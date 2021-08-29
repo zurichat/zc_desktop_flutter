@@ -1,8 +1,47 @@
-# zc_desktop_flutter
+# Zuri ChatApp (zc_desktop_flutter)
+    - Zuri ChatApp is a Slack Clone Desktop App project created in [Flutter](https://flutter.dev/). This project is developed by the desktop team under **TEAM SOCRATE** Zuri ChatApp supports Desktop and Mobile.
+    This project is aimed at developing a chat App solely for the Zuri program.
+- Description
+    - What Zuri ChatApp does
+    - Features
 
-A new Flutter project.
+    - Technologies used
+    
 
-## Getting Started
+# Demo-Preview
+
+# Table of Content
+-
+    - [Project Title](#project-title)
+    - [Demo-Preview](#demo-preview)
+    - [Table of contents](#table-of-contents)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Development](#development)
+    - [Contribute](#contribute)
+    - [License](#license)
+    
+- 
+
+# Installation
+
+# Usage
+
+
+# Development
+
+# Contributing
+Contributions are what make the open source community such an amazing place to be learn and create. Any contributions you make are greatly appreciated.
+
+1. Fork the Project
+2. Create your Feature Branch (git checkout -b feature/AmazingFeature)
+3. Commit your Changes (git commit -m 'Add some AmazingFeature')
+4. Push to the Branch (git push origin feature/AmazingFeature)
+5. Open a Pull Request
+
+
+# License
+
 
 This project is a starting point for a Flutter application.
 
