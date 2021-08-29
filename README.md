@@ -1,7 +1,7 @@
 # Zuri ChatApp (zc_desktop_flutter)
-    - Zuri ChatApp is a Slack Clone Desktop App project created in [Flutter](https://flutter.dev/). This project is developed by the desktop team under **TEAM SOCRATE** Zuri ChatApp supports Desktop and Mobile.
-    This project is aimed at developing a chat App solely for the Zuri program.
-- Description
+Zuri ChatApp is a Slack Clone Desktop App project created in [Flutter](https://flutter.dev/). This project is developed by the desktop team under **TEAM SOCRATE** Zuri ChatApp supports Desktop and Mobile. This project is aimed at developing a chat App solely for the Zuri program.
+
+**Description**
     - What Zuri ChatApp does
     - Features
 
