@@ -5,7 +5,7 @@ class HomeViewModel extends BaseViewModel {
   double _logoWidth = 10.0;
   double _logoHeight = 10.0;
   String _title =
-      'Welcome to Zuri Chat! An open source, very flexible tool built by Flutter desktop team.';
+      'Welcome to Zuri Chat! An open source, very flexible tool built by HNGi4G8 Flutter desktop team.';
 
   String get logoUrl => _logoUrl;
   double get logoWidth => _logoWidth;

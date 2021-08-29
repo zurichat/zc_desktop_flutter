@@ -10,6 +10,16 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              //THIS MAY BE EDITED TO THE STACKED ARCHITECTURE WAY
+              //WHEN I GET UPTO SPEED HOW TO DO IT
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_rounded),
+          ),
+        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
