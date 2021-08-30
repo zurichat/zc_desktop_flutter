@@ -30,7 +30,7 @@ jobs:
           issue-number: context.issue.number
           body: '⚙ Automated Unit Test Result ⚙\n\n All Tests Passed: ${{ needs.checkout_flutter.outputs.output1 }}'
           
-   generate-changelog:
+  generate-changelog:
     name: Generate changelog
     runs-on: ubuntu-latest
     steps:
