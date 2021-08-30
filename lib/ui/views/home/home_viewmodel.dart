@@ -1,6 +1,9 @@
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 
 class HomeViewModel extends BaseViewModel {
+  final log = getLogger("HomeViewwModel");
+
   String _logoUrl = 'assets/images/zc_logo.png';
   double _logoWidth = 10.0;
   double _logoHeight = 10.0;

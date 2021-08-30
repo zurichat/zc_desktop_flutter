@@ -13,7 +13,9 @@ dependencies:
   
   # stacked 
   stacked: ^2.2.5
-  stacked_services: 
+  stacked_services:
+  logger: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:
