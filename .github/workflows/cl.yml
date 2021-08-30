@@ -64,7 +64,6 @@ jobs:
           asset_extension: .tar.gz
           asset_content_type: application/gzip
       
-    needs: [flutter_test]
     steps:
     # Set up Flutter.
     - name: Clone Flutter repository with main channel
