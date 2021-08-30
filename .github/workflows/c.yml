@@ -20,7 +20,6 @@ jobs:
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
-  
   add-comment:
     needs: [flutter_test]
     runs-on: ubuntu-latest     
@@ -109,7 +108,7 @@ jobs:
       run: compress-archive -Path * -DestinationPath ${env:GITHUB_WORKSPACE}\flutter_gallery_${{ matrix.target }}.zip
       working-directory: ${{ matrix.build_path }}
 
-    # Upload the build.
+
     - name: Add packaged build to release draft
       id: upload_release_asset
       uses: actions/upload-release-asset@v1
