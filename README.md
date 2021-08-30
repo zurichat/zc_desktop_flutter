@@ -33,7 +33,25 @@ Zuri ChatApp is a Slack Clone Desktop App project created in [Flutter](https://f
 
 # Demo-Preview
 
-# Table of Content
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#zuri-chatapp-desktop-application">Zuri ChatApp Desktop Application</a>
+    </li>
+    <li>
+      <a href="#demo-preview">Demo-Preview</a>
+    </li>
+    <li><a href="#table-of-content">Table of Content</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#development">Development</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ol>
+</details>
 
 1. [Zuri ChatApp Desktop Application](#project-title)
 2. [Demo-Preview](#demo-preview)
