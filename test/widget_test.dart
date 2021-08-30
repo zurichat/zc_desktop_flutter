@@ -5,12 +5,12 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zc_desktop_flutter/ui/views/home/home_view.dart';
+import 'package:zc_desktop_flutter/ui/views/to_be_deleted.dart';
 
 void main() {
 
   testWidgets('Testing the homeview', (widgetTester)  async {
     // Build our app and trigger a frame.
-    await widgetTester.pumpWidget(HomeView());
+    await widgetTester.pumpWidget(ToBeDeleted());
   });
 }
