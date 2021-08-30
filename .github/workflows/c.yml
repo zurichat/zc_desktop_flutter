@@ -27,9 +27,7 @@ jobs:
       - name: Add comment
         uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
         with:
-          issue_number: context.issue.number
-          owner: context.repo.owner              
-          repo: context.repo.repo        
+          issue-number: context.issue.number
           body: '⚙ Automated Unit Test Result ⚙\n\n All Tests Passed: ${{ needs.checkout_flutter.outputs.output1 }}'
           
   create-build:
@@ -62,8 +60,6 @@ jobs:
     # Set up Flutter.
     - name: Clone Flutter repository with main channel
       uses: subosito/flutter-action@v1
-      with:
-        channel: main
 
     - name: Install Linux dependencies
       if: matrix.target == 'Linux'
