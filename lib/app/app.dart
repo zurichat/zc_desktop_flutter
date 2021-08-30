@@ -13,5 +13,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     presolveUsing: LocalStorageService.getInstance,
   ),
   LazySingleton(classType: NavigationService),
-])
+],
+           logger: StackedLogger(),)
+
 class AppSetup {}
