@@ -30,55 +30,9 @@ jobs:
           issue-number: context.issue.number
           body: '⚙ Automated Unit Test Result ⚙\n\n All Tests Passed: ${{ needs.checkout_flutter.outputs.output1 }}'
           
-  generate-changelog:
-    name: Generate changelog
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get latest published release tag
-        id: get_latest_release
-        uses: pozetroninc/github-action-get-latest-release@v0.5.0
-        with:
-          repository: ${{ github.repository }}
-          excludes: prerelease, draft
-      - name: Generate changelog since last published release
-        uses: charmixer/auto-changelog-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          future_release: ${{ github.ref }}
-          since_tag: ${{ steps.get_latest_release.outputs.release }}
-      - name: Upload changelog
-        uses: actions/upload-artifact@v2
-        with:
-          name: changelog
-          path: CHANGELOG.md
-
-
-  draft-release:
-    name: Draft Github release
-    needs: generate-changelog
-    runs-on: ubuntu-20.04
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-    steps:
-    - name: Download changelog
-      uses: actions/download-artifact@v2
-      with:
-        name: changelog
-    - name: Draft release with changelog
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Flutter Gallery ${{ github.ref }}
-        body_path: CHANGELOG.md
-        draft: true
-        prerelease: false
         
   create-build:
     name: Create ${{ matrix.target }} build
-    needs: draft-release
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -150,6 +104,16 @@ jobs:
       run: compress-archive -Path * -DestinationPath ${env:GITHUB_WORKSPACE}\zuriChat_${{ matrix.target }}.zip
       working-directory: ${{ matrix.build_path }}
 
+    - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
 
     - name: Add packaged build to release draft
       id: upload_release_asset
@@ -157,7 +121,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ needs.draft-release.outputs.upload_url }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./zuriChat_${{ matrix.target }}${{ matrix.asset_extension }}
         asset_name: zuriChat_${{ matrix.target }}${{ matrix.asset_extension }}
         asset_content_type: ${{ matrix.asset_content_type }}
