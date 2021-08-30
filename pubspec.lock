@@ -616,6 +616,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  zcdesk_ui:
+    dependency: "direct main"
+    description:
+      path: "packages/zcdesk_ui"
+      relative: true
+    source: path
+    version: "0.0.1"
 sdks:
   dart: ">=2.13.0 <3.0.0"
   flutter: ">=2.0.0"
