@@ -1,4 +1,7 @@
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
+import 'package:zc_desktop_flutter/ui/views/startup/startup_viewmodel.dart';
 
 class HomeViewModel extends BaseViewModel {
   String _logoUrl = 'assets/images/zc_logo.png';
@@ -11,4 +14,10 @@ class HomeViewModel extends BaseViewModel {
   double get logoWidth => _logoWidth;
   double get logoHeight => _logoHeight;
   String get title => _title;
+
+  // TODO: 4, Remove after review
+  final _storageService = locator<LocalStorageService>();
+
+  // TODO: 5, Remove after review
+  String get testString => _storageService.getFromDisk(testLocalKey) as String;
 }

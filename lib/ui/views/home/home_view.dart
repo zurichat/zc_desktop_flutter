@@ -24,6 +24,10 @@ class HomeView extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Text(model.title),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(model.testString),
               )
             ],
           ),
