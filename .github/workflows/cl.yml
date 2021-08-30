@@ -1,13 +1,11 @@
 name: CI
 on:
-  workflow_dispatch:
-  pull_request:
+ pull_request:
     branches:
       - main
-      - dev
-  push:
-    tags:
-      - '*'
+ push:
+    branches:
+      - main
 
 jobs:
   flutter_test:
