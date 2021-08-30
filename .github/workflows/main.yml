@@ -2,7 +2,7 @@ name: CI
 on:
   pull_request:
     branches:
-      - dev
+      - main
 
 jobs:
   flutter_test:
@@ -15,9 +15,7 @@ jobs:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          channel: "dev"
+          channel: "stable"
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
-
-  
