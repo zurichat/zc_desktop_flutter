@@ -110,7 +110,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ needs.draft-release.outputs.upload_url }}
+        upload_url: ${{ needs.draft-release.outputs}}
         asset_path: ./zuriChat_${{ matrix.target }}${{ matrix.asset_extension }}
         asset_name: zuriChat_${{ matrix.target }}${{ matrix.asset_extension }}
         asset_content_type: ${{ matrix.asset_content_type }}
