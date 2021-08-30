@@ -98,7 +98,7 @@ jobs:
       working-directory: ${{ matrix.build_path }}
     - name: Compress build for macOS
       if: matrix.target == 'macOS'
-      run: ditto -c -k --sequesterRsrc --keepParent zuriChat.app $GITHUB_WORKSPACE/flutter_gallery_${{ matrix.target }}.zip
+      run: ditto -c -k --sequesterRsrc --keepParent zuriChat.app $GITHUB_WORKSPACE/zuriChat_${{ matrix.target }}.zip
       working-directory: ${{ matrix.build_path }}
     - name: Compress build for Windows
       if: matrix.target == 'Windows'
