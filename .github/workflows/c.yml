@@ -19,16 +19,17 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter analyze
-      
-  add-comment:
+
+  check-state:
+    runs-on: ubuntu-latest
     needs: [flutter_test]
-    runs-on: ubuntu-latest     
     steps:
-      - name: Add comment
+      - name: Comment
+        if: steps.find-last-comment.outputs.comment-id == ''
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: context.issue.number
-          body: '⚙ Automated Unit Test Result ⚙\n\n All Tests Passed: ${{ needs.checkout_flutter.outputs.output1 }}'
+          body:  '⚙ Automated Unit Test Result ⚙\n\n All Tests Passed: ${{ needs.checkout_flutter.outputs.output1 }}'
           
         
   create-build:
@@ -97,7 +98,7 @@ jobs:
       working-directory: ${{ matrix.build_path }}
     - name: Compress build for macOS
       if: matrix.target == 'macOS'
-      run: ditto -c -k --sequesterRsrc --keepParent Flutter\ Gallery.app $GITHUB_WORKSPACE/flutter_gallery_${{ matrix.target }}.zip
+      run: ditto -c -k --sequesterRsrc --keepParent zuriChat.app $GITHUB_WORKSPACE/flutter_gallery_${{ matrix.target }}.zip
       working-directory: ${{ matrix.build_path }}
     - name: Compress build for Windows
       if: matrix.target == 'Windows'
