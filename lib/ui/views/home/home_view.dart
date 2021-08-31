@@ -10,6 +10,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
+        appBar: AppBar(title: Text('Zuri'),),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

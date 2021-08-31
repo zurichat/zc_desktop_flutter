@@ -19,9 +19,10 @@ dependencies:
   stacked_services:
 
   logger: ^1.0.0
-
-
-
+  #freezed_annotation: defines the annotations used by freezed
+  freezed_annotation:
+  #defines the annotations used by json_serializable
+  json_annotation:
   # local storage
   shared_preferences: ^2.0.7
 
@@ -31,7 +32,10 @@ dev_dependencies:
     sdk: flutter
   stacked_generator: ^0.5.1
   build_runner:
-
+  #json_serializable: provides the Dart Build System with some builders for handling JSON
+  json_serializable:
+  #a powerful code generator that can handle complex use-cases with a simple API 
+  freezed:
 
 flutter:
   uses-material-design: true

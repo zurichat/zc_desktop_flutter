@@ -7,7 +7,6 @@ import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 // TODO: 2, This is part of the local storage test. Remove this as well
 const testLocalKey = 'TESTKEY';
-
 class StartUpViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 

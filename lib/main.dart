@@ -5,8 +5,9 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 
 import 'app/app.router.dart';
 
-void main() {
-  setupLocator();
+
+void main() async {
+  await setupLocator();
   runApp(ZcDesktop());
 }
 
