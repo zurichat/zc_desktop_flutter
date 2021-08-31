@@ -9,8 +9,8 @@ import 'package:zc_desktop_flutter/ui/views/to_be_deleted.dart';
 
 void main() {
 
-  testWidgets('Testing the homeview', (widgetTester)  async {
+  testWidgets('Testing the tobedeleted', (widgetTester) async {
     // Build our app and trigger a frame.
-    await widgetTester.pumpWidget(ToBeDeleted());
+     await widgetTester.pumpWidget(ToBeDeleted());
   });
 }
