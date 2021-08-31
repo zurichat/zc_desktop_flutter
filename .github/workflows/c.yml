@@ -19,22 +19,21 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter analyze
-      - run: flutter test
-  add-comment:
+
+  check-state:
+    runs-on: ubuntu-latest
     needs: [flutter_test]
-    runs-on: ubuntu-latest     
     steps:
-      - name: Add comment
-        uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
+      - name: Comment
+        if: steps.find-last-comment.outputs.comment-id == ''
+        uses: peter-evans/create-or-update-comment@v1
         with:
-          issue_number: context.issue.number
-          owner: context.repo.owner              
-          repo: context.repo.repo        
-          body: '⚙ Automated Unit Test Result ⚙\n\n All Tests Passed: ${{ needs.checkout_flutter.outputs.output1 }}'
+          issue-number: context.issue.number
+          body:  '⚙ Automated Unit Test Result ⚙\n\n All Tests Passed: ${{ needs.checkout_flutter.outputs.output1 }}'
           
+        
   create-build:
     name: Create ${{ matrix.target }} build
-    needs: [flutter_test]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -58,13 +57,12 @@ jobs:
           build_path: build/linux/x64/release/bundle
           asset_extension: .tar.gz
           asset_content_type: application/gzip
+      fail-fast: false
       
     steps:
     # Set up Flutter.
     - name: Clone Flutter repository with main channel
-      uses: subosito/flutter-action@4389e6cbc6cb8a4b18c628ff96ff90be0e926aa8
-      with:
-        channel: main
+      uses: subosito/flutter-action@v1
 
     - name: Install Linux dependencies
       if: matrix.target == 'Linux'
@@ -72,7 +70,6 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev
     - name: Enable desktop support
-      if: matrix.target != 'Android'
       run: |
         flutter config --enable-linux-desktop
         flutter config --enable-macos-desktop
@@ -97,17 +94,27 @@ jobs:
         Copy-Item (vswhere -latest -find 'VC\Redist\MSVC\*\x64\*\vcruntime140_1.dll') .
     - name: Compress build for Linux
       if: matrix.target == 'Linux'
-      run: tar czf $GITHUB_WORKSPACE/flutter_gallery_${{ matrix.target }}.tar.gz *
+      run: tar czf $GITHUB_WORKSPACE/zuriChat_${{ matrix.target }}.tar.gz *
       working-directory: ${{ matrix.build_path }}
     - name: Compress build for macOS
       if: matrix.target == 'macOS'
-      run: ditto -c -k --sequesterRsrc --keepParent Flutter\ Gallery.app $GITHUB_WORKSPACE/flutter_gallery_${{ matrix.target }}.zip
+      run: ditto -c -k --sequesterRsrc --keepParent zuriChat.app $GITHUB_WORKSPACE/zuriChat_${{ matrix.target }}.zip
       working-directory: ${{ matrix.build_path }}
     - name: Compress build for Windows
       if: matrix.target == 'Windows'
-      run: compress-archive -Path * -DestinationPath ${env:GITHUB_WORKSPACE}\flutter_gallery_${{ matrix.target }}.zip
+      run: compress-archive -Path * -DestinationPath ${env:GITHUB_WORKSPACE}\zuriChat_${{ matrix.target }}.zip
       working-directory: ${{ matrix.build_path }}
 
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
 
     - name: Add packaged build to release draft
       id: upload_release_asset
@@ -115,7 +122,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ needs.draft-release.outputs.upload_url }}
-        asset_path: ./flutter_gallery_${{ matrix.target }}${{ matrix.asset_extension }}
-        asset_name: flutter_gallery_${{ matrix.target }}${{ matrix.asset_extension }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./zuriChat_${{ matrix.target }}${{ matrix.asset_extension }}
+        asset_name: zuriChat_${{ matrix.target }}${{ matrix.asset_extension }}
         asset_content_type: ${{ matrix.asset_content_type }}
