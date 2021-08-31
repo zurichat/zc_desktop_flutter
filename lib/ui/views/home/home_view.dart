@@ -28,6 +28,17 @@ class HomeView extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Text(model.testString),
+              ),
+
+              //TODO: Remove after review
+              Expanded(
+                flex: 1,
+                child: TextButton(
+                  onPressed: ()=> model.goToInputView(),
+                  child: Text(
+                    'input field'
+                  ),
+                ),
               )
             ],
           ),
