@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:zcdesk_ui/src/shared/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Text Styles we will be using through the app.
 
-const TextStyle heading1Style =
-    TextStyle(fontSize: 43, fontWeight: FontWeight.bold, fontFamily: 'Lato');
-const TextStyle heading2Style =
-    TextStyle(fontSize: 37, fontWeight: FontWeight.w600, fontFamily: 'Lato');
-const TextStyle heading3Style =
-    TextStyle(fontSize: 31, fontWeight: FontWeight.w600, fontFamily: 'Lato');
-const TextStyle heading4Style =
-    TextStyle(fontSize: 25, fontWeight: FontWeight.w700, fontFamily: 'Lato');
-const TextStyle headlineStyle =
-    TextStyle(fontSize: 30, fontWeight: FontWeight.w700, fontFamily: 'Lato');
-const TextStyle bodyStyle =
-    TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontFamily: 'Lato');
-const TextStyle subheadingStyle =
-    TextStyle(fontSize: 20, fontWeight: FontWeight.w400, fontFamily: 'Lato');
-const TextStyle captionStyle =
-    TextStyle(fontSize: 20, fontWeight: FontWeight.w400, fontFamily: 'Lato');
-const TextStyle extraSmallStyle =
-    TextStyle(fontSize: 11, fontWeight: FontWeight.w400, fontFamily: 'Lato');
+  TextStyle heading1Style =
+    TextStyle(fontSize: 43.sp, fontWeight: FontWeight.bold, fontFamily: 'Lato');
+  TextStyle heading2Style =
+    TextStyle(fontSize: 37.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
+  TextStyle heading3Style =
+    TextStyle(fontSize: 31.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
+  TextStyle heading4Style =
+    TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w700, fontFamily: 'Lato');
+  TextStyle headlineStyle =
+    TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w700, fontFamily: 'Lato');
+  TextStyle bodyStyle =
+    TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
+  TextStyle subheadingStyle =
+    TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
+  TextStyle captionStyle =
+    TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
+  TextStyle extraSmallStyle =
+    TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
+  TextStyle authBtnStyle =
+    TextStyle(fontSize: 20.sp,color: whiteColor, fontWeight: FontWeight.bold, fontFamily: 'Lato');
