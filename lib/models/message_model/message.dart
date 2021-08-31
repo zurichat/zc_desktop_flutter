@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'message.freezed.dart';
 part 'message.g.dart';
 
-// The channel Datamodel Generator
+// The channel Datamodel Generator. Using freezed to auto generate the need code
 @freezed
 class Message with _$Message {
    const factory Message({

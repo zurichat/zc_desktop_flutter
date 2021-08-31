@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
-// The channel Datamodel Generator
+// The channel Datamodel Generator. Using freezed to auto generate the need code
 @freezed
 class User with _$User {
    const factory User({
