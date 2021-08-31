@@ -19,6 +19,9 @@ dependencies:
   stacked_services:
 
   logger: ^1.0.0
+  get_it: ^7.2.0
+
+
 
 
 

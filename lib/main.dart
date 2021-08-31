@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 
@@ -15,6 +14,7 @@ class ZcDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Zuri Chat',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,

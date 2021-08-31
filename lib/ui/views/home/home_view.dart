@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/widget/app_bar.dart';
 
 import 'home_viewmodel.dart';
 
@@ -10,6 +11,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
+        appBar: buildAppBar(context, true),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
