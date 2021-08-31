@@ -10,10 +10,21 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  # ui package for the whole app
+  zcdesk_ui:
+    path: packages/zcdesk_ui
   
   # stacked 
   stacked: ^2.2.5
-  stacked_services: 
+  stacked_services:
+
+  logger: ^1.0.0
+
+
+
+  # local storage
+  shared_preferences: ^2.0.7
+
 
 dev_dependencies:
   flutter_test:

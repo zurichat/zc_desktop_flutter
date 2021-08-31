@@ -1,5 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/views/home/home_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
@@ -7,6 +8,12 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
   MaterialRoute(page: StartUpView, initial: true),
   MaterialRoute(page: HomeView),
 ], dependencies: [
+  Presolve(
+    classType: LocalStorageService,
+    presolveUsing: LocalStorageService.getInstance,
+  ),
   LazySingleton(classType: NavigationService),
-])
+],
+           logger: StackedLogger(),)
+
 class AppSetup {}
