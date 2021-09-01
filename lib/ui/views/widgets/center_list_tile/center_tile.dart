@@ -3,8 +3,18 @@ import 'dart:math' as math;
 
 import 'center_tile_viewmodel.dart';
 
+Container centertitlecard(BuildContext context) {
+  return Container(
+    alignment: Alignment.topCenter,
+    width: 1136,
+    height: 80,
+    child: Card(elevation: 5, child: CenterListTile(context, "designers")),
+  );
+}
+
 ListTile CenterListTile(BuildContext context, String channelName) {
   return ListTile(
+      contentPadding: EdgeInsets.only(left: 10, right: 10),
       shape:
           UnderlineInputBorder(borderSide: BorderSide(color: Colors.black12)),
       title: Row(
@@ -62,12 +72,11 @@ ListTile CenterListTile(BuildContext context, String channelName) {
             Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationY(math.pi),
-                child: IconButton(
-                  onPressed: (){},
-                  icon: Icon(Icons.person_add_outlined,
+                child: Icon(
+                  Icons.person_add_outlined,
                   color: Color.fromRGBO(0, 184, 124, 1),
                   size: 22,
-            ))),
+                )),
           ],
         ),
       ));
