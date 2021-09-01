@@ -6,7 +6,6 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_viewmodel.dart';
 
-
 class HomeViewModel extends BaseViewModel {
   final log = getLogger("HomeViewwModel");
 
