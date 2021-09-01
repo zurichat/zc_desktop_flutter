@@ -13,7 +13,7 @@ AppBar buildAppBar(BuildContext context, bool isActive) {
 
   return AppBar(
     automaticallyImplyLeading: false,
-    toolbarHeight: 30,
+    toolbarHeight: 40,
     leading: IconButton(
       onPressed: () {},
       icon: Icon(
@@ -57,13 +57,13 @@ AppBar buildAppBar(BuildContext context, bool isActive) {
         SizedBox(width: 10),
         Container(
           width: 400,
-          height: 40,
+          height: 30,
           decoration: BoxDecoration(
             color: bodyColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: TextField(
-            cursorHeight: 30,
+            cursorHeight: 25,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
