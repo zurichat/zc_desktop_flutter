@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 AppBar buildAppBar(BuildContext context, bool isActive) {
@@ -13,7 +14,7 @@ AppBar buildAppBar(BuildContext context, bool isActive) {
 
   return AppBar(
     automaticallyImplyLeading: false,
-    toolbarHeight: 40,
+    toolbarHeight: 30,
     leading: IconButton(
       onPressed: () {},
       icon: Icon(
@@ -56,20 +57,27 @@ AppBar buildAppBar(BuildContext context, bool isActive) {
         ),
         SizedBox(width: 10),
         Container(
-          width: 400,
-          height: 30,
+          constraints: BoxConstraints(
+            maxHeight: 18,
+            maxWidth: 350.0,
+          ),
           decoration: BoxDecoration(
             color: bodyColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: TextField(
-            cursorHeight: 25,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white),
+            cursorHeight: 16,
+            maxLines: 1,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 12.0,
+            ),
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(vertical: 8),
               prefixIcon: Icon(
                 Icons.search,
-                size: 20,
+                size: 15,
                 color: lightIconColor,
               ),
               hintText: 'Search',
@@ -79,6 +87,10 @@ AppBar buildAppBar(BuildContext context, bool isActive) {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
+              filled: true,
+              fillColor: bodyColor,
+              isDense: true,
+              //border: InputBorder.none,
             ),
           ),
         ),
