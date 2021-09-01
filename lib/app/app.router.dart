@@ -8,15 +8,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import '../ui/views/signUp/signup_view.dart';
 
 import '../ui/views/home/home_view.dart';
 import '../ui/views/startup/startup_view.dart';
 
 class Routes {
   static const String startUpView = '/';
+  static const String signUpView = '/signUp-view';
   static const String homeView = '/home-view';
   static const all = <String>{
     startUpView,
+    signUpView,
     homeView,
   };
 }
@@ -26,6 +29,7 @@ class StackedRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.startUpView, page: StartUpView),
+    RouteDef(Routes.signUpView, page: SignUpView),
     RouteDef(Routes.homeView, page: HomeView),
   ];
   @override
@@ -40,6 +44,12 @@ class StackedRouter extends RouterBase {
     HomeView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const HomeView(),
+        settings: data,
+      );
+    },
+    SignUpView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const SignUpView(),
         settings: data,
       );
     },
