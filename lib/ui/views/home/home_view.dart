@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -12,14 +12,11 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         // TODO: Replace this with custom app bar
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Color(0xFF242424),
-          toolbarHeight: 30,
-          elevation: 0.0,
-          title: Center(child: Text('App Bar')),
-        ),
-        body: Row(
+        body: Column( children: [
+          Container(
+              child: buildAppBar(context, true),
+            ),
+          Row(
           children: [
             Expanded(
               child: Container(
@@ -108,8 +105,9 @@ class HomeView extends StatelessWidget {
                 ),
               ),
             )
-          ],
+          ], row here
         ),
+          ],
       ),
       viewModelBuilder: () => HomeViewModel(),
     );
