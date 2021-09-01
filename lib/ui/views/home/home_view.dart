@@ -15,9 +15,10 @@ class HomeView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-                alignment: Alignment.topCenter,
-                child: centertitlecard(context)),
+            Expanded(
+                child: Container(
+                    alignment: Alignment.topCenter,
+                    child: centertitlecard(context))),
             Expanded(
               flex: 3,
               child: Image(
