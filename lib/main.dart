@@ -16,17 +16,17 @@ class ZcDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(1440, 940),
-      builder: () {
-        return MaterialApp(
-          title: 'Zuri Chat',
-          theme: ThemeData(
-            primarySwatch: Colors.blueGrey,
-          ),
-          navigatorKey: StackedService.navigatorKey,
-          onGenerateRoute: StackedRouter().onGenerateRoute,
-        );
-      }
-    );
+        designSize: Size(1440, 940),
+        builder: () {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Zuri Chat',
+            theme: ThemeData(
+              primarySwatch: Colors.blueGrey,
+            ),
+            navigatorKey: StackedService.navigatorKey,
+            onGenerateRoute: StackedRouter().onGenerateRoute,
+          );
+        });
   }
 }
