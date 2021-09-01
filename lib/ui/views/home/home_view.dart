@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
 
 import 'home_viewmodel.dart';
 
@@ -10,16 +11,15 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 3,
-                child: Image(
-                  image: AssetImage(model.logoUrl),
-                ),
+        body: Column(
+          children: [
+            Container(
+              child: buildAppBar(context, true),
+            ),
+            Expanded(
+              flex: 3,
+              child: Image(
+                image: AssetImage(model.logoUrl),
               ),
               Expanded(
                 flex: 1,
@@ -42,6 +42,7 @@ class HomeView extends StatelessWidget {
               )
             ],
           ),
+
         ),
       ),
       viewModelBuilder: () => HomeViewModel(),
