@@ -28,7 +28,11 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.8.2"
+=======
+    version: "2.6.1"
+>>>>>>> 525f31356666901ed898c94f8b3465cd037ce43a
   boolean_selector:
     dependency: transitive
     description:
@@ -202,6 +206,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_svg:
     dependency: "direct main"
     description:
@@ -209,6 +214,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.22.0"
+=======
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.0+2"
+>>>>>>> 525f31356666901ed898c94f8b3465cd037ce43a
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -615,7 +629,11 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.4.3"
+=======
+    version: "0.3.0"
+>>>>>>> 525f31356666901ed898c94f8b3465cd037ce43a
   timing:
     dependency: transitive
     description:

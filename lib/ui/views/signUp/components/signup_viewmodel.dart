@@ -19,7 +19,7 @@ class SignUpViewModel extends BaseViewModel {
   String _title = 'ZURI';
   String _subtitle = 'Create Account';
   String _policy =
-      "By signingup, you agree that you have accepted our \nUser Notice and Privacy Policy";
+      "By signing up, you agree that you have accepted our \nUser Notice and Privacy Policy";
 
   String get logoUrl => _logoUrl;
   double get logoWidth => _logoWidth;
