@@ -28,12 +28,21 @@ dependencies:
   #screen adaptations
   flutter_screenutil: ^5.0.0+2
 
+  #freezed_annotation: defines the annotations used by freezed
+  freezed_annotation:
+  #defines the annotations used by json_serializable
+  json_annotation:
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   stacked_generator: ^0.5.1
   build_runner:
+  #json_serializable: provides the Dart Build System with some builders for handling JSON
+  json_serializable:
+  #a powerful code generator that can handle complex use-cases with a simple API 
+  freezed:
 
 
 flutter:
