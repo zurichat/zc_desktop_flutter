@@ -18,6 +18,6 @@ class AuthButton extends StatelessWidget {
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
             primary: authBtnColor, fixedSize: Size(double.infinity, 60.h)),
-        child: AuthButton(label: 'Get Started'));
+        child: ZcdeskText.authBtnStyle(label));
   }
 }
