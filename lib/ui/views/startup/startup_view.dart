@@ -61,7 +61,7 @@ class Shell extends StatelessWidget {
                                   color: Colors.white,
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w700)),
-                          // ZcdeskText.subheading(
+                          // ZcdeskText.bodyText(
                           //   model.title,
                           // ),
 
