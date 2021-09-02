@@ -8,8 +8,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import '../ui/views/signUp/signup_view.dart';
 
+import '../ui/views/signUp/signup_view.dart';
+import 'package:zc_desktop_flutter/ui/login/login_view.dart';
+
+
+import '../ui/views/authInputTestView/authInputTestView.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/startup/startup_view.dart';
 
@@ -17,11 +21,18 @@ class Routes {
   static const String startUpView = '/';
   static const String signUpView = '/signUp-view';
   static const String homeView = '/home-view';
+
+  static const String loginView = '/login-view';
+  static const all = <String>{startUpView, homeView, loginView};
+
+  static const String authInputTestView = '/auth-input-test-view';
   static const all = <String>{
     startUpView,
     signUpView,
     homeView,
+    authInputTestView,
   };
+
 }
 
 class StackedRouter extends RouterBase {
@@ -31,6 +42,11 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.signUpView, page: SignUpView),
     RouteDef(Routes.homeView, page: HomeView),
+
+    RouteDef(Routes.loginView, page: LoginView),
+
+    RouteDef(Routes.authInputTestView, page: AuthInputTestView),
+
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -47,9 +63,20 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+
     SignUpView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const SignUpView(),
+
+
+    LoginView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginView(),
+
+    AuthInputTestView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AuthInputTestView(),
+
         settings: data,
       );
     },
