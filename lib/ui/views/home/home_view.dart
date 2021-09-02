@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/views/widgets/center_list_tile/center_tile.dart';
 import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
 
 import 'home_viewmodel.dart';
@@ -12,10 +13,14 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              child: buildAppBar(context, true),
-            ),
+            Container(child: buildAppBar(context, true)),
+            Expanded(
+                child: Container(
+                    alignment: Alignment.topCenter,
+                    child: centertitlecard(context))),
             Expanded(
               flex: 3,
               child: Image(

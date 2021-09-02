@@ -276,12 +276,12 @@ packages:
     source: hosted
     version: "4.3.8"
   get_it:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: get_it
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.1.3"
+    version: "7.2.0"
   glob:
     dependency: transitive
     description:
