@@ -28,13 +28,6 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
               ),
-              // ElevatedButton(
-              //   style: ElevatedButton.styleFrom(
-              //     primary: Colors.white,
-              //   ),
-              //   onPressed: () {},
-              //   child: Text("Sign Out"),
-              // ),
             ],
           ),
         ),
