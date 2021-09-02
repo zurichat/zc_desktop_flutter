@@ -26,16 +26,28 @@ class HomeView extends StatelessWidget {
               child: Image(
                 image: AssetImage(model.logoUrl),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Text(model.title),
-            ),
-            Expanded(
-              flex: 1,
-              child: Text(model.testString),
-            )
-          ],
+              Expanded(
+                flex: 1,
+                child: Text(model.title),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(model.testString),
+              ),
+
+              //TODO: Remove after review
+              Expanded(
+                flex: 1,
+                child: TextButton(
+                  onPressed: ()=> model.goToInputView(),
+                  child: Text(
+                    'input field'
+                  ),
+                ),
+              )
+            ],
+          ),
+
         ),
       ),
       viewModelBuilder: () => HomeViewModel(),
