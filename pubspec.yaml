@@ -17,7 +17,7 @@ dependencies:
   # stacked 
   stacked: ^2.2.5
   stacked_services:
-
+  get_it: ^7.2.0
   logger: ^1.0.0
 
 
@@ -31,6 +31,7 @@ dev_dependencies:
     sdk: flutter
   stacked_generator: ^0.5.1
   build_runner:
+  analyzer: 1.5.0
 
 
 flutter:

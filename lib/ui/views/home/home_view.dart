@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 import 'home_viewmodel.dart';
 
@@ -23,7 +24,7 @@ class HomeView extends StatelessWidget {
               ),
               Expanded(
                 flex: 1,
-                child: Text(model.title),
+                child: ZcdeskText.headingOne(model.title),
               ),
               Expanded(
                 flex: 1,

@@ -16,7 +16,6 @@ class StartUpViewModel extends BaseViewModel {
   // TODO: 1, This is to test that the local storage service is working properly. Remove after review
   final _storageService = locator<LocalStorageService>();
 
-
   String _appName = 'Zuri Chat';
   String get appName => _appName;
 
@@ -25,6 +24,14 @@ class StartUpViewModel extends BaseViewModel {
     _storageService.saveToDisk(testLocalKey, 'This is a test');
 
     _navigationService.navigateTo(Routes.homeView);
+    notifyListeners();
+  }
+
+  void goToChat() {
+    // TODO: 3, This is part of the local storage test. Remove this as well
+    _storageService.saveToDisk(testLocalKey, 'This is a test #chat');
+
+    _navigationService.navigateTo(Routes.messageView);
     notifyListeners();
   }
 }

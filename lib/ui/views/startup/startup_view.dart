@@ -15,7 +15,7 @@ class StartUpView extends StatelessWidget {
         ),
         body: Center(
           child: ElevatedButton(
-            onPressed: model.goToHome,
+            onPressed: model.goToChat,
             child: Text("Get Started"),
           ),
         ),
