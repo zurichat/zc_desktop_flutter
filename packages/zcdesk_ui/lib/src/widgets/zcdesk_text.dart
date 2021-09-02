@@ -10,7 +10,9 @@ class ZcdeskText extends StatelessWidget {
   ZcdeskText.headingThree(this.text) : style = heading3Style;
   ZcdeskText.headingFour(this.text) : style = heading4Style;
   ZcdeskText.headline(this.text) : style = headlineStyle;
-  ZcdeskText.bodyText(this.text) : style = bodyStyle;
+  ZcdeskText.bodyText(
+    this.text,
+  ) : style = bodyStyle;
   ZcdeskText.subheading(this.text) : style = subheadingStyle;
   ZcdeskText.caption(this.text) : style = captionStyle;
   ZcdeskText.extraSmallText(this.text) : style = extraSmallStyle;
