@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 
 import 'home_viewmodel.dart';
@@ -10,25 +13,28 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+        body: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                flex: 3,
-                child: Image(
-                  image: AssetImage(model.logoUrl),
+              Container(
+                height: 50.0,
+                width: 150.0,
+                child: Card(
+                  child: ListTile(
+                    leading: Image.asset(
+                      model.logo2,
+                    ),
+                  ),
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Text(model.title),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text(model.testString),
-              )
+              // ElevatedButton(
+              //   style: ElevatedButton.styleFrom(
+              //     primary: Colors.white,
+              //   ),
+              //   onPressed: () {},
+              //   child: Text("Sign Out"),
+              // ),
             ],
           ),
         ),
