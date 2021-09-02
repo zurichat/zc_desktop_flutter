@@ -8,11 +8,11 @@ import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
+
  page_layout
         // TODO: Replace this with custom app bar
         body: Column( children: [
