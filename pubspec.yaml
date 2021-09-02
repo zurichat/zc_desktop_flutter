@@ -22,6 +22,8 @@ dependencies:
   bitsdojo_window: ^0.1.1+1
 
 
+  get_it: ^7.2.0
+
 
 
   # local storage
@@ -29,6 +31,7 @@ dependencies:
 
   #screen adaptations
   flutter_screenutil: ^5.0.0+2
+
 
 
 dev_dependencies:
@@ -42,6 +45,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/widgetImages/
  
 
  
