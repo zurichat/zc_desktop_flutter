@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^0.22.0
 
   #screen adaptations
   flutter_screenutil: ^5.0.0+2
@@ -20,6 +21,8 @@ dev_dependencies:
     sdk: flutter
     
 flutter:
+  assets:
+    - assets/icons/
   fonts:
     - family: Lato
       fonts:
