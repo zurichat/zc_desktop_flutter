@@ -6,7 +6,7 @@
 
 /// Maybe this should be generated for the user as well?
 ///
-// / import 'package:customer_app/services/stackdriver/stackdriver_service.dart';
+/// import 'package:customer_app/services/stackdriver/stackdriver_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
@@ -62,8 +62,8 @@ class SimpleLogPrinter extends LogPrinter {
       var currentStack = StackTrace.current;
       var formattedStacktrace = _formatStackTrace(currentStack, 3);
 
-      var realFirstLine =
-          formattedStacktrace?.firstWhere((line) => line.contains(className));
+      var realFirstLine = formattedStacktrace
+          ?.firstWhere((line) => line.contains(className), orElse: () => "");
 
       var methodName = realFirstLine?.replaceAll('$className.', '');
       return methodName;

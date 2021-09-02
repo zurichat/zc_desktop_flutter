@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart'
-
-import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart
+import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/views/widgets/center_list_tile/center_tile.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -12,16 +11,6 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-
- page_layout
-        // TODO: Replace this with custom app bar
-        body: Column( children: [
-          Cont
-              child: buildAppBar(context, true),
-            ),
-          Row(
-          children: [
-
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,33 +109,9 @@ class HomeView extends StatelessWidget {
                 ),
               ),
             )
-          ], row here
-              Expanded(
-                flex: 1,
-                child: Text(model.title),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text(model.testString),
-              ),
-
-              //TODO: Remove after review
-              Expanded(
-                flex: 1,
-                child: TextButton(
-                  onPressed: ()=> model.goToInputView(),
-                  child: Text(
-                    'input field'
-                  ),
-                ),
-              )
-            ],
+                     ],
           ),
-
-
         ),
-          ],
-      ),
       viewModelBuilder: () => HomeViewModel(),
     );
   }
