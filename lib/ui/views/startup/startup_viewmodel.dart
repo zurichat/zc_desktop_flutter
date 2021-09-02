@@ -26,12 +26,4 @@ class StartUpViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.homeView);
     notifyListeners();
   }
-
-  void goToChat() {
-    // TODO: 3, This is part of the local storage test. Remove this as well
-    _storageService.saveToDisk(testLocalKey, 'This is a test #chat');
-
-    _navigationService.navigateTo(Routes.messageView);
-    notifyListeners();
-  }
 }
