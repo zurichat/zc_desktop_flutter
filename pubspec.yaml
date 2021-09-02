@@ -25,6 +25,10 @@ dependencies:
   # local storage
   shared_preferences: ^2.0.7
 
+  #screen adaptations
+  flutter_screenutil: ^5.0.0+2
+
+
 
 dev_dependencies:
   flutter_test:
