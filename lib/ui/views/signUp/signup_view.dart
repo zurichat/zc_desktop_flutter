@@ -2,13 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:zc_desktop_flutter/ui/views/signUp/authentication.dart';
+import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 import 'components/signupForm.dart';
 import 'components/signup_viewmodel.dart';
 
 class SignUpView extends StatelessWidget {
+  // final String title;
+  // final String subtitle;
+  // final String mainButton;
+  // final Widget form;
+  // final bool showTermText;
+  // final String validationMessage;
+  // final Function onMainButtonClick;
+  // final Function onCreateButtonTapp;
+  // final Function onForgotPassword;
+  // final bool busy;
+
   const SignUpView({
     Key? key,
+    // required this.title,
+    // required this.subtitle,
+    // required this.mainButton,
+    // required this.form,
+    // required this.showTermText,
+    // required this.validationMessage,
+    // required this.onMainButtonClick,
+    // required this.onCreateButtonTapp,
+    // required this.onForgotPassword,
+    // required this.busy
   }) : super(key: key);
 
   @override
@@ -32,7 +55,7 @@ class SignUpView extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          top: _size.height * 0.08,
+                          top: _size.height * 0.07,
                           left: _size.width * 0.07,
                           right: _size.width * 0.03),
                       child: Column(
@@ -47,18 +70,16 @@ class SignUpView extends StatelessWidget {
                               ),
                               Text(
                                 model.title,
-                                style: GoogleFonts.lato(
-                                    fontSize: 24, fontWeight: FontWeight.w900),
+                                style: heading4Style,
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: _size.height * 0.04,
+                            height: _size.height * 0.03,
                           ),
                           Text(
                             model.subtitle,
-                            style: GoogleFonts.lato(
-                                fontSize: 35, fontWeight: FontWeight.w600),
+                            style: heading2Style,
                           ),
                           SizedBox(
                             height: _size.height * 0.04,
@@ -75,18 +96,20 @@ class SignUpView extends StatelessWidget {
                           SizedBox(
                             height: _size.height * 0.01,
                           ),
-                          Row(
-                            children: [
-                              Checkbox(
-                                  value: check,
-                                  activeColor: Colors.green,
-                                  onChanged: (value) {}),
-                              Text(
-                                model.policy,
-                                style: GoogleFonts.lato(
-                                    fontSize: 16, fontWeight: FontWeight.w600),
-                              )
-                            ],
+                          SizedBox(
+                            width: _size.width * 0.7,
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                    value: check,
+                                    activeColor: kcSuccessColor,
+                                    onChanged: (value) {}),
+                                Text(
+                                  model.policy,
+                                  style: bodyStyle,
+                                )
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: _size.height * 0.03,
@@ -106,10 +129,7 @@ class SignUpView extends StatelessWidget {
                               onPressed: () {},
                               child: Text(
                                 "Register",
-                                style: GoogleFonts.lato(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white),
+                                style: subheadingStyle,
                               ),
                             ),
                           ),
@@ -118,11 +138,7 @@ class SignUpView extends StatelessWidget {
                           ),
                           Text(
                             'Easy Sign Up With',
-                            style: GoogleFonts.lato(
-                              fontSize: 14,
-                              wordSpacing: 2,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: smallStyle,
                           ),
                           SizedBox(
                             height: _size.height * 0.02,
@@ -149,10 +165,7 @@ class SignUpView extends StatelessWidget {
                             children: [
                               Text(
                                 "Already have an account?",
-                                style: GoogleFonts.lato(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: captionStyle,
                               ),
                               SizedBox(
                                 width: _size.width * 0.005,
@@ -161,11 +174,7 @@ class SignUpView extends StatelessWidget {
                                 onTap: () {},
                                 child: Text(
                                   "Sign Up",
-                                  style: GoogleFonts.lato(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.green,
-                                  ),
+                                  style: captionStyle1,
                                 ),
                               ),
                             ],
