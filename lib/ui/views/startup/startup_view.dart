@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/views/signUp/signup_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 import 'startup_viewmodel.dart';
@@ -79,6 +80,7 @@ class Shell extends StatelessWidget {
             ),
           ),
         ],
+
       ),
       viewModelBuilder: () => StartUpViewModel(),
     );
