@@ -60,6 +60,11 @@ class LoginViewModel extends BaseViewModel {
   }
 
   void goToHome() {
+    if (emailText.isEmpty) {
+      _navigationService.navigateTo(Routes.homeView);
+      return;
+    }
+
     _storageService.saveToDisk(testLocalKey, emailText);
 
     _navigationService.navigateTo(Routes.homeView);
