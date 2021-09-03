@@ -2,10 +2,15 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
+import '../../services/local_storage_service.dart';
+
+const testLocalKey = 'TESTKEY';
 
 class LoginViewModel extends BaseViewModel {
   final log = getLogger("HomeViewwModel");
   final _navigationService = locator<NavigationService>();
+  final _storageService = locator<LocalStorageService>();
 
   String _logoUrl = 'assets/images/zc_logo2.png';
   String _logoUrlG = 'assets/images/google.png';
@@ -42,12 +47,26 @@ class LoginViewModel extends BaseViewModel {
   String get email => _email;
   String get password => _password;
   String get hint => _hint;
-}
 
-// _buildPasswordTF(),
-// _buildForgotPasswordBtn(),
-// _buildRememberMeCheckbox(),
-// _buildLoginBtn(),
-// _buildSignInWithText(),
-// _buildSocialBtnRow(),
-// _buildSignupBtn(),
+  String emailText = '';
+  String passwordText = '';
+
+  void emailChanged(String? value) {
+    emailText = value!;
+  }
+
+  void passwordChanged(String? value) {
+    passwordText = value!;
+  }
+
+  void goToHome() {
+    if (emailText.isEmpty) {
+      _navigationService.navigateTo(Routes.homeView);
+      return;
+    }
+
+    _storageService.saveToDisk(testLocalKey, emailText);
+
+    _navigationService.navigateTo(Routes.homeView);
+  }
+}

@@ -144,16 +144,15 @@ class WindowsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var colors = WindowButtonColors(
-        mouseOver: Color(0xFFD32F2F),
-        mouseDown: Color(0xFFB71C1C),
-        iconNormal: lightIconColor,
-        iconMouseOver: Colors.white);
+      mouseOver: Color(0xFFD32F2F),
+      mouseDown: Color(0xFFB71C1C),
+      iconNormal: lightIconColor,
+      iconMouseOver: Colors.white,
+    );
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        MinimizeWindowButton(
-          colors: colors,
-        ),
+        MinimizeWindowButton(colors: colors),
         MaximizeWindowButton(colors: colors),
         CloseWindowButton(colors: colors)
       ],
