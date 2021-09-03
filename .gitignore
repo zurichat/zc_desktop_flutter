@@ -38,10 +38,11 @@
 .pub-cache/
 .pub/
 /build/
-
+.note
+.pubspec.lock
 # Web related
 lib/generated_plugin_registrant.dart
-
+test/widget_test.dart
 # Symbolication related
 app.*.symbols
 
@@ -60,7 +61,7 @@ app.*.map.json
 *.h
 
 # If you're building an application, you may want to check-in your pubspec.lock
-pubspec.lock
+.pubspec.lock
 
 # Executables vTap version created by dart2native
 bin/

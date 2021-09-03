@@ -7,7 +7,7 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 
 import 'app/app.router.dart';
 
-void main() async {
+Future<void> main() async {
   GetIt.instance;
   await setupLocator();
   runApp(ZcDesktop());
