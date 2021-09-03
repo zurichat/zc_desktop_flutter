@@ -5,10 +5,10 @@ import 'center_tile_viewmodel.dart';
 
 Container centertitlecard(BuildContext context) {
   return Container(
-    alignment: Alignment.topCenter,
+    alignment: Alignment.topLeft,
     width: 1136,
     height: 80,
-    child: Card(elevation: 5, child: CenterListTile(context, "designers")),
+    child: Card(elevation: 5, child: CenterListTile(context, "designers"),),
   );
 }
 

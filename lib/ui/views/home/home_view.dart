@@ -16,13 +16,31 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(child: buildAppBar(context, true)),
+            Row(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  height: 50.0,
+                  width: 150.0,
+                  child: Card(
+                    child: ListTile(
+                      leading: Image.asset(
+                        model.logo2,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Expanded(
-                child: Container(
-                    alignment: Alignment.topCenter,
-                    child: centertitlecard(context))),
-                     ],
-          ),
+              child: Container(
+                alignment: Alignment.topCenter,
+                child: centertitlecard(context),
+              ),
+            ),
+          ],
         ),
+      ),
       viewModelBuilder: () => HomeViewModel(),
     );
   }

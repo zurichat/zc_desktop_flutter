@@ -21,11 +21,18 @@ class HomeViewModel extends BaseViewModel {
   double _logoHeight = 10.0;
   String _title =
       'Welcome to Zuri Chat! An open source, very flexible tool built by Flutter desktop team.';
+  String _logo2 = 'assets/images/zc_logo2.png';
+  double _logoWidth2 = 10.0;
+  double _logoHeight2 = 10.0;
 
   String get logoUrl => _logoUrl;
   double get logoWidth => _logoWidth;
   double get logoHeight => _logoHeight;
   String get title => _title;
+
+  String get logo2 => _logo2;
+  double get logoWidth2 => _logoWidth2;
+  double get logoHeight2 => _logoHeight2;
 
   // TODO: 4, Remove after review
   final _storageService = locator<LocalStorageService>();
