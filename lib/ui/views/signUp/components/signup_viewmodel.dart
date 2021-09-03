@@ -6,7 +6,6 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
-import 'package:zc_desktop_flutter/ui/views/startup/startup_viewmodel.dart';
 
 class SignUpViewModel extends BaseViewModel {
   final log = getLogger("SignUpViewModel");
@@ -34,11 +33,11 @@ class SignUpViewModel extends BaseViewModel {
   // TODO: 5, Remove after review
   // String get testString => _storageService.getFromDisk(testLocalKey) as String;
 
-  void goToHome() {
-    // // TODO: 3, This is part of the local storage test. Remove this as well
+  void goToLogin() {
+    // TODO: 3, This is part of the local storage test. Remove this as well
     // _storageService.saveToDisk(testLocalKey, 'This is a test');
 
-    // _navigationService.navigateTo(Routes.signUpView);
-    // notifyListeners();
+    _navigationService.navigateTo(Routes.loginView);
+    notifyListeners();
   }
 }

@@ -126,7 +126,7 @@ class SignUpView extends StatelessWidget {
                               onPressed: () {},
                               child: Text(
                                 "Register",
-                                style: subheadingStyle,
+                                style: authBtnStyle,
                               ),
                             ),
                           ),
@@ -168,7 +168,7 @@ class SignUpView extends StatelessWidget {
                                 width: _size.width * 0.005,
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: model.goToLogin,
                                 child: Text(
                                   "Sign Up",
                                   style: captionStyle1,
