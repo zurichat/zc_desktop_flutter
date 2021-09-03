@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:zc_desktop_flutter/ui/views/signUp/authentication.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
-
 import 'components/signupForm.dart';
 import 'components/signup_viewmodel.dart';
 
