@@ -9,23 +9,25 @@ class AuthInputField extends StatelessWidget {
   final int? maxLines;
   final Widget? trailing;
   final TextInputType? inputType;
-  final bool password ;
+  final bool password;
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
   final void Function()? onTrailingTapped;
 
-  const AuthInputField(
-      {Key? key,
-      this.onSaved,
-      this.filledColor = kcBackgroundColor2,
-      this.hintPlaceHolder = '',
-      this.label,
-      this.maxLines,
-      this.inputType,
-      this.trailing,
-      this.onTrailingTapped,
-      this.password = false,
-      required this.controller})
-      : super(key: key);
+  const AuthInputField({
+    Key? key,
+    this.onSaved,
+    this.filledColor = kcBackgroundColor2,
+    this.hintPlaceHolder = '',
+    this.label,
+    this.maxLines,
+    this.keyboardType,
+    this.inputType,
+    this.trailing,
+    this.onTrailingTapped,
+    this.password = false,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +41,20 @@ class AuthInputField extends StatelessWidget {
         ),
 
         // spacing
-        verticalSpaceSmall,
+        verticalSpaceRegular,
 
         TextField(
-          keyboardType: TextInputType.text,
+          keyboardType: keyboardType,
           autofocus: false,
           obscureText: password,
           cursorColor: Theme.of(context).accentColor,
           textInputAction: TextInputAction.done,
           maxLines: maxLines ?? 1,
           style: TextStyle(
-              color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
+            color: Colors.grey,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
           decoration: InputDecoration(
             fillColor: filledColor,
             filled: false,
@@ -63,12 +68,15 @@ class AuthInputField extends StatelessWidget {
                 const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
             hintText: hintPlaceHolder,
             hintStyle: TextStyle(
-                color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w500),
+              color: Colors.grey,
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: bodyColor),
+              borderSide: BorderSide(color: leftNavBarColor),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: bodyColor),
