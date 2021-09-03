@@ -34,7 +34,12 @@ class StartUpViewModel extends BaseViewModel {
     // TODO: 3, This is part of the local storage test. Remove this as well
     _storageService.saveToDisk(testLocalKey, 'This is a test');
 
-    _navigationService.navigateTo(Routes.homeView);
+    // _navigationService.navigateTo(Routes.homeView);
+    // notifyListeners();
+    _navigationService.navigateTo(Routes.signUpView);
+
+    // _navigationService.navigateTo(Routes.loginView);
+
     notifyListeners();
   }
 }
