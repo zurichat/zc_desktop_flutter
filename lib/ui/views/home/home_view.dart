@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/views/widgets/center_list_tile/center_tile.dart';
+import 'package:zc_desktop_flutter/ui/views/widgets/popup_menu_button.dart';
+
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -16,6 +17,7 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(child: buildAppBar(context, true)),
+            buildMenuItem(context),
             Expanded(
                 child: Container(
                     alignment: Alignment.topCenter,
