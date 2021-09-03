@@ -28,10 +28,12 @@ class ProfileDialogViw extends StatelessWidget {
             height: 5.h,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 55.w),
+            padding: EdgeInsets.only(left: 45.w),
             child: Align(
                 alignment: Alignment.centerLeft,
-                child: ZcdeskText.headingThree('About')),
+                child: Container(
+                  width: 95.w,
+                  child: Center(child: ZcdeskText.headingThree('About')))),
           ),
           Stack(
             children: [
@@ -67,11 +69,11 @@ class ProfileDialogViw extends StatelessWidget {
       width: 686.w,
       padding: EdgeInsets.only(left: 15.w, top: 25.w),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              //mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -89,6 +91,7 @@ class ProfileDialogViw extends StatelessWidget {
                       padding: EdgeInsets.only(left: 15.w),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
@@ -103,15 +106,9 @@ class ProfileDialogViw extends StatelessWidget {
                                   ))
                             ],
                           ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          Container(
-                            width: 260.h,
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: ZcdeskText.headingFour('FLUTTER DEV'),),
-                          )
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: ZcdeskText.headingFour('FLUTTER DEV'))
                         ],
                       ),
                     )
