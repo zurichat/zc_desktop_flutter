@@ -77,13 +77,14 @@ class LoginView extends StatelessWidget {
                       verticalSpaceMedium,
                       AuthInputField(
                         label: model.email,
-                        controller: TextEditingController(),
+                        onChanged: model.emailChanged,
                         hintPlaceHolder: 'password@gmail.com',
                       ),
                       verticalSpaceMedium,
                       AuthInputField(
                         label: model.password,
                         password: false,
+                        onChanged: model.passwordChanged,
                         keyboardType: TextInputType.emailAddress,
                         controller: TextEditingController(),
                         hintPlaceHolder: 'Password',
@@ -91,7 +92,7 @@ class LoginView extends StatelessWidget {
                       SizedBox(height: 40.0.h),
                       ZcDeskButton(
                         text: 'Sign In',
-                        onPressed: () {},
+                        onPressed: model.goToHome,
                       ),
                       verticalSpaceLarge,
                       Text(

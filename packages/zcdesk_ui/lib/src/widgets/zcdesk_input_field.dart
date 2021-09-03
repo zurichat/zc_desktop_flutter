@@ -13,6 +13,7 @@ class AuthInputField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final void Function()? onTrailingTapped;
+  final ValueChanged<String>? onChanged;
 
   const AuthInputField({
     Key? key,
@@ -26,7 +27,8 @@ class AuthInputField extends StatelessWidget {
     this.trailing,
     this.onTrailingTapped,
     this.password = false,
-    required this.controller,
+    this.controller,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -44,6 +46,7 @@ class AuthInputField extends StatelessWidget {
         verticalSpaceRegular,
 
         TextField(
+          onChanged: onChanged,
           keyboardType: keyboardType,
           autofocus: false,
           obscureText: password,
