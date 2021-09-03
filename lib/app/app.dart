@@ -9,16 +9,11 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(
-      page: StartUpView,
-    ),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: AuthInputTestView),
     MaterialRoute(page: LoginView, initial: true),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
-    MaterialRoute(page: HomeView),
-    MaterialRoute(page: AuthInputTestView),
   ],
   dependencies: [
     Presolve(
