@@ -18,7 +18,6 @@ class ZcDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-
         designSize: Size(1440, 940),
         builder: () {
           return MaterialApp(
@@ -31,15 +30,5 @@ class ZcDesktop extends StatelessWidget {
             onGenerateRoute: StackedRouter().onGenerateRoute,
           );
         });
-
-
-     
-
-          
-
-        
-    
-   
-
   }
 }
