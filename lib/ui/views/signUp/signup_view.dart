@@ -127,7 +127,7 @@ class SignUpView extends StatelessWidget {
                     ),
                     Text(
                       'Easy Sign Up With',
-                      style: smallStyle,
+                      style: extraSmallStyle,
                     ),
                     SizedBox(
                       height: _size.height * 0.02,
@@ -163,7 +163,7 @@ class SignUpView extends StatelessWidget {
                           onTap: model.goToLogin,
                           child: Text(
                             "Sign Up",
-                            style: captionStyle1,
+                            style: bodyText1,
                           ),
                         ),
                       ],
