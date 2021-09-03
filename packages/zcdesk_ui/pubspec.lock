@@ -7,7 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
+
     version: "2.5.0"
 =======
 
@@ -17,7 +17,6 @@ packages:
     version: "2.8.1"
 
 
->>>>>>> b3ce203934cbf5e49f588802419b3108b802b9d2
   boolean_selector:
     dependency: transitive
     description:
@@ -97,7 +96,7 @@ packages:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.0"
+    version: "1.4.0"
   path:
     dependency: transitive
     description:
@@ -173,6 +172,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 <<<<<<< HEAD
+<<<<<<< HEAD
     version: "0.2.19"
 =======
 
@@ -182,6 +182,9 @@ packages:
 
 
 >>>>>>> b3ce203934cbf5e49f588802419b3108b802b9d2
+=======
+    version: "0.4.1"
+>>>>>>> fbebe51edf075c7c3ca5fdfa253b8b3d1dad55c5
   typed_data:
     dependency: transitive
     description:
