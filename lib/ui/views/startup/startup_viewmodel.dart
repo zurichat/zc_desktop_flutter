@@ -25,7 +25,7 @@ class StartUpViewModel extends BaseViewModel {
 
   String _title = 'Unlimited Team Collaboration Platform';
   String _subTitle =
-      'Unlimited team collaboration platform with emphasis on team building,fun, team manageent and above all, project management.';
+      'Unlimited team collaboration platform with emphasis on team building,\n fun, team manageent and above all, project management.';
 
   String get title => _title;
   String get subTitle => _subTitle;

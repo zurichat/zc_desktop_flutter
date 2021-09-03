@@ -17,22 +17,22 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Sign In | Zuri',
         style: subtitle2.copyWith(
-          fontSize: 16.sp,
+          fontSize: 18.sp,
           color: timeColor,
         ),
       ),
       actions: [
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.minimize, size: 16.h, color: timeColor),
+          icon: Icon(Icons.minimize, size: 18.h, color: timeColor),
         ),
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.copy, size: 16.h, color: timeColor),
+          icon: Icon(Icons.copy, size: 18.h, color: timeColor),
         ),
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.close, size: 16.h, color: timeColor),
+          icon: Icon(Icons.close, size: 18.h, color: timeColor),
         ),
       ],
     );

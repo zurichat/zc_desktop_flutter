@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/login/login_model.dart';
 import 'package:zc_desktop_flutter/ui/login/login_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/shared/ui_helpers.dart';
+import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -11,98 +11,172 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.green),
+        backgroundColor: Colors.white,
+        appBar: CustomAppbar(),
+        body: Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: Container(
+                color: kcPrimaryColor,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(model.circularImage),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      model.title,
+                      textAlign: TextAlign.center,
+                      style: headline6.copyWith(color: Colors.white),
+                    ),
+                    verticalSpaceSmall,
+                    Text(
+                      model.subTitle,
+                      textAlign: TextAlign.center,
+                      style: subtitle2.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                    verticalSpaceLarge,
+                  ],
                 ),
               ),
-              // alignment: Alignment.topRight,
-              Expanded(
-                flex: 2,
-                child: Container(
-                  color: Colors.white,
-                  // alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(75, 40, 40, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(200),
-                          ),
-                          child: Image(
-                            image: AssetImage(model.logoUrl),
-                          ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 72.w),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      verticalSpaceMedium,
+                      Row(
+                        children: [
+                          Image(image: AssetImage(model.logoUrl)),
+                        ],
+                      ),
+                      verticalSpaceMedium,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          model.signIn,
+                          style: headline3,
                         ),
-                        verticalSpaceRegular,
-                        Text(
-                          model.title,
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w600),
-                        ),
-                        verticalSpaceMedium,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              model.email,
-                              style: ktsMediumGreyBodyText.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'lato'),
-                            ),
-                            verticalSpaceRegular,
-                            Container(
-                              child: TextField(
-                                  keyboardType: TextInputType.emailAddress,
-                                  style: TextStyle(color: Colors.black),
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: model.emailhint)),
-                            ),
-                          ],
-                        ),
-                        verticalSpaceRegular,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              model.password,
-                              style: ktsMediumGreyBodyText.copyWith(
-                                fontWeight: FontWeight.w600,
+                      ),
+                      verticalSpaceMedium,
+                      AuthInputField(
+                        label: model.email,
+                        controller: TextEditingController(),
+                        hintPlaceHolder: 'password@gmail.com',
+                      ),
+                      verticalSpaceMedium,
+                      AuthInputField(
+                        label: model.password,
+                        password: false,
+                        keyboardType: TextInputType.emailAddress,
+                        controller: TextEditingController(),
+                        hintPlaceHolder: 'Password',
+                      ),
+                      SizedBox(height: 40.0.h),
+                      ZcDeskButton(
+                        text: 'Sign In',
+                        onPressed: () {},
+                      ),
+                      verticalSpaceLarge,
+                      Text(
+                        'Easy Sign in With',
+                        style: bodyText1.copyWith(fontSize: 16.sp),
+                      ),
+                      verticalSpaceMedium,
+                      AuthIcons(),
+                      verticalSpaceMedium,
+                      GestureDetector(
+                        onTap: () => print('Sign Up Button Pressed'),
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Don\'t have an Account?',
+                                style: bodyText1,
                               ),
-                            ),
-                            verticalSpaceRegular,
-                            Container(
-                              child: TextField(
-                                  obscureText: false,
-                                  keyboardType: TextInputType.emailAddress,
-                                  style: TextStyle(color: Colors.black),
-                                  decoration: InputDecoration(
-                                    suffixIcon: Icon(Icons.remove_red_eye),
-                                    border: OutlineInputBorder(),
-                                    hintText: model.hint,
-                                  )),
-                            ),
-                            verticalSpaceRegular,
-                            LoginModel()
-                          ],
+                              TextSpan(
+                                text: ' Sign Up',
+                                style: TextStyle(
+                                  color: Color(0xff20C18C),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                      verticalSpaceTiny,
+                      TextButton(
+                        onPressed: () =>
+                            print('Forgot Password Button Pressed'),
+                        child: Text(
+                          'Forgot Password?',
+                          style: bodyText1.copyWith(fontSize: 16.sp),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       viewModelBuilder: () => LoginViewModel(),
+    );
+  }
+}
+
+class AuthIcons extends ViewModelWidget<LoginViewModel> {
+  const AuthIcons({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, LoginViewModel model) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        IconButton(
+          icon: Image.asset(
+            model.logoUrlG,
+          ),
+          iconSize: 52.h,
+          onPressed: () {},
+        ),
+        horizontalSpaceRegular,
+        IconButton(
+          icon: Image.asset(
+            model.logoUrlF,
+          ),
+          iconSize: 52.h,
+          onPressed: () {},
+        ),
+        horizontalSpaceRegular,
+        IconButton(
+          icon: Image.asset(
+            model.logoUrlT,
+          ),
+          iconSize: 52.h,
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }

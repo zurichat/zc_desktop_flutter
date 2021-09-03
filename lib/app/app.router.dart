@@ -8,21 +8,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
 
+import '../ui/login/login_view.dart';
 import '../ui/views/authInputTestView/authInputTestView.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/startup/startup_view.dart';
-import '../ui/views/message/message_view.dart';
 
 class Routes {
-  static const String startUpView = '/';
+  static const String startUpView = '/start-up-view';
   static const String homeView = '/home-view';
   static const String authInputTestView = '/auth-input-test-view';
+  static const String loginView = '/';
   static const all = <String>{
     startUpView,
     homeView,
     authInputTestView,
+    loginView,
   };
 }
 
@@ -33,25 +34,32 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.authInputTestView, page: AuthInputTestView),
+    RouteDef(Routes.loginView, page: LoginView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
     StartUpView: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
+      return MaterialPageRoute<dynamic>(
         builder: (context) => const StartUpView(),
         settings: data,
       );
     },
     HomeView: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
+      return MaterialPageRoute<dynamic>(
         builder: (context) => const HomeView(),
         settings: data,
       );
     },
     AuthInputTestView: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
+      return MaterialPageRoute<dynamic>(
         builder: (context) => const AuthInputTestView(),
+        settings: data,
+      );
+    },
+    LoginView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginView(),
         settings: data,
       );
     },
