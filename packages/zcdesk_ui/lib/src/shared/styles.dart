@@ -4,47 +4,105 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Text Styles we will be using through the app.
 
-TextStyle heading1Style =
-    TextStyle(fontSize: 43.sp, fontWeight: FontWeight.bold, fontFamily: 'Lato');
-TextStyle heading2Style =
-    TextStyle(fontSize: 35.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
-TextStyle heading3Style =
-    TextStyle(fontSize: 31.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
-TextStyle heading4Style =
-    TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w900, fontFamily: 'Lato');
-TextStyle headlineStyle =
-    TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w700, fontFamily: 'Lato');
-TextStyle bodyStyle =
-    TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
-TextStyle subheadingStyle =
-    TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
-TextStyle captionStyle =
-    TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
-TextStyle captionStyle1 = TextStyle(
-    fontSize: 20.sp,
-    fontWeight: FontWeight.w600,
-    color: kcSuccessColor,
-    fontFamily: 'Lato');
-TextStyle extraSmallStyle =
-    TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
-TextStyle smallStyle = TextStyle(
-    fontSize: 18.sp,
-    fontWeight: FontWeight.w500,
-    wordSpacing: 2,
-    fontFamily: 'Lato');
+TextStyle heading1Style = TextStyle(
+  fontSize: 43.sp,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Lato',
+);
+
+TextStyle heading2Style = TextStyle(
+  fontSize: 37.sp,
+  fontWeight: FontWeight.w600,
+  fontFamily: 'Lato',
+);
+
+TextStyle heading3Style = TextStyle(
+  fontSize: 31.sp,
+  fontWeight: FontWeight.w600,
+  fontFamily: 'Lato',
+);
+
+TextStyle heading4Style = TextStyle(
+  fontSize: 25.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+TextStyle headlineStyle = TextStyle(
+  fontSize: 30.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+TextStyle bodyStyle = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
+TextStyle subheadingStyle = TextStyle(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w600,
+  color: leftNavBarColor,
+  fontFamily: 'Lato',
+);
+
+TextStyle captionStyle = TextStyle(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
+TextStyle extraSmallStyle = TextStyle(
+  fontSize: 11.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
 TextStyle authBtnStyle = TextStyle(
-    fontSize: 20.sp,
-    color: whiteColor,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'Lato');
+  fontSize: 20.sp,
+  color: whiteColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Lato',
+);
 
 TextStyle dropDownTitleTextStyle = TextStyle(
-    fontSize: 24.sp,
-    color: leftNavBarColor,
-    fontWeight: FontWeight.w500,
-    fontFamily: 'Lato');
+  fontSize: 24.sp,
+  color: leftNavBarColor,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Lato',
+);
+
 TextStyle dropDownBodyTextStyle = TextStyle(
-    fontSize: 16.sp,
-    color: leftNavBarColor,
-    fontWeight: FontWeight.w700,
-    fontFamily: 'Lato');
+  fontSize: 16.sp,
+  color: leftNavBarColor,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+// ====== New Text Styles ====== //
+
+TextStyle headline6 = TextStyle(
+  fontSize: 24.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+TextStyle headline3 = TextStyle(
+  fontSize: 35.sp,
+  fontWeight: FontWeight.w600,
+  fontFamily: 'Lato',
+);
+
+TextStyle subtitle2 = TextStyle(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
+TextStyle bodyText1 = TextStyle(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w600,
+  color: leftNavBarColor,
+  fontFamily: 'Lato',
+);
