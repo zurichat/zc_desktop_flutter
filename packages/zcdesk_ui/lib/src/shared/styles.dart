@@ -30,3 +30,30 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
     TextStyle(fontSize: 24.sp, color: leftNavBarColor, fontWeight: FontWeight.w500, fontFamily: 'Lato');
   TextStyle dropDownBodyTextStyle =
     TextStyle(fontSize: 16.sp, color: leftNavBarColor, fontWeight: FontWeight.w700, fontFamily: 'Lato');
+
+// ====== New Text Styles ====== //
+
+TextStyle headline6 = TextStyle(
+  fontSize: 24.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+TextStyle headline3 = TextStyle(
+  fontSize: 35.sp,
+  fontWeight: FontWeight.w600,
+  fontFamily: 'Lato',
+);
+
+TextStyle subtitle2 = TextStyle(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
+TextStyle bodyText1 = TextStyle(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w600,
+  color: leftNavBarColor,
+  fontFamily: 'Lato',
+);
