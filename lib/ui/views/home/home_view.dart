@@ -20,9 +20,9 @@ class HomeView extends StatelessWidget {
                 child: Container(
                     alignment: Alignment.topCenter,
                     child: centertitlecard(context))),
-                     ],
-          ),
+          ],
         ),
+      ),
       viewModelBuilder: () => HomeViewModel(),
     );
   }
