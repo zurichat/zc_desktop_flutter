@@ -1,11 +1,11 @@
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
+// import 'package:stacked_services/stacked_services.dart';
+// import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 
 class LoginViewModel extends BaseViewModel {
   final log = getLogger("HomeViewwModel");
-  final _navigationService = locator<NavigationService>();
+  // final _navigationService = locator<NavigationService>();
 
   String _logoUrl = 'assets/images/zc_logo2.png';
   String _logoUrlG = 'assets/images/google.png';

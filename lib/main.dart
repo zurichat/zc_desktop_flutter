@@ -22,10 +22,10 @@ class ZcDesktop extends StatelessWidget {
         builder: () {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Zuri Chat',
-            theme: ThemeData(
-              primarySwatch: Colors.blueGrey,
-            ),
+            // title: 'Zuri Chat',
+            // theme: ThemeData(
+            //   primarySwatch: Colors.blueGrey,
+            // ),
             navigatorKey: StackedService.navigatorKey,
             onGenerateRoute: StackedRouter().onGenerateRoute,
           );
