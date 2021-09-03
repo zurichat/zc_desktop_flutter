@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/views/widgets/center_list_tile/center_tile.dart';
