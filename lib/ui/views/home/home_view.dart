@@ -20,11 +20,6 @@ class HomeView extends StatelessWidget {
                 child: Container(
                     alignment: Alignment.topCenter,
                     child: centertitlecard(context))),
-            Center(
-              child: ElevatedButton(onPressed:(){
-                showDialog(context: context, builder: (_)=>ProfileDialogViw());
-              }, child: Text('Click ME'),),
-            )
           ],
         ),
       ),
