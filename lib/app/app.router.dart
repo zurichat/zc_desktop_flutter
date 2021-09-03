@@ -8,8 +8,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+<<<<<<< HEAD
 import '../ui/views/signUp/signup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
+=======
+
+import '../ui/views/signUp/signup_view.dart';
+import 'package:zc_desktop_flutter/ui/login/login_view.dart';
+
+>>>>>>> b3ce203934cbf5e49f588802419b3108b802b9d2
 
 import '../ui/views/authInputTestView/authInputTestView.dart';
 import '../ui/views/home/home_view.dart';
@@ -52,9 +59,26 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+<<<<<<< HEAD
     SignUpView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const SignUpView(),
+=======
+
+    SignUpView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const SignUpView(),
+
+
+    LoginView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginView(),
+
+    AuthInputTestView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AuthInputTestView(),
+
+>>>>>>> b3ce203934cbf5e49f588802419b3108b802b9d2
         settings: data,
       );
     },
