@@ -24,3 +24,5 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
     TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
   TextStyle authBtnStyle =
     TextStyle(fontSize: 20.sp,color: whiteColor, fontWeight: FontWeight.bold, fontFamily: 'Lato');
+  TextStyle leftSideBarStyle =
+    TextStyle(fontSize: 15.sp,color: leftNavBarColor, fontWeight: FontWeight.normal, fontFamily: 'Lato');
