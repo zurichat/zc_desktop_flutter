@@ -13,7 +13,6 @@ import 'package:stacked/stacked_annotations.dart';
 import '../ui/views/authInputTestView/authInputTestView.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/startup/startup_view.dart';
-import '../ui/views/message/message_view.dart';
 
 class Routes {
   static const String startUpView = '/';

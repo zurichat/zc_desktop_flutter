@@ -31,36 +31,43 @@ class LeftSideBarView extends StatelessWidget {
                           LeftSideBar(
                             iconText: model.insight,
                             icon: AssetImage(model.insightUrl),
+                            onTap: (){},
                           ),
                           verticalSpaceMedium,
                           LeftSideBar(
                             iconText: model.threads,
                             icon: AssetImage(model.threadsUrl),
+                            onTap: (){},
                           ),
                           verticalSpaceMedium,
                           LeftSideBar(
                             iconText: model.allDms,
                             icon: AssetImage(model.allDmsUrl),
+                            onTap: (){},
                           ),
                           verticalSpaceMedium,
                           LeftSideBar(
                             iconText: model.draft,
                             icon: AssetImage(model.draftUrl),
+                            onTap: (){},
                           ),
                           verticalSpaceMedium,
                           LeftSideBar(
                             iconText: model.files,
                             icon: AssetImage(model.filesUrl),
+                            onTap: (){},
                           ),
                           verticalSpaceMedium,
                           LeftSideBar(
                             iconText: model.integrate,
                             icon: AssetImage(model.integrateUrl),
+                            onTap: (){},
                           ),
                           verticalSpaceMedium,
                           LeftSideBar(
                             iconText: model.toDo,
                             icon: AssetImage(model.toDoUrl),
+                            onTap: (){},
                           ),
                           verticalSpaceMedium,
                         ],
