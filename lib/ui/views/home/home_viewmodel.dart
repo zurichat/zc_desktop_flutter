@@ -8,7 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
-import 'package:zc_desktop_flutter/ui/views/startup/startup_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/login/login_viewmodel.dart';
 
 class HomeViewModel extends BaseViewModel {
   final log = getLogger("HomeViewwModel");
@@ -24,13 +24,10 @@ class HomeViewModel extends BaseViewModel {
   double get logoHeight => _logoHeight;
   String get title => _title;
 
-  // TODO: 4, Remove after review
   final _storageService = locator<LocalStorageService>();
 
-  // TODO: 5, Remove after review
   String get testString => _storageService.getFromDisk(testLocalKey) as String;
 
-  //TODO: Remove After Review
   final _navigationService = locator<NavigationService>();
 
   void goToInputView() {

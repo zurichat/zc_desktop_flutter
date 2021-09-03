@@ -1,6 +1,7 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 buildAppBar(BuildContext context, bool isActive) {
@@ -11,6 +12,7 @@ buildAppBar(BuildContext context, bool isActive) {
   final icond = Icons.settings_outlined;
 
   return Container(
+    height: 45.h,
     color: Colors.black,
     child: WindowTitleBarBox(
       child: MoveWindow(
@@ -144,16 +146,15 @@ class WindowsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var colors = WindowButtonColors(
-        mouseOver: Color(0xFFD32F2F),
-        mouseDown: Color(0xFFB71C1C),
-        iconNormal: lightIconColor,
-        iconMouseOver: Colors.white);
+      mouseOver: Color(0xFFD32F2F),
+      mouseDown: Color(0xFFB71C1C),
+      iconNormal: lightIconColor,
+      iconMouseOver: Colors.white,
+    );
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        MinimizeWindowButton(
-          colors: colors,
-        ),
+        MinimizeWindowButton(colors: colors),
         MaximizeWindowButton(colors: colors),
         CloseWindowButton(colors: colors)
       ],
