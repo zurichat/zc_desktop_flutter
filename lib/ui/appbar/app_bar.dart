@@ -1,6 +1,7 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 buildAppBar(BuildContext context, bool isActive) {
@@ -11,6 +12,7 @@ buildAppBar(BuildContext context, bool isActive) {
   final icond = Icons.settings_outlined;
 
   return Container(
+    height: 45.h,
     color: Colors.black,
     child: WindowTitleBarBox(
       child: MoveWindow(
