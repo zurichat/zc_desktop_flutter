@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: StartUpView, initial: false),
+    MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView, initial: true),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: AuthInputTestView),
