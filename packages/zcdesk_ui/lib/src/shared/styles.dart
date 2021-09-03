@@ -26,3 +26,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
     TextStyle(fontSize: 20.sp,color: whiteColor, fontWeight: FontWeight.bold, fontFamily: 'Lato');
   TextStyle leftSideBarStyle =
     TextStyle(fontSize: 15.sp,color: leftNavBarColor, fontWeight: FontWeight.normal, fontFamily: 'Lato');
+  TextStyle dropDownTitleTextStyle =
+    TextStyle(fontSize: 24.sp, color: leftNavBarColor, fontWeight: FontWeight.w500, fontFamily: 'Lato');
+  TextStyle dropDownBodyTextStyle =
+    TextStyle(fontSize: 16.sp, color: leftNavBarColor, fontWeight: FontWeight.w700, fontFamily: 'Lato');
