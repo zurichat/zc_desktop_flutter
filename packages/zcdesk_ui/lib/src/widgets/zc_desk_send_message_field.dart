@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zcdesk_ui/src/shared/app_colors.dart';
 import 'package:zcdesk_ui/src/shared/ui_helpers.dart';
 
@@ -132,7 +132,7 @@ class _SendMessageFunctions extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
             padding: EdgeInsets.all(6),
-            child: SvgPicture.asset('packages/zcdesk_ui/assets/icons/send.svg'),
+            // child: SvgPicture.asset('packages/zcdesk_ui/assets/icons/send.svg'),
           ),
         ),
       ],
@@ -157,8 +157,8 @@ class _TextFunction extends StatelessWidget {
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(shape: BoxShape.circle),
         child: Center(
-          child: SvgPicture.asset(icon),
-        ),
+            // child: SvgPicture.asset(icon),
+            ),
       ),
     );
   }

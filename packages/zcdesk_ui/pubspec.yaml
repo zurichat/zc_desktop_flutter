@@ -14,12 +14,10 @@ dependencies:
 
   #screen adaptations
   flutter_screenutil: ^5.0.0+2
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-    
+
 flutter:
   assets:
     - assets/icons/

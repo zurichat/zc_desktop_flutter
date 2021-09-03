@@ -4,6 +4,7 @@ import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/login/login_view.dart';
 import 'package:zc_desktop_flutter/ui/views/authInputTestView/authInputTestView.dart';
 import 'package:zc_desktop_flutter/ui/views/home/home_view.dart';
+import 'package:zc_desktop_flutter/ui/views/signUp/signup_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
 @StackedApp(
@@ -14,6 +15,10 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     MaterialRoute(page: HomeView),
     MaterialRoute(page: AuthInputTestView),
     MaterialRoute(page: LoginView, initial: true),
+    MaterialRoute(page: StartUpView),
+    MaterialRoute(page: SignUpView),
+    MaterialRoute(page: HomeView),
+    MaterialRoute(page: AuthInputTestView),
   ],
   dependencies: [
     Presolve(

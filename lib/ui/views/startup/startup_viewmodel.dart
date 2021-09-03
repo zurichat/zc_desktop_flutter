@@ -24,6 +24,7 @@ class StartUpViewModel extends BaseViewModel {
 
   void goToHome() {
     _navigationService.navigateTo(Routes.homeView);
+
     notifyListeners();
   }
 }
