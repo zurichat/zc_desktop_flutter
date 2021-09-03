@@ -61,7 +61,7 @@ app.*.map.json
 *.h
 
 # If you're building an application, you may want to check-in your pubspec.lock
-.pubspec.lock
+pubspec.lock
 
 # Executables vTap version created by dart2native
 bin/

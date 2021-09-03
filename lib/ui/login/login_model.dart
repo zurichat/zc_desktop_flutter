@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/login/login_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/shared/ui_helpers.dart';
+import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginModel extends StatelessWidget {
   const LoginModel({Key? key}) : super(key: key);
@@ -30,8 +31,7 @@ Widget _buildForgotPasswordBtn() {
       onPressed: () => print('Forgot Password Button Pressed'),
       child: Text(
         'Forgot Password?',
-        style: TextStyle(
-            fontWeight: FontWeight.w600, fontSize: 15, color: Colors.black),
+        style: bodyText1.copyWith(fontSize: 15.sp),
       ),
     ),
   );
@@ -43,7 +43,7 @@ Widget _buildLoginBtn() {
     width: double.infinity,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: kcPrimaryColor,
+        primary: kcSecondaryColor,
       ),
       onPressed: () {},
       child: Padding(
@@ -115,18 +115,13 @@ Widget _buildSignupBtn() {
       text: TextSpan(
         children: [
           TextSpan(
-            text: 'Don\'t have an Account? ',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18.0,
-              fontWeight: FontWeight.w600,
-            ),
+            text: 'Don\'t have an Account?',
+            style: bodyText1,
           ),
           TextSpan(
             text: ' Sign Up',
             style: TextStyle(
               color: Color(0xff20C18C),
-              fontSize: 18.0,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -136,8 +131,6 @@ Widget _buildSignupBtn() {
   );
 }
 
-//colors
-const Color kcPrimaryColor = Color(0xff1A61DB);
 const Color kcMediumGreyColor = Color(0xff868686);
 
 //TextStyles
