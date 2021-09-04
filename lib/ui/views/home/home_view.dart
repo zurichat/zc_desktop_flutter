@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:zc_desktop_flutter/custom_widgets/home_view_widget.dart';
+
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/views/profile_dialog/profile_dialog_view.dart';
@@ -9,12 +12,15 @@ import 'package:zc_desktop_flutter/ui/views/widgets/popup_menu_button.dart';
 
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
-import 'home_viewmodel.dart';
+
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    return HomeViewWidget();
+
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: Column(
@@ -46,5 +52,8 @@ class HomeView extends StatelessWidget {
       ),
       viewModelBuilder: () => HomeViewModel(),
     );
+
   }
 }
+
+
