@@ -4,20 +4,19 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
-buildAppBar(BuildContext context, bool isActive) {
+buildAppBar(BuildContext context, {bool isActive = false, bool isSignUp = false, bool isSignIn = false, String text = ''}) {
   final icon = Icons.menu;
   final icona = Icons.arrow_back;
   final iconb = Icons.arrow_forward;
   final iconc = Icons.watch_later_outlined;
   final icond = Icons.settings_outlined;
-
   return Container(
     height: 45.h,
     color: Colors.black,
     child: WindowTitleBarBox(
       child: MoveWindow(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
               onPressed: () {},
@@ -27,16 +26,17 @@ buildAppBar(BuildContext context, bool isActive) {
                 color: lightIconColor,
               ),
             ),
-            SizedBox(width: 150),
-            IconButton(
+            SizedBox(width: !isSignUp && !isSignIn ? 150.w : 70.w),
+            !isSignUp && !isSignIn ? IconButton(
               onPressed: () {},
               icon: Icon(
                 icona,
                 size: 20,
                 color: lightIconColor,
               ),
-            ),
+            ) : Expanded(child: Text(text, style: TextStyle(color: Colors.white, fontFamily: 'Lato'),)),
             //  SizedBox(width: 10),
+            if(!isSignUp && !isSignIn)
             IconButton(
               onPressed: () {},
               icon: Icon(
@@ -45,6 +45,7 @@ buildAppBar(BuildContext context, bool isActive) {
                 color: lightIconColor,
               ),
             ),
+            if(!isSignUp && !isSignIn)
             // SizedBox(width: 10),
             IconButton(
               onPressed: () {},
@@ -55,6 +56,7 @@ buildAppBar(BuildContext context, bool isActive) {
               ),
             ),
             // SizedBox(width: 10),
+            if(!isSignUp && !isSignIn)
             Container(
               constraints: BoxConstraints(
                 maxHeight: 18,
@@ -94,6 +96,7 @@ buildAppBar(BuildContext context, bool isActive) {
               ),
             ),
             //  SizedBox(width: 10),
+            if(!isSignUp && !isSignIn)
             IconButton(
               onPressed: () {},
               icon: Icon(
@@ -103,36 +106,29 @@ buildAppBar(BuildContext context, bool isActive) {
               ),
             ),
             SizedBox(width: 100),
+            if(!isSignUp && !isSignIn)
             GestureDetector(
               child: Stack(
+                clipBehavior: Clip.none,
                 children: [
-                  Stack(
-                    children: [
-                      CircleAvatar(),
-                      Positioned(
-                        top: 15,
-                        left: 28,
-                        child: Container(
-                          height: 15,
-                          width: 10,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.green),
-                        ),
-                      )
-                    ],
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
+                  CircleAvatar(),
+                  Positioned(
+                    top: 20,
+                    left: 28,
                     child: Container(
-                        decoration: BoxDecoration(
-                            color: isActive ? Colors.green : Colors.grey,
-                            borderRadius: BorderRadius.circular(50))),
+                      height: 15,
+                      width: 15,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: isActive ? Colors.green : Colors.grey),
+                    ),
                   ),
-                ],
+                      ],
               ),
             ),
-            WindowsButton()
+            Align(
+              alignment: Alignment.centerRight,
+              child: WindowsButton())
           ],
         ),
       ),

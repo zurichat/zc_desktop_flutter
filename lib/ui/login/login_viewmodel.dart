@@ -17,23 +17,18 @@ class LoginViewModel extends BaseViewModel {
   String _logoUrlF = 'assets/images/facebook.png';
   String _logoUrlT = 'assets/images/twitter.png';
   double _logoWidth = 5.0;
-  double _logoHeight = 5.0;
-  String _title = 'Unlimited Team Collaboration Platform';
-  String _subTitle =
-      'Unlimited team collaboration platform with emphasis on team building,\n fun, team manageent and above all, project management.';
+  double _logoHeight = 5.0;      
   String _signIn = 'Sign in';
   String _email = 'Email';
   String _password = 'Password';
   String _emailhint = 'password@gmail.com';
   String _hint = 'password';
-  String _circularImage = 'assets/images/circularImage.png';
-  String get circularImage => _circularImage;
+  bool _passwordVisibility = true;
 
   String get logoUrl => _logoUrl;
   String get logoUrlG => _logoUrlG;
+  bool get passwordVisibily => _passwordVisibility;
 
-  String get title => _title;
-  String get subTitle => _subTitle;
   String get signIn => _signIn;
   String get logoUrlF => _logoUrlF;
   String get logoUrlT => _logoUrlT;
@@ -59,14 +54,23 @@ class LoginViewModel extends BaseViewModel {
     passwordText = value!;
   }
 
+  void setPasswordVisibility(){
+    _passwordVisibility = !_passwordVisibility;
+    notifyListeners();
+  }
+
   void goToHome() {
     if (emailText.isEmpty) {
       _navigationService.navigateTo(Routes.homeView);
       return;
     }
-
     _storageService.saveToDisk(testLocalKey, emailText);
 
     _navigationService.navigateTo(Routes.homeView);
+  }
+
+  void goToSignUp() {
+    _navigationService.navigateTo(Routes.signUpView);
+    notifyListeners();
   }
 }

@@ -10,7 +10,7 @@ class LeftSideBarViewModel extends BaseViewModel{
   double _pageHeightTwo = 100.h;
   double _leftSideBarWidth = 350.w;
   double _leftSideBarHeight = 1024.h;
-  double _leftSideBarPadding = 45.w;
+  double _leftSideBarPadding = 40.w;
 
   double get pageWidth => _pageWidth;
   double get pageHeightOne => _pageHeightOne;

@@ -1,28 +1,23 @@
 // ignore_for_file: implementation_imports
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
-import 'package:zc_desktop_flutter/ui/shared/ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/views/check_mail/check_email_view.dart';
-import 'package:zc_desktop_flutter/ui/views/forget_password/reset_password_view.dart';
-import 'package:zc_desktop_flutter/ui/views/forgotPasswordPage/forgot_password_viewmodel.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart' as auth;
+import 'forget_password_view_model.dart';
+import 'package:zc_desktop_flutter/ui/shared/ui_helpers.dart';
 import 'package:zcdesk_ui/src/shared/styles.dart';
 
-class ForgotPasswordPage extends StatelessWidget {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+class ResetPasswordView extends StatelessWidget {
+  const ResetPasswordView({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<ForgotPasswordViewModel>.reactive(
-        viewModelBuilder: () => ForgotPasswordViewModel(),
-        builder: (context, model, child) => Scaffold(
+    return ViewModelBuilder<ForgetPasswordViewModel>.reactive(builder: (context, model, child) {
+      return Scaffold(
                 body: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -36,7 +31,7 @@ class ForgotPasswordPage extends StatelessWidget {
                     Image.asset(model.logoUrl),
                     verticalSpaceMedium,
                     Text(
-                      model.signInText,
+                      model.title,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 43.sp,
@@ -45,7 +40,7 @@ class ForgotPasswordPage extends StatelessWidget {
                     ),
                     verticalSpaceSmall,
                     Text(
-                      model.signInSubtext,
+                      model.subTitle,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 18.sp,
@@ -77,58 +72,12 @@ class ForgotPasswordPage extends StatelessWidget {
                                         builder: (_) => CheckEmailView()));
                         },
                         child: Text(
-                          model.btnText,
+                          'Get Reset Link',
                           style: authBtnStyle,
                         ),
                       ),
                     ),
                     verticalSpaceMedium,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        buildLine(),
-                        Text(
-                          model.orText,
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Lato',
-                              color: Color.fromRGBO(36, 36, 36, 1)),
-                        ),
-                        buildLine(),
-                      ],
-                    ),
-                    verticalSpaceMedium,
-                    GestureDetector(
-                      onTap: (){
-                        //TODO to be replaced with the normal navigation\
-                        Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (_) => ResetPasswordView()));
-                      },
-                      child: Container(
-                        height: 58.h,
-                        width: 440.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3),
-                            border: Border.all(color: Colors.grey)),
-                        child: Center(
-                          child: Text(
-                            model.resetBtnText,
-                            style: TextStyle(
-                                color: Color.fromRGBO(
-                                  26,
-                                  97,
-                                  219,
-                                  1,
-                                ),
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Lato'),
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 Padding(
@@ -166,7 +115,9 @@ class ForgotPasswordPage extends StatelessWidget {
                   ),
                 )
               ],
-            )));
+            ));
+
+    }, viewModelBuilder:()=> ForgetPasswordViewModel(),);
   }
 
   bottomTextStyle() {
@@ -175,13 +126,5 @@ class ForgotPasswordPage extends StatelessWidget {
         fontSize: 18.sp,
         color: Color.fromRGBO(153, 153, 153, 1),
         fontWeight: FontWeight.w400);
-  }
-
-  buildLine(){
-    return Container(
-      height: 1.h,
-      width: 187.w,
-      color: Color.fromRGBO(219, 219, 219, 1),
-    );
   }
 }

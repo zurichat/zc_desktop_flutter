@@ -19,19 +19,6 @@ class ZcDesktop extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-    return  ScreenUtilInit(
-      builder: () => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Zuri Chat',
-        theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-        ),
-
-        navigatorKey: StackedService.navigatorKey,
-        onGenerateRoute: StackedRouter().onGenerateRoute,
-      ),
-      designSize: const Size(375, 667),
     return ScreenUtilInit(
       designSize: Size(1440, 940),
       builder: () {
