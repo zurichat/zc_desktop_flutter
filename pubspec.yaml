@@ -24,7 +24,6 @@ dependencies:
 
   get_it: ^7.2.0
 
-  get_it: ^7.2.0
 
 
 
@@ -32,12 +31,12 @@ dependencies:
   # local storage
   shared_preferences: ^2.0.7
 
-<<<<<<< HEAD
+
   dio: ^4.0.0
-=======
+
   #screen adaptations
   flutter_screenutil: ^5.0.0+2
->>>>>>> 41d6f533a007467fe1a6dd591d3ab55cb4fe22a7
+
 
 
 

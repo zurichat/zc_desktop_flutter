@@ -2,16 +2,8 @@
 //  Generated file. Do not edit.
 //
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // clang-format off
 
-=======
->>>>>>> 5f59ba86c051b34663479dedbe966eb895a87741
-=======
-// clang-format off
-
->>>>>>> 41d6f533a007467fe1a6dd591d3ab55cb4fe22a7
 #include "generated_plugin_registrant.h"
 
 #include <bitsdojo_window_linux/bitsdojo_window_plugin.h>
