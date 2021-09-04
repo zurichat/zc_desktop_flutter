@@ -8,10 +8,18 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 <<<<<<< HEAD
+<<<<<<< HEAD
     version: "2.7.0"
 =======
     version: "2.6.1"
 >>>>>>> 5f59ba86c051b34663479dedbe966eb895a87741
+=======
+
+
+
+    version: "2.8.1"
+
+>>>>>>> 41d6f533a007467fe1a6dd591d3ab55cb4fe22a7
   boolean_selector:
     dependency: transitive
     description:
@@ -33,10 +41,14 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 <<<<<<< HEAD
+<<<<<<< HEAD
     version: "1.3.1"
 =======
     version: "1.2.0"
 >>>>>>> 5f59ba86c051b34663479dedbe966eb895a87741
+=======
+    version: "1.3.1"
+>>>>>>> 41d6f533a007467fe1a6dd591d3ab55cb4fe22a7
   clock:
     dependency: transitive
     description:
@@ -63,6 +75,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.0+2"
+  flutter_svg:
+    dependency: "direct main"
+    description:
+      name: flutter_svg
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.22.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -82,10 +108,14 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 <<<<<<< HEAD
+<<<<<<< HEAD
     version: "1.7.0"
 =======
     version: "1.3.0"
 >>>>>>> 5f59ba86c051b34663479dedbe966eb895a87741
+=======
+    version: "1.7.0"
+>>>>>>> 41d6f533a007467fe1a6dd591d3ab55cb4fe22a7
   path:
     dependency: transitive
     description:
@@ -93,6 +123,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  path_drawing:
+    dependency: transitive
+    description:
+      name: path_drawing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.1"
+  path_parsing:
+    dependency: transitive
+    description:
+      name: path_parsing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -140,10 +191,17 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 <<<<<<< HEAD
+<<<<<<< HEAD
     version: "0.4.2"
 =======
     version: "0.3.0"
 >>>>>>> 5f59ba86c051b34663479dedbe966eb895a87741
+=======
+
+
+    version: "0.4.2"
+
+>>>>>>> 41d6f533a007467fe1a6dd591d3ab55cb4fe22a7
   typed_data:
     dependency: transitive
     description:
@@ -158,6 +216,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.1.2"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=1.24.0-7.0"
