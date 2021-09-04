@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  freezed_annotation: 
+  json_annotation:
   cupertino_icons: ^1.0.2
   # ui package for the whole app
   zcdesk_ui:
@@ -34,6 +36,8 @@ dev_dependencies:
     sdk: flutter
   stacked_generator: ^0.5.1
   build_runner:
+  freezed: 
+  json_serializable:
 
 
 flutter:
