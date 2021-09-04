@@ -8,13 +8,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 
-    version: "2.5.0"
-=======
-
-
-
-
-    version: "2.8.1"
+   version: "2.8.1"
 
 
   boolean_selector:
@@ -171,24 +165,9 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.4.3"
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-    version: "0.2.19"
-=======
-
-
 
     version: "0.4.2"
 
-
->>>>>>> b3ce203934cbf5e49f588802419b3108b802b9d2
-=======
-    version: "0.4.1"
->>>>>>> fbebe51edf075c7c3ca5fdfa253b8b3d1dad55c5
->>>>>>> af1acf446f350bc620111b5a6b7bcfb52edaa2a8
   typed_data:
     dependency: transitive
     description:
@@ -213,3 +192,4 @@ packages:
 sdks:
   dart: ">=2.12.0 <3.0.0"
   flutter: ">=1.24.0-7.0"
+
