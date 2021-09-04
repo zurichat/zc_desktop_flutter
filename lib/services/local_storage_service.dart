@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageService {
@@ -11,7 +10,6 @@ class LocalStorageService {
     }
 
     if (_preferences == null) {
-      WidgetsFlutterBinding.ensureInitialized();
       _preferences = await SharedPreferences.getInstance();
     }
 
