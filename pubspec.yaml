@@ -9,24 +9,28 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   cupertino_icons: ^1.0.2
-  # ui package for the whole app
-  zcdesk_ui:
-    path: packages/zcdesk_ui
+  flutter_screenutil: ^5.0.0+2
+  flutter_svg: ^0.22.0
+  google_fonts: ^2.1.0
   
   # stacked 
   stacked: ^2.2.5
   stacked_services:
-
-  logger: ^1.0.0
   get_it: ^7.2.0
+  logger: ^1.0.0
+  bitsdojo_window: ^0.1.1+1
 
+  dio: ^4.0.0
 
 
   # local storage
   shared_preferences: ^2.0.7
-  dio: ^4.0.0
-  
+
+  # ui package for the whole app
+  zcdesk_ui:
+    path: packages/zcdesk_ui
 
 
 dev_dependencies:
@@ -34,12 +38,19 @@ dev_dependencies:
     sdk: flutter
   stacked_generator: ^0.5.1
   build_runner:
+  analyzer: 1.5.0
 
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+
+    - assets/images/facebook.svg
+    - assets/images/google.svg
+    - assets/images/twitter.svg
+
+    - assets/images/widgetImages/
  
 
  
