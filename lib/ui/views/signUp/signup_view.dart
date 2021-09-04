@@ -1,36 +1,18 @@
+// ignore_for_file: implementation_imports
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:zc_desktop_flutter/ui/login/login_view.dart';
-import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
+import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/views/widgets/build_left_startup_image.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
-import 'components/signupForm.dart';
 import 'components/signup_viewmodel.dart';
+import 'package:zcdesk_ui/src/shared/styles.dart';
 
 class SignUpView extends StatelessWidget {
-  // final String title;
-  // final String subtitle;
-  // final String mainButton;
-  // final Widget form;
-  // final bool showTermText;
-  // final String validationMessage;
-  // final Function onMainButtonClick;
-  // final Function onCreateButtonTapp;
-  // final Function onForgotPassword;
-  // final bool busy;
-
-  const SignUpView({
+    const SignUpView({
     Key? key,
-    // required this.title,
-    // required this.subtitle,
-    // required this.mainButton,
-    // required this.form,
-    // required this.showTermText,
-    // required this.validationMessage,
-    // required this.onMainButtonClick,
-    // required this.onCreateButtonTapp,
-    // required this.onForgotPassword,
-    // required this.busy
   }) : super(key: key);
 
   @override
@@ -39,140 +21,146 @@ class SignUpView extends StatelessWidget {
     Size _size = MediaQuery.of(context).size;
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: _size.height * 0.06,
-                    left: _size.width * 0.07,
-                    right: _size.width * 0.03),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(model.logoUrl),
-                        SizedBox(
-                          width: _size.width * 0.005,
-                        ),
-                        Text(
-                          model.title,
-                          style: heading4Style,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: _size.height * 0.03,
-                    ),
-                    Text(
-                      model.subtitle,
-                      style: heading2Style,
-                    ),
-                    SizedBox(
-                      height: _size.height * 0.03,
-                    )
-                  ],
+        body: Column(
+          children: [
+            Container(
+              height: 40,
+              child: buildAppBar(context, isSignUp: true)),
+            Container(
+              height: _size.height - 40,
+              child: Row(
+                children: [
+                  BuildStartUpImage(
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: _size.width * 0.07, right: _size.width * 0.03),
-                child: Column(
-                  children: [
-                    SignUpForm(),
-                    SizedBox(
-                      height: _size.height * 0.01,
-                    ),
-                    SizedBox(
-                      width: _size.width * 0.7,
-                      child: Row(
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 72.w),
+                    child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
-                          Checkbox(
-                              value: check,
-                              activeColor: kcSuccessColor,
-                              onChanged: (value) {}),
+                          verticalSpaceMedium,
+                          SvgPicture.asset(model.logoUrl),
+                          verticalSpaceMedium,
                           Text(
-                            model.policy,
-                            style: bodyStyle,
-                          )
+                            model.title,
+                            style: heading4Style,
+                          ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: _size.height * 0.03,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 110, right: 50),
-                child: Column(
-                  children: [
-                    Container(
-                      height: _size.height * 0.06,
-                      width: _size.width * 0.9,
-                      child: FlatButton(
-                        color: Colors.blue[800],
-                        onPressed: () {},
-                        child: Text(
-                          "Register",
-                          style: authBtnStyle,
-                        ),
+                      Text(
+                        model.subtitle,
+                        style: heading2Style,
                       ),
-                    ),
-                    SizedBox(
-                      height: _size.height * 0.02,
-                    ),
-                    Text(
-                      'Easy Sign Up With',
-                      style: extraSmallStyle,
-                    ),
-                    SizedBox(
-                      height: _size.height * 0.02,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        _buttonGoog(),
-                        SizedBox(
-                          width: _size.width * 0.03,
-                        ),
-                        _buttonFace(),
-                        SizedBox(
-                          width: _size.width * 0.03,
-                        ),
-                        _buttonTwit(),
-                      ],
-                    ),
-                    SizedBox(
-                      height: _size.height * 0.02,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account?",
-                          style: captionStyle,
-                        ),
-                        SizedBox(
-                          width: _size.width * 0.005,
-                        ),
-                        GestureDetector(
-                          onTap: model.goToLogin,
-                          child: Text(
-                            "Sign Up",
-                            style: bodyText1,
+                      verticalSpaceMedium,
+                      AuthInputField(
+                            label: 'Email',
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: (_){},
+                            hintPlaceHolder: 'password@gmail.com',
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                          verticalSpaceMedium,
+                          AuthInputField(
+                            label: 'Password',
+                            password: true,
+                            isVisible: model.passwordVisibily,
+                            onVisibilityTap: model.setPasswordVisibility,
+                            onChanged: (_){},
+                            hintPlaceHolder: 'password@gmail.com',
+                          ),
+                          verticalSpaceMedium,
+                          AuthInputField(
+                            label: 'Confirm Password',
+                            password: true,
+                            isVisible: model.passwordVisibily,
+                            onVisibilityTap: model.setPasswordVisibility,
+                            onChanged: (_){},
+                            keyboardType: TextInputType.emailAddress,
+                            controller: TextEditingController(),
+                            hintPlaceHolder: 'Password',
+                          ),
+                          verticalSpaceMedium,
+                          Row(
+                            children: [
+                              Checkbox(
+                                  value: check,
+                                  activeColor: kcSuccessColor,
+                                  onChanged: (value){
+                                  },
+                                  ),
+                              Expanded(
+                                child: Text(
+                                  model.policy,
+                                  style: bodyStyle,
+                                ),
+                              )
+                            ],
+                          ),
+                          verticalSpaceMedium,
+                          Container(
+                              height: 58.h,
+                              width: 440.w,
+                              child: TextButton(
+                                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue[800]) ),
+                                onPressed: model.goToHome,
+                                child: Text(
+                                  "Register",
+                                  style: authBtnStyle,
+                                ),
+                              ),
+                            ),
+                          verticalSpaceMedium,
+                          Center(
+                            child: Text(
+                                'Easy Sign in With',
+                                style: bodyText1.copyWith(fontSize: 16.sp),
+                              ),
+                          ),
+                          verticalSpaceMedium,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _buttonGoog(),
+                              horizontalSpaceRegular,
+                              _buttonFace(),
+                              horizontalSpaceRegular,
+                              _buttonTwit(),
+                            ],
+                          ),
+                          verticalSpaceMedium,
+                          Center(
+                            child: GestureDetector(
+                              onTap: model.goToLogin,
+                              child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Already have an account?',
+                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, fontFamily: 'Lato', color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: ' Sign In',
+                                  style: TextStyle(
+                                    color: Color(0xff20C18C),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Lato'
+                                  ),
+                                ),
+                              ],
+                            ),
+                              ),
+                            ),
+                          ),
+                    ],
+                  ),)))
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       viewModelBuilder: () => SignUpViewModel(),

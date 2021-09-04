@@ -10,9 +10,11 @@ class AuthInputField extends StatelessWidget {
   final Widget? trailing;
   final TextInputType? inputType;
   final bool password;
+  final bool isVisible;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final void Function()? onTrailingTapped;
+  final void Function()? onVisibilityTap;
   final ValueChanged<String>? onChanged;
 
   const AuthInputField({
@@ -29,6 +31,8 @@ class AuthInputField extends StatelessWidget {
     this.password = false,
     this.controller,
     this.onChanged,
+    this.onVisibilityTap,
+    this.isVisible = false,
   }) : super(key: key);
 
   @override
@@ -45,46 +49,60 @@ class AuthInputField extends StatelessWidget {
         // spacing
         verticalSpaceRegular,
 
-        TextField(
-          onChanged: onChanged,
-          keyboardType: keyboardType,
-          autofocus: false,
-          obscureText: password,
-          cursorColor: Theme.of(context).accentColor,
-          textInputAction: TextInputAction.done,
-          maxLines: maxLines ?? 1,
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-          decoration: InputDecoration(
-            fillColor: filledColor,
-            filled: false,
-            suffixIcon: trailing != null
-                ? GestureDetector(
-                    onTap: onTrailingTapped,
-                    child: trailing,
-                  )
-                : null,
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            hintText: hintPlaceHolder,
-            hintStyle: TextStyle(
-              color: Colors.grey,
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
+        Stack(
+          children: [
+            TextField(
+              onChanged: onChanged,
+              keyboardType: keyboardType,
+              autofocus: false,
+              obscureText: isVisible,
+              cursorColor: Theme.of(context).accentColor,
+              textInputAction: TextInputAction.done,
+              maxLines: maxLines ?? 1,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+              decoration: InputDecoration(
+                fillColor: filledColor,
+                filled: false,
+                suffixIcon: trailing != null
+                    ? GestureDetector(
+                        onTap: onTrailingTapped,
+                        child: trailing,
+                      )
+                    : null,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                hintText: hintPlaceHolder,
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: leftNavBarColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: bodyColor),
+                ),
+              ),
             ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: leftNavBarColor),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: bodyColor),
-            ),
-          ),
+            if (password)
+              Padding(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                        onPressed: onVisibilityTap,
+                        icon: Icon(
+                            isVisible ? Icons.visibility : Icons.visibility_off))),
+              )
+          ],
         ),
       ],
     );

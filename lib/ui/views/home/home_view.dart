@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
-import 'package:zc_desktop_flutter/ui/views/profile_dialog/profile_dialog_view.dart';
 import 'package:zc_desktop_flutter/ui/views/widgets/center_list_tile/center_tile.dart';
-
 import 'package:zc_desktop_flutter/ui/views/widgets/popup_menu_button.dart';
-
-
 import 'package:zcdesk_ui/zcdesk_ui.dart';
-
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -21,7 +16,7 @@ class HomeView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(child: buildAppBar(context, true)),
+            Container(child: buildAppBar(context, isActive: true)),
             buildMenuItem(context),
             Expanded(
               child: Column(
@@ -29,15 +24,13 @@ class HomeView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: Text(
+                    child:ZcdeskText.headingFour(
                       'Welcome ${model.testString}',
-                      style: headline3,
                     ),
                   ),
      
-                    alignment: Alignment.topCenter,
-                    child: centertitlecard(context),
-                  ),
+                  Align ( alignment: Alignment.topCenter,
+                    child: centertitlecard(context),)
                 ],
               ),
             ),

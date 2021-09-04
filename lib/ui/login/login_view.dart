@@ -1,139 +1,129 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/login/login_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/widgets/build_left_startup_image.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+// ignore: implementation_imports
+import 'package:zcdesk_ui/src/shared/styles.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return ViewModelBuilder<LoginViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         backgroundColor: Colors.white,
-        appBar: CustomAppbar(),
-        body: Row(
+        body: Column(
           children: [
-            Expanded(
-              flex: 3,
-              child: Container(
-                color: kcPrimaryColor,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(model.circularImage),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      model.title,
-                      textAlign: TextAlign.center,
-                      style: headline6.copyWith(color: Colors.white),
-                    ),
-                    verticalSpaceSmall,
-                    Text(
-                      model.subTitle,
-                      textAlign: TextAlign.center,
-                      style: subtitle2.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                    verticalSpaceLarge,
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 72.w),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      verticalSpaceMedium,
-                      Row(
-                        children: [
-                          Image(image: AssetImage(model.logoUrl)),
-                        ],
-                      ),
-                      verticalSpaceMedium,
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          model.signIn,
-                          style: headline3,
-                        ),
-                      ),
-                      verticalSpaceMedium,
-                      AuthInputField(
-                        label: model.email,
-                        onChanged: model.emailChanged,
-                        hintPlaceHolder: 'password@gmail.com',
-                      ),
-                      verticalSpaceMedium,
-                      AuthInputField(
-                        label: model.password,
-                        password: false,
-                        onChanged: model.passwordChanged,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: TextEditingController(),
-                        hintPlaceHolder: 'Password',
-                      ),
-                      SizedBox(height: 40.0.h),
-                      ZcDeskButton(
-                        text: 'Sign In',
-                        onPressed: model.goToHome,
-                      ),
-                      verticalSpaceLarge,
-                      Text(
-                        'Easy Sign in With',
-                        style: bodyText1.copyWith(fontSize: 16.sp),
-                      ),
-                      verticalSpaceMedium,
-                      AuthIcons(),
-                      verticalSpaceMedium,
-                      GestureDetector(
-                        onTap: () => print('Sign Up Button Pressed'),
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Don\'t have an Account?',
-                                style: bodyText1,
+            Container(
+              height: 40,
+              child: buildAppBar(context, isSignIn: true)),
+            Container(
+              height: height - 40,
+              child: Row(
+                children: [
+                  BuildStartUpImage(
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 72.w),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            verticalSpaceMedium,
+                            Row(
+                              children: [
+                                Image(image: AssetImage(model.logoUrl)),
+                              ],
+                            ),
+                            verticalSpaceMedium,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                model.signIn,
+                                style: headline3,
                               ),
-                              TextSpan(
-                                text: ' Sign Up',
-                                style: TextStyle(
-                                  color: Color(0xff20C18C),
-                                  fontWeight: FontWeight.bold,
+                            ),
+                            verticalSpaceMedium,
+                            AuthInputField(
+                              label: model.email,
+                              onChanged: model.emailChanged,
+                              hintPlaceHolder: 'password@gmail.com',
+                            ),
+                            verticalSpaceMedium,
+                            AuthInputField(
+                              label: model.password,
+                              password: true,
+                              isVisible: model.passwordVisibily,
+                              onVisibilityTap: model.setPasswordVisibility,
+                              onChanged: model.passwordChanged,
+                              keyboardType: TextInputType.emailAddress,
+                              controller: TextEditingController(),
+                              hintPlaceHolder: 'Password',
+                            ),
+                            SizedBox(height: 40.0.h),
+                            Container(
+                              height: 58.h,
+                              width: 440.w,
+                              child: TextButton(
+                                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue[800]) ),
+                                onPressed: model.goToHome,
+                                child: Text(
+                                  "Login",
+                                  style: authBtnStyle,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                            verticalSpaceLarge,
+                            Text(
+                              'Easy Sign in With',
+                              style: bodyText1.copyWith(fontSize: 16.sp),
+                            ),
+                            verticalSpaceMedium,
+                            AuthIcons(),
+                            verticalSpaceMedium,
+                            GestureDetector(
+                              onTap: model.goToSignUp,
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Don\'t have an Account?',
+                                      style: bodyText1,
+                                    ),
+                                    TextSpan(
+                                      text: ' Sign Up',
+                                      style: TextStyle(
+                                        color: Color(0xff20C18C),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            verticalSpaceTiny,
+                            TextButton(
+                              onPressed: () =>
+                                  print('Forgot Password Button Pressed'),
+                              child: Text(
+                                'Forgot Password?',
+                                style: bodyText1.copyWith(fontSize: 16.sp),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      verticalSpaceTiny,
-                      TextButton(
-                        onPressed: () =>
-                            print('Forgot Password Button Pressed'),
-                        child: Text(
-                          'Forgot Password?',
-                          style: bodyText1.copyWith(fontSize: 16.sp),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           ],
