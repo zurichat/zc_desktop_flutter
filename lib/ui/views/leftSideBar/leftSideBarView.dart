@@ -85,7 +85,7 @@ class LeftSideBarView extends StatelessWidget {
                     ),
                   ),
                 ),
-
+//TODO
             //The Expanded widgets below is to structure the desktop application
             //They are not necessarily useful.. It's the Expanded widget below that can be extracted 
             //and used in the main app    
