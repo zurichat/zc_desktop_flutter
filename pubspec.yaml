@@ -20,6 +20,8 @@ dependencies:
 
   logger: ^1.0.0
   get_it: ^7.2.0
+  flutter_screenutil: ^5.0.0+2
+
 
 
 
