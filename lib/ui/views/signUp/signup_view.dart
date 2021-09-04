@@ -22,10 +22,11 @@ class SignUpView extends StatelessWidget {
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               height: 40,
-              child: buildAppBar(context, isSignUp: true)),
+              child: buildAppBar(context, isSignUp: true, text: 'Sign Up | Zuri')),
             Container(
               height: _size.height - 40,
               child: Row(

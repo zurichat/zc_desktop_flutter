@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/appbar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/login/login_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/forgotPasswordPage/forgot_password_view.dart';
 import 'package:zc_desktop_flutter/ui/views/widgets/build_left_startup_image.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,15 +20,12 @@ class LoginView extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            Container(
-              height: 40,
-              child: buildAppBar(context, isSignIn: true)),
+            Container(height: 40, child: buildAppBar(context, isSignIn: true, text: 'Sign In | Zuri')),
             Container(
               height: height - 40,
               child: Row(
                 children: [
-                  BuildStartUpImage(
-                  ),
+                  BuildStartUpImage(),
                   Expanded(
                     flex: 2,
                     child: Container(
@@ -73,7 +71,9 @@ class LoginView extends StatelessWidget {
                               height: 58.h,
                               width: 440.w,
                               child: TextButton(
-                                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue[800]) ),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.blue[800])),
                                 onPressed: model.goToHome,
                                 child: Text(
                                   "Login",
@@ -111,8 +111,12 @@ class LoginView extends StatelessWidget {
                             ),
                             verticalSpaceTiny,
                             TextButton(
-                              onPressed: () =>
-                                  print('Forgot Password Button Pressed'),
+                              onPressed: () {
+                                //TODO to be replaced with the normal navigation\
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (_) => ForgotPasswordPage()));
+                              },
                               child: Text(
                                 'Forgot Password?',
                                 style: bodyText1.copyWith(fontSize: 16.sp),

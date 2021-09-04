@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
-buildAppBar(BuildContext context, {bool isActive = false, bool isSignUp = false, bool isSignIn = false}) {
+buildAppBar(BuildContext context, {bool isActive = false, bool isSignUp = false, bool isSignIn = false, String text = ''}) {
   final icon = Icons.menu;
   final icona = Icons.arrow_back;
   final iconb = Icons.arrow_forward;
@@ -34,7 +34,7 @@ buildAppBar(BuildContext context, {bool isActive = false, bool isSignUp = false,
                 size: 20,
                 color: lightIconColor,
               ),
-            ) : Expanded(child: Text(isSignIn ? 'Sign In | Zuri' : 'Sign Up | Zuri', style: TextStyle(color: Colors.white, fontFamily: 'Lato'),)),
+            ) : Expanded(child: Text(text, style: TextStyle(color: Colors.white, fontFamily: 'Lato'),)),
             //  SizedBox(width: 10),
             if(!isSignUp && !isSignIn)
             IconButton(
