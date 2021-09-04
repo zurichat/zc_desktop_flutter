@@ -13,7 +13,11 @@ import 'package:zc_desktop_flutter/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
+<<<<<<< HEAD
     await tester.pumpWidget(ZcDesktop());
+=======
+    await tester.pumpWidget(MyApp());
+>>>>>>> 5f59ba86c051b34663479dedbe966eb895a87741
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
