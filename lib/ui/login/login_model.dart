@@ -29,9 +29,8 @@ Widget _buildForgotPasswordBtn() {
     alignment: Alignment.center,
     child: TextButton(
       onPressed: () => print('Forgot Password Button Pressed'),
-      child: Text(
+      child: ZcdeskText.headingFour(
         'Forgot Password?',
-        style: bodyText1.copyWith(fontSize: 15.sp),
       ),
     ),
   );
@@ -116,7 +115,7 @@ Widget _buildSignupBtn() {
         children: [
           TextSpan(
             text: 'Don\'t have an Account?',
-            style: bodyText1,
+            style: TextStyle(),
           ),
           TextSpan(
             text: ' Sign Up',

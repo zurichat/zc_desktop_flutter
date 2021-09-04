@@ -83,14 +83,14 @@ packages:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.10"
+    version: "0.12.11"
   meta:
     dependency: transitive
     description:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.0"
+    version: "1.7.0"
   path:
     dependency: transitive
     description:
@@ -165,12 +165,8 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-HEAD
-
 
     version: "0.4.2"
-
-
 
   typed_data:
     dependency: transitive

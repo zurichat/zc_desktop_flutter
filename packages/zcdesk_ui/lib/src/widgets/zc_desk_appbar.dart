@@ -4,7 +4,6 @@ import 'package:zcdesk_ui/src/shared/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 
-//TODO: Appbar still needs a lot of improvement
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({
     Key? key,
