@@ -5,8 +5,9 @@ import 'package:zc_desktop_flutter/ui/views/profile_dialog/profile_dialog_view_m
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 class ProfileDialogViw extends StatelessWidget {
-  const ProfileDialogViw({Key? key}) : super(key: key);
-
+  ProfileDialogViw({Key? key, required this.profileImgUrl, required this.userName}) : super(key: key);
+  String profileImgUrl;
+  String userName;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
@@ -83,7 +84,7 @@ class ProfileDialogViw extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
-                            'assets/images/profile.png',
+                            profileImgUrl,
                             fit: BoxFit.fill,
                           ),
                         )),
@@ -95,7 +96,7 @@ class ProfileDialogViw extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              ZcdeskText.headingThree('7H3 PR073C70R'),
+                              ZcdeskText.headingThree(userName),
                               IconButton(
                                   onPressed: model.updateFav,
                                   icon: Icon(

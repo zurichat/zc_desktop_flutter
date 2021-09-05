@@ -1,5 +1,4 @@
 import 'package:stacked/stacked.dart';
-import 'package:flutter/material.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

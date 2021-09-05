@@ -110,11 +110,11 @@ PopupMenuButton buildMenuItem(BuildContext context) {
         ),
       ),
     ],
-    onSelected: (item) => SelectedItem(context, item),
+    onSelected: (item) => selectedItem(context, item),
   );
 }
 
-SelectedItem(BuildContext context, item) {
+ selectedItem(BuildContext context, item) {
   switch (item) {
     case 0:
       ScaffoldMessenger.of(context).showSnackBar(
