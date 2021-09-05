@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/views/profile_dialog/profile_dialog_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 import 'message_viewmodel.dart';
@@ -12,6 +14,7 @@ class MessageView extends StatefulWidget {
 }
 
 class _MessageViewState extends State<MessageView> {
+  final ScrollController _controllerOne = ScrollController();
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MessageViewModel>.reactive(
@@ -21,112 +24,116 @@ class _MessageViewState extends State<MessageView> {
           padding: EdgeInsets.all(9.0),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  MessageHeader(
-                    userDefaultImageUrl: 'assets/images/mark.jpg',
-                    userDisplayName: model.userDisplayName,
-                  ),
-                  horizontalSpaceTiny,
-                  Padding(
-                      padding: const EdgeInsets.only(left: 51),
-                      child: InkWell(
-                          onTap: () {
-                            print("Thread opened");
-                          },
-                          onLongPress: () {
-                            print("More options menu opened");
-                          },
-                          child: SelectableText(model.userPost))),
-                  verticalSpaceSmall,
-                  Padding(
-                    padding: const EdgeInsets.only(left: 51.0),
-                    child: Row(
-                      children: [
-                        MessageReactions(
-                          emojiIconPath: 'assets/images/🤘🏻.png',
-                        ),
-                        horizontalSpaceSmall,
-                        MessageReactions(emojiIconPath: 'assets/images/🎉.png'),
-                        horizontalSpaceSmall,
-                        MessageReactions(emojiIconPath: 'assets/images/🔥.png'),
-                      ],
+            child: Scrollbar(
+              controller: _controllerOne,
+              child: SingleChildScrollView(
+                controller: _controllerOne,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    MessageHeader(
+                      userDefaultImageUrl: 'assets/images/mark.jpg',
+                      userDisplayName: model.userDisplayName,
                     ),
-                  ),
-                  verticalSpaceMedium,
-                  MessageHeader(
-                    userDefaultImageUrl: 'assets/images/2.png',
-                    userDisplayName: 'Naza',
-                  ),
-                  horizontalSpaceTiny,
-                  Padding(
-                      padding: const EdgeInsets.only(left: 51),
-                      child: InkWell(
-                          onTap: () {
-                            print("Thread opened");
-                          },
-                          onLongPress: () {
-                            print("More options menu opened");
-                          },
-                          child: SelectableText(model.userPost))),
-                  verticalSpaceMedium,
-                  MessageHeader(
-                    userDefaultImageUrl: 'assets/images/2.png',
-                    userDisplayName: 'Naza',
-                  ),
-                  horizontalSpaceTiny,
-                  Padding(
-                      padding: const EdgeInsets.only(left: 51),
-                      child: InkWell(
-                          onTap: () {
-                            print("Thread opened");
-                          },
-                          onLongPress: () {
-                            print("More options menu opened");
-                          },
-                          child: SelectableText(model.userPost))),
-                  verticalSpaceSmall,
-                  Padding(
-                    padding: const EdgeInsets.only(left: 51.0),
-                    child: Row(
-                      children: [
-                        MessageReactions(
-                          emojiIconPath: 'assets/images/🤘🏻.png',
-                        ),
-                        horizontalSpaceSmall,
-                        MessageReactions(emojiIconPath: 'assets/images/🎉.png'),
-                        horizontalSpaceSmall,
-                        MessageReactions(emojiIconPath: 'assets/images/🔥.png'),
-                      ],
+                    horizontalSpaceTiny,
+                    Padding(
+                        padding: const EdgeInsets.only(left: 51),
+                        child: InkWell(
+                            onTap: () {
+                              print("Thread opened");
+                            },
+                            onLongPress: () {
+                              print("More options menu opened");
+                            },
+                            child: SelectableText(model.userPost))),
+                    verticalSpaceSmall,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 51.0),
+                      child: Row(
+                        children: [
+                          MessageReactions(
+                            emojiIconPath: 'assets/images/🤘🏻.png',
+                          ),
+                          horizontalSpaceSmall,
+                          MessageReactions(emojiIconPath: 'assets/images/🎉.png'),
+                          horizontalSpaceSmall,
+                          MessageReactions(emojiIconPath: 'assets/images/🔥.png'),
+                        ],
+                      ),
                     ),
-                  ),
-                  verticalSpaceMedium,
-                  MessageHeader(
-                    userDefaultImageUrl: 'assets/images/6.png',
-                    userDisplayName: 'Nonso',
-                  ),
-                  horizontalSpaceTiny,
-                  Padding(
-                      padding: const EdgeInsets.only(left: 51),
-                      child: InkWell(
-                          onTap: () {
-                            print("Thread opened");
-                          },
-                          onLongPress: () {
-                            print("More options menu opened");
-                          },
-                          child: SelectableText(model.userPost))),
-                  verticalSpaceSmall,
-                  Padding(
-                    padding: const EdgeInsets.only(left: 51.0),
-                    child: MessageReplies(
-                      numberOfReplies: model.numberOfReplies,
+                    verticalSpaceMedium,
+                    MessageHeader(
+                      userDefaultImageUrl: 'assets/images/2.png',
+                      userDisplayName: 'Naza',
                     ),
-                  ),
-                  verticalSpaceMedium,
-                ],
+                    horizontalSpaceTiny,
+                    Padding(
+                        padding: const EdgeInsets.only(left: 51),
+                        child: InkWell(
+                            onTap: () {
+                              print("Thread opened");
+                            },
+                            onLongPress: () {
+                              print("More options menu opened");
+                            },
+                            child: SelectableText(model.userPost))),
+                    verticalSpaceMedium,
+                    MessageHeader(
+                      userDefaultImageUrl: 'assets/images/2.png',
+                      userDisplayName: 'Naza',
+                    ),
+                    horizontalSpaceTiny,
+                    Padding(
+                        padding: const EdgeInsets.only(left: 51),
+                        child: InkWell(
+                            onTap: () {
+                              print("Thread opened");
+                            },
+                            onLongPress: () {
+                              print("More options menu opened");
+                            },
+                            child: SelectableText(model.userPost))),
+                    verticalSpaceSmall,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 51.0),
+                      child: Row(
+                        children: [
+                          MessageReactions(
+                            emojiIconPath: 'assets/images/🤘🏻.png',
+                          ),
+                          horizontalSpaceSmall,
+                          MessageReactions(emojiIconPath: 'assets/images/🎉.png'),
+                          horizontalSpaceSmall,
+                          MessageReactions(emojiIconPath: 'assets/images/🔥.png'),
+                        ],
+                      ),
+                    ),
+                    verticalSpaceMedium,
+                    MessageHeader(
+                      userDefaultImageUrl: 'assets/images/6.png',
+                      userDisplayName: 'Nonso',
+                    ),
+                    horizontalSpaceTiny,
+                    Padding(
+                        padding: const EdgeInsets.only(left: 51),
+                        child: InkWell(
+                            onTap: () {
+                              print("Thread opened");
+                            },
+                            onLongPress: () {
+                              print("More options menu opened");
+                            },
+                            child: SelectableText(model.userPost))),
+                    verticalSpaceSmall,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 51.0),
+                      child: MessageReplies(
+                        numberOfReplies: model.numberOfReplies,
+                      ),
+                    ),
+                    verticalSpaceMedium,
+                  ],
+                ),
               ),
             ),
           ),
@@ -151,22 +158,27 @@ class MessageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<MessageViewModel>.reactive(
       builder: (context, model, child) => Row(children: [
-        CircleAvatar(
-          backgroundImage: AssetImage(userDefaultImageUrl),
-          radius: 22,
+        GestureDetector(
+          onTap: (){
+            showDialog(context: context, builder: (_)=>ProfileDialogViw(profileImgUrl: userDefaultImageUrl, userName: userDisplayName,));
+          },
+          child: CircleAvatar(
+            backgroundImage: AssetImage(userDefaultImageUrl),
+            radius: 22,
+          ),
         ),
         SizedBox(
-          width: 6,
+          width: 6.w,
         ),
         Text(userDisplayName,
             style: TextStyle(
-                fontSize: 20, color: headerColor, fontFamily: 'Lato')),
+                fontSize: 20.sp, color: headerColor, fontFamily: 'Lato')),
         SizedBox(
-          width: 6,
+          width: 6.w,
         ),
         Text('${currentMessageTime.hour}:${currentMessageTime.minute}',
             style:
-                TextStyle(fontSize: 20, color: timeColor, fontFamily: 'Lato')),
+                TextStyle(fontSize: 20.sp, color: timeColor, fontFamily: 'Lato')),
       ]),
       viewModelBuilder: () => MessageViewModel(),
     );
