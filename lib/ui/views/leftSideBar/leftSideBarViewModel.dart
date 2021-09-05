@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,10 +50,35 @@ class LeftSideBarViewModel extends BaseViewModel{
   String get filesUrl => _filesUrl;
   String get integrateUrl => _integrateUrl;
   String get toDoUrl => _toDoUrl;
-  
+
+  GlobalKey _channelsMenuKey = LabeledGlobalKey("ChannelsDropDownMenu");
+  bool _isChannelsDropDownMenuOpen = false;
+  late OverlayEntry channelsDropDownMenu;
+
+  GlobalKey _dMsMenuKey = LabeledGlobalKey("DMsDropDownMenu");
+  bool _isDMsDropDownMenuOpen = false;
+  late OverlayEntry dMsDropDownMenu;
+
+  GlobalKey get channelsMenuKey => _channelsMenuKey;
+  bool get isChannelsDropDownMenuOpen => _isChannelsDropDownMenuOpen;
+
+  GlobalKey get dMsMenuKey => _dMsMenuKey;
+  bool get isDMsDropDownMenuOpen => _isDMsDropDownMenuOpen;
+
+  void openChannelsDropDownMenu() {
+    _isChannelsDropDownMenuOpen = !_isChannelsDropDownMenuOpen;
+    notifyListeners();
+  }
+
+  void openDMsDropDownMenu() {
+    _isDMsDropDownMenuOpen = !_isDMsDropDownMenuOpen;
+    notifyListeners();
+  }
 
   void iconClicked(){
     getLogger("LeftSideBar Icon Clicked");
     notifyListeners();
   }
+
+
 }
