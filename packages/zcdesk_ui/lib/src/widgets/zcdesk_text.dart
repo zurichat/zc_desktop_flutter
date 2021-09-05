@@ -5,15 +5,18 @@ class ZcdeskText extends StatelessWidget {
   final String text;
   final TextStyle style;
 
-  const ZcdeskText.headingOne(this.text) : style = heading1Style;
-  const ZcdeskText.headingTwo(this.text) : style = heading2Style;
-  const ZcdeskText.headingThree(this.text) : style = heading3Style;
-  const ZcdeskText.headingFour(this.text) : style = heading4Style;
-  const ZcdeskText.headline(this.text) : style = headlineStyle;
-  const ZcdeskText.bodyText(this.text) : style = bodyStyle;
-  const ZcdeskText.subheading(this.text) : style = subheadingStyle;
-  const ZcdeskText.caption(this.text) : style = captionStyle;
-  const ZcdeskText.extraSmallText(this.text) : style = extraSmallStyle;
+  ZcdeskText.headingOne(this.text) : style = heading1Style;
+  ZcdeskText.headingTwo(this.text) : style = heading2Style;
+  ZcdeskText.headingThree(this.text) : style = heading3Style;
+  ZcdeskText.headingFour(this.text) : style = heading4Style;
+  ZcdeskText.headline(this.text) : style = headlineStyle;
+  ZcdeskText.bodyText(this.text) : style = bodyStyle;
+  ZcdeskText.subheading(this.text) : style = subheadingStyle;
+  ZcdeskText.caption(this.text) : style = captionStyle;
+  ZcdeskText.extraSmallText(this.text) : style = extraSmallStyle;
+  ZcdeskText.authBtnStyle(this.text) : style = authBtnStyle;
+  ZcdeskText.dropDownTitleStyle(this.text) : style = dropDownTitleTextStyle;
+  ZcdeskText.dropDownBodyTextStyle(this.text) : style = dropDownBodyTextStyle;
 
   @override
   Widget build(BuildContext context) {
