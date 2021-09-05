@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 <<<<<<< HEAD
-  freezed_annotation: 
+  freezed_annotation:
   json_annotation:
 =======
 
