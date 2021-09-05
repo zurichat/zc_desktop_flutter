@@ -14,11 +14,13 @@ void main() async {
 Future<void> main() async {
 >>>>>>> dcec163b2aa48fca0720c862ec44af5131f1a300
   GetIt.instance;
-  await setupLocator();
-  runApp(ZcDesktop());
+  setupLocator();
+  runApp(const ZcDesktop());
 }
 
 class ZcDesktop extends StatelessWidget {
+  const ZcDesktop({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

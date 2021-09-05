@@ -17,6 +17,7 @@ class SignUpViewModel extends BaseViewModel {
   double _logoHeight = 12.0;
   String _title = 'ZURI';
   String _subtitle = 'Create Account';
+  bool _passwordVisibility = true;
   String _policy =
       "By signing up, you agree that you have accepted our User Notice \nand Privacy Policy";
 
@@ -27,17 +28,20 @@ class SignUpViewModel extends BaseViewModel {
   String get subtitle => _subtitle;
   String get policy => _policy;
 
-  // TODO: 4, Remove after review
-  final _storageService = locator<LocalStorageService>();
+  bool get passwordVisibily => _passwordVisibility;
 
-  // TODO: 5, Remove after review
-  // String get testString => _storageService.getFromDisk(testLocalKey) as String;
+  void setPasswordVisibility() {
+    _passwordVisibility = !_passwordVisibility;
+    notifyListeners();
+  }
 
   void goToLogin() {
-    // TODO: 3, This is part of the local storage test. Remove this as well
-    // _storageService.saveToDisk(testLocalKey, 'This is a test');
-
     _navigationService.navigateTo(Routes.loginView);
+    notifyListeners();
+  }
+
+  void goToHome() {
+    _navigationService.navigateTo(Routes.homeView);
     notifyListeners();
   }
 }

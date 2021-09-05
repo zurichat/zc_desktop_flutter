@@ -17,6 +17,7 @@ class ZcdeskText extends StatelessWidget {
   ZcdeskText.authBtnStyle(this.text) : style = authBtnStyle;
   ZcdeskText.dropDownTitleStyle(this.text) : style = dropDownTitleTextStyle;
   ZcdeskText.dropDownBodyTextStyle(this.text) : style = dropDownBodyTextStyle;
+  ZcdeskText.leftSideBarText(this.text) : style = leftSideBarStyle;
 
   @override
   Widget build(BuildContext context) {
