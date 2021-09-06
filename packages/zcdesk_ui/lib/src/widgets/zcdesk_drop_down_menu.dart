@@ -42,9 +42,15 @@ class ZcdeskReusableDropDownMenu extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: onDropDownTapped,
-                      child: isDropDownOpen!
-                          ? SvgPicture.asset(SVGAssetPaths.dropDownOpenIcon)
-                          : SvgPicture.asset(SVGAssetPaths.dropDownOpenIcon),
+                      child: Container(
+                        height: 12,
+                        width: 12,
+                        child: SvgPicture.asset(
+                          isDropDownOpen!
+                              ? SVGAssetPaths.dropDownOpenIcon
+                              : SVGAssetPaths.dropDownClosedIcon,
+                        ),
+                      ),
                     ),
                     horizontalSpaceSmall,
                     Container(
@@ -55,7 +61,11 @@ class ZcdeskReusableDropDownMenu extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: onTrailingIconTapped,
-                child: SvgPicture.asset("assets/icons/add_drop_down.svg"),
+                child: Container(
+                  height: 12,
+                  width: 12,
+                  child: SvgPicture.asset("assets/icons/add_drop_down.svg"),
+                ),
               ),
             ],
           ),

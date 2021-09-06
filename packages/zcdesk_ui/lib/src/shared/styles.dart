@@ -38,7 +38,7 @@ TextStyle dropDownBodyTextStyle = TextStyle(
     fontWeight: FontWeight.w400,
     fontFamily: 'Lato');
 TextStyle leftSideBarLogoText =
-    TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, fontFamily: 'Lato');
+    TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold, fontFamily: 'Lato');
 
 // ====== New Text Styles ====== //
 
