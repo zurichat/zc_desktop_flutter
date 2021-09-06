@@ -3,21 +3,13 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LeftSideBarViewModel extends BaseViewModel{
-
-  double _pageWidth = double.infinity;
-  double _pageHeightOne = 80.h;
-  double _pageHeightTwo = 100.h;
+class LeftSideBarViewModel extends BaseViewModel {
   double _leftSideBarWidth = 350.w;
-  double _leftSideBarHeight = 1024.h;
-  double _leftSideBarPadding = 40.w;
+  double _leftSideBarHeight = double.infinity;
 
-  double get pageWidth => _pageWidth;
-  double get pageHeightOne => _pageHeightOne;
-  double get pageHeightTwo => _pageHeightTwo;
   double get leftSideBarWidth => _leftSideBarWidth;
+
   double get leftSideBarHeight => _leftSideBarHeight;
-  double get leftSideBarPadding => _leftSideBarPadding;
 
   String _insight = "Insight";
   String _threads = "Threads";
@@ -28,11 +20,17 @@ class LeftSideBarViewModel extends BaseViewModel{
   String _toDo = "To-do";
 
   String get insight => _insight;
+
   String get threads => _threads;
+
   String get allDms => _allDms;
-  String get draft =>  _draft;
+
+  String get draft => _draft;
+
   String get files => _files;
+
   String get integrate => _integrate;
+
   String get toDo => _toDo;
 
   String _insightUrl = 'assets/images/Insight.png';
@@ -44,26 +42,27 @@ class LeftSideBarViewModel extends BaseViewModel{
   String _toDoUrl = 'assets/images/default.png';
 
   String get insightUrl => _insightUrl;
+
   String get threadsUrl => _threadsUrl;
+
   String get allDmsUrl => _allDmsUrl;
-  String get draftUrl =>  _draftUrl;
+
+  String get draftUrl => _draftUrl;
+
   String get filesUrl => _filesUrl;
+
   String get integrateUrl => _integrateUrl;
+
   String get toDoUrl => _toDoUrl;
 
-  GlobalKey _channelsMenuKey = LabeledGlobalKey("ChannelsDropDownMenu");
   bool _isChannelsDropDownMenuOpen = false;
-  late OverlayEntry channelsDropDownMenu;
-
-  GlobalKey _dMsMenuKey = LabeledGlobalKey("DMsDropDownMenu");
   bool _isDMsDropDownMenuOpen = false;
-  late OverlayEntry dMsDropDownMenu;
 
-  GlobalKey get channelsMenuKey => _channelsMenuKey;
   bool get isChannelsDropDownMenuOpen => _isChannelsDropDownMenuOpen;
-
-  GlobalKey get dMsMenuKey => _dMsMenuKey;
   bool get isDMsDropDownMenuOpen => _isDMsDropDownMenuOpen;
+
+  List<Widget?>? channelsDropDown = [];
+  List<Widget?>? dMsDropDown = [];
 
   void openChannelsDropDownMenu() {
     _isChannelsDropDownMenuOpen = !_isChannelsDropDownMenuOpen;
@@ -75,10 +74,8 @@ class LeftSideBarViewModel extends BaseViewModel{
     notifyListeners();
   }
 
-  void iconClicked(){
+  void iconClicked() {
     getLogger("LeftSideBar Icon Clicked");
     notifyListeners();
   }
-
-
 }
