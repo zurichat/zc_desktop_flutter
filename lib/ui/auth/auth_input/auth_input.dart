@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/auth/authInputTestView/inputTestViewModel.dart';
+import 'package:zc_desktop_flutter/ui/auth/auth_input/auth_input_viewmodel.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
-class AuthInputTestView extends StatelessWidget {
-  const AuthInputTestView({Key? key}) : super(key: key);
+class AuthInput extends StatelessWidget {
+  const AuthInput({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return ViewModelBuilder<InputTestViewModel>.reactive(
-        viewModelBuilder: () => InputTestViewModel(),
+    return ViewModelBuilder<AuthInputTestViewModel>.reactive(
+        viewModelBuilder: () => AuthInputTestViewModel(),
         builder: (context, model, child){
           return  Scaffold(
             body: Center(

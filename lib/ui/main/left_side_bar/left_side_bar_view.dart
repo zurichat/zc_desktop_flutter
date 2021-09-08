@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
-import 'leftSideBarViewModel.dart';
+import 'left_side_bar_viewmodel.dart';
 
 class LeftSideBarView extends StatelessWidget {
   const LeftSideBarView({Key? key}) : super(key: key);

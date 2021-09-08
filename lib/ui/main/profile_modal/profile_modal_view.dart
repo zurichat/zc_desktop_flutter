@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/main/profile_dialog/profile_dialog_view_model.dart';
+import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_viewmodel.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
-class ProfileDialogView extends StatelessWidget {
-  ProfileDialogView(
-      {Key? key, required this.profileImgUrl, required this.userName})
+class ProfileModalView extends StatelessWidget {
+  ProfileModalView(
+      {Key? key,})
       : super(key: key);
-  final String profileImgUrl;
-  final String userName;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       builder: (context, model, child) => Dialog(
-        child: buildContainer(model as ProfileDialogViewModel),
+        child: buildContainer(model as ProfileModalViewModel),
       ),
-      viewModelBuilder: () => ProfileDialogViewModel(),
+      viewModelBuilder: () => ProfileModalViewModel(),
     );
   }
 
-  buildContainer(ProfileDialogViewModel model) {
+  buildContainer(ProfileModalViewModel model) {
     return Container(
       height: 755.h,
       width: 765.w,
@@ -67,7 +65,7 @@ class ProfileDialogView extends StatelessWidget {
     );
   }
 
-  buildHeaderContainer(ProfileDialogViewModel model) {
+  buildHeaderContainer(ProfileModalViewModel model) {
     return Container(
       height: 252.h,
       width: 686.w,
@@ -87,7 +85,7 @@ class ProfileDialogView extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
-                            profileImgUrl,
+                            model.profileImgUrl,
                             fit: BoxFit.fill,
                           ),
                         )),
@@ -99,7 +97,7 @@ class ProfileDialogView extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              ZcdeskText.headingThree(userName),
+                              ZcdeskText.headingThree(model.userName),
                               IconButton(
                                   onPressed: model.updateFav,
                                   icon: Icon(
@@ -202,7 +200,7 @@ class ProfileDialogView extends StatelessWidget {
               height: 19.h,
             ),
             ZcdeskText.subheading(
-                'There aren’t any files to see here right now. But there could be - dragand drop any file into the message pane to add it to this conversation.')
+                'There aren’t any files to see here right now. But there could be - dragand drop any file into the message_page pane to add it to this conversation.')
           ],
         ));
   }
