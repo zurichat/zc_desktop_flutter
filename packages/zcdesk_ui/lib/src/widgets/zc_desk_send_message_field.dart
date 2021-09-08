@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:zcdesk_ui/src/shared/app_colors.dart';
 import 'package:zcdesk_ui/src/shared/ui_helpers.dart';
 
@@ -157,7 +157,7 @@ class _TextFunction extends StatelessWidget {
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(shape: BoxShape.circle),
         child: Center(
-            // child: SvgPicture.asset(icon),
+             child: SvgPicture.asset(icon),
             ),
       ),
     );

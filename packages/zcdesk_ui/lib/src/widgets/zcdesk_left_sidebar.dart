@@ -16,24 +16,21 @@ class LeftSideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: InkWell(
-          onTap: onTap,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ImageIcon(
-                icon,
-                size: 15,
-                color: leftNavBarColor,
-              ),
-              SizedBox(width: 10.w,),
-              ZcdeskText.leftSideBarText(iconText),
-            ],
-          ),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ImageIcon(
+              icon,
+              size: 15,
+              color: leftNavBarColor,
+            ),
+            SizedBox(width: 10.w,),
+            ZcdeskText.leftSideBarText(iconText),
+          ],
         ),
       ),
     );
