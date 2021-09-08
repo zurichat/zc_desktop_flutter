@@ -14,6 +14,10 @@ import '../services/local_storage/local_storage_service.dart';
 
 final locator = StackedLocator.instance;
 
+
+const bool USE_FAKE_IMPLEMENTATION = false;
+
+
 Future setupLocator(
     {String? environment, EnvironmentFilter? environmentFilter}) async {
 // Register environments
