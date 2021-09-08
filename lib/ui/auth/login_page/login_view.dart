@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/auth/forgotPasswordPage/forgot_password_view.dart';
-import 'package:zc_desktop_flutter/ui/auth/login/login_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/appbar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/auth/forgot_password_page/forgot_password_view.dart';
+import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -119,7 +119,7 @@ class LoginView extends StatelessWidget {
                                 //TODO to be replaced with the normal navigation\
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                        builder: (_) => ForgotPasswordPage()));
+                                        builder: (_) => ForgotPasswordView()));
                               },
                               child: Text(
                                 'Forgot Password?',
@@ -178,42 +178,6 @@ class AuthIcons extends ViewModelWidget<LoginViewModel> {
       ],
     );
   }
-}
-
-class Test extends StatefulWidget {
-  const Test({Key? key, text}) : super(key: key);
-
-  final text = "Ademola";
-
-  @override
-  _TestState createState() => _TestState();
-}
-
-class _TestState extends State<Test> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        widget.text,
-      ),
-    );
-  }
-}
-
-class TextSomething {
-  final int number;
-  TextSomething(this.number);
-}
-
-class Text1 {
-  final int number;
-  Text1(this.number);
-
-}
-
-class Text2 {
-  final int number;
-  Text2(this.number);
 }
 
 

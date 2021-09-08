@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/main/leftSideBar/leftSideBarView.dart';
-import 'package:zc_desktop_flutter/ui/main/message/message_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/appbar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/main/left_side_bar/left_side_bar_view.dart';
+import 'package:zc_desktop_flutter/ui/main/message_page/message_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 import 'home_viewmodel.dart';
 
