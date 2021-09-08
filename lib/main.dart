@@ -8,14 +8,11 @@ import 'package:get_it/get_it.dart';
 
 import 'app/app.router.dart';
 
-<<<<<<< HEAD
-void main() async {
-=======
-Future<void> main() async {
->>>>>>> dcec163b2aa48fca0720c862ec44af5131f1a300
-  GetIt.instance;
+void main() {
   setupLocator();
-  runApp(const ZcDesktop());
+  runApp(
+    ZcDesktop(),
+  );
 }
 
 class ZcDesktop extends StatelessWidget {

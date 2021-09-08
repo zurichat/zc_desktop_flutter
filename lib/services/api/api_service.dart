@@ -10,8 +10,6 @@ class ApiService implements Api {
   static const _BASE_URL = "";
   static const _sendTimeOut = 5000;
  
-  
- 
 
   @override
   Future get(String endPoint, {Map<String, dynamic>? queryParameters}) async {
