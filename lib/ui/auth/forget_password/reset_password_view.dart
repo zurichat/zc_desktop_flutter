@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/auth/forgot_password_page/forgot_password_view.dart';
-import 'package:zc_desktop_flutter/ui/auth/login_page/login_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/auth/check_mail/check_email_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/appbar/app_bar.dart';
+import 'package:zcdesk_ui/zcdesk_ui.dart' as auth;
 import 'package:zcdesk_ui/zcdesk_ui.dart';
-import 'check_email_viewmodel.dart';
+import 'forget_password_view_model.dart';
 import 'package:zcdesk_ui/src/shared/styles.dart';
 
-class CheckEmailView extends StatelessWidget {
-  const CheckEmailView({Key? key}) : super(key: key);
+class ResetPasswordView extends StatelessWidget {
+  const ResetPasswordView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CheckEmailViewModel>.reactive(
+    return ViewModelBuilder<ForgetPasswordViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(
             body: Column(
@@ -25,10 +25,9 @@ class CheckEmailView extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: 40,
-                  child: buildAppBar(context,
-                      isSignIn: true, text: 'Check Email | Zuri'),
-                ),
+                    height: 40,
+                    child: buildAppBar(context,
+                        isSignIn: true, text: 'Forget Password | Zuri')),
                 verticalSpaceLarge,
                 Image.asset(model.logoUrl),
                 verticalSpaceMedium,
@@ -41,50 +40,23 @@ class CheckEmailView extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
                 verticalSpaceSmall,
-                Container(
-                  width: 490.w,
-                  alignment: Alignment.center,
-                  child: Text(
-                    model.subTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(153, 153, 153, 1),
-                        fontSize: 18.sp,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.w400),
-                  ),
+                Text(
+                  model.subTitle,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18.sp,
+                      fontFamily: 'Lato',
+                      fontWeight: FontWeight.w400),
                 ),
                 verticalSpaceLarge,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      model.wrongEmail,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromRGBO(153, 153, 153, 1),
-                          fontSize: 20.sp,
-                          fontFamily: 'Lato',
-                          fontWeight: FontWeight.w400),
-                    ),
-                    horizontalSpaceSmall,
-                    GestureDetector(
-                      onTap: () {
-                        //TODO replace with the normal nav
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (_) => ForgotPasswordView()));
-                      },
-                      child: Text(
-                        model.reEnter,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 20.sp,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
+                Container(
+                  width: 440.w,
+                  child: auth.AuthInputField(
+                    label: 'Email',
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (_) {},
+                    hintPlaceHolder: 'password@gmail.com',
+                  ),
                 ),
                 verticalSpaceSmall,
                 Container(
@@ -100,16 +72,17 @@ class CheckEmailView extends StatelessWidget {
                       //TODO replace with the normal nav
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (_) => LoginView(),
+                          builder: (_) => CheckEmailView(),
                         ),
                       );
                     },
                     child: Text(
-                      'Go back to login_page',
+                      'Get Reset Link',
                       style: authBtnStyle,
                     ),
                   ),
                 ),
+                verticalSpaceMedium,
               ],
             ),
             Padding(
@@ -130,17 +103,16 @@ class CheckEmailView extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset('assets/images/world.svg'),
-                      ),
+                          onPressed: () {},
+                          icon: SvgPicture.asset('assets/images/world.svg')),
                       Text(
                         model.changeRegion,
                         style: bottomTextStyle(),
                       ),
                       IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset('assets/images/arrow_down.svg'),
-                      ),
+                          onPressed: () {},
+                          icon:
+                              SvgPicture.asset('assets/images/arrow_down.svg')),
                     ],
                   ),
                 ],
@@ -149,7 +121,7 @@ class CheckEmailView extends StatelessWidget {
           ],
         ));
       },
-      viewModelBuilder: () => CheckEmailViewModel(),
+      viewModelBuilder: () => ForgetPasswordViewModel(),
     );
   }
 

@@ -8,7 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
-import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/auth/login/login_viewmodel.dart';
 
 class HomeViewModel extends BaseViewModel {
   final log = getLogger("HomeViewwModel");
@@ -34,7 +34,7 @@ class HomeViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   void goToInputView() {
-    _navigationService.navigateTo(Routes.authInput);
+    _navigationService.navigateTo(Routes.authInputTestView);
     notifyListeners();
   }
 }

@@ -1,6 +1,6 @@
-import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'draft_model.dart';
 
 class DraftViewModel extends BaseViewModel {
   final log = getLogger("DraftViewwModel");
@@ -10,14 +10,4 @@ class DraftViewModel extends BaseViewModel {
     Draft("Tobi", "Koko is to make a push today", DateTime.now()),
     Draft("Ope", "I will work on the landing page design tomorrow", DateTime.now())
   ];
-}
-
-class Draft {
-  String subject = "";
-  String content = "";
-  DateTime date = DateTime.now();
-  String getFormattedDate() =>
-      '${DateFormat("MMM dd").format(this.date)} at ${DateFormat("h:mm a").format(this.date)}';
-  Draft._();
-  Draft(this.subject, this.content, this.date);
 }

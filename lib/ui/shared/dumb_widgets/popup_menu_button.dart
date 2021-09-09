@@ -95,7 +95,7 @@ PopupMenuButton buildMenuItem(BuildContext context) {
         child: Row(
           children: [
             Text(
-              'More message_page shortcuts',
+              'More message shortcuts',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 13,
@@ -142,7 +142,7 @@ PopupMenuButton buildMenuItem(BuildContext context) {
       break;
     case 6:
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('More message_page shortcuts pressed')));
+          SnackBar(content: Text('More message shortcuts pressed')));
       break;
   }
 }

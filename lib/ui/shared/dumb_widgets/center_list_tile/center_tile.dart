@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-Container centerTitleCard(BuildContext context) {
+import 'center_tile_viewmodel.dart';
+
+Container centertitlecard(BuildContext context) {
   return Container(
     alignment: Alignment.topCenter,
     width: 1136,
     height: 80,
-    child: Card(elevation: 5, child: centerListTile(context, "designers")),
+    child: Card(elevation: 5, child: CenterListTile(context, "designers")),
   );
 }
 
-ListTile centerListTile(BuildContext context, String channelName) {
+ListTile CenterListTile(BuildContext context, String channelName) {
   return ListTile(
       contentPadding: EdgeInsets.only(left: 10, right: 10),
       shape:
@@ -105,17 +107,3 @@ List<Widget>? positioned(BuildContext context) {
   });
   return pos;
 }
-
-final Map<String, String> members = {
-  'WilliamTobs': 'images/widgetImages/ava3.png',
-  'Geeky_Tobi': 'images/widgetImages/ava.png',
-  'Susan': 'images/widgetImages/ava2.jpg',
-  'Jay': 'images/widgetImages/ava.png',
-  'Jayda': 'images/widgetImages/ava2.jpg',
-  'MJ': 'images/widgetImages/ava3.png',
-  'Raphael': 'images/widgetImages/ava.png',
-  'Jake': 'images/widgetImages/ava.png',
-  'Dan': 'images/widgetImages/ava2.jpg',
-  'Eri': 'images/widgetImages/ava3.png',
-};
-

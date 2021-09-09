@@ -46,7 +46,7 @@ TextField _buildMessageTextField({
     decoration: InputDecoration(
       border: UnderlineInputBorder(borderSide: BorderSide.none),
       contentPadding: EdgeInsets.symmetric(vertical: 11),
-      hintText: 'Send a message_page to $placeholder',
+      hintText: 'Send a message to $placeholder',
       hintStyle: TextStyle(
         fontSize: 15,
         color: leftNavBarColor,
