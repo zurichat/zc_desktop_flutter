@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
 
-class InputTestViewModel extends BaseViewModel{
+class AuthInputTestViewModel extends BaseViewModel{
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passWordController = TextEditingController();
 
