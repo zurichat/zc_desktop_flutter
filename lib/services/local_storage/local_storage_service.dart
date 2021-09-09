@@ -19,7 +19,7 @@ class LocalStorageService {
   }
 
   void saveToDisk<T>(String key, T content) {
-    print('(TRACE) LocalStorageService:_saveToDisk. key: $key value: $content');
+   // print('(TRACE) LocalStorageService:_saveToDisk. key: $key value: $content');
 
     if (content is String) {
       _preferences!.setString(key, content);
@@ -40,13 +40,13 @@ class LocalStorageService {
 
   Object? getFromDisk(String key) {
     final value = _preferences!.get(key);
-    print('(TRACE) LocalStorageService:_getFromDisk. key: $key value: $value');
+    //print('(TRACE) LocalStorageService:_getFromDisk. key: $key value: $value');
     return value;
   }
 
   Future<bool> removeFromDisk(String key) async {
     final value = await _preferences!.remove(key);
-    print('(TRACE) LocalStorageService:_getFromDisk. key: $key value: $value');
+    //print('(TRACE) LocalStorageService:_getFromDisk. key: $key value: $value');
     return value;
   }
 }

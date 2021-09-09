@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:stacked/stacked.dart';
 
 import 'package:zc_desktop_flutter/app/app.locator.dart';
@@ -12,7 +14,6 @@ import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
 
 class HomeViewModel extends BaseViewModel {
   final log = getLogger("HomeViewwModel");
-
   String _logoUrl = 'assets/images/zc_logo2.png';
   double _logoWidth = 10.0;
   double _logoHeight = 10.0;
@@ -37,4 +38,5 @@ class HomeViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.authInput);
     notifyListeners();
   }
+
 }

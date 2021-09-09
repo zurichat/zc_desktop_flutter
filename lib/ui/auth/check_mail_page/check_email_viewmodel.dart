@@ -1,11 +1,11 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
+
 
 class CheckEmailViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
-  final _storageService = locator<LocalStorageService>();
 
   String _logoUrl = 'assets/images/zc_logo2.png';
   String _title = 'Check your email!';
@@ -24,5 +24,10 @@ class CheckEmailViewModel extends BaseViewModel {
   String get logoUrl => _logoUrl;
   String get title => _title;
   String get subTitle => _subTitle;
+
+  void goToForgetView() {
+    _navigationService.navigateTo(Routes.forgotPasswordView);
+    notifyListeners();
+  }
 
 }

@@ -31,6 +31,7 @@ dependencies:
   dio: ^4.0.0
   freezed_annotation:
   json_annotation:
+  
 
   # ui package for the whole app
   zcdesk_ui:
@@ -46,8 +47,8 @@ dev_dependencies:
   json_serializable:
   analyzer: ^2.2.0
 
-dependency_overrides:
-  meta: ^1.7.0
+# dependency_overrides:
+#   meta: ^1.7.0
 
 flutter:
   uses-material-design: true
