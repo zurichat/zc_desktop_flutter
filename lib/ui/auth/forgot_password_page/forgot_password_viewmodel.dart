@@ -2,6 +2,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel{
   String _logoUrl ="assets/images/zc_logo2.png";
@@ -40,5 +41,13 @@ class ForgotPasswordViewModel extends BaseViewModel{
 
   String get changeRegion => _changeRegion;
 
-  get navigationService => _navigationService;
+  void goToCheckEmailView() {
+    _navigationService.navigateTo(Routes.checkEmailView);
+    notifyListeners();
+  }
+
+  void goToPasswordRest() {
+    _navigationService.navigateTo(Routes.resetPasswordView);
+    notifyListeners();
+  }
 }

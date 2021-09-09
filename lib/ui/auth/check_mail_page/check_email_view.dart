@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/auth/forgot_password_page/forgot_password_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
@@ -69,11 +68,7 @@ class CheckEmailView extends StatelessWidget {
                     ),
                     horizontalSpaceSmall,
                     GestureDetector(
-                      onTap: () {
-                        //TODO replace with the normal nav
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (_) => ForgotPasswordView()));
-                      },
+                      onTap: model.goToForgetView,
                       child: Text(
                         model.reEnter,
                         textAlign: TextAlign.center,

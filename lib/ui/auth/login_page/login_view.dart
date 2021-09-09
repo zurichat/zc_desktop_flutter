@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/auth/forgot_password_page/forgot_password_view.dart';
+import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
@@ -10,11 +10,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: implementation_imports
 import 'package:zcdesk_ui/src/shared/styles.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatelessWidget with Validator {
   const LoginView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> _formKey = GlobalKey();
     var height = MediaQuery.of(context).size.height;
     return ViewModelBuilder<LoginViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
@@ -54,22 +54,47 @@ class LoginView extends StatelessWidget {
                               ),
                             ),
                             verticalSpaceMedium,
-                            AuthInputField(
-                              label: model.email,
-                              onChanged: model.emailChanged,
-                              hintPlaceHolder: 'password@gmail.com',
-                            ),
-                            verticalSpaceMedium,
-                            AuthInputField(
-                              label: model.password,
-                              password: true,
-                              isVisible: model.passwordVisibily,
-                              onVisibilityTap: model.setPasswordVisibility,
-                              onChanged: model.passwordChanged,
-                              keyboardType: TextInputType.emailAddress,
-                              controller: TextEditingController(),
-                              hintPlaceHolder: 'Password',
-                            ),
+                            Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: [
+                                    AuthInputField(
+                                      label: 'Email',
+                                      validator: (value) {
+                                        if (emailValidator(
+                                            (value) as String)) {
+                                          return null;
+                                        } 
+                                        return 'Invalid Email';
+                                      },
+                                      hintPlaceHolder: 'someone@gmail.com',
+                                    ),
+                                    verticalSpaceMedium,
+                                    AuthInputField(
+                                      label: 'Password',
+                                      password: true,
+                                      validator: (value) {
+                                        if (passwordValidator(
+                                            (value) as String)) {
+                                          return null;
+                                        }
+
+                                        return '''Invalid Password. Password should consist of atleast 
+                          One Uppercase 
+                          One Lowercase
+                          One Character
+                          And It should be at least 8 characters long ''';
+                                      },
+                                      isVisible: model.passwordVisibily,
+                                      onVisibilityTap:
+                                          model.setPasswordVisibility,
+                                      onChanged: model.passwordChanged,
+                                      keyboardType: TextInputType.emailAddress,
+                                      controller: TextEditingController(),
+                                      hintPlaceHolder: 'Password',
+                                    ),
+                                  ],
+                                )),
                             SizedBox(height: 40.0.h),
                             Container(
                               height: 58.h,
@@ -78,7 +103,9 @@ class LoginView extends StatelessWidget {
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
                                         Colors.blue[800])),
-                                onPressed: model.goToHome,
+                                onPressed: () async{
+                                  await model.validateAndLogin(_formKey);
+                                },
                                 child: Text(
                                   "Login",
                                   style: authBtnStyle,
@@ -115,12 +142,7 @@ class LoginView extends StatelessWidget {
                             ),
                             verticalSpaceTiny,
                             TextButton(
-                              onPressed: () {
-                                //TODO to be replaced with the normal navigation\
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (_) => ForgotPasswordView()));
-                              },
+                              onPressed: model.gotoForgetpassword,
                               child: Text(
                                 'Forgot Password?',
                                 style: bodyText1.copyWith(fontSize: 16.sp),
@@ -179,6 +201,3 @@ class AuthIcons extends ViewModelWidget<LoginViewModel> {
     );
   }
 }
-
-
-

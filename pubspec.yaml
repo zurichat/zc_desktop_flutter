@@ -31,6 +31,7 @@ dependencies:
   dio: ^4.0.0
   freezed_annotation:
   json_annotation:
+  
 
   # ui package for the whole app
   zcdesk_ui:
@@ -41,10 +42,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   stacked_generator: ^0.5.1
-  build_runner:
+  build_runner: ^2.1.2
   freezed: 
   json_serializable:
-  analyzer: 1.5.0
+  analyzer: ^2.2.0
 
 
 flutter:

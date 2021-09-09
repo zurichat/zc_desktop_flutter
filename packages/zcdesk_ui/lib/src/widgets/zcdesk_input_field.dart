@@ -15,6 +15,7 @@ class AuthInputField extends StatelessWidget {
   final TextInputType? keyboardType;
   final void Function()? onTrailingTapped;
   final void Function()? onVisibilityTap;
+  final String? Function(String?)? validator;
   final ValueChanged<String>? onChanged;
 
   const AuthInputField({
@@ -32,6 +33,7 @@ class AuthInputField extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.onVisibilityTap,
+    this.validator,
     this.isVisible = false,
   }) : super(key: key);
 
@@ -51,10 +53,11 @@ class AuthInputField extends StatelessWidget {
 
         Stack(
           children: [
-            TextField(
+            TextFormField(
               onChanged: onChanged,
               keyboardType: keyboardType,
               autofocus: false,
+              validator: validator,
               obscureText: isVisible,
               cursorColor: Theme.of(context).accentColor,
               textInputAction: TextInputAction.done,
