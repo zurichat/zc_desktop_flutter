@@ -41,11 +41,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   stacked_generator: ^0.5.1
-  build_runner:
+  build_runner: ^2.1.2
   freezed: 
   json_serializable:
-  analyzer: 1.5.0
+  analyzer: ^2.2.0
 
+dependency_overrides:
+  meta: ^1.7.0
 
 flutter:
   uses-material-design: true
