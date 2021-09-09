@@ -55,7 +55,7 @@ class LeftSideBarView extends StatelessWidget {
                   verticalSpaceRegular,
                   Expanded(
                     child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                      behavior: ScrollBehavior().copyWith(scrollbars: false),
                       child: SingleChildScrollView(
                         physics: ScrollPhysics(),
                         child: Column(
