@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/ui/main/left_side_bar/left_side_bar_view.dart';
 import 'package:zc_desktop_flutter/ui/main/message_page/message_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
@@ -12,6 +14,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = locator<AuthService>();
     var height = MediaQuery.of(context).size.height;
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
@@ -20,6 +23,7 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(height: 40, child: buildAppBar(context, isActive: true)),
+            Text('You\'re welcom ${_auth.username}, and your token is ${_auth.token} '),
             Expanded(
                 child: Row(
               children: [

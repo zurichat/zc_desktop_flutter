@@ -12,6 +12,7 @@ class AuthService {
   ApiService _apiService = ApiService();
   String get token => _token;
   String get userId => _userId;
+  String get username => _username;
 
   Future<void> signUpWithCred(
       {required String fname,
@@ -40,7 +41,7 @@ class AuthService {
     try {
       _token = responseData['data']['token'];
      _userId = responseData['data']['user']['id'];
-     _username = responseData['data']['user']['username'];
+     _username = responseData['data']['user']['display_name'];
      final userData = json.encode({
        'token': _token,
         'userId': _userId,

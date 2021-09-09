@@ -60,6 +60,9 @@ class LoginView extends StatelessWidget with Validator {
                                   children: [
                                     AuthInputField(
                                       label: 'Email',
+                                      onChanged: (value) {
+                                        model.setEmail(value);
+                                      },
                                       validator: (value) {
                                         if (emailValidator(
                                             (value) as String)) {
@@ -88,7 +91,9 @@ class LoginView extends StatelessWidget with Validator {
                                       isVisible: model.passwordVisibily,
                                       onVisibilityTap:
                                           model.setPasswordVisibility,
-                                      onChanged: model.passwordChanged,
+                                      onChanged: (value) {
+                                        model.setPassword(value);
+                                      },
                                       keyboardType: TextInputType.emailAddress,
                                       controller: TextEditingController(),
                                       hintPlaceHolder: 'Password',
@@ -104,7 +109,12 @@ class LoginView extends StatelessWidget with Validator {
                                     backgroundColor: MaterialStateProperty.all(
                                         Colors.blue[800])),
                                 onPressed: () async{
-                                  await model.validateAndLogin(_formKey);
+                                  try {
+                                    await model.validateAndLogin(_formKey);
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Incorrect Username and password')));
+                                  }
+                                  model.goToHome();
                                 },
                                 child: Text(
                                   "Login",
