@@ -7,7 +7,7 @@ class ApiService implements Api {
   Response? _response;
   var responseData;
   final client = Dio();
-  static const _BASE_URL = "https://api.zuri.chat";
+  static const _BASE_URL = "";
   static const _sendTimeOut = 5000;
  
 
@@ -38,15 +38,12 @@ class ApiService implements Api {
           data: body, options: Options(sendTimeout: _sendTimeOut));
       log.i(url);
       log.i(_response!.statusCode);
-      responseData = _response!.data;
-      log.i(responseData);
     } on DioError catch (error) {
       //write code for interceptors
       log.i(error);
     } catch (error) {
       log.i(error);
     }
-    return responseData;
   }
 
   @override
