@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart' ;
-import '/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'api.dart';
 
 class ApiService implements Api {
