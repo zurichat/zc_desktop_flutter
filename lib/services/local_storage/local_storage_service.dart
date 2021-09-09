@@ -19,7 +19,7 @@ class LocalStorageService {
   }
 
   void saveToDisk<T>(String key, T content) {
-    //print('(TRACE) LocalStorageService:_saveToDisk. key: $key value: $content');
+    print('(TRACE) LocalStorageService:_saveToDisk. key: $key value: $content');
 
     if (content is String) {
       _preferences!.setString(key, content);

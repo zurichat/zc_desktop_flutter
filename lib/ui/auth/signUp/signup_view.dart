@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:zc_desktop_flutter/services/api/auth.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/appbar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
@@ -20,10 +19,6 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     bool check = false;
     Size _size = MediaQuery.of(context).size;
-    //TODO for test
-    Auth auth = Auth();
-    //auth.signUpWithCred(fname: 'Okanlawon', lname: 'Damilare', username: 'protector', password: '1Shadow@23', tel: '08177567489', email: 'toxicbishop097@gmail.com');
-    auth.loginWithCred('toxicbishop097@gmail.com', '1Shadow@23');
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: Column(
