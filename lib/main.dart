@@ -4,15 +4,12 @@ import 'package:get_it/get_it.dart';
 
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:get_it/get_it.dart';
 
 import 'app/app.router.dart';
 
-<<<<<<< HEAD
-void main() async {
-=======
+
 Future<void> main() async {
->>>>>>> dcec163b2aa48fca0720c862ec44af5131f1a300
+
   GetIt.instance;
   setupLocator();
   runApp(const ZcDesktop());

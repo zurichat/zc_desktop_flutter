@@ -9,12 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-<<<<<<< HEAD
+
   freezed_annotation:
   json_annotation:
-=======
 
->>>>>>> dcec163b2aa48fca0720c862ec44af5131f1a300
+
+
   cupertino_icons: ^1.0.2
   flutter_screenutil: ^5.0.0+2
   flutter_svg: ^0.22.0
@@ -25,15 +25,10 @@ dependencies:
   stacked_services:
   get_it: ^7.2.0
   logger: ^1.0.0
-<<<<<<< HEAD
-  get_it: ^7.2.0
 
 
-=======
+
   bitsdojo_window: ^0.1.1+1
->>>>>>> dcec163b2aa48fca0720c862ec44af5131f1a300
-
-  dio: ^4.0.0
 
 
   # local storage
@@ -51,12 +46,12 @@ dev_dependencies:
     sdk: flutter
   stacked_generator: ^0.5.1
   build_runner:
-<<<<<<< HEAD
+
   freezed: 
   json_serializable:
-=======
+
   analyzer: 1.5.0
->>>>>>> dcec163b2aa48fca0720c862ec44af5131f1a300
+
 
 
 flutter:
