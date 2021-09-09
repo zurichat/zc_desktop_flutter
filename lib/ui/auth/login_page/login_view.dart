@@ -64,10 +64,9 @@ class LoginView extends StatelessWidget with Validator {
                                         model.setEmail(value);
                                       },
                                       validator: (value) {
-                                        if (emailValidator(
-                                            (value) as String)) {
+                                        if (emailValidator((value) as String)) {
                                           return null;
-                                        } 
+                                        }
                                         return 'Invalid Email';
                                       },
                                       hintPlaceHolder: 'someone@gmail.com',
@@ -108,13 +107,8 @@ class LoginView extends StatelessWidget with Validator {
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
                                         Colors.blue[800])),
-                                onPressed: () async{
-                                  try {
-                                    await model.validateAndLogin(_formKey);
-                                  } catch (e) {
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Incorrect Username and password')));
-                                  }
-                                  model.goToHome();
+                                onPressed: () async {
+                                  await model.validateAndLogin(_formKey);
                                 },
                                 child: Text(
                                   "Login",
