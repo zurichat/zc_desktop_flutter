@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color kcPrimaryColor = Color(0xff00B87C);
+const Color KStartupContainerColor = Color(0xFF53B581);
 const Color kcSecondaryColor = Color(0xff1A61DB);
 const Color kcAccentColor = Color(0xffB8003C);
 const Color kcErrorColor = Color(0xffF40101);
@@ -25,5 +26,5 @@ const Color avatarColor3 = Color(0xffFFF0F0);
 const Color avatarColor4 = Color(0xffACFFE6);
 const Color avatarColor5 = Color(0xffE3EEFF);
 
- //Button colors
- const Color authBtnColor = Color(0xff363636);
+//Button colors
+const Color authBtnColor = Color(0xff363636);
