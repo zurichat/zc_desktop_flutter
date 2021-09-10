@@ -52,6 +52,7 @@ dev_dependencies:
 
   analyzer: 1.5.0
 
+  desktop_window: ^0.4.0
 
 
 flutter:
