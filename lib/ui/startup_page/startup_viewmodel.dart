@@ -12,7 +12,7 @@ class StartUpViewModel extends BaseViewModel {
   String _appName = 'Zuri Chat';
   String get appName => _appName;
 
-  final String _circularImage = 'assets/images/circularImage.png';
+  final String _circularImage = 'assets/lottie/hng.gif';
   String get circularImage => _circularImage;
 
   String _title = 'Unlimited Team Collaboration Platform';
