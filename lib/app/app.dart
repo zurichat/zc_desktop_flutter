@@ -1,5 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/auth/auth_input/auth_input.dart';
@@ -29,6 +30,7 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
     ),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthService),
+    LazySingleton(classType: ApiService),
 
   ],
   logger: StackedLogger(),
