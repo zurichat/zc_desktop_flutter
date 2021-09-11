@@ -51,10 +51,6 @@ class LoginViewModel extends BaseViewModel {
     emailText = value!;
   }
 
-  void passwordChanged(String? value) {
-    passwordText = value!;
-  }
-
   void setPassword(String password) {
     _password = password;
     notifyListeners();
@@ -100,7 +96,7 @@ class LoginViewModel extends BaseViewModel {
     } catch (e) {
       return;
     }
-    goToHome();
+    _navigationService.navigateTo(Routes.homeView);
     notifyListeners();
   }
 }

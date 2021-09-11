@@ -60,11 +60,13 @@ class LoginView extends StatelessWidget with Validator {
                                   children: [
                                     AuthInputField(
                                       label: 'Email',
+                                      onChanged: (value) {
+                                        model.setEmail(value);
+                                      },
                                       validator: (value) {
-                                        if (emailValidator(
-                                            (value) as String)) {
+                                        if (emailValidator((value) as String)) {
                                           return null;
-                                        } 
+                                        }
                                         return 'Invalid Email';
                                       },
                                       hintPlaceHolder: 'someone@gmail.com',
@@ -88,7 +90,9 @@ class LoginView extends StatelessWidget with Validator {
                                       isVisible: model.passwordVisibily,
                                       onVisibilityTap:
                                           model.setPasswordVisibility,
-                                      onChanged: model.passwordChanged,
+                                      onChanged: (value) {
+                                        model.setPassword(value);
+                                      },
                                       keyboardType: TextInputType.emailAddress,
                                       controller: TextEditingController(),
                                       hintPlaceHolder: 'Password',
@@ -103,7 +107,7 @@ class LoginView extends StatelessWidget with Validator {
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
                                         Colors.blue[800])),
-                                onPressed: () async{
+                                onPressed: () async {
                                   await model.validateAndLogin(_formKey);
                                 },
                                 child: Text(

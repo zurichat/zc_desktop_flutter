@@ -111,7 +111,7 @@ class SignUpView extends StatelessWidget with Validator {
                                         },
                                         hintPlaceHolder: 'protector',
                                         validator: (value) {
-                                          if (passwordValidator(
+                                          if (validateName(
                                               (value) as String)) {
                                             return null;
                                           }
