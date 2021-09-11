@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:stacked/stacked.dart';
 
 import 'package:zc_desktop_flutter/app/app.locator.dart';
@@ -35,7 +33,7 @@ class HomeViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   void goToInputView() {
-    _navigationService.navigateTo(Routes.authInput);
+    _navigationService.navigateTo(Routes.loginView);
     notifyListeners();
   }
 
