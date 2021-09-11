@@ -25,9 +25,7 @@ class AuthInput extends StatelessWidget {
                       hintPlaceHolder: 'Markhng@gmail.com',
                       onSaved: (val) => model.onSaved(val),
                     ),
-
                     verticalSpaceMedium,
-
                     AuthInputField(
                       label: 'Password',
                       hintPlaceHolder: 'Password',

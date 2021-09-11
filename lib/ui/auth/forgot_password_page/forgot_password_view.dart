@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/auth/check_mail_page/check_email_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart' as auth;
@@ -70,14 +69,7 @@ class ForgotPasswordView extends StatelessWidget {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.blue[800])),
-                    onPressed: () {
-                      //TODO replace with the normal nav
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (_) => CheckEmailView(),
-                        ),
-                      );
-                    },
+                    onPressed: model.goToCheckEmailView,
                     child: Text(
                       model.btnText,
                       style: authBtnStyle,
@@ -102,14 +94,7 @@ class ForgotPasswordView extends StatelessWidget {
                 ),
                 verticalSpaceMedium,
                 GestureDetector(
-                  onTap: () {
-                    //TODO to be replaced with the normal navigation\
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (_) => ResetPasswordView(),
-                      ),
-                    );
-                  },
+                  onTap: model.goToPasswordRest,
                   child: Container(
                     height: 58.h,
                     width: 440.w,

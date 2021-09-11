@@ -24,6 +24,9 @@ dependencies:
   desktop_window: ^0.4.0
   intl: ^0.17.0
 
+  # animation
+  lottie: ^1.1.0
+
   # local storage
   shared_preferences: ^2.0.7
 
@@ -31,6 +34,7 @@ dependencies:
   dio: ^4.0.0
   freezed_annotation:
   json_annotation:
+  
 
   # ui package for the whole app
   zcdesk_ui:
@@ -54,3 +58,4 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/lottie/

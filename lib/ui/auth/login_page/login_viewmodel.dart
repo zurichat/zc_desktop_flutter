@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 const testLocalKey = 'TESTKEY';
@@ -11,17 +13,18 @@ class LoginViewModel extends BaseViewModel {
   final log = getLogger("LoginViewModel");
   final _navigationService = locator<NavigationService>();
   final _storageService = locator<LocalStorageService>();
+  final _auth = locator<AuthService>();
 
   String _logoUrl = 'assets/images/zc_logo2.png';
   String _logoUrlG = 'assets/images/google.png';
   String _logoUrlF = 'assets/images/facebook.png';
   String _logoUrlT = 'assets/images/twitter.png';
   double _logoWidth = 5.0;
-  double _logoHeight = 5.0;      
+  double _logoHeight = 5.0;
   String _signIn = 'Sign in';
-  String _email = 'Email';
-  String _password = 'Password';
-  String _emailhint = 'password@gmail.com';
+  String _email = '';
+  String _password = '';
+  String _emailhint = 'someone@gmail.com';
   String _hint = 'password';
   bool _passwordVisibility = true;
 
@@ -39,8 +42,6 @@ class LoginViewModel extends BaseViewModel {
 
   String get emailhint => _emailhint;
 
-  String get email => _email;
-  String get password => _password;
   String get hint => _hint;
 
   String emailText = '';
@@ -50,11 +51,17 @@ class LoginViewModel extends BaseViewModel {
     emailText = value!;
   }
 
-  void passwordChanged(String? value) {
-    passwordText = value!;
+  void setPassword(String password) {
+    _password = password;
+    notifyListeners();
   }
 
-  void setPasswordVisibility(){
+  void setEmail(String email) {
+    _email = email;
+    notifyListeners();
+  }
+
+  void setPasswordVisibility() {
     _passwordVisibility = !_passwordVisibility;
     notifyListeners();
   }
@@ -71,6 +78,25 @@ class LoginViewModel extends BaseViewModel {
 
   void goToSignUp() {
     _navigationService.navigateTo(Routes.signUpView);
+    notifyListeners();
+  }
+
+  void gotoForgetpassword() {
+    _navigationService.navigateTo(Routes.forgotPasswordView);
+    notifyListeners();
+  }
+
+  Future<void> validateAndLogin(GlobalKey<FormState> formKey) async {
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
+    formKey.currentState!.save();
+    try {
+      await _auth.loginWithCred(_email, _password);
+    } catch (e) {
+      return;
+    }
+    _navigationService.navigateTo(Routes.homeView);
     notifyListeners();
   }
 }
