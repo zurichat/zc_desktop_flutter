@@ -175,7 +175,7 @@ class SignUpView extends StatelessWidget {
                                             MaterialStateProperty.all(
                                                 Colors.blue[800])),
                                     onPressed: () async {
-                                        await model.validateAndSignUP(_formKey);},
+                                        await model.validateAndSignUP();},
                                     child: !model.isBusy ? Text(
                                       "Register",
                                       style: authBtnStyle,

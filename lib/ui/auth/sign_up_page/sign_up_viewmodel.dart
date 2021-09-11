@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -148,7 +147,7 @@ class SignUpViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  Future<void> validateAndSignUP(GlobalKey<FormState> formKey) async {
+  Future<void> validateAndSignUP() async {
     bool isFnameValid = nameValidator(_fname);
     bool isLnameValid = nameValidator(_lname);
     bool isUsernameValid = nameValidator(_username);
