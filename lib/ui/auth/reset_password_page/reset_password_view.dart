@@ -53,6 +53,7 @@ class ResetPasswordView extends StatelessWidget {
                       width: 440.w,
                       child: auth.AuthInputField(
                         label: 'Email',
+                        controller: TextEditingController(),
                         keyboardType: TextInputType.emailAddress,
                         onChanged: (_) {},
                         hintPlaceHolder: 'password@gmail.com',
