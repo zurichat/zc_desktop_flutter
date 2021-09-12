@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 const testLocalKey = 'TESTKEY';
 
-class LoginViewModel extends BaseViewModel {
+class LoginViewModel extends BaseViewModel with Validator {
   final log = getLogger("LoginViewModel");
   final _navigationService = locator<NavigationService>();
   final _storageService = locator<LocalStorageService>();
@@ -19,6 +19,9 @@ class LoginViewModel extends BaseViewModel {
   String _logoUrlG = 'assets/images/google.png';
   String _logoUrlF = 'assets/images/facebook.png';
   String _logoUrlT = 'assets/images/twitter.png';
+  String _errorMessage = '';
+  String? _emailErrorText;
+  String? _passwordErrorText;
   double _logoWidth = 5.0;
   double _logoHeight = 5.0;
   String _signIn = 'Sign in';
@@ -27,10 +30,19 @@ class LoginViewModel extends BaseViewModel {
   String _emailhint = 'someone@gmail.com';
   String _hint = 'password';
   bool _passwordVisibility = true;
+  bool _isBusy = false;
+  bool _isError = false;
 
   String get logoUrl => _logoUrl;
   String get logoUrlG => _logoUrlG;
+  String get errorMessage => _errorMessage;
+  String? get emailErrorText => _emailErrorText;
+  String? get passwordErrorText => _passwordErrorText;
   bool get passwordVisibily => _passwordVisibility;
+  bool get isBusy => _isBusy;
+  bool get isError => _isError;
+  get email => _email;
+  get password => _password;
 
   String get signIn => _signIn;
   String get logoUrlF => _logoUrlF;
@@ -51,13 +63,13 @@ class LoginViewModel extends BaseViewModel {
     emailText = value!;
   }
 
-  void setPassword(String password) {
-    _password = password;
+  void setErrorMessage(String msg) {
+    _errorMessage = msg;
     notifyListeners();
   }
 
-  void setEmail(String email) {
-    _email = email;
+  void _setIsError() {
+    _isError = true;
     notifyListeners();
   }
 
@@ -66,7 +78,7 @@ class LoginViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void goToHome() {
+  void _goToHome() {
     if (emailText.isEmpty) {
       _navigationService.navigateTo(Routes.homeView);
       return;
@@ -86,17 +98,55 @@ class LoginViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> validateAndLogin(GlobalKey<FormState> formKey) async {
-    if (!formKey.currentState!.validate()) {
+  void _setIsBusy() {
+    _isBusy = !_isBusy;
+    notifyListeners();
+  }
+
+  void setEmail(String value) {
+    _email = value;
+    notifyListeners();
+  }
+
+  void setPassword(String value) {
+    _password = value;
+    notifyListeners();
+  }
+
+  Future<void> validateAndLogin() async {
+    notifyListeners();
+    if (!(emailValidator(_email)) || _password.length <= 0) {
+      if (!(emailValidator(_email))) {
+        _emailErrorText = 'Invalid Email';
+      } else {
+        _emailErrorText = null;
+      }
+      if (_password.length <= 0) {
+        _passwordErrorText = 'Password cannnot be empty';
+      } else {
+        _passwordErrorText = null;
+      }
+      notifyListeners();
       return;
     }
-    formKey.currentState!.save();
+
     try {
+      _setIsBusy();
+      _emailErrorText = null;
       await _auth.loginWithCred(_email, _password);
     } catch (e) {
+      if (e.toString().contains('SocketException')) {
+        setErrorMessage(
+            'Somthing went wrong!!! Please check your internet and try again');
+      } else {
+        setErrorMessage('Invalid Email OR Password');
+      }
+      _setIsError();
+      _setIsBusy();
       return;
     }
-    _navigationService.navigateTo(Routes.homeView);
+
+    _goToHome();
     notifyListeners();
   }
 }

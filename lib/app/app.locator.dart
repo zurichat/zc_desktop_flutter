@@ -10,6 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../services/api/api_service.dart';
 import '../services/authentication/auth_service.dart';
 import '../services/local_storage/local_storage_service.dart';
 
@@ -27,4 +28,5 @@ Future setupLocator(
 
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => AuthService());
+  locator.registerLazySingleton(() => ApiService());
 }
