@@ -43,7 +43,7 @@ class SignUpView extends StatelessWidget with Validator {
                         showTrackOnHover: true,
                         interactive: true,
                         isAlwaysShown: true,
-                        scrollbarOrientation: ScrollbarOrientation.right,
+                        //scrollbarOrientation: ScrollbarOrientation.right,
                         child: SingleChildScrollView(
                           controller: _scrollController,
                           child: Container(

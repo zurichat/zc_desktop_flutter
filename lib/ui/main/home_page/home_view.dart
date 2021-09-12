@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/main/left_side_bar/left_side_bar_view.dart';
 import 'package:zc_desktop_flutter/ui/main/message_page/message_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
@@ -32,7 +33,12 @@ class HomeView extends StatelessWidget {
                   width: 269.w,
                   child: LeftSideBarView(),
                 ),
-                Container(
+                 Container(
+                  width: !model.showThread ? 1035 : 776,
+                  //height: (height - 200).h,
+                  child: DmView()
+                ),
+               /*  Container(
                   width: !model.showThread ? 1035 : 776,
                   //height: (height - 200).h,
                   child: Column(
@@ -53,7 +59,7 @@ class HomeView extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
+                ), */
               ],
             ))
           ],
