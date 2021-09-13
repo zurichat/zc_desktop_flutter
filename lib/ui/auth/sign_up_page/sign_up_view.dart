@@ -14,9 +14,7 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool check = false;
     final _scrollController = ScrollController();
-    final GlobalKey<FormState> _formKey = GlobalKey();
     Size _size = MediaQuery.of(context).size;
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
@@ -68,103 +66,105 @@ class SignUpView extends StatelessWidget {
                                 Text('Sign Up Successful, You will be redirected to the login page shortly', style: headline6.copyWith(color: kcSuccessColor)),
                                 if(model.isSignUpNotSuccessful)
                                 Text(model.errorMessage, style: headline6.copyWith(color: kcErrorColor)),
-                                Form(
-                                  key: _formKey,
-                                  child: Column(
-                                    children: [
-                                      AuthInputField(
-                                        label: 'First Name',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setFname(value);
-                                        },
-                                        errorText: model.fnameError,
-                                        hintPlaceHolder: 'John',
-                                      ),
-                                      AuthInputField(
-                                        label: 'Last Name',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setLname(value);
-                                        },
-                                        errorText: model.lnameError,
-                                        hintPlaceHolder: 'Doe',
-                                      ),
-                                      AuthInputField(
-                                        label: 'Username',
-                                        onChanged: (value) {
-                                          model.setUsername(value);
-                                        },
-                                        hintPlaceHolder: 'protector',
-                                        errorText: model.usernameError,
-                                      ),
-                                      AuthInputField(
-                                        label: 'phone',
-                                        keyboardType:
-                                            TextInputType.number,
-                                        onChanged: (value) {
-                                          model.setPhone(value);
-                                        },
-                                        hintPlaceHolder: '0804576859',
-                                        errorText: model.phoneError
-                                      ),
-                                      AuthInputField(
-                                        label: 'Email',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                       onChanged: (value) {
-                                          model.setEmail(value);
-                                        },
-                                        hintPlaceHolder: 'email@gmail.com',
-                                        errorText: model.emailError,
-                                      ),
-                                      verticalSpaceMedium,
-                                      AuthInputField(
-                                        label: 'Password',
-                                        password: true,
-                                        isVisible: model.passwordVisibily,
-                                        onVisibilityTap:
-                                            model.setPasswordVisibility,
-                                        onChanged: (value) {
-                                          model.setPassword(value);
-                                        },
-                                        hintPlaceHolder: 'password',
-                                        errorText: model.passwordError,
-                                      ),
-                                      verticalSpaceMedium,
-                                      AuthInputField(
-                                        label: 'Confirm Password',
-                                        password: true,
-                                        isVisible: model.passwordVisibily,
-                                        onVisibilityTap:
-                                            model.setPasswordVisibility,
-                                        errorText: model.confirmPasswordError,
-                                        onChanged: (value) {
-                                          model.setConfirmPassword(value);
-                                        },
-                                        hintPlaceHolder: 'Password'
-                                      ),
-                                    ],
-                                  ),
+                                Column(
+                                  children: [
+                                    AuthInputField(
+                                      label: 'First Name',
+                                      keyboardType:
+                                          TextInputType.emailAddress,
+                                      onChanged: (value) {
+                                        model.setFname(value);
+                                      },
+                                      errorText: model.fnameError,
+                                      hintPlaceHolder: 'John',
+                                    ),
+                                    AuthInputField(
+                                      label: 'Last Name',
+                                      keyboardType:
+                                          TextInputType.emailAddress,
+                                      onChanged: (value) {
+                                        model.setLname(value);
+                                      },
+                                      errorText: model.lnameError,
+                                      hintPlaceHolder: 'Doe',
+                                    ),
+                                    AuthInputField(
+                                      label: 'Username',
+                                      onChanged: (value) {
+                                        model.setUsername(value);
+                                      },
+                                      hintPlaceHolder: 'protector',
+                                      errorText: model.usernameError,
+                                    ),
+                                    AuthInputField(
+                                      label: 'phone',
+                                      keyboardType:
+                                          TextInputType.number,
+                                      onChanged: (value) {
+                                        model.setPhone(value);
+                                      },
+                                      hintPlaceHolder: '0804576859',
+                                      errorText: model.phoneError
+                                    ),
+                                    AuthInputField(
+                                      label: 'Email',
+                                      keyboardType:
+                                          TextInputType.emailAddress,
+                                     onChanged: (value) {
+                                        model.setEmail(value);
+                                      },
+                                      hintPlaceHolder: 'email@gmail.com',
+                                      errorText: model.emailError,
+                                    ),
+                                    verticalSpaceMedium,
+                                    AuthInputField(
+                                      label: 'Password',
+                                      password: true,
+                                      isVisible: model.passwordVisibily,
+                                      onVisibilityTap:
+                                          model.setPasswordVisibility,
+                                      onChanged: (value) {
+                                        model.setPassword(value);
+                                      },
+                                      hintPlaceHolder: 'password',
+                                      errorText: model.passwordError,
+                                    ),
+                                    verticalSpaceMedium,
+                                    AuthInputField(
+                                      label: 'Confirm Password',
+                                      password: true,
+                                      isVisible: model.passwordVisibily,
+                                      onVisibilityTap:
+                                          model.setPasswordVisibility,
+                                      errorText: model.confirmPasswordError,
+                                      onChanged: (value) {
+                                        model.setConfirmPassword(value);
+                                      },
+                                      hintPlaceHolder: 'Password'
+                                    ),
+                                  ],
                                 ),
                                 verticalSpaceMedium,
+                                
                                 Row(
                                   children: [
                                     Checkbox(
-                                      value: check,
+                                      value: model.check,
                                       activeColor: kcSuccessColor,
-                                      onChanged: (value) {},
+                                      
+                                      onChanged: (value) {
+                                        model.updateCheck((value) as bool);
+                                      },
                                     ),
                                     Expanded(
                                       child: Text(
                                         model.policy,
                                         style: bodyStyle,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
+                                Text(model.checkError, style: bodyStyle.copyWith(color: kcErrorColor),),
                                 verticalSpaceMedium,
                                 Container(
                                   height: 58.h,
