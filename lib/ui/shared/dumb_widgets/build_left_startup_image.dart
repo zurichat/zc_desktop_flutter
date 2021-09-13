@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/startup_page/startup_viewmodel.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
-import 'package:zcdesk_ui/src/shared/styles.dart';
 
 class BuildStartUpImage extends StatelessWidget {
   const BuildStartUpImage({Key? key}) : super(key: key);
