@@ -37,7 +37,7 @@ class SignUpView extends StatelessWidget {
                         showTrackOnHover: true,
                         interactive: true,
                         isAlwaysShown: true,
-                        //scrollbarOrientation: ScrollbarOrientation.right,
+                        scrollbarOrientation: ScrollbarOrientation.right,
                         child: SingleChildScrollView(
                           controller: _scrollController,
                           child: Container(
