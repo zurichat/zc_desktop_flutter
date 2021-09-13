@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 class DmView extends StatefulWidget {
@@ -43,7 +43,7 @@ class _DmViewState extends State<DmView> {
                         ),
                         SvgPicture.asset(
                           SVGAssetPaths.dropDownOpenIcon,
-                          height: 5,
+                          height: 5.h,
                           color: bodyColor,
                         ),
                       ],
@@ -72,13 +72,13 @@ class _DmViewState extends State<DmView> {
                           index == 10 ||
                           index == 15 ||
                           index == 20) {
-                        return DateWidget(date: '',);
+                        return DateWidget(date: '20 July 2003',);
                       } else {
                         return MessageTile(
-                          userDisplayName: '',
-                          userProfileUrl: '',
-                          time: '',
-                          message: '',
+                          userDisplayName: 'dedan kibere',
+                          userProfileUrl: 'tree.png',
+                          time: '9:06 pm',
+                          message: 'Hello baby bello baby',
                         );
                       }
                     }),
@@ -139,7 +139,7 @@ class MessageTile extends StatelessWidget {
                           style: heading1Style.copyWith(fontSize: 15),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                         Text(
                           time,
@@ -167,31 +167,34 @@ class DateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
-      child: Container(
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          color: kcBackgroundColor2,
-          shape: BoxShape.rectangle,
-          border: Border.all(color: timeColor),
-          borderRadius: BorderRadius.circular(25),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(date,
-              style: heading1Style.copyWith(fontSize: 10),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            SvgPicture.asset(
-              SVGAssetPaths.dropDownOpenIcon,
-              height: 5,
-              color: bodyColor,
-            ),
-          ],
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            color: kcBackgroundColor2,
+            shape: BoxShape.rectangle,
+            border: Border.all(color: timeColor),
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(date,
+                style: heading1Style.copyWith(fontSize: 10),
+              ),
+              SizedBox(
+                width: 5.w,
+              ),
+              SvgPicture.asset(
+                SVGAssetPaths.dropDownOpenIcon,
+                height: 5.h,
+                color: bodyColor,
+              ),
+            ],
+          ),
         ),
       ),
     );
