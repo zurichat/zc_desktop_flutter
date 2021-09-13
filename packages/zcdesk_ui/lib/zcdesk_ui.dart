@@ -17,4 +17,5 @@ export 'src/shared/styles.dart';
 // shared exports
 export 'src/shared/ui_helpers.dart';
 export 'src/shared/svg_assets_paths.dart';
+export 'src/shared/styles.dart';
 

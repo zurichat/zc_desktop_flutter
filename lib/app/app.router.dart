@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import '../ui/auth/auth_input/auth_input.dart';
 import '../ui/auth/check_mail_page/check_email_view.dart';
 import '../ui/auth/forgot_password_page/forgot_password_view.dart';
 import '../ui/auth/login_page/login_view.dart';
@@ -21,7 +20,6 @@ import '../ui/startup_page/startup_view.dart';
 
 class Routes {
   static const String homeView = '/home-view';
-  static const String authInput = '/auth-input';
   static const String loginView = '/';
   static const String startUpView = '/start-up-view';
   static const String signUpView = '/sign-up-view';
@@ -30,7 +28,6 @@ class Routes {
   static const String resetPasswordView = '/reset-password-view';
   static const all = <String>{
     homeView,
-    authInput,
     loginView,
     startUpView,
     signUpView,
@@ -45,7 +42,6 @@ class StackedRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.homeView, page: HomeView),
-    RouteDef(Routes.authInput, page: AuthInput),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.signUpView, page: SignUpView),
@@ -59,12 +55,6 @@ class StackedRouter extends RouterBase {
     HomeView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const HomeView(),
-        settings: data,
-      );
-    },
-    AuthInput: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const AuthInput(),
         settings: data,
       );
     },

@@ -1,26 +1,20 @@
-// ignore_for_file: implementation_imports
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 import 'sign_up_viewmodel.dart';
-import 'package:zcdesk_ui/src/shared/styles.dart';
 
-class SignUpView extends StatelessWidget with Validator {
+class SignUpView extends StatelessWidget {
   const SignUpView({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool check = false;
     final _scrollController = ScrollController();
-    final GlobalKey<FormState> _formKey = GlobalKey();
     Size _size = MediaQuery.of(context).size;
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
@@ -68,149 +62,109 @@ class SignUpView extends StatelessWidget with Validator {
                                   style: heading2Style,
                                 ),
                                 verticalSpaceMedium,
-                                Form(
-                                  key: _formKey,
-                                  child: Column(
-                                    children: [
-                                      AuthInputField(
-                                        label: 'First Name',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setFname(value);
-                                        },
-                                        hintPlaceHolder: 'John',
-                                        validator: (value) {
-                                          if (validateName((value) as String)) {
-                                            return null;
-                                          }
-                                          return 'First Name must be at least 3 characters long';
-                                        },
-                                      ),
-                                      AuthInputField(
-                                        label: 'Last Name',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setLname(value);
-                                        },
-                                        hintPlaceHolder: 'Doe',
-                                        validator: (value) {
-                                          if (validateName((value) as String)) {
-                                            return null;
-                                          }
-                                          return 'First Name must be at least 3 characters long';
-                                        },
-                                      ),
-                                      AuthInputField(
-                                        label: 'Username',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setUsername(value);
-                                        },
-                                        hintPlaceHolder: 'protector',
-                                        validator: (value) {
-                                          if (validateName(
-                                              (value) as String)) {
-                                            return null;
-                                          }
-                                          return 'Username must be at least 3 characters long';
-                                        },
-                                      ),
-                                      AuthInputField(
-                                        label: 'phone',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setPhone(value);
-                                        },
-                                        hintPlaceHolder: '0804576859',
-                                        validator: (value) {
-                                          if (validatePhone(
-                                              (value) as String)) {
-                                            return null;
-                                          }
-                                          return 'Phone must be at least 11 characters';
-                                        },
-                                      ),
-                                      AuthInputField(
-                                        label: 'Email',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setEmail(value);
-                                        },
-                                        hintPlaceHolder: 'email@gmail.com',
-                                        validator: (value) {
-                                          if (emailValidator(
-                                            (value) as String)) {
-                                          return null;
-                                        } 
-                                        return 'Invalid Email';
-                                        }
-                                      ),
-                                      verticalSpaceMedium,
-                                      AuthInputField(
-                                        label: 'Password',
-                                        password: true,
-                                        isVisible: model.passwordVisibily,
-                                        onVisibilityTap:
-                                            model.setPasswordVisibility,
-                                        onChanged: (value) {
-                                          model.setPassword(value);
-                                        },
-                                        hintPlaceHolder: 'password',
-                                        validator: (value) {
-                                          if (passwordValidator(
-                                              (value) as String)) {
-                                            return null;
-                                          }
-
-                                          return '''Invalid Password. Password should consist of atleast 
-                                                          One Uppercase 
-                                                          One Lowercase
-                                                          One Character
-                                                          And It should be at least 8 characters long ''';
-                                        },
-                                      ),
-                                      verticalSpaceMedium,
-                                      AuthInputField(
-                                        label: 'Confirm Password',
-                                        password: true,
-                                        isVisible: model.passwordVisibily,
-                                        onVisibilityTap:
-                                            model.setPasswordVisibility,
-                                        onChanged: (_) {},
-                                        controller: TextEditingController(),
-                                        hintPlaceHolder: 'Password',
-                                        validator: (value) {
-                                          if (confirmPassword((value) as String,
-                                              model.password)) {
-                                            return null;
-                                          }
-                                          return 'Password does not match';
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                                if(model.isSignUpSuccessful)
+                                Text('Sign Up Successful, You will be redirected to the login page shortly', style: headline6.copyWith(color: kcSuccessColor)),
+                                if(model.isSignUpNotSuccessful)
+                                Text(model.errorMessage, style: headline6.copyWith(color: kcErrorColor)),
+                                Column(
+                                  children: [
+                                    AuthInputField(
+                                      label: 'First Name',
+                                      keyboardType:
+                                          TextInputType.emailAddress,
+                                      onChanged: (value) {
+                                        model.setFname(value);
+                                      },
+                                      errorText: model.fnameError,
+                                      hintPlaceHolder: 'John',
+                                    ),
+                                    AuthInputField(
+                                      label: 'Last Name',
+                                      keyboardType:
+                                          TextInputType.emailAddress,
+                                      onChanged: (value) {
+                                        model.setLname(value);
+                                      },
+                                      errorText: model.lnameError,
+                                      hintPlaceHolder: 'Doe',
+                                    ),
+                                    AuthInputField(
+                                      label: 'Username',
+                                      onChanged: (value) {
+                                        model.setUsername(value);
+                                      },
+                                      hintPlaceHolder: 'protector',
+                                      errorText: model.usernameError,
+                                    ),
+                                    AuthInputField(
+                                      label: 'phone',
+                                      keyboardType:
+                                          TextInputType.number,
+                                      onChanged: (value) {
+                                        model.setPhone(value);
+                                      },
+                                      hintPlaceHolder: '0804576859',
+                                      errorText: model.phoneError
+                                    ),
+                                    AuthInputField(
+                                      label: 'Email',
+                                      keyboardType:
+                                          TextInputType.emailAddress,
+                                     onChanged: (value) {
+                                        model.setEmail(value);
+                                      },
+                                      hintPlaceHolder: 'email@gmail.com',
+                                      errorText: model.emailError,
+                                    ),
+                                    verticalSpaceMedium,
+                                    AuthInputField(
+                                      label: 'Password',
+                                      password: true,
+                                      isVisible: model.passwordVisibily,
+                                      onVisibilityTap:
+                                          model.setPasswordVisibility,
+                                      onChanged: (value) {
+                                        model.setPassword(value);
+                                      },
+                                      hintPlaceHolder: 'password',
+                                      errorText: model.passwordError,
+                                    ),
+                                    verticalSpaceMedium,
+                                    AuthInputField(
+                                      label: 'Confirm Password',
+                                      password: true,
+                                      isVisible: model.passwordVisibily,
+                                      onVisibilityTap:
+                                          model.setPasswordVisibility,
+                                      errorText: model.confirmPasswordError,
+                                      onChanged: (value) {
+                                        model.setConfirmPassword(value);
+                                      },
+                                      hintPlaceHolder: 'Password'
+                                    ),
+                                  ],
                                 ),
                                 verticalSpaceMedium,
+                                
                                 Row(
                                   children: [
                                     Checkbox(
-                                      value: check,
+                                      value: model.check,
                                       activeColor: kcSuccessColor,
-                                      onChanged: (value) {},
+                                      
+                                      onChanged: (value) {
+                                        model.updateCheck((value) as bool);
+                                      },
                                     ),
                                     Expanded(
                                       child: Text(
                                         model.policy,
                                         style: bodyStyle,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
+                                Text(model.checkError, style: bodyStyle.copyWith(color: kcErrorColor),),
                                 verticalSpaceMedium,
                                 Container(
                                   height: 58.h,
@@ -221,11 +175,11 @@ class SignUpView extends StatelessWidget with Validator {
                                             MaterialStateProperty.all(
                                                 Colors.blue[800])),
                                     onPressed: () async {
-                                        await model.validateAndSignUP(_formKey);},
-                                    child: Text(
+                                        await model.validateAndSignUP();},
+                                    child: !model.isBusy ? Text(
                                       "Register",
                                       style: authBtnStyle,
-                                    ),
+                                    ):CircularProgressIndicator(color: Colors.white,),
                                   ),
                                 ),
                                 verticalSpaceMedium,
