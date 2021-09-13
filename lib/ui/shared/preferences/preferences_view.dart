@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 class PereferenceView extends StatelessWidget {
@@ -26,11 +27,7 @@ class PereferenceView extends StatelessWidget {
       {
         'text': 'Sidebar',
         'icon': Icons.grid_view_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Sidebar'),
-          ),
-        )
+        'widget': SideBar(),
       },
       {
         'text': 'Themes',
