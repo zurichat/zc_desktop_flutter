@@ -107,7 +107,7 @@ Widget buildAppBar(BuildContext context,
                 ),
               ),
             //  SizedBox(width: 10),
-            // if(!isSignUp && !isSignIn)
+            //if (!isSignUp && !isSignIn)
             IconButton(
               onPressed: () {
                 showDialog(
