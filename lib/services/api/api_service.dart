@@ -1,16 +1,17 @@
 import 'package:dio/dio.dart' ;
-import '/app/app.logger.dart';
+import 'package:stacked/stacked_annotations.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/core/exceptions/http_exception.dart';
 import 'api.dart';
 
+@LazySingleton()
 class ApiService implements Api {
   final log = getLogger('PiService');
   Response? _response;
   var responseData;
   final client = Dio();
-  static const _BASE_URL = "";
+  static const _BASE_URL = "https://api.zuri.chat";
   static const _sendTimeOut = 5000;
- 
-  
  
 
   @override
@@ -24,8 +25,10 @@ class ApiService implements Api {
       log.i(responseData);
     } on DioError catch (error) {
       log.i(error);
+      throw HttpException(error.message);
     } catch (error) {
       log.i(error);
+      throw error;
     }
 
     return responseData;
@@ -40,12 +43,16 @@ class ApiService implements Api {
           data: body, options: Options(sendTimeout: _sendTimeOut));
       log.i(url);
       log.i(_response!.statusCode);
+      responseData = _response!.data;
+      log.i(responseData);
     } on DioError catch (error) {
-      //write code for interceptors
       log.i(error);
+      throw HttpException(error.message);
     } catch (error) {
       log.i(error);
+      throw error;
     }
+    return responseData;
   }
 
   @override

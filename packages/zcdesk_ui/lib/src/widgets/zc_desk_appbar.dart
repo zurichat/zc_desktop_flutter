@@ -1,8 +1,8 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:zcdesk_ui/src/shared/app_colors.dart';
 import 'package:zcdesk_ui/src/shared/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({
