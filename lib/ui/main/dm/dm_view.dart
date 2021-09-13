@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 class DmView extends StatefulWidget {
@@ -30,9 +31,9 @@ class _DmViewState extends State<DmView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         CircleAvatar(
-      radius: 20,
-      child: Image.asset('assets/images/4.png'),
-    ),
+                          radius: 20,
+                          child: Image.asset('assets/images/4.png'),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
@@ -71,9 +72,14 @@ class _DmViewState extends State<DmView> {
                           index == 10 ||
                           index == 15 ||
                           index == 20) {
-                        return DateWidget();
+                        return DateWidget(date: '',);
                       } else {
-                        return MessageTile();
+                        return MessageTile(
+                          userDisplayName: '',
+                          userProfileUrl: '',
+                          time: '',
+                          message: '',
+                        );
                       }
                     }),
               ),
@@ -89,10 +95,20 @@ class _DmViewState extends State<DmView> {
 }
 
 class MessageTile extends StatelessWidget {
+  final String userProfileUrl;
+  final String userDisplayName;
+  final String message;
+  final String time;
+
+  MessageTile(
+      {required this.message,
+      required this.time,
+      required this.userDisplayName,
+      required this.userProfileUrl});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       padding: EdgeInsets.fromLTRB(20, 5, 10, 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -102,7 +118,7 @@ class MessageTile extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: CircleAvatar(
               radius: 20,
-              child: Image.asset('assets/images/4.png'),
+              child: Image.network(userProfileUrl),
             ),
           ),
           Expanded(
@@ -119,22 +135,21 @@ class MessageTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'dedan',
+                          userDisplayName,
                           style: heading1Style.copyWith(fontSize: 15),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Text(
-                          '10:10 AM',
+                          time,
                           style: subtitle2.copyWith(color: timeColor),
                         )
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
-                      child: Text(
-                          'hey you..continue doing this..u can make it...There were so many chaptes that u never got to write but u have a book qawsedrt fgyuhjiou 875q23w 4e5r7t69y 8huc j9i sw3rf56tg7yh8uio'),
+                      child: Text(message),
                     ),
                   ]),
             ),
@@ -146,12 +161,12 @@ class MessageTile extends StatelessWidget {
 }
 
 class DateWidget extends StatelessWidget {
+  final String date;
+  DateWidget({required this.date});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        
-      },
+      onTap: () {},
       child: Container(
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -165,16 +180,17 @@ class DateWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'Today',
+            Text(date,
               style: heading1Style.copyWith(fontSize: 10),
             ),
-            SizedBox(width: 5,),
+            SizedBox(
+              width: 5,
+            ),
             SvgPicture.asset(
-                            SVGAssetPaths.dropDownOpenIcon,
-                            height: 5,
-                            color: bodyColor,
-                          ),
+              SVGAssetPaths.dropDownOpenIcon,
+              height: 5,
+              color: bodyColor,
+            ),
           ],
         ),
       ),
