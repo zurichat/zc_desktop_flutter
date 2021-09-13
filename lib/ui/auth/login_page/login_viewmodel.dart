@@ -5,14 +5,12 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 const testLocalKey = 'TESTKEY';
 
 class LoginViewModel extends BaseViewModel with Validator {
   final log = getLogger("LoginViewModel");
   final _navigationService = locator<NavigationService>();
-  final _storageService = locator<LocalStorageService>();
   final _auth = locator<AuthService>();
 
   String _logoUrl = 'assets/images/zc_logo2.png';
@@ -79,12 +77,6 @@ class LoginViewModel extends BaseViewModel with Validator {
   }
 
   void _goToHome() {
-    if (emailText.isEmpty) {
-      _navigationService.navigateTo(Routes.homeView);
-      return;
-    }
-    _storageService.saveToDisk(testLocalKey, emailText);
-
     _navigationService.navigateTo(Routes.homeView);
   }
 
