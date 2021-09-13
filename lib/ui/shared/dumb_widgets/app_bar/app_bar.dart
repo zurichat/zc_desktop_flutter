@@ -2,14 +2,10 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
-
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/ui/main/home_page/home_view.dart';
-
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 Widget buildAppBar(BuildContext context,
@@ -114,12 +110,10 @@ Widget buildAppBar(BuildContext context,
                 ),
               ),
             //  SizedBox(width: 10),
-            //if (!isSignUp && !isSignIn)
+            // if (!isSignUp && !isSignIn)
             IconButton(
               onPressed: () {
-                showDialog(
-                    context: context, builder: (context) => PereferenceView());
-
+                showDialog(context: context, builder: (_) => PereferenceView());
               },
               icon: Icon(
                 icond,
