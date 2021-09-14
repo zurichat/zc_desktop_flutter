@@ -121,6 +121,7 @@ class MessageTile extends StatelessWidget {
               child: Image.network(userProfileUrl),
             ),
           ),
+          
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),

@@ -38,6 +38,7 @@ class HomeView extends StatelessWidget {
                   //height: (height - 200).h,
                   child: DmView()
                 ),
+                
                /*  Container(
                   width: !model.showThread ? 1035 : 776,
                   //height: (height - 200).h,
