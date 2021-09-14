@@ -43,15 +43,15 @@ class HomeView extends StatelessWidget {
                         child: Container(
                           height: (height * 0.7).h,
                           //width: !model.showThread ? 1135.w : 776.w,
-                          child: DmView(),
+                          child: MessageView(),
                         ),
                       ),
-                      /* Padding(
+                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: SendMessageInputField(
                           sendMessage: () {},
                         ),
-                      ), */
+                      ),
                     ],
                   ),
                 ),
