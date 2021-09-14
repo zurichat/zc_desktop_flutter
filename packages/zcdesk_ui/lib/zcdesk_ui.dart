@@ -11,6 +11,9 @@ export 'src/widgets/zcdesk_drop_down_menu.dart';
 // colors export
 export 'src/shared/app_colors.dart';
 
+//styles export
+export 'src/shared/styles.dart';
+
 // shared exports
 export 'src/shared/ui_helpers.dart';
 export 'src/shared/svg_assets_paths.dart';
