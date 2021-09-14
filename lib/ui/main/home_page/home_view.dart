@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(height: 40, child: buildAppBar(context, isActive: true)),
-            //Text('You\'re welcome ${_auth.username}, and your token is ${_auth.token} '),
+            Text('You\'re welcome ${_auth.username}, and your token is ${_auth.token} '),
             Expanded(
                 child: Row(
               children: [

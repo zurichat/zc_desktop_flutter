@@ -28,8 +28,6 @@ class SignUpViewModel extends BaseViewModel with Validator {
   String? _fnameError;
   String? _usernameError;
   String? _confirmPasswordError;
-  String _checkError = '';
-  bool _check = false;
 
   //TextController Error getters
 
@@ -40,8 +38,6 @@ class SignUpViewModel extends BaseViewModel with Validator {
   get fnameError => _fnameError;
   get usernameError => _usernameError;
   get confirmPasswordError => _confirmPasswordError;
-  get checkError => _checkError;
-  get check => _check;
 
   var _password = '';
   var _email = '';
@@ -83,11 +79,6 @@ class SignUpViewModel extends BaseViewModel with Validator {
 
   void setPasswordVisibility() {
     _passwordVisibility = !_passwordVisibility;
-    notifyListeners();
-  }
-
-  void updateCheck(bool value) {
-    _check = value;
     notifyListeners();
   }
 
@@ -172,7 +163,7 @@ class SignUpViewModel extends BaseViewModel with Validator {
         !isPhoneValid ||
         !isPasswordValid ||
         !isEmailValid ||
-        !isConfirmPasswordValid || !check) {
+        !isConfirmPasswordValid) {
       if (!isFnameValid) {
         _fnameError = 'First Name must be at least 3 characters long';
       } else {
@@ -212,10 +203,6 @@ class SignUpViewModel extends BaseViewModel with Validator {
         _confirmPasswordError = 'Password does not match';
       } else {
         _confirmPasswordError = null;
-      } if(!check) {
-        _checkError = 'Please accept tems and policy';
-      } else {
-        _checkError = '';
       }
       notifyListeners();
       return;
