@@ -119,7 +119,7 @@ Widget buildAppBar(BuildContext context,
                   size: 20,
                   color: lightIconColor,
                 ),
-              ),
+           
             SizedBox(width: 100),
             if (!isSignUp && !isSignIn)
               GestureDetector(
