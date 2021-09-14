@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/accessibility/accessibility_viewmodel.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
+
+import 'accessibility_viewmodel.dart';
 
 class AccessibilityView extends StatelessWidget {
   const AccessibilityView({Key? key}) : super(key: key);
@@ -152,24 +153,26 @@ class AccessibilityView extends StatelessWidget {
           verticalSpaceRegular,
 
           // desc
-          Text.rich(
-              TextSpan(
-                  style: TextStyle(
-                      color: bodyColor,
-                      fontFamily: 'Lato',
-                      fontSize: 13
-                  ),
-                  children: [
-                    TextSpan(text: model.shortCutMsg),
-                    TextSpan(
-                        text:' '+ model.boldShortCutMsg,
-                        style: TextStyle(
-                          color: kcPrimaryColor,
-                          decoration: TextDecoration.underline,
-                        )
-                    )
-                  ]
-              )
+          GestureDetector(
+            onTap:(){},
+            child: Text.rich(
+                TextSpan(
+                    style: TextStyle(
+                        color: bodyColor,
+                        fontFamily: 'Lato',
+                        fontSize: 13
+                    ),
+                    children: [
+                      TextSpan(text: model.shortCutMsg),
+                      TextSpan(
+                          text:' '+ model.boldShortCutMsg,
+                          style: TextStyle(
+                            color: kcPrimaryColor,
+                          )
+                      )
+                    ]
+                )
+            ),
           ),
           verticalSpaceRegular,
 

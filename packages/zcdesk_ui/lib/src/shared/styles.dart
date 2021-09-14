@@ -44,7 +44,7 @@ TextStyle boldCaptionStyle =
 TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
 
 TextStyle lightCaptionStyle =
-TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w300, fontFamily: 'Lato');
+TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, fontFamily: 'Lato');
 
 // ====== New Text Styles ====== //
 

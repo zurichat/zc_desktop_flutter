@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ShortCuts{
 
-  Widget contain({Widget? child,double h = 22, double w = 30}) {
+  Widget contain({Widget? child,double h = 17, double w = 30}) {
     return Container(
       constraints: BoxConstraints(
         minWidth: 30,
-        minHeight: 20,
+        minHeight: 16,
         maxWidth: w,
         maxHeight: h
       ),
@@ -57,21 +57,21 @@ class ShortCuts{
   Widget pageUp() {
     return contain(
       w: 40,
-      child: Center(child: Text('Page up',style: TextStyle(color: Colors.grey,fontSize: 8),)),
+      child: Center(child: Text('Page up',style: TextStyle(color: Colors.grey,fontSize: 9),)),
     );
   }
 
   Widget pageDown() {
     return contain(
-      w: 45,
-      child: Center(child: Text('Page Down',style: TextStyle(color: Colors.grey,fontSize: 8),)),
+      w: 50,
+      child: Center(child: Text('Page Down',style: TextStyle(color: Colors.grey,fontSize: 9),)),
     );
   }
 
   Widget home() {
     return contain(
       w: 40,
-      child: Center(child: Text('Home',style: TextStyle(color: Colors.grey,fontSize: 8),)),
+      child: Center(child: Text('Home',style: TextStyle(color: Colors.grey,fontSize: 9),)),
     );
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/advanced/advanced_viewmodel.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'advanced_viewmodel.dart';
 
 class AdvancedView extends StatelessWidget {
   const AdvancedView({Key? key}) : super(key: key);
@@ -30,12 +30,12 @@ class AdvancedView extends StatelessWidget {
 
                     inputOptionSection(model),
 
-                    verticalSpaceRegular,
+                    verticalSpaceMedium,
                     Divider(color: Colors.black54,),
 
-                    verticalSpaceRegular,
+                    verticalSpaceMedium,
                     searchOptionSection(model),
-                    verticalSpaceRegular,
+                    verticalSpaceMedium,
 
                     Divider(color: Colors.black54,),
                     verticalSpaceRegular,
