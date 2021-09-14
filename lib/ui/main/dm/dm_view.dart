@@ -6,14 +6,9 @@ import 'package:stacked/stacked.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 import 'dm_viewmodel.dart';
 
-class DmView extends StatefulWidget {
+class DmView extends StatelessWidget {
   const DmView({Key? key}) : super(key: key);
 
-  @override
-  _DmViewState createState() => _DmViewState();
-}
-
-class _DmViewState extends State<DmView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DmViewModel>.reactive(
