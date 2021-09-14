@@ -2,7 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 
-class PereferenceViewModel extends BaseViewModel {
+class PreferenceViewModel extends BaseViewModel {
   final _navigator = locator<NavigationService>();
   var _currentPageIndex = 0;
 
