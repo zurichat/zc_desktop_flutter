@@ -21,7 +21,7 @@ TextStyle subheadingStyle =
 TextStyle captionStyle =
     TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
 TextStyle extraSmallStyle =
-    TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
+    TextStyle(overflow: TextOverflow.fade,fontSize: 11.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato',);
 TextStyle authBtnStyle = TextStyle(
     fontSize: 20.sp,
     color: whiteColor,
@@ -39,6 +39,12 @@ TextStyle dropDownBodyTextStyle = TextStyle(
     fontFamily: 'Lato');
 TextStyle leftSideBarLogoText =
     TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold, fontFamily: 'Lato');
+
+TextStyle boldCaptionStyle =
+TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
+
+TextStyle lightCaptionStyle =
+TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, fontFamily: 'Lato');
 
 // ====== New Text Styles ====== //
 

@@ -108,17 +108,18 @@ Widget buildAppBar(BuildContext context,
               ),
             //  SizedBox(width: 10),
             // if (!isSignUp && !isSignIn)
-            IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context, builder: (context) => PreferenceView());
-              },
-              icon: Icon(
-                icond,
-                size: 20,
-                color: lightIconColor,
-              ),
-            ),
+              IconButton(
+                onPressed: () {
+                  showDialog(context: context, builder: (context){
+                    return PreferenceView();
+                  });
+                },
+                icon: Icon(
+                  icond,
+                  size: 20,
+                  color: lightIconColor,
+                ),
+               )
             SizedBox(width: 100),
             if (!isSignUp && !isSignIn)
               GestureDetector(

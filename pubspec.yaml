@@ -34,7 +34,6 @@ dependencies:
   dio: ^4.0.0
   freezed_annotation:
   json_annotation:
-  
 
   # ui package for the whole app
   zcdesk_ui:

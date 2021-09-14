@@ -4,6 +4,8 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'preferenceswidgets/accessibility/accessibility_view.dart';
+import 'preferenceswidgets/advanced/advanced_view.dart';
 
 class PreferenceView extends StatelessWidget {
   const PreferenceView({Key? key}) : super(key: key);
@@ -56,11 +58,7 @@ class PreferenceView extends StatelessWidget {
       {
         'text': 'Accessibility',
         'icon': Icons.desktop_windows_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Accessibilty'),
-          ),
-        )
+        'widget': AccessibilityView()
       },
       {
         'text': 'Mark as read',
@@ -84,11 +82,7 @@ class PreferenceView extends StatelessWidget {
         'text': 'Advanced',
         //This icon will be changed later
         'icon': Icons.messenger_outline,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Advanced'),
-          ),
-        )
+        'widget': AdvancedView()
       }
     ];
     return ViewModelBuilder<PreferenceViewModel>.reactive(
