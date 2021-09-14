@@ -15,6 +15,11 @@
 # generated stacked app files
 lib/app/
 
+# generated flutter files
+.flutter-plugins-dependencies
+lib/generated_plugin_registrant.dart
+
+
 
 # IntelliJ related
 *.iml
