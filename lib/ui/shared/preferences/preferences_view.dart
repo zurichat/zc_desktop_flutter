@@ -4,10 +4,13 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/accessibility/accessibility_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/advanced/advanced_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
-class PereferenceView extends StatelessWidget {
-  const PereferenceView({Key? key}) : super(key: key);
+class PreferenceView extends StatelessWidget {
+  const PreferenceView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final _rightSideBarController = ScrollController();
@@ -19,20 +22,12 @@ class PereferenceView extends StatelessWidget {
       {
         'text': 'Notifications',
         'icon': Icons.notifications_none_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Notifications'),
-          ),
-        )
+        'widget': NotificationView(),
       },
       {
         'text': 'Sidebar',
         'icon': Icons.grid_view_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Sidebar'),
-          ),
-        )
+        'widget': SideBarView(),
       },
       {
         'text': 'Themes',
@@ -91,7 +86,7 @@ class PereferenceView extends StatelessWidget {
         'widget': AdvancedView()
       }
     ];
-    return ViewModelBuilder<PereferenceViewModel>.reactive(
+    return ViewModelBuilder<PreferenceViewModel>.reactive(
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Container(
@@ -163,7 +158,7 @@ class PereferenceView extends StatelessWidget {
           ),
         ),
       ),
-      viewModelBuilder: () => PereferenceViewModel(),
+      viewModelBuilder: () => PreferenceViewModel(),
     );
   }
 }
@@ -175,15 +170,13 @@ Widget buildListItem({
   VoidCallback? onClicked,
 }) {
   const color = Colors.black;
-  final hoverColor = Colors.blue;
-  return Container(
-    color: isSelected ? kcPrimaryColor : Colors.white,
-    child: ListTile(
-      leading: Icon(icon, color: color),
-      title: Text(text,
-          style: TextStyle(color: color, fontSize: 16.sp, fontFamily: 'Lato')),
-      hoverColor: hoverColor,
-      onTap: onClicked,
-    ),
+  final hoverColor = Colors.grey[200];
+  return ListTile(
+    tileColor: isSelected ? kcPrimaryColor : null,
+    leading: Icon(icon, color: color),
+    title: Text(text,
+        style: TextStyle(color: color, fontSize: 16.sp, fontFamily: 'Lato')),
+    hoverColor: isSelected ? kcPrimaryColor : hoverColor,
+    onTap: onClicked,
   );
 }
