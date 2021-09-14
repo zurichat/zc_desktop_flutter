@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/accessibility/accessibility_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/advanced/advanced_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
@@ -62,11 +64,7 @@ class PereferenceView extends StatelessWidget {
       {
         'text': 'Accessibility',
         'icon': Icons.desktop_windows_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Accessibilty'),
-          ),
-        )
+        'widget': AccessibilityView()
       },
       {
         'text': 'Mark as read',
@@ -90,11 +88,7 @@ class PereferenceView extends StatelessWidget {
         'text': 'Advanced',
         //This icon will be changed later
         'icon': Icons.messenger_outline,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Advanced'),
-          ),
-        )
+        'widget': AdvancedView()
       }
     ];
     return ViewModelBuilder<PereferenceViewModel>.reactive(

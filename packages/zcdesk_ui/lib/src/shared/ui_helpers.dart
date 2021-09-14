@@ -15,3 +15,11 @@ Widget verticalSpaceRegular = SizedBox(height: 18.0.h);
 Widget verticalSpaceMedium = SizedBox(height: 25.0.h);
 Widget verticalSpaceLarge = SizedBox(height: 50.0.h);
 
+fullWidth(BuildContext context){
+  return MediaQuery.of(context).size.width;
+}
+
+fullHeight(BuildContext context){
+  return MediaQuery.of(context).size.height;
+}
+
