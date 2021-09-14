@@ -14,7 +14,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _auth = locator<AuthService>();
     var height = MediaQuery.of(context).size.height;
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
@@ -23,7 +22,6 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(height: 40, child: buildAppBar(context, isActive: true)),
-            Text('You\'re welcome ${_auth.username}, and your token is ${_auth.token} '),
             Expanded(
                 child: Row(
               children: [
