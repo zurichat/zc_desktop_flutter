@@ -12,6 +12,10 @@
 .history
 .svn/
 
+# generated stacked app files
+lib/app/
+
+
 # IntelliJ related
 *.iml
 *.ipr
