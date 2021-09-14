@@ -7,6 +7,8 @@ export 'src/widgets/zcdesk_auth_btn.dart';
 export 'src/widgets/zcdesk_left_sidebar.dart';
 export 'src/widgets/zc_desk_send_message_field.dart';
 export 'src/widgets/zcdesk_drop_down_menu.dart';
+export 'src/widgets/zcdesk_checkbox.dart';
+export 'src/shared/shortCuts/short_cut_widgets.dart';
 
 // colors export
 export 'src/shared/app_colors.dart';
