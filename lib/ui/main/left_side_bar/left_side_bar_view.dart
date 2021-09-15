@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 import 'left_side_bar_viewmodel.dart';
@@ -65,43 +66,57 @@ class LeftSideBarView extends StatelessWidget {
                             LeftSideBar(
                               iconText: model.insight,
                               icon: AssetImage(model.insightUrl),
-                              onTap: () {},
+                              onTap: () {
+                                print('toDo');
+                              },
                             ),
                             verticalSpaceMedium,
                             LeftSideBar(
                               iconText: model.threads,
                               icon: AssetImage(model.threadsUrl),
-                              onTap: () {},
+                              onTap: () {
+                                print('toDo');
+                              },
                             ),
                             verticalSpaceMedium,
                             LeftSideBar(
                               iconText: model.allDms,
                               icon: AssetImage(model.allDmsUrl),
-                              onTap: () {},
+                              onTap: () {
+                                print('toDo');
+                              },
                             ),
                             verticalSpaceMedium,
                             LeftSideBar(
                               iconText: model.draft,
                               icon: AssetImage(model.draftUrl),
-                              onTap: () {},
+                              onTap: () {
+                                print('toDo');
+                              },
                             ),
                             verticalSpaceMedium,
                             LeftSideBar(
                               iconText: model.files,
                               icon: AssetImage(model.filesUrl),
-                              onTap: () {},
+                              onTap: () {
+                                print('toDo');
+                              },
                             ),
                             verticalSpaceMedium,
                             LeftSideBar(
                               iconText: model.integrate,
                               icon: AssetImage(model.integrateUrl),
-                              onTap: () {},
+                              onTap: () {
+                                print('toDo');
+                              },
                             ),
                             verticalSpaceMedium,
                             LeftSideBar(
                               iconText: model.toDo,
                               icon: AssetImage(model.toDoUrl),
-                              onTap: () {},
+                              onTap: () {
+                                print('toDo');
+                              },
                             ),
                             verticalSpaceMedium,
                             ZcdeskReusableDropDownMenu(
@@ -151,7 +166,10 @@ class LeftSideBarView extends StatelessWidget {
                                 model.openChannelsDropDownMenu();
                               },
                               isDropDownOpen: model.isChannelsDropDownMenuOpen,
-                              onTrailingIconTapped: () {},
+                              onTrailingIconTapped: () {
+                                showDialog(
+                                  context: context, builder: (context) => ChannelsCreationView());
+                              },
                             ),
                             verticalSpaceRegular,
                             ZcdeskReusableDropDownMenu(

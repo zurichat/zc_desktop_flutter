@@ -59,12 +59,15 @@ class ZcdeskReusableDropDownMenu extends StatelessWidget {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: onTrailingIconTapped,
-                child: Container(
-                  height: 12,
-                  width: 12,
-                  child: SvgPicture.asset("assets/icons/add_drop_down.svg"),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: onTrailingIconTapped,
+                  child: Container(
+                    height: 12,
+                    width: 12,
+                    child: SvgPicture.asset("assets/icons/add_drop_down.svg"),
+                  ),
                 ),
               ),
             ],
