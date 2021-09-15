@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-
-import '/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'api.dart';
 
 class FakeAPiService implements Api {
@@ -10,9 +9,6 @@ class FakeAPiService implements Api {
   final client = Dio();
   static const _BASE_URL = "";
   static const _sendTimeOut = 5000;
- 
-  
- 
 
   @override
   Future get(String endPoint, {Map<String, dynamic>? queryParameters}) async {
@@ -68,10 +64,11 @@ class FakeAPiService implements Api {
 
   @override
   Future delete(String endPoint,
-      {dynamic  data, Map<String, dynamic>? queryParameters}) async {
+      {dynamic data, Map<String, dynamic>? queryParameters}) async {
     var url = _BASE_URL + endPoint;
     try {
-      _response = await client.delete(url, options: Options(sendTimeout: _sendTimeOut));
+      _response =
+          await client.delete(url, options: Options(sendTimeout: _sendTimeOut));
       log.i(url);
       responseData = _response!.data;
     } on DioError catch (error) {
