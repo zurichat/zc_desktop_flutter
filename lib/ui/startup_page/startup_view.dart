@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 
 import 'startup_viewmodel.dart';
 

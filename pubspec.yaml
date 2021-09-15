@@ -36,11 +36,6 @@ dependencies:
   freezed_annotation:
   json_annotation:
 
-  # ui package for the whole app
-  zcdesk_ui:
-    path: packages/zcdesk_ui
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,7 +43,7 @@ dev_dependencies:
   build_runner: ^2.1.2
   freezed: 
   json_serializable:
-  analyzer: ^2.2.0
+  # analyzer: ^2.2.0
 
 # dependency_overrides:
 #   meta: ^1.7.0

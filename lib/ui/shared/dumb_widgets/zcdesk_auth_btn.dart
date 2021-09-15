@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zcdesk_ui/src/shared/app_colors.dart';
-import 'package:zcdesk_ui/src/widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 class AuthButton extends StatelessWidget {
   late final String label;

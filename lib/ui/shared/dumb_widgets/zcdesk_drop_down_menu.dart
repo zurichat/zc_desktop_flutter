@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 class ZcdeskReusableDropDownMenu extends StatelessWidget {
   /// bool to check if drop down menu is open or closed

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/theme/theme_view.dart';

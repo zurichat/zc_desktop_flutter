@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_view.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 
 import 'message_viewmodel.dart';
 
