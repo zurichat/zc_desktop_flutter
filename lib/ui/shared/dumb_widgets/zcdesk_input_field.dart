@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 class AuthInputField extends StatelessWidget {
   final String hintPlaceHolder;
@@ -47,10 +50,7 @@ class AuthInputField extends StatelessWidget {
           visible: label == null ? false : true,
           child: ZcdeskText.subheading(label ?? ''),
         ),
-
-        // spacing
         verticalSpaceRegular,
-
         Stack(
           children: [
             TextField(

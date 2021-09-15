@@ -2,8 +2,8 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 Widget buildAppBar(BuildContext context,
     {bool isActive = false,

@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
+class SVGAssetPaths {
+  static final channelsListIcon = "assets/icons/hash_icon.svg";
+  static final dropDownOpenIcon = "assets/icons/drop_down_open.svg";
+  static final dropDownClosedIcon = "assets/icons/drop_down_closed.svg";
+}
+
 class ShortCuts{
 
   Widget contain({Widget? child,double h = 17, double w = 30}) {
     return Container(
       constraints: BoxConstraints(
-        minWidth: 30,
-        minHeight: 16,
-        maxWidth: w,
-        maxHeight: h
+          minWidth: 30,
+          minHeight: 16,
+          maxWidth: w,
+          maxHeight: h
       ),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4.0),

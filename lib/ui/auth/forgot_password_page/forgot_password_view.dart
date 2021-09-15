@@ -8,10 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart' as auth;
-import 'package:zcdesk_ui/src/shared/styles.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+
 
 import 'forgot_password_viewmodel.dart';
 
@@ -54,7 +55,7 @@ class ForgotPasswordView extends StatelessWidget {
                 verticalSpaceLarge,
                 Container(
                   width: 440.w,
-                  child: auth.AuthInputField(
+                  child: AuthInputField(
                     label: 'Email',
                     controller: TextEditingController(),
                     keyboardType: TextInputType.emailAddress,
