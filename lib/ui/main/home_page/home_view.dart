@@ -6,7 +6,7 @@ import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/ui/main/left_side_bar/left_side_bar_view.dart';
 import 'package:zc_desktop_flutter/ui/main/message_page/message_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {

@@ -35,11 +35,6 @@ dependencies:
   freezed_annotation:
   json_annotation:
 
-  # ui package for the whole app
-  zcdesk_ui:
-    path: packages/zcdesk_ui
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

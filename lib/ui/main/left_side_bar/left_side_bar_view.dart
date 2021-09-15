@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_drop_down_menu.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_left_sidebar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 import 'left_side_bar_viewmodel.dart';
 

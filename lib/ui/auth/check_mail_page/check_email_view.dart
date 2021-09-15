@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/auth/check_mail_page/check_email_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
-import 'check_email_viewmodel.dart';
-import 'package:zcdesk_ui/src/shared/styles.dart';
+
 
 class CheckEmailView extends StatelessWidget {
   const CheckEmailView({Key? key}) : super(key: key);

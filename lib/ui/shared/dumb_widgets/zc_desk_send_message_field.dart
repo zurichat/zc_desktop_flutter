@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:zcdesk_ui/src/shared/app_colors.dart';
-import 'package:zcdesk_ui/src/shared/ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 
 class SendMessageInputField extends StatelessWidget {
   const SendMessageInputField({

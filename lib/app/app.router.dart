@@ -19,8 +19,8 @@ import '../ui/main/home_page/home_view.dart';
 import '../ui/startup_page/startup_view.dart';
 
 class Routes {
-  static const String homeView = '/home-view';
-  static const String loginView = '/';
+  static const String homeView = '/';
+  static const String loginView = '/login-view';
   static const String startUpView = '/start-up-view';
   static const String signUpView = '/sign-up-view';
   static const String forgotPasswordView = '/forgot-password-view';
