@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/main/home_page/home_viewmodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 
 class OrganizationBarView extends ViewModelWidget<HomeViewModel> {
   const OrganizationBarView({Key? key}) : super(key: key);
