@@ -2,6 +2,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 Widget buildAppBar(BuildContext context,
@@ -106,15 +107,19 @@ Widget buildAppBar(BuildContext context,
                 ),
               ),
             //  SizedBox(width: 10),
-            if (!isSignUp && !isSignIn)
+            // if (!isSignUp && !isSignIn)
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(context: context, builder: (context){
+                    return PreferenceView();
+                  });
+                },
                 icon: Icon(
                   icond,
                   size: 20,
                   color: lightIconColor,
                 ),
-              ),
+               )
             SizedBox(width: 100),
             if (!isSignUp && !isSignIn)
               GestureDetector(
