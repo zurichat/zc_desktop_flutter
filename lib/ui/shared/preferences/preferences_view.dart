@@ -6,7 +6,6 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/theme/theme_view.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
 import 'preferenceswidgets/accessibility/accessibility_view.dart';
 import 'preferenceswidgets/advanced/advanced_view.dart';
 
