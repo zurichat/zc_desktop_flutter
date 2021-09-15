@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/audio_video/audio_video_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
 import 'preferenceswidgets/accessibility/accessibility_view.dart';
 import 'preferenceswidgets/advanced/advanced_view.dart';
@@ -77,11 +78,7 @@ class PreferenceView extends StatelessWidget {
       {
         'text': 'Audio & Video',
         'icon': Icons.videocam_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Audio & Video'),
-          ),
-        )
+        'widget': AudioVideoView(),
       },
       {
         'text': 'Advanced',
