@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zcdesk_ui/src/shared/app_colors.dart';
-import 'package:zcdesk_ui/src/shared/styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 
 class ZcDeskButton extends StatelessWidget {
   const ZcDeskButton({

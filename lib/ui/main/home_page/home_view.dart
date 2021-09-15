@@ -9,7 +9,7 @@ import 'package:zc_desktop_flutter/ui/main/message_page/message_view.dart';
 import 'package:zc_desktop_flutter/ui/main/organization_bar/organization_bar.dart';
 import 'package:zc_desktop_flutter/ui/main/right_side_bar/right_sidebar_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'home_viewmodel.dart';
 
 // class HomeView extends StatelessWidget {
