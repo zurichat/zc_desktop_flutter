@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-Container centertitlecard(BuildContext context) {
+Container centerTitleCard(BuildContext context) {
   return Container(
     alignment: Alignment.topCenter,
     width: 1136,

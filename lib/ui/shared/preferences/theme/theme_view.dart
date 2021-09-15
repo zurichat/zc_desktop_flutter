@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/theme/theme_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/shared/ui_helpers.dart';
+import 'package:zcdesk_ui/src/shared/ui_helpers.dart';
 import 'package:zcdesk_ui/src/shared/styles.dart';
 
 class ThemeView extends StatelessWidget {

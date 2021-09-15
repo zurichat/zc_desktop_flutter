@@ -36,4 +36,5 @@ class HomeViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.loginView);
     notifyListeners();
   }
+
 }

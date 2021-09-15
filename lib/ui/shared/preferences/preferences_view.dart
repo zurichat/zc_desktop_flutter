@@ -43,15 +43,6 @@ class PreferenceView extends StatelessWidget {
         )
       },
       {
-        'text': 'Message & Media',
-        'icon': Icons.messenger_outline,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Message & Media'),
-          ),
-        )
-      },
-      {
         'text': 'Language & region',
         'icon': Icons.language_outlined,
         'widget': Container(
