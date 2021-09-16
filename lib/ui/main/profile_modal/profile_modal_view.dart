@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_viewmodel.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 class ProfileModalView extends StatelessWidget {
-  ProfileModalView(
-      {Key? key,})
-      : super(key: key);
+  ProfileModalView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,14 @@ class ProfileModalView extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 45.w),
             child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                    width: 95.w,
-                    child: Center(child: ZcdeskText.headingThree('About')))),
+              alignment: Alignment.centerLeft,
+              child: Container(
+                width: 95.w,
+                child: Center(
+                  child: ZcdeskText.headingThree('About'),
+                ),
+              ),
+            ),
           ),
           Stack(
             children: [

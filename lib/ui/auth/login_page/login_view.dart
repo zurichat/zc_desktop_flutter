@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: implementation_imports
-import 'package:zcdesk_ui/src/shared/styles.dart';
-
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
   @override

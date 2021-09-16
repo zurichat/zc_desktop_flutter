@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 
 import 'search_modal_viewmodel.dart';
 
@@ -83,18 +85,21 @@ bottomText() {
 }
 
 recentSearchListTile(String? text) {
-  return Container(
-    margin: EdgeInsets.only(left: 65.w),
-    child: ListTile(
-      onTap: null,
-      leading: SvgPicture.asset('assets/icons/clock.svg'),
-      title: Text(
-        text!,
-        style: TextStyle(
-          color: headerColor,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w700,
-          fontFamily: 'Lato',
+  return MouseRegion(
+    cursor: SystemMouseCursors.click,
+    child: Container(
+      margin: EdgeInsets.only(left: 65.w),
+      child: ListTile(
+        onTap: () {},
+        leading: SvgPicture.asset('assets/icons/clock.svg'),
+        title: Text(
+          text!,
+          style: TextStyle(
+            color: headerColor,
+            fontSize: 18.sp,
+            fontWeight: FontWeight.w700,
+            fontFamily: 'Lato',
+          ),
         ),
       ),
     ),
@@ -121,28 +126,31 @@ searchButtons({
 }) {
   return GestureDetector(
     onTap: () {},
-    child: Container(
-      decoration: BoxDecoration(
-        color: avatarColor4,
-        borderRadius: BorderRadius.circular(5.r),
-      ),
-      padding: EdgeInsets.symmetric(vertical: 10.5.h, horizontal: 23.5.w),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SvgPicture.asset(assetPath!),
-          SizedBox(
-            width: 11.w,
-          ),
-          Text(buttonText!,
-              style: TextStyle(
-                fontFamily: 'Lato',
-                fontWeight: FontWeight.w500,
-                fontSize: 18.sp,
-                color: bodyColor,
-              )),
-        ],
+    child: MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Container(
+        decoration: BoxDecoration(
+          color: avatarColor4,
+          borderRadius: BorderRadius.circular(5.r),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 10.5.h, horizontal: 23.5.w),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SvgPicture.asset(assetPath!),
+            SizedBox(
+              width: 11.w,
+            ),
+            Text(buttonText!,
+                style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18.sp,
+                  color: bodyColor,
+                )),
+          ],
+        ),
       ),
     ),
   );
@@ -160,7 +168,7 @@ buildSearchWidget(SearchModalViewmodel model) {
     ))),
     child: Column(
       children: [
-        searchWidget(),
+        searchWidget(model),
         scrollableView(model),
       ],
     ),
@@ -171,7 +179,7 @@ scrollableView(SearchModalViewmodel model) {
   return Container(
     height: 406.5.h,
     width: 1008.w,
-    padding: EdgeInsets.only(top: 30.5.h, bottom: 20.h),
+    padding: EdgeInsets.only(top: 30.5.h),
     child: Scrollbar(
       controller: model.scrollbarController,
       isAlwaysShown: true,
@@ -263,7 +271,7 @@ scrollableView(SearchModalViewmodel model) {
   );
 }
 
-searchWidget() {
+searchWidget(SearchModalViewmodel model) {
   return Container(
     height: 56.5.h,
     width: 1008.w,
@@ -297,7 +305,13 @@ searchWidget() {
             ),
           ),
         ),
-        SvgPicture.asset('assets/icons/cancel.svg'),
+        GestureDetector(
+            child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: SvgPicture.asset('assets/icons/cancel.svg')),
+            onTap: () {
+              model.popDialog();
+            }),
       ],
     ),
   );
