@@ -60,6 +60,7 @@ TextStyle subtitle2 = TextStyle(
   fontFamily: 'Lato',
 );
 
+
 TextStyle bodyText1 = TextStyle(
   fontSize: 20.sp,
   fontWeight: FontWeight.w600,
