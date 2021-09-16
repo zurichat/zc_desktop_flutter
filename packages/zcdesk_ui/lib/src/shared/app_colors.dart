@@ -23,7 +23,7 @@ const Color whiteColor = Color(0xFFFFFFFF);
 const Color avatarColor1 = Color(0xffF7E0FF);
 const Color avatarColor2 = Color(0xffF8FFCD);
 const Color avatarColor3 = Color(0xffFFF0F0);
-const Color avatarColor4 = Color(0xffACFFE6);
+const Color avatarColor4 = Color(0xffBCFFE6);
 const Color avatarColor5 = Color(0xffE3EEFF);
 
 //Button colors
