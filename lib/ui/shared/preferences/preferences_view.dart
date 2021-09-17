@@ -38,11 +38,7 @@ class PreferenceView extends StatelessWidget {
       {
         'text': 'Themes',
         'assetName': 'assets/icons/themes.svg', //Icons.remove_red_eye_outlined,
-        'widget': Container(
-          child: Center(
-            child: ThemeView(),
-          ),
-        )
+        'widget': ThemeView(),
       },
       {
         'text': 'Message & Media',
