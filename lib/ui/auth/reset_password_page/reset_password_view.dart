@@ -6,10 +6,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/auth/check_mail_page/check_email_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart' as auth;
-import 'package:zcdesk_ui/zcdesk_ui.dart';
-import 'package:zcdesk_ui/src/shared/styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+
 
 class ResetPasswordView extends StatelessWidget {
   const ResetPasswordView({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class ResetPasswordView extends StatelessWidget {
                     verticalSpaceLarge,
                     Container(
                       width: 440.w,
-                      child: auth.AuthInputField(
+                      child: AuthInputField(
                         label: 'Email',
                         controller: TextEditingController(),
                         keyboardType: TextInputType.emailAddress,
