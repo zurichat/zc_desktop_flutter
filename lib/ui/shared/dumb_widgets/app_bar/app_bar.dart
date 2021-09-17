@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zc_desktop_flutter/ui/main/search_modal/search_modal_view.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 
 
 Widget buildAppBar(BuildContext context,
@@ -69,58 +70,96 @@ Widget buildAppBar(BuildContext context,
               ),
             // SizedBox(width: 10),
             if (!isSignUp && !isSignIn)
-              Container(
-                constraints: BoxConstraints(
-                  maxHeight: 18,
-                  maxWidth: 350.0,
-                ),
-                decoration: BoxDecoration(
-                  color: bodyColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextField(
-                  onTap: () {
-                    showDialog(
-                        context: context, builder: (_) => SearchModalView());
-                  },
-                  textAlign: TextAlign.center,
-                  cursorHeight: 16,
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                  ),
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 8),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 15,
-                      color: lightIconColor,
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context, builder: (_) => SearchModalView());
+                },
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.text,
+                  child: Container(
+                    height: 30.h,
+                    width: 585.w,
+                    margin: EdgeInsets.only(
+                        left: 29.w, right: 138.w, top: 5.h, bottom: 5.h),
+                    padding: EdgeInsets.only(
+                        left: 9.02.w, right: 248.48.w, top: 7.h, bottom: 7.h),
+                    decoration: BoxDecoration(
+                        color: searchBarColor,
+                        borderRadius: BorderRadius.circular(6.r)),
+                    child: Text(
+                      'Search here',
+                      style: TextStyle(
+                          color: whiteColor,
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Lato'),
                     ),
-                    hintText: 'Search',
-                    hintStyle: TextStyle(
-                      color: timeColor,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    filled: true,
-                    fillColor: bodyColor,
-                    isDense: true,
-                    //border: InputBorder.none,
                   ),
                 ),
               ),
+
+            //Adema's changes to katie's code
+            // Container(
+            //   constraints: BoxConstraints(
+            //     maxHeight: 18,
+            //     maxWidth: 350.0,
+            //   ),
+            //   decoration: BoxDecoration(
+            //     color: bodyColor,
+            //     borderRadius: BorderRadius.circular(20),
+            //   ),
+            //   child:
+            //   TextField(
+            //     onTap: () {
+            //       showDialog(
+            //           context: context, builder: (_) => SearchModalView());
+            //     },
+            //     textAlign: TextAlign.center,
+            //     cursorHeight: 16,
+            //     maxLines: 1,
+            //     style: TextStyle(
+            //       color: Colors.white,
+            //       fontSize: 12.0,
+            //     ),
+            //     decoration: InputDecoration(
+            //       contentPadding: EdgeInsets.symmetric(vertical: 8),
+            //       prefixIcon: Icon(
+            //         Icons.search,
+            //         size: 15,
+            //         color: lightIconColor,
+            //       ),
+            //       hintText: 'Search',
+            //       hintStyle: TextStyle(
+            //         color: timeColor,
+            //       ),
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(20),
+            //       ),
+            //       filled: true,
+            //       fillColor: bodyColor,
+            //       isDense: true,
+            //       //border: InputBorder.none,
+            //     ),
+            //   ),
+            // ),
+            //Adema's changes to Katie's code
             //  SizedBox(width: 10),
-            if (!isSignUp && !isSignIn)
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  icond,
-                  size: 20,
-                  color: lightIconColor,
-                ),
+            // if (!isSignUp && !isSignIn)
+            IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return PreferenceView();
+                    });
+              },
+              icon: Icon(
+                icond,
+                size: 20,
+                color: lightIconColor,
               ),
+            ),
             SizedBox(width: 100),
             if (!isSignUp && !isSignIn)
               GestureDetector(
