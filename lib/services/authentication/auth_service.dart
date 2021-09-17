@@ -40,7 +40,7 @@ class AuthService {
   Future<void> loginWithCred(String email, String password) async {
     final responseData = await _apiService.post('/auth/login', {"email": email, "password": password});
     try {
-      _token = responseData['data']['token'];
+      _token = responseData['data']['session_id'];
      _userId = responseData['data']['user']['id'];
      _username = responseData['data']['user']['display_name'];
      final userData = json.encode({
