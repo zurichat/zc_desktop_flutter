@@ -11,6 +11,8 @@ import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/audi
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_view.dart';
 
+import 'preferenceswidgets/theme/theme_view.dart';
+
 class PreferenceView extends StatelessWidget {
   const PreferenceView({Key? key}) : super(key: key);
 
@@ -38,7 +40,7 @@ class PreferenceView extends StatelessWidget {
         'assetName': 'assets/icons/themes.svg', //Icons.remove_red_eye_outlined,
         'widget': Container(
           child: Center(
-            child: ZcdeskText.headline('Themes'),
+            child: ThemeView(),
           ),
         )
       },
@@ -169,7 +171,6 @@ Widget buildListItem({
   required isSelected,
   VoidCallback? onClicked,
 }) {
-  const color = Colors.black;
   final hoverColor = Colors.grey[200];
   return ListTile(
     tileColor: isSelected ? KStartupContainerColor : null,
@@ -177,10 +178,7 @@ Widget buildListItem({
     leading: SvgPicture.asset(assetName),
     title: Text(text,
         style: TextStyle(
-            color: color,
-            fontSize: 16.sp,
-            fontFamily: 'Lato',
-            fontWeight: FontWeight.w600)),
+            fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
     hoverColor: isSelected ? KStartupContainerColor : hoverColor,
     onTap: onClicked,
   );
