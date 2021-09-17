@@ -56,10 +56,10 @@ class ThemeView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                      child: Checkbox(
-                                    shape: CircleBorder(),
+                                      child: Radio(
+                                    groupValue: model.allWorkSpace,
                                     activeColor: model.activeColor(),
-                                    value: model.isChecked2,
+                                    value: themeAccross.directMessage,
                                     onChanged: model.setChecked2,
                                   )),
                                   Expanded(
@@ -75,32 +75,12 @@ class ThemeView extends StatelessWidget {
                         Padding(
                             padding: EdgeInsets.only(
                                 top: 10, left: 10, right: 30, bottom: 10),
-                            child: container(
-                                context,
-                                Colors.white,
-                                model.logoLight,
-                                Colors.black,
-                                model.lightTheme,
-                                model.title,
-                                model.date(),
-                                model.lighChecked,
-                                Color.fromRGBO(26, 97, 219, 0.2),
-                                model.lightThemeChecked)),
+                            child: containerLight(model)),
                         verticalSpaceSmall,
                         Padding(
                             padding: EdgeInsets.only(
                                 top: 10, left: 10, right: 30, bottom: 10),
-                            child: container(
-                                context,
-                                Colors.black,
-                                model.logoDark,
-                                Colors.white,
-                                model.darkTheme,
-                                model.title,
-                                model.date(),
-                                model.darkChecked,
-                                Colors.white,
-                                model.darkThemeChecked)),
+                            child: containerDark(model)),
                         Padding(
                             padding: EdgeInsets.all(10),
                             child: Container(
@@ -388,6 +368,124 @@ class ThemeView extends StatelessWidget {
       },
     );
   }
+
+  containerLight(ThemeViewModel model) {
+    return Container(
+      width: 487,
+      height: 125,
+      padding: EdgeInsets.only(bottom: 0),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Color.fromRGBO(26, 97, 219, 0.5)),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Column(
+        children: [
+          ListTile(
+            leading: Image(image: AssetImage(model.logoLight)),
+            title: Row(children: [
+              Text(model.title,
+                  style: bodyStyle.copyWith(
+                      fontWeight: FontWeight.bold, color: Colors.black)),
+              SizedBox(
+                width: 10,
+              ),
+              Text(model.date(), style: bodyStyle.copyWith(color: Colors.black))
+            ]),
+            subtitle: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Text('Look nice today',
+                    style: bodyStyle.copyWith(color: Colors.black))),
+          ),
+          Spacer(),
+          buildRadio(
+            value: toggleBtwTheme.LightTheme,
+            groupValue: model.switchLightDark,
+            txt: 'Light',
+            onChanged: (value) {
+              model.switchBtwLightDark(value);
+            },
+            color: Color.fromRGBO(26, 97, 219, 0.2),
+          )
+        ],
+      ),
+    );
+  }
+
+  containerDark(ThemeViewModel model) {
+    return Container(
+      width: 487,
+      height: 125,
+      padding: EdgeInsets.only(bottom: 0),
+      decoration: BoxDecoration(
+          color: Colors.black,
+          border: Border.all(color: Color.fromRGBO(26, 97, 219, 0.5)),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Column(
+        children: [
+          ListTile(
+            leading: Image(image: AssetImage(model.logoDark)),
+            title: Row(children: [
+              Text(model.title,
+                  style: bodyStyle.copyWith(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              SizedBox(
+                width: 10,
+              ),
+              Text(model.date(), style: bodyStyle.copyWith(color: Colors.white))
+            ]),
+            subtitle: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Text('Look nice today',
+                    style: bodyStyle.copyWith(color: Colors.white))),
+          ),
+          Spacer(),
+          buildRadio(
+              value: toggleBtwTheme.DarkTheme,
+              groupValue: model.switchLightDark,
+              txt: 'Dark',
+              onChanged: (value) {
+                model.switchBtwLightDark(value);
+              },
+              color: Colors.white)
+        ],
+      ),
+    );
+  }
+
+  buildRadio(
+      {required toggleBtwTheme value,
+      required Object groupValue,
+      void Function(Object? value)? onChanged,
+      required String txt,
+      required Color color}) {
+    return Container(
+        height: 50,
+        margin: EdgeInsets.all(0),
+        decoration: BoxDecoration(
+            color: color,
+            border:
+                Border.all(color: Color.fromRGBO(26, 97, 219, 0.5), width: 0.5),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            horizontalSpaceSmall,
+            Radio(
+              value: value,
+              groupValue: groupValue,
+              onChanged: onChanged,
+              activeColor: Colors.green,
+            ),
+            horizontalSpaceSmall,
+            Expanded(
+                child: Text(txt,
+                    style: bodyStyle.copyWith(
+                        fontWeight: FontWeight.bold, color: Colors.black)))
+          ],
+        ));
+  }
 }
 
 Padding padding(BuildContext context, Widget childs) {
@@ -472,7 +570,3 @@ Container subContainer(BuildContext context, double width, bool Checked,
                     fontWeight: FontWeight.bold, color: Colors.black))),
       ]));
 }
-
-// GridTile grid(){
-//   return GridTile(child: child)
-// }

@@ -4,18 +4,31 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/ui/shared/themes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const testLocalKey = 'TESTKEY';
 
+class ThemeModel {
+  final int index;
+  final String title;
+
+  ThemeModel({required this.index, required this.title});
+}
+
+enum themeAccross { directMessage }
+
+enum toggleBtwTheme {
+  LightTheme,
+  DarkTheme,
+}
+
 class ThemeViewModel extends BaseViewModel {
   final log = getLogger("ThemeViewModel");
+
   final _themeService = locator<ThemeService>();
 
-  void setupLocator() {
-    locator.registerSingleton(ThemeService.getInstance());
-  }
+  themeAccross _allWorkSpace = themeAccross.directMessage;
+
+  toggleBtwTheme _switchLightDark = toggleBtwTheme.LightTheme;
 
   String _logoLight = 'assets/images/logoo.png';
   String _logoDark = 'assets/images/logooDark.png';
@@ -39,7 +52,7 @@ class ThemeViewModel extends BaseViewModel {
   String _body2 = 'Direct messages, mentions & network';
   String _body3 =
       'Automatically switch between light and dark themes when your system does.';
-  Color _activeColor = Colors.blue;
+  Color _activeColor = Colors.green;
   String _lightTheme = 'Light';
   String _darkTheme = 'Dark';
   String _aubergine = 'Aubergine';
@@ -59,7 +72,6 @@ class ThemeViewModel extends BaseViewModel {
   bool _nocVal = false;
   bool _expVal = false;
   bool _isChecked = false;
-  bool _isChecked2 = true;
   bool _lightChecked = true;
   bool _versatileChecked = false;
   bool _darkChecked = false;
@@ -88,6 +100,9 @@ class ThemeViewModel extends BaseViewModel {
   String get expensiveName => _expensiveName;
   String get head1 => _head1;
 
+  themeAccross get allWorkSpace => _allWorkSpace;
+  toggleBtwTheme get switchLightDark => _switchLightDark;
+
   String get head2 => _head2;
 
   String get head3 => _head3;
@@ -107,7 +122,7 @@ class ThemeViewModel extends BaseViewModel {
   DateTime get now => _now;
 
   bool get isChecked => _isChecked;
-  bool get isChecked2 => _isChecked2;
+
   bool get versatileChecked => _versatileChecked;
   bool get aubergineChecked => _aubergineChecked;
   bool get darkChecked => _darkChecked;
@@ -126,9 +141,23 @@ class ThemeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void setChecked2(bool? newValue) {
-    _isChecked2 = newValue!;
+  void setChecked2(themeAccross? newValue) {
+    _allWorkSpace = newValue!;
     notifyListeners();
+  }
+
+  void switchBtwLightDark(Object? newValue) {
+    _switchLightDark = (newValue) as toggleBtwTheme;
+    switch (_switchLightDark) {
+      case toggleBtwTheme.LightTheme:
+        setTheme(themes[0]);
+        notifyListeners();
+        break;
+      case toggleBtwTheme.DarkTheme:
+        setTheme(themes[1]);
+        notifyListeners();
+        break;
+    }
   }
 
   void coastChecked(bool? newValue) {
@@ -197,17 +226,15 @@ class ThemeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void lightThemeChecked(bool? newValue) async {
+  void lightThemeChecked(bool? newValue) {
     if (_lightChecked) {
       return;
     }
-    final prefs = await SharedPreferences.getInstance();
-    _lightChecked = prefs.getBool('my_bool_key1') ?? true;
+
     _darkChecked = false;
     _versatileChecked = false;
     _aubergineChecked = false;
     _lightChecked = newValue!;
-    prefs.setBool('my_bool_key1', _lightChecked);
     setTheme(themes[0]);
     notifyListeners();
   }
@@ -217,22 +244,19 @@ class ThemeViewModel extends BaseViewModel {
     return datee;
   }
 
-  void darkThemeChecked(bool? newValue) async {
+  void darkThemeChecked(bool? newValue) {
     if (_darkChecked) {
       return;
     }
-    final prefs = await SharedPreferences.getInstance();
-    _darkChecked = prefs.getBool('my_bool_key2') ?? false;
     _versatileChecked = false;
     _aubergineChecked = false;
     _lightChecked = false;
     _darkChecked = newValue!;
-    prefs.setBool('my_bool_key2', _darkChecked);
     setTheme(themes[1]);
     notifyListeners();
   }
 
-  void versatileThemeChecked(bool? newValue) async {
+  void versatileThemeChecked(bool? newValue) {
     if (_versatileChecked) {
       return;
     }
@@ -244,7 +268,7 @@ class ThemeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void aubergineThemeChecked(bool? newValue) async {
+  void aubergineThemeChecked(bool? newValue) {
     if (_aubergineChecked) {
       return;
     }
@@ -264,9 +288,9 @@ class ThemeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  List<ThemeModell> get themes => List<ThemeModell>.generate(
+  List<ThemeModel> get themes => List<ThemeModel>.generate(
         4,
-        (index) => ThemeModell(index: index, title: _getTitleForIndex(index)),
+        (index) => ThemeModel(index: index, title: _getTitleForIndex(index)),
       );
 
   String _getTitleForIndex(int index) {
@@ -283,6 +307,6 @@ class ThemeViewModel extends BaseViewModel {
     return "No Theme for index";
   }
 
-  void setTheme(ThemeModell themeData) =>
+  void setTheme(ThemeModel themeData) =>
       _themeService.selectThemeAtIndex(themeData.index);
 }

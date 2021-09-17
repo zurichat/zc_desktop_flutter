@@ -23,9 +23,7 @@ Future setupLocator(
   locator.registerEnvironment(
       environment: environment, environmentFilter: environmentFilter);
 
-  //Register theme
-  final themeStorageService = await ThemeService.getInstance();
-  locator.registerSingleton(themeStorageService);
+  locator.registerSingleton(ThemeService.getInstance());
 
 // Register dependencies
   final localStorageService = await LocalStorageService.getInstance();

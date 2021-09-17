@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ThemeModell {
-  final int index;
-  final String title;
-
-  ThemeModell({required this.index, required this.title});
-}
-
 List<ThemeData> getThemes() {
-  return [lightTheme, darkTheme, aubergineTheme, versatile];
+  return [lightThemes, darkThemes, aubergineThemes, versatiles];
 }
 
-final ThemeData lightTheme = ThemeData(
+final ThemeData lightThemes = ThemeData(
   appBarTheme: AppBarTheme(
       backgroundColor: Color.fromRGBO(0, 184, 124, 1),
       iconTheme: IconThemeData(color: Colors.white)),
@@ -19,12 +12,10 @@ final ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.blueGrey,
   scaffoldBackgroundColor: Colors.white,
   primaryColor: Colors.white,
-  colorScheme: const ColorScheme.dark(
-      brightness: Brightness.light, primary: Colors.black),
   dividerColor: Colors.black,
 );
 
-final ThemeData aubergineTheme = ThemeData(
+final ThemeData aubergineThemes = ThemeData(
   appBarTheme: AppBarTheme(
       backgroundColor: Color.fromRGBO(0, 184, 124, 1),
       iconTheme: IconThemeData(color: Colors.white)),
@@ -38,7 +29,7 @@ final ThemeData aubergineTheme = ThemeData(
   dividerColor: Colors.black,
 );
 
-final ThemeData versatile = ThemeData(
+final ThemeData versatiles = ThemeData(
   appBarTheme: AppBarTheme(
       backgroundColor: Colors.black,
       iconTheme: IconThemeData(color: Colors.white)),
@@ -52,7 +43,7 @@ final ThemeData versatile = ThemeData(
   dividerColor: Colors.black,
 );
 
-final ThemeData darkTheme = ThemeData(
+final ThemeData darkThemes = ThemeData(
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white)),
