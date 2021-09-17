@@ -27,7 +27,7 @@ class DmView extends StatelessWidget {
         viewModelBuilder: () => DmViewModel(),
         builder: (context, model, child) => Container(
               color: whiteColor,
-              padding: EdgeInsets.fromLTRB(10, 5, 20, 5),
+              padding: EdgeInsets.fromLTRB(10, 0, 0, 5),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,

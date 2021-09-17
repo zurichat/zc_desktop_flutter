@@ -14,6 +14,7 @@ dependencies:
   stacked: ^2.2.5
   stacked_services:
   logger: ^1.0.0
+  stacked_themes: ^0.3.6
 
  # utilities
   cupertino_icons: ^1.0.2

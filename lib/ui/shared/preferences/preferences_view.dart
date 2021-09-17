@@ -8,8 +8,12 @@ import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.d
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/accessibility/accessibility_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/advanced/advanced_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/audio_video/audio_video_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/language_region_preference/language_preference_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_view.dart';
+
+import 'preferenceswidgets/theme/theme_view.dart';
 
 class PreferenceView extends StatelessWidget {
   const PreferenceView({Key? key}) : super(key: key);
@@ -36,28 +40,22 @@ class PreferenceView extends StatelessWidget {
       {
         'text': 'Themes',
         'assetName': 'assets/icons/themes.svg', //Icons.remove_red_eye_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Themes'),
-          ),
-        )
+        'widget': ThemeView(),
       },
       {
         'text': 'Message & Media',
-        'assetName': 'assets/icons/media.svg', //Icons.messenger_outline,
+        'assetName': 'assets/icons/media.svg',
         'widget': Container(
           child: Center(
-            child: ZcdeskText.headline('Message & Media'),
+            child: MessageMediaPreferenceView(),
           ),
         )
       },
       {
         'text': 'Language & region',
-        'assetName': 'assets/icons/lan.svg', //Icons.language_outlined,
+        'assetName': 'assets/icons/lan.svg',
         'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Language & Region'),
-          ),
+          child: LanguagePreference(),
         )
       },
       {
@@ -169,7 +167,6 @@ Widget buildListItem({
   required isSelected,
   VoidCallback? onClicked,
 }) {
-  const color = Colors.black;
   final hoverColor = Colors.grey[200];
   return ListTile(
     tileColor: isSelected ? KStartupContainerColor : null,
@@ -177,10 +174,7 @@ Widget buildListItem({
     leading: SvgPicture.asset(assetName),
     title: Text(text,
         style: TextStyle(
-            color: color,
-            fontSize: 16.sp,
-            fontFamily: 'Lato',
-            fontWeight: FontWeight.w600)),
+            fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
     hoverColor: isSelected ? KStartupContainerColor : hoverColor,
     onTap: onClicked,
   );

@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 final topBarHeight = 50.h;
 
 // horizontal spacing
+Widget horizontalSpaceVeryTiny = SizedBox(
+  width: 3.0.w,
+);
 Widget horizontalSpaceTiny = SizedBox(width: 5.0.w);
 Widget horizontalSpaceSmall = SizedBox(width: 10.0.w);
 Widget horizontalSpaceRegular = SizedBox(width: 18.0.w);

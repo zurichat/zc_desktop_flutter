@@ -1,0 +1,1 @@
+enum PrefSidebar { AllConversation, Unread, Custom }
