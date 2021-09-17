@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zc_desktop_flutter/ui/main/search_modal/search_modal_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
+
 Widget buildAppBar(BuildContext context,
     {bool isActive = false,
     bool isSignUp = false,
