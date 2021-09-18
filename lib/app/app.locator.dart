@@ -9,6 +9,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 
 import '../services/api/api_service.dart';
 import '../services/authentication/auth_service.dart';
@@ -21,6 +22,9 @@ Future setupLocator(
 // Register environments
   locator.registerEnvironment(
       environment: environment, environmentFilter: environmentFilter);
+
+// Register themes
+  locator.registerSingleton(ThemeService.getInstance());
 
 // Register dependencies
   final localStorageService = await LocalStorageService.getInstance();
