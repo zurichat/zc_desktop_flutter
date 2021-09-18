@@ -2,6 +2,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_view.dart';
 import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 Widget buildAppBar(BuildContext context,
@@ -121,13 +122,13 @@ Widget buildAppBar(BuildContext context,
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    CircleAvatar(),
+                    ProfileDropdownView(),
                     Positioned(
                       top: 20,
                       left: 28,
                       child: Container(
-                        height: 15,
-                        width: 15,
+                        height: 10,
+                        width: 10,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             color: isActive ? Colors.green : Colors.grey),

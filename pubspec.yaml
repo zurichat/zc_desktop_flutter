@@ -39,6 +39,7 @@ dependencies:
   # ui package for the whole app
   zcdesk_ui:
     path: packages/zcdesk_ui
+  image_picker: ^0.8.4+2
 
 
 dev_dependencies:
