@@ -472,6 +472,3 @@ class NotificationView extends StatelessWidget {
     );
   }
 }
-
-enum PrefMessageNotification { AllMessages, DirectMessages, None }
-enum FlashWindows { Never, WhenIdle, Always }
