@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/core/enums/pre_bar.dart';
+import 'package:zc_desktop_flutter/core/enums/pref_sidebar.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_viewmodel.dart';
@@ -208,7 +210,6 @@ class DisplayCheckBox extends StatelessWidget {
   }
 }
 
-enum PrefSidebar { AllConversation, Unread, Custom }
 
 class DisplayRadio extends StatelessWidget {
   final String text;
@@ -240,7 +241,7 @@ class DisplayRadio extends StatelessWidget {
   }
 }
 
-enum PreBar { Alpha, Recent, Priority }
+
 
 class DisRadio extends StatelessWidget {
   final String text;

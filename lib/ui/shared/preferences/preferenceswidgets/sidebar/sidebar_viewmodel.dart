@@ -1,5 +1,6 @@
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_view.dart';
+import 'package:zc_desktop_flutter/core/enums/pre_bar.dart';
+import 'package:zc_desktop_flutter/core/enums/pref_sidebar.dart';
 
 class SideBarViewModel extends BaseViewModel {
   PrefSidebar _sidebar = PrefSidebar.AllConversation;
