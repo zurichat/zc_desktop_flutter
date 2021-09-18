@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_viewmodel.dart';
-import 'package:zcdesk_ui/zcdesk_ui.dart';
 
 class ProfileDropdownView extends StatefulWidget {
   const ProfileDropdownView({Key? key}) : super(key: key);
@@ -103,7 +105,9 @@ class _ProfileDropdownViewState extends State<ProfileDropdownView> {
 }
 
 class DropDown extends StatefulWidget {
-  const DropDown({Key? key}) : super(key: key);
+  const DropDown({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _DropDownState createState() => _DropDownState();
@@ -137,46 +141,29 @@ class _DropDownState extends State<DropDown> {
               ),
             ),
             DropDownItem(
-              onTap: () {},
               text: "Clear Status",
             ),
             DropDownItem(
-              onTap: () {},
               text: "Set yourself as Away",
-              // isSelected: false,
             ),
             DropDownItem(
-              onTap: () {},
               text: "Pause Notificatons",
-              // isSelected: false,
             ),
             Divider(),
             GestureDetector(
               child: DropDownItem(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => ProfileEditView());
-                },
                 text: "Edit Profile",
-                // isSelected: false,
               ),
             ),
             DropDownItem(
-              onTap: () {},
               text: "View Profile",
-              // isSelected: true,
             ),
             DropDownItem(
-              onTap: () {},
               text: "Preferences",
-              // isSelected: false,
             ),
             Divider(),
             DropDownItem(
-              onTap: () {},
               text: "Sign out of Zuri",
-              // isSelected: false,
             ),
           ],
         ),
@@ -187,12 +174,13 @@ class _DropDownState extends State<DropDown> {
 
 class DropDownItem extends StatefulWidget {
   final String text;
-  final Function onTap;
   final IconData;
 
-  const DropDownItem(
-      {Key? key, required this.text, this.IconData, required this.onTap})
-      : super(key: key);
+  const DropDownItem({
+    Key? key,
+    required this.text,
+    this.IconData,
+  }) : super(key: key);
 
   @override
   _DropDownItemState createState() => _DropDownItemState();
@@ -210,28 +198,24 @@ class _DropDownItemState extends State<DropDownItem> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      // onTap: () {},
-      child: MouseRegion(
-        onEnter: (_) => onEntered(true),
-        onExit: (_) => onEntered(false),
-        child: Container(
-          color: isHover ? kcSuccessColor : kcBackgroundColor2,
-          // isHover: isSelected ? kcPrimaryColor : isHover,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            children: <Widget>[
-              Text(
-                widget.text,
-                style: subtitle2,
-              ),
-              Spacer(),
-              Icon(
-                widget.IconData,
-                color: headerColor,
-              ),
-            ],
-          ),
+    return MouseRegion(
+      onEnter: (_) => onEntered(true),
+      onExit: (_) => onEntered(false),
+      child: Container(
+        color: isHover ? kcSuccessColor : kcBackgroundColor2,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          children: <Widget>[
+            Text(
+              widget.text,
+              style: subtitle2,
+            ),
+            Spacer(),
+            Icon(
+              widget.IconData,
+              color: headerColor,
+            ),
+          ],
         ),
       ),
     );
