@@ -1,5 +1,6 @@
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
+import 'package:zc_desktop_flutter/core/enums/flash_windows.dart';
+import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
 
 class NotificationViewModel extends BaseViewModel {
   PrefMessageNotification _messageNotification =
