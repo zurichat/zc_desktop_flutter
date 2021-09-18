@@ -149,13 +149,13 @@ class ThemeView extends StatelessWidget {
                                                   model.lightThmemImg),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.aubergineChecked,
-                                        model.aubergineThemeChecked,
-                                        model.aubergine,
-                                        Colors.white)
+                                    // subContainer(
+                                    //     context,
+                                    //     370,
+                                    //     model.aubergineChecked,
+                                    //     model.aubergineThemeChecked,
+                                    //     model.aubergine,
+                                    //     Colors.white)
                                   ],
                                 ))),
                                 horizontalSpaceSmall,
@@ -172,13 +172,13 @@ class ThemeView extends StatelessWidget {
                                                   model.lightThmemImg2),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.versatileChecked,
-                                        model.versatileThemeChecked,
-                                        model.versatile,
-                                        Colors.white)
+                                    // subContainer(
+                                    //     context,
+                                    //     370,
+                                    //     model.versatileChecked,
+                                    //     model.versatileThemeChecked,
+                                    //     model.versatile,
+                                    //     Colors.white)
                                   ],
                                 )),
                               ],
@@ -412,7 +412,7 @@ class ThemeView extends StatelessWidget {
             groupValue: model.switchLightDark,
             txt: 'Light',
             onChanged: (value) {
-              model.switchBtwLightDark(value);
+              //model.switchBtwLightDark(value);
             },
             color: Color.fromRGBO(26, 97, 219, 0.2),
           )
@@ -459,7 +459,7 @@ class ThemeView extends StatelessWidget {
               groupValue: model.switchLightDark,
               txt: 'Dark',
               onChanged: (value) {
-                model.switchBtwLightDark(value);
+                //model.switchBtwLightDark(value);
               },
               color: Colors.white)
         ],

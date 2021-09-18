@@ -38,7 +38,7 @@ class ForgotPasswordViewModel extends BaseViewModel{
   }
 
   void goToPasswordRest() {
-    _navigationService.navigateTo(Routes.resetPasswordView);
+    //_navigationService.navigateTo(Routes.resetPasswordView);
     notifyListeners();
   }
 }

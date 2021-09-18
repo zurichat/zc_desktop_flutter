@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 
@@ -24,7 +23,7 @@ enum toggleBtwTheme {
 class ThemeViewModel extends BaseViewModel {
   final log = getLogger("ThemeViewModel");
 
-  final _themeService = locator<ThemeService>();
+  //final _themeService = locator<ThemeService>();
 
   themeAccross _allWorkSpace = themeAccross.directMessage;
 
@@ -146,19 +145,19 @@ class ThemeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void switchBtwLightDark(Object? newValue) {
-    _switchLightDark = (newValue) as toggleBtwTheme;
-    switch (_switchLightDark) {
-      case toggleBtwTheme.LightTheme:
-        setTheme(themes[0]);
-        notifyListeners();
-        break;
-      case toggleBtwTheme.DarkTheme:
-        setTheme(themes[1]);
-        notifyListeners();
-        break;
-    }
-  }
+  // void switchBtwLightDark(Object? newValue) {
+  //   _switchLightDark = (newValue) as toggleBtwTheme;
+  //   switch (_switchLightDark) {
+  //     case toggleBtwTheme.LightTheme:
+  //       setTheme(themes[0]);
+  //       notifyListeners();
+  //       break;
+  //     case toggleBtwTheme.DarkTheme:
+  //       setTheme(themes[1]);
+  //       notifyListeners();
+  //       break;
+  //   }
+  // }
 
   void coastChecked(bool? newValue) {
     setFalse();
@@ -256,29 +255,29 @@ class ThemeViewModel extends BaseViewModel {
   //   notifyListeners();
   // }
 
-  void versatileThemeChecked(bool? newValue) {
-    if (_versatileChecked) {
-      return;
-    }
-    _lightChecked = false;
-    _darkChecked = false;
-    _aubergineChecked = false;
-    _versatileChecked = newValue!;
-    setTheme(themes[3]);
-    notifyListeners();
-  }
+  // void versatileThemeChecked(bool? newValue) {
+  //   if (_versatileChecked) {
+  //     return;
+  //   }
+  //   _lightChecked = false;
+  //   _darkChecked = false;
+  //   _aubergineChecked = false;
+  //   _versatileChecked = newValue!;
+  //   setTheme(themes[3]);
+  //   notifyListeners();
+  // }
 
-  void aubergineThemeChecked(bool? newValue) {
-    if (_aubergineChecked) {
-      return;
-    }
-    _lightChecked = false;
-    _darkChecked = false;
-    _versatileChecked = false;
-    _aubergineChecked = newValue!;
-    setTheme(themes[2]);
-    notifyListeners();
-  }
+  // void aubergineThemeChecked(bool? newValue) {
+  //   if (_aubergineChecked) {
+  //     return;
+  //   }
+  //   _lightChecked = false;
+  //   _darkChecked = false;
+  //   _versatileChecked = false;
+  //   _aubergineChecked = newValue!;
+  //   setTheme(themes[2]);
+  //   notifyListeners();
+  // }
 
   void setFalse() {
     _lightChecked = false;
@@ -307,6 +306,6 @@ class ThemeViewModel extends BaseViewModel {
     return "No Theme for index";
   }
 
-  void setTheme(ThemeModel themeData) =>
-      _themeService.selectThemeAtIndex(themeData.index);
+  // void setTheme(ThemeModel themeData) =>
+  //     _themeService.selectThemeAtIndex(themeData.index);
 }

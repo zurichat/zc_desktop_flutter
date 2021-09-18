@@ -103,7 +103,11 @@ class CheckEmailViewModel extends BaseViewModel {
         _setIsBusy();
         return;
       }
-      _navigator.navigateTo(isReset ? Routes.changePasswordView : Routes.successView);
+      //TODO to be replaced with the ternary navigator.
+      if(isReset) {
+        _navigator.navigateTo(Routes.successView);
+      }
+      //_navigator.navigateTo(isReset ? Routes.changePasswordView : Routes.successView);
     }
     notifyListeners();
   }
