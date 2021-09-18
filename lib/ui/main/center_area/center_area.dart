@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
-import 'package:zc_desktop_flutter/ui/main/draft/draft_view.dart';
 import 'package:zc_desktop_flutter/ui/main/home_page/home_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/main/message_page/message_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_list_what_to_display.dart';
 
 class CenterArea extends ViewModelWidget<HomeViewModel> {
