@@ -54,8 +54,6 @@ class LanguagePreference extends StatelessWidget {
                 ),
               ),
 
-              //---------------------------------------------------------------//
-
               verticalSpaceRegular,
 
               Text(
@@ -148,7 +146,7 @@ buildDropDown(
     child: Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
-        vertical: 7,
+        vertical: 5,
       ),
       child: DropdownButtonFormField(
           icon: SvgPicture.asset('assets/icons/drop_down_open.svg'),
