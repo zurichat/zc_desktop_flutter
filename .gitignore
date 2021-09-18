@@ -13,7 +13,7 @@
 .svn/
 
 # generated stacked app files
-lib/app/
+#lib/app/
 
 # generated flutter files
 .flutter-plugins-dependencies
