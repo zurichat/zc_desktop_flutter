@@ -1,0 +1,1 @@
+enum PreBar { Alpha, Recent, Priority }
