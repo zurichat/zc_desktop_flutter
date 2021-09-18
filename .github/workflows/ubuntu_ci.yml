@@ -1,0 +1,35 @@
+name: Ubuntu CI
+
+# This workflow is triggered on pushes to the repository.
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    # This job will run on ubuntu virtual machine
+    runs-on: ubuntu-latest
+
+    steps:
+      # The branch or tag ref that triggered the workflow will be checked out.
+        # https://github.com/actions/checkout
+        - uses: actions/checkout@v1
+        # Setup the flutter environment.
+        - uses: subosito/flutter-action@v1
+          with:
+            channel: 'stable' # 'dev', 'alpha', default to: 'stable'
+            # flutter-version: '1.12.x' # you can also specify exact version of flutter
+
+        - name: Install Linux dependencies
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
+
+        - run: flutter doctor -v
+        - run: flutter config --enable-linux-desktop
+        - run: flutter clean
+        - run: flutter pub get
+        - run: flutter pub run build_runner build --delete-conflicting-outputs
+        - run: flutter format .
+        #- run: flutter analyze
+        - run: flutter test
+        - run: flutter build linux --debug
