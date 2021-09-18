@@ -46,7 +46,7 @@ class PreferenceView extends StatelessWidget {
       },
       {
         'text': 'Message & Media',
-        'assetName': 'assets/icons/media.svg', //Icons.messenger_outline,
+        'assetName': 'assets/icons/media.svg',
         'widget': Container(
           child: Center(
             child: MessageMediaPreferenceView(),
@@ -55,7 +55,7 @@ class PreferenceView extends StatelessWidget {
       },
       {
         'text': 'Language & region',
-        'assetName': 'assets/icons/lan.svg', //Icons.language_outlined,
+        'assetName': 'assets/icons/lan.svg',
         'widget': Container(
           child: LanguagePreference(),
         )
