@@ -51,7 +51,7 @@ Widget buildAppBar(BuildContext context,
                       iconb,
                       size: 20,
                       color: lightIconColor,
-                    ),
+                    )
                   ),
                 if (!isSignUp && !isSignIn)
                   IconButton(
