@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-
 
 import 'forgot_password_viewmodel.dart';
 
@@ -32,26 +31,7 @@ class ForgotPasswordView extends StatelessWidget {
                     height: 40,
                     child: buildAppBar(context,
                         isSignIn: true, text: 'Forget Password | Zuri')),
-                verticalSpaceLarge,
-                Image.asset(model.logoUrl),
-                verticalSpaceMedium,
-                Text(
-                  model.signInText,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 43.sp,
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.w600),
-                ),
-                verticalSpaceSmall,
-                Text(
-                  model.signInSubtext,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18.sp,
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.w400),
-                ),
+                AuthHeader(title: model.signInText, subTitle: model.signInSubtext),
                 verticalSpaceLarge,
                 Container(
                   width: 440.w,
@@ -67,16 +47,7 @@ class ForgotPasswordView extends StatelessWidget {
                 Container(
                   height: 58.h,
                   width: 440.w,
-                  child: TextButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.blue[800])),
-                    onPressed: model.goToCheckEmailView,
-                    child: Text(
-                      model.btnText,
-                      style: authBtnStyle,
-                    ),
-                  ),
+                  child: AuthButton(label: model.btnText, onTap: model.goToCheckEmailView,)
                 ),
                 verticalSpaceMedium,
                 Row(
@@ -123,40 +94,7 @@ class ForgotPasswordView extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 40.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    model.privacy,
-                    style: bottomTextStyle(),
-                  ),
-                  horizontalSpaceMedium,
-                  Text(
-                    model.contactUs,
-                    style: bottomTextStyle(),
-                  ),
-                  horizontalSpaceMedium,
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset('assets/images/world.svg'),
-                      ),
-                      Text(
-                        model.changeRegion,
-                        style: bottomTextStyle(),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset('assets/images/arrow_down.svg'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            AuthFooter()
           ],
         ),
       ),
@@ -164,13 +102,7 @@ class ForgotPasswordView extends StatelessWidget {
     );
   }
 
-  bottomTextStyle() {
-    return TextStyle(
-        fontFamily: 'Lato',
-        fontSize: 18.sp,
-        color: Color.fromRGBO(153, 153, 153, 1),
-        fontWeight: FontWeight.w400);
-  }
+ 
 
   buildLine() {
     return Container(

@@ -15,9 +15,6 @@ class ForgotPasswordViewModel extends BaseViewModel{
   String _orText = "OR";
 
   String get orText => _orText;
-  String _privacy = "Privacy & Terms";
-  String _contactUs = "Contact us";
-  String _changeRegion = "Change Region";
 
 
   String get signInText => _signInText;
@@ -35,14 +32,8 @@ class ForgotPasswordViewModel extends BaseViewModel{
 
   String get resetBtnText => _resetBtnText;
 
-  String get privacy => _privacy;
-
-  String get contactUs => _contactUs;
-
-  String get changeRegion => _changeRegion;
-
   void goToCheckEmailView() {
-    _navigationService.navigateTo(Routes.checkEmailView);
+    
     notifyListeners();
   }
 

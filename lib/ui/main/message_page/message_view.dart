@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'message_viewmodel.dart';
 
 class MessageView extends StatelessWidget {
+  const MessageView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MessageViewModel>.reactive(

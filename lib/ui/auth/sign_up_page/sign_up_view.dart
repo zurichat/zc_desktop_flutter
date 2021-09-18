@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,6 +8,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'sign_up_viewmodel.dart';
 
@@ -17,7 +19,6 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool check = false;
     final _scrollController = ScrollController();
     final GlobalKey<FormState> _formKey = GlobalKey();
     Size _size = MediaQuery.of(context).size;
@@ -67,57 +68,60 @@ class SignUpView extends StatelessWidget {
                                   style: heading2Style,
                                 ),
                                 verticalSpaceMedium,
-                                if(model.isSignUpSuccessful)
-                                Text('Sign Up Successful, You will be redirected to the login page shortly', style: headline6.copyWith(color: kcSuccessColor)),
-                                if(model.isSignUpNotSuccessful)
-                                Text(model.errorMessage, style: headline6.copyWith(color: kcErrorColor)),
+                                if (model.isSignUpSuccessful)
+                                  Text(
+                                      'Sign Up Successful, You will be redirected to the login page shortly',
+                                      style: headline6.copyWith(
+                                          color: kcSuccessColor)),
+                                if (model.isSignUpNotSuccessful)
+                                  Text(model.errorMessage,
+                                      style: headline6.copyWith(
+                                          color: kcErrorColor)),
                                 Form(
                                   key: _formKey,
                                   child: Column(
                                     children: [
-                                      AuthInputField(
-                                        label: 'First Name',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setFname(value);
-                                        },
-                                        errorText: model.fnameError,
-                                        hintPlaceHolder: 'John',
-                                      ),
-                                      AuthInputField(
-                                        label: 'Last Name',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        onChanged: (value) {
-                                          model.setLname(value);
-                                        },
-                                        errorText: model.lnameError,
-                                        hintPlaceHolder: 'Doe',
-                                      ),
-                                      AuthInputField(
-                                        label: 'Username',
-                                        onChanged: (value) {
-                                          model.setUsername(value);
-                                        },
-                                        hintPlaceHolder: 'protector',
-                                        errorText: model.usernameError,
-                                      ),
-                                      AuthInputField(
-                                        label: 'phone',
-                                        keyboardType:
-                                            TextInputType.number,
-                                        onChanged: (value) {
-                                          model.setPhone(value);
-                                        },
-                                        hintPlaceHolder: '0804576859',
-                                        errorText: model.phoneError
-                                      ),
+                                      // AuthInputField(
+                                      //   label: 'First Name',
+                                      //   keyboardType:
+                                      //       TextInputType.emailAddress,
+                                      //   onChanged: (value) {
+                                      //     model.setFname(value);
+                                      //   },
+                                      //   errorText: model.fnameError,
+                                      //   hintPlaceHolder: 'John',
+                                      // ),
+                                      // AuthInputField(
+                                      //   label: 'Last Name',
+                                      //   keyboardType:
+                                      //       TextInputType.emailAddress,
+                                      //   onChanged: (value) {
+                                      //     model.setLname(value);
+                                      //   },
+                                      //   errorText: model.lnameError,
+                                      //   hintPlaceHolder: 'Doe',
+                                      // ),
+                                      // AuthInputField(
+                                      //   label: 'Username',
+                                      //   onChanged: (value) {
+                                      //     model.setUsername(value);
+                                      //   },
+                                      //   hintPlaceHolder: 'protector',
+                                      //   errorText: model.usernameError,
+                                      // ),
+                                      // AuthInputField(
+                                      //     label: 'phone',
+                                      //     keyboardType: TextInputType.number,
+                                      //     onChanged: (value) {
+                                      //       model.setPhone(value);
+                                      //     },
+                                      //     hintPlaceHolder: '0804576859',
+                                      //     errorText: model.phoneError),
                                       AuthInputField(
                                         label: 'Email',
                                         keyboardType:
                                             TextInputType.emailAddress,
-                                       onChanged: (value) {
+                                        onChanged: (value) {
                                           model.setEmail(value);
                                         },
                                         hintPlaceHolder: 'email@gmail.com',
@@ -138,17 +142,16 @@ class SignUpView extends StatelessWidget {
                                       ),
                                       verticalSpaceMedium,
                                       AuthInputField(
-                                        label: 'Confirm Password',
-                                        password: true,
-                                        isVisible: model.passwordVisibily,
-                                        onVisibilityTap:
-                                            model.setPasswordVisibility,
-                                        errorText: model.confirmPasswordError,
-                                        onChanged: (value) {
-                                          model.setConfirmPassword(value);
-                                        },
-                                        hintPlaceHolder: 'Password'
-                                      ),
+                                          label: 'Confirm Password',
+                                          password: true,
+                                          isVisible: model.passwordVisibily,
+                                          onVisibilityTap:
+                                              model.setPasswordVisibility,
+                                          errorText: model.confirmPasswordError,
+                                          onChanged: (value) {
+                                            model.setConfirmPassword(value);
+                                          },
+                                          hintPlaceHolder: 'Password'),
                                     ],
                                   ),
                                 ),
@@ -156,9 +159,11 @@ class SignUpView extends StatelessWidget {
                                 Row(
                                   children: [
                                     Checkbox(
-                                      value: check,
+                                      value: model.isCheck,
                                       activeColor: kcSuccessColor,
-                                      onChanged: (value) {},
+                                      onChanged: (_) {
+                                        model.setIsCheck();
+                                      },
                                     ),
                                     Expanded(
                                       child: Text(
@@ -168,23 +173,23 @@ class SignUpView extends StatelessWidget {
                                     )
                                   ],
                                 ),
+                                Text(model.isCheckError ?? '',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Lato')),
                                 verticalSpaceMedium,
                                 Container(
-                                  height: 58.h,
-                                  width: 440.w,
-                                  child: TextButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.blue[800])),
-                                    onPressed: () async {
-                                        await model.validateAndSignUP();},
-                                    child: !model.isBusy ? Text(
-                                      "Register",
-                                      style: authBtnStyle,
-                                    ):CircularProgressIndicator(color: Colors.white,),
-                                  ),
-                                ),
+                                    height: 58.h,
+                                    width: 440.w,
+                                    child: AuthButton(
+                                      label: 'Register',
+                                      onTap: () async {
+                                        await model.validateAndSignUP();
+                                      },
+                                      isBUsy: model.isBusy,
+                                    )),
                                 verticalSpaceMedium,
                                 Center(
                                   child: Text(
@@ -205,7 +210,9 @@ class SignUpView extends StatelessWidget {
                                 ),
                                 verticalSpaceMedium,
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 16, ),
+                                  padding: const EdgeInsets.only(
+                                    bottom: 16,
+                                  ),
                                   child: Center(
                                     child: GestureDetector(
                                       onTap: model.goToLogin,

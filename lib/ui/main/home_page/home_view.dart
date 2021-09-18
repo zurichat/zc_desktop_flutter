@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/ui/main/center_area/center_area.dart';
 import 'package:zc_desktop_flutter/ui/main/left_side_bar/left_sidebar_view.dart';
-import 'package:zc_desktop_flutter/ui/main/message_page/message_view.dart';
 import 'package:zc_desktop_flutter/ui/main/organization_bar/organization_bar.dart';
 import 'package:zc_desktop_flutter/ui/main/right_side_bar/right_sidebar_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'home_viewmodel.dart';
 
 // class HomeView extends StatelessWidget {
@@ -73,7 +68,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _auth = locator<AuthService>();
     Size _size = MediaQuery.of(context).size;
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       builder: (context, model, child) => Scaffold(
