@@ -33,7 +33,7 @@ class ThemeView extends StatelessWidget {
                                 context,
                                 Text(
                                   model.head1,
-                                  style: headline6.copyWith(fontSize: 14.sp),
+                                  style: headline6.copyWith(fontSize: 16.sp),
                                 ))),
                         Container(
                             width: 180,
@@ -116,7 +116,7 @@ class ThemeView extends StatelessWidget {
                               TextSpan(
                                   text: 'create a custom theme',
                                   style: subheadingStyle.copyWith(
-                                      color: Colors.blue)),
+                                      color: Color.fromRGBO(0, 184, 124, 1))),
                             ])),
                           ),
                         ),
@@ -135,13 +135,12 @@ class ThemeView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                    child: Container(
-                                        child: Column(
+                                Container(
+                                    child: Column(
                                   children: [
                                     Container(
-                                      width: 370,
-                                      height: 150,
+                                      width: 198,
+                                      height: 115,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
@@ -149,22 +148,19 @@ class ThemeView extends StatelessWidget {
                                                   model.lightThmemImg),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.aubergineChecked,
-                                        model.aubergineThemeChecked,
-                                        model.aubergine,
-                                        Colors.white)
+                                    bottomContainer(
+                                        value: cleanThemes.aubergine,
+                                        groupValue: model.cleanTheme,
+                                        txt: "Aubergine",
+                                        onChanged: model.switchCleanTheme),
                                   ],
-                                ))),
+                                )),
                                 horizontalSpaceSmall,
-                                Expanded(
-                                    child: Column(
+                                Column(
                                   children: [
                                     Container(
-                                      width: 370,
-                                      height: 150,
+                                      width: 198,
+                                      height: 115,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
@@ -172,31 +168,97 @@ class ThemeView extends StatelessWidget {
                                                   model.lightThmemImg2),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.versatileChecked,
-                                        model.versatileThemeChecked,
-                                        model.versatile,
-                                        Colors.white)
+                                    bottomContainer(
+                                        value: cleanThemes.versatile,
+                                        groupValue: model.cleanTheme,
+                                        txt: "Versatile",
+                                        onChanged: model.switchCleanTheme),
                                   ],
-                                )),
+                                ),
                               ],
                             )),
                         Padding(
-                          padding: EdgeInsets.all(10),
-                          child: GestureDetector(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  Icon(Icons.arrow_downward,
-                                      color: Colors.blue, size: 20),
-                                  Text('Show all classic themes',
-                                      style: bodyStyle.copyWith(
-                                          fontSize: 14.sp, color: Colors.blue)),
-                                ],
-                              )),
-                        ),
+                            padding: EdgeInsets.all(10),
+                            child: Theme(
+                                data: ThemeData()
+                                    .copyWith(dividerColor: Colors.transparent),
+                                child: ExpansionTile(
+                                    tilePadding: EdgeInsets.all(0),
+                                    childrenPadding: EdgeInsets.all(0),
+                                    trailing: null,
+                                    title: Row(
+                                      children: [
+                                        Icon(Icons.arrow_downward,
+                                            color:
+                                                Color.fromRGBO(0, 184, 124, 1),
+                                            size: 20),
+                                        Text('Show all classic themes',
+                                            style: bodyStyle.copyWith(
+                                                fontSize: 14.sp,
+                                                color: Color.fromRGBO(
+                                                    0, 184, 124, 1))),
+                                      ],
+                                    ),
+                                    children: [
+                                      Container(
+                                          width: 500,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  child: Column(
+                                                children: [
+                                                  Container(
+                                                    width: 198,
+                                                    height: 115,
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                model
+                                                                    .aubergine2),
+                                                            fit: BoxFit.fill)),
+                                                  ),
+                                                  bottomContainer(
+                                                      value: cleanThemes
+                                                          .aubergine1,
+                                                      groupValue:
+                                                          model.cleanTheme,
+                                                      txt: "Aubergine",
+                                                      onChanged: model
+                                                          .switchCleanTheme),
+                                                ],
+                                              )),
+                                              horizontalSpaceSmall,
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                    width: 198,
+                                                    height: 115,
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                model
+                                                                    .aubergine3),
+                                                            fit: BoxFit.fill)),
+                                                  ),
+                                                  bottomContainer(
+                                                      value: cleanThemes
+                                                          .aubergine2,
+                                                      groupValue:
+                                                          model.cleanTheme,
+                                                      txt: "Aubergine",
+                                                      onChanged: model
+                                                          .switchCleanTheme),
+                                                ],
+                                              ),
+                                            ],
+                                          )),
+                                    ]))),
                         verticalSpaceSmall,
                         Padding(
                             padding: EdgeInsets.all(10),
@@ -212,50 +274,44 @@ class ThemeView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                    child: Container(
-                                        child: Column(
+                                Container(
+                                    child: Column(
                                   children: [
                                     Container(
-                                      width: 370,
-                                      height: 150,
+                                      width: 198,
+                                      height: 115,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(model.coast),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.coastVal,
-                                        model.coastChecked,
-                                        model.coastName,
-                                        Colors.white)
+                                    bottomContainer(
+                                        value: darkDramaticTheme.coast,
+                                        groupValue: model.darkDramaTheme,
+                                        txt: "Coast",
+                                        onChanged: model.switchDramaticTheme),
                                   ],
-                                ))),
+                                )),
                                 horizontalSpaceSmall,
-                                Expanded(
-                                    child: Column(
+                                Column(
                                   children: [
                                     Container(
-                                      width: 370,
-                                      height: 150,
+                                      width: 198,
+                                      height: 115,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(model.triadic),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.triVal,
-                                        model.triaChecked,
-                                        model.triadicName,
-                                        Colors.white)
+                                    bottomContainer(
+                                        value: darkDramaticTheme.triadic,
+                                        groupValue: model.darkDramaTheme,
+                                        txt: "Triadic",
+                                        onChanged: model.switchDramaticTheme),
                                   ],
-                                )),
+                                ),
                               ],
                             )),
                         Container(
@@ -265,13 +321,12 @@ class ThemeView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                    child: Container(
-                                        child: Column(
+                                Container(
+                                    child: Column(
                                   children: [
                                     Container(
-                                      width: 370,
-                                      height: 150,
+                                      width: 198,
+                                      height: 115,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
@@ -279,22 +334,19 @@ class ThemeView extends StatelessWidget {
                                                   model.complimentary),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.compliVal,
-                                        model.compliChecked,
-                                        model.complimentaryName,
-                                        Colors.white)
+                                    bottomContainer(
+                                        value: darkDramaticTheme.complimentary,
+                                        groupValue: model.darkDramaTheme,
+                                        txt: "Complimentary",
+                                        onChanged: model.switchDramaticTheme),
                                   ],
-                                ))),
+                                )),
                                 horizontalSpaceSmall,
-                                Expanded(
-                                    child: Column(
+                                Column(
                                   children: [
                                     Container(
-                                      width: 370,
-                                      height: 150,
+                                      width: 198,
+                                      height: 115,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
@@ -302,15 +354,13 @@ class ThemeView extends StatelessWidget {
                                                   AssetImage(model.automatic),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.autoVal,
-                                        model.autoChecked,
-                                        model.automaticName,
-                                        Colors.white)
+                                    bottomContainer(
+                                        value: darkDramaticTheme.automatic,
+                                        groupValue: model.darkDramaTheme,
+                                        txt: "Automatic",
+                                        onChanged: model.switchDramaticTheme),
                                   ],
-                                )),
+                                ),
                               ],
                             )),
                         Container(
@@ -320,35 +370,31 @@ class ThemeView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                    child: Container(
-                                        child: Column(
+                                Container(
+                                    child: Column(
                                   children: [
                                     Container(
-                                      width: 370,
-                                      height: 150,
+                                      width: 198,
+                                      height: 115,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(model.nocturne),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.nocVal,
-                                        model.nocChecked,
-                                        model.nocturneName,
-                                        Colors.white)
+                                    bottomContainer(
+                                        value: darkDramaticTheme.nocturne,
+                                        groupValue: model.darkDramaTheme,
+                                        txt: "Nocturne",
+                                        onChanged: model.switchDramaticTheme),
                                   ],
-                                ))),
+                                )),
                                 horizontalSpaceSmall,
-                                Expanded(
-                                    child: Column(
+                                Column(
                                   children: [
                                     Container(
-                                      width: 370,
-                                      height: 150,
+                                      width: 198,
+                                      height: 115,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
@@ -356,15 +402,13 @@ class ThemeView extends StatelessWidget {
                                                   AssetImage(model.expensive),
                                               fit: BoxFit.fill)),
                                     ),
-                                    subContainer(
-                                        context,
-                                        370,
-                                        model.expVal,
-                                        model.expChecked,
-                                        model.expensiveName,
-                                        Colors.white)
+                                    bottomContainer(
+                                        value: darkDramaticTheme.expensive,
+                                        groupValue: model.darkDramaTheme,
+                                        txt: "Expensive",
+                                        onChanged: model.switchDramaticTheme),
                                   ],
-                                )),
+                                ),
                               ],
                             )),
                       ]))),
@@ -414,7 +458,7 @@ class ThemeView extends StatelessWidget {
             onChanged: (value) {
               model.switchBtwLightDark(value);
             },
-            color: Color.fromRGBO(26, 97, 219, 0.2),
+            color: Color.fromRGBO(0, 184, 124, 0.42),
           )
         ],
       ),
@@ -488,6 +532,7 @@ class ThemeView extends StatelessWidget {
           children: [
             horizontalSpaceSmall,
             Radio(
+              focusColor: Colors.green,
               value: value,
               groupValue: groupValue,
               onChanged: onChanged,
@@ -503,58 +548,44 @@ class ThemeView extends StatelessWidget {
           ],
         ));
   }
+
+  bottomContainer({
+    required Object value,
+    required Object groupValue,
+    void Function(Object? value)? onChanged,
+    required String txt,
+  }) {
+    return Container(
+        width: 198,
+        height: 38,
+        padding: EdgeInsets.all(0),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border:
+                Border.all(color: Color.fromRGBO(26, 97, 219, 0.5), width: 0.5),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10))),
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Radio(
+            activeColor: Colors.green,
+            value: value,
+            groupValue: groupValue,
+            onChanged: onChanged,
+          ),
+          horizontalSpaceSmall,
+          Text(txt,
+              style: bodyStyle.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black))
+        ]));
+  }
 }
 
 Padding padding(BuildContext context, Widget childs) {
   return Padding(
       padding: EdgeInsets.only(left: 10, right: 10, top: 20), child: childs);
-}
-
-Container container(
-  BuildContext context,
-  Color colors,
-  String img,
-  Color txtColor,
-  String theme,
-  String title,
-  String time,
-  bool Checked,
-  Color color,
-  void Function(bool?)? onChanged,
-) {
-  return Container(
-    width: 487,
-    height: 125,
-    padding: EdgeInsets.only(bottom: 0),
-    decoration: BoxDecoration(
-        color: colors,
-        border: Border.all(color: Color.fromRGBO(26, 97, 219, 0.5)),
-        borderRadius: BorderRadius.all(Radius.circular(10))),
-    child: Column(
-      children: [
-        ListTile(
-          leading: Image(
-            image: AssetImage(img),
-          ),
-          title: Row(children: [
-            Text(title,
-                style: bodyStyle.copyWith(
-                    fontWeight: FontWeight.bold, color: txtColor)),
-            SizedBox(
-              width: 10,
-            ),
-            Text(time, style: bodyStyle.copyWith(color: txtColor))
-          ]),
-          subtitle: Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Text('Look nice today',
-                  style: bodyStyle.copyWith(fontSize: 14.sp, color: txtColor))),
-        ),
-        Spacer(),
-        subContainer(context, 1500, Checked, onChanged, theme, color),
-      ],
-    ),
-  );
 }
 
 Container subContainer(BuildContext context, double width, bool Checked,
@@ -565,7 +596,7 @@ Container subContainer(BuildContext context, double width, bool Checked,
       decoration: BoxDecoration(
           color: color,
           border:
-              Border.all(color: Color.fromRGBO(26, 97, 219, 0.5), width: 0.5),
+              Border.all(color: Color.fromRGBO(203, 203, 203, 1), width: 0.5),
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(10),
               bottomRight: Radius.circular(10))),
