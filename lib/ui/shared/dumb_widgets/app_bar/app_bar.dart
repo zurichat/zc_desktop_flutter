@@ -72,7 +72,8 @@ Widget buildAppBar(BuildContext context,
               GestureDetector(
                 onTap: () {
                   showDialog(
-                      context: context, builder: (_) => SearchModalView());
+                      context: context,
+                      builder: (_) =>  SearchModalView());
                 },
                 child: MouseRegion(
                   cursor: SystemMouseCursors.text,
