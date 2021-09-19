@@ -106,7 +106,7 @@ Widget buildAppBar(BuildContext context,
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: [
-                        ProfileDropdownView(),
+                        // ProfileDropdownView(),
                         Positioned(
                           top: 16,
                           left: 20,
