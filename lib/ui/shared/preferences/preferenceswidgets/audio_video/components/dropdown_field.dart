@@ -21,7 +21,7 @@ class DropDownField<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 366.w,
-      height: 50.h,
+      height: 40,
       child: FormField<T>(
         builder: (FormFieldState<T> state) {
           return InputDecorator(

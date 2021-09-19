@@ -6,10 +6,13 @@ const Color kcSecondaryColor = Color(0xff1A61DB);
 const Color kcAccentColor = Color(0xffB8003C);
 const Color kcErrorColor = Color(0xffF40101);
 const Color kcSuccessColor = Color(0xff008B5E);
+const Color kcPrimaryLight = Color(0xffE1FDF4);
 
 // Backgroung Colors
 const Color kcBackgroundColor1 = Color(0xffF6F6F6);
 const Color kcBackgroundColor2 = Color(0xffFFFFFF);
+const Color hoverColor= Color(0x223A3A3A);
+const Color lightDarkColor= Color(0x993A3A3A);
 
 // Text Colors
 const Color headerColor = Color(0xff242424);
