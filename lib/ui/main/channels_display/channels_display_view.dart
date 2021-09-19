@@ -198,7 +198,7 @@ class ChannelsDisplayList extends StatelessWidget {
   final String channelText11;
   final double paddingall;
   final double paddingBottom4;
-  final MaterialColor isChannelHover;
+  final Color isChannelHover;
   final bool visibleButton;
   final Function(bool) hoverFunction;
   final bool visibleJoined;

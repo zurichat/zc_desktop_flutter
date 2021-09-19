@@ -2,147 +2,154 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 
-
 Widget buildAppBar(BuildContext context,
-    {bool isActive = false,
-    bool isSignUp = false,
-    bool isSignIn = false,
-    String text = ''}) {
-  final icon = Icons.menu;
+    {bool isActive = false, bool isHome = true, String text = ''}) {
+
   final icona = Icons.arrow_back;
   final iconb = Icons.arrow_forward;
   final iconc = Icons.watch_later_outlined;
-  final icond = Icons.settings_outlined;
   return Container(
-    height: 45.h,
+    height: 50.h,
     color: Colors.black,
     child: WindowTitleBarBox(
       child: MoveWindow(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: isHome
+              ? MainAxisAlignment.start
+              : MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                icon,
-                size: 20,
-                color: lightIconColor,
+            if (isHome)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                child: SvgPicture.asset('assets/icons/zuri.svg'),
               ),
-            ),
-            SizedBox(width: !isSignUp && !isSignIn ? 150.w : 70.w),
-            !isSignUp && !isSignIn
-                ? IconButton(
+            if (!isHome)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Icon(Icons.menu,
+                        color: Color.fromRGBO(255, 255, 255, 1)),
+                  ),
+                  SizedBox(
+                    width: 26.w,
+                  ),
+                  Text(
+                    text,
+                    style: TextStyle(color: Colors.white, fontFamily: 'Lato'),
+                  ),
+                ],
+              ),
+            if(isHome)
+            Row(
+              children: [
+                  IconButton(
                     onPressed: () {},
                     icon: Icon(
                       icona,
                       size: 20,
                       color: lightIconColor,
                     ),
-                  )
-                : Expanded(
-                    child: Text(
-                    text,
-                    style: TextStyle(color: Colors.white, fontFamily: 'Lato'),
-                  )),
-            //  SizedBox(width: 10),
-            if (!isSignUp && !isSignIn)
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  iconb,
-                  size: 20,
-                  color: lightIconColor,
-                ),
-              ),
-            if (!isSignUp && !isSignIn)
-              // SizedBox(width: 10),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  iconc,
-                  size: 20,
-                  color: lightIconColor,
-                ),
-              ),
-            // SizedBox(width: 10),
-            if (!isSignUp && !isSignIn)
-              Container(
-                constraints: BoxConstraints(
-                  maxHeight: 18,
-                  maxWidth: 350.0,
-                ),
-                decoration: BoxDecoration(
-                  color: bodyColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  cursorHeight: 16,
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
                   ),
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 8),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 15,
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        iconb,
+                        size: 20,
+                        color: lightIconColor,
+                      )),
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return PreferenceView();
+                          });
+                    },
+                    icon: Icon(
+                      iconc,
+                      size: 20,
                       color: lightIconColor,
                     ),
-                    hintText: 'Search',
-                    hintStyle: TextStyle(
-                      color: timeColor,
+                  ),
+              ],
+            ),
+            SizedBox(width: 29.w),
+            if (isHome)
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 38.h,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(153, 153, 153, 0.2),
+                      borderRadius: BorderRadius.circular(6),
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 7),
+                      child: Text('Search here',
+                          style: TextStyle(
+                              color: Color.fromRGBO(231, 231, 231, 1),
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Lato')),
                     ),
-                    filled: true,
-                    fillColor: bodyColor,
-                    isDense: true,
-                    //border: InputBorder.none,
                   ),
                 ),
               ),
-            //  SizedBox(width: 10),
-            // if (!isSignUp && !isSignIn)
-              IconButton(
-                onPressed: () {
-                  showDialog(context: context, builder: (context){
-                    return PreferenceView();
-                  });
-                },
-                icon: Icon(
-                  icond,
-                  size: 20,
-                  color: lightIconColor,
-                ),
-               ),
-            SizedBox(width: 100),
-            if (!isSignUp && !isSignIn)
-              GestureDetector(
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    CircleAvatar(),
-                    Positioned(
-                      top: 20,
-                      left: 28,
-                      child: Container(
-                        height: 15,
-                        width: 15,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: isActive ? Colors.green : Colors.grey),
-                      ),
+            if (isHome)
+              SizedBox(
+                  width: MediaQuery.of(context).size.width <= 1440
+                      ? 120.w
+                      : 500.w),
+            if(isHome)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                  GestureDetector(
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          height: 28,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: Colors.grey,
+                          ),
+                          child: ClipRRect(),
+                        ),
+                        Positioned(
+                          top: 16,
+                          left: 20,
+                          child: Container(
+                            height: 15,
+                            width: 15,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: isActive ? Colors.green : Colors.grey),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            Align(alignment: Alignment.centerRight, child: WindowsButton())
+                  ),
+                SizedBox(width: 35.w),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: WindowsButton(),
+                )
+              ],
+            ),
+            if(!isHome)
+            Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: WindowsButton(),
+                )
           ],
         ),
       ),
@@ -158,7 +165,7 @@ class WindowsButton extends StatelessWidget {
     var colors = WindowButtonColors(
       mouseOver: Color(0xFFD32F2F),
       mouseDown: Color(0xFFB71C1C),
-      iconNormal: lightIconColor,
+      iconNormal: Colors.white,
       iconMouseOver: Colors.white,
     );
     return Row(

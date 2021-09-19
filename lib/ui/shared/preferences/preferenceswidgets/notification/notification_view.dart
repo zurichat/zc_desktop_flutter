@@ -30,7 +30,7 @@ class NotificationView extends StatelessWidget {
                   children: [
                     Text(
                       'Nofity me about',
-                      style: heading4Style.copyWith(
+                      style: kHeading4TextStyle.copyWith(
                           fontSize: 15.sp, fontWeight: FontWeight.w400),
                     ),
                     TextButton(
@@ -39,7 +39,7 @@ class NotificationView extends StatelessWidget {
                           children: [
                             Text(
                               'About notifications',
-                              style: heading4Style.copyWith(
+                              style: kHeading4TextStyle.copyWith(
                                   color: Colors.green,
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w400),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_checkbox.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'advanced_viewmodel.dart';
 
 class AdvancedView extends StatelessWidget {
@@ -14,9 +15,9 @@ class AdvancedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _rightSideBarController = ScrollController();
-    return  ViewModelBuilder<AdvancedViewModel>.reactive(
-        viewModelBuilder: ()=>AdvancedViewModel(),
-        builder: (context,model,_){
+    return ViewModelBuilder<AdvancedViewModel>.reactive(
+        viewModelBuilder: () => AdvancedViewModel(),
+        builder: (context, model, _) {
           return Scrollbar(
             controller: _rightSideBarController,
             isAlwaysShown: true,
@@ -31,21 +32,19 @@ class AdvancedView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-
-                    inputOptionSection(model),
-
+                    AdvancedViewInputOptions(model: model),
                     verticalSpaceMedium,
-                    Divider(color: Colors.black54,),
-
+                    Divider(
+                      color: Colors.black54,
+                    ),
                     verticalSpaceMedium,
-                    searchOptionSection(model),
+                    AdvancedViewSearchOptions(model: model),
                     verticalSpaceMedium,
-
-                    Divider(color: Colors.black54,),
+                    Divider(
+                      color: Colors.black54,
+                    ),
                     verticalSpaceRegular,
-                    otherOptionSection(model)
-
+                    AdvancedViewMoreOptions(model: model)
                   ],
                 ),
               ),
@@ -53,56 +52,65 @@ class AdvancedView extends StatelessWidget {
           );
         });
   }
+}
 
-  Widget inputOptionSection(AdvancedViewModel model){
+class AdvancedViewInputOptions extends StatelessWidget {
+  const AdvancedViewInputOptions({Key? key, required this.model})
+      : super(key: key);
+
+  final AdvancedViewModel model;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // Input options
-          ZcdeskText.boldCaption('Input options'),
+          Text('Input options', style: headline6.copyWith(fontSize: 15.sp)),
           ListTile(
-              leading: ZcCheckBox(
-                  value: model.onEnter,
-                  fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                  onChanged: (v){
-                    model.setOnEnter = v;
-                  }
-              ),
-              title: Wrap(
-                runSpacing: 10.0,
-                spacing: 10.0,
-                runAlignment: WrapAlignment.spaceEvenly,
-                children: [
-                  ZcdeskText.lightCaption('When typing code with ````, '),
-                  ShortCuts().enter(),
-                  ZcdeskText.lightCaption(' should send the message'),
-                ],
-              ),
-              subtitle: Wrap(
-                runSpacing: 10.0,
-                spacing: 10.0,
-                runAlignment: WrapAlignment.spaceEvenly,
-                children: [
-                ZcdeskText.lightCaption('With this ticked, use '),
-                ShortCuts().shift(),
+            leading: ZcCheckBox(
+                value: model.onEnter,
+                onChanged: (v) {
+                  model.setOnEnter = v;
+                }),
+            title: Wrap(
+              runSpacing: 10.0,
+              spacing: 10.0,
+              runAlignment: WrapAlignment.spaceEvenly,
+              children: [
+                Text('When typing code with ````, ',
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().enter(),
-                ZcdeskText.lightCaption(' to send'),
+                Text(' should send the message',
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
+            subtitle: Wrap(
+              runSpacing: 10.0,
+              spacing: 10.0,
+              runAlignment: WrapAlignment.spaceEvenly,
+              children: [
+                Text('With this ticked, use ',
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                ShortCuts().shift(),
+                ShortCuts().enter(),
+                Text(' to send', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+              ],
             ),
+          ),
           ListTile(
-              leading: ZcCheckBox(
-                  value: model.allowMsgFormat,
-                  fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                  onChanged: (v){
-                    model.setAllowMsgFormat = v;
-                  }
-              ),
-              title: ZcdeskText.lightCaption('Format messages with markup'),
-              subtitle:  ZcdeskText.lightCaption('The text formatting toolbar won’t show in the composer'),
-            ),
+            leading: ZcCheckBox(
+                value: model.allowMsgFormat,
+                onChanged: (v) {
+                  model.setAllowMsgFormat = v;
+                }),
+            title: Text('Format messages with markup',
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+            subtitle: Text(
+                'The text formatting toolbar won’t show in the composer',
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+          ),
 
           verticalSpaceMedium,
 
@@ -112,17 +120,19 @@ class AdvancedView extends StatelessWidget {
             spacing: 10.0,
             runAlignment: WrapAlignment.spaceEvenly,
             children: [
-              ZcdeskText.boldCaption('When writing a message, press'),
+              Text('When writing a message, press',
+                  style: headline6.copyWith(fontSize: 15.sp)),
               ShortCuts().enter(),
-              ZcdeskText.boldCaption('to:'),
+              Text('to:', style: headline6.copyWith(fontSize: 15.sp)),
               SizedBox(
                 height: 25.0,
                 child: ListTile(
-                  title: ZcdeskText.lightCaption('Send the message'),
+                  title: Text('Send the message',
+                      style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                   leading: Radio(
                     value: EnterButtonsChoice.sendMsg,
-                    groupValue:model.enterButtonsChoice,
-                    onChanged: (EnterButtonsChoice? val){
+                    groupValue: model.enterButtonsChoice,
+                    onChanged: (EnterButtonsChoice? val) {
                       model.setCheckVal = val;
                     },
                     activeColor: kcPrimaryColor,
@@ -137,164 +147,171 @@ class AdvancedView extends StatelessWidget {
                     spacing: 10.0,
                     runAlignment: WrapAlignment.spaceEvenly,
                     children: [
-                      ZcdeskText.lightCaption('Start a new line ( use'),
+                      Text('Start a new line ( use',
+                          style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                       ShortCuts().ctrl(),
                       ShortCuts().enter(),
-                      ZcdeskText.lightCaption('to send )'),
+                      Text('to send )',
+                          style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                     ],
                   ),
                   leading: Radio(
                     value: EnterButtonsChoice.newLine,
-                    groupValue:model.enterButtonsChoice,
-                    onChanged: (EnterButtonsChoice? val){
+                    groupValue: model.enterButtonsChoice,
+                    onChanged: (EnterButtonsChoice? val) {
                       model.setCheckVal = val;
                     },
                     activeColor: kcPrimaryColor,
                   ),
                 ),
               ),
-
             ],
           ),
         ],
       ),
     );
   }
+}
 
-  Widget searchOptionSection(AdvancedViewModel model){
+class AdvancedViewSearchOptions extends StatelessWidget {
+  const AdvancedViewSearchOptions({Key? key, required this.model})
+      : super(key: key);
+
+  final AdvancedViewModel model;
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Input options
-          ZcdeskText.boldCaption('Search options'),
+          Text('Search options', style: headline6.copyWith(fontSize: 15.sp)),
           ListTile(
             leading: ZcCheckBox(
                 value: model.ctrlF,
-                fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                onChanged: (v){
+                onChanged: (v) {
                   model.setCtrlF = v;
-                }
-            ),
-            title:  Wrap(
+                }),
+            title: Wrap(
               runSpacing: 10.0,
               spacing: 10.0,
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 ShortCuts().ctrl(),
                 ShortCuts().fKey(),
-                ZcdeskText.lightCaption('Starts a Zurichat search'),
+                Text('Starts a Zurichat search',
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
-            subtitle: ZcdeskText.lightCaption('Overrides normal behavaiour in search behaviour'),
-
+            subtitle: Text('Overrides normal behavaiour in search behaviour',
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
           ),
           ListTile(
             leading: ZcCheckBox(
                 value: model.ctrlK,
-                fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                onChanged: (v){
+                onChanged: (v) {
                   model.setCtrlK = v;
-                }
-            ),
-            title:  Wrap(
+                }),
+            title: Wrap(
               runSpacing: 10.0,
               spacing: 10.0,
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 ShortCuts().ctrl(),
                 ShortCuts().kKey(),
-                ZcdeskText.lightCaption('Starts the quick switcher'),
+                Text('Starts the quick switcher',
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
-            subtitle: ZcdeskText.lightCaption('Overrides normal behavaiour in some browsers'),
-
+            subtitle: Text('Overrides normal behavaiour in some browsers',
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
           ),
 
-          ZcdeskText.boldCaption('Exclude these channels from search results:'),
+          Text('Exclude these channels from search results:',
+              style: headline6.copyWith(fontSize: 15.sp)),
           AuthInputField(
             hintPlaceHolder: 'Type a channel name...',
           )
-
         ],
       ),
     );
   }
+}
 
-  Widget otherOptionSection(AdvancedViewModel model){
+class AdvancedViewMoreOptions extends StatelessWidget {
+  const AdvancedViewMoreOptions({Key? key, required this.model})
+      : super(key: key);
+
+  final AdvancedViewModel model;
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ZcdeskText.boldCaption('Other Options'),
+          Text('Other Options', style: headline6.copyWith(fontSize: 15.sp)),
           verticalSpaceRegular,
           ListTile(
             leading: ZcCheckBox(
                 value: model.option1,
-                fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                onChanged: (v){
+                onChanged: (v) {
                   model.setOption1 = v;
-                }
-            ),
-            title:  Wrap(
+                }),
+            title: Wrap(
               runSpacing: 10.0,
               spacing: 10.0,
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 ShortCuts().pageUp(),
-                ZcdeskText.lightCaption(','),
+                Text(',', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().pageDown(),
-                ZcdeskText.lightCaption(','),
+                Text(',', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().home(),
-                ZcdeskText.lightCaption('and'),
+                Text('and', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().end(),
-                ZcdeskText.lightCaption('Starts a Zurichat search'),
+                Text('Starts a Zurichat search',
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
-
           ),
 
           // Ask if I want to toggle my away status when I log in after having set myself away
           ListTile(
-            leading: ZcCheckBox(
-                value: model.option2,
-                fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                onChanged: (v){
-                  model.setOption2 = v;
-                }
-            ),
-            title: ZcdeskText.lightCaption('Ask if I want to toggle my away status when I log in after having set myself away ')
-
-          ),
+              leading: ZcCheckBox(
+                  value: model.option2,
+                  onChanged: (v) {
+                    model.setOption2 = v;
+                  }),
+              title: Text(
+                  'Ask if I want to toggle my away status when I log in after having set myself away ',
+                  style: kBodyTextStyle.copyWith(fontSize: 13.sp))),
 
           // zuri bot setting
           ListTile(
-              leading: ZcCheckBox(
-                  value: model.option3,
-                  fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                  onChanged: (v){
-                    model.setOption3 = v;
-                  }
-              ),
-              title: ZcdeskText.lightCaption('Send me occassional survey via Zurichat bot'),
-              subtitle: ZcdeskText.lightCaption('We’re working to make Zurichat better. We’d always love to hear your thoughts'),
+            leading: ZcCheckBox(
+                value: model.option3,
+                onChanged: (v) {
+                  model.setOption3 = v;
+                }),
+            title: Text(
+                'Send me occassional survey via Zurichat bot',
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+            subtitle: Text(
+                'We’re working to make Zurichat better. We’d always love to hear your thoughts',
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
           ),
 
           ListTile(
               leading: ZcCheckBox(
                   value: model.option4,
-                  fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                  onChanged: (v){
+                  onChanged: (v) {
                     model.setOption4 = v;
-                  }
-              ),
-              title: ZcdeskText.lightCaption('Warn me about potential malicious linksr')
-
-          ),
-
+                  }),
+              title: Text(
+                  'Warn me about potential malicious links',
+                  style: kBodyTextStyle.copyWith(fontSize: 13.sp))),
         ],
       ),
     );
   }
-
 }

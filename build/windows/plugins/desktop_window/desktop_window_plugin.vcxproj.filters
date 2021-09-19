@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\admin\Desktop\HNG\Dev Branch\zc_desktop_flutter\windows\flutter\ephemeral\.plugin_symlinks\desktop_window\windows\desktop_window_plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\admin\Desktop\HNG\Dev Branch\zc_desktop_flutter\windows\flutter\ephemeral\.plugin_symlinks\desktop_window\windows\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D9883849-A43A-37A3-B4A7-87F8D53D02A4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

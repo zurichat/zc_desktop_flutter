@@ -76,7 +76,7 @@ class AuthInputField extends StatelessWidget {
                 fillColor: filledColor,
                 filled: false,
                 errorText: errorText,
-                errorStyle: bodyStyle.copyWith(color: kcErrorColor),
+                errorStyle: kBodyTextStyle.copyWith(color: kcErrorColor),
                 suffixIcon: trailing != null
                     ? GestureDetector(
                         onTap: onTrailingTapped,

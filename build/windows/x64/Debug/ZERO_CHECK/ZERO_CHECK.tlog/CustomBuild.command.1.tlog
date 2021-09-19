@@ -1,0 +1,10 @@
+^C:\USERS\ADMIN\DESKTOP\HNG\DEV BRANCH\ZC_DESKTOP_FLUTTER\BUILD\WINDOWS\CMAKEFILES\D642648B1AC83F6356D23AF00CA4BEFB\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/admin/Desktop/HNG/Dev Branch/zc_desktop_flutter/windows" "-BC:/Users/admin/Desktop/HNG/Dev Branch/zc_desktop_flutter/build/windows" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/admin/Desktop/HNG/Dev Branch/zc_desktop_flutter/build/windows/zc_desktop_flutter.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

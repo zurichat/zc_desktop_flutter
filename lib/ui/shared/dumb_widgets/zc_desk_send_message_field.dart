@@ -8,7 +8,7 @@ class SendMessageInputField extends StatelessWidget {
     Key? key,
     required this.sendMessage,
   }) : super(key: key);
-  final Function() sendMessage;
+  final Function(String message) sendMessage;
   @override
   Widget build(BuildContext context) {
     final messageController = TextEditingController();
@@ -28,7 +28,9 @@ class SendMessageInputField extends StatelessWidget {
             controller: messageController,
             placeholder: '#designers',
           ),
-          _SendMessageFunctions(sendMessage: sendMessage),
+          _SendMessageFunctions(sendMessage: (){
+            sendMessage(messageController.text);
+          }),
           verticalSpaceSmall,
         ],
       ),
@@ -42,11 +44,12 @@ TextField _buildMessageTextField({
 }) {
   return TextField(
     maxLines: null,
+    controller: controller,
     keyboardType: TextInputType.multiline,
     decoration: InputDecoration(
       border: UnderlineInputBorder(borderSide: BorderSide.none),
       contentPadding: EdgeInsets.symmetric(vertical: 11),
-      hintText: 'Send a message_page to $placeholder',
+      hintText: 'Send a channels_page to $placeholder',
       hintStyle: TextStyle(
         fontSize: 15,
         color: leftNavBarColor,
@@ -82,7 +85,7 @@ class _SendMessageFunctions extends StatelessWidget {
     return Row(
       children: [
         _TextFunction(
-          icon: 'packages/zcdesk_ui/assets/icons/flash.svg',
+          icon: 'assets/icons/flash.svg',
           onTap: launchshortCut,
         ),
         SizedBox(width: 13),
@@ -92,47 +95,42 @@ class _SendMessageFunctions extends StatelessWidget {
         ),
         SizedBox(width: 13),
         _TextFunction(
-          icon: 'packages/zcdesk_ui/assets/icons/bold.svg',
+          icon: 'assets/icons/bold.svg',
           onTap: boldText,
         ),
         horizontalSpaceRegular,
         _TextFunction(
-          icon: 'packages/zcdesk_ui/assets/icons/italic.svg',
+          icon: 'assets/icons/italic.svg',
           onTap: makeItalic,
         ),
         horizontalSpaceRegular,
         _TextFunction(
-          icon: 'packages/zcdesk_ui/assets/icons/link.svg',
+          icon: 'assets/icons/link.svg',
           onTap: addLink,
         ),
         horizontalSpaceRegular,
         _TextFunction(
-          icon: 'packages/zcdesk_ui/assets/icons/list.svg',
+          icon: 'assets/icons/list.svg',
           onTap: createOrderedList,
         ),
         Spacer(),
         _TextFunction(
-          icon: 'packages/zcdesk_ui/assets/icons/at.svg',
+          icon: 'assets/icons/at.svg',
           onTap: mention,
         ),
         horizontalSpaceRegular,
         _TextFunction(
-          icon: 'packages/zcdesk_ui/assets/icons/attach.svg',
+          icon: 'assets/icons/attach.svg',
           onTap: attachFile,
         ),
         horizontalSpaceRegular,
         InkWell(
           onTap: sendMessage,
           hoverColor: Colors.transparent,
-          child: Container(
-            height: 24,
-            width: 24,
-            decoration: BoxDecoration(
-              color: kcPrimaryColor,
-              borderRadius: BorderRadius.circular(2),
-            ),
+          child: Padding(
             padding: EdgeInsets.all(6),
-            // child: SvgPicture.asset('packages/zcdesk_ui/assets/icons/send.svg'),
+            child: SvgPicture.asset('assets/icons/send.svg',color: bodyColor,height: 12,
+              width: 12,),
           ),
         ),
       ],
@@ -155,9 +153,9 @@ class _TextFunction extends StatelessWidget {
       onTap: () {},
       child: Container(
         padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(shape: BoxShape.circle),
+        decoration: BoxDecoration(shape: BoxShape.circle,),
         child: Center(
-             child: SvgPicture.asset(icon),
+             child: SvgPicture.asset(icon,color: lightIconColor,),
             ),
       ),
     );

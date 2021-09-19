@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/accessibility/accessibility_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/advanced/advanced_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/audio_video/audio_video_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/language_region_preference/language_preference_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
-import 'preferenceswidgets/accessibility/accessibility_view.dart';
-import 'preferenceswidgets/advanced/advanced_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_view.dart';
+
+import 'preferenceswidgets/theme/theme_view.dart';
 
 class PreferenceView extends StatelessWidget {
   const PreferenceView({Key? key}) : super(key: key);
@@ -21,53 +28,45 @@ class PreferenceView extends StatelessWidget {
     final List _data = [
       {
         'text': 'Notifications',
-        'icon': Icons.notifications_none_outlined,
+        'assetName':
+            'assets/icons/notifi.svg', //Icons.notifications_none_outlined,
         'widget': NotificationView(),
       },
       {
         'text': 'Sidebar',
-        'icon': Icons.grid_view_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.caption('Sidebar'),
-          ),
-        ),
+        'assetName': 'assets/icons/sidebar.svg', //Icons.grid_view_outlined,
+        'widget': SideBarView(),
       },
       {
         'text': 'Themes',
-        'icon': Icons.remove_red_eye_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Themes'),
-          ),
-        )
+        'assetName': 'assets/icons/themes.svg', //Icons.remove_red_eye_outlined,
+        'widget': ThemeView(),
       },
       {
         'text': 'Message & Media',
-        'icon': Icons.messenger_outline,
+        'assetName': 'assets/icons/media.svg',
         'widget': Container(
           child: Center(
-            child: ZcdeskText.headline('Message & Media'),
+            child: MessageMediaPreferenceView(),
           ),
         )
       },
       {
         'text': 'Language & region',
-        'icon': Icons.language_outlined,
+        'assetName': 'assets/icons/lan.svg',
         'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Language & Region'),
-          ),
+          child: LanguagePreference(),
         )
       },
       {
         'text': 'Accessibility',
-        'icon': Icons.desktop_windows_outlined,
-        'widget': AccessibilityView()
+        'assetName':
+            'assets/icons/access.svg', //Icons.desktop_windows_outlined,
+        'widget': AccessibilityView(),
       },
       {
         'text': 'Mark as read',
-        'icon': Icons.launch,
+        'assetName': 'assets/icons/mark.svg', //Icons.launch,
         'widget': Container(
           child: Center(
             child: ZcdeskText.headline('Mark as read'),
@@ -76,18 +75,13 @@ class PreferenceView extends StatelessWidget {
       },
       {
         'text': 'Audio & Video',
-        'icon': Icons.videocam_outlined,
-        'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Audio & Video'),
-          ),
-        )
+        'assetName': 'assets/icons/audio&vido.svg', //Icons.videocam_outlined,
+        'widget': AudioVideoView(),
       },
       {
         'text': 'Advanced',
-        //This icon will be changed later
-        'icon': Icons.messenger_outline,
-        'widget': AdvancedView()
+        'assetName': 'assets/icons/advanced.svg', //Icons.messenger_outline,
+        'widget': AdvancedView(),
       }
     ];
     return ViewModelBuilder<PreferenceViewModel>.reactive(
@@ -116,6 +110,7 @@ class PreferenceView extends StatelessWidget {
                 ),
               ),
               Divider(
+                thickness: 0.5,
                 color: Colors.black,
               ),
               Row(
@@ -133,7 +128,7 @@ class PreferenceView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return buildListItem(
                                   text: _data[index]['text'],
-                                  icon: _data[index]['icon'],
+                                  assetName: _data[index]['assetName'],
                                   isSelected: model.currentPageIndex == index,
                                   onClicked: () {
                                     model.updatePageIndex(index);
@@ -147,7 +142,7 @@ class PreferenceView extends StatelessWidget {
                     controller: _rightSideBarController,
                     isAlwaysShown: true,
                     scrollbarOrientation: ScrollbarOrientation.right,
-                    thickness: 8,
+                    thickness: 10,
                     showTrackOnHover: true,
                     child: SingleChildScrollView(
                         controller: _rightSideBarController,
@@ -169,18 +164,19 @@ class PreferenceView extends StatelessWidget {
 
 Widget buildListItem({
   required String text,
-  required IconData icon,
+  required String assetName,
   required isSelected,
   VoidCallback? onClicked,
 }) {
-  const color = Colors.black;
   final hoverColor = Colors.grey[200];
   return ListTile(
-    tileColor: isSelected ? kcPrimaryColor : null,
-    leading: Icon(icon, color: color),
+    tileColor: isSelected ? KStartupContainerColor : null,
+    minLeadingWidth: 5,
+    leading: SvgPicture.asset(assetName),
     title: Text(text,
-        style: TextStyle(color: color, fontSize: 16.sp, fontFamily: 'Lato')),
-    hoverColor: isSelected ? kcPrimaryColor : hoverColor,
+        style: TextStyle(
+            fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
+    hoverColor: isSelected ? KStartupContainerColor : hoverColor,
     onTap: onClicked,
   );
 }
