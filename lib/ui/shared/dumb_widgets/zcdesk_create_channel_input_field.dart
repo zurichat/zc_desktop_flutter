@@ -4,7 +4,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
-class AuthInputField extends StatelessWidget {
+class CreateChannelInputField extends StatelessWidget {
   final String hintPlaceHolder;
   final Color? filledColor;
   final Color borderColor;
@@ -24,7 +24,7 @@ class AuthInputField extends StatelessWidget {
   final void Function()? onVisibilityTap;
   final ValueChanged<String>? onChanged;
 
-  const AuthInputField({
+  const CreateChannelInputField({
     Key? key,
     this.onSaved,
     this.filledColor = kcBackgroundColor2,

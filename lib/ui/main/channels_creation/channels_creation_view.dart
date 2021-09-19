@@ -3,114 +3,43 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_create_channel_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
-// import 'package:zcdesk_ui/zcdesk_ui.dart';
+
 
 class ChannelsCreationView extends StatelessWidget {
   const ChannelsCreationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _rightSideBarController = ScrollController();
-
-    //List of datas to be used to populate the leftside and the right side side of the preferences view
-    //TODO Update the widgets in map
-
-    final List _data = [
-      {
-        'text': 'Notifications',
-        'icon': Icons.notifications_none_outlined,
-        'widget': NotificationView(),
-      },
-      // {
-      //   'text': 'Sidebar',
-      //   'icon': Icons.grid_view_outlined,
-      //   'widget': Container(child: Center(child: ZcdeskText.caption('Sidebar'),),),
-      // },
-      // {
-      //   'text': 'Themes',
-      //   'icon': Icons.remove_red_eye_outlined,
-      //   'widget': Container(
-      //     child: Center(
-      //       child: ZcdeskText.headline('Themes'),
-      //     ),
-      //   )
-      // },
-      // {
-      //   'text': 'Message & Media',
-      //   'icon': Icons.messenger_outline,
-      //   'widget': Container(
-      //     child: Center(
-      //       child: ZcdeskText.headline('Message & Media'),
-      //     ),
-      //   )
-      // },
-      // {
-      //   'text': 'Language & region',
-      //   'icon': Icons.language_outlined,
-      //   'widget': Container(
-      //     child: Center(
-      //       child: ZcdeskText.headline('Language & Region'),
-      //     ),
-      //   )
-      // },
-      // {
-      //   'text': 'Accessibility',
-      //   'icon': Icons.desktop_windows_outlined,
-      //   'widget': Container(
-      //     child: Center(
-      //       child: ZcdeskText.headline('Accessibilty'),
-      //     ),
-      //   )
-      // },
-      // {
-      //   'text': 'Mark as read',
-      //   'icon': Icons.launch,
-      //   'widget': Container(
-      //     child: Center(
-      //       child: ZcdeskText.headline('Mark as read'),
-      //     ),
-      //   )
-      // },
-      // {
-      //   'text': 'Audio & Video',
-      //   'icon': Icons.videocam_outlined,
-      //   'widget': Container(
-      //     child: Center(
-      //       child: ZcdeskText.headline('Audio & Video'),
-      //     ),
-      //   )
-      // },
-      // {
-      //   'text': 'Advanced',
-      //   //This icon will be changed later
-      //   'icon': Icons.messenger_outline,
-      //   'widget': Container(
-      //     child: Center(
-      //       child: ZcdeskText.headline('Advanced'),
-      //     ),
-      //   )
-      // }
-    ];
-    return ViewModelBuilder<PreferenceViewModel>.reactive(
+    final GlobalKey<FormState> _formKey = GlobalKey();
+    return ViewModelBuilder<ChannelsCreationViewModel>.reactive(
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
         child: Container(
-          height: 450.h,
-          width: 350.w,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                child: Row(
+          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 690.h : 640.h,
+          width: 410.w,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: model.paddingTop,
+              left: model.paddingLeft,
+              right: model.paddingRight,
+              bottom: model.paddingBottom,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ZcdeskText.headingTwo('Preferences'),
+                    ZcdeskText.headingCreateChannel(model.createChannel),
                     IconButton(
+                      padding: EdgeInsets.symmetric(
+                          vertical: model.iconPadding, horizontal: model.iconPadding),
+                      iconSize: model.iconSize,
                       onPressed: () {
                         model.closeDialog();
                       },
@@ -118,73 +47,124 @@ class ChannelsCreationView extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              Divider(
-                color: Colors.black,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      height: 450.h,
-                      width: 350.w,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ListView.builder(
-                            clipBehavior: Clip.none,
-                            itemCount: _data.length,
-                            itemBuilder: (context, index) {
-                              return buildListItem(
-                                  text: _data[index]['text'],
-                                  icon: _data[index]['icon'],
-                                  isSelected: model.currentPageIndex == index,
-                                  onClicked: () {
-                                    model.updatePageIndex(index);
-                                  });
-                            }),
-                      )),
-                  VerticalDivider(
-                    width: 8,
+                verticalSpaceRegularOne,
+                ZcdeskText.textCreateChannel(
+                  model.channelTextOne,
+                ),
+                verticalSpaceTinyThree,
+                ZcdeskText.textCreateChannel(
+                    model.channelTextTwo),
+                verticalSpaceMedium,
+                if(model.isCreateChannelSuccessful)
+                Text(model.channelTextTen, style: headline7.copyWith(color: kcSuccessColor)),
+                if(model.isCreateChannelNotSuccessful)
+                Text(model.errorMessage, style: headline7.copyWith(color: kcErrorColor)),
+                verticalSpaceTinyThree,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ZcdeskText.headingSmallCreateChannel(
+                        model.channelTextThree,
+                      ),
+                      
+                      CreateChannelInputField(
+                        onChanged: (value) {
+                          model.setchannelName(value);
+                        },
+                        borderColor: model.channelName == '' ? lightIconColor : kcPrimaryColor,
+                        borderFocusColor: model.channelName == '' ? lightIconColor : kcPrimaryColor,
+                        errorText: model.channelNameError,
+                        keyboardType: TextInputType.name,
+                        hintPlaceHolder: '',
+                      ),
+                      verticalSpaceMedium,
+                      Row(
+                        children: [
+                          ZcdeskText.headingSmallCreateChannel(
+                            model.channelTextFour,
+                          ),
+                          ZcdeskText.textCreateChannel(
+                            model.channelTextFive,
+                          ),
+                        ],
+                      ),
+                      CreateChannelInputField(
+                        onChanged: (value) {
+                          model.setchannelDescription(value);
+                        },
+                        borderColor: model.channelDescription == '' ? lightIconColor : kcPrimaryColor,
+                        borderFocusColor: model.channelDescription == '' ? lightIconColor : kcPrimaryColor,
+                        errorText: model.channelDescriptionError,
+                        keyboardType: TextInputType.text,
+                        hintPlaceHolder: '',
+                      ),
+                    ],
                   ),
-                  Scrollbar(
-                    controller: _rightSideBarController,
-                    isAlwaysShown: true,
-                    scrollbarOrientation: ScrollbarOrientation.right,
-                    thickness: 8,
-                    showTrackOnHover: true,
-                    child: SingleChildScrollView(
-                        controller: _rightSideBarController,
-                        child: Container(
-                            height: 450.h,
-                            width: 200.w,
-                            child: _data[model.currentPageIndex]['widget'])),
-                  )
-                ],
-              )
-            ],
+                ),
+                verticalSpaceMediumTwo,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ZcdeskText.headingSmallCreateChannel(
+                      model.channelTextSix,
+                    ),
+                    Switch(
+                      value: model.isSwitched,
+                      onChanged: (value) {
+                        model.setIsSwitched(value);
+                      },
+                      activeTrackColor: kcCreateChannelHoverColor,
+                      inactiveTrackColor: kcBackgroundColor1,
+                      activeColor: kcPrimaryColor,
+                    ),
+                  ],
+                ),
+                verticalSpaceSmall,
+                ZcdeskText.textCreateChannel(
+                  model.channelTextSeven,
+                ),
+                verticalSpaceTinyTwo,
+                ZcdeskText.textCreateChannel(
+                  model.channelTextEight,
+                ),
+                verticalSpaceLarge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 55.h,
+                      width: 155.w,
+                      child: TextButton(
+                        style: ButtonStyle(
+                            mouseCursor: MaterialStateMouseCursor.clickable,
+                            backgroundColor: MaterialStateProperty.all(
+                                (model.channelName == '' && model.channelDescription == '') ? kcCreateChannelColor : kcPrimaryColor,)),
+                        onPressed: () async {
+                          await model.validateAndCreateChannel();
+                        },
+                        child: !model.isBusy
+                            ? Padding(
+                          padding: EdgeInsets.only(bottom: model.paddingBottom2),
+                          child: Text(
+                               model.channelTextNine,
+                                style: authBtnChannelStyle,
+                              ),
+                            )
+                            : CircularProgressIndicator(
+                                color: whiteColor,
+                              ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
-      viewModelBuilder: () => PreferenceViewModel(),
+      viewModelBuilder: () => ChannelsCreationViewModel(),
     );
   }
-}
-
-Widget buildListItem({
-  required String text,
-  required IconData icon,
-  required isSelected,
-  VoidCallback? onClicked,
-}) {
-  const color = Colors.black;
-  final hoverColor = Colors.grey[200];
-  return ListTile(
-    tileColor: isSelected ? kcPrimaryColor : null,
-    leading: Icon(icon, color: color),
-    title: Text(text,
-        style: TextStyle(color: color, fontSize: 16.sp, fontFamily: 'Lato')),
-    hoverColor: isSelected ? kcPrimaryColor : hoverColor,
-    onTap: onClicked,
-  );
 }

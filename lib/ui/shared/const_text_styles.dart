@@ -27,13 +27,63 @@ TextStyle authBtnStyle = TextStyle(
     color: whiteColor,
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
+TextStyle authBtnChannelStyle = TextStyle(
+    fontSize: 20.sp,
+    color: whiteColor,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Lato');
+TextStyle authBtnChannelDisplayStyle = TextStyle(
+    fontSize: 20.sp,
+    color: whiteColor,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Lato');
+TextStyle authBtnChannelDisplayBlackStyle = TextStyle(
+    fontSize: 20.sp,
+    color: createChannelHeaderColor,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Lato');
 TextStyle leftSideBarStyle = TextStyle(
     fontSize: 15.sp,
     color: leftNavBarColor,
     fontWeight: FontWeight.normal,
     fontFamily: 'Lato');
-TextStyle dropDownBodyTextStyle = TextStyle(
+TextStyle searchChannelHeaderStyle = TextStyle(
     fontSize: 16.sp,
+    color: Color.fromRGBO(153, 153, 153, 1),
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Lato');
+TextStyle searchChannelHeaderGreenStyle = TextStyle(
+    fontSize: 16.sp,
+    color: kcPrimaryColor,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Lato');
+TextStyle createChannelHeaderStyle = TextStyle(
+    fontSize: 29.sp,
+    color: createChannelHeaderColor,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Lato');
+TextStyle createChannelSmallHeaderStyle = TextStyle(
+    fontSize: 17.sp,
+    color: createChannelHeaderColor,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Lato');
+TextStyle createChannelTextStyle = TextStyle(
+    fontSize: 15.sp,
+    color: createChannelTextColor,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Lato');
+TextStyle displayChannelSmallHeaderStyle = TextStyle(
+    fontSize: 21.sp,
+    color: whiteColor,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Lato');
+TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
+    fontSize: 20.5.sp,
+    color: createChannelHeaderColor,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Lato');
+TextStyle dropDownBodyTextStyle = TextStyle(
+    fontSize: 15.sp,
     color: leftNavBarColor,
     fontWeight: FontWeight.w400,
     fontFamily: 'Lato');
@@ -53,6 +103,11 @@ TextStyle headline6 = TextStyle(
   fontWeight: FontWeight.w700,
   fontFamily: 'Lato',
 );
+
+TextStyle headline7 = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Lato');
 
 TextStyle headline3 = TextStyle(
   fontSize: 35.sp,

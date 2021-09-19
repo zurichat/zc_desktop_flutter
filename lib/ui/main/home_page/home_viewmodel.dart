@@ -54,6 +54,7 @@ class HomeViewModel extends BaseViewModel {
     'Files': 'assets/images/Vector.png',
     'Integrate': 'assets/images/Group2.png',
     'To-do': 'assets/images/default.png',
+    'Channels': 'assets/images/arrowdown.png',
   };
 
   Map<String, String> get sidebarItems => _sidebarItems;

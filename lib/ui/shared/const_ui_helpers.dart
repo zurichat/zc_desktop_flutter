@@ -10,9 +10,13 @@ Widget horizontalSpaceLarge = SizedBox(width: 50.0.w);
 
 // vertical spacing
 Widget verticalSpaceTiny = SizedBox(height: 5.0.h);
+Widget verticalSpaceTinyTwo = SizedBox(height: 6.0.h);
+Widget verticalSpaceTinyThree = SizedBox(height: 3.0.h);
 Widget verticalSpaceSmall = SizedBox(height: 10.0.h);
 Widget verticalSpaceRegular = SizedBox(height: 18.0.h);
+Widget verticalSpaceRegularOne = SizedBox(height: 16.0.h);
 Widget verticalSpaceMedium = SizedBox(height: 25.0.h);
+Widget verticalSpaceMediumTwo = SizedBox(height: 30.0.h);
 Widget verticalSpaceLarge = SizedBox(height: 50.0.h);
 
 fullWidth(BuildContext context){
