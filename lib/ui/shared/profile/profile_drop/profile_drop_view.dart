@@ -222,7 +222,7 @@ class ProfilePicture extends StatelessWidget {
               children: [
                 Text(
                   "Bernice_Perp",
-                  style: subheadingStyle,
+                  style: kSubHeadingTextStyle,
                 ),
                 verticalSpaceTiny,
                 Row(

@@ -204,7 +204,7 @@ class ProfileModalView extends StatelessWidget {
               height: 19.h,
             ),
             ZcdeskText.subheading(
-                'There aren’t any files to see here right now. But there could be - dragand drop any file into the message_page pane to add it to this conversation.')
+                'There aren’t any files to see here right now. But there could be - dragand drop any file into the channels_page pane to add it to this conversation.')
           ],
         ));
   }

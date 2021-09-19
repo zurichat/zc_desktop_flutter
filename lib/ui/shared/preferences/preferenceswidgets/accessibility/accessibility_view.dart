@@ -72,7 +72,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text('Allow animated images and emoji',
-                      style: bodyStyle.copyWith(fontSize: 15.sp))),
+                      style: kBodyTextStyle.copyWith(fontSize: 15.sp))),
             ],
           ),
           verticalSpaceRegular,
@@ -105,7 +105,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text(model.sentMsgSound,
-                      style: bodyStyle.copyWith(fontSize: 15.sp))),
+                      style: kBodyTextStyle.copyWith(fontSize: 15.sp))),
             ],
           ),
 
@@ -122,7 +122,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text(model.receiveMsgSound,
-                      style: bodyStyle.copyWith(fontSize: 15.sp))),
+                      style: kBodyTextStyle.copyWith(fontSize: 15.sp))),
             ],
           ),
           verticalSpaceSmall,
@@ -138,7 +138,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text(model.readIncomingMsg,
-                      style: bodyStyle.copyWith(fontSize: 15.sp))),
+                      style: kBodyTextStyle.copyWith(fontSize: 15.sp))),
             ],
           ),
           verticalSpaceSmall,
@@ -215,7 +215,7 @@ class ShortCutDescription extends StatelessWidget {
               style: headline6.copyWith(fontSize: 14.sp)),
           subtitle: Text(
               'The last visible message in the list will be selected',
-              style: bodyStyle.copyWith(fontSize: 14.sp)),
+              style: kBodyTextStyle.copyWith(fontSize: 14.sp)),
           leading: Radio(
             value: UpButtonsChoice.option1,
             groupValue: model.upButtonsChoice,
@@ -230,7 +230,7 @@ class ShortCutDescription extends StatelessWidget {
               style: headline6.copyWith(fontSize: 14.sp)),
           subtitle: Text(
               'The last message you sent will be selected and in editing mode',
-              style: bodyStyle.copyWith(fontSize: 14.sp)),
+              style: kBodyTextStyle.copyWith(fontSize: 14.sp)),
           leading: Radio(
             value: UpButtonsChoice.option2,
             groupValue: model.upButtonsChoice,
@@ -246,13 +246,13 @@ class ShortCutDescription extends StatelessWidget {
         //notice
         Row(
           children: [
-            Text('Note: press ', style: bodyStyle.copyWith(fontSize: 13.sp)),
+            Text('Note: press ', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
             ShortCuts().ctrl(),
-            Text(' + ', style: bodyStyle.copyWith(fontSize: 13.sp)),
+            Text(' + ', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
             ShortCuts().up(),
             Flexible(
                 child: Text(' to edit your last message, with either option',
-                    style: bodyStyle.copyWith(fontSize: 13.sp))),
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp))),
           ],
         )
       ],

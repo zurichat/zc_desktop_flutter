@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:stacked/stacked.dart';
-// import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class AudioVideoViewModel extends BaseViewModel {
-  // final _localStorageService = locator<LocalStorageService>();
+  final _localStorageService = locator<LocalStorageService>();
   String? _selectedSpeaker;
   String? _selectedCamera;
 

@@ -9,11 +9,12 @@ import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_v
 
 Widget buildAppBar(BuildContext context,
     {bool isActive = false, bool isHome = true, String text = ''}) {
+
   final icona = Icons.arrow_back;
   final iconb = Icons.arrow_forward;
   final iconc = Icons.watch_later_outlined;
   return Container(
-    height: 40.h,
+    height: 50.h,
     color: Colors.black,
     child: WindowTitleBarBox(
       child: MoveWindow(

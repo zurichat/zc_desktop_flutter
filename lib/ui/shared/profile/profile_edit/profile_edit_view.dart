@@ -45,7 +45,7 @@ class ProfileEditView extends StatelessWidget {
                   children: [
                     Text(
                       "Edit Profile",
-                      style: heading2Style,
+                      style: kHeading2TextStyle,
                     ),
                     IconButton(
                       onPressed: () {
@@ -168,7 +168,7 @@ class ProfileEditView extends StatelessWidget {
                                     children: [
                                       Text(
                                         "Profile Photo",
-                                        style: heading3Style,
+                                        style: kHeading3TextStyle,
                                       ),
                                       verticalSpaceRegular,
                                       Container(
@@ -189,7 +189,7 @@ class ProfileEditView extends StatelessWidget {
                                           onPressed: () {},
                                           child: Text(
                                             "Remove photo",
-                                            style: subheadingStyle,
+                                            style: kSubHeadingTextStyle,
                                           )),
                                     ],
                                   ),
@@ -217,7 +217,7 @@ class ProfileEditView extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         "Cancel",
-                        style: heading4Style,
+                        style: kHeading3TextStyle,
                       ),
                     ),
                     horizontalSpaceSmall,

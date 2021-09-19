@@ -20,8 +20,8 @@ class AudioVideoView extends StatelessWidget {
       builder: (context, model, child) => Scrollbar(
         controller: _scrollController,
         isAlwaysShown: true,
-        // interactive: true,
-        // scrollbarOrientation: ScrollbarOrientation.right,
+        interactive: true,
+        scrollbarOrientation: ScrollbarOrientation.right,
         hoverThickness: 8,
         thickness: 5,
         child: SingleChildScrollView(
@@ -102,7 +102,7 @@ class AudioVideoView extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         'Test Speaker',
-                        style: bodyStyle.copyWith(
+                        style: kBodyTextStyle.copyWith(
                           fontWeight: FontWeight.w700,
                           fontSize: 15.w,
                           color: bodyColor,

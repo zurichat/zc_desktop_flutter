@@ -15,7 +15,7 @@ class SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: bodyStyle.copyWith(color: bodyColor, fontWeight: FontWeight.w700),
+      style: kBodyTextStyle.copyWith(color: bodyColor, fontWeight: FontWeight.w700),
     );
   }
 }

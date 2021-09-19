@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_view.dart';
+import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'channels_viewmodel.dart';
 
-import 'message_viewmodel.dart';
-
-class MessageView extends StatelessWidget {
-  const MessageView({Key? key}): super(key: key);
+class ChannelsView extends ViewModelWidget<WorkspaceViewModel> {
   @override
-  Widget build(BuildContext context) {
-    return ViewModelBuilder<MessageViewModel>.reactive(
-      builder: (context, model, child) => Scaffold(
+  Widget build(BuildContext context, WorkspaceViewModel model) {
+    return Scaffold(
+      backgroundColor: Colors.white,
         body: Container(
           margin: const EdgeInsets.symmetric(vertical: 9.0),
           padding: EdgeInsets.all(9.0),
@@ -115,13 +114,11 @@ class MessageView extends StatelessWidget {
           ),
           //color: Colors.green,
         ),
-      ),
-      viewModelBuilder: () => MessageViewModel(),
     );
   }
 }
 
-Widget messageHeader(BuildContext context, MessageViewModel model) {
+Widget messageHeader(BuildContext context, WorkspaceViewModel model) {
   return Container(
         child: Row(children: [
           GestureDetector(
@@ -149,7 +146,7 @@ Widget messageHeader(BuildContext context, MessageViewModel model) {
     );
   }
 
-Widget messageReactions(MessageViewModel model) {
+Widget messageReactions(WorkspaceViewModel model) {
   return Container(
         child: Column(children: [
           Row(
@@ -182,7 +179,7 @@ Widget messageReactions(MessageViewModel model) {
     );
   }
 
-Widget messageReplies(MessageViewModel model) {
+Widget messageReplies(WorkspaceViewModel model) {
   return InkWell(
       onTap: () {
         print("Threads opened");
@@ -201,7 +198,7 @@ Widget messageReplies(MessageViewModel model) {
                 userDefaultImageUrl: model.userDefaultImageUrl),
             horizontalSpaceTiny,
             //TODO: Get message time of last reply in a thread
-            Text('${MessageViewModel().numberOfReplies} replies',
+            Text('${ChannelsViewModel().numberOfReplies} replies',
                 style: TextStyle(color: kcSecondaryColor)),
             horizontalSpaceTiny,
             Text('Last reply yesterday at 9:12PM')

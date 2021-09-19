@@ -206,8 +206,8 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
         ),
         verticalSpaceSmall,
         Text(model.longText[1],
-            style:
-                bodyStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500)),
+            style: kBodyTextStyle.copyWith(
+                fontSize: 12, fontWeight: FontWeight.w500)),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -257,12 +257,12 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
           width: 400.w,
           child: Text(
               'Display the jumbo versions of emoji (up to 23 at a time!) in messages without text.',
-              style: bodyStyle.copyWith(
+              style: kBodyTextStyle.copyWith(
                   fontSize: 12, fontWeight: FontWeight.w500)),
         ),
         verticalSpaceMedium,
         Text('Here is an Example',
-            style: heading4Style.copyWith(
+            style: kHeading4TextStyle.copyWith(
                 fontSize: 12, fontWeight: FontWeight.w500, color: timeColor)),
         verticalSpaceSmall,
         ReusableContainer(
@@ -297,7 +297,7 @@ Widget themeSection(MessageMediaPreferenceViewModel model) {
           height: 10,
         ),
         Text('Here is an Example',
-            style: heading4Style.copyWith(
+            style: kHeading4TextStyle.copyWith(
                 fontSize: 13, fontWeight: FontWeight.w500)),
         SizedBox(
           height: 10,
@@ -416,7 +416,7 @@ class ReusableContainer extends StatelessWidget {
                         children: [
                           Text(
                             title!,
-                            style: heading4Style.copyWith(fontSize: 13),
+                            style: kHeading4TextStyle.copyWith(fontSize: 13),
                           ),
                           SizedBox(
                             width: 10,
@@ -446,7 +446,7 @@ class ReusableContainer extends StatelessWidget {
                               softWrap: true,
                               text: TextSpan(
                                   text: subtitle!,
-                                  style: heading4Style.copyWith(
+                                  style: kHeading4TextStyle.copyWith(
                                       color: Colors.black,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500),
@@ -489,8 +489,8 @@ buildRadio(
       ),
       Text(
         txt,
-        // style:
-        // extraSmallStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
+        style: kExtraSmallTextStyle.copyWith(
+            fontSize: 12, fontWeight: FontWeight.w500),
       )
     ],
   );
