@@ -18,9 +18,9 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: HomeView),
+    MaterialRoute(page: HomeView, initial: true),
     AdaptiveRoute(page: WorkspaceView),
-    MaterialRoute(page: LoginView, initial: true),
+    MaterialRoute(page: LoginView,),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
