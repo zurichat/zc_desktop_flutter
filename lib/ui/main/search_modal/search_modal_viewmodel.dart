@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
@@ -6,14 +5,12 @@ import 'package:zc_desktop_flutter/enums/button_type_enum.dart';
 
 class SearchModalViewmodel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
-  final _scrollbarController = ScrollController();
   String? _text;
   String? _hintText;
   bool isClicked = false;
   bool swap = false;
   ButtonType buttonType = ButtonType.CHANNELS;
 
-  ScrollController get scrollbarController => _scrollbarController;
 
   String get text => _text!;
   String get hintText => _hintText!;

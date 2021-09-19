@@ -15,6 +15,8 @@ dependencies:
   stacked_services:
   logger: ^1.0.0
   stacked_themes: ^0.3.6
+  stacked_hooks: ^0.2.1
+  
 
  # utilities
   cupertino_icons: ^1.0.2
@@ -24,6 +26,7 @@ dependencies:
   bitsdojo_window: ^0.1.1+1
   desktop_window: ^0.4.0
   intl: ^0.17.0
+  flutter_hooks: ^0.17.0
 
   # animation
   lottie: ^1.1.0
