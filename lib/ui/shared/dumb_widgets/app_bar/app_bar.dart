@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zc_desktop_flutter/ui/main/search_modal/search_modal_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 
@@ -46,13 +47,12 @@ Widget buildAppBar(BuildContext context,
                       )),
                 if (!isSignUp && !isSignIn)
                   IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      iconb,
-                      size: 20,
-                      color: lightIconColor,
-                    )
-                  ),
+                      onPressed: () {},
+                      icon: Icon(
+                        iconb,
+                        size: 20,
+                        color: lightIconColor,
+                      )),
                 if (!isSignUp && !isSignIn)
                   IconButton(
                     onPressed: () {
@@ -74,21 +74,30 @@ Widget buildAppBar(BuildContext context,
             if (!isSignUp && !isSignIn)
               Expanded(
                 child: GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 38.h,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(153, 153, 153, 0.2),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 7),
-                      child: Text('Search here',
-                          style: TextStyle(
-                              color: Color.fromRGBO(231, 231, 231, 1),
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Lato')),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => SearchModalView(),
+                    );
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.text,
+                    child: Container(
+                      height: 38.h,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(153, 153, 153, 0.2),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 9, vertical: 7),
+                        child: Text('Search here',
+                            style: TextStyle(
+                                color: Color.fromRGBO(231, 231, 231, 1),
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Lato')),
+                      ),
                     ),
                   ),
                 ),
