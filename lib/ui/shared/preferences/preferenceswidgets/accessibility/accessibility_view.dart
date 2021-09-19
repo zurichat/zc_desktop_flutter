@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_checkbox.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 import 'accessibility_viewmodel.dart';
 
@@ -17,8 +18,8 @@ class AccessibilityView extends StatelessWidget {
     final _rightSideBarController = ScrollController();
 
     return ViewModelBuilder<AccessibilityViewModel>.reactive(
-        viewModelBuilder: ()=>AccessibilityViewModel(),
-        builder: (context,model,_){
+        viewModelBuilder: () => AccessibilityViewModel(),
+        builder: (context, model, _) {
           return Scrollbar(
             controller: _rightSideBarController,
             isAlwaysShown: true,
@@ -33,13 +34,9 @@ class AccessibilityView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-                    msgAnimationSection(model),
-
+                    MessageAnimationSection(model: model),
                     verticalSpaceRegular,
-
-                    keyboardSettingSection(model)
-
+                    KeyBoardSettingsSection(model: model)
                   ],
                 ),
               ),
@@ -48,49 +45,53 @@ class AccessibilityView extends StatelessWidget {
         });
   }
 
+ 
+}
 
-  Widget msgAnimationSection(AccessibilityViewModel model){
+class MessageAnimationSection extends StatelessWidget {
+  const MessageAnimationSection({Key? key, required this.model})
+      : super(key: key);
+
+  final AccessibilityViewModel model;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // animation setting
-          ZcdeskText.boldCaption('Animation'),
+          Text('Animation', style: headline6.copyWith(fontSize: 15.sp)),
           Row(
             children: [
               ZcCheckBox(
                   value: model.animateValue,
-                  fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                  onChanged: (v){
+                  onChanged: (v) {
                     model.setAnimateValue = v;
-                  }
-              ),
+                  }),
               horizontalSpaceTiny,
-              Flexible(child: ZcdeskText.lightCaption('Allow animated images and emoji')),
+              Flexible(
+                  child: Text('Allow animated images and emoji',
+                      style: bodyStyle.copyWith(fontSize: 15.sp))),
             ],
           ),
           verticalSpaceRegular,
 
           //messaging setting
-          ZcdeskText.boldCaption('Direct message announcements'),
+          Text('Direct message announcements',
+              style: headline6.copyWith(fontSize: 15.sp)),
+
           verticalSpaceSmall,
-          Text.rich(
-              TextSpan(
-                  style: TextStyle(
-                      color: bodyColor,
-                      fontFamily: 'Lato',
-                      fontSize: 13
-                  ),
-                  children: [
-                    TextSpan(text: model.msg),
-                    TextSpan(
-                        text:' '+ model.boldMsg,
-                        style: TextStyle(fontWeight: FontWeight.bold)
-                    )
-                  ]
-              )
-          ),
+          Text.rich(TextSpan(
+              style: TextStyle(
+                  color: bodyColor, fontFamily: 'Lato', fontSize: 15.sp),
+              children: [
+                TextSpan(text: model.msg),
+                TextSpan(
+                    text: ' ' + model.boldMsg,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp))
+              ])),
           verticalSpaceRegular,
 
           // Play a sound when a message is sent
@@ -98,15 +99,16 @@ class AccessibilityView extends StatelessWidget {
             children: [
               ZcCheckBox(
                   value: model.msgSound,
-                  fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                  onChanged: (v){
+                  onChanged: (v) {
                     model.setMsgSound = v;
-                  }
-              ),
+                  }),
               horizontalSpaceTiny,
-              Flexible(child: ZcdeskText.lightCaption(model.sentMsgSound)),
+              Flexible(
+                  child: Text(model.sentMsgSound,
+                      style: bodyStyle.copyWith(fontSize: 15.sp))),
             ],
           ),
+
           verticalSpaceSmall,
 
           // Play a sound when a message is received
@@ -114,13 +116,13 @@ class AccessibilityView extends StatelessWidget {
             children: [
               ZcCheckBox(
                   value: model.receiveSound,
-                  fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                  onChanged: (v){
+                  onChanged: (v) {
                     model.setReceiveSound = v;
-                  }
-              ),
+                  }),
               horizontalSpaceTiny,
-              Flexible(child: ZcdeskText.lightCaption(model.receiveMsgSound)),
+              Flexible(
+                  child: Text(model.receiveMsgSound,
+                      style: bodyStyle.copyWith(fontSize: 15.sp))),
             ],
           ),
           verticalSpaceSmall,
@@ -130,98 +132,109 @@ class AccessibilityView extends StatelessWidget {
             children: [
               ZcCheckBox(
                   value: model.readIncoming,
-                  fillColor: MaterialStateProperty.resolveWith(model.getColor),
-                  onChanged: (v){
+                  onChanged: (v) {
                     model.setReadIncoming = v;
-                  }
-              ),
+                  }),
               horizontalSpaceTiny,
-              Flexible(child: ZcdeskText.lightCaption(model.readIncomingMsg)),
+              Flexible(
+                  child: Text(model.readIncomingMsg,
+                      style: bodyStyle.copyWith(fontSize: 15.sp))),
             ],
           ),
           verticalSpaceSmall,
-
         ],
       ),
     );
   }
+}
 
-  Widget keyboardSettingSection(AccessibilityViewModel model){
+class KeyBoardSettingsSection extends StatelessWidget {
+  const KeyBoardSettingsSection({Key? key, required this.model})
+      : super(key: key);
+
+  final AccessibilityViewModel model;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // key short cut setting
-          ZcdeskText.boldCaption('Keyboard'),
+          Text('Keyboard', style: headline6.copyWith(fontSize: 15.sp)),
           verticalSpaceRegular,
 
           // desc
           GestureDetector(
-            onTap:(){},
-            child: Text.rich(
-                TextSpan(
-                    style: TextStyle(
-                        color: bodyColor,
-                        fontFamily: 'Lato',
-                        fontSize: 13
-                    ),
-                    children: [
-                      TextSpan(text: model.shortCutMsg),
-                      TextSpan(
-                          text:' '+ model.boldShortCutMsg,
-                          style: TextStyle(
-                            color: kcPrimaryColor,
-                          )
-                      )
-                    ]
-                )
-            ),
+            onTap: () {},
+            child: Text.rich(TextSpan(
+                style: TextStyle(
+                    color: bodyColor, fontFamily: 'Lato', fontSize: 15.sp),
+                children: [
+                  TextSpan(text: model.shortCutMsg),
+                  TextSpan(
+                      text: ' ' + model.boldShortCutMsg,
+                      style:
+                          TextStyle(color: kcSecondaryColor, fontSize: 15.sp))
+                ])),
           ),
           verticalSpaceRegular,
 
           // desc2
-           Row(
-              children: [
-                ZcdeskText.boldCaption('Press'),
-                horizontalSpaceTiny,
-                ShortCuts().up(),
-                horizontalSpaceTiny,
-                 ZcdeskText.boldCaption('in the empty message field to:'),
-              ],
-            ),
+          Row(
+            children: [
+              Text('Press', style: headline6.copyWith(fontSize: 15.sp)),
+              horizontalSpaceTiny,
+              ShortCuts().up(),
+              horizontalSpaceTiny,
+              Text('in the empty message field to:',
+                  style: headline6.copyWith(fontSize: 15.sp))
+            ],
+          ),
           verticalSpaceSmall,
 
-          shortcutActions(model)
-
+          ShortCutDescription(model: model)
         ],
       ),
     );
   }
+}
 
-  Widget shortcutActions(AccessibilityViewModel model){
+class ShortCutDescription extends StatelessWidget {
+  const ShortCutDescription({Key? key, required this.model}) : super(key: key);
+
+  final AccessibilityViewModel model;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
-          title: ZcdeskText.boldCaption('Move focus to the message list'),
-          subtitle:  ZcdeskText.lightCaption('The last visible message in the list will be selected'),
+          title: Text('Move focus to the message list',
+              style: headline6.copyWith(fontSize: 14.sp)),
+          subtitle: Text(
+              'The last visible message in the list will be selected',
+              style: bodyStyle.copyWith(fontSize: 14.sp)),
           leading: Radio(
             value: UpButtonsChoice.option1,
-            groupValue:model.upButtonsChoice,
-            onChanged: (UpButtonsChoice? val){
+            groupValue: model.upButtonsChoice,
+            onChanged: (UpButtonsChoice? val) {
               model.setCheckVal = val;
             },
             activeColor: kcPrimaryColor,
           ),
         ),
         ListTile(
-          title: ZcdeskText.boldCaption('Edit your last message'),
-          subtitle:  ZcdeskText.lightCaption('The last message you sent will be selected and in editing mode'),
+          title: Text('Edit your last message',
+              style: headline6.copyWith(fontSize: 14.sp)),
+          subtitle: Text(
+              'The last message you sent will be selected and in editing mode',
+              style: bodyStyle.copyWith(fontSize: 14.sp)),
           leading: Radio(
             value: UpButtonsChoice.option2,
             groupValue: model.upButtonsChoice,
-            onChanged: (UpButtonsChoice? val){
+            onChanged: (UpButtonsChoice? val) {
               model.setCheckVal = val;
             },
             activeColor: kcPrimaryColor,
@@ -233,16 +246,16 @@ class AccessibilityView extends StatelessWidget {
         //notice
         Row(
           children: [
-            ZcdeskText.extraSmallText('Note: press '),
+            Text('Note: press ', style: bodyStyle.copyWith(fontSize: 13.sp)),
             ShortCuts().ctrl(),
-            ZcdeskText.extraSmallText(' + '),
+            Text(' + ', style: bodyStyle.copyWith(fontSize: 13.sp)),
             ShortCuts().up(),
-            Flexible(child: ZcdeskText.extraSmallText(' to edit your last message, with either option')),
+            Flexible(
+                child: Text(' to edit your last message, with either option',
+                    style: bodyStyle.copyWith(fontSize: 13.sp))),
           ],
-
         )
       ],
     );
   }
-
 }
