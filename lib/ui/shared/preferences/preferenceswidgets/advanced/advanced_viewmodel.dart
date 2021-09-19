@@ -1,8 +1,4 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 
 
 enum EnterButtonsChoice { sendMsg, newLine }
@@ -82,16 +78,6 @@ class AdvancedViewModel extends BaseViewModel{
     notifyListeners();
   }
 
-// checkbox color
-  Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.focused
-    };
-    if (states.any(interactiveStates.contains)) {
-      return kcBackgroundColor1;
-    }
-    return kcPrimaryColor;
-  }
+
 
 }

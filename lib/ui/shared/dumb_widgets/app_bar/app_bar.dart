@@ -8,10 +8,7 @@ import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_view.dart';
 
 Widget buildAppBar(BuildContext context,
-    {bool isActive = false,
-    bool isSignUp = false,
-    bool isSignIn = false,
-    String text = ''}) {
+    {bool isActive = false, bool isHome = true, String text = ''}) {
   final icona = Icons.arrow_back;
   final iconb = Icons.arrow_forward;
   final iconc = Icons.watch_later_outlined;
@@ -21,31 +18,43 @@ Widget buildAppBar(BuildContext context,
     child: WindowTitleBarBox(
       child: MoveWindow(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment:
+              isHome ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: SvgPicture.asset('assets/icons/zuri.svg'),
-            ),
-            if (!isSignUp && !isSignIn) SizedBox(width: 40.w),
-            Row(
-              children: [
-                !isSignUp && !isSignIn
-                    ? IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          icona,
-                          size: 20,
-                          color: lightIconColor,
-                        ),
-                      )
-                    : Expanded(
-                        child: Text(
-                        text,
-                        style:
-                            TextStyle(color: Colors.white, fontFamily: 'Lato'),
-                      )),
-                if (!isSignUp && !isSignIn)
+            if (isHome)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                child: SvgPicture.asset('assets/icons/zuri.svg'),
+              ),
+            if (!isHome)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Icon(Icons.menu,
+                        color: Color.fromRGBO(255, 255, 255, 1)),
+                  ),
+                  SizedBox(
+                    width: 26.w,
+                  ),
+                  Text(
+                    text,
+                    style: TextStyle(color: Colors.white, fontFamily: 'Lato'),
+                  ),
+                ],
+              ),
+            if (isHome)
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      icona,
+                      size: 20,
+                      color: lightIconColor,
+                    ),
+                  ),
                   IconButton(
                       onPressed: () {},
                       icon: Icon(
@@ -53,7 +62,6 @@ Widget buildAppBar(BuildContext context,
                         size: 20,
                         color: lightIconColor,
                       )),
-                if (!isSignUp && !isSignIn)
                   IconButton(
                     onPressed: () {
                       showDialog(
@@ -68,10 +76,10 @@ Widget buildAppBar(BuildContext context,
                       color: lightIconColor,
                     ),
                   ),
-              ],
-            ),
+                ],
+              ),
             SizedBox(width: 29.w),
-            if (!isSignUp && !isSignIn)
+            if (isHome)
               Expanded(
                 child: GestureDetector(
                   onTap: () {},
@@ -93,15 +101,15 @@ Widget buildAppBar(BuildContext context,
                   ),
                 ),
               ),
-            if (!isSignUp && !isSignIn)
+            if (isHome)
               SizedBox(
                   width: MediaQuery.of(context).size.width <= 1440
                       ? 120.w
                       : 500.w),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                if (!isSignUp && !isSignIn)
+            if (isHome)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
                   GestureDetector(
                     child: Stack(
                       clipBehavior: Clip.none,
@@ -128,10 +136,18 @@ Widget buildAppBar(BuildContext context,
                       ],
                     ),
                   ),
-                SizedBox(width: 35.w),
-                Align(alignment: Alignment.centerRight, child: WindowsButton())
-              ],
-            )
+                  SizedBox(width: 35.w),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: WindowsButton(),
+                  )
+                ],
+              ),
+            if (!isHome)
+              Padding(
+                padding: const EdgeInsets.only(right: 15.0),
+                child: WindowsButton(),
+              )
           ],
         ),
       ),
@@ -147,7 +163,7 @@ class WindowsButton extends StatelessWidget {
     var colors = WindowButtonColors(
       mouseOver: Color(0xFFD32F2F),
       mouseDown: Color(0xFFB71C1C),
-      iconNormal: lightIconColor,
+      iconNormal: Colors.white,
       iconMouseOver: Colors.white,
     );
     return Row(

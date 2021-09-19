@@ -489,8 +489,8 @@ buildRadio(
       ),
       Text(
         txt,
-        style:
-            extraSmallStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
+        // style:
+        // extraSmallStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
       )
     ],
   );

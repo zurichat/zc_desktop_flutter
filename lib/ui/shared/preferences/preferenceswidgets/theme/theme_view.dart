@@ -574,7 +574,7 @@ Container subContainer(BuildContext context, double width, bool Checked,
         Container(
             child: Checkbox(
           fillColor: MaterialStateProperty.all<Color>(Colors.blue),
-          shape: CircleBorder(),
+          // shape: CircleBorder(),
           activeColor: Colors.blue,
           value: Checked,
           onChanged: onChanged,

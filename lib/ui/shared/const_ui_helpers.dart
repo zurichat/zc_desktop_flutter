@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+//common values
+final topBarHeight = 50.h;
+
 // horizontal spacing
 Widget horizontalSpaceVeryTiny = SizedBox(
   width: 3.0.w,

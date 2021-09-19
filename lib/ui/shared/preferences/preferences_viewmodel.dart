@@ -1,9 +1,9 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
+// import 'package:zc_desktop_flutter/app/app.locator.dart';
 
 class PreferenceViewModel extends BaseViewModel {
-  final _navigator = locator<NavigationService>();
+  // final _navigator = locator<NavigationService>();
   var _currentPageIndex = 0;
 
   get currentPageIndex => _currentPageIndex;
@@ -14,7 +14,7 @@ class PreferenceViewModel extends BaseViewModel {
   }
 
   void closeDialog() {
-    _navigator.popRepeated(1);
+    // _navigator.popRepeated(1);
     notifyListeners();
   }
 }

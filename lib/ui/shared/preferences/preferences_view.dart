@@ -140,7 +140,7 @@ class PreferenceView extends StatelessWidget {
                   Scrollbar(
                     controller: _rightSideBarController,
                     isAlwaysShown: true,
-                    scrollbarOrientation: ScrollbarOrientation.right,
+                    // scrollbarOrientation: ScrollbarOrientation.right,
                     thickness: 10,
                     showTrackOnHover: true,
                     child: SingleChildScrollView(

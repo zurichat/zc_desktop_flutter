@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:stacked/stacked.dart';
+// import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class AudioVideoViewModel extends BaseViewModel {
+  // final _localStorageService = locator<LocalStorageService>();
   String? _selectedSpeaker;
   String? _selectedCamera;
 
-  var settings = {
+  Map<String, dynamic> settings = {
     'speakerEnabled': false,
     'onCallStatus': false,
     'callMicrophoneMuted': false,
@@ -31,6 +36,17 @@ class AudioVideoViewModel extends BaseViewModel {
   String? get selectedSpeaker => _selectedSpeaker;
   String? get selectedCamera => _selectedCamera;
 
+  void fetchSettings() {
+    var currentSettings = _localStorageService.getFromDisk('settings');
+    if (currentSettings != null) {
+      if (currentSettings is String) {
+        settings = json.decode(currentSettings);
+      }
+    } else {
+      return;
+    }
+  }
+
   void setSelectedSpeaker(String value) {
     _selectedSpeaker = value;
     notifyListeners();
@@ -43,6 +59,7 @@ class AudioVideoViewModel extends BaseViewModel {
 
   void toggleSetting(bool? value, String setting) {
     settings[setting] = value!;
+    _localStorageService.saveToDisk('settings', json.encode(settings));
     notifyListeners();
   }
 }

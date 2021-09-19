@@ -18,8 +18,8 @@ class SideBarView extends StatelessWidget {
       builder: (context, model, child) => Scrollbar(
         controller: _controller,
         isAlwaysShown: true,
-        interactive: true,
-        scrollbarOrientation: ScrollbarOrientation.right,
+        // interactive: true,
+        // scrollbarOrientation: ScrollbarOrientation.right,
         hoverThickness: 8,
         thickness: 5,
         child: SingleChildScrollView(
@@ -210,8 +210,6 @@ class DisplayCheckBox extends StatelessWidget {
   }
 }
 
-
-
 class DisplayRadio extends StatelessWidget {
   final String text;
   final void Function(Object? value) onChanged;
@@ -241,8 +239,6 @@ class DisplayRadio extends StatelessWidget {
     );
   }
 }
-
-
 
 class DisRadio extends StatelessWidget {
   final String text;

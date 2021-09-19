@@ -17,8 +17,8 @@ class NotificationView extends StatelessWidget {
       builder: (context, model, child) => Scrollbar(
         controller: _controller,
         isAlwaysShown: true,
-        interactive: true,
-        scrollbarOrientation: ScrollbarOrientation.right,
+        // interactive: true,
+        // scrollbarOrientation: ScrollbarOrientation.right,
         hoverThickness: 8,
         thickness: 5,
         child: SingleChildScrollView(
@@ -353,8 +353,8 @@ class NotificationView extends StatelessWidget {
                 isExpanded: true,
                 isDense: true,
                 onChanged: onChange,
-                alignment: Alignment.center,
-                borderRadius: BorderRadius.circular(10),
+                // alignment: Alignment.center,
+                // borderRadius: BorderRadius.circular(10),
                 items: items
                     .map<DropdownMenuItem<String>>(
                         (String value) => DropdownMenuItem(
@@ -474,4 +474,3 @@ class NotificationView extends StatelessWidget {
     );
   }
 }
-

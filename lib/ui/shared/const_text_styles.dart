@@ -20,12 +20,12 @@ TextStyle subheadingStyle =
     TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
 TextStyle captionStyle =
     TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, fontFamily: 'Lato');
-TextStyle extraSmallStyle = TextStyle(
-  overflow: TextOverflow.fade,
-  fontSize: 11.sp,
-  fontWeight: FontWeight.w400,
-  fontFamily: 'Lato',
-);
+// TextStyle extraSmallStyle = TextStyle(
+//   overflow: TextOverflow.fade,
+//   fontSize: 11.sp,
+//   fontWeight: FontWeight.w400,
+//   fontFamily: 'Lato',
+// );
 TextStyle authBtnStyle = TextStyle(
     fontSize: 20.sp,
     color: whiteColor,

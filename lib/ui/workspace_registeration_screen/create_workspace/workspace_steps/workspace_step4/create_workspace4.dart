@@ -165,12 +165,12 @@ class IconTest extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              IconButton(
-                icon: Icon(Icons.add_link_sharp, size: 18),
-                onPressed: () {},
-                hoverColor: Colors.black,
-                color: KStartupContainerColor,
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.add_link_sharp, size: 18),
+              //   onPressed: () {},
+              //   hoverColor: Colors.black,
+              //   color: KStartupContainerColor,
+              // ),
               Text(
                 ' Get a sharable link ',
                 style: TextStyle(

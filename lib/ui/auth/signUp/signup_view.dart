@@ -30,7 +30,7 @@ class SignUpView extends StatelessWidget {
             Container(
                 height: 40,
                 child: buildAppBar(context,
-                    isSignUp: true, text: 'Sign Up | Zuri')),
+                    isHome: false, text: 'Sign Up | Zuri')),
             Container(
               height: _size.height - 40,
               child: Row(

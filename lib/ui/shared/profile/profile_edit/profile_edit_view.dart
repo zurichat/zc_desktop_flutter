@@ -61,7 +61,7 @@ class ProfileEditView extends StatelessWidget {
                 child: Scrollbar(
                   controller: scrollcontroller,
                   isAlwaysShown: true,
-                  scrollbarOrientation: ScrollbarOrientation.right,
+                  // scrollbarOrientation: ScrollbarOrientation.right,
                   thickness: 10,
                   showTrackOnHover: true,
                   child: SingleChildScrollView(

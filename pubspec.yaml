@@ -7,48 +7,37 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  bitsdojo_window: ^0.1.1+1
+  build_runner: ^2.1.2
+  cupertino_icons: ^1.0.2
+  desktop_window: ^0.4.0
+  dio: ^4.0.0
   flutter:
     sdk: flutter
-  
-  # stacked
-  stacked: ^2.2.5
-  stacked_services:
-  logger: ^1.0.0
-  stacked_themes: ^0.3.6
-
- # utilities
-  cupertino_icons: ^1.0.2
   flutter_screenutil: ^5.0.0+2
   flutter_svg: ^0.22.0
+  freezed_annotation: null
   google_fonts: ^2.1.0
-  bitsdojo_window: ^0.1.1+1
-  desktop_window: ^0.4.0
-  intl: ^0.17.0
-
-  # animation
-  lottie: ^1.1.0
-
-  # local storage
-  shared_preferences: ^2.0.7
-
-  # Network calls
-  dio: ^4.0.0
-  freezed_annotation:
-  json_annotation:
   image_picker: ^0.8.4+1
+  intl: ^0.17.0
+  json_annotation: null
+  logger: ^1.0.0
+  lottie: ^1.1.0
+  shared_preferences: ^2.0.7
+  stacked: ^2.2.5
+  stacked_services: null
+  stacked_themes: ^0.3.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # build_runner: ^2.1.2
+  freezed: null
+  json_serializable: null
   stacked_generator: ^0.5.1
-  build_runner: ^2.1.2
-  freezed: 
-  json_serializable:
-  # analyzer: ^2.2.0
 
 # dependency_overrides:
 #   meta: ^1.7.0
-
 flutter:
   uses-material-design: true
   assets:
