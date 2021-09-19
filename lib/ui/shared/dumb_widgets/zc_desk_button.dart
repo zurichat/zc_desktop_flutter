@@ -16,7 +16,7 @@ class ZcDeskButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: kcSecondaryColor,
+        primary: kcSuccessColor,
         minimumSize: Size.fromHeight(58.0),
       ),
       onPressed: onPressed,

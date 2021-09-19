@@ -12,7 +12,6 @@ class ProfileEditViewModel extends BaseViewModel {
 
   void closeDialog() {
     _navigator.popRepeated(1);
-
     notifyListeners();
   }
 }

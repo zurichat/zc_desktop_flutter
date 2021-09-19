@@ -106,7 +106,14 @@ Widget buildAppBar(BuildContext context,
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: [
-                        // ProfileDropdownView(),
+                        Container(
+                            height: 28,
+                            width: 28,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.grey,
+                            ),
+                            child: ProfileDropdownView()),
                         Positioned(
                           top: 16,
                           left: 20,
