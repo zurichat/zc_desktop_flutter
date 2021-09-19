@@ -16,21 +16,22 @@ class AuthService {
   String get username => _username;
 
   Future<void> signUpWithCred(
-      {required String fname,
-      required String lname,
-      required String username,
+      {
+      //   required String fname,
+      // required String lname,
+      // required String username,
       required String password,
-      required String tel,
+      //required String tel,
       required String email}) async {
 
         try {
           await _apiService.post('/users', {
-            'first_name': fname,
-            'last_name': lname,
-            'display_name': username,
+            // 'first_name': fname,
+            // 'last_name': lname,
+            //'display_name': username,
             'email': email,
             'password': password,
-            'phone': tel
+            // 'phone': tel
           });
         } catch(e) {
           throw e;
@@ -54,5 +55,14 @@ class AuthService {
     } catch(e) {
       throw e;
     }
+  }
+
+  Future<void> confirmEmail(String otp) async{
+    try {
+      await _apiService.post('/verify-account', {"code":otp});
+    } catch(e) {
+      throw e;
+    }
+
   }
 }
