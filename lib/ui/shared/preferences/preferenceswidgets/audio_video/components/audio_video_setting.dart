@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -31,25 +32,32 @@ class AudioVideoSetting extends StatelessWidget {
           onChanged: onChanged,
         ),
         SizedBox(width: 10.w),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 286.w,
-              child: Text(
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
                 title,
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                style: bodyStyle.copyWith(color: bodyColor, fontSize: 15.sp),
+                style: TextStyle(
+                  color: bodyColor,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            if (useSubtitle) SizedBox(height: 2.h),
-            if (useSubtitle)
-              Text(
-                subtitle!,
-                style: bodyStyle.copyWith(color: bodyColor.withOpacity(.5)),
-              ),
-          ],
+              if (useSubtitle) SizedBox(height: 2.h),
+              if (useSubtitle)
+                Text(
+                  subtitle!,
+                  style: bodyStyle.copyWith(
+                    color: bodyColor.withOpacity(.5),
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+            ],
+          ),
         )
       ],
     );
