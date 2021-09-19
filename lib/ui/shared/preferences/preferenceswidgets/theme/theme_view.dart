@@ -47,7 +47,7 @@ class ThemeView extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Text(model.body1,
-                                      style: bodyStyle.copyWith(
+                                      style: kBodyTextStyle.copyWith(
                                           fontSize: 13.sp,
                                           fontWeight: FontWeight.bold))),
                             ])),
@@ -66,7 +66,7 @@ class ThemeView extends StatelessWidget {
                                   )),
                                   Expanded(
                                       child: Text(model.body2,
-                                          style: bodyStyle.copyWith(
+                                          style: kBodyTextStyle.copyWith(
                                               fontSize: 14.sp))),
                                 ])),
                         Padding(
@@ -75,7 +75,7 @@ class ThemeView extends StatelessWidget {
                                 width: 360,
                                 child: Text(model.body3,
                                     style:
-                                        bodyStyle.copyWith(fontSize: 14.sp)))),
+                                    kBodyTextStyle.copyWith(fontSize: 14.sp)))),
                         verticalSpaceMedium,
                         Padding(
                             padding: EdgeInsets.only(
@@ -97,7 +97,7 @@ class ThemeView extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: Text(model.head2,
-                              style: subheadingStyle.copyWith(
+                              style: kSubHeadingTextStyle.copyWith(
                                   fontWeight: FontWeight.bold)),
                         ),
                         Padding(
@@ -109,13 +109,13 @@ class ThemeView extends StatelessWidget {
                               TextSpan(
                                   text:
                                       'Customise the look of your workspace. Feeling adventurous?\n',
-                                  style: subheadingStyle.copyWith(
+                                  style: kSubHeadingTextStyle.copyWith(
                                       color: Theme.of(context)
                                           .colorScheme
                                           .primary)),
                               TextSpan(
                                   text: 'create a custom theme',
-                                  style: subheadingStyle.copyWith(
+                                  style: kSubHeadingTextStyle.copyWith(
                                       color: Colors.blue)),
                             ])),
                           ),
@@ -125,7 +125,7 @@ class ThemeView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             child: Text(
                               model.head3,
-                              style: bodyStyle.copyWith(
+                              style: kBodyTextStyle.copyWith(
                                   color: Color.fromRGBO(153, 153, 153, 1)),
                             )),
                         Container(
@@ -192,7 +192,7 @@ class ThemeView extends StatelessWidget {
                                   Icon(Icons.arrow_downward,
                                       color: Colors.blue, size: 20),
                                   Text('Show all classic themes',
-                                      style: bodyStyle.copyWith(
+                                      style: kBodyTextStyle.copyWith(
                                           fontSize: 14.sp, color: Colors.blue)),
                                 ],
                               )),
@@ -202,7 +202,7 @@ class ThemeView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             child: Text(
                               model.head4,
-                              style: bodyStyle.copyWith(
+                              style: kBodyTextStyle.copyWith(
                                   color: Color.fromRGBO(153, 153, 153, 1)),
                             )),
                         Container(
@@ -389,7 +389,7 @@ class ThemeView extends StatelessWidget {
             leading: Image(image: AssetImage(model.logoLight)),
             title: Row(children: [
               Text(model.title,
-                  style: bodyStyle.copyWith(
+                  style: kBodyTextStyle.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black)),
@@ -398,12 +398,12 @@ class ThemeView extends StatelessWidget {
               ),
               Text(model.date(),
                   style:
-                      bodyStyle.copyWith(fontSize: 14.sp, color: Colors.black))
+                  kBodyTextStyle.copyWith(fontSize: 14.sp, color: Colors.black))
             ]),
             subtitle: Container(
                 margin: EdgeInsets.only(top: 10),
                 child: Text('Look nice today',
-                    style: bodyStyle.copyWith(
+                    style: kBodyTextStyle.copyWith(
                         fontSize: 14.sp, color: Colors.black))),
           ),
           Spacer(),
@@ -436,7 +436,7 @@ class ThemeView extends StatelessWidget {
             leading: Image(image: AssetImage(model.logoDark)),
             title: Row(children: [
               Text(model.title,
-                  style: bodyStyle.copyWith(
+                  style: kBodyTextStyle.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),
@@ -445,12 +445,12 @@ class ThemeView extends StatelessWidget {
               ),
               Text(model.date(),
                   style:
-                      bodyStyle.copyWith(fontSize: 14.sp, color: Colors.white))
+                  kBodyTextStyle.copyWith(fontSize: 14.sp, color: Colors.white))
             ]),
             subtitle: Container(
                 margin: EdgeInsets.only(top: 10),
                 child: Text('Look nice today',
-                    style: bodyStyle.copyWith(
+                    style: kBodyTextStyle.copyWith(
                         fontSize: 14.sp, color: Colors.white))),
           ),
           Spacer(),
@@ -496,7 +496,7 @@ class ThemeView extends StatelessWidget {
             horizontalSpaceSmall,
             Expanded(
                 child: Text(txt,
-                    style: bodyStyle.copyWith(
+                    style: kBodyTextStyle.copyWith(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.black)))
@@ -538,17 +538,17 @@ Container container(
           ),
           title: Row(children: [
             Text(title,
-                style: bodyStyle.copyWith(
+                style: kBodyTextStyle.copyWith(
                     fontWeight: FontWeight.bold, color: txtColor)),
             SizedBox(
               width: 10,
             ),
-            Text(time, style: bodyStyle.copyWith(color: txtColor))
+            Text(time, style: kBodyTextStyle.copyWith(color: txtColor))
           ]),
           subtitle: Container(
               margin: EdgeInsets.only(top: 10),
               child: Text('Look nice today',
-                  style: bodyStyle.copyWith(fontSize: 14.sp, color: txtColor))),
+                  style: kBodyTextStyle.copyWith(fontSize: 14.sp, color: txtColor))),
         ),
         Spacer(),
         subContainer(context, 1500, Checked, onChanged, theme, color),
@@ -582,7 +582,7 @@ Container subContainer(BuildContext context, double width, bool Checked,
         horizontalSpaceSmall,
         Expanded(
             child: Text(them,
-                style: bodyStyle.copyWith(
+                style: kBodyTextStyle.copyWith(
                     fontWeight: FontWeight.bold, color: Colors.black))),
       ]));
 }

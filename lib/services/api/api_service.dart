@@ -6,7 +6,7 @@ import 'api.dart';
 
 @LazySingleton()
 class ApiService implements Api {
-  final log = getLogger('PiService');
+  final log = getLogger('ApiService');
   Response? _response;
   var responseData;
   final client = Dio();

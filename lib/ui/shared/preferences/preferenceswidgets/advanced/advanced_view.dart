@@ -80,10 +80,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 Text('When typing code with ````, ',
-                    style: bodyStyle.copyWith(fontSize: 13.sp)),
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().enter(),
                 Text(' should send the message',
-                    style: bodyStyle.copyWith(fontSize: 13.sp)),
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
             subtitle: Wrap(
@@ -92,10 +92,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 Text('With this ticked, use ',
-                    style: bodyStyle.copyWith(fontSize: 13.sp)),
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().shift(),
                 ShortCuts().enter(),
-                Text(' to send', style: bodyStyle.copyWith(fontSize: 13.sp)),
+                Text(' to send', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
           ),
@@ -106,10 +106,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
                   model.setAllowMsgFormat = v;
                 }),
             title: Text('Format messages with markup',
-                style: bodyStyle.copyWith(fontSize: 13.sp)),
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
             subtitle: Text(
                 'The text formatting toolbar won’t show in the composer',
-                style: bodyStyle.copyWith(fontSize: 13.sp)),
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
           ),
 
           verticalSpaceMedium,
@@ -128,7 +128,7 @@ class AdvancedViewInputOptions extends StatelessWidget {
                 height: 25.0,
                 child: ListTile(
                   title: Text('Send the message',
-                      style: bodyStyle.copyWith(fontSize: 13.sp)),
+                      style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                   leading: Radio(
                     value: EnterButtonsChoice.sendMsg,
                     groupValue: model.enterButtonsChoice,
@@ -148,11 +148,11 @@ class AdvancedViewInputOptions extends StatelessWidget {
                     runAlignment: WrapAlignment.spaceEvenly,
                     children: [
                       Text('Start a new line ( use',
-                          style: bodyStyle.copyWith(fontSize: 13.sp)),
+                          style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                       ShortCuts().ctrl(),
                       ShortCuts().enter(),
                       Text('to send )',
-                          style: bodyStyle.copyWith(fontSize: 13.sp)),
+                          style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                     ],
                   ),
                   leading: Radio(
@@ -200,11 +200,11 @@ class AdvancedViewSearchOptions extends StatelessWidget {
                 ShortCuts().ctrl(),
                 ShortCuts().fKey(),
                 Text('Starts a Zurichat search',
-                    style: bodyStyle.copyWith(fontSize: 13.sp)),
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
             subtitle: Text('Overrides normal behavaiour in search behaviour',
-                style: bodyStyle.copyWith(fontSize: 13.sp)),
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
           ),
           ListTile(
             leading: ZcCheckBox(
@@ -220,11 +220,11 @@ class AdvancedViewSearchOptions extends StatelessWidget {
                 ShortCuts().ctrl(),
                 ShortCuts().kKey(),
                 Text('Starts the quick switcher',
-                    style: bodyStyle.copyWith(fontSize: 13.sp)),
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
             subtitle: Text('Overrides normal behavaiour in some browsers',
-                style: bodyStyle.copyWith(fontSize: 13.sp)),
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
           ),
 
           Text('Exclude these channels from search results:',
@@ -263,14 +263,14 @@ class AdvancedViewMoreOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 ShortCuts().pageUp(),
-                Text(',', style: bodyStyle.copyWith(fontSize: 13.sp)),
+                Text(',', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().pageDown(),
-                Text(',', style: bodyStyle.copyWith(fontSize: 13.sp)),
+                Text(',', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().home(),
-                Text('and', style: bodyStyle.copyWith(fontSize: 13.sp)),
+                Text('and', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
                 ShortCuts().end(),
                 Text('Starts a Zurichat search',
-                    style: bodyStyle.copyWith(fontSize: 13.sp)),
+                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
               ],
             ),
           ),
@@ -284,7 +284,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                   }),
               title: Text(
                   'Ask if I want to toggle my away status when I log in after having set myself away ',
-                  style: bodyStyle.copyWith(fontSize: 13.sp))),
+                  style: kBodyTextStyle.copyWith(fontSize: 13.sp))),
 
           // zuri bot setting
           ListTile(
@@ -295,10 +295,10 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                 }),
             title: Text(
                 'Send me occassional survey via Zurichat bot',
-                style: bodyStyle.copyWith(fontSize: 13.sp)),
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
             subtitle: Text(
                 'We’re working to make Zurichat better. We’d always love to hear your thoughts',
-                style: bodyStyle.copyWith(fontSize: 13.sp)),
+                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
           ),
 
           ListTile(
@@ -309,7 +309,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                   }),
               title: Text(
                   'Warn me about potential malicious links',
-                  style: bodyStyle.copyWith(fontSize: 13.sp))),
+                  style: kBodyTextStyle.copyWith(fontSize: 13.sp))),
         ],
       ),
     );

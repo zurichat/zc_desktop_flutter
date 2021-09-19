@@ -43,7 +43,7 @@ class DropDownField<T> extends StatelessWidget {
                     value: value,
                     child: Text(
                       getLabel(value),
-                      style: bodyStyle.copyWith(color: bodyColor),
+                      style: kBodyTextStyle.copyWith(color: bodyColor),
                       overflow: TextOverflow.ellipsis,
                     ),
                   );

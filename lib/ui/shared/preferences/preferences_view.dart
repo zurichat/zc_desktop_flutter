@@ -110,6 +110,7 @@ class PreferenceView extends StatelessWidget {
                 ),
               ),
               Divider(
+                thickness: 0.5,
                 color: Colors.black,
               ),
               Row(

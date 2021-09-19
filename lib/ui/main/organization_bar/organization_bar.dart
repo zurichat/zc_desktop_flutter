@@ -28,11 +28,11 @@ class OrganizationBarView extends ViewModelWidget<HomeViewModel> {
 Widget _buildOrganizationLogo(Color? color, String? text) {
   return GestureDetector(
     child: Container(
-      height: 60.h,
-      width: 60.h,
+      height: 50.h,
+      width: 50.w,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(8.0.r),
       ),
       child: Center(
         child: Text(text.toString()),

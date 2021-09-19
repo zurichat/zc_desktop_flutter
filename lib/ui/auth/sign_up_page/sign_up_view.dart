@@ -59,13 +59,13 @@ class SignUpView extends StatelessWidget {
                                     verticalSpaceMedium,
                                     Text(
                                       model.title,
-                                      style: heading4Style,
+                                      style: kHeading4TextStyle,
                                     ),
                                   ],
                                 ),
                                 Text(
                                   model.subtitle,
-                                  style: heading2Style,
+                                  style: kHeading2TextStyle,
                                 ),
                                 verticalSpaceMedium,
                                 if (model.isSignUpSuccessful)
@@ -168,7 +168,7 @@ class SignUpView extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         model.policy,
-                                        style: bodyStyle,
+                                        style: kBodyTextStyle,
                                       ),
                                     )
                                   ],
