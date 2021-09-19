@@ -8,6 +8,8 @@ import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.d
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/accessibility/accessibility_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/advanced/advanced_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/audio_video/audio_video_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/language_region_preference/language_preference_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_view.dart';
 
@@ -42,20 +44,18 @@ class PreferenceView extends StatelessWidget {
       },
       {
         'text': 'Message & Media',
-        'assetName': 'assets/icons/media.svg', //Icons.messenger_outline,
+        'assetName': 'assets/icons/media.svg',
         'widget': Container(
           child: Center(
-            child: ZcdeskText.headline('Message & Media'),
+            child: MessageMediaPreferenceView(),
           ),
         )
       },
       {
         'text': 'Language & region',
-        'assetName': 'assets/icons/lan.svg', //Icons.language_outlined,
+        'assetName': 'assets/icons/lan.svg',
         'widget': Container(
-          child: Center(
-            child: ZcdeskText.headline('Language & Region'),
-          ),
+          child: LanguagePreference(),
         )
       },
       {

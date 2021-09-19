@@ -76,3 +76,9 @@ TextStyle bodyText1 = TextStyle(
   color: leftNavBarColor,
   fontFamily: 'Lato',
 );
+TextStyle preferenceButton = TextStyle(
+  fontSize: 13.sp,
+  fontWeight: FontWeight.w400,
+  color: bodyColor,
+  fontFamily: 'Lato',
+);
