@@ -11,13 +11,8 @@ import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 
 class DmView extends StatelessWidget {
-  final String userName;
-  final String userProfile;
-  final String userId;
-  const DmView(
-      {required this.userId,
-      required this.userName,
-      required this.userProfile});
+
+  const DmView({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +53,12 @@ class DmView extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(2),
                                       ),
-                                      child: Image.network(userProfile),
+                                      child: Image.network('userProfile'),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        userName,
+                                        'userName',
                                         style: TextStyle(color: whiteColor),
                                       ),
                                     ),
@@ -108,7 +103,7 @@ class DmView extends StatelessWidget {
                                     shrinkWrap: true,
                                     controller: _rightSideBarController,
                                     children: [
-                                      NewDmView(userName: userName,),
+                                      NewDmView(userName: 'userName',),
                                       
                                       ListView.builder(
                                           itemCount: model.messages.length,
@@ -216,7 +211,7 @@ class MessageTile extends StatelessWidget {
                               children: [
                                 Text(
                                   userDisplayName,
-                                  style: heading1Style.copyWith(fontSize: 15),
+                                  style: kHeading1TextStyle.copyWith(fontSize: 15),
                                 ),
                                 SizedBox(
                                   width: 10.w,
@@ -275,7 +270,7 @@ class DateWidget extends StatelessWidget {
             children: [
               Text(
                 date,
-                style: heading1Style.copyWith(fontSize: 10),
+                style: kHeading1TextStyle.copyWith(fontSize: 10),
               ),
               SizedBox(
                 width: 5.w,

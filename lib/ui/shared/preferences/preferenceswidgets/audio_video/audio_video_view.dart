@@ -102,7 +102,7 @@ class AudioVideoView extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         'Test Speaker',
-                        style: bodyStyle.copyWith(
+                        style: kBodyTextStyle.copyWith(
                           fontWeight: FontWeight.w700,
                           fontSize: 15.w,
                           color: bodyColor,

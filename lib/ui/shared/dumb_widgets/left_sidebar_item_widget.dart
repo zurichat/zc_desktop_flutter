@@ -19,28 +19,24 @@ class LeftSideBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: InkWell(
-        onTap: onTap,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ImageIcon(
-                  icon,
-                  size: 15.sp,
-                  color: kcPrimaryColor,
-                ),
-                horizontalSpaceSmall,
-                ZcdeskText.leftSideBarText(title),
-              ],
-            ),
-            verticalSpaceRegular
-          ],
-        ),
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: <Widget>[
+              ImageIcon(
+                icon,
+                size: 15.sp,
+                color: kcPrimaryColor,
+              ),
+              horizontalSpaceSmall,
+              ZcdeskText.leftSideBarText(title),
+            ],
+          ),
+          verticalSpaceRegular
+        ],
       ),
     );
   }

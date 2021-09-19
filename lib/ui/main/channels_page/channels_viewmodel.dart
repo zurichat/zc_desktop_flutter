@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 
-class MessageViewModel extends BaseViewModel {
+class ChannelsViewModel extends BaseViewModel {
   final log = getLogger("MessageViewModel");
 
   final DateTime currentMessageTime = DateTime.now();
