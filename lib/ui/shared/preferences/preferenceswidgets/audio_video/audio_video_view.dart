@@ -16,6 +16,7 @@ class AudioVideoView extends StatelessWidget {
     final _scrollController = ScrollController();
 
     return ViewModelBuilder<AudioVideoViewModel>.reactive(
+      onModelReady: (model) => model.fetchSettings(),
       builder: (context, model, child) => Scrollbar(
         controller: _scrollController,
         isAlwaysShown: true,
@@ -29,48 +30,49 @@ class AudioVideoView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SectionTitle(title: 'Camera'),
-              SizedBox(height: 16.h),
+              SizedBox(height: 16),
               Container(
                 width: 487.w,
                 height: 304,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
+                    fit: BoxFit.fitHeight,
                     image: AssetImage('assets/images/camera.png'),
                   ),
                 ),
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 16),
               DropDownField<String>(
                 options: model.availableCameras,
                 getLabel: (String value) => value,
                 value: model.selectedCamera,
                 onChanged: (String? value) => model.setSelectedCamera(value!),
               ),
-              SizedBox(height: 46.h),
+              SizedBox(height: 46),
               SectionTitle(title: 'Microphone'),
-              SizedBox(height: 8.h),
+              SizedBox(height: 8),
               DropDownField<String>(
                 options: model.availableSpeakers,
                 getLabel: (String value) => value,
                 value: model.selectedSpeaker,
                 onChanged: (String? value) => model.setSelectedSpeaker(value!),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 20),
               Row(
                 children: [
                   ZcdeskText.bodyText('Input Level : '),
                   _buildDummyInputLevel(),
                 ],
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['speakerEnabled']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'speakerEnabled'),
                 title: 'Enable Speaker',
               ),
-              SizedBox(height: 19.h),
+              SizedBox(height: 19),
               SectionTitle(title: 'Microphone'),
               SizedBox(height: 8),
               Row(
@@ -89,7 +91,7 @@ class AudioVideoView extends StatelessWidget {
                   SizedBox(width: 19.w),
                   SizedBox(
                     width: 124.w,
-                    height: 50.h,
+                    height: 40,
                     child: TextButton(
                       style: ElevatedButton.styleFrom(
                         primary: kcBackgroundColor2,
@@ -110,9 +112,9 @@ class AudioVideoView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 46.h),
+              SizedBox(height: 46),
               SectionTitle(title: 'When joining Zurichat call...'),
-              SizedBox(height: 17.h),
+              SizedBox(height: 17),
               AudioVideoSetting(
                 value: model.settings['onCallStatus']!,
                 onChanged: (value) =>
@@ -122,21 +124,21 @@ class AudioVideoView extends StatelessWidget {
                 subtitle:
                     'If you already have a status set, Zurichat won’t change it.',
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['callMicrophoneMuted']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'callMicrophoneMuted'),
                 title: 'Mute my Microphone',
               ),
-              SizedBox(height: 26.h),
+              SizedBox(height: 26),
               SizedBox(
                 width: 487.w,
                 child: Divider(),
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 16),
               SectionTitle(title: 'When joining huddle...'),
-              SizedBox(height: 17.h),
+              SizedBox(height: 17),
               AudioVideoSetting(
                 value: model.settings['onHuddleStatus']!,
                 onChanged: (value) =>
@@ -146,21 +148,21 @@ class AudioVideoView extends StatelessWidget {
                 subtitle:
                     'If you already have a status set, Zurichat won’t change it.',
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['huddleMicrophoneMuted']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'huddleMicrophoneMuted'),
                 title: 'Mute my Microphone',
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['captionOnInHuddle']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'captionOnInHuddle'),
                 title: 'Automatically turn on captions when you’re in a huddle',
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['warningSentForLargeNumber']!,
                 onChanged: (value) =>
@@ -168,7 +170,7 @@ class AudioVideoView extends StatelessWidget {
                 title:
                     'Send a warning if you’re starting a huddle in a channel with more than 150 members',
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['playMusic']!,
                 onChanged: (value) => model.toggleSetting(value, 'playMusic'),
@@ -188,7 +190,7 @@ class AudioVideoView extends StatelessWidget {
       children: List.generate(
         15,
         (index) => Container(
-          margin: index == 14 ? EdgeInsets.zero : EdgeInsets.only(right: 4),
+          margin: index == 14 ? EdgeInsets.zero : EdgeInsets.only(right: 4.w),
           width: 23.w,
           height: 14.w,
           decoration: BoxDecoration(

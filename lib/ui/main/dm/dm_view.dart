@@ -6,7 +6,8 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/send_message_text_field/zc_desk_send_message_field.dart';
+
 import 'dm_viewmodel.dart';
 
 class DmView extends StatelessWidget {
@@ -81,8 +82,10 @@ class DmView extends StatelessWidget {
                           );
                         } else {
                           return MessageTile(
-                            userDisplayName: model.messages.elementAt(index).userDisplayName,
-                            userProfileUrl: model.messages.elementAt(index).userProfileUrl,
+                            userDisplayName:
+                                model.messages.elementAt(index).userDisplayName,
+                            userProfileUrl:
+                                model.messages.elementAt(index).userProfileUrl,
                             time: model.messages.elementAt(index).time,
                             message: model.messages.elementAt(index).message,
                           );
