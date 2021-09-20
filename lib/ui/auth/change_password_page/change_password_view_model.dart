@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
+import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 
 class ChangePasswordViewModel extends BaseViewModel with Validator{
   final _navigationService = locator<NavigationService>();
@@ -12,6 +13,7 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
   bool _isError = false;
   bool _isBusy = false;
   bool _isShowDialog = false;
+  String _errorMsg = '';
   String _confirmPassword = '';
   String _errorImage = 'assets/images/failed.svg';
   String _successImage = 'assets/images/success.svg';
@@ -27,6 +29,7 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
   get successImage => _successImage;
   get successTitle => _successTitle;
   get successSubtitle => _successSubtitle;
+  get errorMessage => _errorMsg;
 
   final _logoUrl = 'assets/images/zc_logo.svg';
 
@@ -37,6 +40,8 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
   get isError => _isError;
   get isShowDialog => _isShowDialog;
   get isBusy => _isBusy;
+
+  final _authService = locator<AuthService>();
 
   _setIsError() {
     _isError = !_isError;
@@ -95,10 +100,11 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
     }
     try{
       _setIsBusy();
-      await Future.delayed(Duration(milliseconds: 1000));
+      await _authService.updatePassword(_password);
       _setIsBusy();
       _setIsShowDialog(true);
     } catch (e) {
+      _errorMsg = 'Something went wrong';
       _setIsBusy();
       _setIsError();
       _setIsShowDialog(true);
