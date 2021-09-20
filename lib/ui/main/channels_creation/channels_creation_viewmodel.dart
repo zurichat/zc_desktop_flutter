@@ -105,7 +105,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
   }
 
   void goToViewChannels() {
-    _navigationService.navigateTo(Routes.loginView);
+    _navigationService.navigateTo(Routes.workspaceView);
     notifyListeners();
   }
 

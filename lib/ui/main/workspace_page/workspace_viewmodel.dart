@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.dart';
 import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_view.dart';
@@ -9,6 +11,7 @@ import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_view.dart';
 class WorkspaceViewModel extends BaseViewModel {
   final log = getLogger("WorkspaceViewModel");
   final _workspaceService = locator<WorkspaceService>();
+  final _navigationService = locator<NavigationService>();
 
   String userDefaultImageUrl = 'assets/images/zc_logo.png';
   int numberOfReplies = 14;
@@ -24,6 +27,8 @@ class WorkspaceViewModel extends BaseViewModel {
   final ScrollController controller = ScrollController();
 
   int currentWorkspaceIndex = 0;
+
+  bool _displayChannels = false;
 
   bool _showDMs = false;
   bool _showMenus = false;
@@ -44,10 +49,20 @@ class WorkspaceViewModel extends BaseViewModel {
   bool get showDMs => _showDMs;
   bool get showMenus => _showMenus;
   bool get showChannels => _showChannels;
+  bool get displayChannels => _displayChannels;
 
+  void setdisplayChannels() {
+    _displayChannels = !_displayChannels;
+    notifyListeners();
+  }
 
   void openChannelsDropDownMenu() {
     _showChannels = !_showChannels;
+    notifyListeners();
+  }
+
+    void goDisplayChannels() {
+    _navigationService.navigateTo(Routes.displayChannelsView);
     notifyListeners();
   }
 

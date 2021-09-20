@@ -19,7 +19,7 @@ class ChannelsCreationView extends StatelessWidget {
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
         child: Container(
-          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 690.h : 640.h,
+          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 730.h : 650.h,
           width: 410.w,
           child: Padding(
             padding: EdgeInsets.only(
