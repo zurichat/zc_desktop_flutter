@@ -9,6 +9,7 @@ import 'app/app.router.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+
   runApp(
     ZcDesktop(),
   );

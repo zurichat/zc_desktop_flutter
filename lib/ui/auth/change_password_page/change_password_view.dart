@@ -13,7 +13,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dar
 import 'change_password_view_model.dart';
 
 class ChangePasswordView extends StatelessWidget {
-  const ChangePasswordView({Key? key}): super(key: key);
+  const ChangePasswordView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -92,11 +92,11 @@ class ChangePasswordView extends StatelessWidget {
                                   width: 440.w,
                                   child: AuthButton(
                                     label: 'Continue',
-                                    isBUsy: model.isBusy,
+                                    isBusy: model.isBusy,
                                     onTap: () async {
                                       await model.changePassword();
-                                      if(model.isShowDialog) {
-                                         showDialog(
+                                      if (model.isShowDialog) {
+                                        showDialog(
                                             context: context,
                                             builder: (_) =>
                                                 BuildConfirmation());
@@ -120,82 +120,84 @@ class ChangePasswordView extends StatelessWidget {
 }
 
 class BuildConfirmation extends StatelessWidget {
-    const BuildConfirmation({ Key? key }) : super(key: key);
-  
-    @override
-    Widget build(BuildContext context) {
-      return ViewModelBuilder<ChangePasswordViewModel>.nonReactive(builder: (context, model, child) => Dialog(
-      child: Container(
-        height: 634.h,
-        width: 954.w,
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                SvgPicture.asset(
-                    model.isError ? model.errorImage : model.successImage),
-                Center(
-                  child: SvgPicture.asset(
-                      model.isError ? 'assets/images/x.svg' : 'assets/images/mark.svg'),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
-            Text(
-              model.isError ? model.errorTitle : model.successTitle,
-              style: TextStyle(
-                  fontSize: 31.sp,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Lato',
-                  color: Colors.black),
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            Container(
-              width: 454.w,
-              child: Text(
-                model.isError ? model.errorSubtiltle : model.successSubtitle,
+  const BuildConfirmation({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<ChangePasswordViewModel>.nonReactive(
+      builder: (context, model, child) => Dialog(
+        child: Container(
+          height: 634.h,
+          width: 954.w,
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  SvgPicture.asset(
+                      model.isError ? model.errorImage : model.successImage),
+                  Center(
+                    child: SvgPicture.asset(model.isError
+                        ? 'assets/images/x.svg'
+                        : 'assets/images/mark.svg'),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 32.h,
+              ),
+              Text(
+                model.isError ? model.errorTitle : model.successTitle,
                 style: TextStyle(
-                    fontSize: 21.sp,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 31.sp,
+                    fontWeight: FontWeight.w700,
                     fontFamily: 'Lato',
                     color: Colors.black),
-                textAlign: TextAlign.center,
               ),
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
-            GestureDetector(
-              onTap: model.gotoLogin,
-              child: Container(
-                height: 48.h,
-                width: 154.w,
-                color: Color.fromRGBO(0, 184, 124, 1),
-                child: Center(
-                  child: Text(
-                    'Continue to Login',
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Lato',
-                        color: Colors.white),
-                  ),
+              SizedBox(
+                height: 24.h,
+              ),
+              Container(
+                width: 454.w,
+                child: Text(
+                  model.isError ? model.errorSubtiltle : model.successSubtitle,
+                  style: TextStyle(
+                      fontSize: 21.sp,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Lato',
+                      color: Colors.black),
+                  textAlign: TextAlign.center,
                 ),
               ),
-            )
-          ],
+              SizedBox(
+                height: 32.h,
+              ),
+              GestureDetector(
+                onTap: model.gotoLogin,
+                child: Container(
+                  height: 48.h,
+                  width: 154.w,
+                  color: Color.fromRGBO(0, 184, 124, 1),
+                  child: Center(
+                    child: Text(
+                      'Continue to Login',
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Lato',
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
-    ), viewModelBuilder: () => ChangePasswordViewModel(),);
-      
-       
-    }
+      viewModelBuilder: () => ChangePasswordViewModel(),
+    );
   }
+}

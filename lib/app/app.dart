@@ -28,7 +28,9 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
     MaterialRoute(page: ResetPasswordView),
     MaterialRoute(page: ChangePasswordView),
     MaterialRoute(page: SuccessView),
-    MaterialRoute(page: ChannelsView,),
+    MaterialRoute(
+      page: ChannelsView,
+    ),
   ],
   dependencies: [
     Presolve(
@@ -42,5 +44,4 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
   ],
   logger: StackedLogger(),
 )
-
 class AppSetup {}

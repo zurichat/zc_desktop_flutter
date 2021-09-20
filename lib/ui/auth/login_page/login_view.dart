@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/core/constants/images.dart';
+import 'package:zc_desktop_flutter/core/network/failure.dart';
+import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
+import 'package:zc_desktop_flutter/core/constants/strings.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -10,21 +15,26 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dar
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// ignore: implementation_imports
-class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+class LoginView extends HookWidget {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
+    final height = MediaQuery.of(context).size.height;
+
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+
     return ViewModelBuilder<LoginViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         backgroundColor: Colors.white,
         body: Column(
           children: [
             Container(
-                height: 40,
-                child: buildAppBar(context,
-                    isHome: false, text: 'Sign In | Zuri')),
+              height: 40,
+              child:
+                  buildAppBar(context, isHome: false, text: 'Sign In | Zuri'),
+            ),
             Container(
               height: height - 40,
               child: Row(
@@ -42,57 +52,66 @@ class LoginView extends StatelessWidget {
                             verticalSpaceMedium,
                             Row(
                               children: [
-                                Image(image: AssetImage(model.logoUrl)),
+                                Image.asset(AppImages.zuriLogoUrl),
                               ],
                             ),
                             verticalSpaceMedium,
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                model.signIn,
+                                AppStrings.signIn,
                                 style: headline3,
                               ),
                             ),
                             verticalSpaceMedium,
-                            if (model.isError)
+                            if (model.hasError)
                               Text(
-                                model.errorMessage,
+                                (model.modelError as Failure).message,
                                 style: headline6.copyWith(color: Colors.red),
                               ),
-                            Column(
-                              children: [
-                                AuthInputField(
-                                  label: 'Email',
-                                  onChanged: (value){
-                                    model.setEmail(value);
-                                  },
-                                  errorText: model.emailErrorText,
-                                  keyboardType: TextInputType.emailAddress,
-                                  hintPlaceHolder: 'someone@gmail.com',
-                                ),
-                                verticalSpaceMedium,
-                                AuthInputField(
-                                  label: 'Password',
-                                  password: true,
-                                  isVisible: model.passwordVisibily,
-                                  onVisibilityTap: model.setPasswordVisibility,
-                                  errorText: model.passwordErrorText,
-                                  onChanged: (value) {
-                                    model.setPassword(value);
-                                  },
-                                  hintPlaceHolder: 'Password',
-                                ),
-                              ],
+                            verticalSpaceMedium,
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  AuthInputField(
+                                    label: 'Email',
+                                    controller: emailController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    hintPlaceHolder: AppStrings.emailHint,
+                                    validator: context.validateEmail,
+                                  ),
+                                  verticalSpaceMedium,
+                                  AuthInputField(
+                                    label: 'Password',
+                                    password: true,
+                                    controller: passwordController,
+                                    isVisible: model.passwordVisibily,
+                                    onVisibilityTap:
+                                        model.setPasswordVisibility,
+                                    hintPlaceHolder: AppStrings.passwordHint,
+                                    validator: context.validatePassword,
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(height: 40.0.h),
                             Container(
                               height: 58.h,
                               width: 440.w,
-                              child: AuthButton(label: 'Login', isBUsy: model.isBusy, onTap: () async {
-                                  await model.validateAndLogin();
-                                },)
-                              
-                              
+                              child: AuthButton(
+                                label: 'Login',
+                                isBusy: model.isBusy,
+                                onTap: () async {
+                                  if (!_formKey.currentState!.validate())
+                                    return;
+
+                                  await model.login(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  );
+                                },
+                              ),
                             ),
                             verticalSpaceLarge,
                             Text(
@@ -157,25 +176,19 @@ class AuthIcons extends ViewModelWidget<LoginViewModel> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         IconButton(
-          icon: Image.asset(
-            model.logoUrlG,
-          ),
+          icon: Image.asset(AppImages.googleLogoUrl),
           iconSize: 52.h,
           onPressed: () {},
         ),
         horizontalSpaceRegular,
         IconButton(
-          icon: Image.asset(
-            model.logoUrlF,
-          ),
+          icon: Image.asset(AppImages.facebookLogoUrl),
           iconSize: 52.h,
           onPressed: () {},
         ),
         horizontalSpaceRegular,
         IconButton(
-          icon: Image.asset(
-            model.logoUrlT,
-          ),
+          icon: Image.asset(AppImages.twitterLogoUrl),
           iconSize: 52.h,
           onPressed: () {},
         ),
