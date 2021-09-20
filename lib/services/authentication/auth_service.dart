@@ -11,7 +11,7 @@ class AuthService {
   String _token = '';
   String _userId = '';
   String _username = '';
-  final _key = 'userData';
+  final _userDataKey = 'userData';
   String get token => _token;
   String get userId => _userId;
   String get username => _username;
@@ -52,7 +52,7 @@ class AuthService {
         'email': email,
         'username': _username
       });
-      _localStorageService.saveToDisk(_key, userData);
+      _localStorageService.saveToDisk(_userDataKey, userData);
     } catch (e) {
       throw e;
     }
@@ -68,7 +68,7 @@ class AuthService {
 
   Future<void> checkToken() async {
     try {
-      var userInfo = _localStorageService.getFromDisk(_key);
+      var userInfo = _localStorageService.getFromDisk(_userDataKey);
       var decode = json.decode(userInfo.toString());
       await loginWithCred(decode['email'], decode['password']);
     } catch (e) {
@@ -101,6 +101,6 @@ class AuthService {
   }
 
   void logOut() {
-    _localStorageService.removeFromDisk(_key);
+    _localStorageService.removeFromDisk(_userDataKey);
   }
 }

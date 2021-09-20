@@ -5,11 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/auth/check_email_page/check_email_view_model.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login/goto_login_button.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 
 class CheckEmailView extends StatelessWidget {
   const CheckEmailView({Key? key}) : super(key: key);
@@ -50,11 +51,7 @@ class CheckEmailView extends StatelessWidget {
                                 verticalSpaceSmall,
                     Text(
                       model.errorMsg,
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: 'Lato',
-                          color: Colors.red,
-                          fontWeight: FontWeight.w400),
+                      style: headline6.copyWith(color: Theme.of(context).errorColor,),
                     ),
                     verticalSpaceSmall,
                     verticalSpaceLarge,

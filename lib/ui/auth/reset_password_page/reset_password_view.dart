@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_view_model.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login/goto_login_button.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 
@@ -39,11 +40,7 @@ class ResetPasswordView extends StatelessWidget {
                   verticalSpaceLarge,
                   Text(
                     model.errorMessage,
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: 'Lato',
-                        color: Colors.red,
-                        fontWeight: FontWeight.w400),
+                    style: headline6.copyWith(color: Theme.of(context).errorColor,),
                   ),
                   verticalSpaceSmall,
                   Container(

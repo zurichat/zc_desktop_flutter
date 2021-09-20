@@ -33,9 +33,7 @@ class SplashView extends StatelessWidget {
           ),
         );
       },
-      onModelReady: (model) {
-        model.checkLoginStatus();
-      },
+      onModelReady: (model) => model.checkLoginStatus(),
     );
   }
 }

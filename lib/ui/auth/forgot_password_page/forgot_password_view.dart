@@ -6,11 +6,12 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login/goto_login_button.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 
@@ -82,18 +83,12 @@ class ForgotPasswordView extends StatelessWidget {
                     child: Center(
                       child: Text(
                         model.resetBtnText,
-                        style: TextStyle(
-                            color: Color.fromRGBO(0, 184, 124, 1),
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Lato'),
+                        style: headline6.copyWith(color: Color.fromRGBO(0, 184, 124, 1),),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 32.h,
-                ),
+                verticalSpaceSmall,
                 GotoLoginButton(),
               ],
             ),
