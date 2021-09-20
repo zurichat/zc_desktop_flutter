@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_viewmodel.dart';
 
@@ -30,8 +31,8 @@ class NotificationView extends StatelessWidget {
                   children: [
                     Text(
                       'Nofity me about',
-                      style: kHeading4TextStyle.copyWith(
-                          fontSize: 15.sp, fontWeight: FontWeight.w400),
+                      style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w700
+                         ),
                     ),
                     TextButton(
                         onPressed: () {},
@@ -41,7 +42,8 @@ class NotificationView extends StatelessWidget {
                               'About notifications',
                               style: kHeading4TextStyle.copyWith(
                                   color: Colors.green,
-                                  fontSize: 15.sp,
+                                  fontSize: 16.sp,
+                                  fontFamily: 'Lato',
                                   fontWeight: FontWeight.w400),
                             ),
                             Icon(
@@ -63,9 +65,12 @@ class NotificationView extends StatelessWidget {
                 ),
                 Text(
                   'Keywords',
+                  style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w700),
                 ),
+                SizedBox(height: 5.h),
                 Text(
-                    'You will be notified anything, someone uses these keyword in thread'),
+                    'You will be notified anything, someone uses these keyword in thread',
+                    style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
                 SizedBox(
                   height: 16.h,
                 ),
@@ -81,7 +86,9 @@ class NotificationView extends StatelessWidget {
                 ),
                 Text(
                   'Schedule Notification',
+                  style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600),
                 ),
+                SizedBox(height: 5.h),
                 GestureDetector(
                   onTap: () {},
                   child: RichText(
@@ -90,16 +97,16 @@ class NotificationView extends StatelessWidget {
                           text:
                               'You\'ll only receive notifications in the hours that you choose. Outside of those times, notifications will be paused ',
                           style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w400,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
                               fontFamily: 'Lato',
                               color: Colors.grey),
                           children: [
                             TextSpan(
                               text: 'Learn more',
                               style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
                                   fontFamily: 'Lato',
                                   color: Colors.green),
                             )
@@ -130,7 +137,9 @@ class NotificationView extends StatelessWidget {
         ),
         Text(
           txt,
-          style: headline6.copyWith(fontSize: 13.sp),
+          style: TextStyle(
+            fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600
+          ),
         )
       ],
     );
@@ -183,7 +192,7 @@ class NotificationView extends StatelessWidget {
               items: items
                   .map<DropdownMenuItem<String>>(
                       (String value) => DropdownMenuItem(
-                            child: Text(value),
+                            child: Text(value,style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
                             value: value,
                           ))
                   .toList()),
@@ -222,7 +231,7 @@ class NotificationView extends StatelessWidget {
         ),
         Text(
           txt,
-          style: headline6.copyWith(fontSize: 13.sp),
+          style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600),
         ),
       ],
     );
@@ -245,5 +254,5 @@ class NotificationView extends StatelessWidget {
   }
 }
 
-//TODO this should be inside the constant class
-enum PrefMessageNotification { AllMessages, DirectMessages, None }
+
+
