@@ -23,9 +23,10 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
 @StackedApp(
   routes: [
     MaterialRoute(page: HomeView),
-    AdaptiveRoute(page: WorkspaceView, initial: true),
+    AdaptiveRoute(page: WorkspaceView),
     MaterialRoute(
       page: LoginView,
+      initial: true,
     ),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),

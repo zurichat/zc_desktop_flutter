@@ -27,7 +27,6 @@ class CreateWorkspaceView extends StatelessWidget {
                   children: [
                     verticalSpaceLarge,
                     verticalSpaceLarge,
-                    // Image.asset(model.logoUrl),
                     SvgPicture.asset(model.logoUrl),
                     verticalSpaceMedium,
                     Text(
@@ -39,7 +38,7 @@ class CreateWorkspaceView extends StatelessWidget {
                     verticalSpaceSmall,
                     Text(
                       model.signInText2,
-                      style: leftSideBarStyle.copyWith(color: Colors.black),
+                      style: kLeftSideBarStyle.copyWith(color: Colors.black),
                     ),
                     verticalSpaceRegular,
                     AuthInputField(

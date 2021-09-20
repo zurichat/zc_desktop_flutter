@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.dart';
-import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_view.dart';
 
 class WorkspaceViewModel extends BaseViewModel {
   final log = getLogger("WorkspaceViewModel");
@@ -40,11 +41,9 @@ class WorkspaceViewModel extends BaseViewModel {
   List<Channel> get channels => _channels;
   List<DM> get directMessages => _directMessages;
 
-
   bool get showDMs => _showDMs;
   bool get showMenus => _showMenus;
   bool get showChannels => _showChannels;
-
 
   void openChannelsDropDownMenu() {
     _showChannels = !_showChannels;
@@ -95,6 +94,12 @@ class WorkspaceViewModel extends BaseViewModel {
   //TODO: ontap workspace, get workspaces
   Future setupChannelsView() async {
     await runBusyFuture(runTask());
+  }
+
+  // TODO: go to workspace creation page
+  final _navigationService = locator<NavigationService>();
+  void goToCreateWorkspace() {
+    _navigationService.navigateTo(Routes.createWorkspaceView);
   }
 
   // get workspaces
