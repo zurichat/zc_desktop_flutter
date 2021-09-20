@@ -40,14 +40,14 @@ class AudioVideoSetting extends StatelessWidget {
                 title,
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                style: bodyStyle.copyWith(color: bodyColor, fontSize: 15.sp),
+                style: kBodyTextStyle.copyWith(color: bodyColor, fontSize: 15.sp),
               ),
             ),
             if (useSubtitle) SizedBox(height: 2.h),
             if (useSubtitle)
               Text(
                 subtitle!,
-                style: bodyStyle.copyWith(color: bodyColor.withOpacity(.5)),
+                style: kBodyTextStyle.copyWith(color: bodyColor.withOpacity(.5)),
               ),
           ],
         )

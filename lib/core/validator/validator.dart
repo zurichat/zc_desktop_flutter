@@ -10,7 +10,7 @@ mixin Validator {
   }
 
   bool confirmPasswordValidator(String password, String password2) {
-    return password.compareTo(password2) >= 0;
+    return password == password2;
   }
 
   bool nameValidator(String name) {

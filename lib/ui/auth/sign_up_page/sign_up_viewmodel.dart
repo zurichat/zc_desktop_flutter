@@ -20,31 +20,35 @@ class SignUpViewModel extends BaseViewModel with Validator {
   String _title = 'ZURI';
   String _subtitle = 'Create Account';
   String _errorMessage = '';
+  bool _isCheck = false;
   //TextController Error
-  String? _phoneError;
+  // String? _phoneError;
   String? _passwordError;
   String? _emailError;
-  String? _lnameError;
-  String? _fnameError;
-  String? _usernameError;
+  String? _isCheckError;
+  // String? _lnameError;
+  // String? _fnameError;
+  // String? _usernameError;
   String? _confirmPasswordError;
 
   //TextController Error getters
 
-  get phoneError => _phoneError;
+  // get phoneError => _phoneError;
   get passwordError => _passwordError;
   get emailError => _emailError;
-  get lnameError => _lnameError;
-  get fnameError => _fnameError;
-  get usernameError => _usernameError;
+  // get lnameError => _lnameError;
+  // get fnameError => _fnameError;
+  // get usernameError => _usernameError;
   get confirmPasswordError => _confirmPasswordError;
+  get isCheck => _isCheck;
+  get isCheckError => _isCheckError;
 
   var _password = '';
   var _email = '';
-  var _fname = '';
-  var _lname = '';
-  var _username = '';
-  var _phone = '';
+  // var _fname = '';
+  // var _lname = '';
+  // var _username = '';
+  // var _phone = '';
   var _confirmPassword = '';
 
   bool _isBusy = false;
@@ -68,10 +72,10 @@ class SignUpViewModel extends BaseViewModel with Validator {
   String get policy => _policy;
 
   get password => _password;
-  get username => _username;
-  get lname => _lname;
-  get fname => _fname;
-  get phone => _phone;
+  // get username => _username;
+  // get lname => _lname;
+  // get fname => _fname;
+  // get phone => _phone;
   get email => _email;
   get confirmPassword => _confirmPassword;
 
@@ -92,25 +96,25 @@ class SignUpViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  void setPhone(String value) {
-    _phone = value;
-    notifyListeners();
-  }
+  // void setPhone(String value) {
+  //   _phone = value;
+  //   notifyListeners();
+  // }
 
-  void setUsername(String value) {
-    _username = value;
-    notifyListeners();
-  }
+  // void setUsername(String value) {
+  //   _username = value;
+  //   notifyListeners();
+  // }
 
-  void setLname(String value) {
-    _lname = value;
-    notifyListeners();
-  }
+  // void setLname(String value) {
+  //   _lname = value;
+  //   notifyListeners();
+  // }
 
-  void setFname(String value) {
-    _fname = value;
-    notifyListeners();
-  }
+  // void setFname(String value) {
+  //   _fname = value;
+  //   notifyListeners();
+  // }
 
   void setConfirmPassword(String value) {
     _confirmPassword = value;
@@ -119,6 +123,11 @@ class SignUpViewModel extends BaseViewModel with Validator {
 
   void goToLogin() {
     _navigationService.navigateTo(Routes.loginView);
+    notifyListeners();
+  }
+
+  void goToCheckEmail() {
+    _navigationService.navigateTo(Routes.checkEmailView, arguments: {'email': _email, 'isReset': false});
     notifyListeners();
   }
 
@@ -137,10 +146,6 @@ class SignUpViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  void goToHome() {
-    _navigationService.navigateTo(Routes.homeView);
-    notifyListeners();
-  }
 
   void setErrorMessage(String msg) {
     _errorMessage = msg;
@@ -148,42 +153,43 @@ class SignUpViewModel extends BaseViewModel with Validator {
   }
 
   Future<void> validateAndSignUP() async {
-    bool isFnameValid = nameValidator(_fname);
-    bool isLnameValid = nameValidator(_lname);
-    bool isUsernameValid = nameValidator(_username);
-    bool isPhoneValid = phoneValidator(_phone);
+    // bool isFnameValid = nameValidator(_fname);
+    // bool isLnameValid = nameValidator(_lname);
+    // bool isUsernameValid = nameValidator(_username);
+    // bool isPhoneValid = phoneValidator(_phone);
     bool isPasswordValid = passwordValidator(_password);
     bool isEmailValid = emailValidator(_email);
     bool isConfirmPasswordValid =
         confirmPasswordValidator(_password, _confirmPassword);
 
-    if (!isFnameValid ||
-        !isLnameValid ||
-        !isUsernameValid ||
-        !isPhoneValid ||
+    if (
+      // !isFnameValid ||
+      //   !isLnameValid ||
+      //   !isUsernameValid ||
+      //   !isPhoneValid ||
         !isPasswordValid ||
         !isEmailValid ||
-        !isConfirmPasswordValid) {
-      if (!isFnameValid) {
-        _fnameError = 'First Name must be at least 3 characters long';
-      } else {
-        _fnameError = null;
-      }
-      if (!isLnameValid) {
-        _lnameError = 'First Name must be at least 3 characters long';
-      } else {
-        _lnameError = null;
-      }
-      if (!isPhoneValid) {
-        _phoneError = 'Phone must be at least 11 characters';
-      } else {
-        _phoneError = null;
-      }
-      if (!isUsernameValid) {
-        _usernameError = 'Username must be at least 3 characters long';
-      } else {
-        _usernameError = null;
-      }
+        !isConfirmPasswordValid || !_isCheck) {
+      // if (!isFnameValid) {
+      //   _fnameError = 'First Name must be at least 3 characters long';
+      // } else {
+      //   _fnameError = null;
+      // }
+      // if (!isLnameValid) {
+      //   _lnameError = 'First Name must be at least 3 characters long';
+      // } else {
+      //   _lnameError = null;
+      // }
+      // if (!isPhoneValid) {
+      //   _phoneError = 'Phone must be at least 11 characters';
+      // } else {
+      //   _phoneError = null;
+      // }
+      // if (!isUsernameValid) {
+      //   _usernameError = 'Username must be at least 3 characters long';
+      // } else {
+      //   _usernameError = null;
+      // }
       if (!isPasswordValid) {
         _passwordError =
             '''Invalid Password. Password should consist of atleast:
@@ -204,17 +210,22 @@ class SignUpViewModel extends BaseViewModel with Validator {
       } else {
         _confirmPasswordError = null;
       }
+      if (!_isCheck) {
+        _isCheckError = 'Please accept our policy before you continue';
+      } else {
+        _isCheckError = null;
+      }
       notifyListeners();
       return;
     }
     try {
       _setIsBusy();
       await _auth.signUpWithCred(
-          fname: _fname,
-          lname: _lname,
-          username: _username,
+          // fname: _fname,
+          // lname: _lname,
+          // username: _username,
           password: _password,
-          tel: _phone,
+          // tel: _phone,
           email: _email);
       _setIsSignUpSuccessful();
     } catch (e) {
@@ -228,10 +239,12 @@ class SignUpViewModel extends BaseViewModel with Validator {
       _setIsSignUpNotSuccessful();
       return;
     }
-    await Future.delayed(
-      Duration(milliseconds: 5000),
-    );
-    goToLogin();
+    goToCheckEmail();
+    notifyListeners();
+  }
+
+  void setIsCheck() {
+    _isCheck = !_isCheck;
     notifyListeners();
   }
 }

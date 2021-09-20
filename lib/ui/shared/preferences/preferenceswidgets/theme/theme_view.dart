@@ -29,9 +29,10 @@ class ThemeView extends StatelessWidget {
                       children: [
                         Padding(padding: EdgeInsets.all(10)),
                         Container(
-                            child: padding(
-                                context,
-                                Text(
+                            child: Padding(
+                                padding: EdgeInsets.only(
+                                    right: 10, left: 10, top: 20),
+                                child: Text(
                                   model.head1,
                                   style: headline6.copyWith(fontSize: 16.sp),
                                 ))),
@@ -47,7 +48,7 @@ class ThemeView extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Text(model.body1,
-                                      style: bodyStyle.copyWith(
+                                      style: kBodyTextStyle.copyWith(
                                           fontSize: 13.sp,
                                           fontWeight: FontWeight.bold))),
                             ])),
@@ -66,7 +67,7 @@ class ThemeView extends StatelessWidget {
                                   )),
                                   Expanded(
                                       child: Text(model.body2,
-                                          style: bodyStyle.copyWith(
+                                          style: kBodyTextStyle.copyWith(
                                               fontSize: 14.sp))),
                                 ])),
                         Padding(
@@ -74,18 +75,22 @@ class ThemeView extends StatelessWidget {
                             child: Container(
                                 width: 360,
                                 child: Text(model.body3,
-                                    style:
-                                        bodyStyle.copyWith(fontSize: 14.sp)))),
+                                    style: kBodyTextStyle.copyWith(
+                                        fontSize: 14.sp)))),
                         verticalSpaceMedium,
                         Padding(
                             padding: EdgeInsets.only(
                                 top: 10, left: 10, right: 30, bottom: 10),
-                            child: containerLight(model)),
+                            child: ClassicThemeWidgetLight(
+                              model: model,
+                            )),
                         verticalSpaceSmall,
                         Padding(
                             padding: EdgeInsets.only(
                                 top: 10, left: 10, right: 30, bottom: 10),
-                            child: containerDark(model)),
+                            child: ClassicThemeWidgetDark(
+                              model: model,
+                            )),
                         Padding(
                             padding: EdgeInsets.all(10),
                             child: Container(
@@ -97,7 +102,7 @@ class ThemeView extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: Text(model.head2,
-                              style: subheadingStyle.copyWith(
+                              style: kSubHeadingTextStyle.copyWith(
                                   fontWeight: FontWeight.bold)),
                         ),
                         Padding(
@@ -109,13 +114,13 @@ class ThemeView extends StatelessWidget {
                               TextSpan(
                                   text:
                                       'Customise the look of your workspace. Feeling adventurous?\n',
-                                  style: subheadingStyle.copyWith(
+                                  style: kSubHeadingTextStyle.copyWith(
                                       color: Theme.of(context)
                                           .colorScheme
                                           .primary)),
                               TextSpan(
                                   text: 'create a custom theme',
-                                  style: subheadingStyle.copyWith(
+                                  style: kSubHeadingTextStyle.copyWith(
                                       color: Color.fromRGBO(0, 184, 124, 1))),
                             ])),
                           ),
@@ -125,7 +130,7 @@ class ThemeView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             child: Text(
                               model.head3,
-                              style: bodyStyle.copyWith(
+                              style: kBodyTextStyle.copyWith(
                                   color: Color.fromRGBO(153, 153, 153, 1)),
                             )),
                         Container(
@@ -148,11 +153,11 @@ class ThemeView extends StatelessWidget {
                                                   model.lightThmemImg),
                                               fit: BoxFit.fill)),
                                     ),
-                                    bottomContainer(
+                                    BottomContainerWidget(
                                         value: cleanThemes.aubergine,
                                         groupValue: model.cleanTheme,
-                                        txt: "Aubergine",
-                                        onChanged: model.switchCleanTheme),
+                                        onChanged: model.switchCleanTheme,
+                                        txt: "Aubergine")
                                   ],
                                 )),
                                 horizontalSpaceSmall,
@@ -168,11 +173,16 @@ class ThemeView extends StatelessWidget {
                                                   model.lightThmemImg2),
                                               fit: BoxFit.fill)),
                                     ),
-                                    bottomContainer(
+                                    BottomContainerWidget(
                                         value: cleanThemes.versatile,
                                         groupValue: model.cleanTheme,
-                                        txt: "Versatile",
-                                        onChanged: model.switchCleanTheme),
+                                        onChanged: model.switchCleanTheme,
+                                        txt: "Versatile")
+                                    // bottomContainer(
+                                    //     value: cleanThemes.versatile,
+                                    //     groupValue: model.cleanTheme,
+                                    //     txt: "Versatile",
+                                    //     onChanged: model.switchCleanTheme),
                                   ],
                                 ),
                               ],
@@ -193,7 +203,7 @@ class ThemeView extends StatelessWidget {
                                                 Color.fromRGBO(0, 184, 124, 1),
                                             size: 20),
                                         Text('Show all classic themes',
-                                            style: bodyStyle.copyWith(
+                                            style: kBodyTextStyle.copyWith(
                                                 fontSize: 14.sp,
                                                 color: Color.fromRGBO(
                                                     0, 184, 124, 1))),
@@ -222,14 +232,14 @@ class ThemeView extends StatelessWidget {
                                                                     .aubergine2),
                                                             fit: BoxFit.fill)),
                                                   ),
-                                                  bottomContainer(
+                                                  BottomContainerWidget(
                                                       value: cleanThemes
                                                           .aubergine1,
                                                       groupValue:
                                                           model.cleanTheme,
-                                                      txt: "Aubergine",
                                                       onChanged: model
-                                                          .switchCleanTheme),
+                                                          .switchCleanTheme,
+                                                      txt: "Aubergine")
                                                 ],
                                               )),
                                               horizontalSpaceSmall,
@@ -246,14 +256,14 @@ class ThemeView extends StatelessWidget {
                                                                     .aubergine3),
                                                             fit: BoxFit.fill)),
                                                   ),
-                                                  bottomContainer(
+                                                  BottomContainerWidget(
                                                       value: cleanThemes
                                                           .aubergine2,
                                                       groupValue:
                                                           model.cleanTheme,
-                                                      txt: "Aubergine",
                                                       onChanged: model
-                                                          .switchCleanTheme),
+                                                          .switchCleanTheme,
+                                                      txt: "Aubergine")
                                                 ],
                                               ),
                                             ],
@@ -264,7 +274,7 @@ class ThemeView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             child: Text(
                               model.head4,
-                              style: bodyStyle.copyWith(
+                              style: kBodyTextStyle.copyWith(
                                   color: Color.fromRGBO(153, 153, 153, 1)),
                             )),
                         Container(
@@ -286,11 +296,11 @@ class ThemeView extends StatelessWidget {
                                               image: AssetImage(model.coast),
                                               fit: BoxFit.fill)),
                                     ),
-                                    bottomContainer(
+                                    BottomContainerWidget(
                                         value: darkDramaticTheme.coast,
                                         groupValue: model.darkDramaTheme,
-                                        txt: "Coast",
-                                        onChanged: model.switchDramaticTheme),
+                                        onChanged: model.switchDramaticTheme,
+                                        txt: "Coast")
                                   ],
                                 )),
                                 horizontalSpaceSmall,
@@ -305,11 +315,11 @@ class ThemeView extends StatelessWidget {
                                               image: AssetImage(model.triadic),
                                               fit: BoxFit.fill)),
                                     ),
-                                    bottomContainer(
+                                    BottomContainerWidget(
                                         value: darkDramaticTheme.triadic,
                                         groupValue: model.darkDramaTheme,
-                                        txt: "Triadic",
-                                        onChanged: model.switchDramaticTheme),
+                                        onChanged: model.switchDramaticTheme,
+                                        txt: "Triadic")
                                   ],
                                 ),
                               ],
@@ -334,11 +344,11 @@ class ThemeView extends StatelessWidget {
                                                   model.complimentary),
                                               fit: BoxFit.fill)),
                                     ),
-                                    bottomContainer(
+                                    BottomContainerWidget(
                                         value: darkDramaticTheme.complimentary,
                                         groupValue: model.darkDramaTheme,
-                                        txt: "Complimentary",
-                                        onChanged: model.switchDramaticTheme),
+                                        onChanged: model.switchDramaticTheme,
+                                        txt: "Complimentary")
                                   ],
                                 )),
                                 horizontalSpaceSmall,
@@ -354,11 +364,11 @@ class ThemeView extends StatelessWidget {
                                                   AssetImage(model.automatic),
                                               fit: BoxFit.fill)),
                                     ),
-                                    bottomContainer(
+                                    BottomContainerWidget(
                                         value: darkDramaticTheme.automatic,
                                         groupValue: model.darkDramaTheme,
-                                        txt: "Automatic",
-                                        onChanged: model.switchDramaticTheme),
+                                        onChanged: model.switchDramaticTheme,
+                                        txt: "Automatic")
                                   ],
                                 ),
                               ],
@@ -382,11 +392,11 @@ class ThemeView extends StatelessWidget {
                                               image: AssetImage(model.nocturne),
                                               fit: BoxFit.fill)),
                                     ),
-                                    bottomContainer(
+                                    BottomContainerWidget(
                                         value: darkDramaticTheme.nocturne,
                                         groupValue: model.darkDramaTheme,
-                                        txt: "Nocturne",
-                                        onChanged: model.switchDramaticTheme),
+                                        onChanged: model.switchDramaticTheme,
+                                        txt: "Nocturne")
                                   ],
                                 )),
                                 horizontalSpaceSmall,
@@ -402,11 +412,11 @@ class ThemeView extends StatelessWidget {
                                                   AssetImage(model.expensive),
                                               fit: BoxFit.fill)),
                                     ),
-                                    bottomContainer(
+                                    BottomContainerWidget(
                                         value: darkDramaticTheme.expensive,
                                         groupValue: model.darkDramaTheme,
-                                        txt: "Expensive",
-                                        onChanged: model.switchDramaticTheme),
+                                        onChanged: model.switchDramaticTheme,
+                                        txt: "Expensive")
                                   ],
                                 ),
                               ],
@@ -416,137 +426,6 @@ class ThemeView extends StatelessWidget {
         return ThemeViewModel();
       },
     );
-  }
-
-  containerLight(ThemeViewModel model) {
-    return Container(
-      width: 487,
-      height: 125,
-      padding: EdgeInsets.only(bottom: 0),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Color.fromRGBO(26, 97, 219, 0.5)),
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      child: Column(
-        children: [
-          ListTile(
-            leading: Image(image: AssetImage(model.logoLight)),
-            title: Row(children: [
-              Text(model.title,
-                  style: bodyStyle.copyWith(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black)),
-              SizedBox(
-                width: 10,
-              ),
-              Text(model.date(),
-                  style:
-                      bodyStyle.copyWith(fontSize: 14.sp, color: Colors.black))
-            ]),
-            subtitle: Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Text('Look nice today',
-                    style: bodyStyle.copyWith(
-                        fontSize: 14.sp, color: Colors.black))),
-          ),
-          Spacer(),
-          buildRadio(
-            value: toggleBtwTheme.LightTheme,
-            groupValue: model.switchLightDark,
-            txt: 'Light',
-            onChanged: (value) {
-              model.switchBtwLightDark(value);
-            },
-            color: Color.fromRGBO(0, 184, 124, 0.42),
-          )
-        ],
-      ),
-    );
-  }
-
-  containerDark(ThemeViewModel model) {
-    return Container(
-      width: 487,
-      height: 125,
-      padding: EdgeInsets.only(bottom: 0),
-      decoration: BoxDecoration(
-          color: Colors.black,
-          border: Border.all(color: Color.fromRGBO(26, 97, 219, 0.5)),
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      child: Column(
-        children: [
-          ListTile(
-            leading: Image(image: AssetImage(model.logoDark)),
-            title: Row(children: [
-              Text(model.title,
-                  style: bodyStyle.copyWith(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-              SizedBox(
-                width: 10,
-              ),
-              Text(model.date(),
-                  style:
-                      bodyStyle.copyWith(fontSize: 14.sp, color: Colors.white))
-            ]),
-            subtitle: Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Text('Look nice today',
-                    style: bodyStyle.copyWith(
-                        fontSize: 14.sp, color: Colors.white))),
-          ),
-          Spacer(),
-          buildRadio(
-              value: toggleBtwTheme.DarkTheme,
-              groupValue: model.switchLightDark,
-              txt: 'Dark',
-              onChanged: (value) {
-                model.switchBtwLightDark(value);
-              },
-              color: Colors.white)
-        ],
-      ),
-    );
-  }
-
-  buildRadio(
-      {required toggleBtwTheme value,
-      required Object groupValue,
-      void Function(Object? value)? onChanged,
-      required String txt,
-      required Color color}) {
-    return Container(
-        height: 50,
-        margin: EdgeInsets.all(0),
-        decoration: BoxDecoration(
-            color: color,
-            border:
-                Border.all(color: Color.fromRGBO(26, 97, 219, 0.5), width: 0.5),
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            horizontalSpaceSmall,
-            Radio(
-              focusColor: Colors.green,
-              value: value,
-              groupValue: groupValue,
-              onChanged: onChanged,
-              activeColor: Colors.green,
-            ),
-            horizontalSpaceSmall,
-            Expanded(
-                child: Text(txt,
-                    style: bodyStyle.copyWith(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)))
-          ],
-        ));
   }
 
   bottomContainer({
@@ -575,7 +454,7 @@ class ThemeView extends StatelessWidget {
           ),
           horizontalSpaceSmall,
           Text(txt,
-              style: bodyStyle.copyWith(
+              style: kBodyTextStyle.copyWith(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black))
@@ -583,37 +462,193 @@ class ThemeView extends StatelessWidget {
   }
 }
 
-Padding padding(BuildContext context, Widget childs) {
-  return Padding(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 20), child: childs);
+class ClassicThemeWidgetDark extends StatelessWidget {
+  final ThemeViewModel model;
+  ClassicThemeWidgetDark({required this.model});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 487,
+      height: 125,
+      padding: EdgeInsets.only(bottom: 0),
+      decoration: BoxDecoration(
+          color: Colors.black,
+          border: Border.all(color: Color.fromRGBO(26, 97, 219, 0.5)),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Column(
+        children: [
+          ListTile(
+            leading: Image(image: AssetImage(model.logoDark)),
+            title: Row(children: [
+              Text(model.title,
+                  style: kBodyTextStyle.copyWith(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)),
+              SizedBox(
+                width: 10,
+              ),
+              Text(model.date(),
+                  style: kBodyTextStyle.copyWith(
+                      fontSize: 14.sp, color: Colors.white))
+            ]),
+            subtitle: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Text('Look nice today',
+                    style: kBodyTextStyle.copyWith(
+                        fontSize: 14.sp, color: Colors.white))),
+          ),
+          Spacer(),
+          BuildRadio(
+              value: toggleBtwTheme.DarkTheme,
+              groupValue: model.switchLightDark,
+              txt: 'Dark',
+              onChanged: (value) {
+                model.switchBtwLightDark(value);
+              },
+              color: Colors.white)
+        ],
+      ),
+    );
+  }
 }
 
-Container subContainer(BuildContext context, double width, bool Checked,
-    void Function(bool?)? onChanged, String them, Color color) {
-  return Container(
-      width: width,
-      margin: EdgeInsets.all(0),
+class ClassicThemeWidgetLight extends StatelessWidget {
+  ThemeViewModel model;
+  ClassicThemeWidgetLight({required this.model});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 487,
+      height: 125,
+      padding: EdgeInsets.only(bottom: 0),
       decoration: BoxDecoration(
-          color: color,
-          border:
-              Border.all(color: Color.fromRGBO(203, 203, 203, 1), width: 0.5),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10))),
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        horizontalSpaceSmall,
-        Container(
-            child: Checkbox(
-          fillColor: MaterialStateProperty.all<Color>(Colors.blue),
-          shape: CircleBorder(),
-          activeColor: Colors.blue,
-          value: Checked,
-          onChanged: onChanged,
-        )),
-        horizontalSpaceSmall,
-        Expanded(
-            child: Text(them,
-                style: bodyStyle.copyWith(
-                    fontWeight: FontWeight.bold, color: Colors.black))),
-      ]));
+          color: Colors.white,
+          border: Border.all(color: Color.fromRGBO(26, 97, 219, 0.5)),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Column(
+        children: [
+          ListTile(
+            leading: Image(image: AssetImage(model.logoLight)),
+            title: Row(children: [
+              Text(model.title,
+                  style: kBodyTextStyle.copyWith(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black)),
+              SizedBox(
+                width: 10,
+              ),
+              Text(model.date(),
+                  style: kBodyTextStyle.copyWith(
+                      fontSize: 14.sp, color: Colors.black))
+            ]),
+            subtitle: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Text('Look nice today',
+                    style: kBodyTextStyle.copyWith(
+                        fontSize: 14.sp, color: Colors.black))),
+          ),
+          Spacer(),
+          BuildRadio(
+            value: toggleBtwTheme.LightTheme,
+            groupValue: model.switchLightDark,
+            txt: 'Light',
+            onChanged: (value) {
+              model.switchBtwLightDark(value);
+            },
+            color: Color.fromRGBO(0, 184, 124, 0.42),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class BottomContainerWidget extends StatelessWidget {
+  final Object value;
+  final Object groupValue;
+  final void Function(Object? value)? onChanged;
+  final String txt;
+  BottomContainerWidget({
+    required this.value,
+    required this.groupValue,
+    required this.onChanged,
+    required this.txt,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: 198,
+        height: 38,
+        padding: EdgeInsets.all(0),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border:
+                Border.all(color: Color.fromRGBO(26, 97, 219, 0.5), width: 0.5),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10))),
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Radio(
+            activeColor: Colors.green,
+            value: value,
+            groupValue: groupValue,
+            onChanged: onChanged,
+          ),
+          horizontalSpaceSmall,
+          Text(txt,
+              style: kBodyTextStyle.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black))
+        ]));
+  }
+}
+
+class BuildRadio extends StatelessWidget {
+  Object value;
+  Object groupValue;
+  void Function(Object? value)? onChanged;
+  String txt;
+  Color color;
+  BuildRadio(
+      {required this.value,
+      required this.groupValue,
+      required this.onChanged,
+      required this.txt,
+      required this.color});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 50,
+        margin: EdgeInsets.all(0),
+        decoration: BoxDecoration(
+            color: color,
+            border:
+                Border.all(color: Color.fromRGBO(26, 97, 219, 0.5), width: 0.5),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            horizontalSpaceSmall,
+            Radio(
+              focusColor: Colors.green,
+              value: value,
+              groupValue: groupValue,
+              onChanged: onChanged,
+              activeColor: Colors.green,
+            ),
+            horizontalSpaceSmall,
+            Expanded(
+                child: Text(txt,
+                    style: kBodyTextStyle.copyWith(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black)))
+          ],
+        ));
+  }
 }

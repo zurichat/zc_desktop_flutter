@@ -5,7 +5,6 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/ui/main/center_area/center_area.dart';
 import 'package:zc_desktop_flutter/ui/main/left_side_bar/left_sidebar_view.dart';
-import 'package:zc_desktop_flutter/ui/main/message_page/message_view.dart';
 import 'package:zc_desktop_flutter/ui/main/organization_bar/organization_bar.dart';
 import 'package:zc_desktop_flutter/ui/main/right_side_bar/right_sidebar_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
@@ -78,43 +77,43 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       builder: (context, model, child) => Scaffold(
           body: // Column(
-              //   mainAxisAlignment: MainAxisAlignment.start,
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              // Container(height: 40, child: buildAppBar(context, isActive: true)),
-              // Text(
-              //     'You\'re welcome ${_auth.username}, and your token is ${_auth.token} '),
-              Column(
-        children: [
-          Container(height: 40, child: buildAppBar(context, isActive: true)),
-          Expanded(
-            child: Row(
-              children: [
-                OrganizationBarView(),
-                LeftSideBarView(),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 5,
-                        child: CenterArea(),
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          // Container(height: 40, child: buildAppBar(context, isActive: true)),
+          // Text(
+          //     'You\'re welcome ${_auth.username}, and your token is ${_auth.token} '),
+          Column(
+            children: [
+              Container(height: 40, child: buildAppBar(context, isActive: true)),
+              Expanded(
+                child: Row(
+                  children: [
+                    OrganizationBarView(),
+                    LeftSideBarView(),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: CenterArea(),
+                          ),
+                          if (_size.width > 1040)
+                            Expanded(
+                              flex: 3,
+                              child: RightSideBarView(),
+                            )
+                        ],
                       ),
-                      if (_size.width > 1040)
-                        Expanded(
-                          flex: 3,
-                          child: RightSideBarView(),
-                        )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      )
-          //   ],
-          // ),
-          ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )
+        //   ],
+        // ),
+      ),
       viewModelBuilder: () => HomeViewModel(),
     );
   }

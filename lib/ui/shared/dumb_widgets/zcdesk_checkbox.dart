@@ -6,10 +6,8 @@ class ZcCheckBox extends StatelessWidget {
     Key? key,
     required this.value,
     required this.onChanged,
-    this.fillColor
   }) : super(key: key);
 
-  final MaterialStateProperty<Color?>? fillColor;
   final bool? value;
   final ValueChanged<bool?>? onChanged;
 
@@ -19,7 +17,7 @@ class ZcCheckBox extends StatelessWidget {
       scale: 0.7,
       child: Checkbox(
           checkColor: kcBackgroundColor1,
-          fillColor: fillColor,
+          activeColor: kcPrimaryColor,
           splashRadius: 17,
           value: value,
           onChanged: onChanged

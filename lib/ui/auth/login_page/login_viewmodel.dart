@@ -80,12 +80,12 @@ class LoginViewModel extends BaseViewModel with Validator {
 
   void _goToHome() {
     if (emailText.isEmpty) {
-      _navigationService.navigateTo(Routes.homeView);
+      _navigationService.navigateTo(Routes.workspaceView);
       return;
     }
     _storageService.saveToDisk(testLocalKey, emailText);
 
-    _navigationService.navigateTo(Routes.homeView);
+    _navigationService.navigateTo(Routes.workspaceView);
   }
 
   void goToSignUp() {
