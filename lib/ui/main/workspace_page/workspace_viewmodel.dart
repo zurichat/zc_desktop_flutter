@@ -26,6 +26,8 @@ class WorkspaceViewModel extends BaseViewModel {
 
   int currentWorkspaceIndex = 0;
 
+  bool _displayChannels = false;
+
   bool _showDMs = false;
   bool _showMenus = false;
   bool _showChannels = false;
@@ -44,6 +46,17 @@ class WorkspaceViewModel extends BaseViewModel {
   bool get showDMs => _showDMs;
   bool get showMenus => _showMenus;
   bool get showChannels => _showChannels;
+  bool get displayChannels => _displayChannels;
+
+  void setdisplayChannels() {
+    _displayChannels = !_displayChannels;
+    notifyListeners();
+  }
+
+  void goDisplayChannels() {
+    _navigationService.navigateTo(Routes.displayChannelsView);
+    notifyListeners();
+  }
 
   void openChannelsDropDownMenu() {
     _showChannels = !_showChannels;
