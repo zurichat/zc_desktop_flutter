@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/l10n/l10n.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'app/app.router.dart';
 import 'ui/shared/preferences/preferenceswidgets/theme/themes.dart';
 
@@ -34,6 +38,13 @@ class ZcDesktop extends StatelessWidget {
               themeMode: themeMode,
               navigatorKey: StackedService.navigatorKey,
               onGenerateRoute: StackedRouter().onGenerateRoute,
+              supportedLocales: L10n.all,
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate
+              ],
             );
           }),
     );

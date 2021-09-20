@@ -8,6 +8,7 @@ import '../../../const_app_colors.dart';
 import '../../../const_text_styles.dart';
 import '../../../const_ui_helpers.dart';
 import 'language_preference_viewModel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LanguagePreference extends StatelessWidget {
   const LanguagePreference({
@@ -29,10 +30,10 @@ class LanguagePreference extends StatelessWidget {
             children: <Widget>[
               Text(model.preferencetitles[0],
                   style: TextStyle(
-                      fontSize: 15.sp,
+                      color: headerColor,
+                      fontSize: 16.sp,
                       fontFamily: 'Lato',
-                      fontWeight: FontWeight.w500,
-                      color: headerColor)),
+                      fontWeight: FontWeight.bold)),
               verticalSpaceTiny,
               buildDropDown(
                   kcBackgroundColor2, model.languages, model.dropDownLanguage,
@@ -58,10 +59,10 @@ class LanguagePreference extends StatelessWidget {
               Text(
                 model.preferencetitles[1],
                 style: TextStyle(
-                    fontSize: 15.sp,
+                    color: headerColor,
+                    fontSize: 16.sp,
                     fontFamily: 'Lato',
-                    fontWeight: FontWeight.w500,
-                    color: headerColor),
+                    fontWeight: FontWeight.bold),
               ),
 
               ZcCheckBox2(
@@ -95,10 +96,10 @@ class LanguagePreference extends StatelessWidget {
               Text(
                 model.preferencetitles[2],
                 style: TextStyle(
-                    fontSize: 15.sp,
+                    color: headerColor,
+                    fontSize: 16.sp,
                     fontFamily: 'Lato',
-                    fontWeight: FontWeight.w500,
-                    color: headerColor),
+                    fontWeight: FontWeight.bold),
               ),
               verticalSpaceTiny,
 
@@ -122,7 +123,12 @@ class LanguagePreference extends StatelessWidget {
                   onChanged: (v) {
                     model.setcheckBox2 = v;
                   },
-                  txt: model.checkBoxText[1])
+                  txt: model.checkBoxText[1]),
+
+              Text(
+                AppLocalizations.of(context)!.language,
+                style: TextStyle(color: Colors.black),
+              )
             ],
           ),
         ),
