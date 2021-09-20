@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 
@@ -31,7 +32,8 @@ class ForgotPasswordView extends StatelessWidget {
                     height: 40,
                     child: buildAppBar(context,
                         isHome: false, text: 'Forget Password | Zuri')),
-                AuthHeader(title: model.signInText, subTitle: model.signInSubtext),
+                AuthHeader(
+                    title: model.signInText, subTitle: model.signInSubtext),
                 verticalSpaceLarge,
                 Container(
                   width: 440.w,
@@ -45,10 +47,12 @@ class ForgotPasswordView extends StatelessWidget {
                 ),
                 verticalSpaceSmall,
                 Container(
-                  height: 58.h,
-                  width: 440.w,
-                  child: AuthButton(label: model.btnText, onTap: model.goToCheckEmailView,)
-                ),
+                    height: 58.h,
+                    width: 440.w,
+                    child: AuthButton(
+                      label: model.btnText,
+                      onTap: model.goToCheckEmailView,
+                    )),
                 verticalSpaceMedium,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -79,9 +83,7 @@ class ForgotPasswordView extends StatelessWidget {
                       child: Text(
                         model.resetBtnText,
                         style: TextStyle(
-                            color: Color.fromRGBO(
-                              0, 184, 124, 1
-                            ),
+                            color: Color.fromRGBO(0, 184, 124, 1),
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Lato'),
@@ -89,6 +91,10 @@ class ForgotPasswordView extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 32.h,
+                ),
+                GotoLoginButton(),
               ],
             ),
             AuthFooter()
@@ -98,8 +104,6 @@ class ForgotPasswordView extends StatelessWidget {
       viewModelBuilder: () => ForgotPasswordViewModel(),
     );
   }
-
- 
 
   buildLine() {
     return Container(

@@ -104,7 +104,7 @@ class AuthInputField extends StatelessWidget {
                     child: IconButton(
                         onPressed: onVisibilityTap,
                         icon: Icon(
-                            isVisible ? Icons.visibility : Icons.visibility_off))),
+                            isVisible ? Icons.visibility_off : Icons.visibility))),
               )
           ],
         ),

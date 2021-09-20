@@ -6,6 +6,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 
@@ -36,6 +37,15 @@ class ResetPasswordView extends StatelessWidget {
                       child: AuthHeader(
                           title: model.title, subTitle: model.subTitle)),
                   verticalSpaceLarge,
+                  Text(
+                    model.errorMessage,
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Lato',
+                        color: Colors.red,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  verticalSpaceSmall,
                   Container(
                     width: 502.w,
                     child: AuthInputField(
@@ -58,7 +68,11 @@ class ResetPasswordView extends StatelessWidget {
                         onTap: () async {
                           await model.verfiyAndGotoCheckEmail();
                         },
-                      ))
+                      )),
+                  SizedBox(
+                    height: 32.h,
+                  ),
+                  GotoLoginButton(),
                 ],
               ),
               AuthFooter()

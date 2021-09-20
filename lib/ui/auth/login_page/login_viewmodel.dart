@@ -14,7 +14,6 @@ class LoginViewModel extends BaseViewModel with Validator {
   final _navigationService = locator<NavigationService>();
   final _storageService = locator<LocalStorageService>();
   final _auth = locator<AuthService>();
-
   String _logoUrl = 'assets/images/zc_logo2.png';
   String _logoUrlG = 'assets/images/google.png';
   String _logoUrlF = 'assets/images/facebook.png';
@@ -59,14 +58,11 @@ class LoginViewModel extends BaseViewModel with Validator {
   String emailText = '';
   String passwordText = '';
 
-  void emailChanged(String? value) {
-    emailText = value!;
-  }
-
   void setErrorMessage(String msg) {
     _errorMessage = msg;
     notifyListeners();
   }
+
 
   void _setIsError() {
     _isError = true;
@@ -94,7 +90,7 @@ class LoginViewModel extends BaseViewModel with Validator {
   }
 
   void gotoForgetpassword() {
-    _navigationService.navigateTo(Routes.forgotPasswordView);
+    _navigationService.navigateTo(Routes.resetPasswordView);
     notifyListeners();
   }
 
@@ -148,5 +144,15 @@ class LoginViewModel extends BaseViewModel with Validator {
 
     _goToHome();
     notifyListeners();
+  }
+
+  Future<void> checkLoginStatus() async {
+    try {
+      await _auth.checkToken();
+      _goToHome();
+
+    } catch (e) {
+      _navigationService.navigateTo(Routes.loginView);
+    }
   }
 }
