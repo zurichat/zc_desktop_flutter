@@ -131,4 +131,33 @@ class ShortCuts {
       )),
     );
   }
+
+   Widget slash() {
+    return contain(
+      child: Center(
+        child: Text('/'),
+      )
+      
+    );
+  }
+
+   Widget esc() {
+    return contain(
+      child: Center(
+        child: Text('ESC'),
+      )
+      
+    );
+  }
+
+   Widget alt() {
+    return contain(
+      child: Center(
+        child: Text('/'),
+      )
+      
+    );
+  }
+
 }
+
