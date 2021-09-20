@@ -27,18 +27,15 @@ class SplashView extends StatelessWidget {
                 Center(
                     child: CircularProgressIndicator(
                   color: Colors.grey,
-
                 ))
-
               ],
             ),
           ),
         );
       },
-      onModelReady: (model){
+      onModelReady: (model) {
         model.checkLoginStatus();
       },
     );
   }
-
 }
