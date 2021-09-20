@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: 
+    sdk: flutter
   
   # stacked
   stacked: ^2.2.5
@@ -52,6 +54,7 @@ dev_dependencies:
 #   meta: ^1.7.0
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - assets/images/

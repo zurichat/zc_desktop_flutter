@@ -12,6 +12,7 @@ import '../../../const_app_colors.dart';
 import '../../../const_text_styles.dart';
 import '../../../const_ui_helpers.dart';
 import 'message_media_preference_viewModel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MessageMediaPreferenceView extends StatelessWidget {
   const MessageMediaPreferenceView({Key? key}) : super(key: key);
@@ -32,6 +33,10 @@ class MessageMediaPreferenceView extends StatelessWidget {
             emojiSection(model),
             inLineMediaSection(model),
             bringEmailIntoZuriSection(model),
+            Text(
+              AppLocalizations.of(context)!.language,
+              style: TextStyle(color: Colors.black),
+            )
           ],
         ),
       ),
@@ -49,7 +54,10 @@ Widget bringEmailIntoZuriSection(MessageMediaPreferenceViewModel model) {
         Text(
           model.messagepreferencetitles[7],
           style: TextStyle(
-              fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w500),
+              color: headerColor,
+              fontSize: 16.sp,
+              fontFamily: 'Lato',
+              fontWeight: FontWeight.bold),
         ),
         verticalSpaceSmall,
         SizedBox(
@@ -62,8 +70,8 @@ Widget bringEmailIntoZuriSection(MessageMediaPreferenceViewModel model) {
         ),
         verticalSpaceMedium,
         PreferenceButton(
-          label: 'Get a forward address',
-        )
+          label: 'Get a forward message',
+        ),
       ],
     ),
   );
@@ -77,9 +85,10 @@ Widget inLineMediaSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(model.messagepreferencetitles[6],
             style: TextStyle(
+                color: headerColor,
                 fontSize: 16.sp,
                 fontFamily: 'Lato',
-                fontWeight: FontWeight.w500)),
+                fontWeight: FontWeight.bold)),
         verticalSpaceSmall,
         ZcCheckBox1(
             onChanged: (v) {
@@ -128,7 +137,10 @@ Widget additionalOptionsSection(MessageMediaPreferenceViewModel model) {
         Text(
           model.messagepreferencetitles[3],
           style: TextStyle(
-              fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w500),
+              color: headerColor,
+              fontSize: 16.sp,
+              fontFamily: 'Lato',
+              fontWeight: FontWeight.bold),
         ),
         verticalSpaceSmall,
         ZcCheckBox1(
@@ -204,7 +216,10 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
         Text(
           model.messagepreferencetitles[4],
           style: TextStyle(
-              fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w500),
+              color: headerColor,
+              fontSize: 16.sp,
+              fontFamily: 'Lato',
+              fontWeight: FontWeight.bold),
         ),
         verticalSpaceSmall,
         Text(
@@ -297,9 +312,10 @@ Widget themeSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(model.messagepreferencetitles[0],
             style: TextStyle(
+                color: headerColor,
                 fontSize: 16.sp,
                 fontFamily: 'Lato',
-                fontWeight: FontWeight.w500)),
+                fontWeight: FontWeight.bold)),
         buildThemeRadioColumn(model),
         verticalSpaceSmall,
         Text('Here is an Example',
@@ -334,10 +350,10 @@ Widget nameSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(model.messagepreferencetitles[2],
             style: TextStyle(
+                color: headerColor,
                 fontSize: 16.sp,
                 fontFamily: 'Lato',
-                fontWeight: FontWeight.w500,
-                color: headerColor)),
+                fontWeight: FontWeight.bold)),
         buildNameRadioColumn(model),
         verticalSpaceSmall,
         ReusableContainer(
@@ -406,74 +422,79 @@ class ReusableContainer extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: kcPrimaryColor)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: [
-                Image.asset(image!),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Text(
-                            title!,
-                            style: TextStyle(
-                                fontSize: 13.sp,
-                                fontFamily: 'Lato',
-                                fontWeight: FontWeight.w700,
-                                color: headerColor),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Column(
+      child: Column(
+        children: <Widget>[
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              child: Row(
+                children: [
+                  Image.asset(image!),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Flexible(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
                             children: [
-                              verticalSpaceTiny,
                               Text(
-                                time!,
+                                title!,
                                 style: TextStyle(
-                                    fontSize: 12.sp,
+                                    fontSize: 13.sp,
                                     fontFamily: 'Lato',
-                                    fontWeight: FontWeight.w500),
+                                    fontWeight: FontWeight.w700,
+                                    color: headerColor),
                               ),
+                              horizontalSpaceSmall,
+                              Column(
+                                children: [
+                                  verticalSpaceTiny,
+                                  Text(
+                                    time!,
+                                    style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontFamily: 'Lato',
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              )
                             ],
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SvgPicture.asset(emoji!),
+                                horizontalSpaceTiny,
+                                RichText(
+                                    overflow: TextOverflow.ellipsis,
+                                    text: TextSpan(
+                                        text: subtitle!,
+                                        style: kHeading4TextStyle.copyWith(
+                                            color: Colors.black,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500),
+                                        children: [
+                                          TextSpan(
+                                            text: subtxt,
+                                            style: subtitle2.copyWith(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500,
+                                                color: kcPrimaryColor),
+                                          )
+                                        ]))
+                              ],
+                            ),
                           )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(emoji!),
-                          horizontalSpaceTiny,
-                          RichText(
-                              softWrap: true,
-                              text: TextSpan(
-                                  text: subtitle!,
-                                  style: kHeading4TextStyle.copyWith(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500),
-                                  children: [
-                                    TextSpan(
-                                      text: subtxt,
-                                      style: subtitle2.copyWith(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: kcPrimaryColor),
-                                    )
-                                  ]))
-                        ],
-                      )
-                    ])
-              ],
-            )
-          ],
-        ),
+                        ]),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

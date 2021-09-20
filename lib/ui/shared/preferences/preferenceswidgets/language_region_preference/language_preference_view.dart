@@ -29,10 +29,10 @@ class LanguagePreference extends StatelessWidget {
             children: <Widget>[
               Text(model.preferencetitles[0],
                   style: TextStyle(
-                      fontSize: 15.sp,
+                      color: headerColor,
+                      fontSize: 16.sp,
                       fontFamily: 'Lato',
-                      fontWeight: FontWeight.w500,
-                      color: headerColor)),
+                      fontWeight: FontWeight.bold)),
               verticalSpaceTiny,
               buildDropDown(
                   kcBackgroundColor2, model.languages, model.dropDownLanguage,
@@ -58,10 +58,10 @@ class LanguagePreference extends StatelessWidget {
               Text(
                 model.preferencetitles[1],
                 style: TextStyle(
-                    fontSize: 15.sp,
+                    color: headerColor,
+                    fontSize: 16.sp,
                     fontFamily: 'Lato',
-                    fontWeight: FontWeight.w500,
-                    color: headerColor),
+                    fontWeight: FontWeight.bold),
               ),
 
               ZcCheckBox2(
@@ -95,10 +95,10 @@ class LanguagePreference extends StatelessWidget {
               Text(
                 model.preferencetitles[2],
                 style: TextStyle(
-                    fontSize: 15.sp,
+                    color: headerColor,
+                    fontSize: 16.sp,
                     fontFamily: 'Lato',
-                    fontWeight: FontWeight.w500,
-                    color: headerColor),
+                    fontWeight: FontWeight.bold),
               ),
               verticalSpaceTiny,
 
