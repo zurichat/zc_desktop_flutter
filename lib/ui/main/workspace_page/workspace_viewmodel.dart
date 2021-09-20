@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.
 class WorkspaceViewModel extends BaseViewModel {
   final log = getLogger("WorkspaceViewModel");
   final _workspaceService = locator<WorkspaceService>();
+  final _navigationService = locator<NavigationService>();
 
   String userDefaultImageUrl = 'assets/images/zc_logo.png';
   int numberOfReplies = 14;
@@ -54,7 +55,7 @@ class WorkspaceViewModel extends BaseViewModel {
   }
 
   void goDisplayChannels() {
-    _navigationService.navigateTo(Routes.displayChannelsView);
+    _navigationService.navigateTo(Routes.channelsDisplayView);
     notifyListeners();
   }
 
@@ -110,9 +111,8 @@ class WorkspaceViewModel extends BaseViewModel {
   }
 
   // TODO: go to workspace creation page
-  final _navigationService = locator<NavigationService>();
   void goToCreateWorkspace() {
-    // _navigationService.navigateTo(Routes.createWorkspaceView);
+    _navigationService.navigateTo(Routes.createWorkspaceView);
   }
 
   // get workspaces
