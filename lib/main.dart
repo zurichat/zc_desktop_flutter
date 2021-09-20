@@ -25,7 +25,7 @@ class ZcDesktop extends StatelessWidget {
     return ThemeBuilder(
       themes: getThemes(),
       builder: (context, regularTheme, darkTheme, themeMode) => ScreenUtilInit(
-          designSize: Size(1440, 940),
+          designSize: Size(1440, 1024),
           builder: () {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
