@@ -4,6 +4,10 @@ class SVGAssetPaths {
   static final channelsListIcon = "assets/icons/hash_inactive.svg";
   static final dropDownOpenIcon = "assets/icons/drop_down_open.svg";
   static final dropDownClosedIcon = "assets/icons/drop_down_closed.svg";
+  static final channelDropDown = "assets/icons/channel_drop_down.svg";
+  static final sortIcon = "assets/icons/sort.svg";
+  static final filterDown = "assets/icons/filter.svg";
+  static final activeIcon = "assets/icons/active.svg";
   static final fluentEmoji = "assets/icons/fluent_emoji.svg";
   static final shareIcon = "assets/icons/share.svg";
   static final actionsIcon = "assets/icons/actions.svg";

@@ -99,7 +99,7 @@ class WorkspaceViewModel extends BaseViewModel {
   // TODO: go to workspace creation page
   final _navigationService = locator<NavigationService>();
   void goToCreateWorkspace() {
-    _navigationService.navigateTo(Routes.createWorkspaceView);
+    // _navigationService.navigateTo(Routes.createWorkspaceView);
   }
 
   // get workspaces

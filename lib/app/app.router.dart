@@ -21,6 +21,7 @@ import '../ui/main/channels_page/channels_view.dart';
 import '../ui/main/home_page/home_view.dart';
 import '../ui/main/workspace_page/workspace_view.dart';
 import '../ui/startup_page/startup_view.dart';
+import '../ui/main/channels_display/channels_display_view.dart';
 
 class Routes {
   static const String homeView = '/home-view';
@@ -34,6 +35,7 @@ class Routes {
   static const String changePasswordView = '/change-password-view';
   static const String successView = '/success-view';
   static const String channelsView = '/channels-view';
+  static const String displayChannelsView = '/display-channels-view';
   static const all = <String>{
     homeView,
     workspaceView,
@@ -46,6 +48,7 @@ class Routes {
     changePasswordView,
     successView,
     channelsView,
+    displayChannelsView,
   };
 }
 
@@ -64,6 +67,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.changePasswordView, page: ChangePasswordView),
     RouteDef(Routes.successView, page: SuccessView),
     RouteDef(Routes.channelsView, page: ChannelsView),
+    RouteDef(Routes.displayChannelsView, page: ChannelsDisplayView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -131,6 +135,12 @@ class StackedRouter extends RouterBase {
     ChannelsView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => ChannelsView(),
+        settings: data,
+      );
+    },
+    ChannelsDisplayView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => ChannelsDisplayView(),
         settings: data,
       );
     },

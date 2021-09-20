@@ -19,6 +19,7 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
 import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage1.dart';
 import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage2.dart';
 import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage3.dart';
+import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_view.dart';
 
 @StackedApp(
   routes: [
@@ -40,6 +41,7 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
     MaterialRoute(page: CreateWorkspaceStage1),
     MaterialRoute(page: CreateWorkspaceStage2),
     MaterialRoute(page: CreateWorkspaceStage3),
+    MaterialRoute(page: ChannelsDisplayView),
   ],
   dependencies: [
     Presolve(
