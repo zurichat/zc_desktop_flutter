@@ -150,6 +150,10 @@ flutter_screenutil
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-5.0.0+2/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-5.0.0+2/lib/
+flutter_statusbarcolor_ns
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_statusbarcolor_ns-0.3.0-nullsafety/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_statusbarcolor_ns-0.3.0-nullsafety/lib/
 flutter_svg
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.22.0/
@@ -322,6 +326,10 @@ recase
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/recase-4.0.0/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/recase-4.0.0/lib/
+rxdart
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.2/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.2/lib/
 shared_preferences
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.7/
@@ -382,6 +390,10 @@ stacked_services
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_services-0.8.13/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_services-0.8.13/lib/
+stacked_themes
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_themes-0.3.6/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_themes-0.3.6/lib/
 stream_channel
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.1.0/
