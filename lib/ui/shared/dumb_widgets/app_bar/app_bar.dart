@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zc_desktop_flutter/ui/main/search_modal/search_modal_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_view.dart';
 
 Widget buildAppBar(BuildContext context,
     {bool isActive = false, bool isHome = true, String text = ''}) {
@@ -64,11 +65,11 @@ Widget buildAppBar(BuildContext context,
                       )),
                   IconButton(
                     onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return PreferenceView();
-                          });
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (context) {
+                      //       return PreferenceView();
+                      //     });
                     },
                     icon: Icon(
                       iconc,
@@ -122,14 +123,13 @@ Widget buildAppBar(BuildContext context,
                       clipBehavior: Clip.none,
                       children: [
                         Container(
-                          height: 28,
-                          width: 28,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: Colors.grey,
-                          ),
-                          child: ClipRRect(),
-                        ),
+                            height: 28,
+                            width: 28,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.grey,
+                            ),
+                            child: ProfileDropdownView()),
                         Positioned(
                           top: 16,
                           left: 20,
