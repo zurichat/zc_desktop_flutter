@@ -10,13 +10,9 @@ import 'channels_viewmodel.dart';
 class ChannelsView extends ViewModelWidget<WorkspaceViewModel> {
   @override
   Widget build(BuildContext context, WorkspaceViewModel model) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-        body: Container(
-          margin: const EdgeInsets.symmetric(vertical: 9.0),
-          padding: EdgeInsets.all(9.0),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+    return  Container(
+      child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 10),
             child: Scrollbar(
               controller: model.controllerOne,
               child: SingleChildScrollView(
@@ -112,11 +108,11 @@ class ChannelsView extends ViewModelWidget<WorkspaceViewModel> {
               ),
             ),
           ),
-          //color: Colors.green,
-        ),
+          
     );
   }
 }
+
 
 Widget messageHeader(BuildContext context, WorkspaceViewModel model) {
   return Container(
