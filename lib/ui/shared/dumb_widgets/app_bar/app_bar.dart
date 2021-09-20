@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zc_desktop_flutter/ui/main/search_modal/search_modal_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_view.dart';
 
 Widget buildAppBar(BuildContext context,
     {bool isActive = false, bool isHome = true, String text = ''}) {
@@ -128,7 +129,7 @@ Widget buildAppBar(BuildContext context,
                             borderRadius: BorderRadius.circular(4),
                             color: Colors.grey,
                           ),
-                          child: ClipRRect(),
+                          child: ProfileDropdownView(),
                         ),
                         Positioned(
                           top: 16,

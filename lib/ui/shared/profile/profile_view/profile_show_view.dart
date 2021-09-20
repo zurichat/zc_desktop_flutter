@@ -63,7 +63,7 @@ class ProfileShowView extends StatelessWidget {
                                 decoration:
                                     BoxDecoration(shape: BoxShape.circle),
                                 child: Image.asset(
-                                    'assets/images/profile_placeholder.jpg'),
+                                    'assets/images/profile_placeholder.png'),
                               ),
                               verticalSpaceRegular,
                               Text(
