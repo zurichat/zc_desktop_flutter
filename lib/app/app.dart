@@ -1,5 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
@@ -28,7 +29,9 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
     MaterialRoute(page: ResetPasswordView),
     MaterialRoute(page: ChangePasswordView),
     MaterialRoute(page: SuccessView),
-    MaterialRoute(page: ChannelsView,),
+    MaterialRoute(
+      page: ChannelsView,
+    ),
   ],
   dependencies: [
     Presolve(
@@ -39,8 +42,8 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
     LazySingleton(classType: AuthService),
     LazySingleton(classType: ApiService),
     LazySingleton(classType: WorkspaceService),
+    Singleton(classType: ThemeService, resolveUsing: ThemeService.getInstance)
   ],
   logger: StackedLogger(),
 )
-
 class AppSetup {}
