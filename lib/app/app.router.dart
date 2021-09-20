@@ -98,7 +98,7 @@ class StackedRouter extends RouterBase {
     },
     LoginView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const LoginView(),
+        builder: (context) => LoginView(),
         settings: data,
       );
     },
@@ -110,7 +110,7 @@ class StackedRouter extends RouterBase {
     },
     SignUpView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const SignUpView(),
+        builder: (context) => SignUpView(),
         settings: data,
       );
     },

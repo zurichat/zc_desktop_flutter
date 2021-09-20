@@ -1,68 +1,80 @@
-import 'dart:convert';
 import 'package:stacked/stacked_annotations.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/services/api/api_service.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+
+import '../../app/app.locator.dart';
+import '../../models/auth_response.dart';
+import '../api/api_service.dart';
+import '../local_storage/local_storage_service.dart';
+
+const localAuthResponseKey = 'localAuthResponse';
 
 @LazySingleton()
 class AuthService {
   final _localStorageService = locator<LocalStorageService>();
-  final  _apiService = locator<ApiService>();
-  String _token = '';
-  String _userId = '';
-  String _username = '';
-  String get token => _token;
-  String get userId => _userId;
-  String get username => _username;
+  final _apiService = locator<ApiService>();
 
-  Future<void> signUpWithCred(
-      {
-      //   required String fname,
-      // required String lname,
-      // required String username,
-      required String password,
-      //required String tel,
-      required String email}) async {
+  AuthResponse? authResponse;
 
-        try {
-          await _apiService.post('/users', {
-            // 'first_name': fname,
-            // 'last_name': lname,
-            //'display_name': username,
-            'email': email,
-            'password': password,
-            // 'phone': tel
-          });
-        } catch(e) {
-          throw e;
-        }
-  }
-
-  Future<void> loginWithCred(String email, String password) async {
-    final responseData = await _apiService.post('/auth/login', {"email": email, "password": password});
-    try {
-      _token = responseData['data']['session_id'];
-     _userId = responseData['data']['user']['id'];
-     _username = responseData['data']['user']['display_name'];
-     final userData = json.encode({
-       'token': _token,
-        'userId': _userId,
-        'password': password,
+  Future<void> signup({
+    required String password,
+    required String email,
+  }) async {
+    await _apiService.post(
+      _apiService.apiConstants.signupUri,
+      body: {
         'email': email,
-        'username': _username
-      });
-      _localStorageService.saveToDisk('userData', userData);
-    } catch(e) {
-      throw e;
-    }
+        'password': password,
+      },
+    );
   }
 
-  Future<void> confirmEmail(String otp) async{
-    try {
-      await _apiService.post('/verify-account', {"code":otp});
-    } catch(e) {
-      throw e;
-    }
+  Future<void> confirmEmail(String otp) async {
+    await _apiService.post(
+      _apiService.apiConstants.confirmEmailUri,
+      body: {
+        "code": otp,
+      },
+    );
+  }
 
+  Future<void> login(String email, String password) async {
+    final response = await _apiService.post(
+      _apiService.apiConstants.signinUri,
+      body: {
+        "email": email,
+        "password": password,
+      },
+    );
+
+    authResponse = AuthResponse.fromMap(response['data']);
+
+    _localStorageService.saveToDisk(localAuthResponseKey, response['data']);
+  }
+
+  Future<void> getResetCode(String email) async {
+    await _apiService.post(
+      _apiService.apiConstants.requestPasswordResetCodeUri,
+      body: {"email": email},
+    );
+  }
+
+  Future<void> confirmResetCode(String code) async {
+    await _apiService.post(
+      _apiService.apiConstants.verifyResetPasswordUri,
+      body: {"code": code},
+    );
+  }
+
+  Future<void> updatePassword(String password) async {
+    await _apiService.post(
+      _apiService.apiConstants.verifyResetPasswordUri,
+      body: {
+        "password": password,
+        "confirm_password": password,
+      },
+    );
+  }
+
+  void logOut() {
+    _localStorageService.removeFromDisk(localAuthResponseKey);
   }
 }

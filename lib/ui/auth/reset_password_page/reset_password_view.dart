@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_view_model.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 
@@ -36,6 +38,11 @@ class ResetPasswordView extends StatelessWidget {
                       child: AuthHeader(
                           title: model.title, subTitle: model.subTitle)),
                   verticalSpaceLarge,
+                  Text(
+                    model.errorMessage,
+                    style: headline6.copyWith(color: Theme.of(context).errorColor,),
+                  ),
+                  verticalSpaceSmall,
                   Container(
                     width: 502.w,
                     child: AuthInputField(
@@ -54,11 +61,15 @@ class ResetPasswordView extends StatelessWidget {
                       height: 48.h,
                       child: AuthButton(
                         label: 'Get a reset link',
-                        isBUsy: model.isBusy,
+                        isBusy: model.isBusy,
                         onTap: () async {
                           await model.verfiyAndGotoCheckEmail();
                         },
-                      ))
+                      )),
+                  SizedBox(
+                    height: 32.h,
+                  ),
+                  GotoLoginButton(),
                 ],
               ),
               AuthFooter()
