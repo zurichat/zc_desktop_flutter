@@ -66,16 +66,17 @@ final authBtnStyle = TextStyle(
   fontFamily: 'Lato',
 );
 
-final leftSideBarStyle = TextStyle(
+final kLeftSideBarStyle = TextStyle(
   fontSize: 15.sp,
-  color: leftNavBarColor,
-  fontWeight: FontWeight.normal,
+  color: Colors.black,
+  fontWeight: FontWeight.w400,
+  fontStyle: FontStyle.normal,
   fontFamily: 'Lato',
 );
 
 final dropDownBodyTextStyle = TextStyle(
-  fontSize: 16.sp,
-  color: leftNavBarColor,
+  fontSize: 15.sp,
+  color: Colors.black,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
