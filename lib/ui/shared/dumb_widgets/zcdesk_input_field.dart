@@ -105,9 +105,12 @@ class AuthInputField extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                         onPressed: onVisibilityTap,
-                        icon: Icon(isVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off))),
+
+                        icon: Icon(
+                            isVisible ? Icons.visibility_off : Icons.visibility))),
+                       
+                        
+                            
               )
           ],
         ),
