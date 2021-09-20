@@ -12,6 +12,7 @@
 .history
 .svn/
 
+
 # generated stacked app files
 lib/app/
 

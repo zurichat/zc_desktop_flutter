@@ -7,6 +7,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'app/app.router.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
     runApp(
     ZcDesktop(),
