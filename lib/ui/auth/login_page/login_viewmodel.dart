@@ -150,6 +150,7 @@ class LoginViewModel extends BaseViewModel with Validator {
     try {
       await _auth.checkToken();
       _goToHome();
+
     } catch (e) {
       _navigationService.navigateTo(Routes.loginView);
     }
