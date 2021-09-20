@@ -428,7 +428,7 @@ class ReusableContainer extends StatelessWidget {
                               ),
                               Text(
                                 time!,
-                                style: leftSideBarStyle.copyWith(
+                                style: kLeftSideBarStyle.copyWith(
                                     fontSize: 10, color: timeColor),
                               ),
                             ],
