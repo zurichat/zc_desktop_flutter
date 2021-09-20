@@ -21,7 +21,14 @@ import '../ui/main/channels_page/channels_view.dart';
 import '../ui/main/home_page/home_view.dart';
 import '../ui/main/workspace_page/workspace_view.dart';
 import '../ui/startup_page/startup_view.dart';
+<<<<<<< HEAD
 import '../ui/main/channels_display/channels_display_view.dart';
+=======
+import '../ui/workspace_registeration_screen/create_workspace.dart';
+import '../ui/workspace_registeration_screen/create_workspace_stage1.dart';
+import '../ui/workspace_registeration_screen/create_workspace_stage2.dart';
+import '../ui/workspace_registeration_screen/create_workspace_stage3.dart';
+>>>>>>> 481cc05946d18d4ed4e67fe4ffb4b5e3b774d88b
 
 class Routes {
   static const String homeView = '/home-view';
@@ -35,7 +42,14 @@ class Routes {
   static const String changePasswordView = '/change-password-view';
   static const String successView = '/success-view';
   static const String channelsView = '/channels-view';
+<<<<<<< HEAD
   static const String displayChannelsView = '/display-channels-view';
+=======
+  static const String createWorkspaceView = '/create-workspace-view';
+  static const String createWorkspaceStage1 = '/create-workspace-stage1';
+  static const String createWorkspaceStage2 = '/create-workspace-stage2';
+  static const String createWorkspaceStage3 = '/create-workspace-stage3';
+>>>>>>> 481cc05946d18d4ed4e67fe4ffb4b5e3b774d88b
   static const all = <String>{
     homeView,
     workspaceView,
@@ -48,7 +62,14 @@ class Routes {
     changePasswordView,
     successView,
     channelsView,
+<<<<<<< HEAD
     displayChannelsView,
+=======
+    createWorkspaceView,
+    createWorkspaceStage1,
+    createWorkspaceStage2,
+    createWorkspaceStage3,
+>>>>>>> 481cc05946d18d4ed4e67fe4ffb4b5e3b774d88b
   };
 }
 
@@ -67,7 +88,14 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.changePasswordView, page: ChangePasswordView),
     RouteDef(Routes.successView, page: SuccessView),
     RouteDef(Routes.channelsView, page: ChannelsView),
+<<<<<<< HEAD
     RouteDef(Routes.displayChannelsView, page: ChannelsDisplayView),
+=======
+    RouteDef(Routes.createWorkspaceView, page: CreateWorkspaceView),
+    RouteDef(Routes.createWorkspaceStage1, page: CreateWorkspaceStage1),
+    RouteDef(Routes.createWorkspaceStage2, page: CreateWorkspaceStage2),
+    RouteDef(Routes.createWorkspaceStage3, page: CreateWorkspaceStage3),
+>>>>>>> 481cc05946d18d4ed4e67fe4ffb4b5e3b774d88b
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -138,9 +166,33 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+<<<<<<< HEAD
     ChannelsDisplayView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => ChannelsDisplayView(),
+=======
+    CreateWorkspaceView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const CreateWorkspaceView(),
+        settings: data,
+      );
+    },
+    CreateWorkspaceStage1: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const CreateWorkspaceStage1(),
+        settings: data,
+      );
+    },
+    CreateWorkspaceStage2: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const CreateWorkspaceStage2(),
+        settings: data,
+      );
+    },
+    CreateWorkspaceStage3: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const CreateWorkspaceStage3(),
+>>>>>>> 481cc05946d18d4ed4e67fe4ffb4b5e3b774d88b
         settings: data,
       );
     },
