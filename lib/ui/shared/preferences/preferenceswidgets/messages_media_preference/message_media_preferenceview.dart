@@ -437,10 +437,13 @@ class ReusableContainer extends StatelessWidget {
                               verticalSpaceTiny,
                               Text(
                                 time!,
+
                                 style: TextStyle(
                                     fontSize: 12.sp,
                                     fontFamily: 'Lato',
                                     fontWeight: FontWeight.w500),
+
+
                               ),
                             ],
                           )
