@@ -16,4 +16,10 @@ class APIConstants {
 
   Uri get confirmEmailUri =>
       Uri(scheme: scheme, host: host, path: '/verify-account');
+
+  Uri get verifyResetPasswordUri =>
+      Uri(scheme: scheme, host: host, path: '/account/verify-reset-password');
+
+  Uri get requestPasswordResetCodeUri => Uri(
+      scheme: scheme, host: host, path: '/account/request-password-reset-code');
 }

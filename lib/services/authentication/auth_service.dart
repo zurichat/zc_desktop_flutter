@@ -1,8 +1,9 @@
 import 'package:stacked/stacked_annotations.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/models/auth_response.dart';
-import 'package:zc_desktop_flutter/services/api/api_service.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+
+import '../../app/app.locator.dart';
+import '../../models/auth_response.dart';
+import '../api/api_service.dart';
+import '../local_storage/local_storage_service.dart';
 
 const localAuthResponseKey = 'localAuthResponse';
 
@@ -47,5 +48,33 @@ class AuthService {
     authResponse = AuthResponse.fromMap(response['data']);
 
     _localStorageService.saveToDisk(localAuthResponseKey, response['data']);
+  }
+
+  Future<void> getResetCode(String email) async {
+    await _apiService.post(
+      _apiService.apiConstants.requestPasswordResetCodeUri,
+      body: {"email": email},
+    );
+  }
+
+  Future<void> confirmResetCode(String code) async {
+    await _apiService.post(
+      _apiService.apiConstants.verifyResetPasswordUri,
+      body: {"code": code},
+    );
+  }
+
+  Future<void> updatePassword(String password) async {
+    await _apiService.post(
+      _apiService.apiConstants.verifyResetPasswordUri,
+      body: {
+        "password": password,
+        "confirm_password": password,
+      },
+    );
+  }
+
+  void logOut() {
+    _localStorageService.removeFromDisk(localAuthResponseKey);
   }
 }

@@ -4,11 +4,14 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 import 'change_password_view_model.dart';
 
@@ -43,7 +46,7 @@ class ChangePasswordView extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               verticalSpaceMedium,
                               SvgPicture.asset(model.logoUrl),
@@ -51,11 +54,7 @@ class ChangePasswordView extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   'Reset Password',
-                                  style: TextStyle(
-                                      fontSize: 32.sp,
-                                      color: Color.fromRGBO(36, 36, 36, 1),
-                                      fontFamily: 'Lato',
-                                      fontWeight: FontWeight.w600),
+                                  style: headline3,
                                 ),
                               ),
                               verticalSpaceMedium,
@@ -87,6 +86,12 @@ class ChangePasswordView extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: 40.0.h),
+                              Text(
+                                model.errorMessage,
+                                style: headline6.copyWith(
+                                    color: Theme.of(context).errorColor),
+                              ),
+                              verticalSpaceSmall,
                               Container(
                                   height: 58.h,
                                   width: 440.w,
@@ -103,6 +108,20 @@ class ChangePasswordView extends StatelessWidget {
                                       }
                                     },
                                   )),
+                              SizedBox(
+                                height: 32.h,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 23.w),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                        'Don\'t wish to change your password?  ',
+                                        style: headline6),
+                                    GotoLoginButton(),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -149,29 +168,20 @@ class BuildConfirmation extends StatelessWidget {
               SizedBox(
                 height: 32.h,
               ),
-              Text(
+              ZcdeskText.headingTwo(
                 model.isError ? model.errorTitle : model.successTitle,
-                style: TextStyle(
-                    fontSize: 31.sp,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Lato',
-                    color: Colors.black),
               ),
               SizedBox(
                 height: 24.h,
               ),
               Container(
-                width: 454.w,
-                child: Text(
-                  model.isError ? model.errorSubtiltle : model.successSubtitle,
-                  style: TextStyle(
-                      fontSize: 21.sp,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Lato',
-                      color: Colors.black),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+                  width: 454.w,
+                  alignment: Alignment.center,
+                  child: ZcdeskText.headingThree(
+                    model.isError
+                        ? model.errorSubtiltle
+                        : model.successSubtitle,
+                  )),
               SizedBox(
                 height: 32.h,
               ),
@@ -184,11 +194,9 @@ class BuildConfirmation extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Continue to Login',
-                      style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Lato',
-                          color: Colors.white),
+                      style: headline6.copyWith(
+                        color: Color.fromRGBO(0, 184, 124, 1),
+                      ),
                     ),
                   ),
                 ),

@@ -10,7 +10,6 @@ class LoginViewModel extends BaseViewModel {
 
   final _navigationService = locator<NavigationService>();
   final _auth = locator<AuthService>();
-
   bool _passwordVisibility = true;
 
   bool get passwordVisibily => _passwordVisibility;
@@ -26,7 +25,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   void gotoForgetpassword() {
-    _navigationService.navigateTo(Routes.forgotPasswordView);
+    _navigationService.navigateTo(Routes.resetPasswordView);
     notifyListeners();
   }
 
@@ -46,5 +45,15 @@ class LoginViewModel extends BaseViewModel {
   void onFutureError(error, Object? key) {
     print('Handle Error here');
     super.onFutureError(error, key);
+  }
+
+  Future<void> checkLoginStatus() async {
+    // try {
+    //   await _auth.checkToken();
+    //   _goToHome();
+
+    // } catch (e) {
+    _navigationService.navigateTo(Routes.loginView);
+    // }
   }
 }
