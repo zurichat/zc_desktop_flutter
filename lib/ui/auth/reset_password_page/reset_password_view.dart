@@ -61,7 +61,7 @@ class ResetPasswordView extends StatelessWidget {
                       height: 48.h,
                       child: AuthButton(
                         label: 'Get a reset link',
-                        isBUsy: model.isBusy,
+                        isBusy: model.isBusy,
                         onTap: () async {
                           await model.verfiyAndGotoCheckEmail();
                         },

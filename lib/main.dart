@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'app/app.router.dart';
 import 'ui/shared/preferences/preferenceswidgets/theme/themes.dart';
 

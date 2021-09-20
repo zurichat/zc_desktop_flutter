@@ -89,8 +89,7 @@ class ChangePasswordView extends StatelessWidget {
                               Text(
                                 model.errorMessage,
                                 style: headline6.copyWith(
-                                  color: Theme.of(context).errorColor
-                                ),
+                                    color: Theme.of(context).errorColor),
                               ),
                               verticalSpaceSmall,
                               Container(
@@ -98,7 +97,7 @@ class ChangePasswordView extends StatelessWidget {
                                   width: 440.w,
                                   child: AuthButton(
                                     label: 'Continue',
-                                    isBUsy: model.isBusy,
+                                    isBusy: model.isBusy,
                                     onTap: () async {
                                       await model.changePassword();
                                       if (model.isShowDialog) {
@@ -195,7 +194,9 @@ class BuildConfirmation extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Continue to Login',
-                      style: headline6.copyWith(color: Color.fromRGBO(0, 184, 124, 1),),
+                      style: headline6.copyWith(
+                        color: Color.fromRGBO(0, 184, 124, 1),
+                      ),
                     ),
                   ),
                 ),
