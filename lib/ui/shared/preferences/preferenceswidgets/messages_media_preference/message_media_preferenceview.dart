@@ -33,10 +33,10 @@ class MessageMediaPreferenceView extends StatelessWidget {
             emojiSection(model),
             inLineMediaSection(model),
             bringEmailIntoZuriSection(model),
-            // Text(
-            //   AppLocalizations.of(context)!.language,
-            //   style: TextStyle(color: Colors.black),
-            // )
+            Text(
+              AppLocalizations.of(context)!.language,
+              style: TextStyle(color: Colors.black),
+            )
           ],
         ),
       ),

@@ -24,29 +24,6 @@ class ZcDesktop extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-    return ScreenUtilInit(
-      designSize: Size(1440, 1024),
-      builder: () {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Zuri Chat',
-          theme: ThemeData(
-            primarySwatch: Colors.blueGrey,
-            scaffoldBackgroundColor: whiteColor,
-          ),
-          navigatorKey: StackedService.navigatorKey,
-          onGenerateRoute: StackedRouter().onGenerateRoute,
-          supportedLocales: L10n.all,
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate
-          ],
-        );
-      },
-
     //For the theme
     return ThemeBuilder(
       themes: getThemes(),
@@ -61,9 +38,15 @@ class ZcDesktop extends StatelessWidget {
               themeMode: themeMode,
               navigatorKey: StackedService.navigatorKey,
               onGenerateRoute: StackedRouter().onGenerateRoute,
+              supportedLocales: L10n.all,
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate
+              ],
             );
           }),
-
     );
   }
 }
