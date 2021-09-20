@@ -13,9 +13,8 @@
 .svn/
 
 # generated stacked app files
-lib/app/app.locator.dart
-lib/app/app.logger.dart
-lib/app/app.router.dart
+lib/app/
+
 
 # generated flutter files
 .flutter-plugins-dependencies
