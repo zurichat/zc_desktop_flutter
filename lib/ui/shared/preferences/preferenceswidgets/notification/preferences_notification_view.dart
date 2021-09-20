@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/preferences_notification_viewmodel.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({Key? key}) : super(key: key);
@@ -30,8 +31,7 @@ class NotificationView extends StatelessWidget {
                   children: [
                     Text(
                       'Nofity me about',
-                      style: kHeading4TextStyle.copyWith(
-                          fontSize: 15.sp, fontWeight: FontWeight.w400),
+                      style: preferenceStyleBold,
                     ),
                     TextButton(
                         onPressed: () {},
@@ -41,7 +41,8 @@ class NotificationView extends StatelessWidget {
                               'About notifications',
                               style: kHeading4TextStyle.copyWith(
                                   color: Colors.green,
-                                  fontSize: 15.sp,
+                                  fontSize: 16.sp,
+                                  fontFamily: 'Lato',
                                   fontWeight: FontWeight.w400),
                             ),
                             Icon(
@@ -63,9 +64,12 @@ class NotificationView extends StatelessWidget {
                 ),
                 Text(
                   'Keywords',
+                  style: preferenceStyleBold,
                 ),
+                SizedBox(height: 5.h),
                 Text(
-                    'You will be notified anything, someone uses these keyword in thread'),
+                    'You will be notified anytime someone uses these keyword in thread',
+                    style: preferenceStyleNormal),
                 SizedBox(
                   height: 16.h,
                 ),
@@ -81,7 +85,9 @@ class NotificationView extends StatelessWidget {
                 ),
                 Text(
                   'Schedule Notification',
+                  style: preferenceStyleNormal,
                 ),
+                SizedBox(height: 5.h),
                 GestureDetector(
                   onTap: () {},
                   child: RichText(
@@ -89,17 +95,13 @@ class NotificationView extends StatelessWidget {
                       text: TextSpan(
                           text:
                               'You\'ll only receive notifications in the hours that you choose. Outside of those times, notifications will be paused ',
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Lato',
-                              color: Colors.grey),
+                          style: preferenceStyleNormal,
                           children: [
                             TextSpan(
                               text: 'Learn more',
                               style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
                                   fontFamily: 'Lato',
                                   color: Colors.green),
                             )
@@ -130,7 +132,7 @@ class NotificationView extends StatelessWidget {
         ),
         Text(
           txt,
-          style: headline6.copyWith(fontSize: 13.sp),
+          style: preferenceStyleNormal,
         )
       ],
     );
@@ -183,7 +185,7 @@ class NotificationView extends StatelessWidget {
               items: items
                   .map<DropdownMenuItem<String>>(
                       (String value) => DropdownMenuItem(
-                            child: Text(value),
+                            child: Text(value,style: preferenceStyleNormal),
                             value: value,
                           ))
                   .toList()),
@@ -222,7 +224,7 @@ class NotificationView extends StatelessWidget {
         ),
         Text(
           txt,
-          style: headline6.copyWith(fontSize: 13.sp),
+          style: preferenceStyleNormal,
         ),
       ],
     );
@@ -245,5 +247,5 @@ class NotificationView extends StatelessWidget {
   }
 }
 
-//TODO this should be inside the constant class
-enum PrefMessageNotification { AllMessages, DirectMessages, None }
+
+
