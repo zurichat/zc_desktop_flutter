@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/dm_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/main/dm/hover_actions_view.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/new_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -11,7 +12,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 
 class DmView extends StatelessWidget {
-
   const DmView({Key? key});
 
   @override
@@ -22,116 +22,83 @@ class DmView extends StatelessWidget {
         viewModelBuilder: () => DmViewModel(),
         builder: (context, model, child) => Container(
               color: whiteColor,
-              padding: EdgeInsets.fromLTRB(10, 0, 0, 5),
+              padding: EdgeInsets.fromLTRB(2, 0, 0, 5),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          color: kcPrimaryColor,
-                          padding: EdgeInsets.all(4),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 25.h,
-                                      width: 25.w,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(2),
-                                      ),
-                                      child: Image.network('userProfile'),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'userName',
-                                        style: TextStyle(color: whiteColor),
-                                      ),
-                                    ),
-                                    SvgPicture.asset(
-                                      SVGAssetPaths.dropDownOpenIcon,
-                                      height: 5.h,
-                                      color: whiteColor,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.phone_outlined,
-                                    color: whiteColor,
-                                  ))
-                            ],
-                          ),
-                        ),
-                        TopRowActions()
-                      ],
-                    ),
-                  ),
+                  Align(alignment: Alignment.topCenter, child: TopRowActions()),
                   Flexible(
-                          fit: FlexFit.tight,
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              child: Container(
-                                color: kcBackgroundColor2,
-                                child: Scrollbar(
-                                  controller: _rightSideBarController,
-                                  isAlwaysShown: true,
-                                  scrollbarOrientation:
-                                      ScrollbarOrientation.right,
-                                  thickness: 10,
-                                  showTrackOnHover: true,
-                                  child: ListView(
-                                    physics: AlwaysScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    controller: _rightSideBarController,
-                                    children: [
-                                      NewDmView(userName: 'userName',),
-                                      
-                                      ListView.builder(
-                                          itemCount: model.messages.length,
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          itemBuilder: (context, index) {
-                                            return MessageTile(
-                                              userDisplayName: model.messages
-                                                  .elementAt(index)
-                                                  .userDisplayName,
-                                              userProfileUrl: model.messages
-                                                  .elementAt(index)
-                                                  .userProfileUrl,
-                                              time: model.messages
-                                                  .elementAt(index)
-                                                  .time,
-                                              message: model.messages
-                                                  .elementAt(index)
-                                                  .message,
-                                            );
-                                          }),
-                                    ],
-                                  ),
+                    fit: FlexFit.tight,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Container(
+                          color: kcBackgroundColor2,
+                          child: Scrollbar(
+                            controller: _rightSideBarController,
+                            isAlwaysShown: true,
+                            scrollbarOrientation: ScrollbarOrientation.right,
+                            thickness: 10,
+                            showTrackOnHover: true,
+                            child: ListView(
+                              physics: AlwaysScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              controller: _rightSideBarController,
+                              children: [
+                                NewDmView(
+                                  userName: 'userName',
                                 ),
-                              ),
+                                ListView.builder(
+                                    itemCount: model.messages.length,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      if (index == model.messages.length - 1) {
+                                        return Column(
+                                          children: [
+                                            NewMessageIn(),
+                                            MessageTile(
+                                          userDisplayName: model.messages
+                                              .elementAt(index)
+                                              .userDisplayName,
+                                          userProfileUrl: model.messages
+                                              .elementAt(index)
+                                              .userProfileUrl,
+                                          time: model.messages
+                                              .elementAt(index)
+                                              .time,
+                                          message: model.messages
+                                              .elementAt(index)
+                                              .message,
+                                        )
+                                          ],
+                                        );
+                                      } else {
+                                        return MessageTile(
+                                          userDisplayName: model.messages
+                                              .elementAt(index)
+                                              .userDisplayName,
+                                          userProfileUrl: model.messages
+                                              .elementAt(index)
+                                              .userProfileUrl,
+                                          time: model.messages
+                                              .elementAt(index)
+                                              .time,
+                                          message: model.messages
+                                              .elementAt(index)
+                                              .message,
+                                        );
+                                      }
+                                    }),
+                              ],
                             ),
                           ),
                         ),
+                      ),
+                    ),
+                  ),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: SendMessageInputField(
@@ -193,7 +160,12 @@ class MessageTile extends StatelessWidget {
                       width: 35.h,
                       decoration:
                           BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                      child: Image.network(userProfileUrl),
+                      child: Image.network(
+                        userProfileUrl,
+                        errorBuilder: (context, object, stacktrace) {
+                          return Image.asset('assets/images/profile.png');
+                        },
+                      ),
                     ),
                   ),
                   Expanded(
@@ -211,7 +183,8 @@ class MessageTile extends StatelessWidget {
                               children: [
                                 Text(
                                   userDisplayName,
-                                  style: kHeading1TextStyle.copyWith(fontSize: 15),
+                                  style:
+                                      kHeading1TextStyle.copyWith(fontSize: 15),
                                 ),
                                 SizedBox(
                                   width: 10.w,
@@ -295,8 +268,14 @@ class TopRowActions extends StatelessWidget {
       color: kcPrimaryLight,
       child: Row(
         children: [
-          TopRowItem(label: 'Pinned', icon: SVGAssetPaths.pinnedIcon,),
-          TopRowItem(label: 'Add to bookmarks', icon: SVGAssetPaths.addIcon,)
+          TopRowItem(
+            label: 'Pinned',
+            icon: SVGAssetPaths.pinnedIcon,
+          ),
+          TopRowItem(
+            label: 'Add to bookmarks',
+            icon: SVGAssetPaths.addIcon,
+          )
         ],
       ),
     );
@@ -314,9 +293,10 @@ class TopRowItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(icon,
-                                      color: bodyColor,
-                                    ),
+          SvgPicture.asset(
+            icon,
+            color: bodyColor,
+          ),
           SizedBox(
             width: 5.h,
           ),
@@ -345,7 +325,12 @@ class NewMessageIn extends StatelessWidget {
         SizedBox(
           width: 25.w,
         ),
-        Center(child: Text('New',style: subtitle2.copyWith(color: kcAccentColor),))
+        Center(
+            child: Text(
+          'New',
+          style: subtitle2.copyWith(color: kcAccentColor),
+        )),
+        SizedBox(width:25.h)
       ],
     );
   }
@@ -365,32 +350,120 @@ class OnHoverWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(SVGAssetPaths.fluentEmoji,
-                                    ),
-          
+          HoverItem(icon: SVGAssetPaths.fluentEmoji, onTap: () {}),
           SizedBox(
             width: 10.w,
           ),
-          SvgPicture.asset(SVGAssetPaths.thread,
-                                    ),
+          HoverItem(icon: SVGAssetPaths.thread, onTap: () {}),
           SizedBox(
             width: 10.w,
           ),
-          SvgPicture.asset(SVGAssetPaths.shareIcon,
-                                    ),
+          HoverItem(icon: SVGAssetPaths.shareIcon, onTap: () {}),
           SizedBox(
             width: 10.w,
           ),
-          SvgPicture.asset(SVGAssetPaths.bookmarkIcon,
-                                    ),
+          HoverItem(icon: SVGAssetPaths.bookmarkIcon, onTap: () {}),
           SizedBox(
             width: 10.w,
           ),
-          SvgPicture.asset(SVGAssetPaths.actionsIcon,
-                                    ),
-          
+          HoverItem(
+              icon: SVGAssetPaths.actionsIcon,
+              onTap: () {
+                showDialog(
+                    context: context,
+                    useSafeArea: false,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: MoreActions(),
+                        contentPadding: EdgeInsets.all(20),
+                        scrollable: true,
+                        insetPadding: EdgeInsets.all(0),
+                      );
+                    });
+              }),
         ],
       ),
+    );
+  }
+}
+
+class HoverItem extends StatelessWidget {
+  final Function() onTap;
+  final String icon;
+
+  HoverItem({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<DmViewModel>.reactive(
+        viewModelBuilder: () => DmViewModel(),
+        builder: (context, model, child) => MouseRegion(
+              opaque: false,
+              onHover: (event) {
+                model.onHoverActionsHovered(true);
+              },
+              onExit: (event) {
+                model.onHoverActionsHovered(false);
+              },
+              child: GestureDetector(
+                onTap: onTap,
+                child: SvgPicture.asset(icon),
+              ),
+            ));
+  }
+}
+
+class DmScreenLeading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 25.h,
+            width: 25.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+            ),
+            child: Image.network(
+              'userProfile',
+              errorBuilder: (context, object, stacktrace) {
+                return Image.asset('assets/images/profile.png');
+              },
+            ),
+          ),
+          SizedBox(
+            width: 5.h,
+          ),
+          Text(
+            'userName',
+            style: TextStyle(color: whiteColor),
+          ),
+          SizedBox(
+            width: 5.h,
+          ),
+          SvgPicture.asset('assets/icons/vectordown_icon.svg',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DmScreenTrailing extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.phone_outlined,
+            color: whiteColor,
+            size: 20.h,
+          )),
     );
   }
 }

@@ -8,9 +8,16 @@ class DmViewModel extends BaseViewModel {
   List<Message> get messages => _messages;
   bool _onMessageTileHover = false;
   bool get onMessageTileHover => _onMessageTileHover;
+  bool _onHoverActionsHovered = false;
+  bool get onHoverActionsHover => _onHoverActionsHovered;
 
   void onMessageHovered(bool hover) {
     _onMessageTileHover = hover;
+    notifyListeners();
+  }
+
+  void onHoverActionsHovered(bool hover) {
+    _onHoverActionsHovered = hover;
     notifyListeners();
   }
 

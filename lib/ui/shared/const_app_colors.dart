@@ -11,7 +11,7 @@ const Color kcPrimaryLight = Color(0xffE1FDF4);
 // Backgroung Colors
 const Color kcBackgroundColor1 = Color(0xffF6F6F6);
 const Color kcBackgroundColor2 = Color(0xffFFFFFF);
-const Color hoverColor= Color(0x223A3A3A);
+const Color hoverColor= Color(0x113A3A3A);
 const Color lightDarkColor= Color(0x993A3A3A);
 
 // Text Colors
