@@ -12,7 +12,6 @@ import '../../../const_app_colors.dart';
 import '../../../const_text_styles.dart';
 import '../../../const_ui_helpers.dart';
 import 'message_media_preference_viewModel.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MessageMediaPreferenceView extends StatelessWidget {
   const MessageMediaPreferenceView({Key? key}) : super(key: key);
@@ -33,10 +32,6 @@ class MessageMediaPreferenceView extends StatelessWidget {
             emojiSection(model),
             inLineMediaSection(model),
             bringEmailIntoZuriSection(model),
-            Text(
-              AppLocalizations.of(context)!.language,
-              style: TextStyle(color: Colors.black),
-            )
           ],
         ),
       ),
