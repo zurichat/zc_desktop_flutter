@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/ui/main/channels_page/channels_view.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
@@ -52,19 +53,39 @@ class WorkspaceView extends StatelessWidget {
                             color: kcBackgroundColor2,
                             width: 70.w,
                             height: double.infinity,
-                            child: ListView.builder(
-                              itemCount: model.workspacesItems.length.toInt(),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      print("Workspace $index tapped");
-                                      model.setCurrentWorkspaceIndex(index);
-                                    },
-                                    child: model.workspacesItems[index],
-                                  ),
-                                );
-                              },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: model.workspace.length.toInt(),
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          print("Workspace $index tapped");
+                                          model.setCurrentWorkspaceIndex(index);
+                                        },
+                                        child: WorkspaceItem(
+                                          workspace: model.workspace[index],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          model.goToCreateWorkspace();
+                                        },
+                                        child: Icon(
+                                          Icons.add,
+                                          color: kcPrimaryColor,
+                                          size: 20,
+                                        )))
+                              ],
                             ),
                           ),
                           //TODO: Left side bar
@@ -87,145 +108,111 @@ class WorkspaceView extends StatelessWidget {
                                           shrinkWrap: true,
                                           children: [
                                             MenuItem(model),
-                                            SizedBox(height: 15),
+                                            verticalSpaceRegular,
                                             TitleSection(
                                               title: 'Channels',
+                                              addButtonTitle: 'Add channels',
                                               toggleTap: () {
                                                 model
                                                     .openChannelsDropDownMenu();
-                                                model.channels = <Widget>[
-                                                  Container(
-                                                    child: Column(
-                                                      children: List.generate(
-                                                        model
-                                                            .channelsListItemCount,
-                                                        (index) => MouseRegion(
-                                                          child:
-                                                              GestureDetector(
-                                                            onTap: () {
-                                                              print(
-                                                                  "channel item $index tapped");
-                                                              //model.showChannel(index);
-                                                              model
-                                                                  .setCurrentChannelIndex(
-                                                                      index);
-                                                              model
-                                                                  .getViewToDisplay(
-                                                                      index:
-                                                                          index,
-                                                                      isChannel:
-                                                                          true);
-                                                            },
-                                                            child: Container(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left:
-                                                                          20.0),
-                                                              child: Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        vertical:
-                                                                            16.0),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Container(
-                                                                      child: SvgPicture.asset(
-                                                                          SVGAssetPaths
-                                                                              .channelsListIcon),
-                                                                    ),
-                                                                    horizontalSpaceSmall,
-                                                                    ZcdeskText.dropDownBodyTextStyle(
-                                                                        model.getChannelName(
-                                                                            index)!),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ];
                                               },
                                               show: model.showChannels,
                                               addTap: () {},
-                                            ),
-                                            if (model.showChannels)
-                                              ...model.channels,
-                                            SizedBox(height: 5),
-                                            TitleSection(
-                                              title: 'Direct Messages',
-                                              show: model.showDMs,
-                                              toggleTap: () {
-                                                model.openDMsDropDownMenu();
-                                                model.dMs = <Widget>[
-                                                  Container(
-                                                    child: Column(
-                                                      children: List.generate(
-                                                        model
-                                                            .usersListItemCount,
-                                                        (index) => MouseRegion(
-                                                          child:
-                                                              GestureDetector(
-                                                            onTap: () {
-                                                              print(
-                                                                  "dm item $index tapped");
-                                                              //model.showDM(index);
-                                                              model
-                                                                  .setCurrentUsersIndex(
-                                                                      index);
-                                                              model
-                                                                  .getViewToDisplay(
-                                                                      index:
-                                                                          index,
-                                                                      isDM:
-                                                                          true);
-                                                            },
-                                                            child: Container(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left:
-                                                                          20.0),
-                                                              child: Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        vertical:
-                                                                            16.0),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    CircleAvatar(
-                                                                      backgroundImage:
-                                                                          AssetImage(
-                                                                              'assets/images/mark.jpg'),
-                                                                      radius:
-                                                                          18.r,
-                                                                    ),
-                                                                    horizontalSpaceRegular,
-                                                                    ZcdeskText.dropDownBodyTextStyle(
-                                                                        model.getUsersName(
-                                                                            index)!),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
+                                              list: List.generate(
+                                                model.channels.length.toInt(),
+                                                (index) => MouseRegion(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      bottom: 16.0,
+                                                    ),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        print(
+                                                            "channel item $index tapped");
+                                                        //model.showChannel(index);
+                                                        model.getViewToDisplay(
+                                                            index: index,
+                                                            isChannel: true);
+                                                      },
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Container(
+                                                            child: SvgPicture.asset(
+                                                                SVGAssetPaths
+                                                                    .channelsListIcon),
                                                           ),
-                                                        ),
+                                                          horizontalSpaceSmall,
+                                                          ZcdeskText
+                                                              .dropDownBodyTextStyle(
+                                                                  model
+                                                                      .channels[
+                                                                          index]
+                                                                      .name!),
+                                                        ],
                                                       ),
                                                     ),
                                                   ),
-                                                ];
+                                                ),
+                                              ),
+                                            ),
+                                            verticalSpaceRegular,
+                                            TitleSection(
+                                              title: 'Direct Messages',
+                                              addButtonTitle: 'Add teammates',
+                                              show: model.showDMs,
+                                              toggleTap: () {
+                                                model.openDMsDropDownMenu();
                                               },
                                               addTap: () {},
+                                              list: List.generate(
+                                                model.directMessages.length
+                                                    .toInt(),
+                                                (index) => MouseRegion(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      bottom: 16.0,
+                                                    ),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        print(
+                                                            "dm item $index tapped");
+                                                        //model.showDM(index);
+                                                        model.getViewToDisplay(
+                                                            index: index,
+                                                            isDM: true);
+                                                      },
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          CircleAvatar(
+                                                            backgroundImage:
+                                                                AssetImage(
+                                                                    'assets/images/mark.jpg'),
+                                                            radius: 18.r,
+                                                          ),
+                                                          horizontalSpaceRegular,
+                                                          ZcdeskText
+                                                              .dropDownBodyTextStyle(
+                                                                  model
+                                                                      .directMessages[
+                                                                          index]
+                                                                      .user!
+                                                                      .name!),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                            if (model.showDMs) ...model.dMs,
-                                            SizedBox(height: 15),
+                                            verticalSpaceRegular,
                                           ],
                                         ),
                                       ],
@@ -279,55 +266,83 @@ class TitleSection extends StatelessWidget {
   final GestureTapCallback toggleTap;
   final bool show;
   final GestureTapCallback addTap;
+  final List<Widget>? list;
+  final String? addButtonTitle;
 
-  const TitleSection(
-      {Key? key,
-      required this.title,
-      required this.toggleTap,
-      required this.show,
-      required this.addTap})
-      : super(key: key);
+  const TitleSection({
+    Key? key,
+    required this.title,
+    required this.toggleTap,
+    required this.show,
+    required this.addTap,
+    this.list,
+    this.addButtonTitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: toggleTap,
-            child: Container(
-              child: show
-                  ? Container(
-                      height: 12,
-                      width: 12,
-                      child: SvgPicture.asset(SVGAssetPaths.dropDownOpenIcon),
-                    )
-                  : Container(
-                      height: 12,
-                      width: 12,
-                      child: SvgPicture.asset(SVGAssetPaths.dropDownClosedIcon),
-                    ),
+    return Column(
+      children: [
+        Row(
+          children: [
+            GestureDetector(
+              onTap: toggleTap,
+              child: Container(
+                child: show
+                    ? Container(
+                        height: 12,
+                        width: 12,
+                        child: SvgPicture.asset(SVGAssetPaths.dropDownOpenIcon),
+                      )
+                    : Container(
+                        height: 12,
+                        width: 12,
+                        child:
+                            SvgPicture.asset(SVGAssetPaths.dropDownClosedIcon),
+                      ),
+              ),
+            ),
+            SizedBox(width: 8),
+            Expanded(
+              child: Container(
+                child: Text(title, style: kLeftSideBarStyle),
+              ),
+            ),
+          ],
+        ),
+        verticalSpaceSmall,
+        if (show)
+          Container(
+            padding: EdgeInsets.only(left: 20.0),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 16.0),
+              child: Column(
+                children: [
+                  Column(
+                    children: list!,
+                  ),
+                  verticalSpaceTiny,
+                  Row(
+                    textBaseline: TextBaseline.ideographic,
+                    children: [
+                      Text(addButtonTitle!, style: kLeftSideBarStyle),
+                      horizontalSpaceSmall,
+                      InkWell(
+                        onTap: addTap,
+                        child: Container(
+                          height: 12,
+                          width: 12,
+                          child: SvgPicture.asset(
+                              "assets/icons/add_dm_channel.svg"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-          SizedBox(width: 8),
-          Expanded(
-            child: Container(
-              child: Text(title,
-                  style: TextStyle(color: Color(0xFFC7C8CA), fontSize: 14)),
-            ),
-          ),
-          InkWell(
-            onTap: addTap,
-            child: Container(
-              height: 12,
-              width: 12,
-              child: SvgPicture.asset("assets/icons/add_drop_down.svg"),
-            ),
-          ),
-          SizedBox(width: 15),
-        ],
-      ),
+      ],
     );
   }
 }
@@ -363,8 +378,7 @@ class ReusableMenuItem extends StatelessWidget {
               ),
               SizedBox(width: 10),
               Container(
-                child: Text(text!,
-                    style: TextStyle(color: Color(0xFFC7C8CA), fontSize: 14)),
+                child: Text(text!, style: kLeftSideBarStyle),
               ),
             ],
           ),
@@ -385,11 +399,6 @@ class MenuItem extends StatelessWidget {
       child: Column(
         children: [
           ReusableMenuItem(
-            iconPath: 'assets/icons/insight.svg',
-            text: 'Insights',
-            onTap: () {},
-          ),
-          ReusableMenuItem(
               iconPath: 'assets/icons/threads.svg',
               text: 'Threads',
               onTap: () {
@@ -400,15 +409,14 @@ class MenuItem extends StatelessWidget {
               text: 'All DMs',
               onTap: () {}),
           ReusableMenuItem(
-              iconPath: 'assets/icons/draft.svg', text: 'Draft', onTap: () {}),
+              iconPath: 'assets/icons/drafts.svg', text: 'Draft', onTap: () {}),
           ReusableMenuItem(
-              iconPath: 'assets/icons/file.svg', text: 'Files', onTap: () {}),
+              iconPath: 'assets/icons/files.svg', text: 'Files', onTap: () {}),
           ReusableMenuItem(
-              iconPath: 'assets/icons/integrate.svg',
-              text: 'Integrate',
-              onTap: () {}),
-          ReusableMenuItem(
-              iconPath: 'assets/icons/todo.svg', text: 'To-do', onTap: () {}),
+            iconPath: 'assets/icons/plugins.svg',
+            text: 'Plugins',
+            onTap: () {},
+          ),
         ],
       ),
     );

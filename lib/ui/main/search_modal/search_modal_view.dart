@@ -23,7 +23,6 @@ class SearchModalView extends StatelessWidget {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => SearchModalViewmodel(),
       builder: (context, model, _) => Dialog(
-        alignment: Alignment.topCenter,
         child: BuildContainerWidget(model: model as SearchModalViewmodel),
       ),
     );
@@ -146,7 +145,7 @@ lookingForWidget({
     margin: EdgeInsets.only(left: 65.w, top: 18.h, right: 708.w, bottom: 13.h),
     child: Text(
       text!,
-      style: leftSideBarStyle,
+      style: kLeftSideBarStyle,
     ),
   );
 }

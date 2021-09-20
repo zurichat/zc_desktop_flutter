@@ -6,7 +6,7 @@ import 'package:zc_desktop_flutter/core/enums/pre_bar.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_sidebar.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/preferences_sidebar_viewmodel.dart';
 
 class SideBarView extends StatelessWidget {
   const SideBarView({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class SideBarView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Always show in the side bar',
-                    style: headline6.copyWith(fontSize: 14.sp)),
+                    style: preferenceStyleBold),
                 SizedBox(height: 14),
                 DisplayCheckBox(
                   value: model.insight,
@@ -98,7 +98,7 @@ class SideBarView extends StatelessWidget {
                 SizedBox(height: 5),
                 Divider(),
                 SizedBox(height: 10),
-                Text('Show...', style: headline6.copyWith(fontSize: 14.sp)),
+                Text('Show...', style: preferenceStyleBold),
                 DisplayRadio(
                     groupValue: model.sidebar,
                     text: 'All your conversation',
@@ -122,10 +122,10 @@ class SideBarView extends StatelessWidget {
                     value: PrefSidebar.Custom),
                 SizedBox(height: 5),
                 Text('Choose your settings for each section from the sidebar ',
-                    style: headline3.copyWith(fontSize: 10.sp)),
+                    style: preferenceStyleNormal),
                 Divider(),
                 SizedBox(height: 10),
-                Text('Sort...', style: headline6.copyWith(fontSize: 14.sp)),
+                Text('Sort...', style: preferenceStyleBold),
                 DisRadio(
                     groupValue: model.bar,
                     text: 'Alphabetically',
@@ -150,11 +150,11 @@ class SideBarView extends StatelessWidget {
                 SizedBox(height: 5),
                 Text(
                     'You can also choose how individual section are sorted directly from the sidebar',
-                    style: headline3.copyWith(fontSize: 10.sp)),
+                    style: preferenceStyleNormal),
                 Divider(),
                 SizedBox(height: 10),
                 Text('Direct message announcements',
-                    style: headline6.copyWith(fontSize: 14.sp)),
+                    style: preferenceStyleBold),
                 SizedBox(height: 5),
                 DisCheckBox(
                     text: 'Show profile photos next to DM',
@@ -204,7 +204,7 @@ class DisplayCheckBox extends StatelessWidget {
         ),
         SvgPicture.asset(assetName),
         SizedBox(width: 5),
-        Text(text, style: headline6.copyWith(fontSize: 13.sp)),
+        Text(text, style: preferenceStyleNormal),
       ],
     );
   }
@@ -236,7 +236,7 @@ class DisplayRadio extends StatelessWidget {
           onChanged: onChanged,
           activeColor: KStartupContainerColor,
         ),
-        Text(text, style: headline6.copyWith(fontSize: 13.sp)),
+        Text(text, style: preferenceStyleNormal),
       ],
     );
   }
@@ -267,7 +267,7 @@ class DisRadio extends StatelessWidget {
             groupValue: groupValue,
             onChanged: onChanged,
             activeColor: KStartupContainerColor),
-        Text(text, style: headline6.copyWith(fontSize: 13.sp)),
+        Text(text, style: preferenceStyleNormal),
       ],
     );
   }
@@ -294,7 +294,7 @@ class DisCheckBox extends StatelessWidget {
           onChanged: onChanged,
           activeColor: KStartupContainerColor,
         ),
-        Text(text, style: headline6.copyWith(fontSize: 13.sp)),
+        Text(text, style: preferenceStyleNormal),
       ],
     );
   }
