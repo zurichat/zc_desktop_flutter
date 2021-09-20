@@ -31,8 +31,7 @@ class NotificationView extends StatelessWidget {
                   children: [
                     Text(
                       'Nofity me about',
-                      style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w700
-                         ),
+                      style: preferenceStyleBold,
                     ),
                     TextButton(
                         onPressed: () {},
@@ -65,12 +64,12 @@ class NotificationView extends StatelessWidget {
                 ),
                 Text(
                   'Keywords',
-                  style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w700),
+                  style: preferenceStyleBold,
                 ),
                 SizedBox(height: 5.h),
                 Text(
                     'You will be notified anytime someone uses these keyword in thread',
-                    style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
+                    style: preferenceStyleNormal),
                 SizedBox(
                   height: 16.h,
                 ),
@@ -86,7 +85,7 @@ class NotificationView extends StatelessWidget {
                 ),
                 Text(
                   'Schedule Notification',
-                  style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600),
+                  style: preferenceStyleNormal,
                 ),
                 SizedBox(height: 5.h),
                 GestureDetector(
@@ -96,11 +95,7 @@ class NotificationView extends StatelessWidget {
                       text: TextSpan(
                           text:
                               'You\'ll only receive notifications in the hours that you choose. Outside of those times, notifications will be paused ',
-                          style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Lato',
-                              color: Colors.grey),
+                          style: preferenceStyleNormal,
                           children: [
                             TextSpan(
                               text: 'Learn more',
@@ -137,9 +132,7 @@ class NotificationView extends StatelessWidget {
         ),
         Text(
           txt,
-          style: TextStyle(
-            fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600
-          ),
+          style: preferenceStyleNormal,
         )
       ],
     );
@@ -192,7 +185,7 @@ class NotificationView extends StatelessWidget {
               items: items
                   .map<DropdownMenuItem<String>>(
                       (String value) => DropdownMenuItem(
-                            child: Text(value,style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
+                            child: Text(value,style: preferenceStyleNormal),
                             value: value,
                           ))
                   .toList()),
@@ -231,7 +224,7 @@ class NotificationView extends StatelessWidget {
         ),
         Text(
           txt,
-          style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600),
+          style: preferenceStyleNormal,
         ),
       ],
     );
