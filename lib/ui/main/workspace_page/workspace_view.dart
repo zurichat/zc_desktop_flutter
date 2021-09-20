@@ -56,21 +56,39 @@ class WorkspaceView extends StatelessWidget {
                             color: kcBackgroundColor2,
                             width: 70.w,
                             height: double.infinity,
-                            child: ListView.builder(
-                              itemCount: model.workspace.length.toInt(),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      print("Workspace $index tapped");
-                                      model.setCurrentWorkspaceIndex(index);
-                                    },
-                                    child: WorkspaceItem(
-                                      workspace: model.workspace[index],
-                                    ),
-                                  ),
-                                );
-                              },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: model.workspace.length.toInt(),
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          print("Workspace $index tapped");
+                                          model.setCurrentWorkspaceIndex(index);
+                                        },
+                                        child: WorkspaceItem(
+                                          workspace: model.workspace[index],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          model.goToCreateWorkspace();
+                                        },
+                                        child: Icon(
+                                          Icons.add,
+                                          color: kcPrimaryColor,
+                                          size: 20,
+                                        )))
+                              ],
                             ),
                           ),
                           //TODO: Left side bar
@@ -107,7 +125,10 @@ class WorkspaceView extends StatelessWidget {
                                                 model.channels.length.toInt(),
                                                 (index) => MouseRegion(
                                                   child: Padding(
-                                                    padding: const EdgeInsets.only(bottom: 16.0,),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      bottom: 16.0,
+                                                    ),
                                                     child: InkWell(
                                                       onTap: () {
                                                         print(
@@ -155,7 +176,10 @@ class WorkspaceView extends StatelessWidget {
                                                     .toInt(),
                                                 (index) => MouseRegion(
                                                   child: Padding(
-                                                    padding: const EdgeInsets.only(bottom: 16.0,),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      bottom: 16.0,
+                                                    ),
                                                     child: InkWell(
                                                       onTap: () {
                                                         print(
@@ -254,7 +278,8 @@ class TitleSection extends StatelessWidget {
     required this.toggleTap,
     required this.show,
     required this.addTap,
-    this.list, this.addButtonTitle,
+    this.list,
+    this.addButtonTitle,
   }) : super(key: key);
 
   @override

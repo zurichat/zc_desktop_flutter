@@ -8,11 +8,7 @@ class AuthButton extends StatelessWidget {
   late final String label;
   late final VoidCallback? onTap;
   late final bool isBUsy;
-  AuthButton({
-    required this.label,
-    this.onTap,
-    this.isBUsy = false
-  });
+  AuthButton({required this.label, this.onTap, this.isBUsy = false});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +19,16 @@ class AuthButton extends StatelessWidget {
         ),
       ),
       onPressed: onTap,
-      child: !isBUsy ? Text(
-        label,
-        style: authBtnStyle,
-      ) : Center(child: CircularProgressIndicator(color: Colors.white,),),
+      child: !isBUsy
+          ? Text(
+              label,
+              style: authBtnStyle,
+            )
+          : Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            ),
     );
   }
 }
@@ -43,16 +45,23 @@ class PreferenceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
-      child: Container(
-          height: 39.h,
-          width: 183.w,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: preferenceBorderblack),
-          ),
-          child: Center(child: ZcdeskText.preferenceBtn(label))),
-    );
+        onTap: onTap,
+        child: Container(
+            height: 39.h,
+            width: 183.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(color: preferenceBorderblack),
+            ),
+            child: Center(
+                child: Text(
+              label,
+              style: TextStyle(
+                  color: bodyColor,
+                  fontSize: 13.sp,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.w400),
+            ))));
 
     // ElevatedButton(
     //     onPressed: onTap,
@@ -65,4 +74,3 @@ class PreferenceButton extends StatelessWidget {
     //     child: ZcdeskText.extraSmallText(label));
   }
 }
-
