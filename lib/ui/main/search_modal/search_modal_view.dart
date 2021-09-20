@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:zc_desktop_flutter/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -15,26 +17,39 @@ class SearchModalView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        viewModelBuilder: () => SearchModalViewmodel(),
-        builder: (context, model, _) => Dialog(
-              child: buildModalContainer(model as SearchModalViewmodel),
-            ));
+      viewModelBuilder: () => SearchModalViewmodel(),
+      builder: (context, model, _) => Dialog(
+        child: BuildContainerWidget(model: model as SearchModalViewmodel),
+      ),
+    );
   }
 }
 
-buildModalContainer(SearchModalViewmodel model) {
-  return Container(
-    height: model.isClicked ? 400.h : 514.h,
-    width: 1008.w,
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        buildSearchWidget(model),
-        bottomText(),
-      ],
-    ),
-  );
+class BuildContainerWidget extends StatelessWidget {
+  BuildContainerWidget({
+    Key? key,
+    this.model,
+  }) : super(key: key);
+
+  final SearchModalViewmodel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: model!.isClicked ? 400.h : 514.h,
+      width: 1008.w,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          BuildSearchWidget(
+            model: model,
+          ),
+          bottomText(),
+        ],
+      ),
+    );
+  }
 }
 
 bottomText() {
@@ -126,7 +141,7 @@ lookingForWidget({
     margin: EdgeInsets.only(left: 65.w, top: 18.h, right: 708.w, bottom: 13.h),
     child: Text(
       text!,
-      style: leftSideBarStyle,
+      style: kLeftSideBarStyle,
     ),
   );
 }
@@ -180,42 +195,98 @@ searchButtons(
   );
 }
 
-buildSearchWidget(SearchModalViewmodel model) {
-  return Container(
-    height: model.isClicked ? 350.h : 464.h,
-    width: 1008.w,
-    decoration: BoxDecoration(
-        border: Border(
-            bottom: BorderSide(
-      color: lightIconColor,
-      width: 1.h,
-    ))),
-    child: Column(
-      children: [
-        searchWidget(model),
-        scrollableView(model),
-      ],
-    ),
-  );
+class BuildSearchWidget extends StatelessWidget {
+  BuildSearchWidget({
+    Key? key,
+    this.model,
+  }) : super(key: key);
+
+  final SearchModalViewmodel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: model!.isClicked ? 350.h : 464.h,
+      width: 1008.w,
+      decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+        color: lightIconColor,
+        width: 1.h,
+      ))),
+      child: Stack(
+        children: [
+          SearchWidget(),
+          Positioned(top: 30.h, child: ScrollableView()),
+        ],
+      ),
+    );
+  }
 }
 
-scrollableView(SearchModalViewmodel model) {
-  return Container(
-    height: model.isClicked ? 285.h : 406.5.h,
-    width: 1008.w,
-    padding: EdgeInsets.only(top: 30.5.h),
-    child: Scrollbar(
-      controller: model.scrollbarController,
-      isAlwaysShown: true,
-      child: SingleChildScrollView(
-        controller: model.scrollbarController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            model.isClicked
-                ? Visibility(
-                    visible: false,
-                    child: Container(
+class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
+  const ScrollableView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget buildViewModelWidget(
+      BuildContext context, SearchModalViewmodel model) {
+    var scrollController = useScrollController();
+    return Container(
+      height: model.isClicked ? 285.h : 406.5.h,
+      width: 1008.w,
+      padding: EdgeInsets.only(top: 30.5.h),
+      child: Scrollbar(
+        controller: scrollController,
+        isAlwaysShown: true,
+        child: SingleChildScrollView(
+          controller: scrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              model.isClicked
+                  ? Visibility(
+                      visible: false,
+                      child: Container(
+                        height: 54.h,
+                        width: 902.57.w,
+                        margin: EdgeInsets.only(top: 10.h),
+                        child: Row(
+                          children: [
+                            Container(
+                                margin: EdgeInsets.only(left: 65.w),
+                                child: SvgPicture.asset(
+                                    'assets/icons/align_left.svg')),
+                            SizedBox(
+                              width: 23.w,
+                            ),
+                            Expanded(
+                              child: TextField(
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: bodyColor,
+                                  fontSize: 18.sp,
+                                ),
+                                decoration: InputDecoration(
+                                  hintText:
+                                      'Find in direct messages with rafiu',
+                                  hintStyle: TextStyle(
+                                    color: bodyColor,
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18.sp,
+                                  ),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  : Container(
                       height: 54.h,
                       width: 902.57.w,
                       margin: EdgeInsets.only(top: 10.h),
@@ -251,53 +322,60 @@ scrollableView(SearchModalViewmodel model) {
                         ],
                       ),
                     ),
-                  )
-                : Container(
-                    height: 54.h,
-                    width: 902.57.w,
-                    margin: EdgeInsets.only(top: 10.h),
-                    child: Row(
-                      children: [
-                        Container(
-                            margin: EdgeInsets.only(left: 65.w),
-                            child: SvgPicture.asset(
-                                'assets/icons/align_left.svg')),
-                        SizedBox(
-                          width: 23.w,
+              model.isClicked
+                  ? Visibility(
+                      visible: false,
+                      child: lookingForWidget(text: 'I’m looking for...'),
+                    )
+                  : lookingForWidget(text: 'I’m looking for...'),
+              model.isClicked
+                  ? Visibility(
+                      visible: false,
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 39.h),
+                        padding: EdgeInsets.only(
+                          left: 65.w,
                         ),
-                        Expanded(
-                          child: TextField(
-                            maxLines: 1,
-                            style: TextStyle(
-                              color: bodyColor,
-                              fontSize: 18.sp,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            searchButtons(
+                              assetPath: 'assets/icons/message_circle.svg',
+                              buttonText: 'Messages',
+                              buttonType: ButtonType.MESSAGE,
+                              model: model,
                             ),
-                            decoration: InputDecoration(
-                              hintText: 'Find in direct messages with rafiu',
-                              hintStyle: TextStyle(
-                                color: bodyColor,
-                                fontFamily: 'Lato',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18.sp,
-                              ),
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
+                            SizedBox(
+                              width: 19.w,
                             ),
-                          ),
+                            searchButtons(
+                              assetPath: 'assets/icons/layers.svg',
+                              buttonText: 'Files',
+                              buttonType: ButtonType.FILE,
+                              model: model,
+                            ),
+                            SizedBox(
+                              width: 19.w,
+                            ),
+                            searchButtons(
+                              assetPath: 'assets/icons/hash.svg',
+                              buttonText: 'Channels',
+                              buttonType: ButtonType.CHANNELS,
+                              model: model,
+                            ),
+                            SizedBox(
+                              width: 19.w,
+                            ),
+                            searchButtons(
+                                assetPath: 'assets/icons/users.svg',
+                                buttonText: 'People',
+                                buttonType: ButtonType.PEOPLE,
+                                model: model),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-            model.isClicked
-                ? Visibility(
-                    visible: false,
-                    child: lookingForWidget(text: 'I’m looking for...'),
-                  )
-                : lookingForWidget(text: 'I’m looking for...'),
-            model.isClicked
-                ? Visibility(
-                    visible: false,
-                    child: Container(
+                      ),
+                    )
+                  : Container(
                       margin: EdgeInsets.only(bottom: 39.h),
                       padding: EdgeInsets.only(
                         left: 65.w,
@@ -340,146 +418,113 @@ scrollableView(SearchModalViewmodel model) {
                         ],
                       ),
                     ),
-                  )
-                : Container(
-                    margin: EdgeInsets.only(bottom: 39.h),
-                    padding: EdgeInsets.only(
-                      left: 65.w,
+              lookingForWidget(
+                  text: model.isClicked
+                      ? 'Recent Searches in ${model.text}'
+                      : 'Recent Searches'),
+              recentSearchListTile(model.isClicked ? model.text : 'Adema'),
+              recentSearchListTile(model.isClicked ? model.text : 'Adema'),
+              recentSearchListTile(model.isClicked ? model.text : 'Adema'),
+              recentSearchListTile(model.isClicked ? model.text : 'Adema'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
+  const SearchWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget buildViewModelWidget(
+      BuildContext context, SearchModalViewmodel model) {
+    var text = useTextEditingController();
+    return Container(
+      height: 56.5.h,
+      width: 1008.w,
+      padding: EdgeInsets.only(
+          left: model.isClicked ? 20.w : 65.w,
+          right: 45.w,
+          top: model.isClicked ? 10.h : 17.h,
+          bottom: model.isClicked ? 10.h : 15.h),
+      decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+        color: lightIconColor,
+        width: 1.h,
+      ))),
+      child: Row(
+        children: [
+          model.isClicked
+              ? MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: Container(
+                    height: 49.h,
+                    width: 140.w,
+                    padding:
+                        EdgeInsets.symmetric(vertical: 5.h, horizontal: 8.5.w),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: avatarColor4,
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        searchButtons(
-                          assetPath: 'assets/icons/message_circle.svg',
-                          buttonText: 'Messages',
-                          buttonType: ButtonType.MESSAGE,
-                          model: model,
+                        Text(
+                          model.text,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontFamily: 'Lato',
+                            color: bodyColor,
+                          ),
                         ),
-                        SizedBox(
-                          width: 19.w,
-                        ),
-                        searchButtons(
-                          assetPath: 'assets/icons/layers.svg',
-                          buttonText: 'Files',
-                          buttonType: ButtonType.FILE,
-                          model: model,
-                        ),
-                        SizedBox(
-                          width: 19.w,
-                        ),
-                        searchButtons(
-                          assetPath: 'assets/icons/hash.svg',
-                          buttonText: 'Channels',
-                          buttonType: ButtonType.CHANNELS,
-                          model: model,
-                        ),
-                        SizedBox(
-                          width: 19.w,
-                        ),
-                        searchButtons(
-                            assetPath: 'assets/icons/users.svg',
-                            buttonText: 'People',
-                            buttonType: ButtonType.PEOPLE,
-                            model: model),
+                        GestureDetector(
+                            onTap: () {
+                              model.toggleButtonClicked();
+                              model.toggleSwap();
+                            },
+                            child: SvgPicture.asset('assets/icons/cancel.svg')),
                       ],
                     ),
                   ),
-            lookingForWidget(
-                text: model.isClicked
-                    ? 'Recent Searches in ${model.text}'
-                    : 'Recent Searches'),
-            recentSearchListTile('Adema'),
-            recentSearchListTile('Adema'),
-            recentSearchListTile('Adema'),
-            recentSearchListTile('Adema'),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
-searchWidget(SearchModalViewmodel model) {
-  return Container(
-    height: 56.5.h,
-    width: 1008.w,
-    padding: EdgeInsets.only(
-        left: model.isClicked ? 20.w : 65.w,
-        right: 45.w,
-        top: model.isClicked ? 10.h : 17.h,
-        bottom: model.isClicked ? 10.h : 15.h),
-    decoration: BoxDecoration(
-        border: Border(
-            bottom: BorderSide(
-      color: lightIconColor,
-      width: 1.h,
-    ))),
-    child: Row(
-      children: [
-        model.isClicked
-            ? MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: Container(
-                  height: 49.h,
-                  width: 140.w,
-                  padding:
-                      EdgeInsets.symmetric(vertical: 5.h, horizontal: 8.5.w),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.r),
-                    color: avatarColor4,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        model.text,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontFamily: 'Lato',
-                          color: bodyColor,
-                        ),
-                      ),
-                      GestureDetector(
-                          onTap: () {
-                            model.toggleButtonClicked();
-                            model.toggleSwap();
-                          },
-                          child: SvgPicture.asset('assets/icons/cancel.svg')),
-                    ],
-                  ),
-                ),
-              )
-            : SvgPicture.asset('assets/icons/search.svg'),
-        Expanded(
-          child: TextField(
-            textAlign: TextAlign.left,
-            maxLines: 1,
-            style: TextStyle(
-              color: headerColor,
-              fontSize: 18.sp,
-            ),
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.only(left: 31.w, top: 17.h, bottom: 16.h),
-              hintText: model.isClicked
-                  ? model.hintText
-                  : 'Scour your archives and fish out the answers',
-              hintStyle: TextStyle(
-                color: leftNavBarColor,
+                )
+              : SvgPicture.asset('assets/icons/search.svg'),
+          Expanded(
+            child: TextField(
+              controller: text,
+              textAlign: TextAlign.left,
+              maxLines: 1,
+              style: TextStyle(
+                color: headerColor,
+                fontSize: 18.sp,
               ),
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
+              decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.only(left: 31.w, top: 17.h, bottom: 16.h),
+                hintText: model.isClicked
+                    ? model.hintText
+                    : 'Scour your archives and fish out the answers',
+                hintStyle: TextStyle(
+                  color: leftNavBarColor,
+                ),
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+              ),
             ),
           ),
-        ),
-        GestureDetector(
-            child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: SvgPicture.asset('assets/icons/cancel.svg')),
-            onTap: () {
-              model.popDialog();
-            }),
-      ],
-    ),
-  );
+          GestureDetector(
+              child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: SvgPicture.asset('assets/icons/cancel.svg')),
+              onTap: () {
+                model.popDialog();
+              }),
+        ],
+      ),
+    );
+  }
 }

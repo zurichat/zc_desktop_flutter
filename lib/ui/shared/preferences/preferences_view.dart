@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/accessibility/accessibility_view.dart';
@@ -10,8 +11,8 @@ import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/adva
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/audio_video/audio_video_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/language_region_preference/language_preference_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/sidebar_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/preferences_notification_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/preferences_sidebar_view.dart';
 
 import 'preferenceswidgets/theme/theme_view.dart';
 
@@ -174,8 +175,7 @@ Widget buildListItem({
     minLeadingWidth: 5,
     leading: SvgPicture.asset(assetName),
     title: Text(text,
-        style: TextStyle(
-            fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
+        style: preferenceStyleNormal),
     hoverColor: isSelected ? KStartupContainerColor : hoverColor,
     onTap: onClicked,
   );

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zc_desktop_flutter/ui/main/search_modal/search_modal_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 
 Widget buildAppBar(BuildContext context,
     {bool isActive = false, bool isHome = true, String text = ''}) {
-
   final icona = Icons.arrow_back;
   final iconb = Icons.arrow_forward;
   final iconc = Icons.watch_later_outlined;
@@ -18,9 +18,8 @@ Widget buildAppBar(BuildContext context,
     child: WindowTitleBarBox(
       child: MoveWindow(
         child: Row(
-          mainAxisAlignment: isHome
-              ? MainAxisAlignment.start
-              : MainAxisAlignment.spaceBetween,
+          mainAxisAlignment:
+              isHome ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
           children: [
             if (isHome)
               Padding(
@@ -45,9 +44,9 @@ Widget buildAppBar(BuildContext context,
                   ),
                 ],
               ),
-            if(isHome)
-            Row(
-              children: [
+            if (isHome)
+              Row(
+                children: [
                   IconButton(
                     onPressed: () {},
                     icon: Icon(
@@ -77,27 +76,34 @@ Widget buildAppBar(BuildContext context,
                       color: lightIconColor,
                     ),
                   ),
-              ],
-            ),
+                ],
+              ),
             SizedBox(width: 29.w),
             if (isHome)
               Expanded(
                 child: GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 38.h,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(153, 153, 153, 0.2),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 7),
-                      child: Text('Search here',
-                          style: TextStyle(
-                              color: Color.fromRGBO(231, 231, 231, 1),
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Lato')),
+                  onTap: () {
+                    showDialog(
+                        context: context, builder: (_) => SearchModalView());
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Container(
+                      height: 38.h,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(153, 153, 153, 0.2),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 9, vertical: 7),
+                        child: Text('Search here',
+                            style: TextStyle(
+                                color: Color.fromRGBO(231, 231, 231, 1),
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Lato')),
+                      ),
                     ),
                   ),
                 ),
@@ -107,10 +113,10 @@ Widget buildAppBar(BuildContext context,
                   width: MediaQuery.of(context).size.width <= 1440
                       ? 120.w
                       : 500.w),
-            if(isHome)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
+            if (isHome)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
                   GestureDetector(
                     child: Stack(
                       clipBehavior: Clip.none,
@@ -138,18 +144,18 @@ Widget buildAppBar(BuildContext context,
                       ],
                     ),
                   ),
-                SizedBox(width: 35.w),
-                Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
-                  child: WindowsButton(),
-                )
-              ],
-            ),
-            if(!isHome)
-            Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
-                  child: WindowsButton(),
-                )
+                  SizedBox(width: 35.w),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: WindowsButton(),
+                  )
+                ],
+              ),
+            if (!isHome)
+              Padding(
+                padding: const EdgeInsets.only(right: 15.0),
+                child: WindowsButton(),
+              )
           ],
         ),
       ),
