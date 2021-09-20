@@ -1,5 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
@@ -50,6 +51,8 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
     LazySingleton(classType: AuthService),
     LazySingleton(classType: ApiService),
     LazySingleton(classType: WorkspaceService),
+    LazySingleton(
+        classType: ThemeService, resolveUsing: ThemeService.getInstance)
   ],
   logger: StackedLogger(),
 )
