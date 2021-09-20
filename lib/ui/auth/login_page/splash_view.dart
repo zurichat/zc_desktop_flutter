@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 
 import 'login_viewmodel.dart';
@@ -25,20 +24,19 @@ class SplashView extends StatelessWidget {
                 SizedBox(
                   height: 390.h,
                 ),
-                container(model)
+                Center(
+                    child: CircularProgressIndicator(
+                  color: Colors.grey,
+                ))
               ],
             ),
           ),
         );
       },
+      onModelReady: (model){
+        model.checkLoginStatus();
+      },
     );
   }
 
-  container(model) {
-    model.checkLoginStatus();
-    return Center(
-        child: CircularProgressIndicator(
-      color: Colors.grey,
-    ));
-  }
 }

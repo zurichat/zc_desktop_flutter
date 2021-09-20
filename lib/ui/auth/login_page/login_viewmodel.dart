@@ -19,7 +19,6 @@ class LoginViewModel extends BaseViewModel with Validator {
   String _logoUrlF = 'assets/images/facebook.png';
   String _logoUrlT = 'assets/images/twitter.png';
   String _errorMessage = '';
-  bool _initial = false;
   String? _emailErrorText;
   String? _passwordErrorText;
   double _logoWidth = 5.0;
@@ -59,19 +58,11 @@ class LoginViewModel extends BaseViewModel with Validator {
   String emailText = '';
   String passwordText = '';
 
-  void emailChanged(String? value) {
-    emailText = value!;
-  }
-
   void setErrorMessage(String msg) {
     _errorMessage = msg;
     notifyListeners();
   }
 
-  void setInitial() {
-    _initial = true;
-    notifyListeners();
-  }
 
   void _setIsError() {
     _isError = true;
@@ -97,7 +88,6 @@ class LoginViewModel extends BaseViewModel with Validator {
     _navigationService.navigateTo(Routes.signUpView);
     notifyListeners();
   }
-
 
   void gotoForgetpassword() {
     _navigationService.navigateTo(Routes.resetPasswordView);
@@ -158,15 +148,10 @@ class LoginViewModel extends BaseViewModel with Validator {
 
   Future<void> checkLoginStatus() async {
     try {
-      if(!_initial) {
-        await _auth.checkToken();
-        setInitial();
-        _goToHome();
-      }
-      return;
+      await _auth.checkToken();
+      _goToHome();
     } catch (e) {
       _navigationService.navigateTo(Routes.loginView);
     }
   }
-
 }
