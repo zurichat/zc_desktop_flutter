@@ -12,6 +12,11 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 class WorkspaceView extends StatelessWidget {
@@ -33,18 +38,26 @@ class WorkspaceView extends StatelessWidget {
                   isActive: true,
                 ),
               ),
-              verticalSpaceSmall,
+              
+              
+             // verticalSpaceSmall,
               model.isBusy
-                  ? Center(
-                      child: Container(
-                        width: 24.0,
-                        height: 24.0,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 3.0.r,
-                          valueColor: AlwaysStoppedAnimation(Colors.grey),
+                  ? Expanded(
+                    child: Container(
+                      height: fullHeight(context),
+                      width: fullHeight(context),
+                      child: Center(
+                          child: Container(
+                            width: 24.0,
+                            height: 24.0,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3.0.r,
+                              valueColor: AlwaysStoppedAnimation(Colors.grey),
+                            ),
+                          ),
                         ),
-                      ),
-                    )
+                    ),
+                  )
                   : Expanded(
                       child: Row(
                         children: [
@@ -107,6 +120,10 @@ class WorkspaceView extends StatelessWidget {
                                               NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           children: [
+                                            DetailedCustomAppBar(
+                                              leading: WorkSpaceSetting(),
+                                              trailing: NewMessageBtn(),
+                                            ),
                                             MenuItem(model),
                                             verticalSpaceRegular,
                                             TitleSection(
@@ -224,7 +241,16 @@ class WorkspaceView extends StatelessWidget {
                           ),
                           //TODO: Center Area
                           Expanded(
-                            child: ShowView(model),
+                            child: Column(
+                                children: [
+                                  DetailedCustomAppBar(
+                                    margin: const EdgeInsets.only(left: 2.0),
+                                    leading: WorkSpaceTitle(),
+                                    trailing: WorkSpaceMembers(),
+                                  ),
+                                 ShowView(model)
+                                ],
+                              ),
                           ),
                         ],
                       ),

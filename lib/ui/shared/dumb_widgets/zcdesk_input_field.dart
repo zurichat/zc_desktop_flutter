@@ -9,6 +9,7 @@ class AuthInputField extends StatelessWidget {
   final Color? filledColor;
   final ValueChanged<String?>? onSaved;
   final String? label;
+  final String? helperText;
   final int? maxLines;
   final Widget? trailing;
   final TextInputType? inputType;
@@ -38,6 +39,7 @@ class AuthInputField extends StatelessWidget {
     this.errorText,
     this.onVisibilityTap,
     this.isVisible = false,
+    this.helperText,
   }) : super(key: key);
 
   @override
@@ -103,8 +105,12 @@ class AuthInputField extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                         onPressed: onVisibilityTap,
+
                         icon: Icon(
                             isVisible ? Icons.visibility_off : Icons.visibility))),
+                       
+                        
+                            
               )
           ],
         ),
