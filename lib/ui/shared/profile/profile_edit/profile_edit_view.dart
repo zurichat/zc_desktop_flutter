@@ -10,8 +10,6 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dar
 import 'profile_edit_viewmodel.dart';
 
 class ProfileEditView extends StatelessWidget {
-  final _controller = ScrollController();
-
   ProfileEditView({
     Key? key,
   }) : super(key: key);

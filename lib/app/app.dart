@@ -18,9 +18,11 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: HomeView),
+    MaterialRoute(page: HomeView, initial: true),
     AdaptiveRoute(page: WorkspaceView),
-    MaterialRoute(page: LoginView, initial: true),
+    MaterialRoute(
+      page: LoginView,
+    ),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
@@ -28,7 +30,9 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
     MaterialRoute(page: ResetPasswordView),
     MaterialRoute(page: ChangePasswordView),
     MaterialRoute(page: SuccessView),
-    MaterialRoute(page: ChannelsView,),
+    MaterialRoute(
+      page: ChannelsView,
+    ),
   ],
   dependencies: [
     Presolve(
@@ -42,5 +46,4 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
   ],
   logger: StackedLogger(),
 )
-
 class AppSetup {}

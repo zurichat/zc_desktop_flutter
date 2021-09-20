@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/ui/main/organization_bar/organization_bar.dar
 import 'package:zc_desktop_flutter/ui/main/right_side_bar/right_sidebar_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
+import 'package:zc_desktop_flutter/ui/shared/profile/profile_view/profile_show_view.dart';
 import 'home_viewmodel.dart';
 
 // class HomeView extends StatelessWidget {
@@ -77,43 +78,43 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       builder: (context, model, child) => Scaffold(
           body: // Column(
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          // Container(height: 40, child: buildAppBar(context, isActive: true)),
-          // Text(
-          //     'You\'re welcome ${_auth.username}, and your token is ${_auth.token} '),
-          Column(
-            children: [
-              Container(height: 40, child: buildAppBar(context, isActive: true)),
-              Expanded(
-                child: Row(
-                  children: [
-                    OrganizationBarView(),
-                    LeftSideBarView(),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: CenterArea(),
-                          ),
-                          if (_size.width > 1040)
-                            Expanded(
-                              flex: 3,
-                              child: RightSideBarView(),
-                            )
-                        ],
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              // Container(height: 40, child: buildAppBar(context, isActive: true)),
+              // Text(
+              //     'You\'re welcome ${_auth.username}, and your token is ${_auth.token} '),
+              Column(
+        children: [
+          Container(height: 40, child: buildAppBar(context, isActive: true)),
+          Expanded(
+            child: Row(
+              children: [
+                OrganizationBarView(),
+                LeftSideBarView(),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 5,
+                        child: CenterArea(),
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          )
-        //   ],
-        // ),
-      ),
+                      if (_size.width > 1040)
+                        Expanded(
+                          flex: 3,
+                          child: ProfileShowView(),
+                        )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      )
+          //   ],
+          // ),
+          ),
       viewModelBuilder: () => HomeViewModel(),
     );
   }
