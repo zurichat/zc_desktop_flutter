@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/notification_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/preferences_notification_viewmodel.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class NotificationView extends StatelessWidget {
                 ),
                 SizedBox(height: 5.h),
                 Text(
-                    'You will be notified anything, someone uses these keyword in thread',
+                    'You will be notified anytime someone uses these keyword in thread',
                     style: TextStyle(fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w600)),
                 SizedBox(
                   height: 16.h,
