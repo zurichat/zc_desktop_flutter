@@ -21,25 +21,39 @@ enum toggleBtwTheme {
   DarkTheme,
 }
 
+enum darkDramaticTheme {
+  coast,
+  triadic,
+  complimentary,
+  automatic,
+  nocturne,
+  expensive
+}
+
+enum cleanThemes { aubergine, versatile, aubergine1, aubergine2 }
+
 class ThemeViewModel extends BaseViewModel {
   final log = getLogger("ThemeViewModel");
 
   final _themeService = locator<ThemeService>();
 
   themeAccross _allWorkSpace = themeAccross.directMessage;
-
   toggleBtwTheme _switchLightDark = toggleBtwTheme.LightTheme;
+  darkDramaticTheme _darkDramaTheme = darkDramaticTheme.coast;
+  cleanThemes _cleanTheme = cleanThemes.aubergine;
 
   String _logoLight = 'assets/images/logoo.png';
   String _logoDark = 'assets/images/logooDark.png';
-  String _lightThmemImg = 'assets/images/LightThme.png';
-  String _lightThmemImg2 = 'assets/images/LightThme2.png';
+  String _lightThmemImg = 'assets/images/LightThme2.png';
+  String _lightThmemImg2 = 'assets/images/LightThme.png';
   String _coast = 'assets/images/Coast.png';
   String _triadic = 'assets/images/Triadic.png';
   String _complimentary = 'assets/images/complimentary.png';
   String _automatic = 'assets/images/automatic.png';
   String _nocturne = 'assets/images/Nocturne.png';
   String _expensive = 'assets/images/Expensive.png';
+  String _aubergine2 = 'assets/images/Aubergine2.png';
+  String _aubergine3 = 'assets/images/Aubergine3.png';
   double _logoWidth = 29.1;
   double _logoHeight = 30.77;
   String _title = 'Zuribot';
@@ -85,6 +99,8 @@ class ThemeViewModel extends BaseViewModel {
   String get lightThmemImg2 => _lightThmemImg2;
   String get coast => _coast;
   String get triadic => _triadic;
+  String get aubergine2 => _aubergine2;
+  String get aubergine3 => _aubergine3;
   String get complimentary => _complimentary;
   String get automatic => _automatic;
   String get nocturne => _nocturne;
@@ -102,6 +118,8 @@ class ThemeViewModel extends BaseViewModel {
 
   themeAccross get allWorkSpace => _allWorkSpace;
   toggleBtwTheme get switchLightDark => _switchLightDark;
+  darkDramaticTheme get darkDramaTheme => _darkDramaTheme;
+  cleanThemes get cleanTheme => _cleanTheme;
 
   String get head2 => _head2;
 
@@ -155,6 +173,51 @@ class ThemeViewModel extends BaseViewModel {
         break;
       case toggleBtwTheme.DarkTheme:
         setTheme(themes[1]);
+        notifyListeners();
+        break;
+    }
+  }
+
+  void switchCleanTheme(Object? value) {
+    _cleanTheme = (value) as cleanThemes;
+    switch (_cleanTheme) {
+      case cleanThemes.aubergine:
+        notifyListeners();
+        break;
+      case cleanThemes.versatile:
+        notifyListeners();
+        break;
+      case cleanThemes.aubergine1:
+        notifyListeners();
+        break;
+      case cleanThemes.aubergine2:
+        notifyListeners();
+        break;
+    }
+  }
+
+  void switchDramaticTheme(Object? value) {
+    _darkDramaTheme = (value) as darkDramaticTheme;
+    switch (_darkDramaTheme) {
+      case darkDramaticTheme.coast:
+        notifyListeners();
+        break;
+      case darkDramaticTheme.triadic:
+        notifyListeners();
+        break;
+      case darkDramaticTheme.complimentary:
+        notifyListeners();
+        break;
+      case darkDramaticTheme.expensive:
+        notifyListeners();
+        break;
+      case darkDramaticTheme.triadic:
+        notifyListeners();
+        break;
+      case darkDramaticTheme.nocturne:
+        notifyListeners();
+        break;
+      case darkDramaticTheme.automatic:
         notifyListeners();
         break;
     }
@@ -226,35 +289,10 @@ class ThemeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  // void lightThemeChecked(bool? newValue) {
-  //   if (_lightChecked) {
-  //     return;
-  //   }
-
-  //   _darkChecked = false;
-  //   _versatileChecked = false;
-  //   _aubergineChecked = false;
-  //   _lightChecked = newValue!;
-  //   setTheme(themes[0]);
-  //   notifyListeners();
-  // }
-
   String date() {
     String datee = now.hour.toString() + ":" + now.minute.toString();
     return datee;
   }
-
-  // void darkThemeChecked(bool? newValue) {
-  //   if (_darkChecked) {
-  //     return;
-  //   }
-  //   _versatileChecked = false;
-  //   _aubergineChecked = false;
-  //   _lightChecked = false;
-  //   _darkChecked = newValue!;
-  //   setTheme(themes[1]);
-  //   notifyListeners();
-  // }
 
   void versatileThemeChecked(bool? newValue) {
     if (_versatileChecked) {

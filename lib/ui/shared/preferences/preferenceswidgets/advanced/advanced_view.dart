@@ -67,7 +67,7 @@ class AdvancedViewInputOptions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Input options
-          Text('Input options', style: headline6.copyWith(fontSize: 15.sp)),
+          Text('Input options', style: preferenceStyleBold),
           ListTile(
             leading: ZcCheckBox(
                 value: model.onEnter,
@@ -80,10 +80,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 Text('When typing code with ````, ',
-                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                    style: preferenceStyleBold),
                 ShortCuts().enter(),
                 Text(' should send the message',
-                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                    style: preferenceStyleBold),
               ],
             ),
             subtitle: Wrap(
@@ -92,10 +92,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 Text('With this ticked, use ',
-                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                    style: preferenceStyleNormal),
                 ShortCuts().shift(),
                 ShortCuts().enter(),
-                Text(' to send', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                Text(' to send', style: preferenceStyleNormal),
               ],
             ),
           ),
@@ -106,10 +106,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
                   model.setAllowMsgFormat = v;
                 }),
             title: Text('Format messages with markup',
-                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                style: preferenceStyleBold),
             subtitle: Text(
                 'The text formatting toolbar won’t show in the composer',
-                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                style: preferenceStyleNormal),
           ),
 
           verticalSpaceMedium,
@@ -121,14 +121,14 @@ class AdvancedViewInputOptions extends StatelessWidget {
             runAlignment: WrapAlignment.spaceEvenly,
             children: [
               Text('When writing a message, press',
-                  style: headline6.copyWith(fontSize: 15.sp)),
+                  style: preferenceStyleBold),
               ShortCuts().enter(),
-              Text('to:', style: headline6.copyWith(fontSize: 15.sp)),
+              Text('to:', style: preferenceStyleBold),
               SizedBox(
                 height: 25.0,
                 child: ListTile(
                   title: Text('Send the message',
-                      style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                      style: preferenceStyleBold),
                   leading: Radio(
                     value: EnterButtonsChoice.sendMsg,
                     groupValue: model.enterButtonsChoice,
@@ -148,11 +148,11 @@ class AdvancedViewInputOptions extends StatelessWidget {
                     runAlignment: WrapAlignment.spaceEvenly,
                     children: [
                       Text('Start a new line ( use',
-                          style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                          style: preferenceStyleBold),
                       ShortCuts().ctrl(),
                       ShortCuts().enter(),
                       Text('to send )',
-                          style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                          style: preferenceStyleBold),
                     ],
                   ),
                   leading: Radio(
@@ -185,7 +185,7 @@ class AdvancedViewSearchOptions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Input options
-          Text('Search options', style: headline6.copyWith(fontSize: 15.sp)),
+          Text('Search options', style: preferenceStyleBold),
           ListTile(
             leading: ZcCheckBox(
                 value: model.ctrlF,
@@ -200,11 +200,11 @@ class AdvancedViewSearchOptions extends StatelessWidget {
                 ShortCuts().ctrl(),
                 ShortCuts().fKey(),
                 Text('Starts a Zurichat search',
-                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                    style: preferenceStyleBold),
               ],
             ),
             subtitle: Text('Overrides normal behavaiour in search behaviour',
-                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                style: preferenceStyleNormal),
           ),
           ListTile(
             leading: ZcCheckBox(
@@ -220,15 +220,15 @@ class AdvancedViewSearchOptions extends StatelessWidget {
                 ShortCuts().ctrl(),
                 ShortCuts().kKey(),
                 Text('Starts the quick switcher',
-                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                    style: preferenceStyleBold),
               ],
             ),
             subtitle: Text('Overrides normal behavaiour in some browsers',
-                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                style: preferenceStyleNormal),
           ),
 
           Text('Exclude these channels from search results:',
-              style: headline6.copyWith(fontSize: 15.sp)),
+              style: preferenceStyleBold),
           AuthInputField(
             hintPlaceHolder: 'Type a channel name...',
           )
@@ -249,7 +249,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Other Options', style: headline6.copyWith(fontSize: 15.sp)),
+          Text('Other Options', style: preferenceStyleBold),
           verticalSpaceRegular,
           ListTile(
             leading: ZcCheckBox(
@@ -263,14 +263,14 @@ class AdvancedViewMoreOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 ShortCuts().pageUp(),
-                Text(',', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                Text(',', style: preferenceStyleNormal),
                 ShortCuts().pageDown(),
-                Text(',', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                Text(',', style: preferenceStyleNormal),
                 ShortCuts().home(),
-                Text('and', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                Text('and', style: preferenceStyleNormal),
                 ShortCuts().end(),
                 Text('Starts a Zurichat search',
-                    style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                    style: preferenceStyleNormal),
               ],
             ),
           ),
@@ -284,7 +284,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                   }),
               title: Text(
                   'Ask if I want to toggle my away status when I log in after having set myself away ',
-                  style: kBodyTextStyle.copyWith(fontSize: 13.sp))),
+                  style: preferenceStyleNormal)),
 
           // zuri bot setting
           ListTile(
@@ -295,10 +295,10 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                 }),
             title: Text(
                 'Send me occassional survey via Zurichat bot',
-                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                style: preferenceStyleBold),
             subtitle: Text(
                 'We’re working to make Zurichat better. We’d always love to hear your thoughts',
-                style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+                style: preferenceStyleNormal),
           ),
 
           ListTile(
@@ -309,7 +309,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                   }),
               title: Text(
                   'Warn me about potential malicious links',
-                  style: kBodyTextStyle.copyWith(fontSize: 13.sp))),
+                  style: preferenceStyleNormal)),
         ],
       ),
     );

@@ -6,6 +6,10 @@ import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:zc_desktop_flutter/enums/button_type_enum.dart';
+import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+
+import 'package:zc_desktop_flutter/services/search_workspace/users_loacal_data.dart';
+import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 
@@ -217,7 +221,12 @@ class BuildSearchWidget extends StatelessWidget {
       child: Stack(
         children: [
           SearchWidget(),
-          Positioned(top: 30.h, child: ScrollableView()),
+          Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: BuildSearchList(),
+          )
+
+          //Positioned(top: 30.h, child: ScrollableView()),
         ],
       ),
     );
@@ -422,6 +431,8 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
                   text: model.isClicked
                       ? 'Recent Searches in ${model.text}'
                       : 'Recent Searches'),
+
+              /// BuildSearchList(),
               recentSearchListTile(model.isClicked ? model.text : 'Adema'),
               recentSearchListTile(model.isClicked ? model.text : 'Adema'),
               recentSearchListTile(model.isClicked ? model.text : 'Adema'),
@@ -495,6 +506,7 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
               : SvgPicture.asset('assets/icons/search.svg'),
           Expanded(
             child: TextField(
+              onChanged: model.getSuggestions,
               controller: text,
               textAlign: TextAlign.left,
               maxLines: 1,
@@ -527,4 +539,38 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
       ),
     );
   }
+}
+
+class BuildSearchList extends HookViewModelWidget<SearchModalViewmodel> {
+  const BuildSearchList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget buildViewModelWidget(
+      BuildContext context, SearchModalViewmodel model) {
+    return Container(
+      height: 200,
+      width: 600,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          final user = model.userData[index];
+
+          return buildList(context, user, model);
+        },
+        itemCount: model.userData.length,
+      ),
+    );
+  }
+
+  Widget buildList(
+          BuildContext context, User zuriUser, SearchModalViewmodel model) =>
+      ListTile(
+        title: Text(zuriUser.name),
+        onTap: () {
+          print('opened center area with DM between you and ${zuriUser.name}');
+          model.popDialog();
+          print('Closed Dialog');
+        },
+      );
 }

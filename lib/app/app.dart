@@ -1,5 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
@@ -15,12 +16,19 @@ import 'package:zc_desktop_flutter/ui/main/channels_page/channels_view.dart';
 import 'package:zc_desktop_flutter/ui/main/home_page/home_view.dart';
 import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_view.dart';
 import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
+import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace.dart';
+import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage1.dart';
+import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage2.dart';
+import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage3.dart';
 
 @StackedApp(
   routes: [
     MaterialRoute(page: HomeView),
     AdaptiveRoute(page: WorkspaceView),
-    MaterialRoute(page: LoginView, initial: true),
+    MaterialRoute(
+      page: LoginView,
+      initial: true,
+    ),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
@@ -28,7 +36,11 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
     MaterialRoute(page: ResetPasswordView),
     MaterialRoute(page: ChangePasswordView),
     MaterialRoute(page: SuccessView),
-    MaterialRoute(page: ChannelsView,),
+    MaterialRoute(page: ChannelsView),
+    MaterialRoute(page: CreateWorkspaceView),
+    MaterialRoute(page: CreateWorkspaceStage1),
+    MaterialRoute(page: CreateWorkspaceStage2),
+    MaterialRoute(page: CreateWorkspaceStage3),
   ],
   dependencies: [
     Presolve(
@@ -39,8 +51,9 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
     LazySingleton(classType: AuthService),
     LazySingleton(classType: ApiService),
     LazySingleton(classType: WorkspaceService),
+    LazySingleton(
+        classType: ThemeService, resolveUsing: ThemeService.getInstance)
   ],
   logger: StackedLogger(),
 )
-
 class AppSetup {}
