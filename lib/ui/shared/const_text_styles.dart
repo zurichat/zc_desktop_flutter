@@ -124,3 +124,15 @@ final bodyText1 = TextStyle(
   color: leftNavBarColor,
   fontFamily: 'Lato',
 );
+
+final preferenceStyleNormal = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w600,
+);
+
+final preferenceStyleBold = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w700,
+);
