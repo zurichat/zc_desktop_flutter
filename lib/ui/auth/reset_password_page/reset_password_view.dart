@@ -37,6 +37,15 @@ class ResetPasswordView extends StatelessWidget {
                       child: AuthHeader(
                           title: model.title, subTitle: model.subTitle)),
                   verticalSpaceLarge,
+                  Text(
+                    model.errorMessage,
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Lato',
+                        color: Colors.red,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  verticalSpaceSmall,
                   Container(
                     width: 502.w,
                     child: AuthInputField(
@@ -60,10 +69,10 @@ class ResetPasswordView extends StatelessWidget {
                           await model.verfiyAndGotoCheckEmail();
                         },
                       )),
-                      SizedBox(
-                  height: 32.h,
-                ),
-                GotoLoginButton(),
+                  SizedBox(
+                    height: 32.h,
+                  ),
+                  GotoLoginButton(),
                 ],
               ),
               AuthFooter()

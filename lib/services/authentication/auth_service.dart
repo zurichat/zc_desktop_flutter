@@ -76,6 +76,30 @@ class AuthService {
     }
   }
 
+  Future<void> getResetCode(String email) async {
+    try {
+      await _apiService.post('/account/request-password-reset-code', {"email": email});
+    }catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> confirmResetCode(String code) async {
+    try {
+      await _apiService.post('/account/verify-reset-password', {"code": code});
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> updatePassword(String password) async {
+    try {
+      await _apiService.post('/account/verify-reset-password', {"password": password, "confirm_password": password});
+    } catch (e) {
+      throw e;
+    }
+  }
+
   void logOut() {
     _localStorageService.removeFromDisk(_key);
   }

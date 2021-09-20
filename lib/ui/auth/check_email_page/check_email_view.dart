@@ -47,6 +47,16 @@ class CheckEmailView extends StatelessWidget {
                                 : model.resetTitle,
                             subTitle:
                                 'We sent a 6 digit code to $_email. The code expire shortly, so please enter it soon.')),
+                                verticalSpaceSmall,
+                    Text(
+                      model.errorMsg,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Lato',
+                          color: Colors.red,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    verticalSpaceSmall,
                     verticalSpaceLarge,
                     Container(
                         width: 768.w,

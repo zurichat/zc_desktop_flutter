@@ -17,6 +17,7 @@ class CheckEmailViewModel extends BaseViewModel {
   String _otp3 = '';
   String _otp4 = '';
   String _otp5 = '';
+  String _errorMsg = '';
   final _focusNode0 = FocusNode();
   final _focusNode1 = FocusNode();
   final _focusNode2 = FocusNode();
@@ -31,6 +32,7 @@ class CheckEmailViewModel extends BaseViewModel {
   get focusNode4 => _focusNode4;
   get focusNode5 => _focusNode5;
   get isBusy => _isBusy;
+  get errorMsg => _errorMsg;
 
   get resetTitle => _resetTitle;
   get confirmTitle => _confirmTitle;
@@ -101,14 +103,15 @@ class CheckEmailViewModel extends BaseViewModel {
         if(!isReset){
           await _auth.confirmEmail(otp);
         } else {
-          await Future.delayed(Duration(milliseconds: 1000));
+          await _auth.confirmResetCode(otp);
         }
+        _navigator.navigateTo(isReset ? Routes.changePasswordView : Routes.successView);
       } catch (e) {
-        print(e);
+        _errorMsg = 'Invalid ${isReset? 'reset' : 'confirmation'} code';
         _setIsBusy();
         return;
       }
-      _navigator.navigateTo(isReset ? Routes.changePasswordView : Routes.successView);
+      
     }
     notifyListeners();
   }

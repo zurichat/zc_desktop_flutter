@@ -88,6 +88,15 @@ class ChangePasswordView extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: 40.0.h),
+                              Text(
+                                model.errorMessage,
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Lato',
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              verticalSpaceSmall,
                               Container(
                                   height: 58.h,
                                   width: 440.w,
