@@ -224,6 +224,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_hooks",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_hooks-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_screenutil",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-5.0.0+2",
       "packageUri": "lib/",
@@ -602,6 +608,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "stacked_hooks",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_hooks-0.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "stacked_services",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_services-0.8.13",
       "packageUri": "lib/",
@@ -710,7 +722,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-09-20T05:02:25.081616Z",
+  "generated": "2021-09-20T11:36:27.059875Z",
   "generator": "pub",
-  "generatorVersion": "2.15.0-42.0.dev"
+  "generatorVersion": "2.15.0-82.0.dev"
 }

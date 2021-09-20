@@ -164,12 +164,8 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
     try {
       _setIsBusy();
       await _auth.signUpWithCred(
-          fname: _channelName,
-          lname: _channelName,
-          username: _channelName,
-          password: _channelDescription,
-          tel: _channelName,
-          email: _channelName);
+          email: _channelName,
+          password: _channelName,);
       _setIsCreateChannelSuccessful();
     } catch (e) {
       if (e.toString().contains('SocketException')) {

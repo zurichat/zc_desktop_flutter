@@ -26,7 +26,7 @@ class ZcdeskText extends StatelessWidget {
   ZcdeskText.authBtnChannelDisplayStyle(this.text) : style = authBtnChannelDisplayStyle;
   ZcdeskText.authBtnChannelDisplayBlackStyle(this.text) : style = authBtnChannelDisplayBlackStyle;
   ZcdeskText.dropDownBodyTextStyle(this.text) : style = dropDownBodyTextStyle;
-  ZcdeskText.leftSideBarText(this.text) : style = leftSideBarStyle;
+  ZcdeskText.leftSideBarText(this.text) : style = kLeftSideBarStyle;
   ZcdeskText.leftSideBarLogoText(this.text) : style = leftSideBarLogoText;
   ZcdeskText.boldCaption(this.text) : style = boldCaptionStyle;
   ZcdeskText.lightCaption(this.text) : style = lightCaptionStyle;

@@ -146,6 +146,10 @@ fixnum
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.0/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.0/lib/
+flutter_hooks
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_hooks-0.17.0/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_hooks-0.17.0/lib/
 flutter_screenutil
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-5.0.0+2/
@@ -386,6 +390,10 @@ stacked_generator
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_generator-0.5.2/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_generator-0.5.2/lib/
+stacked_hooks
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_hooks-0.2.1/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_hooks-0.2.1/lib/
 stacked_services
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stacked_services-0.8.13/

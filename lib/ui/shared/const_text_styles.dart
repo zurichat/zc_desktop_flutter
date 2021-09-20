@@ -150,6 +150,15 @@ final kExtraSmallTextStyle = TextStyle(
   fontFamily: 'Lato',
 );
 
+
+final kLeftSideBarStyle = TextStyle(
+  fontSize: 15.sp,
+  color: Colors.black,
+  fontWeight: FontWeight.w400,
+  fontStyle: FontStyle.normal,
+  fontFamily: 'Lato',
+);
+
 // ====== New Text Styles ====== //
 
 final headline6 = TextStyle(
