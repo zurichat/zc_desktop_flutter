@@ -48,14 +48,17 @@ Widget bringEmailIntoZuriSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(
           model.messagepreferencetitles[7],
-          style: headline6.copyWith(fontSize: 15),
+          style: TextStyle(
+              fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w500),
         ),
         verticalSpaceSmall,
         SizedBox(
           width: 350,
           child: Text(model.longText[0],
-              style: subtitle2.copyWith(
-                  fontSize: 12, fontWeight: FontWeight.w500, color: bodyColor)),
+              style: TextStyle(
+                  fontSize: 12.sp,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.w500)),
         ),
         verticalSpaceMedium,
         PreferenceButton(
@@ -72,10 +75,11 @@ Widget inLineMediaSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          model.messagepreferencetitles[6],
-          style: headline6.copyWith(fontSize: 15),
-        ),
+        Text(model.messagepreferencetitles[6],
+            style: TextStyle(
+                fontSize: 16.sp,
+                fontFamily: 'Lato',
+                fontWeight: FontWeight.w500)),
         verticalSpaceSmall,
         ZcCheckBox1(
             onChanged: (v) {
@@ -123,7 +127,8 @@ Widget additionalOptionsSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(
           model.messagepreferencetitles[3],
-          style: headline6.copyWith(fontSize: 15),
+          style: TextStyle(
+              fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w500),
         ),
         verticalSpaceSmall,
         ZcCheckBox1(
@@ -180,10 +185,11 @@ class ZcCheckBox1 extends StatelessWidget {
         horizontalSpaceVeryTiny,
         Flexible(
             child: Text(txt!,
-                style: subtitle2.copyWith(
-                    fontSize: 12,
+                style: TextStyle(
+                    fontSize: 12.sp,
+                    fontFamily: 'Lato',
                     fontWeight: FontWeight.w500,
-                    color: bodyColor))),
+                    color: leftNavBarColor))),
       ],
     );
   }
@@ -197,7 +203,8 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(
           model.messagepreferencetitles[4],
-          style: headline6.copyWith(fontSize: 15),
+          style: TextStyle(
+              fontSize: 16.sp, fontFamily: 'Lato', fontWeight: FontWeight.w500),
         ),
         verticalSpaceSmall,
         Text(
@@ -206,8 +213,8 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
         ),
         verticalSpaceSmall,
         Text(model.longText[1],
-            style:
-                kBodyTextStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500)),
+            style: kBodyTextStyle.copyWith(
+                fontSize: 12, fontWeight: FontWeight.w500)),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -288,20 +295,20 @@ Widget themeSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          model.messagepreferencetitles[0],
-          style: headline6.copyWith(fontSize: 15),
-        ),
+        Text(model.messagepreferencetitles[0],
+            style: TextStyle(
+                fontSize: 16.sp,
+                fontFamily: 'Lato',
+                fontWeight: FontWeight.w500)),
         buildThemeRadioColumn(model),
-        SizedBox(
-          height: 10,
-        ),
+        verticalSpaceSmall,
         Text('Here is an Example',
-            style: kHeading4TextStyle.copyWith(
-                fontSize: 13, fontWeight: FontWeight.w500)),
-        SizedBox(
-          height: 10,
-        ),
+            style: TextStyle(
+                fontSize: 13.sp,
+                fontFamily: 'Lato',
+                fontWeight: FontWeight.w500,
+                color: bodyColor)),
+        verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/GroupLogo.png',
           subtitle: 'Feeling great',
@@ -325,14 +332,14 @@ Widget nameSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          model.messagepreferencetitles[2],
-          style: headline6.copyWith(fontSize: 15),
-        ),
+        Text(model.messagepreferencetitles[2],
+            style: TextStyle(
+                fontSize: 16.sp,
+                fontFamily: 'Lato',
+                fontWeight: FontWeight.w500,
+                color: headerColor)),
         buildNameRadioColumn(model),
-        SizedBox(
-          height: 5,
-        ),
+        verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/People of Brooklyn Avatar.png',
           subtitle: 'Hi, i am ',
@@ -394,13 +401,13 @@ class ReusableContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 86,
-      width: 700,
+      height: 86.h,
+      width: 556.w,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: kcPrimaryColor)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Column(
           children: <Widget>[
             Row(
@@ -416,27 +423,31 @@ class ReusableContainer extends StatelessWidget {
                         children: [
                           Text(
                             title!,
-                            style: kHeading4TextStyle.copyWith(fontSize: 13),
+                            style: TextStyle(
+                                fontSize: 13.sp,
+                                fontFamily: 'Lato',
+                                fontWeight: FontWeight.w700,
+                                color: headerColor),
                           ),
                           SizedBox(
                             width: 10,
                           ),
                           Column(
                             children: [
-                              SizedBox(
-                                height: 7,
-                              ),
+                              verticalSpaceTiny,
                               Text(
                                 time!,
-                                style: leftSideBarStyle.copyWith(
-                                    fontSize: 10, color: timeColor),
+
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.w500),
+
+
                               ),
                             ],
                           )
                         ],
-                      ),
-                      SizedBox(
-                        height: 6,
                       ),
                       Row(
                         children: [
@@ -454,7 +465,7 @@ class ReusableContainer extends StatelessWidget {
                                     TextSpan(
                                       text: subtxt,
                                       style: subtitle2.copyWith(
-                                          fontSize: 12,
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.w500,
                                           color: kcPrimaryColor),
                                     )
@@ -489,8 +500,11 @@ buildRadio(
       ),
       Text(
         txt,
-        style:
-            kExtraSmallTextStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
+        style: TextStyle(
+            fontSize: 12.sp,
+            fontFamily: 'Lato',
+            fontWeight: FontWeight.w500,
+            color: bodyColor),
       )
     ],
   );

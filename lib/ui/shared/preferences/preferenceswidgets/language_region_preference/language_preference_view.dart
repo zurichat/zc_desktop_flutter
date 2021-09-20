@@ -27,16 +27,13 @@ class LanguagePreference extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                model.preferencetitles[0],
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF3A3A3A)),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
+              Text(model.preferencetitles[0],
+                  style: TextStyle(
+                      fontSize: 15.sp,
+                      fontFamily: 'Lato',
+                      fontWeight: FontWeight.w500,
+                      color: headerColor)),
+              verticalSpaceTiny,
               buildDropDown(
                   kcBackgroundColor2, model.languages, model.dropDownLanguage,
                   (value) {
@@ -48,8 +45,10 @@ class LanguagePreference extends StatelessWidget {
                 child: Text(
                   model.subHeadings[0],
                   style: TextStyle(
-                    color: Color(0xFF999999),
-                    fontSize: 15,
+                    fontFamily: 'Lato',
+                    color: leftNavBarColor,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -59,9 +58,10 @@ class LanguagePreference extends StatelessWidget {
               Text(
                 model.preferencetitles[1],
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF3A3A3A)),
+                    fontSize: 15.sp,
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.w500,
+                    color: headerColor),
               ),
 
               ZcCheckBox2(
@@ -95,9 +95,10 @@ class LanguagePreference extends StatelessWidget {
               Text(
                 model.preferencetitles[2],
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF3A3A3A)),
+                    fontSize: 15.sp,
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.w500,
+                    color: headerColor),
               ),
               verticalSpaceTiny,
 
@@ -111,9 +112,10 @@ class LanguagePreference extends StatelessWidget {
               Text(
                 model.preferencetitles[3],
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF3A3A3A)),
+                    fontSize: 15.sp,
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.w500,
+                    color: headerColor),
               ),
               ZcCheckBox2(
                   value: model.checkBox2,
@@ -144,10 +146,7 @@ buildDropDown(
         borderRadius: BorderRadius.circular(5),
         border: Border.all(color: Colors.grey)),
     child: Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: DropdownButtonFormField(
           icon: SvgPicture.asset('assets/icons/drop_down_open.svg'),
           decoration: InputDecoration(
@@ -159,7 +158,12 @@ buildDropDown(
           onChanged: onChange,
           items: items
               .map<DropdownMenuItem<String>>((String value) => DropdownMenuItem(
-                    child: Text(value),
+                    child: Text(value,
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.w400,
+                            color: headerColor)),
                     value: value,
                   ))
               .toList()),
@@ -193,8 +197,9 @@ class ZcCheckBox2 extends StatelessWidget {
         horizontalSpaceVeryTiny,
         Flexible(
             child: Text(txt!,
-                style: subtitle2.copyWith(
-                    fontSize: 15,
+                style: TextStyle(
+                    fontSize: 15.sp,
+                    fontFamily: 'Lato',
                     fontWeight: FontWeight.w400,
                     color: bodyColor))),
       ],

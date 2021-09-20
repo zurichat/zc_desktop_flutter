@@ -66,16 +66,17 @@ final authBtnStyle = TextStyle(
   fontFamily: 'Lato',
 );
 
-final leftSideBarStyle = TextStyle(
+final kLeftSideBarStyle = TextStyle(
   fontSize: 15.sp,
-  color: leftNavBarColor,
-  fontWeight: FontWeight.normal,
+  color: Colors.black,
+  fontWeight: FontWeight.w400,
+  fontStyle: FontStyle.normal,
   fontFamily: 'Lato',
 );
 
 final dropDownBodyTextStyle = TextStyle(
-  fontSize: 16.sp,
-  color: leftNavBarColor,
+  fontSize: 15.sp,
+  color: Colors.black,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
@@ -122,4 +123,16 @@ final bodyText1 = TextStyle(
   fontWeight: FontWeight.w600,
   color: leftNavBarColor,
   fontFamily: 'Lato',
+);
+
+final preferenceStyleNormal = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w600,
+);
+
+final preferenceStyleBold = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w700,
 );
