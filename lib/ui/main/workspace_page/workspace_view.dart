@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
+import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
+import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_view.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_page/channels_view.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_viewmodel.dart';
@@ -38,15 +40,14 @@ class WorkspaceView extends StatelessWidget {
                   isActive: true,
                 ),
               ),
-              
-              
-             // verticalSpaceSmall,
+
+              // verticalSpaceSmall,
               model.isBusy
                   ? Expanded(
-                    child: Container(
-                      height: fullHeight(context),
-                      width: fullHeight(context),
-                      child: Center(
+                      child: Container(
+                        height: fullHeight(context),
+                        width: fullHeight(context),
+                        child: Center(
                           child: Container(
                             width: 24.0,
                             height: 24.0,
@@ -56,8 +57,8 @@ class WorkspaceView extends StatelessWidget {
                             ),
                           ),
                         ),
-                    ),
-                  )
+                      ),
+                    )
                   : Expanded(
                       child: Row(
                         children: [
@@ -134,7 +135,15 @@ class WorkspaceView extends StatelessWidget {
                                                     .openChannelsDropDownMenu();
                                               },
                                               show: model.showChannels,
-                                              addTap: () {},
+                                              addTap: () {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        ChannelsCreationView());
+                                              },
+                                              displayChannel: () {
+                                                model.setdisplayChannels();
+                                              },
                                               list: List.generate(
                                                 model.channels.length.toInt(),
                                                 (index) => MouseRegion(
@@ -184,6 +193,7 @@ class WorkspaceView extends StatelessWidget {
                                               toggleTap: () {
                                                 model.openDMsDropDownMenu();
                                               },
+                                              displayChannel: () {},
                                               addTap: () {},
                                               list: List.generate(
                                                 model.directMessages.length
@@ -240,18 +250,25 @@ class WorkspaceView extends StatelessWidget {
                             ),
                           ),
                           //TODO: Center Area
-                          Expanded(
-                            child: Column(
-                                children: [
-                                  DetailedCustomAppBar(
-                                    margin: const EdgeInsets.only(left: 2.0),
-                                    leading: WorkSpaceTitle(),
-                                    trailing: WorkSpaceMembers(),
+
+                          model.displayChannels == false
+                              ? Expanded(
+                                  child: Column(
+                                    children: [
+                                      DetailedCustomAppBar(
+                                        margin: EdgeInsets.only(left: 2.0.w),
+                                        leading: WorkSpaceTitle(),
+                                        trailing: WorkSpaceMembers(),
+                                      ),
+                                      ShowView(model),
+                                    ],
                                   ),
-                                 ShowView(model)
-                                ],
-                              ),
-                          ),
+                                )
+                              : Expanded(
+                                  child: Padding(
+                                  padding: EdgeInsets.only(left: 3.0),
+                                  child: ChannelsDisplayView(),
+                                )),
                         ],
                       ),
                     ),
@@ -294,6 +311,7 @@ class TitleSection extends StatelessWidget {
   final GestureTapCallback addTap;
   final List<Widget>? list;
   final String? addButtonTitle;
+  final GestureTapCallback displayChannel;
 
   const TitleSection({
     Key? key,
@@ -303,6 +321,7 @@ class TitleSection extends StatelessWidget {
     required this.addTap,
     this.list,
     this.addButtonTitle,
+    required this.displayChannel,
   }) : super(key: key);
 
   @override
@@ -330,8 +349,23 @@ class TitleSection extends StatelessWidget {
             ),
             SizedBox(width: 8),
             Expanded(
-              child: Container(
-                child: Text(title, style: kLeftSideBarStyle),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    child: Text(title, style: kLeftSideBarStyle),
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: EdgeInsets.only(right: 15.0.w),
+                    child: InkWell(
+                      onTap: displayChannel,
+                      child: SvgPicture.asset(
+                        SVGAssetPaths.addIcon,
+                        height: 10,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -351,8 +385,6 @@ class TitleSection extends StatelessWidget {
                   Row(
                     textBaseline: TextBaseline.ideographic,
                     children: [
-                      Text(addButtonTitle!, style: kLeftSideBarStyle),
-                      horizontalSpaceSmall,
                       InkWell(
                         onTap: addTap,
                         child: Container(
@@ -362,6 +394,9 @@ class TitleSection extends StatelessWidget {
                               "assets/icons/add_dm_channel.svg"),
                         ),
                       ),
+                      horizontalSpaceSmall,
+                      Text(addButtonTitle!, style: kLeftSideBarStyle),
+                      horizontalSpaceSmall,
                     ],
                   ),
                 ],

@@ -12,10 +12,11 @@ class ChannelsView extends ViewModelWidget<WorkspaceViewModel> {
   Widget build(BuildContext context, WorkspaceViewModel model) {
     return  Container(
       child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 12.0.w, vertical: 10.h),
             child: Scrollbar(
               controller: model.controllerOne,
               child: SingleChildScrollView(
+                physics: ScrollPhysics(),
                 controller: model.controllerOne,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -23,7 +24,7 @@ class ChannelsView extends ViewModelWidget<WorkspaceViewModel> {
                     messageHeader(context, model),
                     horizontalSpaceTiny,
                     Padding(
-                        padding: const EdgeInsets.only(left: 51),
+                        padding: EdgeInsets.only(left: 51),
                         child: InkWell(
                             onTap: () {
                               print("Thread opened");
@@ -84,25 +85,6 @@ class ChannelsView extends ViewModelWidget<WorkspaceViewModel> {
                         ],
                       ),
                     ),
-                    verticalSpaceMedium,
-                    messageHeader(context, model),
-                    horizontalSpaceTiny,
-                    Padding(
-                        padding: const EdgeInsets.only(left: 51),
-                        child: InkWell(
-                            onTap: () {
-                              print("Thread opened");
-                            },
-                            onLongPress: () {
-                              print("More options menu opened");
-                            },
-                            child: SelectableText(model.userPost))),
-                    verticalSpaceSmall,
-                    Padding(
-                      padding: const EdgeInsets.only(left: 51.0),
-                      child: messageReplies(model),
-                    ),
-                    verticalSpaceMedium,
                   ],
                 ),
               ),

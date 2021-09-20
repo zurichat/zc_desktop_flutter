@@ -17,6 +17,7 @@ import '../ui/auth/login_page/login_view.dart';
 import '../ui/auth/reset_password_page/reset_password_view.dart';
 import '../ui/auth/sign_up_page/sign_up_view.dart';
 import '../ui/auth/success_page/success_view.dart';
+import '../ui/main/channels_display/channels_display_view.dart';
 import '../ui/main/channels_page/channels_view.dart';
 import '../ui/main/home_page/home_view.dart';
 import '../ui/main/workspace_page/workspace_view.dart';
@@ -42,6 +43,7 @@ class Routes {
   static const String createWorkspaceStage1 = '/create-workspace-stage1';
   static const String createWorkspaceStage2 = '/create-workspace-stage2';
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
+  static const String channelsDisplayView = '/channels-display-view';
   static const all = <String>{
     homeView,
     workspaceView,
@@ -58,6 +60,7 @@ class Routes {
     createWorkspaceStage1,
     createWorkspaceStage2,
     createWorkspaceStage3,
+    channelsDisplayView,
   };
 }
 
@@ -80,6 +83,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.createWorkspaceStage1, page: CreateWorkspaceStage1),
     RouteDef(Routes.createWorkspaceStage2, page: CreateWorkspaceStage2),
     RouteDef(Routes.createWorkspaceStage3, page: CreateWorkspaceStage3),
+    RouteDef(Routes.channelsDisplayView, page: ChannelsDisplayView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -171,6 +175,12 @@ class StackedRouter extends RouterBase {
     CreateWorkspaceStage3: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const CreateWorkspaceStage3(),
+        settings: data,
+      );
+    },
+    ChannelsDisplayView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const ChannelsDisplayView(),
         settings: data,
       );
     },
