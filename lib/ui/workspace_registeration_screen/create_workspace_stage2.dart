@@ -7,17 +7,16 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 
-import 'create_workspace2_viewmodel.dart';
+import 'create_workspace_viewmodel.dart';
 
-class CreateWorkspaceView2 extends StatelessWidget {
-  const CreateWorkspaceView2({Key? key}) : super(key: key);
+class CreateWorkspaceStage2 extends StatelessWidget {
+  const CreateWorkspaceStage2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreateWorkspaceViewModel2>.reactive(
+    return ViewModelBuilder<CreateWorkspaceViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: SingleChildScrollView(
-          controller: model.controllerOne,
           child: Column(children: [
             Row(
               children: [
@@ -28,17 +27,12 @@ class CreateWorkspaceView2 extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          height: 70.h,
+                          height: 60.h,
                           width: 269.w,
                           color: KStartupContainerColor,
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: Container(
-                              height: 20.h,
-                              width: 250.w,
-                              color: Colors.grey[300],
-                              child: Text(''),
-                            ),
+                            child: Text(model.companyName),
                           ),
                         ),
                       ],
@@ -65,7 +59,7 @@ class CreateWorkspaceView2 extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                model.signInPgNum,
+                                model.stage2PageNum,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 18.sp,
@@ -74,7 +68,7 @@ class CreateWorkspaceView2 extends StatelessWidget {
                               ),
                               verticalSpaceSmall,
                               Text(
-                                model.signInText2,
+                                model.stage2Text,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 40.sp,
@@ -83,7 +77,7 @@ class CreateWorkspaceView2 extends StatelessWidget {
                               ),
                               verticalSpaceLarge,
                               Text(
-                                model.signInSubtext,
+                                model.stage2SubText,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 18.sp,
@@ -97,7 +91,7 @@ class CreateWorkspaceView2 extends StatelessWidget {
                                   controller: TextEditingController(),
                                   keyboardType: TextInputType.emailAddress,
                                   onChanged: (_) {},
-                                  hintPlaceHolder: model.emailHint,
+                                  hintPlaceHolder: model.stage2ExampleText,
                                   trailing: Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Text('50',
@@ -116,7 +110,9 @@ class CreateWorkspaceView2 extends StatelessWidget {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               lightIconColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    model.goToStage3();
+                                  },
                                   child: Text(
                                     model.btnText,
                                     style: authBtnStyle,
@@ -136,23 +132,7 @@ class CreateWorkspaceView2 extends StatelessWidget {
           ]),
         ),
       ),
-      viewModelBuilder: () => CreateWorkspaceViewModel2(),
-    );
-  }
-
-  bottomTextStyle() {
-    return TextStyle(
-        fontFamily: 'Lato',
-        fontSize: 18.sp,
-        color: Color.fromRGBO(153, 153, 153, 1),
-        fontWeight: FontWeight.w400);
-  }
-
-  buildLine() {
-    return Container(
-      height: 1.h,
-      width: 187.w,
-      color: Color.fromRGBO(219, 219, 219, 1),
+      viewModelBuilder: () => CreateWorkspaceViewModel(),
     );
   }
 }

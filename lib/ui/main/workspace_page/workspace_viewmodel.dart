@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.dart';
 import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_view.dart';
@@ -22,7 +24,6 @@ class WorkspaceViewModel extends IndexTrackingViewModel {
 
   ScrollController controller = ScrollController();
 
-
   List<Widget> channels = [];
   List<Widget> dMs = [];
   List<Widget> _workspacesItems = [];
@@ -39,7 +40,6 @@ class WorkspaceViewModel extends IndexTrackingViewModel {
   final DateTime currentMessageTime = DateTime.now();
   final ScrollController controllerOne = ScrollController();
 
-
   String userDefaultImageUrl = 'assets/images/zc_logo.png';
   int numberOfReplies = 14;
   int numberOfReactions = 0;
@@ -48,7 +48,6 @@ class WorkspaceViewModel extends IndexTrackingViewModel {
   String emojiIconPath = 'assets/images/🤘🏻.png';
   String userPost =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-
 
   bool get showDMs => _showDMs;
 
@@ -93,7 +92,6 @@ class WorkspaceViewModel extends IndexTrackingViewModel {
     notifyListeners();
   }
 
-
   void setup() async {
     await setupChannelsView();
     workspaceListItemCount = _workspace.length.toInt();
@@ -107,7 +105,8 @@ class WorkspaceViewModel extends IndexTrackingViewModel {
       ));
     });
 
-    log.i("workspace list item count $workspaceListItemCount  channels list item count $channelsListItemCount");
+    log.i(
+        "workspace list item count $workspaceListItemCount  channels list item count $channelsListItemCount");
   }
 
   void getData() async {
@@ -141,7 +140,12 @@ class WorkspaceViewModel extends IndexTrackingViewModel {
   //TODO: ontap workspace, get workspaces
   Future setupChannelsView() async {
     await runBusyFuture(runTask());
+  }
 
+  //TODO: Temporary solution - navigate to create workspace page
+  final _navigationService = locator<NavigationService>();
+  void goToCreateWorkspace() {
+    _navigationService.navigateTo(Routes.createWorkspaceView);
   }
 
   // get workspaces
@@ -151,7 +155,9 @@ class WorkspaceViewModel extends IndexTrackingViewModel {
 
   String? getChannelName(int index) {
     if (_workspace.isNotEmpty) {
-      for (int i = 0; i < _workspace[currentWorkspaceIndex].channels!.length; i++) {
+      for (int i = 0;
+          i < _workspace[currentWorkspaceIndex].channels!.length;
+          i++) {
         log.i("from getChannelName() $currentWorkspaceIndex");
         notifyListeners();
         return _workspace[currentWorkspaceIndex].channels![index].name;
@@ -190,4 +196,3 @@ class WorkspaceViewModel extends IndexTrackingViewModel {
     notifyListeners();
   }
 }
-

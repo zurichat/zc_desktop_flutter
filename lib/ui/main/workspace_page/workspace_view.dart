@@ -11,6 +11,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/line_divider.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 class WorkspaceView extends StatelessWidget {
@@ -52,21 +53,38 @@ class WorkspaceView extends StatelessWidget {
                             color: kcBackgroundColor2,
                             width: 70.w,
                             height: double.infinity,
-                            child: ListView.builder(
-                              itemCount: model.workspacesItems.length.toInt(),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      print("Workspace $index tapped");
-                                      model.setCurrentWorkspaceIndex(index);
-                                    },
-                                    child: model.workspacesItems[index],
+                            child: Column(
+                              children: [
+                                ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      model.workspacesItems.length.toInt(),
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          print("Workspace $index tapped");
+                                          model.setCurrentWorkspaceIndex(index);
+                                        },
+                                        child: model.workspacesItems[index],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    model.goToCreateWorkspace();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.add, color: kcPrimaryColor),
                                   ),
-                                );
-                              },
+                                )
+                              ],
                             ),
                           ),
+                          LineDivider(vertical: true),
                           //TODO: Left side bar
                           Container(
                             width: 260.w,
