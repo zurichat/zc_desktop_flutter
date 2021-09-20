@@ -44,8 +44,6 @@ class AccessibilityView extends StatelessWidget {
           );
         });
   }
-
- 
 }
 
 class MessageAnimationSection extends StatelessWidget {
@@ -61,7 +59,7 @@ class MessageAnimationSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // animation setting
-          Text('Animation', style: headline6.copyWith(fontSize: 15.sp)),
+          Text('Animation', style: preferenceStyleBold),
           Row(
             children: [
               ZcCheckBox(
@@ -72,26 +70,19 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text('Allow animated images and emoji',
-                      style: kBodyTextStyle.copyWith(fontSize: 15.sp))),
+                      style: preferenceStyleNormal)),
             ],
           ),
           verticalSpaceRegular,
 
           //messaging setting
-          Text('Direct message announcements',
-              style: headline6.copyWith(fontSize: 15.sp)),
+          Text('Direct message announcements', style: preferenceStyleBold),
 
           verticalSpaceSmall,
-          Text.rich(TextSpan(
-              style: TextStyle(
-                  color: bodyColor, fontFamily: 'Lato', fontSize: 15.sp),
-              children: [
-                TextSpan(text: model.msg),
-                TextSpan(
-                    text: ' ' + model.boldMsg,
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp))
-              ])),
+          Text.rich(TextSpan(style: preferenceStyleNormal, children: [
+            TextSpan(text: model.msg),
+            TextSpan(text: ' ' + model.boldMsg, style: preferenceStyleBold)
+          ])),
           verticalSpaceRegular,
 
           // Play a sound when a message is sent
@@ -104,8 +95,8 @@ class MessageAnimationSection extends StatelessWidget {
                   }),
               horizontalSpaceTiny,
               Flexible(
-                  child: Text(model.sentMsgSound,
-                      style: kBodyTextStyle.copyWith(fontSize: 15.sp))),
+                  child:
+                      Text(model.sentMsgSound, style: preferenceStyleNormal)),
             ],
           ),
 
@@ -122,7 +113,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text(model.receiveMsgSound,
-                      style: kBodyTextStyle.copyWith(fontSize: 15.sp))),
+                      style: preferenceStyleNormal)),
             ],
           ),
           verticalSpaceSmall,
@@ -138,7 +129,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text(model.readIncomingMsg,
-                      style: kBodyTextStyle.copyWith(fontSize: 15.sp))),
+                      style: preferenceStyleNormal)),
             ],
           ),
           verticalSpaceSmall,
@@ -168,8 +159,7 @@ class KeyBoardSettingsSection extends StatelessWidget {
           GestureDetector(
             onTap: () {},
             child: Text.rich(TextSpan(
-                style: TextStyle(
-                    color: bodyColor, fontFamily: 'Lato', fontSize: 15.sp),
+                style: preferenceStyleBold,
                 children: [
                   TextSpan(text: model.shortCutMsg),
                   TextSpan(
@@ -183,12 +173,12 @@ class KeyBoardSettingsSection extends StatelessWidget {
           // desc2
           Row(
             children: [
-              Text('Press', style: headline6.copyWith(fontSize: 15.sp)),
+              Text('Press', style: preferenceStyleBold),
               horizontalSpaceTiny,
               ShortCuts().up(),
               horizontalSpaceTiny,
               Text('in the empty message field to:',
-                  style: headline6.copyWith(fontSize: 15.sp))
+                  style: preferenceStyleBold)
             ],
           ),
           verticalSpaceSmall,
@@ -212,10 +202,10 @@ class ShortCutDescription extends StatelessWidget {
       children: [
         ListTile(
           title: Text('Move focus to the message list',
-              style: headline6.copyWith(fontSize: 14.sp)),
+              style: preferenceStyleBold),
           subtitle: Text(
               'The last visible message in the list will be selected',
-              style: kBodyTextStyle.copyWith(fontSize: 14.sp)),
+              style: preferenceStyleNormal),
           leading: Radio(
             value: UpButtonsChoice.option1,
             groupValue: model.upButtonsChoice,
@@ -227,10 +217,10 @@ class ShortCutDescription extends StatelessWidget {
         ),
         ListTile(
           title: Text('Edit your last message',
-              style: headline6.copyWith(fontSize: 14.sp)),
+              style: preferenceStyleBold),
           subtitle: Text(
               'The last message you sent will be selected and in editing mode',
-              style: kBodyTextStyle.copyWith(fontSize: 14.sp)),
+              style: preferenceStyleNormal),
           leading: Radio(
             value: UpButtonsChoice.option2,
             groupValue: model.upButtonsChoice,
@@ -244,15 +234,16 @@ class ShortCutDescription extends StatelessWidget {
         verticalSpaceRegular,
 
         //notice
-        Row(
+        Wrap(
           children: [
-            Text('Note: press ', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+            Text('Note: press ',
+                style: preferenceStyleNormal),
             ShortCuts().ctrl(),
-            Text(' + ', style: kBodyTextStyle.copyWith(fontSize: 13.sp)),
+            Text(' + ', style: preferenceStyleNormal),
             ShortCuts().up(),
             Flexible(
                 child: Text(' to edit your last message, with either option',
-                    style: kBodyTextStyle.copyWith(fontSize: 13.sp))),
+                    style: preferenceStyleNormal)),
           ],
         )
       ],
