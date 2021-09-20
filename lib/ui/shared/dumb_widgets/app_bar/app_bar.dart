@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 
 Widget buildAppBar(BuildContext context,
-    {bool isActive = false, bool isHome = true, String text = ''}) {
+    {bool isActive = false, bool isHome = true, String text = '',}) {
   final icona = Icons.arrow_back;
   final iconb = Icons.arrow_forward;
   final iconc = Icons.watch_later_outlined;

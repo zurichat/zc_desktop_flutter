@@ -34,16 +34,19 @@ class WorkspaceView extends StatelessWidget {
               ),
               verticalSpaceSmall,
               model.isBusy
-                  ? Center(
-                      child: Container(
-                        width: 24.0,
-                        height: 24.0,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 3.0.r,
-                          valueColor: AlwaysStoppedAnimation(Colors.grey),
+                  ? Container(
+                    height: 790.h,
+                    child: Center(
+                        child: Container(
+                          width: 24.0,
+                          height: 24.0,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3.0.r,
+                            valueColor: AlwaysStoppedAnimation(Colors.grey),
+                          ),
                         ),
                       ),
-                    )
+                  )
                   : Expanded(
                       child: Row(
                         children: [

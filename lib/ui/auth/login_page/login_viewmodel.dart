@@ -14,12 +14,12 @@ class LoginViewModel extends BaseViewModel with Validator {
   final _navigationService = locator<NavigationService>();
   final _storageService = locator<LocalStorageService>();
   final _auth = locator<AuthService>();
-
   String _logoUrl = 'assets/images/zc_logo2.png';
   String _logoUrlG = 'assets/images/google.png';
   String _logoUrlF = 'assets/images/facebook.png';
   String _logoUrlT = 'assets/images/twitter.png';
   String _errorMessage = '';
+  bool _initial = false;
   String? _emailErrorText;
   String? _passwordErrorText;
   double _logoWidth = 5.0;
@@ -68,6 +68,11 @@ class LoginViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
+  void setInitial() {
+    _initial = true;
+    notifyListeners();
+  }
+
   void _setIsError() {
     _isError = true;
     notifyListeners();
@@ -93,8 +98,9 @@ class LoginViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
+
   void gotoForgetpassword() {
-    _navigationService.navigateTo(Routes.forgotPasswordView);
+    _navigationService.navigateTo(Routes.resetPasswordView);
     notifyListeners();
   }
 
@@ -149,4 +155,18 @@ class LoginViewModel extends BaseViewModel with Validator {
     _goToHome();
     notifyListeners();
   }
+
+  Future<void> checkLoginStatus() async {
+    try {
+      if(!_initial) {
+        await _auth.checkToken();
+        setInitial();
+        _goToHome();
+      }
+      return;
+    } catch (e) {
+      _navigationService.navigateTo(Routes.loginView);
+    }
+  }
+
 }

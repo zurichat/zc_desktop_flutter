@@ -8,7 +8,7 @@ import 'app/app.router.dart';
 
 void main() {
   setupLocator();
-  runApp(
+    runApp(
     ZcDesktop(),
   );
 }

@@ -53,7 +53,7 @@ class DmView extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(2),
                                       ),
-                                      child: Image.network('userProfile'),
+                                      child: Image.network('https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png', fit: BoxFit.contain,),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),

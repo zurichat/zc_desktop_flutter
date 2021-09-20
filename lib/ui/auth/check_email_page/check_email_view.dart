@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login/goto_login_button.dart';
 
 class CheckEmailView extends StatelessWidget {
   const CheckEmailView({Key? key}) : super(key: key);
@@ -39,7 +40,11 @@ class CheckEmailView extends StatelessWidget {
                     Container(
                         width: 481.w,
                         child: AuthHeader(
-                            title: _isResetPassword != null ? _isResetPassword ? model.resetTitle : model.confirmTitle : model.resetTitle,
+                            title: _isResetPassword != null
+                                ? _isResetPassword
+                                    ? model.resetTitle
+                                    : model.confirmTitle
+                                : model.resetTitle,
                             subTitle:
                                 'We sent a 6 digit code to $_email. The code expire shortly, so please enter it soon.')),
                     verticalSpaceLarge,
@@ -72,7 +77,12 @@ class CheckEmailView extends StatelessWidget {
                     Text(
                       'Can’t find your code?  Check your spam folder.',
                       style: textStyle,
-                    )
+                    ),
+                    if (_isResetPassword ?? false)
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                    if (_isResetPassword ?? false) GotoLoginButton(),
                   ],
                 ),
                 AuthFooter()

@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/ui/auth/change_password_page/change_password_
 import 'package:zc_desktop_flutter/ui/auth/check_email_page/check_email_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/forgot_password_page/forgot_password_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_view.dart';
+import 'package:zc_desktop_flutter/ui/auth/login_page/splash_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/sign_up_page/sign_up_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/success_page/success_view.dart';
@@ -20,7 +21,7 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
   routes: [
     MaterialRoute(page: HomeView),
     AdaptiveRoute(page: WorkspaceView),
-    MaterialRoute(page: LoginView, initial: true),
+    MaterialRoute(page: LoginView,),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
@@ -29,6 +30,7 @@ import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
     MaterialRoute(page: ChangePasswordView),
     MaterialRoute(page: SuccessView),
     MaterialRoute(page: ChannelsView,),
+    MaterialRoute(page: SplashView, initial: true)
   ],
   dependencies: [
     Presolve(
