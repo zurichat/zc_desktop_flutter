@@ -90,7 +90,7 @@ class CreateWorkspaceViewModel extends BaseViewModel {
 
   final _navigationService = locator<NavigationService>();
   void goToStage1() {
-    _navigationService.navigateTo(Routes.createWorkspaceStage1);
+    // _navigationService.navigateTo(Routes.createWorkspaceStage1);
   }
 
   String _stage2PageNum = "Stage 2 of 3 ";
@@ -107,7 +107,7 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String get stage2ExampleText => _stage2ExampleText;
 
   void goToStage2() {
-    _navigationService.navigateTo(Routes.createWorkspaceStage2);
+    // _navigationService.navigateTo(Routes.createWorkspaceStage2);
   }
 
   String _stage3PageNum = "Stage 3 of 3 ";
@@ -129,7 +129,7 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String get btnText2 => _btnText2;
 
   void goToStage3() {
-    _navigationService.navigateTo(Routes.createWorkspaceStage3);
+    // _navigationService.navigateTo(Routes.createWorkspaceStage3);
   }
 
   void goToHome() {

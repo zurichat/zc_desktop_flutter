@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.
 class WorkspaceViewModel extends BaseViewModel {
   final log = getLogger("WorkspaceViewModel");
   final _workspaceService = locator<WorkspaceService>();
+  final _navigationService = locator<NavigationService>();
 
   String userDefaultImageUrl = 'assets/images/zc_logo.png';
   int numberOfReplies = 14;
@@ -25,6 +26,8 @@ class WorkspaceViewModel extends BaseViewModel {
   final ScrollController controller = ScrollController();
 
   int currentWorkspaceIndex = 0;
+
+  bool _displayChannels = false;
 
   bool _showDMs = false;
   bool _showMenus = false;
@@ -44,6 +47,17 @@ class WorkspaceViewModel extends BaseViewModel {
   bool get showDMs => _showDMs;
   bool get showMenus => _showMenus;
   bool get showChannels => _showChannels;
+  bool get displayChannels => _displayChannels;
+
+  void setdisplayChannels() {
+    _displayChannels = !_displayChannels;
+    notifyListeners();
+  }
+
+  void goDisplayChannels() {
+    _navigationService.navigateTo(Routes.channelsDisplayView);
+    notifyListeners();
+  }
 
   void openChannelsDropDownMenu() {
     _showChannels = !_showChannels;
@@ -97,7 +111,6 @@ class WorkspaceViewModel extends BaseViewModel {
   }
 
   // TODO: go to workspace creation page
-  final _navigationService = locator<NavigationService>();
   void goToCreateWorkspace() {
     _navigationService.navigateTo(Routes.createWorkspaceView);
   }

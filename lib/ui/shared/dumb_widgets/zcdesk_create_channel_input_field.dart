@@ -4,16 +4,18 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
-class AuthInputField extends StatelessWidget {
+class CreateChannelInputField extends StatelessWidget {
   final String hintPlaceHolder;
   final Color? filledColor;
+  final Color borderColor;
+  final Color borderFocusColor;
   final ValueChanged<String?>? onSaved;
   final String? label;
-  final String? helperText;
   final int? maxLines;
   final Widget? trailing;
   final TextInputType? inputType;
   final bool password;
+  final bool isFocus;
   final bool isVisible;
   final String? errorText;
   final TextEditingController? controller;
@@ -21,12 +23,14 @@ class AuthInputField extends StatelessWidget {
   final void Function()? onTrailingTapped;
   final void Function()? onVisibilityTap;
   final ValueChanged<String>? onChanged;
-  final String? Function(String?)? validator;
 
-  const AuthInputField({
+  const CreateChannelInputField({
     Key? key,
     this.onSaved,
     this.filledColor = kcBackgroundColor2,
+    this.borderColor = bodyColor,
+    this.borderFocusColor = bodyColor,
+    this.isFocus = false,
     this.hintPlaceHolder = '',
     this.label,
     this.maxLines,
@@ -38,10 +42,8 @@ class AuthInputField extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.errorText,
-    this.validator,
     this.onVisibilityTap,
     this.isVisible = false,
-    this.helperText,
   }) : super(key: key);
 
   @override
@@ -54,15 +56,13 @@ class AuthInputField extends StatelessWidget {
           visible: label == null ? false : true,
           child: ZcdeskText.subheading(label ?? ''),
         ),
-        verticalSpaceRegular,
+        label == null ? verticalSpaceSmall : verticalSpaceRegular,
         Stack(
           children: [
-            TextFormField(
-              controller: controller,
-              validator: validator,
+            TextField(
               onChanged: onChanged,
               keyboardType: keyboardType,
-              autofocus: false,
+              autofocus: isFocus,
               obscureText: isVisible,
               cursorColor: Theme.of(context).accentColor,
               textInputAction: TextInputAction.done,
@@ -94,14 +94,11 @@ class AuthInputField extends StatelessWidget {
                 errorBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.red),
                 ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
-                ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: leftNavBarColor),
+                  borderSide: BorderSide(color: borderFocusColor),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: bodyColor),
+                  borderSide: BorderSide(color: borderColor),
                 ),
               ),
             ),
@@ -112,12 +109,8 @@ class AuthInputField extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                         onPressed: onVisibilityTap,
-
                         icon: Icon(
-                            isVisible ? Icons.visibility_off : Icons.visibility))),
-                       
-                        
-                            
+                            isVisible ? Icons.visibility : Icons.visibility_off))),
               )
           ],
         ),

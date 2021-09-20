@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/ui/auth/change_password_page/change_password_
 import 'package:zc_desktop_flutter/ui/auth/check_email_page/check_email_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/forgot_password_page/forgot_password_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_view.dart';
+import 'package:zc_desktop_flutter/ui/auth/login_page/splash_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/sign_up_page/sign_up_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/success_page/success_view.dart';
@@ -20,6 +21,7 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
 import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage1.dart';
 import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage2.dart';
 import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_workspace_stage3.dart';
+import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_view.dart';
 
 @StackedApp(
   routes: [
@@ -27,8 +29,8 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
     AdaptiveRoute(page: WorkspaceView),
     MaterialRoute(
       page: LoginView,
-      initial: true,
     ),
+    MaterialRoute(page: SplashView, initial: true),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
@@ -41,6 +43,7 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
     MaterialRoute(page: CreateWorkspaceStage1),
     MaterialRoute(page: CreateWorkspaceStage2),
     MaterialRoute(page: CreateWorkspaceStage3),
+    MaterialRoute(page: ChannelsDisplayView),
   ],
   dependencies: [
     Presolve(

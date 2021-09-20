@@ -32,5 +32,5 @@ Future setupLocator(
   locator.registerLazySingleton(() => AuthService());
   locator.registerLazySingleton(() => ApiService());
   locator.registerLazySingleton(() => WorkspaceService());
-  locator.registerSingleton(ThemeService.getInstance());
+  locator.registerLazySingleton(() => ThemeService.getInstance());
 }

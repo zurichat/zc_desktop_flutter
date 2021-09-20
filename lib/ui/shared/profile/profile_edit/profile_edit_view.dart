@@ -167,10 +167,21 @@ class ProfileEditView extends StatelessWidget {
                                           ),
                                         ),
                                         child: Image.asset(
-                                            'assets/images/profile_placeholder.jpg'),
+                                            'assets/images/profile_placeholder.png'),
                                       ),
                                       verticalSpaceRegular,
-                                      ZcDeskButton(text: 'Upload an image'),
+                                      Container(
+                                        width: 200.w,
+                                        height: 50.h,
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Upload an image',
+                                            style: subtitle2,
+                                          ),
+                                        ),
+                                      ),
+                                      // ZcDeskButton(text: 'Upload an image'),
                                       verticalSpaceRegular,
                                       TextButton(
                                           onPressed: () {},
@@ -204,7 +215,7 @@ class ProfileEditView extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         "Cancel",
-                        style: kHeading3TextStyle,
+                        style: authBtnStyle,
                       ),
                     ),
                     horizontalSpaceSmall,

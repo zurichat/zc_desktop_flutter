@@ -58,7 +58,7 @@ class CreateWorkspaceView extends StatelessWidget {
                       height: model.authButtonHeight,
                       child: AuthButton(
                         label: model.btnText,
-                        isBUsy: model.isBusy,
+                        isBusy: model.isBusy,
                         onTap: () {
                           model.goToStage1();
                         },

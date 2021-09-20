@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../const_app_colors.dart';
 import '../const_text_styles.dart';
-import 'zcdesk_text.dart';
 
 class AuthButton extends StatelessWidget {
-  late final String label;
-  late final VoidCallback? onTap;
-  late final bool isBUsy;
-  AuthButton({required this.label, this.onTap, this.isBUsy = false});
+  final String label;
+  final VoidCallback? onTap;
+  final bool isBusy;
+
+  AuthButton({required this.label, this.onTap, this.isBusy = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class AuthButton extends StatelessWidget {
         ),
       ),
       onPressed: onTap,
-      child: !isBUsy
+      child: !isBusy
           ? Text(
               label,
               style: authBtnStyle,
