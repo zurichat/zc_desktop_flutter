@@ -14,6 +14,8 @@ class SVGAssetPaths {
   static final newDm = "assets/icons/new_dm.svg";
 }
 
+
+
 class ShortCuts {
   Widget contain({Widget? child, double h = 17, double w = 30}) {
     return Container(
