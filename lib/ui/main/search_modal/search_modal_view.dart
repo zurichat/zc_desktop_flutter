@@ -141,7 +141,7 @@ lookingForWidget({
     margin: EdgeInsets.only(left: 65.w, top: 18.h, right: 708.w, bottom: 13.h),
     child: Text(
       text!,
-      style: leftSideBarStyle,
+      style: kLeftSideBarStyle,
     ),
   );
 }
