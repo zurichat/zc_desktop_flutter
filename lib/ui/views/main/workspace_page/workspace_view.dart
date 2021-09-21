@@ -6,9 +6,6 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_view.dart';
-import 'package:zc_desktop_flutter/ui/main/channels_page/channels_view.dart';
-import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
-import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -20,6 +17,8 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dar
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/workspace_page/workspace_viewmodel.dart';
 
 class WorkspaceView extends StatelessWidget {
   const WorkspaceView({Key? key}) : super(key: key);
@@ -289,7 +288,8 @@ class ShowView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (model.isChannel) {
-      return ChannelsView();
+      return Container();
+      //  ChannelsView();
     }
 
     if (model.isDM) {
@@ -300,7 +300,8 @@ class ShowView extends StatelessWidget {
       return Scaffold();
     }
 
-    return ChannelsView();
+    return Container();
+    // ChannelsView();
   }
 }
 

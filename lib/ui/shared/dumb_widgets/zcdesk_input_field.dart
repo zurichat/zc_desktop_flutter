@@ -67,12 +67,9 @@ class AuthInputField extends StatelessWidget {
               cursorColor: Theme.of(context).accentColor,
               textInputAction: TextInputAction.done,
               maxLines: maxLines ?? 1,
-              style: TextStyle(
-                color: Colors.grey.shade800,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: headline7,
               decoration: InputDecoration(
+                labelStyle: headline7,
                 fillColor: filledColor,
                 filled: false,
                 errorText: errorText,
@@ -112,12 +109,9 @@ class AuthInputField extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                         onPressed: onVisibilityTap,
-
-                        icon: Icon(
-                            isVisible ? Icons.visibility_off : Icons.visibility))),
-                       
-                        
-                            
+                        icon: Icon(isVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility))),
               )
           ],
         ),

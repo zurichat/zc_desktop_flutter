@@ -3,7 +3,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.dart';
 
@@ -55,7 +54,7 @@ class WorkspaceViewModel extends BaseViewModel {
   }
 
   void goDisplayChannels() {
-    _navigationService.navigateTo(Routes.channelsDisplayView);
+    // _navigationService.navigateTo(Routes.channelsDisplayView);
     notifyListeners();
   }
 
@@ -112,7 +111,7 @@ class WorkspaceViewModel extends BaseViewModel {
 
   // TODO: go to workspace creation page
   void goToCreateWorkspace() {
-    _navigationService.navigateTo(Routes.createWorkspaceView);
+    // _navigationService.navigateTo(Routes.createWorkspaceView);
   }
 
   // get workspaces

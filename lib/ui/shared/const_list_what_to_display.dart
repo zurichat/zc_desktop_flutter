@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
-import 'package:zc_desktop_flutter/ui/main/draft/draft_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/draft/draft_view.dart';
 
 const Map data = {
   'Insight': Text('The Insight Widget Will Show Here'),

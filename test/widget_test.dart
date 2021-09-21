@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
 
 void main() {
   testWidgets('Dm tile displays user and message', (WidgetTester tester) async {

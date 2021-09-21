@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/main/home_page/home_view.dart';
-import 'package:zc_desktop_flutter/ui/main/home_page/home_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/main/organization_bar/organization_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_sidebar_item_widget.dart';
+import 'package:zc_desktop_flutter/ui/views/main/home_page/home_viewmodel.dart';
 
 class LeftSideBarView extends ViewModelWidget<HomeViewModel> {
   const LeftSideBarView({Key? key}) : super(key: key);

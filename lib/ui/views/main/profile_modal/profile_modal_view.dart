@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/views/main/profile_modal/profile_modal_viewmodel.dart';
 
 class ProfileModalView extends StatelessWidget {
   ProfileModalView({
