@@ -257,8 +257,8 @@ class WorkspaceView extends StatelessWidget {
                                     children: [
                                       DetailedCustomAppBar(
                                         margin: EdgeInsets.only(left: 2.0.w),
-                                        leading: WorkSpaceTitle(),
-                                        trailing: WorkSpaceMembers(),
+                                        leading: model.isDM ? DmScreenLeading() :WorkSpaceTitle(),
+                                        trailing: model.isDM ? DmScreenTrailing() : WorkSpaceMembers(),
                                       ),
                                       ShowView(model),
                                     ],
