@@ -1,18 +1,19 @@
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class LoginViewModel extends BaseViewModel {
   final log = getLogger("LoginViewModel");
-
+  final _windowTitleBarService = locator<WindowTitleBarService>();
   final _navigationService = locator<NavigationService>();
   final _auth = locator<AuthService>();
   bool _passwordVisibility = true;
 
-  bool get passwordVisibily => _passwordVisibility;
+  bool get passwordVisible => _passwordVisibility;
 
   void setPasswordVisibility() {
     _passwordVisibility = !_passwordVisibility;
@@ -21,12 +22,10 @@ class LoginViewModel extends BaseViewModel {
 
   void goToSignUp() {
     _navigationService.navigateTo(Routes.signUpView);
-    notifyListeners();
   }
 
-  void gotoForgetpassword() {
+  void gotoForgetPassword() {
     _navigationService.navigateTo(Routes.resetPasswordView);
-    notifyListeners();
   }
 
   Future<void> login({
