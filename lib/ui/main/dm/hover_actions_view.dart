@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 
 class MoreActions extends StatelessWidget {
@@ -48,5 +49,37 @@ class MoreActionTile extends StatelessWidget {
       title: Text(title),
       trailing: trailing,
     );
+  }
+}
+
+class HoverInfo extends StatelessWidget {
+  final String action;
+  final double width;
+  HoverInfo({required this.action, required this.width});
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(action);
+  }
+}
+
+class SimpleClipper extends CustomClipper<Path> {
+  final double width;
+  SimpleClipper({required this.width});
+  @override
+  Path getClip(Size size) {
+    Path path = new Path();
+    // path start with (0.0, 0.0) point
+    path.lineTo(0.0, size.height.h - 10);
+    path.lineTo(width.w, size.height.h - 10);//75
+    path.lineTo(width.w+5, size.height.h);//70
+    path.lineTo(width.w+5, size.height.h - 10);//65
+    path.lineTo(size.width.w, size.height.h - 10);
+    path.lineTo(size.width.w, 0.0);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }
