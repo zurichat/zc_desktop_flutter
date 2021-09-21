@@ -10,6 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 import '../services/api/api_service.dart';
 import '../services/authentication/auth_service.dart';
@@ -33,4 +34,5 @@ Future setupLocator(
   locator.registerLazySingleton(() => ApiService());
   locator.registerLazySingleton(() => WorkspaceService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
+  locator.registerLazySingleton(() => WindowTitleBarService());
 }
