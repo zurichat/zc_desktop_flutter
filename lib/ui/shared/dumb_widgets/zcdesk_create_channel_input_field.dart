@@ -23,6 +23,7 @@ class CreateChannelInputField extends StatelessWidget {
   final void Function()? onTrailingTapped;
   final void Function()? onVisibilityTap;
   final ValueChanged<String>? onChanged;
+  final String? Function(String?)? validator;
 
   const CreateChannelInputField({
     Key? key,
@@ -40,6 +41,7 @@ class CreateChannelInputField extends StatelessWidget {
     this.onTrailingTapped,
     this.password = false,
     this.controller,
+    this.validator,
     this.onChanged,
     this.errorText,
     this.onVisibilityTap,
@@ -59,7 +61,9 @@ class CreateChannelInputField extends StatelessWidget {
         label == null ? verticalSpaceSmall : verticalSpaceRegular,
         Stack(
           children: [
-            TextField(
+            TextFormField(
+              controller: controller,
+              validator: validator,
               onChanged: onChanged,
               keyboardType: keyboardType,
               autofocus: isFocus,
