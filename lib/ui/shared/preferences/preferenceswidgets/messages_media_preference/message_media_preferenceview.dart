@@ -36,6 +36,8 @@ class MessageMediaPreferenceView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => MessageMediaPreferenceViewModel(),
+      onModelReady: (model) => model.fetchAndSetMsgSetting(),
+      onDispose: (model) => model.saveToDisk(),
     );
   }
 }
