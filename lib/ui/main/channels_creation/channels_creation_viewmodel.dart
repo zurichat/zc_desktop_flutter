@@ -5,6 +5,7 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/authentication/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class ChannelsCreationViewModel extends BaseViewModel with Validator{
@@ -21,7 +22,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
   final log = getLogger("CreateChannelViewModel");
   final _navigationService = locator<NavigationService>();
   final _storageService = locator<LocalStorageService>();
-  final _auth = locator<AuthService>();
+  final _auth = locator<ChannelsService>();
 
   String _createChannel = 'Create a channel';
   String _channelTextOne = 'Channels are where your team communicates. They’re best ';
@@ -138,7 +139,13 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
     notifyListeners();
   }
 
-  Future<void> validateAndCreateChannel() async {
+    Future<void> createchannel({
+    required String name,
+    required String owner,
+    required String description,
+    required bool private,
+  }) async {
+
     bool isChannelNameValid = nameValidator(_channelName);
     // bool isChannelDescriptionValid = nameValidator(_channelDescription);
 
@@ -160,18 +167,17 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
       notifyListeners();
       return;
     }
+
     try {
       _setIsBusy();
-      await _auth.signup(
-          email: _channelName,
-          password: _channelName,);
+      await runBusyFuture(performCreateChannel(name, owner, description, private));
       _setIsCreateChannelSuccessful();
     } catch (e) {
       if (e.toString().contains('SocketException')) {
         setErrorMessage(
             'Please check your internet and try again!');
       } else {
-        setErrorMessage('The Channel is Already In Use');
+        setErrorMessage('An unexpected error occured!');
       }
       _setIsBusy();
       _setIsCreateChannelNotSuccessful();
@@ -180,10 +186,71 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
     await Future.delayed(
       Duration(milliseconds: 5000),
     );
-    goToViewChannels();
+     _navigationService.popRepeated(1);
     notifyListeners();
   }
-}
+
+  Future<void> performCreateChannel(String name, String owner, String description, bool private) async {
+
+    await _auth.createChannel(name: name, owner: owner, description: description, private: false);
+
+    // _navigationService.navigateTo(Routes.checkEmailView, arguments: {
+    //   'email': email,
+    //   'isReset': false,
+    // });
+  }
+
+  /// Error should be handled here. It could be displaying a toast of something else
+  @override
+  void onFutureError(error, Object? key) {
+    print('Handle Error here');
+    super.onFutureError(error, key);
+  }
+
+//   Future<void> validateAndCreateChannel() async {
+//     bool isChannelNameValid = nameValidator(_channelName);
+//     // bool isChannelDescriptionValid = nameValidator(_channelDescription);
+
+//     // if (!isChannelNameValid ||
+//     //     !isChannelDescriptionValid)
+
+//     if (!isChannelNameValid) {
+//       if (!isChannelNameValid) {
+//         _channelNameError = 'Channel Name must be at least 3 characters long';
+//       } else {
+//         _channelNameError = null;
+//       }
+//       // if (!isChannelDescriptionValid) {
+//       //   _channelDescriptionError = 'Channel Description must be at least 3 characters long';
+//       // } else {
+//       //   _channelDescriptionError = null;
+//       // }
+
+//       notifyListeners();
+//       return;
+//     }
+//     try {
+//       _setIsBusy();
+
+//       _setIsCreateChannelSuccessful();
+//     } catch (e) {
+//       if (e.toString().contains('SocketException')) {
+//         setErrorMessage(
+//             'Please check your internet and try again!');
+//       } else {
+//         setErrorMessage('An unexpected error occured!');
+//       }
+//       _setIsBusy();
+//       _setIsCreateChannelNotSuccessful();
+//       return;
+//     }
+//     await Future.delayed(
+//       Duration(milliseconds: 5000),
+//     );
+//      _navigationService.popRepeated(1);
+//     notifyListeners();
+//   }
+// }
 
  // void _goToHome() {
   //   if (emailText.isEmpty) {
@@ -232,4 +299,4 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
   //   _goToHome();
   //   notifyListeners();
   // }
-
+}

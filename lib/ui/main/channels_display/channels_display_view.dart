@@ -146,7 +146,7 @@ class ChannelsDisplayView extends StatelessWidget {
                         itemCount: model.sidebarItems.length,
                         itemBuilder: (context, index) {
                           return ChannelsDisplayList(
-                              visibleJoined: model.sidebarItems.keys.toList()[index] == 'annoucement' ? false : true,
+                              visibleJoined: model.sidebarItems.keys.toList()[index] == 'Annoucements' ? false : true,
                               paddingBottom2: model.paddingBottom2,
                               paddingall: model.paddingall,
                               paddingBottom3: model.paddingBottom3,

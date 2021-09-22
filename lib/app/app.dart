@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/authentication/channels_service.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
@@ -15,6 +16,7 @@ import 'package:zc_desktop_flutter/ui/auth/login_page/splash_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/reset_password_page/reset_password_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/sign_up_page/sign_up_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/success_page/success_view.dart';
+import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_view.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_page/channels_view.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
@@ -42,6 +44,7 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
     MaterialRoute(page: CreateWorkspaceStage2),
     MaterialRoute(page: CreateWorkspaceStage3),
     MaterialRoute(page: ChannelsDisplayView),
+    MaterialRoute(page: ChannelsCreationView),
     AdaptiveRoute(
       page: WorkspaceView,
       initial: true,
@@ -58,6 +61,7 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
     ),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthService),
+    LazySingleton(classType: ChannelsService),
     LazySingleton(classType: ApiService),
     LazySingleton(classType: WorkspaceService),
     LazySingleton(classType: DMService),
