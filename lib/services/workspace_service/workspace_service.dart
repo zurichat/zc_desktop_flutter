@@ -1,8 +1,12 @@
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 
 class WorkspaceService {
   final _log = getLogger("WorkspaceService");
+
+  late int _selectedWorkspaceIndex;
+
   List<Workspace> workspaces = <Workspace>[
     Workspace(
       id: 0,
@@ -16,11 +20,6 @@ class WorkspaceService {
           users: <User>[
             User(
               name: "John Doe",
-              avatar: "",
-              description: "",
-              id: 0,
-              online: false,
-              status: "",
             ),
           ],
         ),
@@ -31,11 +30,6 @@ class WorkspaceService {
           users: <User>[
             User(
               name: "John Doe",
-              avatar: "",
-              description: "",
-              id: 0,
-              online: false,
-              status: "",
             ),
           ],
         ),
@@ -46,11 +40,6 @@ class WorkspaceService {
           users: <User>[
             User(
               name: "John Doe",
-              avatar: "",
-              description: "",
-              id: 0,
-              online: false,
-              status: "",
             ),
           ],
         ),
@@ -59,22 +48,12 @@ class WorkspaceService {
         DM(
           user: User(
             name: "John Doe",
-            avatar: "",
-            description: "",
-            id: 0,
-            online: false,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "John Doe",
-                avatar: "",
-                description: "",
-                id: 0,
-                online: false,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
@@ -83,22 +62,12 @@ class WorkspaceService {
         DM(
           user: User(
             name: "John Snow",
-            avatar: "",
-            description: "",
-            id: 1,
-            online: false,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "John Snow",
-                avatar: "",
-                description: "",
-                id: 1,
-                online: false,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
@@ -107,22 +76,12 @@ class WorkspaceService {
         DM(
           user: User(
             name: "John Wick",
-            avatar: "",
-            description: "",
-            id: 2,
-            online: true,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "John Wick",
-                avatar: "",
-                description: "",
-                id: 2,
-                online: true,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
@@ -132,11 +91,6 @@ class WorkspaceService {
     )
       ..user = User(
         name: "Ademola Fadumo",
-        avatar: "",
-        description: "",
-        id: 3,
-        online: true,
-        status: "",
       ),
     Workspace(
       id: 1,
@@ -150,19 +104,9 @@ class WorkspaceService {
           users: <User>[
             User(
               name: "John Doe",
-              avatar: "",
-              description: "",
-              id: 0,
-              online: false,
-              status: "",
             ),
             User(
               name: "Ademola Fadumo",
-              avatar: "",
-              description: "",
-              id: 3,
-              online: true,
-              status: "",
             )
           ],
         ),
@@ -173,11 +117,6 @@ class WorkspaceService {
           users: <User>[
             User(
               name: "John Doe",
-              avatar: "",
-              description: "",
-              id: 0,
-              online: false,
-              status: "",
             ),
           ],
         ),
@@ -186,22 +125,12 @@ class WorkspaceService {
         DM(
           user: User(
             name: "Marlon Humpreys",
-            avatar: "",
-            description: "",
-            id: 0,
-            online: false,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "Marlon Humpreys",
-                avatar: "",
-                description: "",
-                id: 0,
-                online: false,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
@@ -210,22 +139,12 @@ class WorkspaceService {
         DM(
           user: User(
             name: "Tom Brady",
-            avatar: "",
-            description: "",
-            id: 1,
-            online: false,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "Tom Brady",
-                avatar: "",
-                description: "",
-                id: 1,
-                online: false,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
@@ -234,22 +153,12 @@ class WorkspaceService {
         DM(
           user: User(
             name: "Travis Kelce",
-            avatar: "",
-            description: "",
-            id: 2,
-            online: true,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "Travis Kelce",
-                avatar: "",
-                description: "",
-                id: 2,
-                online: true,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
@@ -259,11 +168,6 @@ class WorkspaceService {
     )
       ..user = User(
         name: "Ademola Fadumo",
-        avatar: "",
-        description: "",
-        id: 3,
-        online: true,
-        status: "",
       ),
     Workspace(
       id: 2,
@@ -277,11 +181,6 @@ class WorkspaceService {
           users: <User>[
             User(
               name: "John Doe",
-              avatar: "",
-              description: "",
-              id: 0,
-              online: false,
-              status: "",
             ),
           ],
         ),
@@ -292,11 +191,6 @@ class WorkspaceService {
           users: <User>[
             User(
               name: "John Doe",
-              avatar: "",
-              description: "",
-              id: 0,
-              online: false,
-              status: "",
             ),
           ],
         ),
@@ -305,22 +199,12 @@ class WorkspaceService {
         DM(
           user: User(
             name: "Patrick Mahomes",
-            avatar: "",
-            description: "",
-            id: 0,
-            online: false,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "Patrick Mahomes",
-                avatar: "",
-                description: "",
-                id: 0,
-                online: false,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
@@ -329,22 +213,12 @@ class WorkspaceService {
         DM(
           user: User(
             name: "Tyreek Hill",
-            avatar: "",
-            description: "",
-            id: 1,
-            online: false,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "Tyreek Hill",
-                avatar: "",
-                description: "",
-                id: 1,
-                online: false,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
@@ -353,41 +227,29 @@ class WorkspaceService {
         DM(
           user: User(
             name: "Kawhi Leonard",
-            avatar: "",
-            description: "",
-            id: 2,
-            online: true,
-            status: "",
           ),
         )
           ..chats = [
             Chat(
               user: User(
                 name: "Kawhi Leonard",
-                avatar: "",
-                description: "",
-                id: 2,
-                online: true,
-                status: "",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
           ],
       ],
-    )
-      ..user = User(
+    )..user = User(
         name: "Ademola Fadumo",
-        avatar: "",
-        description: "",
-        id: 3,
-        online: true,
-        status: "",
       ),
   ];
 
+  int getSelectedWorkspaceIndex() => _selectedWorkspaceIndex;
+
+  void selectedWorkspaceIndex(int value) => _selectedWorkspaceIndex = value;
+
   Future<List<Workspace>> getWorkspaces() async {
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 2));
 
     _log.i("Workspaces retrieved successfully");
 

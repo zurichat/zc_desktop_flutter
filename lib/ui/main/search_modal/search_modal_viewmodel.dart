@@ -1,13 +1,15 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
-
+import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/search_workspace/users_loacal_data.dart';
 
 class SearchModalViewmodel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
+  final _dmService = locator<DMService>();
   String? _text;
   String? _hintText;
   bool isClicked = false;
@@ -65,9 +67,14 @@ class SearchModalViewmodel extends BaseViewModel {
   }
 
   List<User> getSuggestions(String query) => List.of(userData).where((user) {
-        final userLower = user.name.toLowerCase();
+        final userLower = user.name!.toLowerCase();
         final queryLower = query.toLowerCase();
 
         return userLower.contains(queryLower);
       }).toList();
+
+  void searchUser(User user) {
+    _dmService.setUser(user);
+    _navigationService.navigateTo(WorkspaceViewRoutes.dmView, id: 1);
+  }
 }
