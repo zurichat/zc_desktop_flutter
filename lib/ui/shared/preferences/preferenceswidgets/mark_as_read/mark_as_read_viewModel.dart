@@ -15,7 +15,7 @@ class MarkAsReadViewModel extends BaseViewModel {
       'Zuri marks a channel read as soon as you view it. You can change this if you’d like.';
   String get msg => _msg;
 
-  String _boldMsg = ' When I view a channel:';
+  String _boldMsg = 'When I view a channel:';
   String get boldMsg => _boldMsg;
 
   //
@@ -26,8 +26,7 @@ class MarkAsReadViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  String _clickoption1 =
-      ' Start me where I left off, and mark the channel read';
+  String _clickoption1 = 'Start me where I left off, and mark the channel read';
   String get clickOption1 => _clickoption1;
 
   bool? _option2 = false;
@@ -38,7 +37,7 @@ class MarkAsReadViewModel extends BaseViewModel {
   }
 
   String _clickOption2 =
-      ' Start me at the newest message, and mark the channel read';
+      'Start me at the newest message, and mark the channel read';
   String get clickOption2 => _clickOption2;
 
   bool? _option3 = false;
@@ -49,7 +48,7 @@ class MarkAsReadViewModel extends BaseViewModel {
   }
 
   String _clickOption3 =
-      ' Start me at the newest message, but leave unseen messages unread';
+      'Start me at the newest message, but leave unseen messages unread';
   String get clickOption3 => _clickOption3;
 
   /// Second Section
@@ -63,8 +62,7 @@ class MarkAsReadViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  String _clickMarkAll =
-      ' Start me at the newest message, but leave unseen messages unread';
+  String _clickMarkAll = 'Prompt to confirm';
   String get clickMarkAll => _clickMarkAll;
 
   /// keyboard settings
@@ -73,10 +71,10 @@ class MarkAsReadViewModel extends BaseViewModel {
   String _fShortCutMsg = 'Mark all messages in current channel as read';
   String get fShortCutMsg => _fShortCutMsg;
 
-  String _sShortCutMsg = ' Mark all messages as read';
+  String _sShortCutMsg = 'Mark all messages as read';
   String get sShortCutMsg => _sShortCutMsg;
 
-  String _tShortCutMsg = ' Mark all messages as unread';
+  String _tShortCutMsg = 'Mark all messages as unread';
   String get tShortCutMsg => _tShortCutMsg;
 
   UpButtonsChoice? _upButtonsChoice = UpButtonsChoice.option1;
