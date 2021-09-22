@@ -22,8 +22,8 @@ class StatusDialogMinView extends StatelessWidget {
 
   dialogContainer(StatusDialogMinViewModel model) {
     return Container(
-      width: 547.h,
-      height: 268.w,
+      width: 547.w,
+      height: 268.h,
       padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
       child: Stack(children: [
         Column(
@@ -33,7 +33,12 @@ class StatusDialogMinView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ZcdeskText.headingThree(model.setAStatus),
-                IconButton(onPressed: model.popDialog, icon: Icon(Icons.close))
+                IconButton(
+                    onPressed: model.popDialog,
+                    icon: Icon(
+                      Icons.close,
+                      size: 28.sp,
+                    ))
               ],
             ),
             Container(
@@ -45,8 +50,12 @@ class StatusDialogMinView extends StatelessWidget {
                   prefixIcon: IconButton(
                       onPressed: () {},
                       icon: SvgPicture.asset('assets/icons/emoji_icon.svg')),
-                  suffixIcon:
-                      IconButton(onPressed: () {}, icon: Icon(Icons.clear)),
+                  suffixIcon: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.clear,
+                        size: 20.sp,
+                      )),
                 ),
               ),
             ),
@@ -64,21 +73,20 @@ class StatusDialogMinView extends StatelessWidget {
         Align(
           alignment: Alignment.bottomRight,
           //child: Padding(
-            //padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric( horizontal: 16.w),
-                    primary: Colors.white,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor,
-                        width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text(model.clearBtnText)),
+          //padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: Colors.white,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(model.clearBtnText)),
           //),
         ),
       ]),
