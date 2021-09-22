@@ -13,7 +13,7 @@ import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/lang
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/preferences_notification_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/preferences_sidebar_view.dart';
-
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/mark_as_read/mark_as_read_view.dart';
 import 'preferenceswidgets/theme/theme_view.dart';
 
 class PreferenceView extends StatelessWidget {
@@ -70,7 +70,7 @@ class PreferenceView extends StatelessWidget {
         'assetName': 'assets/icons/mark.svg', //Icons.launch,
         'widget': Container(
           child: Center(
-            child: ZcdeskText.headline('Mark as read'),
+            child:  MarkAsRead(),
           ),
         )
       },
@@ -89,6 +89,9 @@ class PreferenceView extends StatelessWidget {
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).colorScheme.primary),
+              borderRadius: BorderRadius.circular(15)),
           height: 750.h,
           width: 827.w,
           child: Column(
@@ -174,8 +177,7 @@ Widget buildListItem({
     tileColor: isSelected ? KStartupContainerColor : null,
     minLeadingWidth: 5,
     leading: SvgPicture.asset(assetName),
-    title: Text(text,
-        style: preferenceStyleNormal),
+    title: Text(text, style: preferenceStyleNormal),
     hoverColor: isSelected ? KStartupContainerColor : hoverColor,
     onTap: onClicked,
   );

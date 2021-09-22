@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zc_desktop_flutter/ui/main/status_dialog/status_dialog_min/status_dialog_min_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -42,7 +43,7 @@ class ProfileDropdownView extends StatelessWidget {
     });
   }
 
-  void findDropdownData() {
+void findDropdownData() {
     RenderBox? renderBox =
         actionKey.currentContext!.findRenderObject() as RenderBox;
     height = renderBox.size.height;
@@ -104,7 +105,11 @@ class DropDown extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 5),
                       child: OutlineButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => StatusDialogMinView());
+                        },
                         child: Icon(Icons.edit_outlined),
                       ),
                     ),
@@ -183,7 +188,7 @@ class DropDownItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         text,
-                        style: subtitle2,
+                        style: preferenceStyleNormal,
                       ),
                       Spacer(),
                       Icon(
@@ -222,7 +227,7 @@ class ProfilePicture extends StatelessWidget {
               children: [
                 Text(
                   "Bernice_Perp",
-                  style: kSubHeadingTextStyle,
+                  style: preferenceStyleNormal,
                 ),
                 verticalSpaceTiny,
                 Row(
@@ -236,7 +241,7 @@ class ProfilePicture extends StatelessWidget {
                     ),
                     Text(
                       "Away",
-                      style: subtitle2,
+                      style: preferenceStyleNormal,
                     )
                   ],
                 )
@@ -248,3 +253,13 @@ class ProfilePicture extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+ 

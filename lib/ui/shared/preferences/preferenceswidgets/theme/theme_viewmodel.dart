@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/theme/themes.dart';
 
 const testLocalKey = 'TESTKEY';
 
@@ -27,7 +28,8 @@ enum darkDramaticTheme {
   complimentary,
   automatic,
   nocturne,
-  expensive
+  expensive,
+  Null
 }
 
 enum cleanThemes { aubergine, versatile, aubergine1, aubergine2 }
@@ -39,7 +41,7 @@ class ThemeViewModel extends BaseViewModel {
 
   themeAccross _allWorkSpace = themeAccross.directMessage;
   toggleBtwTheme _switchLightDark = toggleBtwTheme.LightTheme;
-  darkDramaticTheme _darkDramaTheme = darkDramaticTheme.coast;
+  darkDramaticTheme _darkDramaTheme = darkDramaticTheme.Null;
   cleanThemes _cleanTheme = cleanThemes.aubergine;
 
   String _logoLight = 'assets/images/logoo.png';
@@ -54,8 +56,6 @@ class ThemeViewModel extends BaseViewModel {
   String _expensive = 'assets/images/Expensive.png';
   String _aubergine2 = 'assets/images/Aubergine2.png';
   String _aubergine3 = 'assets/images/Aubergine3.png';
-  double _logoWidth = 29.1;
-  double _logoHeight = 30.77;
   String _title = 'Zuribot';
   String _head1 =
       'Change the appearance of Slack across all of your workspaces.';
@@ -79,17 +79,7 @@ class ThemeViewModel extends BaseViewModel {
   String _expensiveName = 'Expensive';
   DateTime _now = DateTime.now();
 
-  bool _coastVal = false;
-  bool _triVal = false;
-  bool _compliVal = false;
-  bool _autoVal = false;
-  bool _nocVal = false;
-  bool _expVal = false;
   bool _isChecked = false;
-  bool _lightChecked = true;
-  bool _versatileChecked = false;
-  bool _darkChecked = false;
-  bool _aubergineChecked = false;
 
   String get lightTheme => _lightTheme;
   String get darkTheme => _darkTheme;
@@ -122,36 +112,13 @@ class ThemeViewModel extends BaseViewModel {
   cleanThemes get cleanTheme => _cleanTheme;
 
   String get head2 => _head2;
-
   String get head3 => _head3;
-
   String get head4 => _head4;
-
   String get body1 => _body1;
-
   String get body2 => _body2;
-
-  double get logoWidth => _logoWidth;
-
-  double get logoHeight => _logoHeight;
-
   String get body3 => _body3;
-
   DateTime get now => _now;
-
   bool get isChecked => _isChecked;
-
-  bool get versatileChecked => _versatileChecked;
-  bool get aubergineChecked => _aubergineChecked;
-  bool get darkChecked => _darkChecked;
-  bool get lighChecked => _lightChecked;
-  bool get coastVal => _coastVal;
-  bool get triVal => _triVal;
-  bool get compliVal => _compliVal;
-  bool get autoVal => _autoVal;
-  bool get nocVal => _nocVal;
-  bool get expVal => _expVal;
-
   Color activeColor() => _activeColor;
 
   void setChecked(bool? newValue) {
@@ -182,15 +149,18 @@ class ThemeViewModel extends BaseViewModel {
     _cleanTheme = (value) as cleanThemes;
     switch (_cleanTheme) {
       case cleanThemes.aubergine:
+        setTheme(themes[2]);
         notifyListeners();
         break;
       case cleanThemes.versatile:
-        notifyListeners();
+        setTheme(themes[3]);
         break;
       case cleanThemes.aubergine1:
+        setTheme(themes[4]);
         notifyListeners();
         break;
       case cleanThemes.aubergine2:
+        setTheme(themes[5]);
         notifyListeners();
         break;
     }
@@ -200,93 +170,32 @@ class ThemeViewModel extends BaseViewModel {
     _darkDramaTheme = (value) as darkDramaticTheme;
     switch (_darkDramaTheme) {
       case darkDramaticTheme.coast:
+        setTheme(themes[6]);
         notifyListeners();
         break;
       case darkDramaticTheme.triadic:
+        setTheme(themes[7]);
         notifyListeners();
         break;
       case darkDramaticTheme.complimentary:
-        notifyListeners();
-        break;
-      case darkDramaticTheme.expensive:
-        notifyListeners();
-        break;
-      case darkDramaticTheme.triadic:
-        notifyListeners();
-        break;
-      case darkDramaticTheme.nocturne:
+        setTheme(themes[8]);
         notifyListeners();
         break;
       case darkDramaticTheme.automatic:
+        setTheme(themes[9]);
         notifyListeners();
         break;
+      case darkDramaticTheme.nocturne:
+        setTheme(themes[10]);
+        notifyListeners();
+        break;
+      case darkDramaticTheme.expensive:
+        setTheme(themes[11]);
+        notifyListeners();
+        break;
+      case darkDramaticTheme.Null:
+        break;
     }
-  }
-
-  void coastChecked(bool? newValue) {
-    setFalse();
-    _triVal = false;
-    _compliVal = false;
-    _autoVal = false;
-    _nocVal = false;
-    _expVal = false;
-    _coastVal = newValue!;
-    notifyListeners();
-  }
-
-  void triaChecked(bool? newValue) {
-    setFalse();
-    _coastVal = false;
-    _compliVal = false;
-    _autoVal = false;
-    _nocVal = false;
-    _expVal = false;
-    _triVal = newValue!;
-    notifyListeners();
-  }
-
-  void compliChecked(bool? newValue) {
-    setFalse();
-    _coastVal = false;
-    _triVal = false;
-    _autoVal = false;
-    _nocVal = false;
-    _expVal = false;
-    _compliVal = newValue!;
-    notifyListeners();
-  }
-
-  void autoChecked(bool? newValue) {
-    setFalse();
-    _coastVal = false;
-    _triVal = false;
-    _compliVal = false;
-    _nocVal = false;
-    _expVal = false;
-    _autoVal = newValue!;
-    notifyListeners();
-  }
-
-  void nocChecked(bool? newValue) {
-    setFalse();
-    _coastVal = false;
-    _triVal = false;
-    _compliVal = false;
-    _autoVal = false;
-    _expVal = false;
-    _nocVal = newValue!;
-    notifyListeners();
-  }
-
-  void expChecked(bool? newValue) {
-    setFalse();
-    _coastVal = false;
-    _triVal = false;
-    _compliVal = false;
-    _autoVal = false;
-    _nocVal = false;
-    _expVal = newValue!;
-    notifyListeners();
   }
 
   String date() {
@@ -294,40 +203,8 @@ class ThemeViewModel extends BaseViewModel {
     return datee;
   }
 
-  void versatileThemeChecked(bool? newValue) {
-    if (_versatileChecked) {
-      return;
-    }
-    _lightChecked = false;
-    _darkChecked = false;
-    _aubergineChecked = false;
-    _versatileChecked = newValue!;
-    setTheme(themes[3]);
-    notifyListeners();
-  }
-
-  void aubergineThemeChecked(bool? newValue) {
-    if (_aubergineChecked) {
-      return;
-    }
-    _lightChecked = false;
-    _darkChecked = false;
-    _versatileChecked = false;
-    _aubergineChecked = newValue!;
-    setTheme(themes[2]);
-    notifyListeners();
-  }
-
-  void setFalse() {
-    _lightChecked = false;
-    _darkChecked = false;
-    _versatileChecked = false;
-    _aubergineChecked = false;
-    notifyListeners();
-  }
-
   List<ThemeModel> get themes => List<ThemeModel>.generate(
-        4,
+        12,
         (index) => ThemeModel(index: index, title: _getTitleForIndex(index)),
       );
 
@@ -341,6 +218,22 @@ class ThemeViewModel extends BaseViewModel {
         return "aubergine";
       case 3:
         return 'versatile';
+      case 4:
+        return "aubergine";
+      case 5:
+        return "aubergine";
+      case 6:
+        return "coast";
+      case 7:
+        return "triadic";
+      case 8:
+        return "complimentary";
+      case 9:
+        return "automatic";
+      case 10:
+        return "nocture";
+      case 11:
+        return "expensive";
     }
     return "No Theme for index";
   }

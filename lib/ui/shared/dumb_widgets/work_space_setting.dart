@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class WorkSpaceSetting
- extends StatelessWidget {
+class WorkSpaceSetting extends StatelessWidget {
   final String? workspaceTitle;
 
   const WorkSpaceSetting({Key? key, this.workspaceTitle}) : super(key: key);
@@ -11,6 +10,7 @@ class WorkSpaceSetting
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).accentColor,
       width: 200.w,
       child: Row(
         children: [
@@ -26,4 +26,3 @@ class WorkSpaceSetting
     );
   }
 }
-

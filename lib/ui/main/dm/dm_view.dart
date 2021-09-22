@@ -61,18 +61,18 @@ class DmView extends StatelessWidget {
                           child: Container(
                             color: kcBackgroundColor2,
                             child: Scrollbar(
-                        controller: _rightSideBarController,
-                        isAlwaysShown: true,
-                        scrollbarOrientation: ScrollbarOrientation.right,
-                        thickness: 10,
-                        showTrackOnHover: true,
-                        child: ListView(
-                          physics: AlwaysScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          controller: _rightSideBarController,
-                          children: [
+                              controller: _rightSideBarController,
+                              isAlwaysShown: true,
+                              scrollbarOrientation: ScrollbarOrientation.right,
+                              thickness: 10,
+                              showTrackOnHover: true,
+                              child: ListView(
+                                physics: AlwaysScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                controller: _rightSideBarController,
+                                children: [
                                   NewDmView(
-                                    userName: "userName",
+                                    userName: model.user.name!,
                                   ),
                                   model.messages.isNotEmpty
                                       ? DateWidget(
@@ -108,12 +108,9 @@ class DmView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
+                    )))),
+                    Align(
+                      alignment: Alignment.bottomCenter,
                       child: SendMessageInputField(
                         sendMessage: (message) {
                           if (message.isNotEmpty) {
