@@ -35,6 +35,21 @@ class ProfileEditView extends StatelessWidget {
     }
   }
 
+  Future cropUploadedFile() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform
+          .pickFiles(allowMultiple: false, type: FileType.image);
+
+      if (result != null) {
+        File file = File(result.files.single.path!);
+      } else {
+        // User canceled the picker
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileEditViewModel>.reactive(
@@ -111,7 +126,7 @@ class ProfileEditView extends StatelessWidget {
                                       verticalSpaceRegular,
                                       Text(
                                         "Custom rules for this workspace:",
-                                        style: subtitle2,
+                                        style: subtitle1,
                                       ),
                                       verticalSpaceRegular,
                                       Text(
@@ -187,8 +202,8 @@ class ProfileEditView extends StatelessWidget {
                                                     Radius.circular(10),
                                                   ),
                                                   image: DecorationImage(
-                                                    image:
-                                                        FileImage(imagefile!),
+                                                    image: FileImage(
+                                                        model.imagefile!),
                                                   )),
                                             )
                                           : Container(
@@ -250,7 +265,7 @@ class ProfileEditView extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         "Cancel",
-                        style: authBtnStyle,
+                        style: subtitle1,
                       ),
                     ),
                     horizontalSpaceSmall,

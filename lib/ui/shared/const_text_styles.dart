@@ -106,10 +106,8 @@ final headline6 = TextStyle(
   fontFamily: 'Lato',
 );
 
-TextStyle headline7 = TextStyle(
-    fontSize: 18.sp,
-    fontWeight: FontWeight.w600,
-    fontFamily: 'Lato');
+TextStyle headline7 =
+    TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
 
 final headline3 = TextStyle(
   fontSize: 35.sp,
@@ -119,7 +117,14 @@ final headline3 = TextStyle(
 
 final subtitle2 = TextStyle(
   fontSize: 18.sp,
-  fontWeight: FontWeight.w400,
+  fontWeight: FontWeight.w600,
+  fontFamily: 'Lato',
+);
+
+final subtitle1 = TextStyle(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
   fontFamily: 'Lato',
 );
 

@@ -7,6 +7,8 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/profile/profile_upload_image/profile_upload_view.dart';
 
 class ProfileDropdownView extends StatelessWidget {
   ProfileDropdownView({Key? key}) : super(key: key);
@@ -58,6 +60,17 @@ class ProfileDropdownView extends StatelessWidget {
           _toggleDropdown(
             context: context,
           );
+          // setState(() {
+          //   _toggleDropdown(close: true);
+          //   // if (model.isDropped) {
+          //   //   model.floatingDropdown.remove();
+          //   // } else {
+          //   //   model.floatingDropdown = model.createFloatingDropdown();
+          //   //   Overlay.of(context)!.insert(model.floatingDropdown);
+          //   // }
+
+          //   // model.isDropped = !model.isDropped;
+          // });
         },
         child: Container(
           width: 40.w,
@@ -69,16 +82,15 @@ class ProfileDropdownView extends StatelessWidget {
     );
   }
 
-  void _toggleDropdown({bool close = false, required BuildContext context}) {
+  void _toggleDropdown({bool close = false, BuildContext? context}) {
     final model = ProfileDropdownViewModel();
     if (model.isDropped || close) {
       this.floatingDropdown.remove();
       model.setIsDropped(false);
     } else {
-      findDropdownData();
       this.floatingDropdown = this.createFloatingDropdown();
-      Overlay.of(context)!.insert(this.floatingDropdown);
-      model.setIsDropped(false);
+      Overlay.of(context!)!.insert(this.floatingDropdown);
+      model.setIsDropped(true);
     }
   }
 }
