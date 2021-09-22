@@ -1,6 +1,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
+
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/models/channels_model/channels_model.dart';
 import 'package:zc_desktop_flutter/services/search_service/channel_service.dart';
@@ -8,7 +9,7 @@ import 'package:zc_desktop_flutter/services/search_service/channel_service.dart'
 class SearchModalViewmodel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _availableChannels = locator<ChannelService>();
-
+  
   String? _text;
   String? _hintText;
   String? _textFieldText;
@@ -82,6 +83,7 @@ class SearchModalViewmodel extends BaseViewModel {
     _navigationService.popRepeated(0);
   }
 
+
   void onChange(String value) {
     textFieldActivated = true;
     getSuggestions(value);
@@ -102,5 +104,6 @@ class SearchModalViewmodel extends BaseViewModel {
     _channels = chanList;
 
     notifyListeners();
+
   }
 }

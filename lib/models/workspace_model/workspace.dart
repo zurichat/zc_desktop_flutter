@@ -1,3 +1,5 @@
+import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+
 class Workspace {
   int? id;
   String? name;
@@ -10,20 +12,19 @@ class Workspace {
   int? currentChannel = 0;
   int? currentDM = -1;
 
-  Workspace(
-      {this.id,
-      this.name,
-      this.url,
-      this.logo,
-      this.user,
-      this.users,
-      this.channels,
-      this.dms,
-      this.currentChannel,
-      this.currentDM});
+  Workspace({this.id,
+    this.name,
+    this.url,
+    this.logo,
+    this.user,
+    this.users,
+    this.channels,
+    this.dms,
+    this.currentChannel,
+    this.currentDM});
 }
 
-class User {
+/*class User {
   int? id;
   String? name;
   String? status;
@@ -38,7 +39,7 @@ class User {
       this.description,
       this.avatar,
       this.online});
-}
+}*/
 
 class Channel extends BaseChat {
   String? name;
