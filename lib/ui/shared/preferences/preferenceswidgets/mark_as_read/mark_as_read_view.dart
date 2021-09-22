@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_checkbox.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/mark_as_read/mark_as_read_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/mark_as_read/mark_as_read_viewModel.dart';
 
 class MarkAsRead extends StatelessWidget {
   const MarkAsRead({Key? key}) : super(key: key);
@@ -55,13 +55,14 @@ class ViewChannel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(model.msg),
+        Text(model.msg, style: preferenceStyleBold),
         verticalSpaceRegular,
-        Text(model.boldMsg, style: headline6.copyWith(fontSize: 15.sp)),
+        verticalSpaceRegular,
+        Text(model.boldMsg, style: preferenceStyleBold),
         verticalSpaceRegular,
         ViewChannelOptions(model: model),
         verticalSpaceRegular,
-        Text(model.sBoldMsg, style: headline6.copyWith(fontSize: 15.sp)),
+        Text(model.sBoldMsg, style: preferenceStyleBold),
         verticalSpaceRegular,
         ViewMarkAll(model: model),
         // Text('Keyboard Shortcuts', style: headline6.copyWith(fontSize: 15.sp)),
@@ -80,7 +81,7 @@ class ViewChannelOptions extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       ListTile(
         title: Text('Start me where I left off, and mark the channel read',
-            style: headline6.copyWith(fontSize: 14.sp)),
+            style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option1,
           groupValue: model.upButtonsChoice,
@@ -92,7 +93,7 @@ class ViewChannelOptions extends StatelessWidget {
       ),
       ListTile(
         title: Text('Start me at the newest message, and mark the channel read',
-            style: headline6.copyWith(fontSize: 14.sp)),
+            style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option2,
           groupValue: model.upButtonsChoice,
@@ -105,7 +106,7 @@ class ViewChannelOptions extends StatelessWidget {
       ListTile(
         title: Text(
             'Start me at the newest message, but leave unseen messages unread',
-            style: headline6.copyWith(fontSize: 14.sp)),
+            style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option3,
           groupValue: model.upButtonsChoice,
@@ -126,21 +127,22 @@ class ViewMarkAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      ZcCheckBox(
-        value: model.markAll,
-        onChanged: (v) {
-          model.setMarkAll = v;
-        },
-      ),
-      horizontalSpaceTiny,
-      Flexible(
-          child: Text(model.clickMarkAll,
-              style: headline6.copyWith(fontSize: 14.sp))),
-    ]);
+    return Row(
+      children: [
+        ZcCheckBox(
+            value: model.animateValue,
+            onChanged: (v) {
+              model.setAnimateValue = v;
+            }),
+        horizontalSpaceTiny,
+        Flexible(
+            child: Text('Prompt To confirm', style: preferenceStyleNormal)),
+      ],
+    );
   }
 }
 
+//keyboard Section
 class KeyBoardSettingsSection extends StatelessWidget {
   const KeyBoardSettingsSection({Key? key, required this.model})
       : super(key: key);
@@ -153,14 +155,11 @@ class KeyBoardSettingsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // key short cut setting
-          Text('Keyboard Shortcuts',
-              style: headline6.copyWith(fontSize: 15.sp)),
+          Text('Keyboard Shortcuts', style: preferenceStyleBold),
           verticalSpaceRegular,
           Row(
             children: [
-              Text(model.fShortCutMsg,
-                  style: headline6.copyWith(fontSize: 15.sp)),
+              Text(model.fShortCutMsg, style: preferenceStyleNormal),
               horizontalSpaceTiny,
               ShortCuts().esc(),
               horizontalSpaceTiny,
@@ -169,28 +168,29 @@ class KeyBoardSettingsSection extends StatelessWidget {
           verticalSpaceSmall,
           Row(
             children: [
-              Text(model.sShortCutMsg,
-                  style: headline6.copyWith(fontSize: 15.sp)),
+              Text(model.sShortCutMsg, style: preferenceStyleNormal),
               horizontalSpaceTiny,
               ShortCuts().shift(),
-              verticalSpaceTiny,
+              horizontalSpaceTiny,
               ShortCuts().esc(),
               horizontalSpaceTiny,
             ],
           ),
+          verticalSpaceSmall,
           Row(
             children: [
-              Text(model.tShortCutMsg,
-                  style: headline6.copyWith(fontSize: 15.sp)),
+              Text(model.tShortCutMsg, style: preferenceStyleNormal),
               horizontalSpaceTiny,
               ShortCuts().alt(),
               horizontalSpaceTiny,
             ],
           ),
+          verticalSpaceSmall,
           Row(
             children: [
+              verticalSpaceTiny,
               Text('To view the full list of keyboard shortcuts, just press',
-                  style: headline6.copyWith(fontSize: 15.sp)),
+                  style: preferenceStyleNormal),
               horizontalSpaceTiny,
               ShortCuts().ctrl(),
               horizontalSpaceTiny,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SVGAssetPaths {
   static final channelsListIcon = "assets/icons/hash_inactive.svg";
-  static final dropDownOpenIcon = "assets/icons/vectordown_icon.svg";
+  static final dropDownOpenIcon = "assets/icons/drop_down_open.svg";
   static final dropDownClosedIcon = "assets/icons/drop_down_closed.svg";
   static final channelDropDown = "assets/icons/channel_drop_down.svg";
   static final sortIcon = "assets/icons/sort.svg";
@@ -155,7 +155,7 @@ class ShortCuts {
     return contain(
       child: Center(
         child: Text('ESC'),
-      )
+      ),
       
     );
   }

@@ -1,17 +1,45 @@
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {
   final log = getLogger("DmViewModel");
+  final _dmService = locator<DMService>();
+  User _user = User(name: "");
+
+  void setup() {
+    runTask();
+  }
+
+  void runTask() async {
+    _user = await runBusyFuture(_dmService.getUser());
+    log.i(_user.name);
+  }
+
+  String? getChatUserName() {
+    if (_user.name!.isNotEmpty) {
+      return _user.name;
+    }
+
+    return 'No data';
+  }
+
+  User get user => _user;
   final DateTime currentMessageTime = DateTime.now();
   List<Message> _messages = [];
+
   List<Message> get messages => _messages;
   bool _onMessageTileHover = false;
+
   bool get onMessageTileHover => _onMessageTileHover;
   bool _onHoverActionsHovered = false;
+
   bool get onHoverActionsHover => _onHoverActionsHovered;
   int _onMessageHoveredIndex = 0;
+
   int get onMessageHoveredIndex => _onMessageHoveredIndex;
 
   String _hoverAction = '';
