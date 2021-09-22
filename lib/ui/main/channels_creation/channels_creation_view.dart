@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_viewmodel.dart';
@@ -9,12 +11,17 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_create_channel_
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 
-class ChannelsCreationView extends StatelessWidget {
-  const ChannelsCreationView({Key? key}) : super(key: key);
-
+class ChannelsCreationView extends HookWidget {
+  // const ChannelsCreationView({Key? key}) : super(key: key);
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey();
+    
+    final nameController = useTextEditingController();
+    final descriptionController = useTextEditingController();
+
+
     return ViewModelBuilder<ChannelsCreationViewModel>.reactive(
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
@@ -75,6 +82,7 @@ class ChannelsCreationView extends StatelessWidget {
                         },
                         borderColor: model.channelName == '' ? lightIconColor : kcPrimaryColor,
                         borderFocusColor: model.channelName == '' ? lightIconColor : kcPrimaryColor,
+                        controller: nameController,
                         errorText: model.channelNameError,
                         keyboardType: TextInputType.name,
                         hintPlaceHolder: '',
@@ -96,6 +104,7 @@ class ChannelsCreationView extends StatelessWidget {
                         },
                         borderColor: model.channelDescription == '' ? lightIconColor : kcPrimaryColor,
                         borderFocusColor: model.channelDescription == '' ? lightIconColor : kcPrimaryColor,
+                        controller: descriptionController,
                         errorText: model.channelDescriptionError,
                         keyboardType: TextInputType.text,
                         hintPlaceHolder: '',
@@ -142,7 +151,18 @@ class ChannelsCreationView extends StatelessWidget {
                             backgroundColor: MaterialStateProperty.all(
                                 (model.channelName == '' && model.channelDescription == '') ? kcCreateChannelColor : kcPrimaryColor,)),
                         onPressed: () async {
-                          await model.validateAndCreateChannel();
+                          // await model.validateAndCreateChannel();
+
+                          if (!_formKey.currentState!.validate())
+                                return;
+
+                          await model.createchannel(
+                            name: nameController.text,
+                            owner: nameController.text,
+                            description: descriptionController.text,
+                            private: false,
+                          );
+
                         },
                         child: !model.isBusy
                             ? Padding(

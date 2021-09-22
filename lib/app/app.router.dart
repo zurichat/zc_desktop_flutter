@@ -18,6 +18,7 @@ import '../ui/auth/login_page/splash_view.dart';
 import '../ui/auth/reset_password_page/reset_password_view.dart';
 import '../ui/auth/sign_up_page/sign_up_view.dart';
 import '../ui/auth/success_page/success_view.dart';
+import '../ui/main/channels_creation/channels_creation_view.dart';
 import '../ui/main/channels_display/channels_display_view.dart';
 import '../ui/main/channels_page/channels_view.dart';
 import '../ui/main/dm/dm_view.dart';
@@ -44,6 +45,8 @@ class Routes {
   static const String createWorkspaceStage2 = '/create-workspace-stage2';
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
   static const String channelsDisplayView = '/channels-display-view';
+
+  static const String channelsCreationView = '/channels-creation-view';
   static const String workspaceView = '/';
   static const all = <String>{
     loginView,
@@ -61,6 +64,7 @@ class Routes {
     createWorkspaceStage2,
     createWorkspaceStage3,
     channelsDisplayView,
+    channelsCreationView,
     workspaceView,
   };
 }
@@ -84,6 +88,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.createWorkspaceStage2, page: CreateWorkspaceStage2),
     RouteDef(Routes.createWorkspaceStage3, page: CreateWorkspaceStage3),
     RouteDef(Routes.channelsDisplayView, page: ChannelsDisplayView),
+    RouteDef(Routes.channelsCreationView, page: ChannelsCreationView),
     RouteDef(
       Routes.workspaceView,
       page: WorkspaceView,
@@ -183,8 +188,14 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    WorkspaceView: (data) {
+    ChannelsCreationView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => ChannelsCreationView(),
+        settings: data,
+      );
+    },
+    WorkspaceView: (data) {
+      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
         builder: (context) => const WorkspaceView(),
         settings: data,
       );
@@ -212,13 +223,13 @@ class WorkspaceViewRouter extends RouterBase {
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
     ChannelsView: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
+      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
         builder: (context) => ChannelsView(),
         settings: data,
       );
     },
     DmView: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
+      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
         builder: (context) => const DmView(),
         settings: data,
       );
