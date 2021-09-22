@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
 
-class ChannelsCreationViewModel extends BaseViewModel with Validator{
+class ChannelsCreationViewModel extends BaseViewModel with Validator {
   final _navigator = locator<NavigationService>();
   // var _currentPageIndex = 0;
 
@@ -25,8 +25,10 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
   final _auth = locator<AuthService>();
 
   String _createChannel = 'Create a channel';
-  String _channelTextOne = 'Channels are where your team communicates. They’re best ';
-  String _channelTextTwo = 'when organized around a topic - #marketing, for example.';
+  String _channelTextOne =
+      'Channels are where your team communicates. They’re best ';
+  String _channelTextTwo =
+      'when organized around a topic - #marketing, for example.';
   String _channelTextThree = 'Name';
   String _channelTextFour = 'Description ';
   String _channelTextFive = '(optional)';
@@ -55,7 +57,6 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
 
   var _channelName = '';
   var _channelDescription = '';
-
 
   String get createChannel => _createChannel;
   String get channelTextOne => _channelTextOne;
@@ -113,7 +114,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
     _isBusy = !_isBusy;
     notifyListeners();
   }
-  
+
   void setIsSwitched(bool val) {
     _isSwitched = val;
     notifyListeners();
@@ -163,14 +164,14 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
     }
     try {
       _setIsBusy();
-      await _auth.signUpWithCred(
-          email: _channelName,
-          password: _channelName,);
+      await _auth.signup(
+        email: _channelName,
+        password: _channelName,
+      );
       _setIsCreateChannelSuccessful();
     } catch (e) {
       if (e.toString().contains('SocketException')) {
-        setErrorMessage(
-            'Please check your internet and try again!');
+        setErrorMessage('Please check your internet and try again!');
       } else {
         setErrorMessage('The Channel is Already In Use');
       }
