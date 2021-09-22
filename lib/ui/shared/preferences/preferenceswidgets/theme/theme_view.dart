@@ -520,22 +520,17 @@ class ClassicThemeWidgetLight extends StatelessWidget {
             leading: Image(image: AssetImage(model.logoLight)),
             title: Row(children: [
               Text(model.title,
-                  style: kBodyTextStyle.copyWith(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black)),
+                  style: preferenceStyleBold),
               SizedBox(
                 width: 10,
               ),
               Text(model.date(),
-                  style: kBodyTextStyle.copyWith(
-                      fontSize: 14.sp, color: Colors.black))
+                  style: preferenceStyleNormal)
             ]),
             subtitle: Container(
                 margin: EdgeInsets.only(top: 10),
                 child: Text('Look nice today',
-                    style: kBodyTextStyle.copyWith(
-                        fontSize: 14.sp, color: Colors.black))),
+                    style: preferenceStyleNormal)),
           ),
           Spacer(),
           BuildRadio(
@@ -588,10 +583,7 @@ class BottomContainerWidget extends StatelessWidget {
               )),
           horizontalSpaceSmall,
           Text(txt,
-              style: kBodyTextStyle.copyWith(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black))
+              style:preferenceStyleBold)
         ]));
   }
 }
@@ -636,10 +628,7 @@ class BuildRadio extends StatelessWidget {
             horizontalSpaceSmall,
             Expanded(
                 child: Text(txt,
-                    style: kBodyTextStyle.copyWith(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)))
+                    style: preferenceStyleBold))
           ],
         ));
   }

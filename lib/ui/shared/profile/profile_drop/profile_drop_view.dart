@@ -43,7 +43,7 @@ class ProfileDropdownView extends StatelessWidget {
     });
   }
 
-  void findDropdownData() {
+void findDropdownData() {
     RenderBox? renderBox =
         actionKey.currentContext!.findRenderObject() as RenderBox;
     height = renderBox.size.height;
@@ -188,7 +188,7 @@ class DropDownItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         text,
-                        style: subtitle2,
+                        style: preferenceStyleNormal,
                       ),
                       Spacer(),
                       Icon(
@@ -227,7 +227,7 @@ class ProfilePicture extends StatelessWidget {
               children: [
                 Text(
                   "Bernice_Perp",
-                  style: kSubHeadingTextStyle,
+                  style: preferenceStyleNormal,
                 ),
                 verticalSpaceTiny,
                 Row(
@@ -241,7 +241,7 @@ class ProfilePicture extends StatelessWidget {
                     ),
                     Text(
                       "Away",
-                      style: subtitle2,
+                      style: preferenceStyleNormal,
                     )
                   ],
                 )
@@ -253,3 +253,13 @@ class ProfilePicture extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+ 

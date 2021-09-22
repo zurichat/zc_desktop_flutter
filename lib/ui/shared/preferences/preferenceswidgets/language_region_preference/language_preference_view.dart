@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 
 import '../../../const_app_colors.dart';
 import '../../../const_ui_helpers.dart';
@@ -14,7 +15,7 @@ class LanguagePreference extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     final _rightSideBarController = ScrollController();
 
     return ViewModelBuilder<LanguagePreferenceViewModel>.reactive(
@@ -27,11 +28,7 @@ class LanguagePreference extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(model.preferencetitles[0],
-                  style: TextStyle(
-                      color: headerColor,
-                      fontSize: 16.sp,
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.bold)),
+                  style: preferenceStyleBold),
               verticalSpaceTiny,
               buildDropDown(
                   kcBackgroundColor2, model.languages, model.dropDownLanguage,
@@ -43,12 +40,7 @@ class LanguagePreference extends StatelessWidget {
                 width: 304.w,
                 child: Text(
                   model.subHeadings[0],
-                  style: TextStyle(
-                    fontFamily: 'Lato',
-                    color: leftNavBarColor,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: preferenceStyleNormal,
                 ),
               ),
 
@@ -56,11 +48,7 @@ class LanguagePreference extends StatelessWidget {
 
               Text(
                 model.preferencetitles[1],
-                style: TextStyle(
-                    color: headerColor,
-                    fontSize: 16.sp,
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.bold),
+                style: preferenceStyleBold,
               ),
 
               ZcCheckBox2(
@@ -82,10 +70,7 @@ class LanguagePreference extends StatelessWidget {
                 width: 400.w,
                 child: Text(
                   model.subHeadings[1],
-                  style: TextStyle(
-                    color: Color(0xFF999999),
-                    fontSize: 15,
-                  ),
+                  style: preferenceStyleNormal,
                 ),
               ),
 
@@ -93,11 +78,7 @@ class LanguagePreference extends StatelessWidget {
               verticalSpaceMedium,
               Text(
                 model.preferencetitles[2],
-                style: TextStyle(
-                    color: headerColor,
-                    fontSize: 16.sp,
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.bold),
+                style: preferenceStyleBold,
               ),
               verticalSpaceTiny,
 
@@ -110,11 +91,7 @@ class LanguagePreference extends StatelessWidget {
               verticalSpaceRegular,
               Text(
                 model.preferencetitles[3],
-                style: TextStyle(
-                    fontSize: 15.sp,
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.w500,
-                    color: headerColor),
+                style: preferenceStyleNormal,
               ),
               ZcCheckBox2(
                   value: model.checkBox2,
@@ -125,7 +102,7 @@ class LanguagePreference extends StatelessWidget {
 
               Text(
                 "AppLocalizations.of(context)!.language",
-                style: TextStyle(color: Colors.black),
+                style: preferenceStyleNormal,
               )
             ],
           ),
@@ -163,11 +140,7 @@ buildDropDown(
           items: items
               .map<DropdownMenuItem<String>>((String value) => DropdownMenuItem(
                     child: Text(value,
-                        style: TextStyle(
-                            fontSize: 14.sp,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.w400,
-                            color: headerColor)),
+                        style: preferenceStyleNormal),
                     value: value,
                   ))
               .toList()),
@@ -201,12 +174,14 @@ class ZcCheckBox2 extends StatelessWidget {
         horizontalSpaceVeryTiny,
         Flexible(
             child: Text(txt!,
-                style: TextStyle(
-                    fontSize: 15.sp,
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.w400,
-                    color: bodyColor))),
+                style: preferenceStyleNormal)),
       ],
     );
   }
 }
+
+
+
+
+
+  
