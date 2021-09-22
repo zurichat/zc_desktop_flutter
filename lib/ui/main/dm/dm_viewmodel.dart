@@ -65,7 +65,7 @@ class DmViewModel extends BaseViewModel {
         reactions: [
           Reaction(count: 3, id: 1, reaction: '😂'),
           Reaction(count: 4, id: 2, reaction: '😍'),
-          Reaction(count: 20, id: 3, reaction: '👌'),
+          Reaction(count: 20, id: 1, reaction: '👌'),
         ],
         message: message,
         time: DateFormat('hh:mm a').format(DateTime.now()).toString(),
