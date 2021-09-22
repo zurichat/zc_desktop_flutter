@@ -11,10 +11,9 @@ class WorkSpaceTitle extends StatelessWidget {
       width: 200.w,
       child: Row(
         children: [
-          Text('# Announcement',
-              style: TextStyle(
-                color: Colors.white,
-              )),
+          Text(
+            '# Announcement',
+          ),
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: SvgPicture.asset('assets/icons/vectordown_icon.svg'))
