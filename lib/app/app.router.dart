@@ -14,6 +14,7 @@ import '../ui/auth/change_password_page/change_password_view.dart';
 import '../ui/auth/check_email_page/check_email_view.dart';
 import '../ui/auth/forgot_password_page/forgot_password_view.dart';
 import '../ui/auth/login_page/login_view.dart';
+import '../ui/auth/login_page/splash_view.dart';
 import '../ui/auth/reset_password_page/reset_password_view.dart';
 import '../ui/auth/sign_up_page/sign_up_view.dart';
 import '../ui/auth/success_page/success_view.dart';
@@ -30,7 +31,8 @@ import '../ui/workspace_registeration_screen/create_workspace_stage3.dart';
 class Routes {
   static const String homeView = '/home-view';
   static const String workspaceView = '/workspace-view';
-  static const String loginView = '/';
+  static const String loginView = '/login-view';
+  static const String splashView = '/';
   static const String startUpView = '/start-up-view';
   static const String signUpView = '/sign-up-view';
   static const String forgotPasswordView = '/forgot-password-view';
@@ -48,6 +50,7 @@ class Routes {
     homeView,
     workspaceView,
     loginView,
+    splashView,
     startUpView,
     signUpView,
     forgotPasswordView,
@@ -71,6 +74,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.workspaceView, page: WorkspaceView),
     RouteDef(Routes.loginView, page: LoginView),
+    RouteDef(Routes.splashView, page: SplashView),
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.signUpView, page: SignUpView),
     RouteDef(Routes.forgotPasswordView, page: ForgotPasswordView),
@@ -103,6 +107,12 @@ class StackedRouter extends RouterBase {
     LoginView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => LoginView(),
+        settings: data,
+      );
+    },
+    SplashView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const SplashView(),
         settings: data,
       );
     },
