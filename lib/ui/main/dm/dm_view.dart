@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/dm_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/hover_actions_view.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/new_dm_view.dart';
@@ -76,7 +77,7 @@ class DmView extends StatelessWidget {
                                   model.messages.isNotEmpty
                                       ? DateWidget(
                                           date:
-                                              model.formatDate(DateTime.now()))
+                                              model.formatDate(model.messages[0].createdAt))
                                       : SizedBox(),
                                   ListView.builder(
                                       itemCount: model.messages.length,
@@ -91,21 +92,8 @@ class DmView extends StatelessWidget {
                                               MessageTile(
                                                 model: model,
                                                 messageIndex: index,
-                                                reactions: model.messages
-                                                    .elementAt(index)
-                                                    .reactions,
-                                                userDisplayName: model.messages
-                                                    .elementAt(index)
-                                                    .userDisplayName,
-                                                userProfileUrl: model.messages
-                                                    .elementAt(index)
-                                                    .userProfileUrl,
-                                                time: model.messages
-                                                    .elementAt(index)
-                                                    .time,
                                                 message: model.messages
-                                                    .elementAt(index)
-                                                    .message,
+                                                    .elementAt(index),
                                               ),
                                             ],
                                     );
@@ -113,21 +101,8 @@ class DmView extends StatelessWidget {
                                   return MessageTile(
                                     model: model,
                                     messageIndex: index,
-                                    reactions: model.messages
-                                        .elementAt(index)
-                                        .reactions,
-                                    userDisplayName: model.messages
-                                        .elementAt(index)
-                                        .userDisplayName,
-                                    userProfileUrl: model.messages
-                                        .elementAt(index)
-                                        .userProfileUrl,
-                                    time: model.messages
-                                        .elementAt(index)
-                                        .time,
                                     message: model.messages
-                                        .elementAt(index)
-                                        .message,
+                                                    .elementAt(index),
                                   );
                                 }),
                           ],
@@ -154,22 +129,14 @@ class DmView extends StatelessWidget {
 }
 
 class MessageTile extends StatelessWidget {
-  final String userProfileUrl;
-  final String userDisplayName;
-  final String message;
-  final String time;
+  final Results message;
   final int messageIndex;
   final DmViewModel model;
-  final List<Reaction> reactions;
 
   MessageTile(
       {required this.message,
-      required this.time,
       required this.messageIndex,
-      required this.model,
-      required this.reactions,
-      required this.userDisplayName,
-      required this.userProfileUrl});
+      required this.model,});
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +175,7 @@ class MessageTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.r),
                         image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: NetworkImage(userProfileUrl, scale: 5),
+                          image: NetworkImage(model.getUser(message.senderId).displayName, scale: 5),
                         )),
                   ),
                   SizedBox(
@@ -225,23 +192,21 @@ class MessageTile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                userDisplayName,
+                              Text(model.getUser(message.senderId).displayName,
                                 style: kHeading1TextStyle.copyWith(
                                     fontSize: 15.sp),
                               ),
                               SizedBox(
                                 width: 10.w,
                               ),
-                              Text(
-                                time,
+                              Text(model.formatDate(model.getUser(message.senderId).createdAt),
                                 style: subtitle2.copyWith(color: timeColor),
                               )
                             ],
                           ),
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
-                            child: Text(message),
+                            child: Text(message.message),
                           ),
                           Padding(
                             padding: EdgeInsets.all(8),
@@ -253,10 +218,10 @@ class MessageTile extends StatelessWidget {
                                         crossAxisSpacing: 15,
                                         mainAxisSpacing: 20),
                                 shrinkWrap: true,
-                                itemCount: reactions.length + 1,
+                                itemCount: message.reactions.length + 1,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  if (index == reactions.length) {
+                                  if (index == message.reactions.length) {
                                     return Container(
                                       padding: EdgeInsets.all(2),
                                       decoration: BoxDecoration(
@@ -283,11 +248,9 @@ class MessageTile extends StatelessWidget {
                                             messageIndex, index);
                                       },
                                       model: model,
-                                      isReacted:
-                                          reactions.elementAt(index).isReacted,
-                                      emoji:
-                                          reactions.elementAt(index).reaction,
-                                      count: reactions.elementAt(index).count,
+                                      isReacted:false,
+                                      emoji:'',
+                                      count: 0,
                                     );
                                   }
                                 }),

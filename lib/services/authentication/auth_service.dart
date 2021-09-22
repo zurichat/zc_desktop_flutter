@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:stacked/stacked_annotations.dart';
 
 import '../../app/app.locator.dart';
@@ -47,7 +49,7 @@ class AuthService {
 
     authResponse = AuthResponse.fromMap(response['data']);
 
-    _localStorageService.saveToDisk(localAuthResponseKey, response['data']);
+    _localStorageService.saveToDisk(localAuthResponseKey,jsonEncode(response['data']));
   }
 
   Future<void> getResetCode(String email) async {

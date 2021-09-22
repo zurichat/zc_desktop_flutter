@@ -1,14 +1,20 @@
+import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
 import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+import 'package:zc_desktop_flutter/models/user.dart' as LoggedInUser;
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {
   final log = getLogger("DmViewModel");
   final _dmService = locator<DMService>();
   User _user = User(name: "");
+  late LoggedInUser.User _currentLoggedInUser;
+  String? _roomId = '';
+  List<Results> _messages = [];
 
   void setup() {
     runTask();
@@ -16,7 +22,13 @@ class DmViewModel extends BaseViewModel {
 
   void runTask() async {
     _user = await runBusyFuture(_dmService.getUser());
+    _currentLoggedInUser = _dmService.getCurrentLoggedInUser()!;
+    _roomId = await _dmService.createRoom();
+    _dmService.getRoomInfo(_roomId);
+    _messages = await _dmService.fetchRoomMessages(_roomId);
+    //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
     log.i(_user.name);
+    notifyListeners();
   }
 
   String? getChatUserName() {
@@ -28,10 +40,11 @@ class DmViewModel extends BaseViewModel {
   }
 
   User get user => _user;
+  String get roomId => _roomId!;
+  LoggedInUser.User get currentLoggedInUser => _currentLoggedInUser;
   final DateTime currentMessageTime = DateTime.now();
-  List<Message> _messages = [];
 
-  List<Message> get messages => _messages;
+  List<Results> get messages => _messages;
   bool _onMessageTileHover = false;
 
   bool get onMessageTileHover => _onMessageTileHover;
@@ -60,23 +73,35 @@ class DmViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void sendMessage(String message) {
-    _messages.add(Message(
-        reactions: [
-          Reaction(count: 3, id: 1, reaction: '😂'),
-          Reaction(count: 4, id: 2, reaction: '😍'),
-          Reaction(count: 20, id: 3, reaction: '👌'),
-        ],
-        message: message,
-        time: DateFormat('hh:mm a').format(DateTime.now()).toString(),
-        userDisplayName: 'Dennis',
-        userProfileUrl:
-            'https://gravatar.com/avatar/3cf766c59c42f3bdb00bdc874a5a55e3?s=200&d=retro&r=g'));
+  Future<void> sendMessage(String message) async {
+    _messages.add(Results(
+      reactions: [],
+      id: '',
+      createdAt: '',
+      threads: [],
+      media: [],
+      pinned: false,
+      senderId: '1',
+      message: message,
+      savedBy: [],
+      read: true,
+      roomId: _roomId!,
+    ));
+    await _dmService.sendMessage(_roomId, '1', message);
+
     notifyListeners();
   }
 
+  LoggedInUser.User getUser(var senderId) {
+    if (_currentLoggedInUser.id == senderId) {
+      return _currentLoggedInUser;
+    } else {
+      return _currentLoggedInUser; //check this functionality
+    }
+  }
+
   void reactToMessage(int messageIndex, int reactionIndex) {
-    if (_messages
+    /* if (_messages
         .elementAt(messageIndex)
         .reactions
         .elementAt(reactionIndex)
@@ -122,18 +147,19 @@ class DmViewModel extends BaseViewModel {
               .reactions
               .elementAt(reactionIndex)
               .isReacted;
-    }
+    } */
     notifyListeners();
   }
 
-  String formatDate(DateTime dateToCheck) {
+  String formatDate(String dateToCheck) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = DateTime(now.year, now.month, now.day - 1);
     final tomorrow = DateTime(now.year, now.month, now.day + 1);
-
-    final aDate =
-        DateTime(dateToCheck.year, dateToCheck.month, dateToCheck.day);
+    final aDate = DateTime(
+        int.parse(DateFormat('yyyy').format(today)),
+        int.parse(DateFormat('MM').format(today)),
+        int.parse(DateFormat('dd').format(today)));
     if (aDate == today) {
       return 'Today ' +
           today.day.toString() +
@@ -142,35 +168,7 @@ class DmViewModel extends BaseViewModel {
     } else if (aDate == yesterday) {
       return 'Yesterday ' + yesterday.day.toString();
     } else {
-      return dateToCheck.month.toString() + dateToCheck.day.toString();
+      return DateFormat('MM').format(today) + DateFormat('dd').format(today);
     }
   }
-}
-
-class Message {
-  final String userProfileUrl;
-  final String userDisplayName;
-  final String message;
-  final String time;
-  final List<Reaction> reactions;
-
-  Message(
-      {required this.message,
-      required this.time,
-      required this.userDisplayName,
-      required this.userProfileUrl,
-      required this.reactions});
-}
-
-class Reaction {
-  int count;
-  final String reaction;
-  final int id;
-  bool isReacted;
-
-  Reaction(
-      {required this.count,
-      required this.id,
-      required this.reaction,
-      this.isReacted = false});
 }
