@@ -1,7 +1,15 @@
+import 'dart:convert';
+
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/models/preferences_model/messages_and_media/messages_and_media.dart';
+import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 import 'message_media_preferenceview.dart';
 
 class MessageMediaPreferenceViewModel extends BaseViewModel {
+  final _mmpStorageKey = 'mmpKey';
+  final _sharedPref = locator<LocalStorageService>();
+  var _msgmediapref = MessagesAndMedia();
   PrefTheme _themePref = PrefTheme.Clean;
   PrefTheme _namePref = PrefTheme.JustDisplayNames;
   get themepref => _themePref;
@@ -54,11 +62,13 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
 
   void setThemePref(Object? value) {
     _themePref = (value) as PrefTheme;
+    _msgmediapref = _msgmediapref.copyWith(theme: _themePref);
     notifyListeners();
   }
 
   void setNamePref(Object? value) {
     _namePref = (value) as PrefTheme;
+    _msgmediapref = _msgmediapref.copyWith(name: _namePref);
     notifyListeners();
   }
 
@@ -80,21 +90,25 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
 
   set setShowJumbomji(bool? val) {
     this._showJumbomji = val;
+    _msgmediapref = _msgmediapref.copyWith(showJumbomoji: (_showJumbomji) as bool);
     notifyListeners();
   }
 
   set setDiplayCurrentTyping(bool? val) {
     this._displayCurrentTyping = val;
+    _msgmediapref = _msgmediapref.copyWith(displayInfo: (val) as bool);
     notifyListeners();
   }
 
   set setTimeWith(bool? val) {
     this._timeWith = val;
+    _msgmediapref = _msgmediapref.copyWith(showTime: (val) as bool);
     notifyListeners();
   }
 
   set setDiplayColorSwatch(bool? val) {
     this._displayColorSwatches = val;
+    _msgmediapref = _msgmediapref.copyWith(disPlayColor: (val) as bool);
     notifyListeners();
   }
 
@@ -105,27 +119,32 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
   bool? get showTextpreview => _showTextpreview;
 
   set setimageFileUploadZuri(bool? val) {
+    _msgmediapref = _msgmediapref.copyWith(showUploadPreview: (val) as bool);
     this._imageFileUploadZuri = val;
     notifyListeners();
   }
 
   set setimageFileLinkedWebsite(bool? val) {
+    _msgmediapref = _msgmediapref.copyWith(showLinkPreview: (val) as bool);
     this._imageFileLinkedWebsite = val;
     notifyListeners();
   }
 
   set setevenLarger2Mb(bool? val) {
     this._evenLarger2Mb = val;
+    _msgmediapref = _msgmediapref.copyWith(largerThan2: (val) as bool);
     notifyListeners();
   }
 
   set setshowTextpreview(bool? val) {
     this._showTextpreview = val;
+    _msgmediapref = _msgmediapref.copyWith(displayInfo: (val) as bool);
     notifyListeners();
   }
 
   set setDisplayEmojiAsText(bool? val) {
     this._displayEmojiAsText = val;
+    _msgmediapref = _msgmediapref.copyWith(displayEmojiAsPlain: (val) as bool);
     notifyListeners();
   }
 
@@ -134,4 +153,28 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
     'Choose the default skin tone that will be used whenever you use certain emojis in reactions and messages.'
   ];
   List<String> get longText => _longText;
+
+  void saveToDisk() {
+    _sharedPref.saveToDisk(_mmpStorageKey, jsonEncode(_msgmediapref));
+  }
+
+  Future<void> fetchAndSetMsgSetting() async {
+    final result = await _sharedPref.getFromDisk(_mmpStorageKey);
+    _msgmediapref = MessagesAndMedia.fromJson(jsonDecode(result.toString()));
+    _themePref = _msgmediapref.theme;
+    _namePref = _msgmediapref.name;
+    _displayEmojiAsText = _msgmediapref.displayEmojiAsPlain;
+    _showTextpreview = _msgmediapref.showLinkPreviewText;
+    _imageFileUploadZuri = _msgmediapref.showUploadPreview;
+    _imageFileLinkedWebsite = _msgmediapref.showLinkPreview;
+    _timeWith = _msgmediapref.showTime;
+    _showJumbomji = _msgmediapref.showJumbomoji;
+    _displayColorSwatches = _msgmediapref.disPlayColor;
+    _displayCurrentTyping = _msgmediapref.displayInfo;
+    _showJumbomji = _msgmediapref.showJumbomoji;
+    _evenLarger2Mb = _msgmediapref.largerThan2;
+    
+    notifyListeners();
+    
+  }
 }

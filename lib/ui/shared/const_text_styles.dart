@@ -196,3 +196,11 @@ TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
     color: createChannelHeaderColor,
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
+
+//status dialogs styles
+final clearStatusTextStyle = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: bodyColor,
+  fontFamily: 'Lato',
+);

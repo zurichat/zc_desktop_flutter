@@ -75,198 +75,6 @@ class WorkspaceWrapper extends StatelessWidget {
                           valueColor: AlwaysStoppedAnimation(Colors.grey),
                         ),
                       ),
-<<<<<<< HEAD
-                    )
-                  : Expanded(
-                      child: Row(
-                        children: [
-                          //TODO: organization side bar
-                          Container(
-                            color: Theme.of(context).accentColor,
-                            width: 70.w,
-                            height: double.infinity,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: model.workspace.length.toInt(),
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          print("Workspace $index tapped");
-                                          model.setCurrentWorkspaceIndex(index);
-                                        },
-                                        child: WorkspaceItem(
-                                          workspace: model.workspace[index],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          model.goToCreateWorkspace();
-                                        },
-                                        child: Icon(
-                                          Icons.add,
-                                          color: kcPrimaryColor,
-                                          size: 20,
-                                        )))
-                              ],
-                            ),
-                          ),
-                          //TODO: Left side bar
-                          Container(
-                              color: Theme.of(context).accentColor,
-                              width: 260.w,
-                              height: double.infinity,
-                              child: Padding(
-                                padding: EdgeInsets.all(5),
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: SingleChildScrollView(
-                                        controller: model.controller,
-                                        physics: ScrollPhysics(),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            ListView(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              children: [
-                                                DetailedCustomAppBar(
-                                                  leading: WorkSpaceSetting(),
-                                                  trailing: NewMessageBtn(),
-                                                ),
-                                                MenuItem(model),
-                                                verticalSpaceRegular,
-                                                TitleSection(
-                                                  title: 'Channels',
-                                                  addButtonTitle:
-                                                      'Add channels',
-                                                  toggleTap: () {
-                                                    model
-                                                        .openChannelsDropDownMenu();
-                                                  },
-                                                  show: model.showChannels,
-                                                  addTap: () {
-                                                    showDialog(
-                                                        context: context,
-                                                        builder: (context) =>
-                                                            ChannelsCreationView());
-                                                  },
-                                                  displayChannel: () {
-                                                    model.setdisplayChannels();
-                                                  },
-                                                  list: List.generate(
-                                                    model.channels.length
-                                                        .toInt(),
-                                                    (index) => MouseRegion(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                          bottom: 16.0,
-                                                        ),
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            print(
-                                                                "channel item $index tapped");
-                                                            //model.showChannel(index);
-                                                            model
-                                                                .getViewToDisplay(
-                                                                    index:
-                                                                        index,
-                                                                    isChannel:
-                                                                        true);
-                                                          },
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Container(
-                                                                child: SvgPicture.asset(
-                                                                    SVGAssetPaths
-                                                                        .channelsListIcon),
-                                                              ),
-                                                              horizontalSpaceSmall,
-                                                              ZcdeskText
-                                                                  .dropDownBodyTextStyle(model
-                                                                      .channels[
-                                                                          index]
-                                                                      .name!),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                verticalSpaceRegular,
-                                                TitleSection(
-                                                  title: 'Direct Messages',
-                                                  addButtonTitle:
-                                                      'Add teammates',
-                                                  show: model.showDMs,
-                                                  toggleTap: () {
-                                                    model.openDMsDropDownMenu();
-                                                  },
-                                                  displayChannel: () {},
-                                                  addTap: () {},
-                                                  list: List.generate(
-                                                    model.directMessages.length
-                                                        .toInt(),
-                                                    (index) => MouseRegion(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                          bottom: 16.0,
-                                                        ),
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            print(
-                                                                "dm item $index tapped");
-                                                            //model.showDM(index);
-                                                            model
-                                                                .getViewToDisplay(
-                                                                    index:
-                                                                        index,
-                                                                    isDM: true);
-                                                          },
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              CircleAvatar(
-                                                                backgroundImage:
-                                                                    AssetImage(
-                                                                        'assets/images/mark.jpg'),
-                                                                radius: 18.r,
-                                                              ),
-                                                              horizontalSpaceRegular,
-                                                              ZcdeskText
-                                                                  .dropDownBodyTextStyle(model
-                                                                      .directMessages[
-                                                                          index]
-                                                                      .user!
-                                                                      .name!),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-=======
                     ),
                   ),
                 )
@@ -275,7 +83,7 @@ class WorkspaceWrapper extends StatelessWidget {
                     children: [
                       //TODO: organization side bar
                       Container(
-                        color: kcBackgroundColor2,
+                        color: Theme.of(context).accentColor,
                         width: 70.w,
                         height: double.infinity,
                         child: Column(
@@ -413,42 +221,11 @@ class WorkspaceWrapper extends StatelessWidget {
                                                         .name,
                                                     userIcon:
                                                         'assets/icons/users.svg',
->>>>>>> a451b0feb100a0c8f3849b29a72be5156270cd29
                                                   ),
                                                 ),
                                                 verticalSpaceRegular,
                                               ],
                                             ),
-<<<<<<< HEAD
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                          //TODO: Center Area
-
-                          model.displayChannels == false
-                              ? Expanded(
-                                  child: Column(
-                                    children: [
-                                      DetailedCustomAppBar(
-                                        margin: EdgeInsets.only(left: 2.0.w),
-                                        leading: WorkSpaceTitle(),
-                                        trailing: WorkSpaceMembers(),
-                                      ),
-                                      ShowView(model),
-                                    ],
-                                  ),
-                                )
-                              : Expanded(
-                                  child: Padding(
-                                  padding: EdgeInsets.only(left: 3.0),
-                                  child: ChannelsDisplayView(),
-                                )),
-                        ],
-=======
                                           ),
                                         ),
                                         verticalSpaceRegular,
@@ -460,7 +237,6 @@ class WorkspaceWrapper extends StatelessWidget {
                             ),
                           ],
                         ),
->>>>>>> a451b0feb100a0c8f3849b29a72be5156270cd29
                       ),
                       //TODO: Center Area
                       centerChild!,

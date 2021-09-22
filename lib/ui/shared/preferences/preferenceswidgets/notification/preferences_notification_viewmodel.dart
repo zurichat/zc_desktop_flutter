@@ -5,7 +5,7 @@ import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
 class NotificationViewModel extends BaseViewModel {
   PrefMessageNotification _messageNotification =
       PrefMessageNotification.AllMessages;
-  //FlashWindows _flashWindows = FlashWindows.WhenIdle;
+  FlashWindows _flashWindows = FlashWindows.WhenIdle;
 
   bool _isSameForMobile = false;
   bool _isMeetingSet = true;
@@ -172,7 +172,7 @@ class NotificationViewModel extends BaseViewModel {
   get isRepliedInThred => _isRepliesInThread;
 
   get messageNotification => _messageNotification;
-  // get flashWindows => _flashWindows;
+  get flashWindows => _flashWindows;
 
   void setMessageNotification(Object? value) {
     _messageNotification = (value) as PrefMessageNotification;
@@ -180,7 +180,7 @@ class NotificationViewModel extends BaseViewModel {
   }
 
   void setFlashWindows(Object? value) {
-    //_flashWindows = (value) as FlashWindows;
+    _flashWindows = (value) as FlashWindows;
     notifyListeners();
   }
 
