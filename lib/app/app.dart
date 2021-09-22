@@ -42,12 +42,12 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
     MaterialRoute(page: CreateWorkspaceStage2),
     MaterialRoute(page: CreateWorkspaceStage3),
     MaterialRoute(page: ChannelsDisplayView),
-    AdaptiveRoute(
+    MaterialRoute(
       page: WorkspaceView,
       initial: true,
       children: [
-        AdaptiveRoute(page: ChannelsView, initial: true),
-        AdaptiveRoute(page: DmView),
+        MaterialRoute(page: ChannelsView, initial: true),
+        MaterialRoute(page: DmView),
       ],
     ),
   ],

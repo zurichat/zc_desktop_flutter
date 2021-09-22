@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SVGAssetPaths {
   static final channelsListIcon = "assets/icons/hash_inactive.svg";
   static final dropDownOpenIcon = "assets/icons/drop_down_open.svg";
-  static final dropDownClosedIcon = "assets/icons/drop_down_closed.svg";
+  static final dropDownClosedIcon = "assets/icons/channel_close.svg";
   static final channelDropDown = "assets/icons/channel_drop_down.svg";
   static final sortIcon = "assets/icons/sort.svg";
   static final filterDown = "assets/icons/filter.svg";

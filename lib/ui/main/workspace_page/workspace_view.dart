@@ -314,13 +314,13 @@ class ReusableDropDown extends StatelessWidget {
               child: Container(
                 child: show
                     ? Container(
-                        height: 12,
-                        width: 12,
+                        height: 8,
+                        width: 8,
                         child: SvgPicture.asset(SVGAssetPaths.dropDownOpenIcon),
                       )
                     : Container(
-                        height: 12,
-                        width: 12,
+                        height: 8,
+                        width: 8,
                         child:
                             SvgPicture.asset(SVGAssetPaths.dropDownClosedIcon),
                       ),
