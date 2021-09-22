@@ -68,7 +68,7 @@ final authBtnStyle = TextStyle(
 
 final kLeftSideBarStyle = TextStyle(
   fontSize: 15.sp,
-  color: Colors.black,
+  color: Colors.white,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
   fontFamily: 'Lato',
@@ -76,7 +76,7 @@ final kLeftSideBarStyle = TextStyle(
 
 final dropDownBodyTextStyle = TextStyle(
   fontSize: 15.sp,
-  color: Colors.black,
+  color: Colors.white,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
@@ -106,10 +106,8 @@ final headline6 = TextStyle(
   fontFamily: 'Lato',
 );
 
-TextStyle headline7 = TextStyle(
-    fontSize: 18.sp,
-    fontWeight: FontWeight.w600,
-    fontFamily: 'Lato');
+TextStyle headline7 =
+    TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
 
 final headline3 = TextStyle(
   fontSize: 35.sp,
