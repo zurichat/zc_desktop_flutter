@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WorkSpaceTitle extends StatelessWidget {
-  const WorkSpaceTitle({Key? key}) : super(key: key);
+  final String? channelTitle;
+
+  WorkSpaceTitle({Key? key, this.channelTitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +13,7 @@ class WorkSpaceTitle extends StatelessWidget {
       width: 200.w,
       child: Row(
         children: [
-          Text(
-            '# Announcement',
-          ),
+          Text("# ${channelTitle!}", style: TextStyle()),
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: SvgPicture.asset('assets/icons/vectordown_icon.svg'))

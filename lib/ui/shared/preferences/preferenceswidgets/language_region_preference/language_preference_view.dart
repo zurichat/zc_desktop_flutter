@@ -5,10 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../const_app_colors.dart';
-import '../../../const_text_styles.dart';
 import '../../../const_ui_helpers.dart';
 import 'language_preference_viewModel.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LanguagePreference extends StatelessWidget {
   const LanguagePreference({
@@ -126,7 +124,7 @@ class LanguagePreference extends StatelessWidget {
                   txt: model.checkBoxText[1]),
 
               Text(
-                AppLocalizations.of(context)!.language,
+                "AppLocalizations.of(context)!.language",
                 style: TextStyle(color: Colors.black),
               )
             ],
