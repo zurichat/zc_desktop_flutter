@@ -14,6 +14,7 @@ import 'package:stacked_themes/stacked_themes.dart';
 import '../services/api/api_service.dart';
 import '../services/authentication/auth_service.dart';
 import '../services/local_storage/local_storage_service.dart';
+import '../services/search_service/channel_service.dart';
 import '../services/workspace_service/workspace_service.dart';
 
 final locator = StackedLocator.instance;
@@ -31,6 +32,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => AuthService());
   locator.registerLazySingleton(() => ApiService());
+  locator.registerLazySingleton(() => ChannelService());
   locator.registerLazySingleton(() => WorkspaceService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
 }

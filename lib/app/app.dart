@@ -4,6 +4,7 @@ import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/search_service/channel_service.dart';
 import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.dart';
 import 'package:zc_desktop_flutter/ui/auth/change_password_page/change_password_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/check_email_page/check_email_view.dart';
@@ -53,6 +54,7 @@ import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_vie
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: ApiService),
+    LazySingleton(classType: ChannelService),
     LazySingleton(classType: WorkspaceService),
     LazySingleton(
         classType: ThemeService, resolveUsing: ThemeService.getInstance)
