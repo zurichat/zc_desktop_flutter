@@ -55,7 +55,9 @@ class ProfileDropdownView extends StatelessWidget {
     return ViewModelBuilder<ProfileDropdownViewModel>.reactive(
       builder: (context, model, child) => InkWell(
         onTap: () {
-          _toggleDropdown(context: context);
+          _toggleDropdown(
+            context: context,
+          );
         },
         child: Container(
           width: 40.w,
@@ -75,7 +77,7 @@ class ProfileDropdownView extends StatelessWidget {
     } else {
       this.floatingDropdown = this.createFloatingDropdown();
       Overlay.of(context)!.insert(this.floatingDropdown);
-      model.setIsDropped(true);
+      model.setIsDropped(false);
     }
   }
 }
@@ -177,7 +179,7 @@ class DropDownItem extends StatelessWidget {
               child: GestureDetector(
                 onTap: onTap,
                 child: Container(
-                  color: model.isHover ? kcSuccessColor : kcBackgroundColor2,
+                  color: model.isHover ? kcPrimaryColor : kcBackgroundColor2,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: <Widget>[
