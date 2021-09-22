@@ -1,13 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
-import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_view.dart';
-import 'package:zc_desktop_flutter/ui/main/channels_page/channels_view.dart';
-import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -17,8 +16,6 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 class WorkspaceView extends StatelessWidget {
@@ -31,33 +28,54 @@ class WorkspaceView extends StatelessWidget {
         model.setup();
       },
       builder: (context, model, child) => Scaffold(
-        body: Container(
-          child: Column(
-            children: [
-              Container(
-                child: buildAppBar(
-                  context,
-                  isActive: true,
-                ),
-              ),
+        body: WorkspaceWrapper(
+          model,
+          centerChild: Expanded(
+            child: ExtendedNavigator(
+              navigatorKey: StackedService.nestedNavigationKey(1),
+              router: WorkspaceViewRouter(),
+            ),
+          ),
+        ),
+      ),
+      viewModelBuilder: () => WorkspaceViewModel(),
+    );
+  }
+}
 
-              // verticalSpaceSmall,
-              model.isBusy
-                  ? Expanded(
+class WorkspaceWrapper extends StatelessWidget {
+  final WorkspaceViewModel? model;
+  final Widget? centerChild;
+
+  WorkspaceWrapper(this.model, {Key? key, this.centerChild}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            child: buildAppBar(
+              context,
+              isActive: true,
+            ),
+          ),
+          // verticalSpaceSmall,
+          model!.isBusy
+              ? Expanded(
+                  child: Container(
+                    height: fullHeight(context),
+                    width: fullHeight(context),
+                    child: Center(
                       child: Container(
-                        height: fullHeight(context),
-                        width: fullHeight(context),
-                        child: Center(
-                          child: Container(
-                            width: 24.0,
-                            height: 24.0,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 3.0.r,
-                              valueColor: AlwaysStoppedAnimation(Colors.grey),
-                            ),
-                          ),
+                        width: 24.0,
+                        height: 24.0,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3.0.r,
+                          valueColor: AlwaysStoppedAnimation(Colors.grey),
                         ),
                       ),
+<<<<<<< HEAD
                     )
                   : Expanded(
                       child: Row(
@@ -248,11 +266,160 @@ class WorkspaceView extends StatelessWidget {
                                                         ),
                                                       ),
                                                     ),
+=======
+                    ),
+                  ),
+                )
+              : Expanded(
+                  child: Row(
+                    children: [
+                      //TODO: organization side bar
+                      Container(
+                        color: kcBackgroundColor2,
+                        width: 70.w,
+                        height: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: model!.workspace.length.toInt(),
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      print("Workspace $index tapped");
+                                      model!.setCurrentWorkspaceIndex(index);
+                                    },
+                                    child: WorkspaceItem(
+                                      workspace: model!.workspace[index],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  model!.goToCreateWorkspace();
+                                },
+                                child: Icon(
+                                  Icons.add,
+                                  color: kcPrimaryColor,
+                                  size: 20,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      //TODO: Left side bar
+                      Container(
+                        width: 260.w,
+                        height: double.infinity,
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: SingleChildScrollView(
+                                controller: model!.controller,
+                                physics: ScrollPhysics(),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    ListView(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      children: [
+                                        DetailedCustomAppBar(
+                                          leading: WorkSpaceSetting(
+                                            workspaceTitle:
+                                                model!.getWorkspaceName(),
+                                          ),
+                                          trailing: NewMessageBtn(),
+                                        ),
+                                        DisplayMenu(model!),
+                                        verticalSpaceRegular,
+                                        ReusableDropDown(
+                                          title: 'Channels',
+                                          addButtonTitle: 'Add channels',
+                                          toggleTap: () {
+                                            model!.openChannelsDropDownMenu();
+                                          },
+                                          show: model!.showChannels,
+                                          addTap: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    ChannelsCreationView());
+                                          },
+                                          displayChannel: () {
+                                            model!.setDisplayChannels();
+                                          },
+                                          list: List.generate(
+                                            model!.channels.length.toInt(),
+                                            (index) => MouseRegion(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 16.0,
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    print(
+                                                        "channel item $index tapped");
+                                                    //model.showChannel(index);
+                                                    model!.goToChannelsView(
+                                                        index);
+                                                  },
+                                                  child: ChannelItem(
+                                                    channelName: model!
+                                                        .channels[index].name!,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        verticalSpaceRegular,
+                                        ReusableDropDown(
+                                          title: 'Direct Messages',
+                                          addButtonTitle: 'Add teammates',
+                                          show: model!.showDMs,
+                                          toggleTap: () {
+                                            model!.openDMsDropDownMenu();
+                                          },
+                                          displayChannel: () {},
+                                          addTap: () {},
+                                          list: List.generate(
+                                            model!.directMessages.length
+                                                .toInt(),
+                                            (index) => MouseRegion(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 16.0,
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    print(
+                                                        "dm item $index tapped");
+                                                    //model.showDM(index);
+                                                    model!.goToDmView(index);
+                                                  },
+                                                  child: DMItem(
+                                                    userName: model!
+                                                        .directMessages[index]
+                                                        .user!
+                                                        .name,
+                                                    userIcon:
+                                                        'assets/icons/users.svg',
+>>>>>>> a451b0feb100a0c8f3849b29a72be5156270cd29
                                                   ),
                                                 ),
                                                 verticalSpaceRegular,
                                               ],
                                             ),
+<<<<<<< HEAD
                                           ],
                                         ),
                                       ),
@@ -281,41 +448,67 @@ class WorkspaceView extends StatelessWidget {
                                   child: ChannelsDisplayView(),
                                 )),
                         ],
+=======
+                                          ),
+                                        ),
+                                        verticalSpaceRegular,
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+>>>>>>> a451b0feb100a0c8f3849b29a72be5156270cd29
                       ),
-                    ),
-            ],
-          ),
-        ),
+                      //TODO: Center Area
+                      centerChild!,
+                    ],
+                  ),
+                ),
+        ],
       ),
-      viewModelBuilder: () => WorkspaceViewModel(),
     );
   }
 }
 
-class ShowView extends StatelessWidget {
+class DisplayMenu extends StatelessWidget {
   final WorkspaceViewModel model;
 
-  const ShowView(this.model, {Key? key}) : super(key: key);
+  const DisplayMenu(this.model, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (model.isChannel) {
-      return ChannelsView();
-    }
-
-    if (model.isDM) {
-      return DmView();
-    }
-
-    if (model.isThreads) {
-      return Scaffold();
-    }
-
-    return ChannelsView();
+    return Container(
+      child: Column(
+        children: [
+          ReusableMenuItem(
+              iconPath: 'assets/icons/threads.svg',
+              text: 'Threads',
+              onTap: () {
+                model.getViewToDisplay(isThreads: true);
+              }),
+          ReusableMenuItem(
+              iconPath: 'assets/icons/alldms.svg',
+              text: 'All DMs',
+              onTap: () {}),
+          ReusableMenuItem(
+              iconPath: 'assets/icons/drafts.svg', text: 'Draft', onTap: () {}),
+          ReusableMenuItem(
+              iconPath: 'assets/icons/files.svg', text: 'Files', onTap: () {}),
+          ReusableMenuItem(
+            iconPath: 'assets/icons/plugins.svg',
+            text: 'Plugins',
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
   }
 }
 
-class TitleSection extends StatelessWidget {
+class ReusableDropDown extends StatelessWidget {
   final String title;
   final GestureTapCallback toggleTap;
   final bool show;
@@ -324,7 +517,7 @@ class TitleSection extends StatelessWidget {
   final String? addButtonTitle;
   final GestureTapCallback displayChannel;
 
-  const TitleSection({
+  const ReusableDropDown({
     Key? key,
     required this.title,
     required this.toggleTap,
@@ -460,41 +653,6 @@ class ReusableMenuItem extends StatelessWidget {
   }
 }
 
-class MenuItem extends StatelessWidget {
-  final WorkspaceViewModel model;
-
-  const MenuItem(this.model, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          ReusableMenuItem(
-              iconPath: 'assets/icons/threads.svg',
-              text: 'Threads',
-              onTap: () {
-                model.getViewToDisplay(isThreads: true);
-              }),
-          ReusableMenuItem(
-              iconPath: 'assets/icons/alldms.svg',
-              text: 'All DMs',
-              onTap: () {}),
-          ReusableMenuItem(
-              iconPath: 'assets/icons/drafts.svg', text: 'Draft', onTap: () {}),
-          ReusableMenuItem(
-              iconPath: 'assets/icons/files.svg', text: 'Files', onTap: () {}),
-          ReusableMenuItem(
-            iconPath: 'assets/icons/plugins.svg',
-            text: 'Plugins',
-            onTap: () {},
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class WorkspaceItem extends StatelessWidget {
   final int? index;
   final bool? selected;
@@ -590,6 +748,54 @@ class WorkspaceItem extends StatelessWidget {
               ),
             ),*/
         ],
+      ),
+    );
+  }
+}
+
+class ChannelItem extends StatelessWidget {
+  final String? channelName;
+
+  ChannelItem({Key? key, this.channelName}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            child: SvgPicture.asset(SVGAssetPaths.channelsListIcon),
+          ),
+          horizontalSpaceSmall,
+          ZcdeskText.dropDownBodyTextStyle(channelName!),
+        ],
+      ),
+    );
+  }
+}
+
+class DMItem extends StatelessWidget {
+  final String? userIcon;
+  final String? userName;
+
+  DMItem({Key? key, this.userIcon, this.userName}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: MouseRegion(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              child: SvgPicture.asset(userIcon!),
+              radius: 18.r,
+            ),
+            horizontalSpaceRegular,
+            ZcdeskText.dropDownBodyTextStyle(userName!),
+          ],
+        ),
       ),
     );
   }
