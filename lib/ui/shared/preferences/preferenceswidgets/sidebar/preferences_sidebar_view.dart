@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_bar.dart';
@@ -175,6 +174,8 @@ class SideBarView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => SideBarViewModel(),
+      onModelReady: (model) => model.fetchAndSetSetting(),
+      onDispose: (model) => model.saveSettings(),
     );
   }
 }

@@ -163,7 +163,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator{
     }
     try {
       _setIsBusy();
-      await _auth.signUpWithCred(
+      await _auth.signup(
           email: _channelName,
           password: _channelName,);
       _setIsCreateChannelSuccessful();
