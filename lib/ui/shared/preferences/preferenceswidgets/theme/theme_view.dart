@@ -34,7 +34,7 @@ class ThemeView extends StatelessWidget {
                                     right: 10, left: 10, top: 20),
                                 child: Text(
                                   model.head1,
-                                  style: headline6.copyWith(fontSize: 16.sp),
+                                  style: preferenceStyleBold,
                                 ))),
                         Container(
                             width: 180,
@@ -48,9 +48,7 @@ class ThemeView extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Text(model.body1,
-                                      style: kBodyTextStyle.copyWith(
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.bold))),
+                                      style: preferenceStyleBold)),
                             ])),
                         Container(
                             width: 250,
@@ -67,16 +65,14 @@ class ThemeView extends StatelessWidget {
                                   )),
                                   Expanded(
                                       child: Text(model.body2,
-                                          style: kBodyTextStyle.copyWith(
-                                              fontSize: 14.sp))),
+                                          style: preferenceStyleNormal)),
                                 ])),
                         Padding(
                             padding: EdgeInsets.only(left: 37),
                             child: Container(
                                 width: 360,
                                 child: Text(model.body3,
-                                    style: kBodyTextStyle.copyWith(
-                                        fontSize: 14.sp)))),
+                                    style: preferenceStyleNormal))),
                         verticalSpaceMedium,
                         Padding(
                             padding: EdgeInsets.only(
@@ -102,8 +98,7 @@ class ThemeView extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: Text(model.head2,
-                              style: kSubHeadingTextStyle.copyWith(
-                                  fontWeight: FontWeight.bold)),
+                              style: preferenceStyleBold),
                         ),
                         Padding(
                           padding: EdgeInsets.all(10),
@@ -532,22 +527,17 @@ class ClassicThemeWidgetLight extends StatelessWidget {
             leading: Image(image: AssetImage(model.logoLight)),
             title: Row(children: [
               Text(model.title,
-                  style: kBodyTextStyle.copyWith(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black)),
+                  style: preferenceStyleBold),
               SizedBox(
                 width: 10,
               ),
               Text(model.date(),
-                  style: kBodyTextStyle.copyWith(
-                      fontSize: 14.sp, color: Colors.black))
+                  style: preferenceStyleNormal)
             ]),
             subtitle: Container(
                 margin: EdgeInsets.only(top: 10),
                 child: Text('Look nice today',
-                    style: kBodyTextStyle.copyWith(
-                        fontSize: 14.sp, color: Colors.black))),
+                    style: preferenceStyleNormal)),
           ),
           Spacer(),
           BuildRadio(
@@ -598,10 +588,7 @@ class BottomContainerWidget extends StatelessWidget {
           ),
           horizontalSpaceSmall,
           Text(txt,
-              style: kBodyTextStyle.copyWith(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black))
+              style:preferenceStyleBold)
         ]));
   }
 }
@@ -644,10 +631,7 @@ class BuildRadio extends StatelessWidget {
             horizontalSpaceSmall,
             Expanded(
                 child: Text(txt,
-                    style: kBodyTextStyle.copyWith(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)))
+                    style: preferenceStyleBold))
           ],
         ));
   }

@@ -43,7 +43,7 @@ class ProfileDropdownView extends StatelessWidget {
     });
   }
 
-  void findDropdownData() {
+void findDropdownData() {
     RenderBox? renderBox =
         actionKey.currentContext!.findRenderObject() as RenderBox;
     height = renderBox.size.height;
@@ -253,3 +253,13 @@ class ProfilePicture extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+ 
