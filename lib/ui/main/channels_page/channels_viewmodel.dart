@@ -14,7 +14,7 @@ class ChannelsViewModel extends BaseViewModel {
   final DateTime currentMessageTime = DateTime.now();
   final ScrollController controllerOne = ScrollController();
 
-  String userDefaultImageUrl = 'assets/images/zc_logo.png';
+  String userDefaultImageUrl = 'assets/images/mark.jpeg';
   int numberOfReplies = 14;
   int numberOfReactions = 0;
   String userDisplayName = 'Mark';

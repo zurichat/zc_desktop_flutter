@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/ui/main/dm/dm_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/message.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/reaction.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/user_avatar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 
@@ -50,70 +55,10 @@ class ChannelsView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              messageHeader(context, model),
-                              horizontalSpaceTiny,
-                              Padding(
-                                  padding: EdgeInsets.only(left: 51),
-                                  child: InkWell(
-                                      onTap: () {
-                                        print("Thread opened");
-                                      },
-                                      onLongPress: () {
-                                        print("More options menu opened");
-                                      },
-                                      child: SelectableText(model.userPost))),
-                              verticalSpaceSmall,
-                              Padding(
-                                padding: const EdgeInsets.only(left: 51.0),
-                                child: Row(
-                                  children: [
-                                    messageReactions(model),
-                                    horizontalSpaceSmall,
-                                    messageReactions(model),
-                                    horizontalSpaceSmall,
-                                    messageReactions(model),
-                                  ],
-                                ),
-                              ),
-                              verticalSpaceMedium,
-                              messageHeader(context, model),
-                              horizontalSpaceTiny,
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 51),
-                                  child: InkWell(
-                                      onTap: () {
-                                        print("Thread opened");
-                                      },
-                                      onLongPress: () {
-                                        print("More options menu opened");
-                                      },
-                                      child: SelectableText(model.userPost))),
-                              verticalSpaceMedium,
-                              messageHeader(context, model),
-                              horizontalSpaceTiny,
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 51),
-                                  child: InkWell(
-                                      onTap: () {
-                                        print("Thread opened");
-                                      },
-                                      onLongPress: () {
-                                        print("More options menu opened");
-                                      },
-                                      child: SelectableText(model.userPost))),
-                              verticalSpaceSmall,
-                              Padding(
-                                padding: const EdgeInsets.only(left: 51.0),
-                                child: Row(
-                                  children: [
-                                    messageReactions(model),
-                                    horizontalSpaceSmall,
-                                    messageReactions(model),
-                                    horizontalSpaceSmall,
-                                    messageReactions(model),
-                                  ],
-                                ),
-                              ),
+                              MessageWidget(model: model),
+                              MessageWidget(model: model),
+                              MessageWidget(model: model),
+                              
                             ],
                           ),
                         ),
@@ -128,67 +73,8 @@ class ChannelsView extends StatelessWidget {
   }
 }
 
-Widget messageHeader(BuildContext context, ChannelsViewModel model) {
-  return Container(
-    child: Row(children: [
-      GestureDetector(
-        onTap: () {
-          showDialog(context: context, builder: (_) => ProfileModalView());
-        },
-        child: CircleAvatar(
-          backgroundImage: AssetImage(model.userDefaultImageUrl),
-          radius: 22,
-        ),
-      ),
-      SizedBox(
-        width: 6.w,
-      ),
-      Text(model.userDisplayName,
-          style: TextStyle(
-              fontSize: 20.sp, color: headerColor, fontFamily: 'Lato')),
-      SizedBox(
-        width: 6.w,
-      ),
-      Text(
-          '${model.currentMessageTime.hour}:${model.currentMessageTime.minute}',
-          style:
-              TextStyle(fontSize: 20.sp, color: timeColor, fontFamily: 'Lato')),
-    ]),
-  );
-}
 
-Widget messageReactions(ChannelsViewModel model) {
-  return Container(
-    child: Column(children: [
-      Row(
-        children: [
-          InkWell(
-            child: Container(
-              //width: 30,
-              decoration: BoxDecoration(
-                  color: kcBackgroundColor1,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(children: [
-                  Image.asset(model.emojiIconPath, height: 15, width: 15),
-                  horizontalSpaceTiny,
-                  Text('${model.numberOfReactions}'),
-                ]),
-              ),
-            ),
-            onTap: () {
-              print("reaction incremented");
-              model.increaseReactionNumber();
-              //increment reaction
-            },
-          ),
-        ],
-      ),
-      verticalSpaceSmall,
-    ]),
-  );
-}
+
 
 Widget messageReplies(ChannelsViewModel model) {
   return InkWell(

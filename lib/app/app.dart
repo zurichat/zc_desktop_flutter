@@ -49,8 +49,8 @@ import 'package:zc_desktop_flutter/ui/workspace_registeration_screen/create_work
       page: WorkspaceView,
       initial: true,
       children: [
-        AdaptiveRoute(page: ChannelsView, initial: true),
-        AdaptiveRoute(page: DmView),
+        MaterialRoute(page: ChannelsView, initial: true),
+        MaterialRoute(page: DmView),
       ],
     ),
   ],

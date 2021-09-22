@@ -140,6 +140,25 @@ final preferenceStyleBold = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
+final messageSenderStyleBold = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w800,
+);
+
+final messageStyleNormal = TextStyle(
+  fontSize: 15.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w400,
+);
+
+final messageTimeStyleNormal = TextStyle(
+  fontSize: 14.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w300,
+ // color: Colors.grey[300]
+);
+
 //Create and Display Channels Styles
 TextStyle authBtnChannelStyle = TextStyle(
     fontSize: 20.sp,
