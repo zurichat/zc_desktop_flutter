@@ -48,3 +48,6 @@ const Color avatarColor5 = Color(0xffE3EEFF);
 //Button colors
 const Color authBtnColor = Color(0xff363636);
 const Color preferenceBorderblack = Color(0xFF323232);
+
+//status colors
+const Color clearStatusBtnBorderColor = Color(0xffa1a1a1);
