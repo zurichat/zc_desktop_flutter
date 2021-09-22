@@ -13,7 +13,7 @@ import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/lang
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/notification/preferences_notification_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/sidebar/preferences_sidebar_view.dart';
-
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/mark_as_read/mark_as_read_view.dart';
 import 'preferenceswidgets/theme/theme_view.dart';
 
 class PreferenceView extends StatelessWidget {
@@ -70,7 +70,7 @@ class PreferenceView extends StatelessWidget {
         'assetName': 'assets/icons/mark.svg', //Icons.launch,
         'widget': Container(
           child: Center(
-            child: ZcdeskText.headline('Mark as read'),
+            child:  MarkAsRead(),
           ),
         )
       },
