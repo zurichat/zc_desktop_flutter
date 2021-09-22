@@ -47,7 +47,7 @@ class ProfileDropdownView extends StatelessWidget {
         actionKey.currentContext!.findRenderObject() as RenderBox;
     height = renderBox.size.height;
     width = renderBox.size.width;
-    Offset offset = renderBox.localToGlobal(Offset.zero);
+    // Offset offset = renderBox.localToGlobal(Offset.zero);
   }
 
   @override
@@ -75,6 +75,7 @@ class ProfileDropdownView extends StatelessWidget {
       this.floatingDropdown.remove();
       model.setIsDropped(false);
     } else {
+      findDropdownData();
       this.floatingDropdown = this.createFloatingDropdown();
       Overlay.of(context)!.insert(this.floatingDropdown);
       model.setIsDropped(false);
