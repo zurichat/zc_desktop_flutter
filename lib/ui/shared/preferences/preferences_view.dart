@@ -89,9 +89,6 @@ class PreferenceView extends StatelessWidget {
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.primary),
-              borderRadius: BorderRadius.circular(15)),
           height: 750.h,
           width: 827.w,
           child: Column(
@@ -177,7 +174,8 @@ Widget buildListItem({
     tileColor: isSelected ? KStartupContainerColor : null,
     minLeadingWidth: 5,
     leading: SvgPicture.asset(assetName),
-    title: Text(text, style: preferenceStyleNormal),
+    title: Text(text,
+        style: preferenceStyleNormal),
     hoverColor: isSelected ? KStartupContainerColor : hoverColor,
     onTap: onClicked,
   );

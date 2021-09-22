@@ -13,10 +13,9 @@ Widget buildAppBar(BuildContext context,
   final icona = Icons.arrow_back;
   final iconb = Icons.arrow_forward;
   final iconc = Icons.watch_later_outlined;
-
   return Container(
     height: 50.h,
-    color: Theme.of(context).appBarTheme.backgroundColor,
+    color: Colors.black,
     child: WindowTitleBarBox(
       child: MoveWindow(
         child: Row(

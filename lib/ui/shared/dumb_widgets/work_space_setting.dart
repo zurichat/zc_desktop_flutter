@@ -10,7 +10,6 @@ class WorkSpaceSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).accentColor,
       width: 200.w,
       child: Row(
         children: [

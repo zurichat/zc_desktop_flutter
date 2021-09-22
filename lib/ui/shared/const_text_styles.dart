@@ -68,7 +68,7 @@ final authBtnStyle = TextStyle(
 
 final kLeftSideBarStyle = TextStyle(
   fontSize: 15.sp,
-  color: Colors.white,
+  color: Colors.black,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
   fontFamily: 'Lato',
@@ -76,7 +76,7 @@ final kLeftSideBarStyle = TextStyle(
 
 final dropDownBodyTextStyle = TextStyle(
   fontSize: 15.sp,
-  color: Colors.white,
+  color: Colors.black,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
@@ -106,8 +106,10 @@ final headline6 = TextStyle(
   fontFamily: 'Lato',
 );
 
-TextStyle headline7 =
-    TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
+TextStyle headline7 = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Lato');
 
 final headline3 = TextStyle(
   fontSize: 35.sp,
@@ -195,6 +197,7 @@ TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
     fontSize: 20.5.sp,
     color: createChannelHeaderColor,
     fontWeight: FontWeight.bold,
+<<<<<<< HEAD
     fontFamily: 'Lato');
 
 //status dialogs styles
@@ -204,3 +207,6 @@ final clearStatusTextStyle = TextStyle(
   color: bodyColor,
   fontFamily: 'Lato',
 );
+=======
+    fontFamily: 'Lato');
+>>>>>>> parent of 1a0f028 (Theme implementation on workspace)
