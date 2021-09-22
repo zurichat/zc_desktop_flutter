@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_checkbox.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/mark_as_read/mark_as_read_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/mark_as_read/mark_as_read_viewModel.dart';
 
 class MarkAsRead extends StatelessWidget {
   const MarkAsRead({Key? key}) : super(key: key);
