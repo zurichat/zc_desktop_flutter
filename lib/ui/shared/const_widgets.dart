@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SVGAssetPaths {
   static final channelsListIcon = "assets/icons/hash_inactive.svg";
-  static final dropDownOpenIcon = "assets/icons/drop_down_open.svg";
+  static final dropDownOpenIcon = "assets/icons/vectordown_icon.svg";
   static final dropDownClosedIcon = "assets/icons/drop_down_closed.svg";
   static final channelDropDown = "assets/icons/channel_drop_down.svg";
   static final sortIcon = "assets/icons/sort.svg";
@@ -16,8 +16,14 @@ class SVGAssetPaths {
   static final addIcon = "assets/icons/add.svg";
   static final thread = "assets/icons/threads.svg";
   static final newDm = "assets/icons/new_dm.svg";
+  static final right_icon = "assets/icons/right_icon.svg";
+  static final shortcut = "assets/icons/shortcuts.svg"; 
+  static final add_reaction_container = "assets/icons/add_reaction_container.svg";
+  static final add_saved_container = "assets/icons/add_saved_container.svg";
+  static final more_actions_container = "assets/icons/more_actions_container.svg";
+  static final reply_thread_container = "assets/icons/reply_thread_container.svg";
+  static final share_message_container = "assets/icons/share_message_container.svg";
 }
-
 
 
 class ShortCuts {
