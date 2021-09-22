@@ -83,7 +83,7 @@ class WorkspaceWrapper extends StatelessWidget {
                     children: [
                       //TODO: organization side bar
                       Container(
-                        color: kcBackgroundColor2,
+                        color: Theme.of(context).accentColor,
                         width: 70.w,
                         height: double.infinity,
                         child: Column(
@@ -125,6 +125,7 @@ class WorkspaceWrapper extends StatelessWidget {
                       ),
                       //TODO: Left side bar
                       Container(
+                        color: Theme.of(context).accentColor,
                         width: 260.w,
                         height: double.infinity,
                         child: Column(

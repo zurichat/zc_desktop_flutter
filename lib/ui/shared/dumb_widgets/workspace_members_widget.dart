@@ -7,12 +7,10 @@ class WorkSpaceMembers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150.w,
-        decoration:
-            BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              color: Colors.white
-              ),
+        width: 150.w,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            border: Border.all(color: Colors.grey)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -20,26 +18,23 @@ class WorkSpaceMembers extends StatelessWidget {
               flex: 3,
               child: Stack(
                 children: [
+                  Positioned(child: MemberAvatar()),
                   Positioned(
-                    child: MemberAvatar()
-                    ),
-                   Positioned(
-                    right: 20,
-                    bottom: 0,
-                    top: 0,
-                    left: 0,
-                     child: MemberAvatar()),
-
-                     Positioned(
+                      right: 20,
+                      bottom: 0,
+                      top: 0,
+                      left: 0,
+                      child: MemberAvatar()),
+                  Positioned(
                       right: 50,
                       bottom: 0,
                       top: 0,
                       left: 0,
                       child: MemberAvatar())
-                  ],
+                ],
               ),
             ),
-            Expanded(flex:1,child: Text('300'))
+            Expanded(flex: 1, child: Text('300'))
           ],
         ));
   }
