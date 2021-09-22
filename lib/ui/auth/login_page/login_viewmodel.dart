@@ -53,6 +53,8 @@ class LoginViewModel extends BaseViewModel {
     //   _goToHome();
 
     // } catch (e) {
+    
+    await Future.delayed(Duration(milliseconds: 1000));
     _navigationService.navigateTo(Routes.loginView);
     // }
   }
