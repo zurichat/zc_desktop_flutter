@@ -5,11 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:zc_desktop_flutter/enums/button_type_enum.dart';
-import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 
-import 'package:zc_desktop_flutter/services/search_workspace/users_loacal_data.dart';
-import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 
@@ -110,7 +107,7 @@ bottomText() {
   );
 }
 
-recentSearchListTile(String? text) {
+recentSearchListTile(String? text, {VoidCallback? function}) {
   return MouseRegion(
     cursor: SystemMouseCursors.click,
     child: Container(
@@ -119,7 +116,7 @@ recentSearchListTile(String? text) {
         child: ListTile(
           hoverColor: kcSecondaryColor,
           tileColor: whiteColor,
-          onTap: () {},
+          onTap: function,
           leading: SvgPicture.asset('assets/icons/clock.svg'),
           title: Text(
             text!,
@@ -220,13 +217,11 @@ class BuildSearchWidget extends StatelessWidget {
       ))),
       child: Stack(
         children: [
+          Positioned(
+            top: 30.h,
+            child: ScrollableView(),
+          ),
           SearchWidget(),
-          Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: BuildSearchList(),
-          )
-
-          //Positioned(top: 30.h, child: ScrollableView()),
         ],
       ),
     );
@@ -453,124 +448,116 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
   @override
   Widget buildViewModelWidget(
       BuildContext context, SearchModalViewmodel model) {
-    var text = useTextEditingController();
-    return Container(
-      height: 56.5.h,
-      width: 1008.w,
-      padding: EdgeInsets.only(
-          left: model.isClicked ? 20.w : 65.w,
-          right: 45.w,
-          top: model.isClicked ? 10.h : 17.h,
-          bottom: model.isClicked ? 10.h : 15.h),
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-        color: lightIconColor,
-        width: 1.h,
-      ))),
-      child: Row(
-        children: [
-          model.isClicked
-              ? MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Container(
-                    height: 49.h,
-                    width: 140.w,
-                    padding:
-                        EdgeInsets.symmetric(vertical: 5.h, horizontal: 8.5.w),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: avatarColor4,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          model.text,
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            fontFamily: 'Lato',
-                            color: bodyColor,
-                          ),
+    final text = useTextEditingController();
+
+    return Column(
+      children: [
+        Container(
+          height: 56.5.h,
+          width: 1008.w,
+          padding: EdgeInsets.only(
+              left: model.isClicked ? 20.w : 65.w,
+              right: 45.w,
+              top: model.isClicked ? 10.h : 17.h,
+              bottom: model.isClicked ? 10.h : 15.h),
+          decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+            color: lightIconColor,
+            width: 1.h,
+          ))),
+          child: Row(
+            children: [
+              model.isClicked
+                  ? MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Container(
+                        height: 49.h,
+                        width: 140.w,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5.h, horizontal: 8.5.w),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: avatarColor4,
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              model.toggleButtonClicked();
-                              model.toggleSwap();
-                            },
-                            child: SvgPicture.asset('assets/icons/cancel.svg')),
-                      ],
-                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              model.text,
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontFamily: 'Lato',
+                                color: bodyColor,
+                              ),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  model.toggleButtonClicked();
+                                  model.toggleSwap();
+                                  text.clear();
+                                  model.toggleTextFieldActivated();
+                                },
+                                child: SvgPicture.asset(
+                                    'assets/icons/cancel.svg')),
+                          ],
+                        ),
+                      ),
+                    )
+                  : SvgPicture.asset('assets/icons/search.svg'),
+              Expanded(
+                child: TextField(
+                  controller: text,
+                  textAlign: TextAlign.left,
+                  maxLines: 1,
+                  style: TextStyle(
+                    color: headerColor,
+                    fontSize: 18.sp,
                   ),
-                )
-              : SvgPicture.asset('assets/icons/search.svg'),
-          Expanded(
-            child: TextField(
-              onChanged: model.getSuggestions,
-              controller: text,
-              textAlign: TextAlign.left,
-              maxLines: 1,
-              style: TextStyle(
-                color: headerColor,
-                fontSize: 18.sp,
-              ),
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.only(left: 31.w, top: 17.h, bottom: 16.h),
-                hintText: model.isClicked
-                    ? model.hintText
-                    : 'Scour your archives and fish out the answers',
-                hintStyle: TextStyle(
-                  color: leftNavBarColor,
+                  onChanged: model.onChange,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.only(left: 31.w, top: 17.h, bottom: 16.h),
+                    hintText: model.isClicked
+                        ? model.hintText
+                        : 'Scour your archives and fish out the answers',
+                    hintStyle: TextStyle(
+                      color: leftNavBarColor,
+                    ),
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                  ),
                 ),
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
               ),
-            ),
+              GestureDetector(
+                  child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: SvgPicture.asset('assets/icons/cancel.svg')),
+                  onTap: () {
+                    model.popDialog();
+                  }),
+            ],
           ),
-          GestureDetector(
-              child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: SvgPicture.asset('assets/icons/cancel.svg')),
-              onTap: () {
-                model.popDialog();
-              }),
-        ],
-      ),
+        ),
+        !model.textFieldActivated
+            ? SizedBox(
+                height: 0.h,
+                width: 0.h,
+              )
+            : Container(
+                height: model.isClicked ? 270.h : 350.h,
+                width: 1008.w,
+                child: ListView.builder(
+                    itemCount: model.availableChannelLength,
+                    itemBuilder: (context, index) {
+                      return recentSearchListTile(
+                           model.channels[index].name, function: () {
+                        model.toggleTextFieldActivated();
+                        text.clear();
+                      });
+                    }),
+              )
+      ],
     );
   }
-}
-
-class BuildSearchList extends HookViewModelWidget<SearchModalViewmodel> {
-  const BuildSearchList({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget buildViewModelWidget(
-      BuildContext context, SearchModalViewmodel model) {
-    return Container(
-      height: 200,
-      width: 600,
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          final user = model.userData[index];
-
-          return buildList(context, user, model);
-        },
-        itemCount: model.userData.length,
-      ),
-    );
-  }
-
-  Widget buildList(
-          BuildContext context, User zuriUser, SearchModalViewmodel model) =>
-      ListTile(
-        title: Text(zuriUser.name),
-        onTap: () {
-          print('opened center area with DM between you and ${zuriUser.name}');
-          model.popDialog();
-          print('Closed Dialog');
-        },
-      );
 }
