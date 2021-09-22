@@ -11,6 +11,7 @@ import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_view.dart
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 
 class DmView extends StatelessWidget {
@@ -21,15 +22,33 @@ class DmView extends StatelessWidget {
     final _rightSideBarController = ScrollController();
 
     return ViewModelBuilder<DmViewModel>.reactive(
+        onModelReady: (model) {
+          model.setup();
+        },
         viewModelBuilder: () => DmViewModel(),
-        builder: (context, model, child) => Expanded(
-              child: Container(
+        builder: (context, model, child) => model.isBusy
+            ? Center(
+                child: Container(
+                  width: 24.0,
+                  height: 24.0,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 3.0.r,
+                    valueColor: AlwaysStoppedAnimation(Colors.grey),
+                  ),
+                ),
+              )
+            : Container(
                 color: whiteColor,
                 padding: EdgeInsets.fromLTRB(2, 0, 0, 5),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    DetailedCustomAppBar(
+                      margin: EdgeInsets.only(left: 2.0.w),
+                      leading: DmScreenLeading(model),
+                      trailing: DmScreenTrailing(),
+                    ),
                     Align(
                         alignment: Alignment.topCenter, child: TopRowActions()),
                     Flexible(
@@ -41,81 +60,85 @@ class DmView extends StatelessWidget {
                           child: Container(
                             color: kcBackgroundColor2,
                             child: Scrollbar(
-                              controller: _rightSideBarController,
-                              isAlwaysShown: true,
-                              scrollbarOrientation: ScrollbarOrientation.right,
-                              thickness: 10,
-                              showTrackOnHover: true,
-                              child: ListView(
-                                physics: AlwaysScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                controller: _rightSideBarController,
-                                children: [
+                        controller: _rightSideBarController,
+                        isAlwaysShown: true,
+                        scrollbarOrientation: ScrollbarOrientation.right,
+                        thickness: 10,
+                        showTrackOnHover: true,
+                        child: ListView(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          controller: _rightSideBarController,
+                          children: [
                                   NewDmView(
-                                    userName: 'userName',
+                                    userName: "userName",
                                   ),
-                                  model.messages.isNotEmpty ? DateWidget(date: model.formatDate(DateTime.now())) : SizedBox(),
+                                  model.messages.isNotEmpty
+                                      ? DateWidget(
+                                          date:
+                                              model.formatDate(DateTime.now()))
+                                      : SizedBox(),
                                   ListView.builder(
                                       itemCount: model.messages.length,
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
-                                        if(model.messages.length-1==index){
+                                        if (model.messages.length - 1 ==
+                                            index) {
                                           return Column(
                                             children: [
                                               NewMessageIn(),
                                               MessageTile(
-                                              model: model,
-                                              messageIndex: index,
-                                              reactions: model.messages
-                                                  .elementAt(index)
-                                                  .reactions,
-                                              userDisplayName: model.messages
-                                                  .elementAt(index)
-                                                  .userDisplayName,
-                                              userProfileUrl: model.messages
-                                                  .elementAt(index)
-                                                  .userProfileUrl,
-                                              time: model.messages
-                                                  .elementAt(index)
-                                                  .time,
-                                              message: model.messages
-                                                  .elementAt(index)
-                                                  .message,
-                                        ),
+                                                model: model,
+                                                messageIndex: index,
+                                                reactions: model.messages
+                                                    .elementAt(index)
+                                                    .reactions,
+                                                userDisplayName: model.messages
+                                                    .elementAt(index)
+                                                    .userDisplayName,
+                                                userProfileUrl: model.messages
+                                                    .elementAt(index)
+                                                    .userProfileUrl,
+                                                time: model.messages
+                                                    .elementAt(index)
+                                                    .time,
+                                                message: model.messages
+                                                    .elementAt(index)
+                                                    .message,
+                                              ),
                                             ],
-                                          );
-                                      
-                                        }
-                                        return MessageTile(
-                                          model: model,
-                                          messageIndex: index,
-                                          reactions: model.messages
-                                              .elementAt(index)
-                                              .reactions,
-                                          userDisplayName: model.messages
-                                              .elementAt(index)
-                                              .userDisplayName,
-                                          userProfileUrl: model.messages
-                                              .elementAt(index)
-                                              .userProfileUrl,
-                                          time: model.messages
-                                              .elementAt(index)
-                                              .time,
-                                          message: model.messages
-                                              .elementAt(index)
-                                              .message,
-                                        );
-                                      }),
-                                ],
-                              ),
-                            ),
-                          ),
+                                    );
+                                  }
+                                  return MessageTile(
+                                    model: model,
+                                    messageIndex: index,
+                                    reactions: model.messages
+                                        .elementAt(index)
+                                        .reactions,
+                                    userDisplayName: model.messages
+                                        .elementAt(index)
+                                        .userDisplayName,
+                                    userProfileUrl: model.messages
+                                        .elementAt(index)
+                                        .userProfileUrl,
+                                    time: model.messages
+                                        .elementAt(index)
+                                        .time,
+                                    message: model.messages
+                                        .elementAt(index)
+                                        .message,
+                                  );
+                                }),
+                          ],
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
                       child: SendMessageInputField(
                         sendMessage: (message) {
                           if (message.isNotEmpty) {
@@ -126,8 +149,7 @@ class DmView extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-            ));
+              ));
   }
 }
 
@@ -157,18 +179,20 @@ class MessageTile extends StatelessWidget {
         opaque: false,
         key: UniqueKey(),
         onHover: (event) {
-          model.onMessageHovered(true,messageIndex);
+          model.onMessageHovered(true, messageIndex);
         },
         onExit: (event) {
-          model.onMessageHovered(false,messageIndex);
+          model.onMessageHovered(false, messageIndex);
         },
         child: Stack(
           clipBehavior: Clip.none,
           children: [
             Container(
               foregroundDecoration: BoxDecoration(
-                  color:
-                      model.onMessageTileHover && model.onMessageHoveredIndex==messageIndex ? hoverColor : Colors.transparent),
+                  color: model.onMessageTileHover &&
+                          model.onMessageHoveredIndex == messageIndex
+                      ? hoverColor
+                      : Colors.transparent),
               color: kcBackgroundColor2,
               padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
               child: Row(
@@ -179,18 +203,13 @@ class MessageTile extends StatelessWidget {
                     margin: const EdgeInsets.all(2.0),
                     height: 50.h,
                     width: 50.w,
-                    decoration:
-                        BoxDecoration(
-                          border: Border.all(color:lightIconColor),
-                          borderRadius: BorderRadius.circular(8.r),
-                          image:DecorationImage(
-                            fit: BoxFit.fill,
-                            image:  NetworkImage(
-                      userProfileUrl,scale: 5
-                    ), )
-                          
-                         
-                        ),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: lightIconColor),
+                        borderRadius: BorderRadius.circular(8.r),
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(userProfileUrl, scale: 5),
+                        )),
                   ),
                   SizedBox(
                     width: 8.w,
@@ -208,7 +227,8 @@ class MessageTile extends StatelessWidget {
                             children: [
                               Text(
                                 userDisplayName,
-                                style: kHeading1TextStyle.copyWith(fontSize: 15),
+                                style: kHeading1TextStyle.copyWith(
+                                    fontSize: 15.sp),
                               ),
                               SizedBox(
                                 width: 10.w,
@@ -259,12 +279,14 @@ class MessageTile extends StatelessWidget {
                                   } else {
                                     return EmojiReaction(
                                       onTap: () {
-                                        model.reactToMessage(messageIndex, index);
+                                        model.reactToMessage(
+                                            messageIndex, index);
                                       },
                                       model: model,
                                       isReacted:
                                           reactions.elementAt(index).isReacted,
-                                      emoji: reactions.elementAt(index).reaction,
+                                      emoji:
+                                          reactions.elementAt(index).reaction,
                                       count: reactions.elementAt(index).count,
                                     );
                                   }
@@ -275,11 +297,14 @@ class MessageTile extends StatelessWidget {
                 ],
               ),
             ),
-            model.onMessageTileHover && model.onMessageHoveredIndex==messageIndex
+            model.onMessageTileHover &&
+                    model.onMessageHoveredIndex == messageIndex
                 ? Positioned(
                     top: -10,
                     right: 10,
-                    child: OnHoverWidget(model: model,),
+                    child: OnHoverWidget(
+                      model: model,
+                    ),
                   )
                 : SizedBox()
           ],
@@ -291,7 +316,9 @@ class MessageTile extends StatelessWidget {
 
 class DateWidget extends StatelessWidget {
   final String date;
+
   DateWidget({required this.date});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -313,7 +340,7 @@ class DateWidget extends StatelessWidget {
             children: [
               Text(
                 date,
-                style: kHeading1TextStyle.copyWith(fontSize: 10),
+                style: kHeading1TextStyle.copyWith(fontSize: 10.sp),
               ),
               SizedBox(
                 width: 5.w,
@@ -355,7 +382,9 @@ class TopRowActions extends StatelessWidget {
 class TopRowItem extends StatelessWidget {
   final String icon;
   final String label;
+
   TopRowItem({required this.label, required this.icon});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -408,14 +437,16 @@ class NewMessageIn extends StatelessWidget {
 
 class OnHoverWidget extends StatelessWidget {
   final DmViewModel model;
+
   OnHoverWidget({required this.model});
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
         Container(
-          height:50.h,
+          height: 50.h,
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
             color: kcBackgroundColor2,
@@ -426,35 +457,57 @@ class OnHoverWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              HoverItem(model: model,icon: SVGAssetPaths.fluentEmoji,onHover: (event) {
-                model.onHoverActionsHovered(true,SVGAssetPaths.add_reaction_container,-45);
-              }, onTap: () {}),
+              HoverItem(
+                  model: model,
+                  icon: SVGAssetPaths.fluentEmoji,
+                  onHover: (event) {
+                    model.onHoverActionsHovered(
+                        true, SVGAssetPaths.add_reaction_container, -45);
+                  },
+                  onTap: () {}),
               SizedBox(
                 width: 10.w,
               ),
-              HoverItem(model: model,icon: SVGAssetPaths.thread,onHover: (event) {
-                model.onHoverActionsHovered(true,SVGAssetPaths.reply_thread_container,-15);
-              }, onTap: () {}),
+              HoverItem(
+                  model: model,
+                  icon: SVGAssetPaths.thread,
+                  onHover: (event) {
+                    model.onHoverActionsHovered(
+                        true, SVGAssetPaths.reply_thread_container, -15);
+                  },
+                  onTap: () {}),
               SizedBox(
                 width: 10.w,
               ),
-              HoverItem(model: model,icon: SVGAssetPaths.shareIcon, onHover: (event) {
-                model.onHoverActionsHovered(true,SVGAssetPaths.share_message_container,15);
-              },onTap: () {}),
+              HoverItem(
+                  model: model,
+                  icon: SVGAssetPaths.shareIcon,
+                  onHover: (event) {
+                    model.onHoverActionsHovered(
+                        true, SVGAssetPaths.share_message_container, 15);
+                  },
+                  onTap: () {}),
               SizedBox(
                 width: 10.w,
               ),
-              HoverItem(model: model,icon: SVGAssetPaths.bookmarkIcon,onHover: (event) {
-                model.onHoverActionsHovered(true,SVGAssetPaths.add_saved_container,45);
-              }, onTap: () {}),
+              HoverItem(
+                  model: model,
+                  icon: SVGAssetPaths.bookmarkIcon,
+                  onHover: (event) {
+                    model.onHoverActionsHovered(
+                        true, SVGAssetPaths.add_saved_container, 45);
+                  },
+                  onTap: () {}),
               SizedBox(
                 width: 10.w,
               ),
-              HoverItem(model: model,
+              HoverItem(
+                  model: model,
                   icon: SVGAssetPaths.actionsIcon,
                   onHover: (event) {
-                model.onHoverActionsHovered(true,SVGAssetPaths.more_actions_container,50);
-              },
+                    model.onHoverActionsHovered(
+                        true, SVGAssetPaths.more_actions_container, 50);
+                  },
                   onTap: () {
                     showDialog(
                         context: context,
@@ -471,9 +524,14 @@ class OnHoverWidget extends StatelessWidget {
             ],
           ),
         ),
-      model.onHoverActionsHover
-                  ? Positioned(top: -40,left: model.hoverWidth, child: HoverInfo(action: model.hoverAction,width:model.hoverWidth))
-                  : SizedBox()],
+        model.onHoverActionsHover
+            ? Positioned(
+                top: -40,
+                left: model.hoverWidth,
+                child: HoverInfo(
+                    action: model.hoverAction, width: model.hoverWidth))
+            : SizedBox()
+      ],
     );
   }
 }
@@ -483,32 +541,42 @@ class HoverItem extends StatelessWidget {
   final Function(PointerHoverEvent event) onHover;
   final String icon;
   final DmViewModel model;
-  HoverItem({required this.icon,required this.onHover, required this.model, required this.onTap});
+
+  HoverItem(
+      {required this.icon,
+      required this.onHover,
+      required this.model,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return  MouseRegion(
-              opaque: false,
-              key: UniqueKey(),
-              onHover: onHover,
-              onExit: (event) {
-                model.onHoverActionsHovered(false,'',0);
-              },
-              child: GestureDetector(
-                onTap: onTap,
-                child: Container(
-                    foregroundDecoration: BoxDecoration(
-                        color:  Colors.transparent),
-                    child: SvgPicture.asset(icon,
-                    height: 30.h,
-                    width: 30.w,
-                    fit: BoxFit.fill,)),
-              ),
-            );
+    return MouseRegion(
+      opaque: false,
+      key: UniqueKey(),
+      onHover: onHover,
+      onExit: (event) {
+        model.onHoverActionsHovered(false, '', 0);
+      },
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+            foregroundDecoration: BoxDecoration(color: Colors.transparent),
+            child: SvgPicture.asset(
+              icon,
+              height: 30.h,
+              width: 30.w,
+              fit: BoxFit.fill,
+            )),
+      ),
+    );
   }
 }
 
 class DmScreenLeading extends StatelessWidget {
+  final DmViewModel? model;
+
+  DmScreenLeading(this.model);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -522,21 +590,22 @@ class DmScreenLeading extends StatelessWidget {
           Container(
             height: 40.h,
             width: 40.w,
-            decoration:
-                        BoxDecoration(
-                          //border: Border.all(color:lightIconColor),
-                          borderRadius: BorderRadius.circular(4.r),
-                          image:DecorationImage(
-                            fit: BoxFit.fill,
-                            image:  AssetImage(
-                      'assets/images/profile.png',
-                    ), ),
-          ),),
+            decoration: BoxDecoration(
+              //border: Border.all(color:lightIconColor),
+              borderRadius: BorderRadius.circular(4.r),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(
+                  'assets/images/profile.png',
+                ),
+              ),
+            ),
+          ),
           SizedBox(
             width: 5.h,
           ),
           Text(
-            'userName',
+            model!.getChatUserName()!,
             style: TextStyle(color: whiteColor),
           ),
           SizedBox(
@@ -561,7 +630,7 @@ class DmScreenTrailing extends StatelessWidget {
           icon: Icon(
             Icons.phone_outlined,
             color: whiteColor,
-            size: 25.h,
+            size: 25.sp,
           )),
     );
   }
@@ -573,12 +642,14 @@ class EmojiReaction extends StatelessWidget {
   final bool isReacted;
   final DmViewModel model;
   final Function() onTap;
+
   EmojiReaction(
       {required this.isReacted,
       required this.count,
       required this.emoji,
       required this.onTap,
       required this.model});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
