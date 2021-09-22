@@ -203,6 +203,6 @@ TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
 final clearStatusTextStyle = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.w600,
-  color: clearStatusBtnTxtColor,
+  color: bodyColor,
   fontFamily: 'Lato',
 );

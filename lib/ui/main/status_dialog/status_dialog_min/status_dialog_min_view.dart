@@ -72,7 +72,7 @@ class StatusDialogMinView extends StatelessWidget {
                     textStyle: clearStatusTextStyle,
                     padding: EdgeInsets.symmetric( horizontal: 16.w),
                     primary: Colors.white,
-                    onPrimary: clearStatusBtnTxtColor,
+                    onPrimary: bodyColor,
                     side: BorderSide(
                         color: clearStatusBtnBorderColor,
                         width: 1.0.w),
