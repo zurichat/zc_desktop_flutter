@@ -12,7 +12,7 @@ class AudioVideoView extends StatelessWidget {
   const AudioVideoView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
     final _scrollController = ScrollController();
 
     return ViewModelBuilder<AudioVideoViewModel>.reactive(
@@ -203,3 +203,13 @@ class AudioVideoView extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+  
