@@ -14,12 +14,14 @@ import '../ui/auth/change_password_page/change_password_view.dart';
 import '../ui/auth/check_email_page/check_email_view.dart';
 import '../ui/auth/forgot_password_page/forgot_password_view.dart';
 import '../ui/auth/login_page/login_view.dart';
+import '../ui/auth/login_page/splash_view.dart';
 import '../ui/auth/reset_password_page/reset_password_view.dart';
 import '../ui/auth/sign_up_page/sign_up_view.dart';
 import '../ui/auth/success_page/success_view.dart';
+import '../ui/main/channels_creation/channels_creation_view.dart';
 import '../ui/main/channels_display/channels_display_view.dart';
 import '../ui/main/channels_page/channels_view.dart';
-import '../ui/main/home_page/home_view.dart';
+import '../ui/main/dm/dm_view.dart';
 import '../ui/main/workspace_page/workspace_view.dart';
 import '../ui/startup_page/startup_view.dart';
 import '../ui/workspace_registeration_screen/create_workspace.dart';
@@ -28,9 +30,8 @@ import '../ui/workspace_registeration_screen/create_workspace_stage2.dart';
 import '../ui/workspace_registeration_screen/create_workspace_stage3.dart';
 
 class Routes {
-  static const String homeView = '/home-view';
-  static const String workspaceView = '/workspace-view';
-  static const String loginView = '/';
+  static const String loginView = '/login-view';
+  static const String splashView = '/splash-view';
   static const String startUpView = '/start-up-view';
   static const String signUpView = '/sign-up-view';
   static const String forgotPasswordView = '/forgot-password-view';
@@ -44,10 +45,11 @@ class Routes {
   static const String createWorkspaceStage2 = '/create-workspace-stage2';
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
   static const String channelsDisplayView = '/channels-display-view';
+  static const String channelsCreationView = '/channels-creation-view';
+  static const String workspaceView = '/';
   static const all = <String>{
-    homeView,
-    workspaceView,
     loginView,
+    splashView,
     startUpView,
     signUpView,
     forgotPasswordView,
@@ -61,6 +63,8 @@ class Routes {
     createWorkspaceStage2,
     createWorkspaceStage3,
     channelsDisplayView,
+    channelsCreationView,
+    workspaceView,
   };
 }
 
@@ -68,9 +72,8 @@ class StackedRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.homeView, page: HomeView),
-    RouteDef(Routes.workspaceView, page: WorkspaceView),
     RouteDef(Routes.loginView, page: LoginView),
+    RouteDef(Routes.splashView, page: SplashView),
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.signUpView, page: SignUpView),
     RouteDef(Routes.forgotPasswordView, page: ForgotPasswordView),
@@ -84,25 +87,25 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.createWorkspaceStage2, page: CreateWorkspaceStage2),
     RouteDef(Routes.createWorkspaceStage3, page: CreateWorkspaceStage3),
     RouteDef(Routes.channelsDisplayView, page: ChannelsDisplayView),
+    RouteDef(Routes.channelsCreationView, page: ChannelsCreationView),
+    RouteDef(
+      Routes.workspaceView,
+      page: WorkspaceView,
+      generator: WorkspaceViewRouter(),
+    ),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
-    HomeView: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const HomeView(),
-        settings: data,
-      );
-    },
-    WorkspaceView: (data) {
-      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
-        builder: (context) => const WorkspaceView(),
-        settings: data,
-      );
-    },
     LoginView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => LoginView(),
+        settings: data,
+      );
+    },
+    SplashView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const SplashView(),
         settings: data,
       );
     },
@@ -181,6 +184,52 @@ class StackedRouter extends RouterBase {
     ChannelsDisplayView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const ChannelsDisplayView(),
+        settings: data,
+      );
+    },
+    ChannelsCreationView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => ChannelsCreationView(),
+        settings: data,
+      );
+    },
+    WorkspaceView: (data) {
+      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
+        builder: (context) => const WorkspaceView(),
+        settings: data,
+      );
+    },
+  };
+}
+
+class WorkspaceViewRoutes {
+  static const String channelsView = '/';
+  static const String dmView = '/dm-view';
+  static const all = <String>{
+    channelsView,
+    dmView,
+  };
+}
+
+class WorkspaceViewRouter extends RouterBase {
+  @override
+  List<RouteDef> get routes => _routes;
+  final _routes = <RouteDef>[
+    RouteDef(WorkspaceViewRoutes.channelsView, page: ChannelsView),
+    RouteDef(WorkspaceViewRoutes.dmView, page: DmView),
+  ];
+  @override
+  Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
+  final _pagesMap = <Type, StackedRouteFactory>{
+    ChannelsView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => ChannelsView(),
+        settings: data,
+      );
+    },
+    DmView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const DmView(),
         settings: data,
       );
     },

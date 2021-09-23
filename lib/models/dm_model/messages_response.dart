@@ -1,85 +1,37 @@
-class MessagesResponse {
-  int count;
-  String? next;
-  String? previous;
-  List<Results> results;
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'messages_response.freezed.dart';
+part 'messages_response.g.dart';
 
-  MessagesResponse(
-      {required this.count, this.next, this.previous, required this.results});
+@freezed
+class MessagesResponse with _$MessagesResponse{
 
-  factory MessagesResponse.fromMap(Map<String, dynamic> json) {
-    return MessagesResponse(
-        count: json['count'],
-        next: json['next'],
-        results: json['results'].cast<Results>(),
-        previous: json['previous']);
-  }
-
-  Map<String, dynamic> toMap() => {
-        'count': count,
-        'next': next,
-        'results': results,
-        'previous': previous,
-      };
+  factory MessagesResponse({
+    @Default(0) int count,
+    String? next,
+    String? previous,
+    @Default([]) List<Results> results
+  }) = _MessagesResponse; 
   
-  
+  factory MessagesResponse.fromJson(Map<String, dynamic> json) => _$MessagesResponseFromJson(json);
 }
 
-class Results {
-  String id;
-  String createdAt;
-  List<String> media;
-  String message;
-  bool pinned;
-  List<String> reactions;
-  bool read;
-  String roomId;
-  List<String> savedBy;
-  String senderId;
-  List<String> threads;
+@freezed
+class Results with _$Results{
+  
+  factory Results(
+      {@Default('') String id,
+      @Default('') String created_at,
+      @Default([]) List<String> media,
+      @Default('') String message,
+      @Default(false) bool pinned,
+      @Default([]) List<String> reactions,
+      @Default(false) bool read,
+      @Default('') String room_id,
+      @Default([]) List<String> saved_by,
+      @Default('') String sender_id,
+      @Default([]) List<String> threads})= _Results;
 
-  Results(
-      {required this.id,
-      required this.createdAt,
-      required this.media,
-      required this.message,
-      required this.pinned,
-      required this.reactions,
-      required this.read,
-      required this.roomId,
-      required this.savedBy,
-      required this.senderId,
-      required this.threads});
-
-  factory Results.fromMap(Map<String, dynamic> json) {
-    return Results(
-      id: json['_id'],
-      createdAt: json['created_at'],
-      media: json['media'].cast<String>(),
-      message: json['message'],
-      pinned: json['pinned'],
-      reactions: json['reactions'].cast<String>(),
-      read: json['read'],
-      roomId: json['room_id'],
-      savedBy: json['saved_by'].cast<String>(),
-      senderId: json['sender_id'],
-      threads: json['threads'].cast<String>(),
-    );
-  }
-
-  Map<String, dynamic> toMap() => {
-        '_id': id,
-        'created_at': createdAt,
-        'room_id': roomId,
-        'media': media,
-        'message': message,
-        'pinned': pinned,
-        'reactions': reactions,
-        'read': read,
-        'saved_by': savedBy,
-        'sender_id': senderId,
-        'threads': threads,
-      };
+  factory Results.fromJson(Map<String, dynamic> json) => _$ResultsFromJson(json);
 }
 
 class MarkMessageAsReadResponse {

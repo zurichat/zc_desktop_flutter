@@ -38,7 +38,8 @@ class DMService {
     }
   }
 
-  Future<void> sendMessage(var roomId, var senderId, var message) async {
+  Future<SendMessageResponse> sendMessage(
+      var roomId, var senderId, var message) async {
     print(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         .format(DateTime.now().toUtc())
         .toString());
@@ -58,16 +59,16 @@ class DMService {
           .toString(),
     });
 
-    var message_id = SendMessageResponse.fromJson(response).messageId;
-    print("message_d: ${message_id}");
+    return SendMessageResponse.fromJson(response);
   }
 
-  Future<String?> createRoom() async {
+  Future<String?> createRoom(
+      currentLoggedInUser.User currentUser, User user) async {
     final response = await _apiService.post(
       _apiService.apiConstants.dmCreateRoom,
       body: {
         "org_id": "1",
-        "room_user_ids": ["1", "2"],
+        "room_user_ids": [currentUser.id, user.id],
         "bookmarks": ["0"],
         "pinned": ["0"]
       },
@@ -77,24 +78,28 @@ class DMService {
   }
 
   Future<void> getRoomInfo(var roomId) async {
-    final response =
-        await _apiService.get(_apiService.apiConstants.dmGetRoomInfo,queryParameters: {'room_id': roomId});
+    final response = await _apiService.get(
+        _apiService.apiConstants.dmGetRoomInfo,
+        queryParameters: {'room_id': roomId});
     var res = RoomInfoResponse.fromJson(response).numberOfUsers;
     print("number of users: ${res}");
   }
 
   Future<List<Results>> fetchRoomMessages(var roomId) async {
-    final response =
-        await _apiService.get(_apiService.apiConstants.dmFetchRoomMessages(roomId));
-    return MessagesResponse.fromMap(response).results;
+    final response = await _apiService
+        .get(_apiService.apiConstants.dmFetchRoomMessages(roomId));
+    try {
+      return MessagesResponse.fromJson(response).results;
+    } catch (on, stacktrace) {
+      print(stacktrace);
+      return [];
+    }
   }
 
   Future<void> markMessageAsRead(var messageId) async {
-    final response =
-        await _apiService.put(_apiService.apiConstants.dmMarkMessageAsRead(messageId),body: {});
+    final response = await _apiService
+        .put(_apiService.apiConstants.dmMarkMessageAsRead(messageId), body: {});
     var res = MarkMessageAsReadResponse.fromJson(response).read;
     print("message has been read: ${res}");
   }
-
-  
 }

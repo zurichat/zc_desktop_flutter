@@ -1,3 +1,7 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'room_response.freezed.dart';
+part 'room_response.g.dart';
+
 class CreateRoomResponse {
   final String roomId;
 
@@ -19,64 +23,30 @@ class CreateRoomResponse {
   String toString() => 'CreateRoomResponse(sessionID: $roomId)';
 }
 
-class SendMessageResponse {
-  final String status;
-  final String messageId;
-  final String roomId;
-  final String event;
-  final bool thread;
-  final SendMessageResponseData data;
+@freezed
+class SendMessageResponse with _$SendMessageResponse {
 
-  SendMessageResponse(
-      {required this.status,
-      required this.messageId,
-      required this.roomId,
-      required this.event,
-      required this.thread,
-      required this.data});
+  factory SendMessageResponse({ 
+      @Default('') String status,
+  @Default('') String message_id,
+  @Default('') String room_id,
+  @Default('') String event,
+  @Default(false) bool thread,
+  required SendMessageResponseData data,})= _SendMessageResponse;
 
-  factory SendMessageResponse.fromJson(Map<String, dynamic> json) {
-    return SendMessageResponse(
-      status: json['status'],
-      messageId: json['message_id'],
-      roomId: json['room_id'],
-      event: json['event'],
-      thread: json['thread'],
-      data: SendMessageResponseData.fromJson(json['data']),
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        'status': status,
-        'message_id': messageId,
-        'room_id': roomId,
-        'event': event,
-        'thread': thread,
-        'data': data,
-      };
+factory SendMessageResponse.fromJson(Map<String, dynamic> json) => _$SendMessageResponseFromJson(json);
 }
 
-class SendMessageResponseData {
-  final String senderId;
-  final String message;
-  final String createdAt;
+@freezed
+class SendMessageResponseData with _$SendMessageResponseData {
 
-  SendMessageResponseData(
-      {required this.senderId, required this.message, required this.createdAt});
+  factory SendMessageResponseData(
+      {
+       @Default('') String sender_id,
+  @Default('') String message,
+  @Default('') String created_at,})= _SendMessageResponseData;
 
-  factory SendMessageResponseData.fromJson(Map<String, dynamic> json) {
-    return SendMessageResponseData(
-      senderId: json['sender_id'],
-      message: json['message'],
-      createdAt: json['created_at'],
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        'sender_id': senderId,
-        'message': message,
-        'created_at': createdAt,
-      };
+  factory SendMessageResponseData.fromJson(Map<String, dynamic> json) => _$SendMessageResponseDataFromJson(json);
 }
 
 class RoomInfoResponse {
