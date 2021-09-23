@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesck_search_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
@@ -30,49 +30,13 @@ class ChannelsDisplayView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              width: model.channelWidth,
-              height: model.channelHeight,
-              // height: _size.height * .1,
-              decoration: BoxDecoration(color: kcPrimaryColor),
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: model.paddingTop,
-                    left: model.paddingLeft,
-                    right: model.paddingRight,
-                    bottom: model.paddingBottom),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: SvgPicture.asset(
-                        SVGAssetPaths.channelsListIcon,
-                        color: whiteColor,
-                      ),
-                    ),
-                    horizontalSpaceSmall,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ZcdeskText.displayChannelSmallHeaderStyle(
-                            model.channelText1),
-                        Container(
-                          child: Padding(
-                            padding: EdgeInsets.only(top: model.paddingTop2),
-                            child: SvgPicture.asset(
-                              SVGAssetPaths.channelDropDown,
-                              color: whiteColor,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+          DetailedCustomAppBar(
+            margin: EdgeInsets.only(left: 2.0.w),
+            leading: WorkSpaceTitle(
+              channelTitle: "Announcements",
             ),
           ),
+          /////////////////////////////////////////
           Padding(
             padding: EdgeInsets.only(
               top: 12.0,
@@ -146,7 +110,11 @@ class ChannelsDisplayView extends StatelessWidget {
                         itemCount: model.sidebarItems.length,
                         itemBuilder: (context, index) {
                           return ChannelsDisplayList(
-                              visibleJoined: model.sidebarItems.keys.toList()[index] == 'Annoucements' ? false : true,
+                              visibleJoined:
+                                  model.sidebarItems.keys.toList()[index] ==
+                                          'Annoucements'
+                                      ? false
+                                      : true,
                               paddingBottom2: model.paddingBottom2,
                               paddingall: model.paddingall,
                               paddingBottom3: model.paddingBottom3,
@@ -307,7 +275,8 @@ class ChannelsDisplayList extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border(
                             top: BorderSide(
-                                color: kcBorderColor,),
+                              color: kcBorderColor,
+                            ),
                             bottom: BorderSide(
                               color: kcBorderColor,
                             ),

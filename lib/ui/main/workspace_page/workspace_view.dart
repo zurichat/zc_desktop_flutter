@@ -8,7 +8,6 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
 import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
@@ -115,7 +114,7 @@ class WorkspaceWrapper extends StatelessWidget {
                                 },
                                 child: Icon(
                                   Icons.add,
-                                  color: kcPrimaryColor,
+                                  color: Colors.white,
                                   size: 20,
                                 ),
                               ),
@@ -164,7 +163,7 @@ class WorkspaceWrapper extends StatelessWidget {
                                                     ChannelsCreationView());
                                           },
                                           displayChannel: () {
-                                            model!.setDisplayChannels();
+                                            model!.openChannelsList();
                                           },
                                           list: List.generate(
                                             model!.channels.length.toInt(),
@@ -260,19 +259,25 @@ class DisplayMenu extends StatelessWidget {
       child: Column(
         children: [
           ReusableMenuItem(
-              iconPath: 'assets/icons/threads.svg',
-              text: 'Threads',
-              onTap: () {
-                model.getViewToDisplay(isThreads: true);
-              }),
+            iconPath: 'assets/icons/threads.svg',
+            text: 'Threads',
+            onTap: () {},
+          ),
           ReusableMenuItem(
-              iconPath: 'assets/icons/alldms.svg',
-              text: 'All DMs',
-              onTap: () {}),
+            iconPath: 'assets/icons/alldms.svg',
+            text: 'All DMs',
+            onTap: () {},
+          ),
           ReusableMenuItem(
-              iconPath: 'assets/icons/drafts.svg', text: 'Draft', onTap: () {}),
+            iconPath: 'assets/icons/drafts.svg',
+            text: 'Draft',
+            onTap: () {},
+          ),
           ReusableMenuItem(
-              iconPath: 'assets/icons/files.svg', text: 'Files', onTap: () {}),
+            iconPath: 'assets/icons/files.svg',
+            text: 'Files',
+            onTap: () {},
+          ),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
             text: 'Plugins',
