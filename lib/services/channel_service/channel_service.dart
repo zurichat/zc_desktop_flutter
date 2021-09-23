@@ -4,6 +4,18 @@ import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
 class ChannelService {
   final log = getLogger("ChannelService");
   Channel _channel = Channel(name: "");
+  List<Channel> _channelList = [
+    Channel(name: 'Socrates'),
+    Channel(name: 'Tolstoy'),
+    Channel(name: 'Hobbes'),
+    Channel(name: 'Karl'),
+    Channel(name: 'Hemmingway'),
+    Channel(name: 'Team-desktop-client'),
+    Channel(name: 'Hermes'),
+    Channel(name: 'Solozo'),
+    Channel(name: 'Aristotle'),
+    Channel(name: 'Anchor'),
+  ];
 
   void setChannel(Channel channel) {
     _channel = channel;
@@ -13,4 +25,7 @@ class ChannelService {
     await Future.delayed(Duration(seconds: 2));
     return this._channel;
   }
+
+  List<Channel> get channelList => [..._channelList];
+  int get channelListLength => _channelList.length;
 }

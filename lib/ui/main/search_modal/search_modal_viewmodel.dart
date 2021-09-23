@@ -2,8 +2,10 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/enums/button_type_enum.dart';
+import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/search_workspace/users_loacal_data.dart';
 
@@ -13,13 +15,13 @@ import 'package:zc_desktop_flutter/services/search_workspace/users_loacal_data.d
 class SearchModalViewmodel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _dmService = locator<DMService>();
-  // final _availableChannels = locator<ChannelService>();
+  final _channelService = locator<ChannelService>();
 
   String? _text;
   String? _hintText;
   String? _textFieldText;
   int? userDataLength;
-  //int? availableUserLength;
+  int? availableListLength;
   bool isClicked = false;
   bool swap = false;
   bool textFieldActivated = false;
@@ -32,18 +34,14 @@ class SearchModalViewmodel extends BaseViewModel {
   String get text => _text!;
   String get hintText => _hintText!;
   String get textFieldText => _textFieldText!;
-  // List<Channels> _channels = [];
-  // List<Channels> get channels => [..._channels];
+  List<Channel> _channels = [];
+  List<Channel> get channels => [..._channels];
   List<User> _userNames = [];
   List<User> get userDatas => [..._userNames];
   static const historyLength = 5;
   List<String> searchHistory = [];
   // List<Channels>? filteredChannelList;
   String? selectedTerm;
-
-  copyChannels() {
-    // _channels = _availableChannels.channelList;
-  }
 
   toggleButtonClicked() {
     isClicked = !isClicked;
@@ -66,13 +64,14 @@ class SearchModalViewmodel extends BaseViewModel {
         {
           _text = 'channel';
           _hintText = 'Search in Channels';
-          // availableChannelLength = _availableChannels.channelListLength;
+          availableListLength = _channelService.channelListLength;
         }
         break;
       case ButtonType.MESSAGE:
         {
           _text = 'message';
           _hintText = 'Search in Messages';
+          availableListLength = userData.length;
         }
         break;
       case ButtonType.FILE:
@@ -86,6 +85,9 @@ class SearchModalViewmodel extends BaseViewModel {
           _text = 'people';
           _hintText = 'Search anyone in workspace';
         }
+        break;
+      default:
+        {}
         break;
     }
   }
@@ -101,7 +103,7 @@ class SearchModalViewmodel extends BaseViewModel {
   //       return userLower.contains(queryLower);
   //     }).toList();
 
-  void getSuggestions(String query) {
+  void getSuggestionsForDM(String query) {
     _userNames = userData;
     var userList;
     userList = List.of(userData).where((e) {
@@ -110,7 +112,7 @@ class SearchModalViewmodel extends BaseViewModel {
       return userLower.startsWith(queryLower);
     }).toList();
 
-    userDataLength = userList.length;
+    availableListLength = userList.length;
     _userNames = userList;
 
     notifyListeners();
@@ -118,23 +120,39 @@ class SearchModalViewmodel extends BaseViewModel {
 
   void onChange(String value) {
     textFieldActivated = true;
-    getSuggestions(value);
+    getSuggestionsForChannels(value);
+    // if (isClicked) {
+    //   if (ButtonType == ButtonType.CHANNELS) {
+    //     getSuggestionsForChannels(value);
+    //   }
+    //   if (ButtonType == ButtonType.PEOPLE) {
+    //     getSuggestionsForDM(value);
+    //   }
+    //   getSuggestionsForDM(value);
+    // }
+
     notifyListeners();
   }
-  // void getSuggestionsForChannels(String query) {
-  //   _channels = _availableChannels.channelList;
-  //   var chanList;
-  //   chanList = List.of(_channels).where((e) {
-  //     final channelNameToLower = e.name!.toLowerCase();
-  //     final queryLower = query.toLowerCase();
-  //     return channelNameToLower.startsWith(queryLower);
-  //   }).toList();
 
-  //   availableChannelLength = chanList.length;
-  //   _channels = chanList;
+  void getSuggestionsForChannels(String query) {
+    _channels = _channelService.channelList;
+    var filteredList;
+    filteredList = List.of(_channels).where((e) {
+      final channelNameToLower = e.name!.toLowerCase();
+      final queryLower = query.toLowerCase();
+      return channelNameToLower.startsWith(queryLower);
+    }).toList();
 
-  //   notifyListeners();
-  // }
+    availableListLength = filteredList.length;
+    _channels = filteredList;
+
+    notifyListeners();
+  }
+
+  void searchChannels(Channel channel) {
+    _channelService.setChannel(channel);
+    _navigationService.navigateTo(WorkspaceViewRoutes.channelsView, id: 1);
+  }
 
   void searchUser(User user) {
     _dmService.setUser(user);
