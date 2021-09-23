@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
@@ -15,6 +18,37 @@ class ProfileEditView extends StatelessWidget {
   }) : super(key: key);
 
   final scrollcontroller = ScrollController();
+  File? imagefile;
+
+  Future chooceFileToUpload() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform
+          .pickFiles(allowMultiple: false, type: FileType.image);
+
+      if (result != null) {
+        File file = File(result.files.single.path!);
+      } else {
+        // User canceled the picker
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future cropUploadedFile() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform
+          .pickFiles(allowMultiple: false, type: FileType.image);
+
+      if (result != null) {
+        File file = File(result.files.single.path!);
+      } else {
+        // User canceled the picker
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,23 +192,39 @@ class ProfileEditView extends StatelessWidget {
                                         style: kHeading3TextStyle,
                                       ),
                                       verticalSpaceRegular,
-                                      Container(
-                                        height: 350.h,
-                                        width: 250.w,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(10),
-                                          ),
-                                        ),
-                                        child: Image.asset(
-                                            'assets/images/profile_placeholder.png'),
-                                      ),
+                                      imagefile != null
+                                          ? Container(
+                                              height: 300.h,
+                                              width: 200.w,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(10),
+                                                  ),
+                                                  image: DecorationImage(
+                                                    image:
+                                                        FileImage(imagefile!),
+                                                  )),
+                                            )
+                                          : Container(
+                                              height: 300.h,
+                                              width: 200.w,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                              ),
+                                              child: Image.asset(
+                                                  'assets/images/profile_placeholder.png'),
+                                            ),
                                       verticalSpaceRegular,
                                       Container(
                                         width: 200.w,
                                         height: 50.h,
                                         child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            chooceFileToUpload();
+                                          },
                                           child: Text(
                                             'Upload an image',
                                             style: subtitle2,
@@ -215,7 +265,7 @@ class ProfileEditView extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         "Cancel",
-                        style: authBtnStyle,
+                        style: subtitle2,
                       ),
                     ),
                     horizontalSpaceSmall,
