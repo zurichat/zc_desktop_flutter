@@ -606,7 +606,7 @@ class DmScreenLeading extends StatelessWidget {
           ),
           Text(
             model!.getChatUserName()!,
-            style: TextStyle(color: whiteColor),
+            style: TextStyle(color: Colors.black),
           ),
           SizedBox(
             width: 5.h,

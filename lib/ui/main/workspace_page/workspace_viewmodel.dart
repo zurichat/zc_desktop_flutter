@@ -33,22 +33,22 @@ class WorkspaceViewModel extends BaseViewModel {
   List<DM> _directMessages = [];
 
   List<Workspace> get workspace => _workspace;
+
   List<Channel> get channels => _channels;
+
   List<DM> get directMessages => _directMessages;
 
   bool get showDMs => _showDMs;
+
   bool get showMenus => _showMenus;
+
   bool get showChannels => _showChannels;
+
   bool get displayChannels => _displayChannels;
 
-  void setDisplayChannels() {
-    _displayChannels = !_displayChannels;
-    notifyListeners();
-  }
-
-  void goDisplayChannels() {
-    //_navigationService.navigateTo(Routes.channelsDisplayView);
-    notifyListeners();
+  void openChannelsList() {
+    _navigationService.navigateTo(WorkspaceViewRoutes.channelsDisplayView,
+        id: 1);
   }
 
   void openChannelsDropDownMenu() {
@@ -61,50 +61,25 @@ class WorkspaceViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void getViewToDisplay(
-      {int? index,
-      bool isChannel = false,
-      bool isDM = false,
-      bool isThreads = false}) {
-    if (isChannel) {
-      this.isChannel = true;
-    } else {
-      this.isChannel = false;
-    }
-
-    if (isDM) {
-      this.isDM = true;
-    } else {
-      this.isDM = false;
-    }
-
-    if (isThreads) {
-      this.isThreads = true;
-    } else {
-      this.isThreads = false;
-    }
-    notifyListeners();
-  }
-
   void setup() async {
-    await setupChannelsView();
+    await setupWorkspace();
   }
 
   void setCurrentWorkspaceIndex(int index) {
     log.i("$index from workspace");
     currentWorkspaceIndex = index;
-    setupChannelsView();
+    setupWorkspace();
     notifyListeners();
   }
 
   //TODO: ontap workspace, get workspaces
-  Future setupChannelsView() async {
+  Future setupWorkspace() async {
     await runBusyFuture(runTask());
   }
 
   // TODO: go to workspace creation page
   void goToCreateWorkspace() {
-    //_navigationService.navigateTo(Routes.createWorkspaceView);
+    _navigationService.navigateTo(Routes.createWorkspaceView);
   }
 
   // get workspaces
@@ -116,20 +91,14 @@ class WorkspaceViewModel extends BaseViewModel {
 
   void getChannels() {
     if (_workspace.isNotEmpty) {
-      for (int i = 0;
-          i < _workspace[currentWorkspaceIndex].channels!.length;
-          i++) {
-        _channels = _workspace[currentWorkspaceIndex].channels!;
-      }
+      _channels = _workspace[currentWorkspaceIndex].channels!;
     }
     notifyListeners();
   }
 
   void getUsers() {
     if (_workspace.isNotEmpty) {
-      for (int i = 0; i < _workspace[currentWorkspaceIndex].dms!.length; i++) {
-        _directMessages = _workspace[currentWorkspaceIndex].dms!;
-      }
+      _directMessages = _workspace[currentWorkspaceIndex].dms!;
     }
     notifyListeners();
   }
@@ -146,15 +115,14 @@ class WorkspaceViewModel extends BaseViewModel {
 
   String? getWorkspaceName() {
     if (_workspace.isNotEmpty) {
-      for (int i = 0; i < _workspace.length; i++) {
-        return _workspace[currentWorkspaceIndex].name!;
-      }
+      return _workspace[currentWorkspaceIndex].name!;
     }
     notifyListeners();
   }
 
   @override
   void dispose() {
+    super.dispose();
     controller.dispose();
   }
 }
