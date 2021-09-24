@@ -22,8 +22,8 @@ class LeftSideBarView extends ViewModelWidget<HomeViewModel> {
         decoration: BoxDecoration(color: Colors.white),
         child: Container(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 19.0,
+            padding:  EdgeInsets.symmetric(
+              horizontal: 19.0.w,
               vertical: 19.0,
             ),
             child: ListView.builder(

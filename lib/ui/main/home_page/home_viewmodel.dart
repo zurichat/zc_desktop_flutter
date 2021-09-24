@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:window_size/window_size.dart';
 
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
@@ -25,6 +26,8 @@ class HomeViewModel extends BaseViewModel {
   double get logoHeight => _logoHeight;
   String get title => _title;
 
+  bool windowIsSmall = false;
+
   final _storageService = locator<LocalStorageService>();
 
   bool get showThread => _showThread;
@@ -34,6 +37,10 @@ class HomeViewModel extends BaseViewModel {
   void goToInputView() {
     _navigationService.navigateTo(Routes.loginView);
     notifyListeners();
+  }
+
+  void isWindowSmall(Size size) {
+    getWindowMinSize() == Size(400, 500);
   }
 
   // left side bar related

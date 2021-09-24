@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:window_size/window_size.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/ui/main/center_area/center_area.dart';
 import 'package:zc_desktop_flutter/ui/main/left_side_bar/left_sidebar_view.dart';
 import 'package:zc_desktop_flutter/ui/main/organization_bar/organization_bar.dart';
 import 'package:zc_desktop_flutter/ui/main/right_side_bar/right_sidebar_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'home_viewmodel.dart';
@@ -87,26 +89,30 @@ class HomeView extends StatelessWidget {
             children: [
               Container(height: 40, child: buildAppBar(context, isActive: true)),
               Expanded(
-                child: Row(
-                  children: [
-                    OrganizationBarView(),
-                    LeftSideBarView(),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: CenterArea(),
+                child: LayoutBuilder(
+                  builder: (context, constraint) {
+                    return Row(
+                      children: [
+                        OrganizationBarView(),
+                        LeftSideBarView(),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: CenterArea(),
+                              ),
+                              if (_size.width > 1040)
+                                Expanded(
+                                  flex: 3,
+                                  child: RightSideBarView(),
+                                )
+                            ],
                           ),
-                          if (_size.width > 1040)
-                            Expanded(
-                              flex: 3,
-                              child: RightSideBarView(),
-                            )
-                        ],
-                      ),
-                    )
-                  ],
+                        )
+                      ],
+                    );
+                  }
                 ),
               ),
             ],

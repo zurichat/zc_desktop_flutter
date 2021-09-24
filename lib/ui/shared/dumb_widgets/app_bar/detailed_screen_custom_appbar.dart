@@ -17,7 +17,7 @@ class DetailedCustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.h,
+      height: 40,
       width: fullWidth(context),
       //color: Theme.of(context).accentColor,
       margin: margin,
@@ -26,8 +26,8 @@ class DetailedCustomAppBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          leading,
-          trailing,
+           Flexible(child: leading),
+           Flexible(child: trailing),
         ],
       ),
     );

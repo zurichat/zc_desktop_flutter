@@ -78,6 +78,7 @@ final dropDownBodyTextStyle = TextStyle(
   fontSize: 15.sp,
   color: Colors.white,
   fontWeight: FontWeight.w400,
+  overflow: TextOverflow.fade,
   fontFamily: 'Lato',
 );
 final leftSideBarLogoText = TextStyle(
@@ -153,7 +154,7 @@ final messageStyleNormal = TextStyle(
 );
 
 final messageTimeStyleNormal = TextStyle(
-  fontSize: 14.sp,
+  fontSize: 16.sp,
   fontFamily: 'Lato',
   fontWeight: FontWeight.w300,
  // color: Colors.grey[300]

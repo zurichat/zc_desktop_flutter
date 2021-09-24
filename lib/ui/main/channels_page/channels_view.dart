@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/main/dm/dm_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/message.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/reaction.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/user_avatar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 
@@ -33,77 +27,44 @@ class ChannelsView extends StatelessWidget {
                 ),
               ),
             )
-          : Container(
-              child: Column(
+          : Column(
                 children: [
                   DetailedCustomAppBar(
-                    margin: EdgeInsets.only(left: 2.0.w),
-                    leading: WorkSpaceTitle(
-                      channelTitle: model.getChannelName(),
-                    ),
-                    trailing: WorkSpaceMembers(),
+                   // margin: EdgeInsets.only(left: 2.0.w),
+                    leading: Text("# ${model.getChannelName()}",
+                      style: TextStyle(overflow: TextOverflow.fade)),
+                    trailing: WorkSpaceMembers(model: model,),
                   ),
-                  Container(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 12.0.w, vertical: 10.h),
-                      child: Scrollbar(
+                   Expanded(
+                     flex: 10,
+                     child: Scrollbar(
                         controller: model.controllerOne,
                         child: SingleChildScrollView(
-                          physics: ScrollPhysics(),
                           controller: model.controllerOne,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              MessageWidget(model: model),
-                              MessageWidget(model: model),
-                              MessageWidget(model: model),
-                              
-                            ],
+                          child: Container(
+                            width: fullWidth(context),
+                            padding: EdgeInsets.only(left: 12.0.w),
+                            child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: [
+                                      MessageWidget(model: model,messageIndex: 0,),
+                                      MessageWidget(model: model,messageIndex: 1,),
+                                      MessageWidget(model: model,messageIndex: 2,),
+                                      
+                                    ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
+                   ),
                 ],
               ),
-            ),
+            
       viewModelBuilder: () => ChannelsViewModel(),
     );
   }
 }
 
-
-
-
-Widget messageReplies(ChannelsViewModel model) {
-  return InkWell(
-    onTap: () {
-      print("Threads opened");
-    },
-    child: Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          constructRepliesHighLightAvatars(
-              userDefaultImageUrl: 'assets/images/4.png'),
-          constructRepliesHighLightAvatars(
-              userDefaultImageUrl: 'assets/images/mark.jpg'),
-          constructRepliesHighLightAvatars(
-              userDefaultImageUrl: 'assets/images/7.png'),
-          constructRepliesHighLightAvatars(
-              userDefaultImageUrl: model.userDefaultImageUrl),
-          horizontalSpaceTiny,
-          //TODO: Get message time of last reply in a thread
-          Text('${ChannelsViewModel().numberOfReplies} replies',
-              style: TextStyle(color: kcSecondaryColor)),
-          horizontalSpaceTiny,
-          Text('Last reply yesterday at 9:12PM')
-        ],
-      ),
-    ),
-  );
-}
 
 Widget constructRepliesHighLightAvatars({
   required String userDefaultImageUrl,

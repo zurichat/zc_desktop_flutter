@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
-
 import '../const_app_colors.dart';
+import '../const_text_styles.dart';
 
 class LeftSideBarItem extends StatelessWidget {
   final Function() onTap;
@@ -21,22 +20,26 @@ class LeftSideBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: <Widget>[
-              ImageIcon(
-                icon,
-                size: 15.sp,
-                color: kcPrimaryColor,
+      child:  Container(
+        width:fullWidth(context).w,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: <Widget>[
+                  ImageIcon(
+                    icon,
+                    size: 15.sp,
+                    color: kcPrimaryColor,
+                  ),
+                  horizontalSpaceSmall,
+                  Text(title,style: kLeftSideBarStyle,),
+                  
+                ],
               ),
-              horizontalSpaceSmall,
-              ZcdeskText.leftSideBarText(title),
+              verticalSpaceRegular
             ],
           ),
-          verticalSpaceRegular
-        ],
       ),
     );
   }

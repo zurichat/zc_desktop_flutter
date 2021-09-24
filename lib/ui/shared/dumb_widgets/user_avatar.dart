@@ -6,7 +6,7 @@ class UserAvatar extends StatelessWidget {
     Key? key,
      required this.imageUri,
      this.h = 40,
-     this.w = 35
+     this.w = 40
      }) : super(key: key);
 
   final String imageUri;
@@ -16,8 +16,8 @@ class UserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: h.h,
-        width: h.w,
+        height: h,
+        width: h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
           image:

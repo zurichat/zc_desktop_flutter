@@ -34,6 +34,10 @@ build/
 lib/generated_plugin_registrant.dart
 lib/models/preferences_model/**/*.g.dart
 lib/models/preferences_model/**/*.freezed.dart
+lib/models/dm_model/**/*.g.dart
+lib/models/dm_model/**/*.freezed.dart
+lib/app/app.locator.dart
+lib/app/app.router.dart
 
 
 # Android related
