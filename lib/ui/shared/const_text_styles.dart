@@ -68,7 +68,7 @@ final authBtnStyle = TextStyle(
 
 final kLeftSideBarStyle = TextStyle(
   fontSize: 15.sp,
-  color: Colors.black,
+  color: Colors.white,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
   fontFamily: 'Lato',
@@ -76,7 +76,7 @@ final kLeftSideBarStyle = TextStyle(
 
 final dropDownBodyTextStyle = TextStyle(
   fontSize: 15.sp,
-  color: Colors.black,
+  color: Colors.white,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
@@ -106,10 +106,8 @@ final headline6 = TextStyle(
   fontFamily: 'Lato',
 );
 
-TextStyle headline7 = TextStyle(
-    fontSize: 18.sp,
-    fontWeight: FontWeight.w600,
-    fontFamily: 'Lato');
+TextStyle headline7 =
+    TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
 
 final headline3 = TextStyle(
   fontSize: 35.sp,
@@ -140,6 +138,25 @@ final preferenceStyleBold = TextStyle(
   fontSize: 16.sp,
   fontFamily: 'Lato',
   fontWeight: FontWeight.w700,
+);
+
+final messageSenderStyleBold = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w800,
+);
+
+final messageStyleNormal = TextStyle(
+  fontSize: 15.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w400,
+);
+
+final messageTimeStyleNormal = TextStyle(
+  fontSize: 14.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w300,
+ // color: Colors.grey[300]
 );
 
 //Create and Display Channels Styles
@@ -198,3 +215,11 @@ TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
     color: createChannelHeaderColor,
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
+
+//status dialogs styles
+final clearStatusTextStyle = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: bodyColor,
+  fontFamily: 'Lato',
+);

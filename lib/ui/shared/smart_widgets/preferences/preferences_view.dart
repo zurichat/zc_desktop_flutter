@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenc
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/advanced/advanced_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/audio_video/audio_video_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/language_region_preference/language_preference_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/mark_as_read/mark_as_read_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/notification/preferences_notification_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/sidebar/preferences_sidebar_view.dart';
@@ -70,7 +71,7 @@ class PreferenceView extends StatelessWidget {
         'assetName': 'assets/icons/mark.svg', //Icons.launch,
         'widget': Container(
           child: Center(
-            child: ZcdeskText.headline('Mark as read'),
+            child:  MarkAsRead(),
           ),
         )
       },
@@ -89,6 +90,9 @@ class PreferenceView extends StatelessWidget {
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).colorScheme.primary),
+              borderRadius: BorderRadius.circular(15)),
           height: 750.h,
           width: 827.w,
           child: Column(

@@ -78,10 +78,9 @@ class ChannelsDisplayViewModel extends BaseViewModel {
   }
 
   Map<String, String> _sidebarItems = {
-    'channelName': '34',
-    'general': '500',
-    'annoucement': '45',
-    'newChannel': '45',
+    'Annoucements': '34',
+    'Team-Desktop-Client': '500',
+    'Games': '45',
   };
 
   Map<String, String> get sidebarItems => _sidebarItems;

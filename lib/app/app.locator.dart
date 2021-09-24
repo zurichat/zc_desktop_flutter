@@ -10,11 +10,15 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
-import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 import '../services/api/api_service.dart';
 import '../services/auth_service.dart';
+import '../services/channel_service/channel_service.dart';
+import '../services/channels_service.dart';
+import '../services/dm_service/dm_service.dart';
 import '../services/local_storage_service.dart';
+import '../services/organisation/organisation_service.dart';
+import '../services/window_title_bar_service.dart';
 import '../services/workspace_service.dart';
 
 final locator = StackedLocator.instance;
@@ -31,8 +35,12 @@ Future setupLocator(
 
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => AuthService());
+  locator.registerLazySingleton(() => ChannelsService());
   locator.registerLazySingleton(() => ApiService());
   locator.registerLazySingleton(() => WorkspaceService());
+  locator.registerLazySingleton(() => DMService());
+  locator.registerLazySingleton(() => ChannelService());
+  locator.registerLazySingleton(() => OrganizationService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
   locator.registerLazySingleton(() => WindowTitleBarService());
 }

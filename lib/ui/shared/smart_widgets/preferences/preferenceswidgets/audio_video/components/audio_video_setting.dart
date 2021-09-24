@@ -19,7 +19,9 @@ class AudioVideoSetting extends StatelessWidget {
   final String? subtitle;
   final bool useSubtitle;
   @override
-  Widget build(BuildContext context) {
+
+
+Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment:
           useSubtitle ? CrossAxisAlignment.start : CrossAxisAlignment.center,
@@ -40,14 +42,14 @@ class AudioVideoSetting extends StatelessWidget {
                 title,
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                style: kBodyTextStyle.copyWith(color: bodyColor, fontSize: 15.sp),
+                style: preferenceStyleNormal,
               ),
             ),
             if (useSubtitle) SizedBox(height: 2.h),
             if (useSubtitle)
               Text(
                 subtitle!,
-                style: kBodyTextStyle.copyWith(color: bodyColor.withOpacity(.5)),
+                style: preferenceStyleNormal,
               ),
           ],
         )
@@ -55,3 +57,12 @@ class AudioVideoSetting extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+  

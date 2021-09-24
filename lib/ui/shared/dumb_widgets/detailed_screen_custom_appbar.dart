@@ -19,13 +19,16 @@ class DetailedCustomAppBar extends StatelessWidget {
     return Container(
       height: 50.h,
       width: fullWidth(context),
-      color: Color(0xFF00B87C),
+      //color: Theme.of(context).accentColor,
       margin: margin,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.0.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [leading, trailing],
+        children: [
+          leading,
+          trailing,
+        ],
       ),
     );
   }

@@ -174,6 +174,8 @@ class SideBarView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => SideBarViewModel(),
+      onModelReady: (model) => model.fetchAndSetSetting(),
+      onDispose: (model) => model.saveSettings(),
     );
   }
 }

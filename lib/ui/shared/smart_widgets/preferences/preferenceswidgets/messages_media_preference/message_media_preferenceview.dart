@@ -35,6 +35,8 @@ class MessageMediaPreferenceView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => MessageMediaPreferenceViewModel(),
+      onModelReady: (model) => model.fetchAndSetMsgSetting(),
+      onDispose: (model) => model.saveToDisk(),
     );
   }
 }
@@ -47,20 +49,13 @@ Widget bringEmailIntoZuriSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(
           model.messagepreferencetitles[7],
-          style: TextStyle(
-              color: headerColor,
-              fontSize: 16.sp,
-              fontFamily: 'Lato',
-              fontWeight: FontWeight.bold),
+          style: preferenceStyleBold,
         ),
         verticalSpaceSmall,
         SizedBox(
           width: 350,
           child: Text(model.longText[0],
-              style: TextStyle(
-                  fontSize: 12.sp,
-                  fontFamily: 'Lato',
-                  fontWeight: FontWeight.w500)),
+              style: preferenceStyleNormal),
         ),
         verticalSpaceMedium,
         PreferenceButton(
@@ -78,11 +73,7 @@ Widget inLineMediaSection(MessageMediaPreferenceViewModel model) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(model.messagepreferencetitles[6],
-            style: TextStyle(
-                color: headerColor,
-                fontSize: 16.sp,
-                fontFamily: 'Lato',
-                fontWeight: FontWeight.bold)),
+            style: preferenceStyleBold),
         verticalSpaceSmall,
         ZcCheckBox1(
             onChanged: (v) {
@@ -130,12 +121,7 @@ Widget additionalOptionsSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(
           model.messagepreferencetitles[3],
-          style: TextStyle(
-              color: headerColor,
-              fontSize: 16.sp,
-              fontFamily: 'Lato',
-              fontWeight: FontWeight.bold),
-        ),
+          style: preferenceStyleBold  ),
         verticalSpaceSmall,
         ZcCheckBox1(
             onChanged: (v) {
@@ -191,11 +177,7 @@ class ZcCheckBox1 extends StatelessWidget {
         horizontalSpaceVeryTiny,
         Flexible(
             child: Text(txt!,
-                style: TextStyle(
-                    fontSize: 12.sp,
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.w500,
-                    color: leftNavBarColor))),
+                style:preferenceStyleNormal)),
       ],
     );
   }
@@ -209,21 +191,16 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(
           model.messagepreferencetitles[4],
-          style: TextStyle(
-              color: headerColor,
-              fontSize: 16.sp,
-              fontFamily: 'Lato',
-              fontWeight: FontWeight.bold),
+          style: preferenceStyleBold,
         ),
         verticalSpaceSmall,
         Text(
           model.messagepreferencetitles[5],
-          style: headline6.copyWith(fontSize: 14, fontWeight: FontWeight.w600),
+          style: preferenceStyleNormal,
         ),
         verticalSpaceSmall,
         Text(model.longText[1],
-            style: kBodyTextStyle.copyWith(
-                fontSize: 12, fontWeight: FontWeight.w500)),
+            style: preferenceStyleNormal),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -273,13 +250,11 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
           width: 400.w,
           child: Text(
               'Display the jumbo versions of emoji (up to 23 at a time!) in messages without text.',
-              style: kBodyTextStyle.copyWith(
-                  fontSize: 12, fontWeight: FontWeight.w500)),
+              style: preferenceStyleNormal),
         ),
         verticalSpaceMedium,
         Text('Here is an Example',
-            style: kHeading4TextStyle.copyWith(
-                fontSize: 12, fontWeight: FontWeight.w500, color: timeColor)),
+            style: preferenceStyleNormal),
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/People of Brooklyn Avatar 2.png',
@@ -305,19 +280,11 @@ Widget themeSection(MessageMediaPreferenceViewModel model) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(model.messagepreferencetitles[0],
-            style: TextStyle(
-                color: headerColor,
-                fontSize: 16.sp,
-                fontFamily: 'Lato',
-                fontWeight: FontWeight.bold)),
+            style: preferenceStyleBold),
         buildThemeRadioColumn(model),
         verticalSpaceSmall,
         Text('Here is an Example',
-            style: TextStyle(
-                fontSize: 13.sp,
-                fontFamily: 'Lato',
-                fontWeight: FontWeight.w500,
-                color: bodyColor)),
+            style: preferenceStyleNormal),
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/GroupLogo.png',
@@ -343,11 +310,7 @@ Widget nameSection(MessageMediaPreferenceViewModel model) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(model.messagepreferencetitles[2],
-            style: TextStyle(
-                color: headerColor,
-                fontSize: 16.sp,
-                fontFamily: 'Lato',
-                fontWeight: FontWeight.bold)),
+            style:preferenceStyleBold),
         buildNameRadioColumn(model),
         verticalSpaceSmall,
         ReusableContainer(
@@ -435,11 +398,7 @@ class ReusableContainer extends StatelessWidget {
                             children: [
                               Text(
                                 title!,
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    fontFamily: 'Lato',
-                                    fontWeight: FontWeight.w700,
-                                    color: headerColor),
+                                style: preferenceStyleBold,
                               ),
                               horizontalSpaceSmall,
                               Column(
@@ -447,10 +406,7 @@ class ReusableContainer extends StatelessWidget {
                                   verticalSpaceTiny,
                                   Text(
                                     time!,
-                                    style: TextStyle(
-                                        fontSize: 12.sp,
-                                        fontFamily: 'Lato',
-                                        fontWeight: FontWeight.w500),
+                                    style: preferenceStyleNormal,
                                   ),
                                 ],
                               )
@@ -466,10 +422,7 @@ class ReusableContainer extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     text: TextSpan(
                                         text: subtitle!,
-                                        style: kHeading4TextStyle.copyWith(
-                                            color: Colors.black,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500),
+                                        style: preferenceStyleNormal,
                                         children: [
                                           TextSpan(
                                             text: subtxt,
@@ -512,11 +465,7 @@ buildRadio(
       ),
       Text(
         txt,
-        style: TextStyle(
-            fontSize: 12.sp,
-            fontFamily: 'Lato',
-            fontWeight: FontWeight.w500,
-            color: bodyColor),
+        style: preferenceStyleNormal,
       )
     ],
   );
@@ -570,3 +519,16 @@ enum PrefTheme {
   JustDisplayNames,
   FullandDisplaynames,
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

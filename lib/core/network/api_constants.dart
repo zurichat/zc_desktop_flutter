@@ -1,14 +1,22 @@
+import 'package:flutter/cupertino.dart';
+
 class APIConstants {
   static const String scheme = 'https';
 
   final String host;
+  final String dmHost;
 
   final int receiveTimeout = 3000;
   final int sendTimeout = 5000;
 
-  APIConstants.production() : host = 'api.zuri.chat';
+  APIConstants.production()
+      : host = 'api.zuri.chat',
+        dmHost = 'dm.zuri.chat';
 
   Uri get baseUri => Uri(scheme: scheme, host: host, path: '/');
+
+  Uri get createChannelUri => Uri(
+      scheme: scheme, host: 'channels.zuri.chat/api/', path: 'v1/1/channels/');
 
   Uri get signinUri => Uri(scheme: scheme, host: host, path: '/auth/login');
 
@@ -22,4 +30,30 @@ class APIConstants {
 
   Uri get requestPasswordResetCodeUri => Uri(
       scheme: scheme, host: host, path: '/account/request-password-reset-code');
+
+  // Organisation endpoints
+  Uri getOrganisationsUri(email) =>
+      Uri(scheme: scheme, host: host, path: '/users/$email/organizations');
+
+  Uri get createOrganisationUri =>
+      Uri(scheme: scheme, host: host, path: '/organizations');
+
+  Uri getOrganisationUri(String organisationId) =>
+      Uri(scheme: scheme, host: host, path: '/organizations/$organisationId');
+
+  //DMs endpoints
+  Uri get dmCreateRoom =>
+      Uri(scheme: scheme, host: dmHost, path: '/api/v1/createroom');
+
+  Uri dmSendMessage(String roomId) => Uri(
+      scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');
+
+  Uri get dmGetRoomInfo =>
+      Uri(scheme: scheme, host: dmHost, path: '/api/v1/room-info');
+
+  Uri dmFetchRoomMessages(String roomId) =>
+      Uri(scheme: scheme, host: dmHost, path: '/api/v1/messages/${roomId}');
+
+  Uri dmMarkMessageAsRead(String messageId) =>
+      Uri(scheme: scheme, host: dmHost, path: '/api/v1/${messageId}/read/new/');
 }

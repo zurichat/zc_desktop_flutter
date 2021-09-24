@@ -38,7 +38,7 @@ class SignUpViewModel extends BaseViewModel {
   }
 
   void goToHome() {
-    _navigationService.navigateTo(Routes.homeView);
+    //_navigationService.navigateTo(Routes.homeView);
     notifyListeners();
   }
 }

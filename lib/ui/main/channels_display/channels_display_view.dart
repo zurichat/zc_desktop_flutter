@@ -9,6 +9,8 @@ import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_vie
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesck_search_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
@@ -28,49 +30,13 @@ class ChannelsDisplayView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              width: model.channelWidth,
-              height: model.channelHeight,
-              // height: _size.height * .1,
-              decoration: BoxDecoration(color: kcPrimaryColor),
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: model.paddingTop,
-                    left: model.paddingLeft,
-                    right: model.paddingRight,
-                    bottom: model.paddingBottom),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: SvgPicture.asset(
-                        ChannelsListSvg,
-                        color: whiteColor,
-                      ),
-                    ),
-                    horizontalSpaceSmall,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ZcdeskText.displayChannelSmallHeaderStyle(
-                            model.channelText1),
-                        Container(
-                          child: Padding(
-                            padding: EdgeInsets.only(top: model.paddingTop2),
-                            child: SvgPicture.asset(
-                              ChannelDropDownSvg,
-                              color: whiteColor,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+          DetailedCustomAppBar(
+            margin: EdgeInsets.only(left: 2.0.w),
+            leading: WorkSpaceTitle(
+              channelTitle: "Announcements",
             ),
           ),
+          /////////////////////////////////////////
           Padding(
             padding: EdgeInsets.only(
               top: 12.0,
@@ -146,7 +112,7 @@ class ChannelsDisplayView extends StatelessWidget {
                           return ChannelsDisplayList(
                               visibleJoined:
                                   model.sidebarItems.keys.toList()[index] ==
-                                          'annoucement'
+                                          'Annoucements'
                                       ? false
                                       : true,
                               paddingBottom2: model.paddingBottom2,

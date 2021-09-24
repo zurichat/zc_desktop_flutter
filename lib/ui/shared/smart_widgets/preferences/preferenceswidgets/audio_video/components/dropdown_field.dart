@@ -17,7 +17,7 @@ class DropDownField<T> extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     return SizedBox(
       width: 366.w,
       height: 40,
@@ -42,7 +42,7 @@ class DropDownField<T> extends StatelessWidget {
                     value: value,
                     child: Text(
                       getLabel(value),
-                      style: kBodyTextStyle.copyWith(color: bodyColor),
+                      style: preferenceStyleNormal,
                       overflow: TextOverflow.ellipsis,
                     ),
                   );
