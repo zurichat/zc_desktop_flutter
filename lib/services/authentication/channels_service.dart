@@ -1,5 +1,5 @@
 import 'package:stacked/stacked_annotations.dart';
-
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../api/api_service.dart';
@@ -9,10 +9,15 @@ const localAuthResponseKey = 'localAuthResponse';
 
 @LazySingleton()
 class ChannelsService {
+  final log = getLogger('ChannelsApiService');
   // final _localStorageService = locator<LocalStorageService>();
   final _apiService = locator<ApiService>();
+  // final storageService = locator<SharedPreferenceLocalStorage>();
+  // final _userService = locator<UserService>();
 
-  // AuthResponse? authResponse;
+  // Your functions for api calls can go in here
+  // https://channels.zuri.chat/api/v1/61459d8e62688da5302acdb1/channels/
+
 
   Future<void>createChannel({
     required String name,

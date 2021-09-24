@@ -222,13 +222,13 @@ class WorkspaceViewRouter extends RouterBase {
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
     ChannelsView: (data) {
-      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => ChannelsView(),
         settings: data,
       );
     },
     DmView: (data) {
-      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const DmView(),
         settings: data,
       );
