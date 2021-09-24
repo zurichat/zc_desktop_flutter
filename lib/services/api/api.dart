@@ -1,5 +1,9 @@
 abstract class Api {
-  Future<dynamic> get(Uri uri);
+  Future<dynamic> get(
+    Uri uri, {
+    Map<String, dynamic>? data,
+    Map<String, String>? headers,
+  });
 
   Future<dynamic> post(
     Uri uri, {

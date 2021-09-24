@@ -10,7 +10,7 @@ class APIConstants {
 
   Uri get baseUri => Uri(scheme: scheme, host: host, path: '/');
 
-  Uri get createChannelUri => Uri(scheme: scheme, host: 'channels.zuri.chat/api/', path: 'v1/1/channels/');
+  Uri get createChannelUri => Uri(scheme: scheme, host: 'channels.zuri.chat', path: '/api/v1/614679ee1a5607b13c00bcb7/channels/');
 
   Uri get signinUri => Uri(scheme: scheme, host: host, path: '/auth/login');
 

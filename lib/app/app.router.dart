@@ -30,7 +30,7 @@ import '../ui/workspace_registeration_screen/create_workspace_stage2.dart';
 import '../ui/workspace_registeration_screen/create_workspace_stage3.dart';
 
 class Routes {
-  static const String loginView = '/login-view';
+  static const String loginView = '/';
   static const String splashView = '/splash-view';
   static const String startUpView = '/start-up-view';
   static const String signUpView = '/sign-up-view';
@@ -46,7 +46,7 @@ class Routes {
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
   static const String channelsDisplayView = '/channels-display-view';
   static const String channelsCreationView = '/channels-creation-view';
-  static const String workspaceView = '/';
+  static const String workspaceView = '/workspace-view';
   static const all = <String>{
     loginView,
     splashView,
@@ -194,7 +194,7 @@ class StackedRouter extends RouterBase {
       );
     },
     WorkspaceView: (data) {
-      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const WorkspaceView(),
         settings: data,
       );
@@ -204,9 +204,11 @@ class StackedRouter extends RouterBase {
 
 class WorkspaceViewRoutes {
   static const String channelsView = '/';
+  static const String channelsDisplayView = '/channels-display-view';
   static const String dmView = '/dm-view';
   static const all = <String>{
     channelsView,
+    channelsDisplayView,
     dmView,
   };
 }
@@ -216,6 +218,8 @@ class WorkspaceViewRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(WorkspaceViewRoutes.channelsView, page: ChannelsView),
+    RouteDef(WorkspaceViewRoutes.channelsDisplayView,
+        page: ChannelsDisplayView),
     RouteDef(WorkspaceViewRoutes.dmView, page: DmView),
   ];
   @override
@@ -224,6 +228,12 @@ class WorkspaceViewRouter extends RouterBase {
     ChannelsView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => ChannelsView(),
+        settings: data,
+      );
+    },
+    ChannelsDisplayView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const ChannelsDisplayView(),
         settings: data,
       );
     },

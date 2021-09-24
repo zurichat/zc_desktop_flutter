@@ -1,15 +1,19 @@
+import 'dart:convert';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
+import 'package:zc_desktop_flutter/models/auth_response.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class ChannelsCreationViewModel extends BaseViewModel with Validator {
   final _navigator = locator<NavigationService>();
+  final _localStorageService = locator<LocalStorageService>();
   // var _currentPageIndex = 0;
 
   // get currentPageIndex => _currentPageIndex;
@@ -79,6 +83,9 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
   bool get isSwitched => _isSwitched;
   String get errorMessage => _errorMessage;
 
+  static const localAuthResponseKey = 'localAuthResponse';
+
+
   //TextController Error getters
 
   bool get isCreateChannelSuccessful => _isCreateChannelSuccessful;
@@ -140,6 +147,28 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
+  Future<void> performCreateChannel(
+      String name, String owner, String description, bool private) async {
+
+    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    final resUser = AuthResponse.fromMap(jsonDecode(authResponse as String));
+
+    await _auth.createChannels(
+        name: name, owner: owner, description: description, private: private);
+    print(resUser.user.displayName);
+    // _navigationService.navigateTo(Routes.checkEmailView, arguments: {
+    //   'email': email,
+    //   'isReset': false,
+    // });
+  }
+
+  /// Error should be handled here. It could be displaying a toast of something else
+  @override
+  void onFutureError(error, Object? key) {
+    print('Handle Error here');
+    super.onFutureError(error, key);
+  }
+
   Future<void> createchannel({
     required String name,
     required String owner,
@@ -164,49 +193,47 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
       //   _channelDescriptionError = null;
       // }
 
-      notifyListeners();
+      // notifyListeners();
       return;
     }
-
-    try {
-      _setIsBusy();
-      await runBusyFuture(
-          performCreateChannel(name, owner, description, private));
-      _setIsCreateChannelSuccessful();
-    } catch (e) {
-      if (e.toString().contains('SocketException')) {
-        setErrorMessage('Please check your internet and try again!');
-      } else {
-        setErrorMessage('An unexpected error occured!');
-      }
-      _setIsBusy();
-      _setIsCreateChannelNotSuccessful();
-      return;
+    try{
+      await runBusyFuture(performCreateChannel(name, owner, description, private));
+    }catch(e){
+      print('ERROORRRR!!1');
     }
-    await Future.delayed(
-      Duration(milliseconds: 5000),
-    );
+    
+    // try {
+    //   // _setIsBusy();
+    //   await runBusyFuture(performCreateChannel(name, owner, description, private));
+    // } catch (e) {
+    //   if (e.toString().contains('SocketException')) {
+    //     setErrorMessage('Please check your internet and try again!');
+    //   } else {
+    //     setErrorMessage('An unexpected error occured!');
+    //   }
+    //   _setIsBusy();
+    //   _setIsCreateChannelNotSuccessful();
+    //   return;
+    // }
+    // await Future.delayed(
+    //   Duration(milliseconds: 5000),
+    // );
+    _setIsCreateChannelSuccessful();
     _navigationService.popRepeated(1);
     notifyListeners();
   }
 
-  Future<void> performCreateChannel(
-      String name, String owner, String description, bool private) async {
-    await _auth.createChannel(
-        name: name, owner: owner, description: description, private: false);
 
-    // _navigationService.navigateTo(Routes.checkEmailView, arguments: {
-    //   'email': email,
-    //   'isReset': false,
-    // });
-  }
 
-  /// Error should be handled here. It could be displaying a toast of something else
-  @override
-  void onFutureError(error, Object? key) {
-    print('Handle Error here');
-    super.onFutureError(error, key);
-  }
+
+
+
+
+
+
+
+
+
 
 //   Future<void> validateAndCreateChannel() async {
 //     bool isChannelNameValid = nameValidator(_channelName);

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -7,6 +9,9 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/models/auth_response.dart';
+import 'package:zc_desktop_flutter/models/user.dart';
+import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
@@ -96,5 +101,15 @@ class ChannelsDisplayViewModel extends BaseViewModel {
 
   Map<String, String> get sidebarItems => _sidebarItems;
 
+  final _localStorageService = locator<LocalStorageService>();
+  User? user;
+  AuthResponse? userdata;
+  Future<void> fetchAndSetUserData() async {
+    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    final resUser = AuthResponse.fromMap(jsonDecode(authResponse as String));
+
+  print(resUser.user.token);
+  notifyListeners(); 
+  }
  
 }

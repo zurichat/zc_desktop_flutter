@@ -25,6 +25,7 @@ class ChannelsDisplayView extends StatelessWidget {
     int selectedIndex;
 
     return ViewModelBuilder<ChannelsDisplayViewModel>.reactive(
+      onModelReady: (model) async => await model.fetchAndSetUserData(),
       builder: (context, model, child) => Scaffold(
           body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
