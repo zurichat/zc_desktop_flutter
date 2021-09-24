@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -9,12 +11,14 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dar
 
 import 'create_workspace_viewmodel.dart';
 
-class CreateWorkspaceView extends StatelessWidget {
-  const CreateWorkspaceView({Key? key}) : super(key: key);
+class CreateWorkspaceView extends HookWidget {
+  CreateWorkspaceView({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     // bool check = false;
+    final emailController = useTextEditingController();
     return ViewModelBuilder<CreateWorkspaceViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: Center(
@@ -41,16 +45,14 @@ class CreateWorkspaceView extends StatelessWidget {
                       style: kLeftSideBarStyle.copyWith(color: Colors.black),
                     ),
                     verticalSpaceRegular,
-                    AuthInputField(
-                      onChanged: (value) {
-                        model.setEmail(value);
-                      },
-                      onSaved: (value) {
-                        model.setEmail(value);
-                      },
-                      // errorText: model.emailErrorText,
-                      keyboardType: TextInputType.emailAddress,
-                      hintPlaceHolder: 'example@work.com',
+                    Form(
+                      key: _formKey,
+                      child: AuthInputField(
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        hintPlaceHolder: 'example@work.com',
+                        validator: context.validateEmail,
+                      ),
                     ),
                     verticalSpaceMedium,
                     Container(
@@ -60,7 +62,10 @@ class CreateWorkspaceView extends StatelessWidget {
                         label: model.btnText,
                         isBusy: model.isBusy,
                         onTap: () {
-                          model.goToStage1();
+                          if (!_formKey.currentState!.validate()) return;
+                          print(emailController.text);
+
+                          model.createOrganization(emailController.text);
                         },
                       ),
                     ),
