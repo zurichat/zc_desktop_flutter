@@ -34,8 +34,8 @@ class SearchModalViewmodel extends BaseViewModel {
   String get text => _text!;
   String get hintText => _hintText!;
   String get textFieldText => _textFieldText!;
-  List<Channel> _channels = [];
-  List<Channel> get channels => [..._channels];
+  List<dynamic> _searchList = [];
+  List<dynamic> get searchList => [..._searchList];
   List<User> _userNames = [];
   List<User> get userDatas => [..._userNames];
   static const historyLength = 5;
@@ -96,57 +96,68 @@ class SearchModalViewmodel extends BaseViewModel {
     _navigationService.popRepeated(0);
   }
 
-  // List<User> getSusggestions(String query) => List.of(userData).where((user) {
-  //       final userLower = user.name!.toLowerCase();
-  //       final queryLower = query.toLowerCase();
-
-  //       return userLower.contains(queryLower);
-  //     }).toList();
-
   void getSuggestionsForDM(String query) {
-    _userNames = userData;
+    _searchList = userData;
     var userList;
-    userList = List.of(userData).where((e) {
+    userList = List.of(_searchList).where((e) {
       final userLower = e.name!.toLowerCase();
       final queryLower = query.toLowerCase();
       return userLower.startsWith(queryLower);
     }).toList();
 
     availableListLength = userList.length;
-    _userNames = userList;
+    _searchList = userList;
 
     notifyListeners();
   }
 
   void onChange(String value) {
     textFieldActivated = true;
-    getSuggestionsForChannels(value);
-    // if (isClicked) {
-    //   if (ButtonType == ButtonType.CHANNELS) {
-    //     getSuggestionsForChannels(value);
-    //   }
-    //   if (ButtonType == ButtonType.PEOPLE) {
-    //     getSuggestionsForDM(value);
-    //   }
-    //   getSuggestionsForDM(value);
-    // }
-
+    switch (buttonType) {
+      case ButtonType.CHANNELS:
+        {
+          getSuggestionsForChannels(value);
+        }
+        break;
+      case ButtonType.PEOPLE:
+        {
+          getSuggestionsForDM(value);
+        }
+        break;
+      default:
+    }
     notifyListeners();
   }
 
   void getSuggestionsForChannels(String query) {
-    _channels = _channelService.channelList;
+    _searchList = _channelService.channelList;
     var filteredList;
-    filteredList = List.of(_channels).where((e) {
+    filteredList = List.of(_searchList).where((e) {
       final channelNameToLower = e.name!.toLowerCase();
       final queryLower = query.toLowerCase();
       return channelNameToLower.startsWith(queryLower);
     }).toList();
 
     availableListLength = filteredList.length;
-    _channels = filteredList;
+    _searchList = filteredList;
 
     notifyListeners();
+  }
+
+  void searchNavigate(dynamic data) {
+    switch (buttonType) {
+      case ButtonType.CHANNELS:
+        {
+          searchChannels(data as Channel);
+        }
+        break;
+      case ButtonType.PEOPLE:
+        {
+          searchUser(data as User);
+        }
+        break;
+      default:
+    }
   }
 
   void searchChannels(Channel channel) {

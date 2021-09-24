@@ -17,6 +17,7 @@ import '../services/authentication/channels_service.dart';
 import '../services/channel_service/channel_service.dart';
 import '../services/dm_service/dm_service.dart';
 import '../services/local_storage/local_storage_service.dart';
+import '../services/organisation/organisation_service.dart';
 import '../services/user_service/user_service.dart';
 import '../services/workspace_service/workspace_service.dart';
 
@@ -40,5 +41,6 @@ Future setupLocator(
   locator.registerLazySingleton(() => DMService());
   locator.registerLazySingleton(() => ChannelService());
   locator.registerLazySingleton(() => UserService());
+  locator.registerLazySingleton(() => OrganizationService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
 }

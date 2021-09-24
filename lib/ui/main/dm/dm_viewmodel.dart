@@ -1,14 +1,21 @@
+import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
+import 'package:zc_desktop_flutter/models/dm_model/room_response.dart';
 import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+import 'package:zc_desktop_flutter/models/user.dart' as LoggedInUser;
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {
   final log = getLogger("DmViewModel");
   final _dmService = locator<DMService>();
   User _user = User(name: "");
+  late LoggedInUser.User _currentLoggedInUser;
+  String? _roomId = '';
+  List<Results> _messages = [];
 
   void setup() {
     runTask();
@@ -16,7 +23,13 @@ class DmViewModel extends BaseViewModel {
 
   void runTask() async {
     _user = await runBusyFuture(_dmService.getUser());
+    _currentLoggedInUser = _dmService.getCurrentLoggedInUser()!;
+    _roomId = await _dmService.createRoom(_currentLoggedInUser, _user);
+    _dmService.getRoomInfo(_roomId);
+    _messages = await _dmService.fetchRoomMessages(_roomId);
+    //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
     log.i(_user.name);
+    notifyListeners();
   }
 
   String? getChatUserName() {
@@ -28,14 +41,18 @@ class DmViewModel extends BaseViewModel {
   }
 
   User get user => _user;
+  String get roomId => _roomId!;
+  LoggedInUser.User get currentLoggedInUser => _currentLoggedInUser;
   final DateTime currentMessageTime = DateTime.now();
-  List<Message> _messages = [];
 
-  List<Message> get messages => _messages;
+  List<Results> get messages => _messages;
   bool _onMessageTileHover = false;
 
   bool get onMessageTileHover => _onMessageTileHover;
   bool _onHoverActionsHovered = false;
+
+  bool get showingNewMessageIn => _showingNewMessageIn;
+  bool _showingNewMessageIn = false;
 
   bool get onHoverActionsHover => _onHoverActionsHovered;
   int _onMessageHoveredIndex = 0;
@@ -60,23 +77,71 @@ class DmViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void sendMessage(String message) {
-    _messages.add(Message(
-        reactions: [
-          Reaction(count: 3, id: 1, reaction: '😂'),
-          Reaction(count: 4, id: 2, reaction: '😍'),
-          Reaction(count: 20, id: 1, reaction: '👌'),
-        ],
+  Future<void> sendMessage(String message) async {
+    var mess = Results(
+      reactions: [],
+      id: '',
+      created_at: DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+          .format(DateTime.now())
+          .toString(),
+      threads: [],
+      media: [],
+      pinned: false,
+      sender_id: _currentLoggedInUser.id,
+      message: message,
+      saved_by: [],
+      read: true,
+      room_id: _roomId!,
+    );
+    _messages.add(mess);
+    notifyListeners();
+    //u can get index by getting list length and minus 1
+    SendMessageResponse res =
+        await _dmService.sendMessage(_roomId, _currentLoggedInUser.id, message);
+    var index = _messages.indexWhere((Results) {
+      return Results.message == res.data.message;
+    });
+    _messages.replaceRange(index, index + 1, [
+      Results(
+        reactions: [],
+        id: res.message_id,
+        created_at: res.data.created_at,
+        threads: [],
+        media: [],
+        pinned: false,
+        sender_id: _currentLoggedInUser.id,
         message: message,
-        time: DateFormat('hh:mm a').format(DateTime.now()).toString(),
-        userDisplayName: 'Dennis',
-        userProfileUrl:
-            'https://gravatar.com/avatar/3cf766c59c42f3bdb00bdc874a5a55e3?s=200&d=retro&r=g'));
+        saved_by: [],
+        read: true,
+        room_id: _roomId!,
+      )
+    ]);
+
     notifyListeners();
   }
 
+  LoggedInUser.User getUser(var senderId) {
+    print("player "+senderId);
+    if (_currentLoggedInUser.id == senderId) {
+      return _currentLoggedInUser;
+    } else {
+      return LoggedInUser.User(
+          id: _user.id!.toString(),
+          firstName: 'firstName',
+          lastName: 'lastName',
+          displayName: _user.name!,
+          email: 'email',
+          phone: 'phone',
+          status: 1,
+          timeZone: 'timeZone',
+          createdAt: 'createdAt',
+          updatedAt: 'updatedAt',
+          token: 'token'); //check this functionality
+    }
+  }
+
   void reactToMessage(int messageIndex, int reactionIndex) {
-    if (_messages
+    /* if (_messages
         .elementAt(messageIndex)
         .reactions
         .elementAt(reactionIndex)
@@ -122,55 +187,85 @@ class DmViewModel extends BaseViewModel {
               .reactions
               .elementAt(reactionIndex)
               .isReacted;
-    }
+    } */
     notifyListeners();
   }
 
-  String formatDate(DateTime dateToCheck) {
+  String formatDate(String createdAt) {
+    final dateToCheck = DateTime.parse(createdAt);
+    print(dateToCheck);
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = DateTime(now.year, now.month, now.day - 1);
     final tomorrow = DateTime(now.year, now.month, now.day + 1);
-
-    final aDate =
-        DateTime(dateToCheck.year, dateToCheck.month, dateToCheck.day);
+    final aDate = DateTime(
+        int.parse(DateFormat('yyyy').format(dateToCheck)),
+        int.parse(DateFormat('MM').format(dateToCheck)),
+        int.parse(DateFormat('dd').format(dateToCheck)));
+    print(DateFormat('dd').format(dateToCheck));
+    print(aDate);
     if (aDate == today) {
       return 'Today ' +
           today.day.toString() +
           ' ' +
           DateFormat('MMMM').format(today).toString();
     } else if (aDate == yesterday) {
-      return 'Yesterday ' + yesterday.day.toString();
+      return 'Yesterday ' +
+          yesterday.day.toString() +
+          ' ' +
+          DateFormat('MMMM').format(dateToCheck).toString();
     } else {
-      return dateToCheck.month.toString() + dateToCheck.day.toString();
+      return DateFormat('MM').format(dateToCheck) +
+          DateFormat('dd').format(dateToCheck);
     }
   }
-}
 
-class Message {
-  final String userProfileUrl;
-  final String userDisplayName;
-  final String message;
-  final String time;
-  final List<Reaction> reactions;
+  String formatTime(String createdAt) {
+    final dateToCheck = DateTime.parse(createdAt);
+    return DateFormat('HH:mm a').format(dateToCheck);
+  }
 
-  Message(
-      {required this.message,
-      required this.time,
-      required this.userDisplayName,
-      required this.userProfileUrl,
-      required this.reactions});
-}
+  bool isSameDate(int index) {
+    if (index + 1 < _messages.length) {
+      final prevDate = DateTime.parse(_messages.elementAt(index).created_at);
+      final nextDate =
+          DateTime.parse(_messages.elementAt(index + 1).created_at);
+      if (DateTime(
+              int.parse(DateFormat('yyyy').format(prevDate)),
+              int.parse(DateFormat('MM').format(prevDate)),
+              int.parse(DateFormat('dd').format(prevDate))) ==
+          DateTime(
+              int.parse(DateFormat('yyyy').format(nextDate)),
+              int.parse(DateFormat('MM').format(nextDate)),
+              int.parse(DateFormat('dd').format(nextDate)))) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
 
-class Reaction {
-  int count;
-  final String reaction;
-  final int id;
-  bool isReacted;
+  void onDispose() {
+    markMessageAsRead();
+  }
 
-  Reaction(
-      {required this.count,
-      required this.id,
-      required this.reaction,
-      this.isReacted = false});
+  void markMessageAsRead() {
+    Iterable<Results> nonReadMessages = _messages.where((element) {
+      if (!element.read && element.sender_id != currentLoggedInUser.id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    nonReadMessages.forEach((element) {
+      _dmService.markMessageAsRead(element.id);
+    });
+    toggleShowingNewMessageIn(false);
+  }
+
+  void toggleShowingNewMessageIn(bool showing) {
+    _showingNewMessageIn = showing;
+  }
 }

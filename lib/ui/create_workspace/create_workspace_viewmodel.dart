@@ -3,8 +3,10 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/services/organisation/organisation_service.dart';
 
 class CreateWorkspaceViewModel extends BaseViewModel {
+  final _organizationService = locator<OrganizationService>();
   String _logoUrl = "assets/images/zuri_logo.svg";
   String get logoUrl => _logoUrl;
 
@@ -90,7 +92,7 @@ class CreateWorkspaceViewModel extends BaseViewModel {
 
   final _navigationService = locator<NavigationService>();
   void goToStage1() {
-    // _navigationService.navigateTo(Routes.createWorkspaceStage1);
+    _navigationService.navigateTo(Routes.createWorkspaceStage1);
   }
 
   String _stage2PageNum = "Stage 2 of 3 ";
@@ -107,7 +109,7 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String get stage2ExampleText => _stage2ExampleText;
 
   void goToStage2() {
-    // _navigationService.navigateTo(Routes.createWorkspaceStage2);
+    _navigationService.navigateTo(Routes.createWorkspaceStage2);
   }
 
   String _stage3PageNum = "Stage 3 of 3 ";
@@ -129,10 +131,15 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String get btnText2 => _btnText2;
 
   void goToStage3() {
-    // _navigationService.navigateTo(Routes.createWorkspaceStage3);
+    _navigationService.navigateTo(Routes.createWorkspaceStage3);
   }
 
   void goToHome() {
     _navigationService.navigateTo(Routes.workspaceView);
+  }
+
+  Future<void> createOrganization(String email) async {
+    await _organizationService.createOrganisation(email);
+    goToStage1();
   }
 }
