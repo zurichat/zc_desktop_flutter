@@ -5,7 +5,7 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_bar.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_sidebar.dart';
 import 'package:zc_desktop_flutter/models/preferences_model/side_bar/sidebar.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class SideBarViewModel extends BaseViewModel {
   final _localStorage = locator<LocalStorageService>();

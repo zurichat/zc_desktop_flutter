@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/models/preferences_model/messages_and_media/messages_and_media.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
+
 import 'message_media_preferenceview.dart';
 
 class MessageMediaPreferenceViewModel extends BaseViewModel {

@@ -1,15 +1,16 @@
 import 'dart:convert';
+
 import 'package:intl/intl.dart';
-import 'package:zc_desktop_flutter/models/auth_response.dart';
-import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
-import 'package:zc_desktop_flutter/models/user.dart' as currentLoggedInUser;
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/models/auth_response.dart';
+import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
 import 'package:zc_desktop_flutter/models/dm_model/room_response.dart';
-import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+import 'package:zc_desktop_flutter/models/user.dart' as currentLoggedInUser;
+import 'package:zc_desktop_flutter/models/user_model.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/channels_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class DMService {
   final log = getLogger("DMService");

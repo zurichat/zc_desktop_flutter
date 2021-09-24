@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_images.dart';
-import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -13,6 +12,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesck_search_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels_display/channels_display_viewmodel.dart';
 
 class ChannelsDisplayView extends StatelessWidget {
   const ChannelsDisplayView({Key? key}) : super(key: key);

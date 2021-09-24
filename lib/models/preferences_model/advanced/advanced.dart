@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/advanced/advanced_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/advanced/advanced_viewmodel.dart';
 
 part 'advanced.freezed.dart';
 part 'advanced.g.dart';

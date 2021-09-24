@@ -1,5 +1,5 @@
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
+import 'package:zc_desktop_flutter/models/workspace.dart';
 
 class ChannelService {
   final log = getLogger("ChannelService");

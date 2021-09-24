@@ -3,7 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
-import 'package:zc_desktop_flutter/models/user.dart';
+import 'package:zc_desktop_flutter/models/user_model.dart';
 import 'package:zc_desktop_flutter/models/workspace.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';

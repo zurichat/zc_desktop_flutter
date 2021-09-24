@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:stacked/stacked_annotations.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../../models/organisation/organisation.dart';
 import '../api/api_service.dart';
-import '../authentication/auth_service.dart';
-import '../local_storage/local_storage_service.dart';
 
 const selectedOrganisationKey = 'selectedOrganisationKey';
 const userSelectedOrganisationsKey = 'userSelectedOrganisationsKey';

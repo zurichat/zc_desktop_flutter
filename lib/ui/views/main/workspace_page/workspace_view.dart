@@ -7,15 +7,14 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_images.dart';
 import 'package:zc_desktop_flutter/models/workspace.dart';
-import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels_creation/channels_creation_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/workspace_page/workspace_viewmodel.dart';
 
 class WorkspaceView extends StatelessWidget {
@@ -54,13 +53,6 @@ class WorkspaceWrapper extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Container(
-            child: buildAppBar(
-              context,
-              isActive: true,
-            ),
-          ),
-          // verticalSpaceSmall,
           model!.isBusy
               ? Expanded(
                   child: Container(

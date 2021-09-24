@@ -1,12 +1,12 @@
-import 'dart:convert';
+
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
 import 'package:zc_desktop_flutter/models/dm_model/room_response.dart';
-import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
 import 'package:zc_desktop_flutter/models/user.dart' as LoggedInUser;
+import 'package:zc_desktop_flutter/models/user_model.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {

@@ -11,12 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import '../ui/create_workspace/create_workspace.dart';
-import '../ui/create_workspace/create_workspace_stage1.dart';
-import '../ui/create_workspace/create_workspace_stage2.dart';
-import '../ui/create_workspace/create_workspace_stage3.dart';
-import '../ui/main/channels_creation/channels_creation_view.dart';
-import '../ui/main/channels_display/channels_display_view.dart';
 import '../ui/views/auth/change_password_page/change_password_view.dart';
 import '../ui/views/auth/check_email_page/check_email_view.dart';
 import '../ui/views/auth/forgot_password_page/forgot_password_view.dart';
@@ -24,6 +18,12 @@ import '../ui/views/auth/login_page/login_view.dart';
 import '../ui/views/auth/reset_password_page/reset_password_view.dart';
 import '../ui/views/auth/signUp/signup_view.dart';
 import '../ui/views/auth/success_page/success_view.dart';
+import '../ui/views/create_workspace/create_workspace.dart';
+import '../ui/views/create_workspace/create_workspace_stage1.dart';
+import '../ui/views/create_workspace/create_workspace_stage2.dart';
+import '../ui/views/create_workspace/create_workspace_stage3.dart';
+import '../ui/views/main/channels_creation/channels_creation_view.dart';
+import '../ui/views/main/channels_display/channels_display_view.dart';
 import '../ui/views/main/channels_page/channels_view.dart';
 import '../ui/views/main/dm/dm_view.dart';
 import '../ui/views/main/home_page/home_view.dart';
@@ -48,7 +48,6 @@ class Routes {
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
   static const String channelsDisplayView = '/channels-display-view';
   static const String channelsCreationView = '/channels-creation-view';
-  static const String workspaceView = '/workspace-view';
   static const all = <String>{
     startUpView,
     loginView,
@@ -59,7 +58,6 @@ class Routes {
     changePasswordView,
     successView,
     homeView,
-    workspaceView,
     channelsView,
     createWorkspaceView,
     createWorkspaceStage1,

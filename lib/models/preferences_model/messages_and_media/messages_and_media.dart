@@ -1,7 +1,7 @@
 
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
 
 part 'messages_and_media.freezed.dart';
 part 'messages_and_media.g.dart';

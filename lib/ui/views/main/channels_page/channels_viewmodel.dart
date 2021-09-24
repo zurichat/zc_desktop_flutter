@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
+import 'package:zc_desktop_flutter/models/workspace.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
 
 class ChannelsViewModel extends BaseViewModel {
