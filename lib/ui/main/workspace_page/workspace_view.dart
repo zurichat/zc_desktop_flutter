@@ -549,7 +549,7 @@ class ChannelItem extends StatelessWidget {
             child: SvgPicture.asset(SVGAssetPaths.channelsListIcon),
           ),
           horizontalSpaceSmall,
-          ZcdeskText.dropDownBodyTextStyle(channelName!),
+          Flexible(child: ZcdeskText.dropDownBodyTextStyle(channelName!)),
         ],
       ),
     );

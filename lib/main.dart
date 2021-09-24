@@ -15,7 +15,7 @@ Future main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowMinSize(const Size(750, 500));
+    setWindowMinSize(const Size(700, 500));
     setWindowMaxSize(Size.infinite);
   }
   await ThemeManager.initialise();
