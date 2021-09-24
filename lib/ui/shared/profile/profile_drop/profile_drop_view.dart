@@ -8,6 +8,8 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/profile/profile_upload_image/profile_upload_view.dart';
 
 class ProfileDropdownView extends StatelessWidget {
   ProfileDropdownView({Key? key}) : super(key: key);
@@ -48,7 +50,7 @@ void findDropdownData() {
         actionKey.currentContext!.findRenderObject() as RenderBox;
     height = renderBox.size.height;
     width = renderBox.size.width;
-    Offset offset = renderBox.localToGlobal(Offset.zero);
+    // Offset offset = renderBox.localToGlobal(Offset.zero);
   }
 
   @override
@@ -57,6 +59,17 @@ void findDropdownData() {
       builder: (context, model, child) => InkWell(
         onTap: () {
           _toggleDropdown(context: context);
+          // setState(() {
+          //   _toggleDropdown(close: true);
+          //   // if (model.isDropped) {
+          //   //   model.floatingDropdown.remove();
+          //   // } else {
+          //   //   model.floatingDropdown = model.createFloatingDropdown();
+          //   //   Overlay.of(context)!.insert(model.floatingDropdown);
+          //   // }
+
+          //   // model.isDropped = !model.isDropped;
+          // });
         },
         child: Container(
           width: 40.w,
@@ -68,14 +81,14 @@ void findDropdownData() {
     );
   }
 
-  void _toggleDropdown({bool close = false, required BuildContext context}) {
+  void _toggleDropdown({bool close = false, BuildContext? context}) {
     final model = ProfileDropdownViewModel();
     if (model.isDropped || close) {
       this.floatingDropdown.remove();
       model.setIsDropped(false);
     } else {
       this.floatingDropdown = this.createFloatingDropdown();
-      Overlay.of(context)!.insert(this.floatingDropdown);
+      Overlay.of(context!)!.insert(this.floatingDropdown);
       model.setIsDropped(true);
     }
   }
@@ -96,6 +109,7 @@ class DropDown extends StatelessWidget {
         builder: (context, model, child) => Material(
               elevation: 20,
               child: Container(
+                color: kcBackgroundColor2,
                 // height: 300.h,
                 child: Column(
                   children: <Widget>[
@@ -182,7 +196,7 @@ class DropDownItem extends StatelessWidget {
               child: GestureDetector(
                 onTap: onTap,
                 child: Container(
-                  color: model.isHover ? kcSuccessColor : kcBackgroundColor2,
+                  color: model.isHover ? kcPrimaryColor : kcBackgroundColor2,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: <Widget>[

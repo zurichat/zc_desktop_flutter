@@ -24,23 +24,6 @@ class Workspace {
     this.currentDM});
 }
 
-/*class User {
-  int? id;
-  String? name;
-  String? status;
-  String? description;
-  String? avatar;
-  bool? online;
-
-  User(
-      {this.id,
-      this.name,
-      this.status,
-      this.description,
-      this.avatar,
-      this.online});
-}*/
-
 class Channel extends BaseChat {
   String? name;
   String? topic;
