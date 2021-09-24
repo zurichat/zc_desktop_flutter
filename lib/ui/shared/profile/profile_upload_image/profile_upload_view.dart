@@ -2,45 +2,21 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_upload_image/profile_upload_viewmodel.dart';
 
 class ProfileUploadView extends StatelessWidget {
-  ProfileUploadView({
+  ProfileUploadView(
+    File file, {
     Key? key,
   }) : super(key: key);
 
   final scrollcontroller = ScrollController();
-  // final controller = CropController(aspectRatio: 1000 / 667.0);
-  // double _rotation = 0;
-  // BoxShape shape = BoxShape.rectangle;
-
-  late File imagefile;
-
-  // Future chooceFileToUpload() async {
-  //   try {
-  //     FilePickerResult? result = await FilePicker.platform
-  //         .pickFiles(allowMultiple: false, type: FileType.image);
-
-  //     if (result != null) {
-  //       // _cropImage(result);
-  //       File file = File(result.files.single.path!);
-  //       imagefile = File(path);
-  //     } else {
-  //       // User canceled the picker
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

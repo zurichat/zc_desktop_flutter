@@ -41,6 +41,7 @@ dependencies:
   freezed_annotation:
   json_annotation:
   file_picker: ^4.1.1
+  crop_your_image: ^0.6.0+1
 
 dev_dependencies:
   flutter_test:

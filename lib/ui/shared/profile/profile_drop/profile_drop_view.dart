@@ -8,8 +8,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/shared/profile/profile_upload_image/profile_upload_view.dart';
 
 class ProfileDropdownView extends StatelessWidget {
   ProfileDropdownView({Key? key}) : super(key: key);
@@ -24,7 +22,7 @@ class ProfileDropdownView extends StatelessWidget {
     return OverlayEntry(builder: (context) {
       return Positioned(
         right: 100.w,
-        width: 300.w,
+        width: 250.w,
         height: 450.h,
         top: 60.h,
         child: Container(
@@ -115,16 +113,22 @@ class DropDown extends StatelessWidget {
                   children: <Widget>[
                     ProfilePicture(),
                     Container(
-                      width: 300.w,
+                      width: 250.w,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 5),
                       child: OutlineButton(
                         onPressed: () {
+                          onPress!();
                           showDialog(
                               context: context,
                               builder: (context) => StatusDialogMinView());
                         },
-                        child: Icon(Icons.edit_outlined),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Icon(
+                            Icons.edit_outlined,
+                          ),
+                        ),
                       ),
                     ),
                     DropDownItem(
@@ -202,12 +206,14 @@ class DropDownItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         text,
-                        style: subtitle2,
+                        style: model.isHover ? subtitlec2 : subtitle2,
+                        // style: subtitle2,
                       ),
                       Spacer(),
                       Icon(
                         iconData,
-                        color: headerColor,
+                        color: model.isHover ? kcBackgroundColor2 : headerColor,
+                        // color: headerColor,
                       ),
                     ],
                   ),
@@ -218,7 +224,9 @@ class DropDownItem extends StatelessWidget {
 }
 
 class ProfilePicture extends StatelessWidget {
-  const ProfilePicture({Key? key}) : super(key: key);
+  bool isActive = false;
+
+  ProfilePicture({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -238,6 +246,7 @@ class ProfilePicture extends StatelessWidget {
           Container(
             width: 100.w,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Bernice_Perp",
@@ -246,16 +255,21 @@ class ProfilePicture extends StatelessWidget {
                 verticalSpaceTiny,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(
-                      Icons.circle,
-                      size: 10,
-                      color: kcSuccessColor,
+                    Container(
+                      height: 8,
+                      width: 8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: isActive
+                              ? createChannelTextColor
+                              : kcSuccessColor),
                     ),
+                    horizontalSpaceTiny,
                     Text(
                       "Away",
-                      style: subtitle2,
+                      style: lightCaptionStyle,
                     )
                   ],
                 )

@@ -40,8 +40,21 @@ final kBodyTextStyle = TextStyle(
   fontFamily: 'Lato',
 );
 
+final kBodyTextStyle1 = TextStyle(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
 final kSubHeadingTextStyle = TextStyle(
   fontSize: 20.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
+final kSubHeadingTextStyle1 = TextStyle(
+  fontSize: 20.sp,
+  color: kcPrimaryColor,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
@@ -106,6 +119,13 @@ final headline6 = TextStyle(
   fontFamily: 'Lato',
 );
 
+final headline8 = TextStyle(
+  fontSize: 25.sp,
+  fontWeight: FontWeight.w500,
+  color: createChannelHeaderColor,
+  fontFamily: 'Lato',
+);
+
 TextStyle headline7 =
     TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: 'Lato');
 
@@ -118,6 +138,27 @@ final headline3 = TextStyle(
 final subtitle2 = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
+final subtitlec2 = TextStyle(
+  fontSize: 18.sp,
+  color: kcBackgroundColor2,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
+final subtitle3 = TextStyle(
+  fontSize: 20.sp,
+  color: createChannelHeaderColor,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
+final subtitle3b = TextStyle(
+  fontSize: 20.sp,
+  color: createChannelHeaderColor,
+  fontWeight: FontWeight.w500,
   fontFamily: 'Lato',
 );
 
