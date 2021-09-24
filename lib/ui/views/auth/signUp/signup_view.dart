@@ -2,15 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stacked/stacked.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+
 import 'signup_viewmodel.dart';
 
 class SignUpView extends StatelessWidget {
@@ -28,14 +27,10 @@ class SignUpView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-                height: 40,
-                child: buildAppBar(context,
-                    isHome: false, text: 'Sign Up | Zuri')),
-            Container(
               height: _size.height - 40,
               child: Row(
                 children: [
-                  BuildStartUpImage(),
+                  LeftSideContainer(),
                   Expanded(
                       flex: 2,
                       child: Container(

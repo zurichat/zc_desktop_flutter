@@ -3,8 +3,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
-import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.dart';
+import 'package:zc_desktop_flutter/models/workspace.dart';
+import 'package:zc_desktop_flutter/services/workspace_service.dart';
 
 class WorkspaceViewModel extends BaseViewModel {
   final log = getLogger("WorkspaceViewModel");

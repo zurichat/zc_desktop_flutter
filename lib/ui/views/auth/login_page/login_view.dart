@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/core/constants/images.dart';
-import 'package:zc_desktop_flutter/core/constants/strings.dart';
+import 'package:zc_desktop_flutter/constants/app_images.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/login_page/login_viewmodel.dart';
@@ -31,7 +31,7 @@ class LoginView extends HookWidget {
               Expanded(
                 child: Row(
                   children: [
-                    BuildStartUpImage(),
+                    LeftSideContainer(),
                     Expanded(
                       flex: 2,
                       child: Container(
@@ -43,10 +43,10 @@ class LoginView extends HookWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset(AppImages.zuriLogoUrl),
+                              Image.asset(ZuriSvg),
                               verticalSpaceMedium,
                               Text(
-                                AppStrings.signIn,
+                                SignInText,
                                 style: headline3,
                               ),
                               if (model.hasError) ...[
@@ -65,7 +65,7 @@ class LoginView extends HookWidget {
                                       label: 'Email',
                                       controller: emailController,
                                       keyboardType: TextInputType.emailAddress,
-                                      hintPlaceHolder: AppStrings.emailHint,
+                                      hintPlaceHolder: EmailHintText,
                                       validator: context.validateEmail,
                                     ),
                                     verticalSpaceMedium,
@@ -76,7 +76,7 @@ class LoginView extends HookWidget {
                                       isVisible: model.passwordVisible,
                                       onVisibilityTap:
                                           model.setPasswordVisibility,
-                                      hintPlaceHolder: AppStrings.passwordHint,
+                                      hintPlaceHolder: PasswordHintText,
                                       validator: context.validatePassword,
                                     ),
                                   ],
@@ -171,19 +171,19 @@ class AuthIcons extends ViewModelWidget<LoginViewModel> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         IconButton(
-          icon: Image.asset(AppImages.googleLogoUrl),
+          icon: Image.asset(GoogleLogo),
           iconSize: 40.h,
           onPressed: () {},
         ),
         horizontalSpaceRegular,
         IconButton(
-          icon: Image.asset(AppImages.facebookLogoUrl),
+          icon: Image.asset(FacebookLogo),
           iconSize: 40.h,
           onPressed: () {},
         ),
         horizontalSpaceRegular,
         IconButton(
-          icon: Image.asset(AppImages.twitterLogoUrl),
+          icon: Image.asset(TwitterLogo),
           iconSize: 40.h,
           onPressed: () {},
         ),

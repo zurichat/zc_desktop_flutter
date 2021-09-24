@@ -6,9 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
@@ -31,14 +30,10 @@ class ChangePasswordView extends StatelessWidget {
           body: Column(
             children: [
               Container(
-                  height: 40,
-                  child: buildAppBar(context,
-                      isHome: false, text: 'Change Password | Zuri')),
-              Container(
                 height: height - 40,
                 child: Row(
                   children: [
-                    BuildStartUpImage(),
+                    LeftSideContainer(),
                     Expanded(
                       flex: 2,
                       child: Container(

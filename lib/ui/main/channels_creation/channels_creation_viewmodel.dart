@@ -4,8 +4,8 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class ChannelsCreationViewModel extends BaseViewModel with Validator{
   final _navigator = locator<NavigationService>();

@@ -13,9 +13,9 @@ import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 import '../services/api/api_service.dart';
-import '../services/authentication/auth_service.dart';
-import '../services/local_storage/local_storage_service.dart';
-import '../services/workspace_service/workspace_service.dart';
+import '../services/auth_service.dart';
+import '../services/local_storage_service.dart';
+import '../services/workspace_service.dart';
 
 final locator = StackedLocator.instance;
 

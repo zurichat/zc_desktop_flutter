@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
+import 'package:zc_desktop_flutter/constants/app_images.dart';
+import 'package:zc_desktop_flutter/models/workspace.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
@@ -33,14 +32,6 @@ class WorkspaceView extends StatelessWidget {
         body: Container(
           child: Column(
             children: [
-              Container(
-                child: buildAppBar(
-                  context,
-                  isActive: true,
-                ),
-              ),
-
-              // verticalSpaceSmall,
               model.isBusy
                   ? Expanded(
                       child: Container(
@@ -167,8 +158,7 @@ class WorkspaceView extends StatelessWidget {
                                                         children: [
                                                           Container(
                                                             child: SvgPicture.asset(
-                                                                SVGAssetPaths
-                                                                    .channelsListIcon),
+                                                                ChannelsListSvg),
                                                           ),
                                                           horizontalSpaceSmall,
                                                           ZcdeskText
@@ -338,13 +328,12 @@ class TitleSection extends StatelessWidget {
                     ? Container(
                         height: 12,
                         width: 12,
-                        child: SvgPicture.asset(SVGAssetPaths.dropDownOpenIcon),
+                        child: SvgPicture.asset(DropDownOpenSvg),
                       )
                     : Container(
                         height: 12,
                         width: 12,
-                        child:
-                            SvgPicture.asset(SVGAssetPaths.dropDownClosedIcon),
+                        child: SvgPicture.asset(DropDownClosedSvg),
                       ),
               ),
             ),
@@ -361,7 +350,7 @@ class TitleSection extends StatelessWidget {
                     child: InkWell(
                       onTap: displayChannel,
                       child: SvgPicture.asset(
-                        SVGAssetPaths.addIcon,
+                        AddSvg,
                         height: 10,
                       ),
                     ),

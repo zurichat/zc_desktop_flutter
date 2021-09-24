@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
@@ -30,17 +29,15 @@ class ResetPasswordView extends StatelessWidget {
               Column(
                 children: [
                   Container(
-                      height: 40,
-                      child: buildAppBar(context,
-                          isHome: false, text: 'Reset Password | Zuri')),
-                  Container(
                       width: 542.w,
                       child: AuthHeader(
                           title: model.title, subTitle: model.subTitle)),
                   verticalSpaceLarge,
                   Text(
                     model.errorMessage,
-                    style: headline6.copyWith(color: Theme.of(context).errorColor,),
+                    style: headline6.copyWith(
+                      color: Theme.of(context).errorColor,
+                    ),
                   ),
                   verticalSpaceSmall,
                   Container(

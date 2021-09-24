@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:zc_desktop_flutter/enums/button_type_enum.dart';
-import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+import 'package:zc_desktop_flutter/models/user_model.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 

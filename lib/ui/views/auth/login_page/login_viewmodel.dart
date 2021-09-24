@@ -3,7 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class LoginViewModel extends BaseViewModel {

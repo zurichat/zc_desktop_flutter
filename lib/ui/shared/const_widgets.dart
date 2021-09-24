@@ -1,25 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SVGAssetPaths {
-  static final channelsListIcon = "assets/icons/hash_inactive.svg";
-  static final dropDownOpenIcon = "assets/icons/drop_down_open.svg";
-  static final dropDownClosedIcon = "assets/icons/drop_down_closed.svg";
-  static final channelDropDown = "assets/icons/channel_drop_down.svg";
-  static final sortIcon = "assets/icons/sort.svg";
-  static final filterDown = "assets/icons/filter.svg";
-  static final activeIcon = "assets/icons/active.svg";
-  static final fluentEmoji = "assets/icons/fluent_emoji.svg";
-  static final shareIcon = "assets/icons/share.svg";
-  static final actionsIcon = "assets/icons/actions.svg";
-  static final bookmarkIcon = "assets/icons/bookmark.svg";
-  static final pinnedIcon = "assets/icons/pinned.svg";
-  static final addIcon = "assets/icons/add.svg";
-  static final thread = "assets/icons/threads.svg";
-  static final newDm = "assets/icons/new_dm.svg";
-}
-
-
-
+//TODO: Remove this class and delete the file
 class ShortCuts {
   Widget contain({Widget? child, double h = 17, double w = 30}) {
     return Container(

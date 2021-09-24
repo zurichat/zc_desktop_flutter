@@ -2,9 +2,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/enums/button_type_enum.dart';
-import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
-
-import 'package:zc_desktop_flutter/services/search_workspace/users_loacal_data.dart';
+import 'package:zc_desktop_flutter/models/user_model.dart';
+import 'package:zc_desktop_flutter/services/users_loacal_data.dart';
 
 class SearchModalViewmodel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();

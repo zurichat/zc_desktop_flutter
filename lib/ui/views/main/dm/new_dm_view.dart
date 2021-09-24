@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zc_desktop_flutter/constants/app_images.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 
 class NewDmView extends StatelessWidget {
   final String userName;
@@ -23,7 +23,7 @@ class NewDmView extends StatelessWidget {
               child: CircleAvatar(
                 radius: 20,
                 backgroundColor: avatarColor3,
-                child: SvgPicture.asset(SVGAssetPaths.newDm,
+                child: SvgPicture.asset(NewDmSvg,
                                     ),
               ),
             ),

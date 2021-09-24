@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
@@ -36,10 +35,6 @@ class CheckEmailView extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                        height: 40,
-                        child: buildAppBar(context,
-                            isHome: false, text: 'Forget Password | Zuri')),
-                    Container(
                         width: 481.w,
                         child: AuthHeader(
                             title: _isResetPassword != null
@@ -49,10 +44,12 @@ class CheckEmailView extends StatelessWidget {
                                 : model.resetTitle,
                             subTitle:
                                 'We sent a 6 digit code to $_email. The code expire shortly, so please enter it soon.')),
-                                verticalSpaceSmall,
+                    verticalSpaceSmall,
                     Text(
                       model.errorMsg,
-                      style: headline6.copyWith(color: Theme.of(context).errorColor,),
+                      style: headline6.copyWith(
+                        color: Theme.of(context).errorColor,
+                      ),
                     ),
                     verticalSpaceSmall,
                     verticalSpaceLarge,

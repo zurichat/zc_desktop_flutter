@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_images.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/new_dm_view.dart';
 
 class DmView extends StatelessWidget {
-
   const DmView({Key? key});
 
   @override
@@ -63,7 +61,7 @@ class DmView extends StatelessWidget {
                                       ),
                                     ),
                                     SvgPicture.asset(
-                                      SVGAssetPaths.dropDownOpenIcon,
+                                      DropDownOpenSvg,
                                       height: 5.h,
                                       color: whiteColor,
                                     ),
@@ -84,64 +82,64 @@ class DmView extends StatelessWidget {
                     ),
                   ),
                   Flexible(
-                          fit: FlexFit.tight,
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              child: Container(
-                                color: kcBackgroundColor2,
-                                child: Scrollbar(
-                                  controller: _rightSideBarController,
-                                  isAlwaysShown: true,
-                                  scrollbarOrientation:
-                                      ScrollbarOrientation.right,
-                                  thickness: 10,
-                                  showTrackOnHover: true,
-                                  child: ListView(
-                                    physics: AlwaysScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    controller: _rightSideBarController,
-                                    children: [
-                                      NewDmView(userName: 'userName',),
-                                      
-                                      ListView.builder(
-                                          itemCount: model.messages.length,
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          itemBuilder: (context, index) {
-                                            return MessageTile(
-                                              userDisplayName: model.messages
-                                                  .elementAt(index)
-                                                  .userDisplayName,
-                                              userProfileUrl: model.messages
-                                                  .elementAt(index)
-                                                  .userProfileUrl,
-                                              time: model.messages
-                                                  .elementAt(index)
-                                                  .time,
-                                              message: model.messages
-                                                  .elementAt(index)
-                                                  .message,
-                                            );
-                                          }),
-                                    ],
-                                  ),
+                    fit: FlexFit.tight,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Container(
+                          color: kcBackgroundColor2,
+                          child: Scrollbar(
+                            controller: _rightSideBarController,
+                            isAlwaysShown: true,
+                            scrollbarOrientation: ScrollbarOrientation.right,
+                            thickness: 10,
+                            showTrackOnHover: true,
+                            child: ListView(
+                              physics: AlwaysScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              controller: _rightSideBarController,
+                              children: [
+                                NewDmView(
+                                  userName: 'userName',
                                 ),
-                              ),
+                                ListView.builder(
+                                    itemCount: model.messages.length,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return MessageTile(
+                                        userDisplayName: model.messages
+                                            .elementAt(index)
+                                            .userDisplayName,
+                                        userProfileUrl: model.messages
+                                            .elementAt(index)
+                                            .userProfileUrl,
+                                        time: model.messages
+                                            .elementAt(index)
+                                            .time,
+                                        message: model.messages
+                                            .elementAt(index)
+                                            .message,
+                                      );
+                                    }),
+                              ],
                             ),
                           ),
                         ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SendMessageInputField(
-                      sendMessage: (message) {
-                        if (message.isNotEmpty) {
-                          model.sendMessage(message);
-                        }
-                      },
+                      ),
                     ),
                   ),
+                  // Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: SendMessageInputField(
+                  //     sendMessage: (message) {
+                  //       if (Message.isNotEmpty) {
+                  //         model.sendMessage(message);
+                  //       }
+                  //     },
+                  //   ),
+                  // ),
                 ],
               ),
             ));
@@ -211,7 +209,8 @@ class MessageTile extends StatelessWidget {
                               children: [
                                 Text(
                                   userDisplayName,
-                                  style: kHeading1TextStyle.copyWith(fontSize: 15),
+                                  style:
+                                      kHeading1TextStyle.copyWith(fontSize: 15),
                                 ),
                                 SizedBox(
                                   width: 10.w,
@@ -276,7 +275,7 @@ class DateWidget extends StatelessWidget {
                 width: 5.w,
               ),
               SvgPicture.asset(
-                SVGAssetPaths.dropDownOpenIcon,
+                DropDownOpenSvg,
                 height: 5.h,
                 color: bodyColor,
               ),
@@ -295,8 +294,14 @@ class TopRowActions extends StatelessWidget {
       color: kcPrimaryLight,
       child: Row(
         children: [
-          TopRowItem(label: 'Pinned', icon: SVGAssetPaths.pinnedIcon,),
-          TopRowItem(label: 'Add to bookmarks', icon: SVGAssetPaths.addIcon,)
+          TopRowItem(
+            label: 'Pinned',
+            icon: PinnedSvg,
+          ),
+          TopRowItem(
+            label: 'Add to bookmarks',
+            icon: AddSvg
+          )
         ],
       ),
     );
@@ -314,9 +319,10 @@ class TopRowItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(icon,
-                                      color: bodyColor,
-                                    ),
+          SvgPicture.asset(
+            icon,
+            color: bodyColor,
+          ),
           SizedBox(
             width: 5.h,
           ),
@@ -345,7 +351,11 @@ class NewMessageIn extends StatelessWidget {
         SizedBox(
           width: 25.w,
         ),
-        Center(child: Text('New',style: subtitle2.copyWith(color: kcAccentColor),))
+        Center(
+            child: Text(
+          'New',
+          style: subtitle2.copyWith(color: kcAccentColor),
+        ))
       ],
     );
   }
@@ -365,30 +375,33 @@ class OnHoverWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(SVGAssetPaths.fluentEmoji,
-                                    ),
-          
+          SvgPicture.asset(
+            FluentEmojiSvg,
+          ),
           SizedBox(
             width: 10.w,
           ),
-          SvgPicture.asset(SVGAssetPaths.thread,
-                                    ),
+          SvgPicture.asset(
+            ThreadSvg,
+          ),
           SizedBox(
             width: 10.w,
           ),
-          SvgPicture.asset(SVGAssetPaths.shareIcon,
-                                    ),
+          SvgPicture.asset(
+            ShareSvg,
+          ),
           SizedBox(
             width: 10.w,
           ),
-          SvgPicture.asset(SVGAssetPaths.bookmarkIcon,
-                                    ),
+          SvgPicture.asset(
+            BookmarkSvg,
+          ),
           SizedBox(
             width: 10.w,
           ),
-          SvgPicture.asset(SVGAssetPaths.actionsIcon,
-                                    ),
-          
+          SvgPicture.asset(
+            ActionsSvg,
+          ),
         ],
       ),
     );

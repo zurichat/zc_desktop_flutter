@@ -118,7 +118,7 @@ class LeftSideHome extends HookWidget {
     final searchTextFieldController = useTextEditingController();
     return Row(
       children: [
-        SvgPicture.asset(AppIcon),
+        SvgPicture.asset(AppSvg),
         horizontalSpaceLarge,
         Row(
           children: [

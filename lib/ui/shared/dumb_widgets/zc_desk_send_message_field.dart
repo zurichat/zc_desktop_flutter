@@ -1,162 +1,236 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/painting.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 
-class SendMessageInputField extends StatelessWidget {
+import 'formatter.dart';
+import 'message_action.dart';
+
+class SendMessageInputField extends StatefulWidget {
   const SendMessageInputField({
     Key? key,
     required this.sendMessage,
   }) : super(key: key);
-  final Function(String message) sendMessage;
+  final Function() sendMessage;
+
+  @override
+  State<SendMessageInputField> createState() => _SendMessageInputFieldState();
+}
+
+class _SendMessageInputFieldState extends State<SendMessageInputField> {
+  late FocusNode _focus;
+  final _messageController = TextEditingController();
+  late bool hasFocus;
+  late bool isTyping;
+  @override
+  void initState() {
+    super.initState();
+    hasFocus = false;
+    isTyping = false;
+    _focus = new FocusNode();
+    _focus.addListener(_onFocusChange);
+    _messageController.addListener(
+      () {
+        setState(
+          () => isTyping = _messageController.text.isNotEmpty ? true : false,
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _focus.removeListener(_onFocusChange);
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    setState(() {
+      hasFocus = _focus.hasFocus;
+    });
+  }
+
+  void keepFocusActive() {
+    _focus.requestFocus();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final messageController = TextEditingController();
-
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 12),
-      padding: EdgeInsets.symmetric(horizontal: 12),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
-        border: Border.all(color: leftNavBarColor),
+        border: Border.all(color: hasFocus ? Colors.black : leftNavBarColor),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _buildMessageTextField(
-            controller: messageController,
             placeholder: '#designers',
           ),
-          _SendMessageFunctions(sendMessage: (){
-            sendMessage(messageController.text);
-          }),
-          verticalSpaceSmall,
+          _SendMessageFunctions(
+            isActive: hasFocus,
+            isTyping: isTyping,
+            shortcutPressed: () {
+              keepFocusActive();
+            },
+            formatPressed: () {
+              keepFocusActive();
+            },
+            tagPressed: () {
+              keepFocusActive();
+            },
+            attachPressed: () {
+              keepFocusActive();
+            },
+            sendPressed: () {
+              keepFocusActive();
+              widget.sendMessage();
+            },
+            schedulePressed: () {
+              keepFocusActive();
+            },
+          ),
         ],
       ),
     );
   }
-}
 
-TextField _buildMessageTextField({
-  required String placeholder,
-  required TextEditingController controller,
-}) {
-  return TextField(
-    maxLines: null,
-    controller: controller,
-    keyboardType: TextInputType.multiline,
-    decoration: InputDecoration(
-      border: UnderlineInputBorder(borderSide: BorderSide.none),
-      contentPadding: EdgeInsets.symmetric(vertical: 11),
-      hintText: 'Send a channels_page to $placeholder',
-      hintStyle: TextStyle(
-        fontSize: 15,
-        color: leftNavBarColor,
-        fontWeight: FontWeight.w500,
+  TextField _buildMessageTextField({required String placeholder}) {
+    return TextField(
+      maxLines: null,
+      controller: _messageController,
+      focusNode: _focus,
+      keyboardType: TextInputType.multiline,
+      decoration: InputDecoration(
+        border: UnderlineInputBorder(borderSide: BorderSide.none),
+        contentPadding: EdgeInsets.all(5),
+        hintText: 'Send a message_page to $placeholder',
+        hintStyle: TextStyle(
+          fontSize: 15,
+          color: leftNavBarColor,
+          fontWeight: FontWeight.w500,
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _SendMessageFunctions extends StatelessWidget {
   const _SendMessageFunctions({
     Key? key,
-    this.boldText,
-    this.launchshortCut,
-    this.makeItalic,
-    this.addLink,
-    this.createOrderedList,
-    this.attachFile,
-    this.mention,
-    required this.sendMessage,
+    required this.isActive,
+    required this.isTyping,
+    required this.sendPressed,
+    this.shortcutPressed,
+    this.tagPressed,
+    this.attachPressed,
+    this.schedulePressed,
+    this.formatPressed,
   }) : super(key: key);
-  final Function()? boldText;
-  final Function()? launchshortCut;
-  final Function()? makeItalic;
-  final Function()? addLink;
-  final Function()? createOrderedList;
-  final Function()? attachFile;
-  final Function()? mention;
-  final Function() sendMessage;
+  final bool isActive;
+  final bool isTyping;
+  final Function() sendPressed;
+  final Function()? shortcutPressed;
+  final Function()? tagPressed;
+  final Function()? attachPressed;
+  final Function()? schedulePressed;
+  final Function()? formatPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _TextFunction(
-          icon: 'assets/icons/flash.svg',
-          onTap: launchshortCut,
+    return Container(
+      padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        border: Border(
+          top: isActive
+              ? BorderSide(color: leftNavBarColor.withOpacity(.2))
+              : BorderSide.none,
         ),
-        SizedBox(width: 13),
-        SizedBox(
-          height: 19,
-          child: const VerticalDivider(width: .5),
-        ),
-        SizedBox(width: 13),
-        _TextFunction(
-          icon: 'assets/icons/bold.svg',
-          onTap: boldText,
-        ),
-        horizontalSpaceRegular,
-        _TextFunction(
-          icon: 'assets/icons/italic.svg',
-          onTap: makeItalic,
-        ),
-        horizontalSpaceRegular,
-        _TextFunction(
-          icon: 'assets/icons/link.svg',
-          onTap: addLink,
-        ),
-        horizontalSpaceRegular,
-        _TextFunction(
-          icon: 'assets/icons/list.svg',
-          onTap: createOrderedList,
-        ),
-        Spacer(),
-        _TextFunction(
-          icon: 'assets/icons/at.svg',
-          onTap: mention,
-        ),
-        horizontalSpaceRegular,
-        _TextFunction(
-          icon: 'assets/icons/attach.svg',
-          onTap: attachFile,
-        ),
-        horizontalSpaceRegular,
-        InkWell(
-          onTap: sendMessage,
-          hoverColor: Colors.transparent,
-          child: Padding(
-            padding: EdgeInsets.all(6),
-            child: SvgPicture.asset('assets/icons/send.svg',color: bodyColor,height: 12,
-              width: 12,),
+      ),
+      child: Stack(
+        children: [
+          Row(
+            children: [
+              MessageAction(
+                onTap: shortcutPressed!,
+                icon: 'assets/icons/flash.svg',
+                hoverColor: kcSecondaryColor,
+                iconHoverColor: whiteColor,
+              ),
+              SizedBox(width: 13),
+              SizedBox(
+                height: 19,
+                child: const VerticalDivider(width: .5),
+              ),
+              SizedBox(width: 13),
+              ...List.generate(
+                MarkDown.values.length,
+                (index) {
+                  final markdowns = MarkDown.values;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 13),
+                    child: TextFormatterButton(
+                      markDown: markdowns[index],
+                      isActive: isActive,
+                      onTap: formatPressed!,
+                    ),
+                  );
+                },
+              ),
+              Spacer(),
+              MessageAction(
+                onTap: tagPressed!,
+                icon: 'assets/icons/at.svg',
+              ),
+              MessageAction(
+                onTap: attachPressed!,
+                icon: 'assets/icons/attach.svg',
+              ),
+              Container(
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: isTyping ? kcPrimaryColor : whiteColor,
+                  borderRadius: BorderRadius.circular(3),
+                ),
+                child: Row(
+                  children: [
+                    AbsorbPointer(
+                      absorbing: isTyping ? false : true,
+                      child: MessageAction(
+                        onTap: sendPressed,
+                        hoverColor: kcPrimaryColor,
+                        iconHoverColor: whiteColor,
+                        icon: 'assets/icons/send.svg',
+                        iconColor: isTyping ? whiteColor : lightIconColor,
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                    SizedBox(
+                      height: 19,
+                      child: VerticalDivider(
+                        width: .5,
+                        color: isTyping ? whiteColor : Color(0xff616061),
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                    AbsorbPointer(
+                      absorbing: isTyping ? false : true,
+                      child: MessageAction(
+                        onTap: schedulePressed!,
+                        hoverColor: lightIconColor,
+                        iconHoverColor: whiteColor,
+                        icon: 'assets/icons/drop_down_open.svg',
+                        iconColor: isTyping ? whiteColor : lightIconColor,
+                        width: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class _TextFunction extends StatelessWidget {
-  const _TextFunction({
-    Key? key,
-    required this.icon,
-    this.onTap,
-  }) : super(key: key);
-  final String icon;
-  final Function()? onTap;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(50),
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(shape: BoxShape.circle,),
-        child: Center(
-             child: SvgPicture.asset(icon,color: lightIconColor,),
-            ),
+        ],
       ),
     );
   }

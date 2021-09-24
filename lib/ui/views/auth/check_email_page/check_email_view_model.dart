@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
 
 class CheckEmailViewModel extends BaseViewModel {
   final _navigator = locator<NavigationService>();

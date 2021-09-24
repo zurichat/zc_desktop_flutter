@@ -6,11 +6,11 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/l10n/l10n.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/theme/themes.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/window_title_bar/window_title_bar_view.dart';
 import 'package:zc_desktop_flutter/window_setup.dart';
 
 import 'app/app.router.dart';
-import 'ui/shared/preferences/preferenceswidgets/theme/themes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

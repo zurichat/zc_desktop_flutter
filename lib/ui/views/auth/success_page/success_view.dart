@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/success_page/success_view_model.dart';
 
 class SuccessView extends StatefulWidget {
@@ -24,13 +23,6 @@ class _SuccessViewState extends State<SuccessView> {
         return Scaffold(
             body: Column(
           children: [
-            Container(
-                height: 40,
-                child: buildAppBar(context,
-                    isHome: false, text: 'Success | Zuri')),
-                    SizedBox(
-                      height: 300.h,
-                    ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

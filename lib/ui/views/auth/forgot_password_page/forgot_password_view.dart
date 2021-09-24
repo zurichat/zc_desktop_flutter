@@ -8,14 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-
-import 'forgot_password_view_model.dart';
+import 'package:zc_desktop_flutter/ui/views/auth/forgot_password_page/forgot_password_viewmodel.dart';
 
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);
@@ -29,10 +27,6 @@ class ForgotPasswordView extends StatelessWidget {
           children: [
             Column(
               children: [
-                Container(
-                    height: 40,
-                    child: buildAppBar(context,
-                        isHome: false, text: 'Forget Password | Zuri')),
                 AuthHeader(
                     title: model.signInText, subTitle: model.signInSubtext),
                 verticalSpaceLarge,
@@ -83,7 +77,9 @@ class ForgotPasswordView extends StatelessWidget {
                     child: Center(
                       child: Text(
                         model.resetBtnText,
-                        style: headline6.copyWith(color: Color.fromRGBO(0, 184, 124, 1),),
+                        style: headline6.copyWith(
+                          color: Color.fromRGBO(0, 184, 124, 1),
+                        ),
                       ),
                     ),
                   ),

@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/constants/app_images.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_display/channels_display_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesck_search_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
@@ -47,7 +45,7 @@ class ChannelsDisplayView extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: SvgPicture.asset(
-                        SVGAssetPaths.channelsListIcon,
+                        ChannelsListSvg,
                         color: whiteColor,
                       ),
                     ),
@@ -61,7 +59,7 @@ class ChannelsDisplayView extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(top: model.paddingTop2),
                             child: SvgPicture.asset(
-                              SVGAssetPaths.channelDropDown,
+                              ChannelDropDownSvg,
                               color: whiteColor,
                             ),
                           ),
@@ -112,7 +110,7 @@ class ChannelsDisplayView extends StatelessWidget {
                           child: Row(
                             children: [
                               SvgPicture.asset(
-                                SVGAssetPaths.sortIcon,
+                                SortIconSvg,
                                 color: kcDisplayChannelColor,
                               ),
                               horizontalSpaceSmall,
@@ -127,7 +125,7 @@ class ChannelsDisplayView extends StatelessWidget {
                           child: Row(
                             children: [
                               SvgPicture.asset(
-                                SVGAssetPaths.filterDown,
+                                FilterDownSvg,
                                 color: kcDisplayChannelColor,
                               ),
                               horizontalSpaceSmall,
@@ -146,7 +144,11 @@ class ChannelsDisplayView extends StatelessWidget {
                         itemCount: model.sidebarItems.length,
                         itemBuilder: (context, index) {
                           return ChannelsDisplayList(
-                              visibleJoined: model.sidebarItems.keys.toList()[index] == 'annoucement' ? false : true,
+                              visibleJoined:
+                                  model.sidebarItems.keys.toList()[index] ==
+                                          'annoucement'
+                                      ? false
+                                      : true,
                               paddingBottom2: model.paddingBottom2,
                               paddingall: model.paddingall,
                               paddingBottom3: model.paddingBottom3,
@@ -255,7 +257,7 @@ class ChannelsDisplayList extends StatelessWidget {
                         SizedBox(
                           height: _size.height * .02,
                           child: SvgPicture.asset(
-                            SVGAssetPaths.channelsListIcon,
+                            ChannelsListSvg,
                             color: createChannelHeaderColor,
                           ),
                         ),
@@ -280,7 +282,7 @@ class ChannelsDisplayList extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   SvgPicture.asset(
-                                    SVGAssetPaths.activeIcon,
+                                    ActiveSvg,
                                     color: kcPrimaryColor,
                                   ),
                                   ZcdeskText.searchChannelHeaderGreenStyle(
@@ -307,7 +309,8 @@ class ChannelsDisplayList extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border(
                             top: BorderSide(
-                                color: kcBorderColor,),
+                              color: kcBorderColor,
+                            ),
                             bottom: BorderSide(
                               color: kcBorderColor,
                             ),
