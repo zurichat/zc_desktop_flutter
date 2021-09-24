@@ -8,11 +8,9 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/theme/theme_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-import 'package:zc_desktop_flutter/ui/shared/preferences/preferenceswidgets/theme/themes.dart';
 
 class ThemeView extends StatelessWidget {
-  ScrollController _rightSideBarController = ScrollController();
-
+  
   @override
   Widget build(BuildContext context) {
     final ScrollController _controller = ScrollController();
@@ -446,6 +444,8 @@ class ThemeView extends StatelessWidget {
       viewModelBuilder: () {
         return ThemeViewModel();
       },
+      onModelReady: (model) => model.fetchAndSetSetting(),
+      onDispose: (model) => model.saveSettings(),
     );
   }
 }
@@ -520,17 +520,17 @@ class ClassicThemeWidgetLight extends StatelessWidget {
             leading: Image(image: AssetImage(model.logoLight)),
             title: Row(children: [
               Text(model.title,
-                  style: preferenceStyleBold),
+                  style: prefHeaderTextStyle),
               SizedBox(
                 width: 10,
               ),
               Text(model.date(),
-                  style: preferenceStyleNormal)
+                  style: prefBodyTextStyle)
             ]),
             subtitle: Container(
                 margin: EdgeInsets.only(top: 10),
                 child: Text('Look nice today',
-                    style: preferenceStyleNormal)),
+                    style: prefBodyTextStyle)),
           ),
           Spacer(),
           BuildRadio(
@@ -583,7 +583,7 @@ class BottomContainerWidget extends StatelessWidget {
               )),
           horizontalSpaceSmall,
           Text(txt,
-              style:preferenceStyleBold)
+              style:prefHeaderTextStyle)
         ]));
   }
 }
@@ -628,7 +628,7 @@ class BuildRadio extends StatelessWidget {
             horizontalSpaceSmall,
             Expanded(
                 child: Text(txt,
-                    style: preferenceStyleBold))
+                    style: prefHeaderTextStyle))
           ],
         ));
   }

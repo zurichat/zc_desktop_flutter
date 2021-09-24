@@ -1,5 +1,4 @@
 import 'package:stacked/stacked.dart';
-
 enum UpButtonsChoice { option1, option2, option3 }
 
 class MarkAsReadViewModel extends BaseViewModel {
@@ -84,4 +83,5 @@ class MarkAsReadViewModel extends BaseViewModel {
     this._upButtonsChoice = val;
     notifyListeners();
   }
+
 }

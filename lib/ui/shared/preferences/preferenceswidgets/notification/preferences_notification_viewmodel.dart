@@ -1,8 +1,16 @@
+import 'dart:convert';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/core/enums/flash_windows.dart';
 import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
+import 'package:zc_desktop_flutter/models/preferences_model/notification/notification.dart';
+import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class NotificationViewModel extends BaseViewModel {
+  final _localStorage = locator<LocalStorageService>();
+  final _notificationStorageKey = 'notificationSetting';
+  var _notifications = Notification();
+
   PrefMessageNotification _messageNotification =
       PrefMessageNotification.AllMessages;
   FlashWindows _flashWindows = FlashWindows.WhenIdle;
@@ -119,51 +127,62 @@ class NotificationViewModel extends BaseViewModel {
 
   void setIsEmail() {
     _isEmail = !_isEmail;
+    _notifications = Notification().copyWith(isEmail: _isEmail);
     notifyListeners();
   }
 
   void setNotificationValue(String value) {
     _sendNotificationValue = value;
+    _notifications = Notification().copyWith(notificationValue: _sendNotificationValue);
     notifyListeners();
   }
 
   void setIsPreviewMessage() {
     _isPreviewMessage = !_isPreviewMessage;
+    _notifications = Notification().copyWith(includePreview: _isPreviewMessage);
     notifyListeners();
   }
 
   void setIsMute() {
     _isMute = !_isMute;
+    _notifications = Notification().copyWith(muteAll: _isMute);
     notifyListeners();
   }
 
   void setScheduleValue(String value) {
     _scheduleValue = value;
+    _notifications = Notification().copyWith(duration: _scheduleValue);
     notifyListeners();
   }
 
   void setMessageSoundValue(String value) {
     _messageSoundValue = value;
+    _notifications = Notification().copyWith(messageSound: _messageSoundValue);
     notifyListeners();
   }
 
   void setLougeSoundValue(String value) {
     _lougeSoundValue = value;
+    _notifications = Notification().copyWith(loungeSound: _lougeSoundValue);
     notifyListeners();
   }
 
   void setNotificationSoundValue(String value) {
     _notificationSoundValue = value;
+    _notifications =
+        Notification().copyWith(deliverSound: _notificationSoundValue);
     notifyListeners();
   }
 
   void setSchedule1Value(String value) {
     _schedule1Value = value;
+    _notifications = Notification().copyWith(from: _schedule1Value);
     notifyListeners();
   }
 
   void setSchedule2Value(String value) {
     _schedule2Value = value;
+    _notifications = Notification().copyWith(to: _schedule2Value);
     notifyListeners();
   }
 
@@ -176,26 +195,59 @@ class NotificationViewModel extends BaseViewModel {
 
   void setMessageNotification(Object? value) {
     _messageNotification = (value) as PrefMessageNotification;
+    _notifications = Notification().copyWith(notifyMe: _messageNotification);
     notifyListeners();
   }
 
   void setFlashWindows(Object? value) {
     _flashWindows = (value) as FlashWindows;
+    _notifications =
+        Notification().copyWith(flashOnNotification: _flashWindows);
     notifyListeners();
   }
 
   void setISRepliedInThread() {
     _isRepliesInThread = !_isRepliesInThread;
+    _notifications =
+        Notification().copyWith(repliesToThread: _isRepliesInThread);
     notifyListeners();
   }
 
   void setIsmeetingSet() {
     _isMeetingSet = !_isMeetingSet;
+    _notifications = Notification().copyWith(meetingStart: _isMeetingSet);
     notifyListeners();
   }
 
   void setIsSameForMobile() {
     _isSameForMobile = !_isSameForMobile;
+    _notifications =
+        Notification().copyWith(differentSettingsForMobile: _isSameForMobile);
+    notifyListeners();
+  }
+
+  void saveSettings() => _localStorage.saveToDisk(
+      _notificationStorageKey, jsonEncode(_notifications));
+
+  Future<void> fetchAndSetSetting() async {
+    final result = await _localStorage.getFromDisk(_notificationStorageKey);
+    _notifications = Notification.fromJson(jsonDecode(result.toString()));
+     Notification().copyWith(isEmail: _isEmail);
+     Notification().copyWith(notificationValue: _sendNotificationValue);
+    _isPreviewMessage = _notifications.includePreview;
+    _isMute = _notifications.muteAll;
+    _scheduleValue = _notifications.duration;
+    _messageSoundValue = _notifications.messageSound;
+    _lougeSoundValue = _notifications.loungeSound;
+    _notificationSoundValue = _notifications.deliverSound;
+    _schedule1Value = _notifications.from;
+    _schedule2Value = _notifications.to;
+    _messageNotification = _notifications.notifyMe;
+    _flashWindows = _notifications.flashOnNotification;
+    _isRepliesInThread = _notifications.repliesToThread;
+    _isMeetingSet = _notifications.meetingStart;
+    _isSameForMobile = _notifications.differentSettingsForMobile;
+
     notifyListeners();
   }
 }

@@ -202,7 +202,7 @@ class DropDownItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         text,
-                        style: preferenceStyleNormal,
+                        style: prefBodyTextStyle,
                       ),
                       Spacer(),
                       Icon(
@@ -241,7 +241,7 @@ class ProfilePicture extends StatelessWidget {
               children: [
                 Text(
                   "Bernice_Perp",
-                  style: preferenceStyleNormal,
+                  style: prefBodyTextStyle,
                 ),
                 verticalSpaceTiny,
                 Row(
@@ -255,7 +255,7 @@ class ProfilePicture extends StatelessWidget {
                     ),
                     Text(
                       "Away",
-                      style: preferenceStyleNormal,
+                      style: prefBodyTextStyle,
                     )
                   ],
                 )

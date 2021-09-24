@@ -16,6 +16,8 @@ class Notification with _$Notification {
     @Default('Duration') String duration,
     @Default('From') String from,
     @Default('To') String to,
+    @Default(false) isEmail,
+    @Default('as soon as I\'m inactive') String notificationValue,
     @Default(true) bool includePreview,
     @Default(false) bool muteAll,
     @Default('Pick sound') String messageSound,

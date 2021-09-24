@@ -29,7 +29,7 @@ class SideBarView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Always show in the side bar',
-                    style: preferenceStyleBold),
+                    style: prefHeaderTextStyle),
                 SizedBox(height: 14),
                 DisplayCheckBox(
                   value: model.insight,
@@ -97,7 +97,7 @@ class SideBarView extends StatelessWidget {
                 SizedBox(height: 5),
                 Divider(),
                 SizedBox(height: 10),
-                Text('Show...', style: preferenceStyleBold),
+                Text('Show...', style: prefHeaderTextStyle),
                 DisplayRadio(
                     groupValue: model.sidebar,
                     text: 'All your conversation',
@@ -121,10 +121,10 @@ class SideBarView extends StatelessWidget {
                     value: PrefSidebar.Custom),
                 SizedBox(height: 5),
                 Text('Choose your settings for each section from the sidebar ',
-                    style: preferenceStyleNormal),
+                    style: prefBodyTextStyle),
                 Divider(),
                 SizedBox(height: 10),
-                Text('Sort...', style: preferenceStyleBold),
+                Text('Sort...', style: prefHeaderTextStyle),
                 DisRadio(
                     groupValue: model.bar,
                     text: 'Alphabetically',
@@ -149,11 +149,11 @@ class SideBarView extends StatelessWidget {
                 SizedBox(height: 5),
                 Text(
                     'You can also choose how individual section are sorted directly from the sidebar',
-                    style: preferenceStyleNormal),
+                    style: prefSubTitleTextStyle),
                 Divider(),
                 SizedBox(height: 10),
                 Text('Direct message announcements',
-                    style: preferenceStyleBold),
+                    style: prefHeaderTextStyle),
                 SizedBox(height: 5),
                 DisCheckBox(
                     text: 'Show profile photos next to DM',
@@ -205,7 +205,7 @@ class DisplayCheckBox extends StatelessWidget {
         ),
         SvgPicture.asset(assetName),
         SizedBox(width: 5),
-        Text(text, style: preferenceStyleNormal),
+        Text(text, style: prefBodyTextStyle),
       ],
     );
   }
@@ -237,7 +237,7 @@ class DisplayRadio extends StatelessWidget {
           onChanged: onChanged,
           activeColor: KStartupContainerColor,
         ),
-        Text(text, style: preferenceStyleNormal),
+        Text(text, style: prefBodyTextStyle),
       ],
     );
   }
@@ -268,7 +268,7 @@ class DisRadio extends StatelessWidget {
             groupValue: groupValue,
             onChanged: onChanged,
             activeColor: KStartupContainerColor),
-        Text(text, style: preferenceStyleNormal),
+        Text(text, style: prefBodyTextStyle),
       ],
     );
   }
@@ -295,7 +295,7 @@ class DisCheckBox extends StatelessWidget {
           onChanged: onChanged,
           activeColor: KStartupContainerColor,
         ),
-        Text(text, style: preferenceStyleNormal),
+        Text(text, style: prefBodyTextStyle),
       ],
     );
   }
