@@ -2,11 +2,14 @@ class APIConstants {
   static const String scheme = 'https';
 
   final String host;
+  final String dmHost;
 
   final int receiveTimeout = 3000;
   final int sendTimeout = 5000;
 
-  APIConstants.production() : host = 'api.zuri.chat';
+  APIConstants.production()
+      : host = 'api.zuri.chat',
+        dmHost = 'dm.zuri.chat';
 
   Uri get baseUri => Uri(scheme: scheme, host: host, path: '/');
 
@@ -24,4 +27,20 @@ class APIConstants {
 
   Uri get requestPasswordResetCodeUri => Uri(
       scheme: scheme, host: host, path: '/account/request-password-reset-code');
+
+  //DMs endpoints
+  Uri get dmCreateRoom =>
+      Uri(scheme: scheme, host: dmHost, path: '/api/v1/createroom');
+
+  Uri dmSendMessage(String roomId) => Uri(
+      scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');
+
+  Uri get dmGetRoomInfo =>
+      Uri(scheme: scheme, host: dmHost, path: '/api/v1/room-info');
+
+  Uri dmFetchRoomMessages(String roomId) =>
+      Uri(scheme: scheme, host: dmHost, path: '/api/v1/messages/${roomId}');
+
+  Uri dmMarkMessageAsRead(String messageId) =>
+      Uri(scheme: scheme, host: dmHost, path: '/api/v1/${messageId}/read/new/');
 }

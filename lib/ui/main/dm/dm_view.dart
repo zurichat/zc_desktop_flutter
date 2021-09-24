@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/dm_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/hover_actions_view.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/new_dm_view.dart';
@@ -24,6 +25,9 @@ class DmView extends StatelessWidget {
     return ViewModelBuilder<DmViewModel>.reactive(
         onModelReady: (model) {
           model.setup();
+        },
+        onDispose: (model) {
+          model.onDispose();
         },
         viewModelBuilder: () => DmViewModel(),
         builder: (context, model, child) => model.isBusy
@@ -52,91 +56,93 @@ class DmView extends StatelessWidget {
                     Align(
                         alignment: Alignment.topCenter, child: TopRowActions()),
                     Flexible(
-                      fit: FlexFit.tight,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                          child: Container(
-                            color: kcBackgroundColor2,
-                            child: Scrollbar(
-                              controller: _rightSideBarController,
-                              isAlwaysShown: true,
-                              scrollbarOrientation: ScrollbarOrientation.right,
-                              thickness: 10,
-                              showTrackOnHover: true,
-                              child: ListView(
-                                physics: AlwaysScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                controller: _rightSideBarController,
-                                children: [
-                                  NewDmView(
-                                    userName: model.user.name!,
-                                  ),
-                                  model.messages.isNotEmpty
-                                      ? DateWidget(
-                                          date:
-                                              model.formatDate(DateTime.now()))
-                                      : SizedBox(),
-                                  ListView.builder(
-                                      itemCount: model.messages.length,
+                        fit: FlexFit.tight,
+                        child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: Container(
+                                  color: kcBackgroundColor2,
+                                  child: Scrollbar(
+                                    controller: _rightSideBarController,
+                                    isAlwaysShown: true,
+                                    scrollbarOrientation:
+                                        ScrollbarOrientation.right,
+                                    thickness: 10,
+                                    showTrackOnHover: true,
+                                    child: ListView(
+                                      physics: AlwaysScrollableScrollPhysics(),
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemBuilder: (context, index) {
-                                        if (model.messages.length - 1 ==
-                                            index) {
-                                          return Column(
-                                            children: [
-                                              NewMessageIn(),
-                                              MessageTile(
+                                      controller: _rightSideBarController,
+                                      children: [
+                                        NewDmView(
+                                          userName: model.user.name!,
+                                        ),
+                                        ListView.builder(
+                                            itemCount: model.messages.length,
+                                            shrinkWrap: true,
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            itemBuilder: (context, index) {
+                                              if (model.messages
+                                                          .elementAt(index)
+                                                          .sender_id !=
+                                                      model.currentLoggedInUser
+                                                          .id &&
+                                                  !model.messages
+                                                      .elementAt(index)
+                                                      .read &&
+                                                  !model.showingNewMessageIn) {
+                                                print('popopopop');
+                                                model.toggleShowingNewMessageIn(
+                                                    true);
+                                                return Column(
+                                                  children: [
+                                                    NewMessageIn(),
+                                                    MessageTile(
+                                                      model: model,
+                                                      messageIndex: index,
+                                                      message: model.messages
+                                                          .elementAt(index),
+                                                    ),
+                                                  ],
+                                                );
+                                              } else if ((!model
+                                                      .isSameDate(index)) ||
+                                                  index == 0) {
+                                                return Column(
+                                                  children: [
+                                                    DateWidget(
+                                                        date: model.formatDate(
+                                                            model
+                                                                .messages
+                                                                .elementAt(
+                                                                    index ==
+                                                                            0
+                                                                        ? index
+                                                                        : index +
+                                                                            1)
+                                                                .created_at)),
+                                                    MessageTile(
+                                                      model: model,
+                                                      messageIndex: index,
+                                                      message: model.messages
+                                                          .elementAt(index),
+                                                    ),
+                                                  ],
+                                                );
+                                              }
+                                              return MessageTile(
                                                 model: model,
                                                 messageIndex: index,
-                                                reactions: model.messages
-                                                    .elementAt(index)
-                                                    .reactions,
-                                                userDisplayName: model.messages
-                                                    .elementAt(index)
-                                                    .userDisplayName,
-                                                userProfileUrl: model.messages
-                                                    .elementAt(index)
-                                                    .userProfileUrl,
-                                                time: model.messages
-                                                    .elementAt(index)
-                                                    .time,
                                                 message: model.messages
-                                                    .elementAt(index)
-                                                    .message,
-                                              ),
-                                            ],
-                                          );
-                                        }
-                                        return MessageTile(
-                                          model: model,
-                                          messageIndex: index,
-                                          reactions: model.messages
-                                              .elementAt(index)
-                                              .reactions,
-                                          userDisplayName: model.messages
-                                              .elementAt(index)
-                                              .userDisplayName,
-                                          userProfileUrl: model.messages
-                                              .elementAt(index)
-                                              .userProfileUrl,
-                                          time: model.messages
-                                              .elementAt(index)
-                                              .time,
-                                          message: model.messages
-                                              .elementAt(index)
-                                              .message,
-                                        );
-                                      }),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                                                    .elementAt(index),
+                                              );
+                                            }),
+                                      ],
+                                    ),
+                                  ),
+                                )))),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: SendMessageInputField(
@@ -154,22 +160,15 @@ class DmView extends StatelessWidget {
 }
 
 class MessageTile extends StatelessWidget {
-  final String userProfileUrl;
-  final String userDisplayName;
-  final String message;
-  final String time;
+  final Results message;
   final int messageIndex;
   final DmViewModel model;
-  final List<Reaction> reactions;
 
-  MessageTile(
-      {required this.message,
-      required this.time,
-      required this.messageIndex,
-      required this.model,
-      required this.reactions,
-      required this.userDisplayName,
-      required this.userProfileUrl});
+  MessageTile({
+    required this.message,
+    required this.messageIndex,
+    required this.model,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -194,108 +193,130 @@ class MessageTile extends StatelessWidget {
                       ? hoverColor
                       : Colors.transparent),
               color: kcBackgroundColor2,
-              padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(2.0),
-                    height: 50.h,
-                    width: 50.w,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: lightIconColor),
-                        borderRadius: BorderRadius.circular(8.r),
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: NetworkImage(userProfileUrl, scale: 5),
-                        )),
-                  ),
-                  SizedBox(
-                    width: 8.w,
-                  ),
-                  Expanded(
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                userDisplayName,
-                                style: kHeading1TextStyle.copyWith(
-                                    fontSize: 15.sp),
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              Text(
-                                time,
-                                style: subtitle2.copyWith(color: timeColor),
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
-                            child: Text(message),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8),
-                            child: GridView.builder(
-                                gridDelegate:
-                                    SliverGridDelegateWithMaxCrossAxisExtent(
-                                        maxCrossAxisExtent: 40,
-                                        childAspectRatio: 3 / 2,
-                                        crossAxisSpacing: 15,
-                                        mainAxisSpacing: 20),
-                                shrinkWrap: true,
-                                itemCount: reactions.length + 1,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  if (index == reactions.length) {
-                                    return Container(
-                                      padding: EdgeInsets.all(2),
-                                      decoration: BoxDecoration(
-                                          color: reactionBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(25.r),
-                                          border: Border.all(
-                                              color: reactionBackground)),
-                                      child: Center(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SvgPicture.asset(
-                                              SVGAssetPaths.fluentEmoji),
-                                          Text('+')
-                                        ],
-                                      )),
-                                    );
-                                  } else {
-                                    return EmojiReaction(
-                                      onTap: () {
-                                        model.reactToMessage(
-                                            messageIndex, index);
-                                      },
-                                      model: model,
-                                      isReacted:
-                                          reactions.elementAt(index).isReacted,
-                                      emoji:
-                                          reactions.elementAt(index).reaction,
-                                      count: reactions.elementAt(index).count,
-                                    );
-                                  }
-                                }),
-                          )
-                        ]),
-                  )
-                ],
-              ),
+              padding: EdgeInsets.fromLTRB(0, 2, 10, 2),
+              child: messageIndex != 0 &&
+                      message.sender_id ==
+                          model.messages
+                              .elementAt(messageIndex - 1)
+                              .sender_id &&
+                      model.formatTime(message.created_at) ==
+                          model.formatTime(model.messages
+                              .elementAt(messageIndex - 1)
+                              .created_at)
+                  ? SameSenderMessageTile(
+                      message: message,
+                      model: model,
+                      messageIndex: messageIndex,
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(2.0),
+                          height: 50.h,
+                          width: 50.w,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: lightIconColor),
+                              borderRadius: BorderRadius.circular(8.r),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                    model
+                                        .getUser(message.sender_id)
+                                        .displayName,
+                                    scale: 5),
+                              )),
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        Expanded(
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(//u will have to change this using real data
+                                      model
+                                          .getUser(message.sender_id)
+                                          .displayName.isEmpty ? 'Zuri Me' : model
+                                          .getUser(message.sender_id)
+                                          .displayName,
+                                      style: kHeading1TextStyle.copyWith(
+                                          fontSize: 15.sp),
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Text(
+                                      model.formatTime(message.created_at),
+                                      style:
+                                          subtitle2.copyWith(color: timeColor),
+                                    )
+                                  ],
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                                  child: Text(message.message),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                  child: GridView.builder(
+                                      gridDelegate:
+                                          SliverGridDelegateWithMaxCrossAxisExtent(
+                                              maxCrossAxisExtent: 40,
+                                              childAspectRatio: 3 / 2,
+                                              crossAxisSpacing: 15,
+                                              mainAxisSpacing: 20),
+                                      shrinkWrap: true,
+                                      itemCount: message.reactions.length + 1,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemBuilder: (context, index) {
+                                        if (index == message.reactions.length) {
+                                          return Container(
+                                            padding: EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                                color: reactionBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(25.r),
+                                                border: Border.all(
+                                                    color: reactionBackground)),
+                                            child: Center(
+                                                child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                    SVGAssetPaths.fluentEmoji),
+                                                Text('+')
+                                              ],
+                                            )),
+                                          );
+                                        } else {
+                                          return EmojiReaction(
+                                            onTap: () {
+                                              model.reactToMessage(
+                                                  messageIndex, index);
+                                            },
+                                            model: model,
+                                            isReacted: false,
+                                            emoji: '',
+                                            count: 0,
+                                          );
+                                        }
+                                      }),
+                                )
+                              ]),
+                        )
+                      ],
+                    ),
             ),
             model.onMessageTileHover &&
                     model.onMessageHoveredIndex == messageIndex
@@ -680,6 +701,88 @@ class EmojiReaction extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SameSenderMessageTile extends StatelessWidget {
+  final DmViewModel model;
+  final Results message;
+  final int messageIndex;
+  SameSenderMessageTile(
+      {required this.message, required this.model, required this.messageIndex});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          model.onMessageTileHover &&
+                  model.onMessageHoveredIndex == messageIndex
+              ? Text(
+                  model.formatTime(message.created_at),
+                  style: subtitle2.copyWith(color: timeColor),
+                )
+              : SizedBox(
+                  width: 60.w,
+                ),
+          SizedBox(
+            width: 5.w,
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(message.message),
+                Padding(
+                  padding: EdgeInsets.all(4),
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 40,
+                          childAspectRatio: 3 / 2,
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 20),
+                      shrinkWrap: true,
+                      itemCount: message.reactions.length + 1,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        if (index == message.reactions.length) {
+                          return Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                color: reactionBackground,
+                                borderRadius: BorderRadius.circular(25.r),
+                                border: Border.all(color: reactionBackground)),
+                            child: Center(
+                                child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(SVGAssetPaths.fluentEmoji),
+                                Text('+')
+                              ],
+                            )),
+                          );
+                        } else {
+                          return EmojiReaction(
+                            onTap: () {
+                              model.reactToMessage(messageIndex, index);
+                            },
+                            model: model,
+                            isReacted: false,
+                            emoji: '',
+                            count: 0,
+                          );
+                        }
+                      }),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
