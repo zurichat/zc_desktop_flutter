@@ -37,7 +37,7 @@ class OrganizationService {
 
     final response = await _apiService.get(
       _apiService.apiConstants.getOrganisationsUri(_authResponse.user.email),
-      headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
+      // headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
     );
 
     return List.from(
@@ -46,13 +46,14 @@ class OrganizationService {
   }
 
   /// This is used the create an organisation
-  Future<void> createOrganisation() async {
+  Future<void> createOrganisation(String email) async {
     // Getting stored AuthResponse from local storage
 
     final response = await _apiService.post(
-      _apiService.apiConstants.organisationsUri,
+      _apiService.apiConstants.createOrganisationUri,
       body: {
-        "creator_email": _authResponse.user.email,
+        // "creator_email": _authResponse.user.email,
+        "creator_email": email,
       },
       headers: {
         'Authorization': 'Bearer ${_authResponse.user.token}',
