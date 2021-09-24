@@ -43,7 +43,7 @@ class LoginView extends HookWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset(ZuriSvg),
+                              Image.asset(ZuriLogo),
                               verticalSpaceMedium,
                               Text(
                                 SignInText,
