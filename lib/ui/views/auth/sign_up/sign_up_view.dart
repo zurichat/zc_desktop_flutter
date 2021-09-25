@@ -113,6 +113,7 @@ class SignUpView extends HookWidget {
                                       activeColor: kcSuccessColor,
                                       onChanged: model.onPolicyCheckChanged,
                                     ),
+                                    verticalSpaceMedium,
                                     Expanded(
                                       child: Text(
                                         PolicyText,

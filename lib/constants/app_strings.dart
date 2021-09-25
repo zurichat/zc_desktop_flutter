@@ -3,7 +3,7 @@ const String CreateAccountText = 'Create Account';
 const String EmailHintText = 'someone@gmail.com';
 const String PasswordHintText = 'password';
 const String PolicyText =
-    "By signing up, you agree that you have accepted our User Notice \nand Privacy Policy";
+    "By signing up, you agree that you have accepted our User Notice and Privacy Policy";
 const String SignInText = 'Sign in';
 const String StartUpTitleText = 'Unlimited Team Collaboration Platform';
 const String StartUpSubTitleText =

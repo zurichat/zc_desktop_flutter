@@ -1,4 +1,3 @@
-
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
@@ -119,12 +118,12 @@ class DmViewModel extends BaseViewModel {
   }
 
   LoggedInUser.User getUser(var senderId) {
-    print("player "+senderId);
+    print("player " + senderId);
     if (_currentLoggedInUser.id == senderId) {
       return _currentLoggedInUser;
     } else {
       return LoggedInUser.User(
-          id: _user.id!.toString(),
+          id: _user.id.toString(),
           firstName: 'firstName',
           lastName: 'lastName',
           displayName: _user.name!,
