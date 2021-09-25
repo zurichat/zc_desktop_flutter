@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-import 'package:zc_desktop_flutter/ui/views/auth/reset_password_page/reset_password_view_model.dart';
+import 'package:zc_desktop_flutter/ui/views/auth/reset_password/reset_password_view_model.dart';
 
 class ResetPasswordView extends StatelessWidget {
   const ResetPasswordView({Key? key}) : super(key: key);

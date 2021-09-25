@@ -5,7 +5,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/message_reply_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/reaction.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/user_avatar.dart';
-import 'package:zc_desktop_flutter/ui/views/main/channels_page/channels_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels/channels_viewmodel.dart';
 
 class MessageWidget extends StatelessWidget {
   const MessageWidget({Key? key, required this.model}) : super(key: key);

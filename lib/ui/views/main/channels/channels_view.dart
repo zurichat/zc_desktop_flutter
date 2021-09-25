@@ -7,7 +7,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/message.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
-import 'package:zc_desktop_flutter/ui/views/main/channels_page/channels_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels/channels_viewmodel.dart';
 
 
 class ChannelsView extends StatelessWidget {

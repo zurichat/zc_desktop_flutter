@@ -13,7 +13,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-import 'package:zc_desktop_flutter/ui/views/auth/forgot_password_page/forgot_password_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/auth/forgot_password/forgot_password_viewmodel.dart';
 
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);

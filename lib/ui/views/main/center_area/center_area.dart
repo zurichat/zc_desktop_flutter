@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/views/main/channels_page/channels_view.dart';
-import 'package:zc_desktop_flutter/ui/views/main/home_page/home_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels/channels_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/home/home_viewmodel.dart';
 
 class CenterArea extends ViewModelWidget<HomeViewModel> {
   const CenterArea({Key? key}) : super(key: key);

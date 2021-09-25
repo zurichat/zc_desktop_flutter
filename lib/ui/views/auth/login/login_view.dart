@@ -9,10 +9,11 @@ import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_icons.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-import 'package:zc_desktop_flutter/ui/views/auth/login_page/login_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/auth/login/login_viewmodel.dart';
 
 class LoginView extends HookWidget {
   final _formKey = GlobalKey<FormState>();
@@ -37,9 +38,7 @@ class LoginView extends HookWidget {
                       child: Container(
                         child: SingleChildScrollView(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 80.w,
-                            vertical: 40.h,
-                          ),
+                              horizontal: 80.w, vertical: 40.h),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -109,7 +108,11 @@ class LoginView extends HookWidget {
                                     style: bodyText1.copyWith(fontSize: 16.sp),
                                   ),
                                   verticalSpaceSmall,
-                                  AuthIcons(),
+                                  AuthIcons(
+                                    googleOnPressed: () {},
+                                    facebookOnPressed: () {},
+                                    twitterOnPressed: () {},
+                                  ),
                                   verticalSpaceSmall,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -156,38 +159,6 @@ class LoginView extends HookWidget {
         ),
       ),
       viewModelBuilder: () => LoginViewModel(),
-    );
-  }
-}
-
-class AuthIcons extends ViewModelWidget<LoginViewModel> {
-  const AuthIcons({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, LoginViewModel model) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        IconButton(
-          icon: Image.asset(GoogleLogo),
-          iconSize: 40.h,
-          onPressed: () {},
-        ),
-        horizontalSpaceRegular,
-        IconButton(
-          icon: Image.asset(FacebookLogo),
-          iconSize: 40.h,
-          onPressed: () {},
-        ),
-        horizontalSpaceRegular,
-        IconButton(
-          icon: Image.asset(TwitterLogo),
-          iconSize: 40.h,
-          onPressed: () {},
-        ),
-      ],
     );
   }
 }

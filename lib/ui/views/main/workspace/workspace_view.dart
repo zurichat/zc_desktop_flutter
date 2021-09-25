@@ -15,7 +15,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_creation/channels_creation_view.dart';
-import 'package:zc_desktop_flutter/ui/views/main/workspace_page/workspace_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/workspace/workspace_viewmodel.dart';
 
 class WorkspaceView extends StatelessWidget {
   const WorkspaceView({Key? key}) : super(key: key);

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_images.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
@@ -11,6 +10,7 @@ import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_icons.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
@@ -24,53 +24,38 @@ class SignUpView extends HookWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
 
-    final _scrollController = useScrollController();
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final confirmPasswordController = useTextEditingController();
 
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: _size.height - 40,
-              child: Row(
-                children: [
-                  LeftSideContainer(),
-                  Expanded(
-                      flex: 2,
-                      child: Scrollbar(
-                        controller: _scrollController,
-                        showTrackOnHover: true,
-                        interactive: true,
-                        isAlwaysShown: true,
-                        scrollbarOrientation: ScrollbarOrientation.right,
-                        child: SingleChildScrollView(
-                          controller: _scrollController,
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 72.w),
+        body: Container(
+          child: Column(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    LeftSideContainer(),
+                    Expanded(
+                        flex: 2,
+                        child: Scrollbar(
+                          showTrackOnHover: true,
+                          interactive: true,
+                          isAlwaysShown: true,
+                          scrollbarOrientation: ScrollbarOrientation.right,
+                          child: SingleChildScrollView(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 80.w, vertical: 40.h),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    verticalSpaceMedium,
-                                    SvgPicture.asset(ZuriSvg),
-                                    verticalSpaceMedium,
-                                    Text(
-                                      ZuriText,
-                                      style: kHeading4TextStyle,
-                                    ),
-                                  ],
-                                ),
+                                Image.asset(ZuriLogo),
+                                verticalSpaceMedium,
                                 Text(
                                   CreateAccountText,
-                                  style: kHeading2TextStyle,
+                                  style: headline3,
                                 ),
-                                verticalSpaceMedium,
                                 if (model.hasError)
                                   Text(
                                     (model.modelError as Failure).message,
@@ -94,7 +79,7 @@ class SignUpView extends HookWidget {
                                       AuthInputField(
                                         label: 'Password',
                                         password: true,
-                                        isVisible: model.passwordVisibily,
+                                        isVisible: model.passwordVisibility,
                                         onVisibilityTap:
                                             model.setPasswordVisibility,
                                         hintPlaceHolder: PasswordHintText,
@@ -106,9 +91,9 @@ class SignUpView extends HookWidget {
                                         label: 'Confirm Password',
                                         password: true,
                                         isVisible:
-                                            model.confirmPasswordVisibily,
+                                            model.confirmPasswordVisibility,
                                         onVisibilityTap:
-                                            model.setconfirmPasswordVisibility,
+                                            model.setConfirmPasswordVisibility,
                                         hintPlaceHolder: PasswordHintText,
                                         controller: confirmPasswordController,
                                         validator: (value) =>
@@ -136,23 +121,16 @@ class SignUpView extends HookWidget {
                                     )
                                   ],
                                 ),
-                                // Text(model.isCheckError ?? '',
-                                //     style: TextStyle(
-                                //         color: Colors.red,
-                                //         fontSize: 13.sp,
-                                //         fontWeight: FontWeight.w400,
-                                //         fontFamily: 'Lato')),
                                 verticalSpaceMedium,
-                                Container(
-                                    height: 58.h,
+                                SizedBox(
+                                    height: 45.h,
                                     width: 440.w,
                                     child: AuthButton(
                                       label: 'Register',
                                       onTap: () async {
                                         if (!_formKey.currentState!.validate())
                                           return;
-
-                                        await model.signup(
+                                        await model.signUp(
                                           email: emailController.text,
                                           password: passwordController.text,
                                         );
@@ -167,7 +145,11 @@ class SignUpView extends HookWidget {
                                   ),
                                 ),
                                 verticalSpaceMedium,
-                                AuthIcons(),
+                                AuthIcons(
+                                  googleOnPressed: () {},
+                                  facebookOnPressed: () {},
+                                  twitterOnPressed: () {},
+                                ),
                                 verticalSpaceMedium,
                                 Padding(
                                   padding: const EdgeInsets.only(
@@ -203,47 +185,15 @@ class SignUpView extends HookWidget {
                               ],
                             ),
                           ),
-                        ),
-                      ))
-                ],
+                        ))
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       viewModelBuilder: () => SignUpViewModel(),
-    );
-  }
-}
-
-class AuthIcons extends ViewModelWidget<SignUpViewModel> {
-  const AuthIcons({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, SignUpViewModel model) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        IconButton(
-          icon: Image.asset(GoogleLogo),
-          iconSize: 52.h,
-          onPressed: () {},
-        ),
-        horizontalSpaceRegular,
-        IconButton(
-          icon: Image.asset(FacebookLogo),
-          iconSize: 52.h,
-          onPressed: () {},
-        ),
-        horizontalSpaceRegular,
-        IconButton(
-          icon: Image.asset(TwitterLogo),
-          iconSize: 52.h,
-          onPressed: () {},
-        ),
-      ],
     );
   }
 }

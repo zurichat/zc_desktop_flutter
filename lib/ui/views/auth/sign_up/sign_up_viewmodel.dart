@@ -14,10 +14,10 @@ class SignUpViewModel extends BaseViewModel with Validator {
   final _authService = locator<AuthService>();
 
   bool _passwordVisibility = true;
-  bool get passwordVisibily => _passwordVisibility;
+  bool get passwordVisibility => _passwordVisibility;
 
   bool _confirmPasswordVisibility = true;
-  bool get confirmPasswordVisibily => _confirmPasswordVisibility;
+  bool get confirmPasswordVisibility => _confirmPasswordVisibility;
 
   bool _isPolicyChecked = false;
   bool get isPolicyChecked => _isPolicyChecked;
@@ -27,7 +27,7 @@ class SignUpViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  void setconfirmPasswordVisibility() {
+  void setConfirmPasswordVisibility() {
     _confirmPasswordVisibility = !_confirmPasswordVisibility;
     notifyListeners();
   }
@@ -42,14 +42,14 @@ class SignUpViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  Future<void> signup({
+  Future<void> signUp({
     required String email,
     required String password,
   }) async {
-    await runBusyFuture(performSignup(email, password));
+    await runBusyFuture(performSignUp(email, password));
   }
 
-  Future<void> performSignup(String email, String password) async {
+  Future<void> performSignUp(String email, String password) async {
     if (!isPolicyChecked) {
       throw Failure('Please accept our policy before you continue');
     } else {

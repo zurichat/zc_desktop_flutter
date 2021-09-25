@@ -9,7 +9,7 @@ class StartUpViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   void initialise() async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 1000));
 
    await _navigationService.navigateTo(Routes.loginView);
   }
