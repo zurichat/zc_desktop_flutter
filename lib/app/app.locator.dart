@@ -17,7 +17,7 @@ import '../services/channel_service/channel_service.dart';
 import '../services/channel_service/channels_api_service.dart';
 import '../services/dm_service/dm_service.dart';
 import '../services/local_storage/local_storage_service.dart';
-import '../services/organisation/organisation_service.dart';
+import '../services/organization/organization_service.dart';
 import '../services/workspace_service/workspace_service.dart';
 
 final locator = StackedLocator.instance;
