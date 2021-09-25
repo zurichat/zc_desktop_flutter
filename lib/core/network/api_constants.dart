@@ -5,18 +5,17 @@ class APIConstants {
 
   final String host;
   final String dmHost;
+  final String channelHost;
 
   final int receiveTimeout = 3000;
   final int sendTimeout = 5000;
 
   APIConstants.production()
       : host = 'api.zuri.chat',
-        dmHost = 'dm.zuri.chat';
+        dmHost = 'dm.zuri.chat',
+        channelHost = 'channels.zuri.chat';
 
   Uri get baseUri => Uri(scheme: scheme, host: host, path: '/');
-
-  Uri get createChannelUri => Uri(
-      scheme: scheme, host: 'channels.zuri.chat/api/', path: 'v1/1/channels/');
 
   Uri get signinUri => Uri(scheme: scheme, host: host, path: '/auth/login');
 
@@ -43,6 +42,12 @@ class APIConstants {
 
   Uri updateOrganizationNameUri(String organizationId) => Uri(
       scheme: scheme, host: host, path: '/organizations/$organizationId/name');
+
+  // Channels Endpoints
+
+  Uri getcreateChannelUri(String organisationId) => Uri(scheme: scheme, host: channelHost, path: '/api/v1/$organisationId/channels/');
+
+  Uri getuserChannelUri(String organisationId, String channelId) => Uri(scheme: scheme, host: channelHost, path: '/api/v1/$organisationId/channels/$channelId/members/');
 
   //DMs endpoints
   Uri get dmCreateRoom =>

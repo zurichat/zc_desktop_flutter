@@ -3,8 +3,8 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/authentication/channels_service.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_api_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 

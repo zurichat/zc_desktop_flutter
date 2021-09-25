@@ -19,134 +19,141 @@ class ChannelsDisplayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final _auth = locator<AuthService>();
-    Size _size = MediaQuery.of(context).size;
+
     final _scrollController = ScrollController();
-    int selectedIndex;
 
     return ViewModelBuilder<ChannelsDisplayViewModel>.reactive(
+      // onModelReady: (model) async => await model.fetchAndSetUserData(),
       builder: (context, model, child) => Scaffold(
-          body: Column(
+          body: Padding(
+            padding: EdgeInsets.only(left: 15.0.w,),
+            child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          DetailedCustomAppBar(
-            margin: EdgeInsets.only(left: 2.0.w),
-            leading: WorkSpaceTitle(
-              channelTitle: "Announcements",
-            ),
-          ),
-          /////////////////////////////////////////
-          Padding(
-            padding: EdgeInsets.only(
-              top: 12.0,
-              bottom: 18.0,
-            ),
-            child: Container(
-              child: ChannelSearchInputField(
-                onChanged: (value) {
-                  // model.setchannelName(value);
-                },
-                borderColor:
-                    model.searchChannel == '' ? bodyColor : kcPrimaryColor,
-                borderFocusColor: model.searchChannel == ''
-                    ? leftNavBarColor
-                    : kcPrimaryColor,
-                // errorText: model.searchChannel,
-                keyboardType: TextInputType.name,
-                hintPlaceHolder: model.channelText2,
+            // DetailedCustomAppBar(
+            //   margin: EdgeInsets.only(left: 2.0.w),
+            //   leading: WorkSpaceTitle(
+            //     channelTitle: "Announcements",
+            //   ),
+            // ),
+            /////////////////////////////////////////
+            Padding(
+              padding: EdgeInsets.only(
+                top: 12.0.h,
+                bottom: 18.0.h,
+              ),
+              child: Container(
+                child: ChannelSearchInputField(
+                  onChanged: (value) {
+                    // model.setchannelName(value);
+                  },
+                  borderColor:
+                      model.searchChannel == '' ? bodyColor : kcPrimaryColor,
+                  borderFocusColor: model.searchChannel == ''
+                      ? leftNavBarColor
+                      : kcPrimaryColor,
+                  // errorText: model.searchChannel,
+                  keyboardType: TextInputType.name,
+                  hintPlaceHolder: model.channelText2,
+                ),
               ),
             ),
-          ),
-          verticalSpaceSmall,
-          Expanded(
-            flex: 14,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * .7,
-              height: double.infinity,
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      ZcdeskText.searchChannelHeaderStyle(model.channelText3),
-                      Spacer(),
-                      Row(children: <Widget>[
-                        InkWell(
-                          onTap: () {},
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                SVGAssetPaths.sortIcon,
-                                color: kcDisplayChannelColor,
-                              ),
-                              horizontalSpaceSmall,
-                              ZcdeskText.searchChannelHeaderStyle(
-                                  model.channelText4),
-                            ],
+            verticalSpaceSmall,
+            Expanded(
+              flex: 14,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * .7,
+                height: double.infinity,
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        ZcdeskText.searchChannelHeaderStyle(model.channelText3),
+                        Spacer(),
+                        Row(children: <Widget>[
+                          InkWell(
+                            onTap: () {},
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  SVGAssetPaths.sortIcon,
+                                  color: kcDisplayChannelColor,
+                                ),
+                                horizontalSpaceSmall,
+                                ZcdeskText.searchChannelHeaderStyle(
+                                    model.channelText4),
+                              ],
+                            ),
                           ),
-                        ),
-                        horizontalSpaceMedium,
-                        InkWell(
-                          onTap: () {},
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                SVGAssetPaths.filterDown,
-                                color: kcDisplayChannelColor,
-                              ),
-                              horizontalSpaceSmall,
-                              ZcdeskText.searchChannelHeaderStyle(
-                                  model.channelText5),
-                            ],
+                          horizontalSpaceMedium,
+                          InkWell(
+                            onTap: () {},
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  SVGAssetPaths.filterDown,
+                                  color: kcDisplayChannelColor,
+                                ),
+                                horizontalSpaceSmall,
+                                ZcdeskText.searchChannelHeaderStyle(
+                                    model.channelText5),
+                              ],
+                            ),
                           ),
-                        ),
-                      ]),
-                    ],
-                  ),
-                  verticalSpaceSmall,
-                  Expanded(
-                    child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: model.sidebarItems.length,
-                        itemBuilder: (context, index) {
-                          return ChannelsDisplayList(
-                              visibleJoined:
-                                  model.sidebarItems.keys.toList()[index] ==
-                                          'Annoucements'
-                                      ? false
-                                      : true,
-                              paddingBottom2: model.paddingBottom2,
-                              paddingall: model.paddingall,
-                              paddingBottom3: model.paddingBottom3,
-                              channelText6:
-                                  model.sidebarItems.keys.toList()[index],
-                              channelText7: model.channelText7,
-                              channelText8:
-                                  model.sidebarItems.values.toList()[index],
-                              channelText9: model.channelText9,
-                              channelText10: model.channelText10,
-                              channelText11: model.channelText11,
-                              paddingBottom4: model.paddingBottom4,
-                              isChannelHover: (model.isChannelHover == false ||
-                                      model.selectedind != index)
-                                  ? whiteColor
-                                  : kcBackgroundColor1,
-                              visibleButton: (model.isChannelHover == false ||
-                                      model.selectedind != index)
-                                  ? false
-                                  : true,
-                              hoverFunction: (val) {
-                                model.setIsChannelHover();
-                                model.setIsselectedind(index);
-                              });
-                        }),
-                  ),
-                ],
+                        ]),
+                      ],
+                    ),
+                    verticalSpaceSmall,
+                    Expanded(
+                      child: ListView.builder(
+                          controller: _scrollController,
+                          itemCount: model.sidebarItems.length,
+                          itemBuilder: (context, index) {
+                            return ChannelsDisplayList(
+                                viewPressed: () async {
+                              // await model.validateAndCreateChannel();
+                              await model.performGetChannel();
+
+                            },
+                                visibleJoined:
+                                    model.sidebarItems.keys.toList()[index] ==
+                                            'Annoucements'
+                                        ? false
+                                        : true,
+                                paddingBottom2: 8.0.h,
+                                paddingall: 10.0,
+                                paddingBottom3: 2.5.h,
+                                channelText6:
+                                    model.sidebarItems.keys.toList()[index],
+                                channelText7: model.channelText7,
+                                channelText8:
+                                    model.sidebarItems.values.toList()[index],
+                                channelText9: model.channelText9,
+                                channelText10: model.channelText10,
+                                channelText11: model.channelText11,
+                                paddingBottom4: 3.0.h,
+                                isChannelHover: (model.isChannelHover == false ||
+                                        model.selectedind != index)
+                                    ? whiteColor
+                                    : kcBackgroundColor1,
+                                visibleButton: (model.isChannelHover == false ||
+                                        model.selectedind != index)
+                                    ? false
+                                    : true,
+                                hoverFunction: (val) {
+                                  model.setIsChannelHover();
+                                  model.setIsselectedind(index);
+                                });
+                          }),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
         ],
-      )
+      ),
+          )
           //   ],
           // ),
           ),
@@ -169,6 +176,7 @@ class ChannelsDisplayList extends StatelessWidget {
   final Color isChannelHover;
   final bool visibleButton;
   final Function(bool) hoverFunction;
+  final void Function()? viewPressed;
   final bool visibleJoined;
 
   ChannelsDisplayList({
@@ -186,6 +194,7 @@ class ChannelsDisplayList extends StatelessWidget {
     required this.hoverFunction,
     required this.visibleButton,
     required this.visibleJoined,
+    required this.viewPressed,
   });
 
   @override
@@ -295,9 +304,7 @@ class ChannelsDisplayList extends StatelessWidget {
                               backgroundColor: MaterialStateProperty.all(
                                 kcBackgroundColor1,
                               )),
-                          onPressed: () async {
-                            // await model.validateAndCreateChannel();
-                          },
+                          onPressed: viewPressed,
                           // child: !model.isBusy
                           //     ? Text(
                           //        'Join',
@@ -340,7 +347,7 @@ class ChannelsDisplayList extends StatelessWidget {
                         //         color: whiteColor,
                         //       ),
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 3.0),
+                          padding: EdgeInsets.only(bottom: 3.0.h),
                           child: Text(
                             channelText11,
                             style: authBtnChannelDisplayStyle,

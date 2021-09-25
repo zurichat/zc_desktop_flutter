@@ -18,19 +18,19 @@ import '../ui/auth/login_page/splash_view.dart';
 import '../ui/auth/reset_password_page/reset_password_view.dart';
 import '../ui/auth/sign_up_page/sign_up_view.dart';
 import '../ui/auth/success_page/success_view.dart';
+import '../ui/create_workspace/create_initial_channel.dart';
+import '../ui/create_workspace/create_organization_name.dart';
+import '../ui/create_workspace/create_workspace.dart';
+import '../ui/create_workspace/invite_user_to_organization.dart';
 import '../ui/main/channels_creation/channels_creation_view.dart';
 import '../ui/main/channels_display/channels_display_view.dart';
 import '../ui/main/channels_page/channels_view.dart';
 import '../ui/main/dm/dm_view.dart';
 import '../ui/main/workspace_page/workspace_view.dart';
 import '../ui/startup_page/startup_view.dart';
-import '../ui/workspace_registeration_screen/create_workspace.dart';
-import '../ui/workspace_registeration_screen/create_workspace_stage1.dart';
-import '../ui/workspace_registeration_screen/create_workspace_stage2.dart';
-import '../ui/workspace_registeration_screen/create_workspace_stage3.dart';
 
 class Routes {
-  static const String loginView = '/login-view';
+  static const String loginView = '/';
   static const String splashView = '/splash-view';
   static const String startUpView = '/start-up-view';
   static const String signUpView = '/sign-up-view';
@@ -46,7 +46,7 @@ class Routes {
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
   static const String channelsDisplayView = '/channels-display-view';
   static const String channelsCreationView = '/channels-creation-view';
-  static const String workspaceView = '/';
+  static const String workspaceView = '/workspace-view';
   static const all = <String>{
     loginView,
     splashView,
@@ -158,14 +158,20 @@ class StackedRouter extends RouterBase {
       );
     },
     CreateWorkspaceView: (data) {
+      var args = data.getArgs<CreateWorkspaceViewArguments>(
+        orElse: () => CreateWorkspaceViewArguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const CreateWorkspaceView(),
+        builder: (context) => CreateWorkspaceView(key: args.key),
         settings: data,
       );
     },
     CreateWorkspaceStage1: (data) {
+      var args = data.getArgs<CreateWorkspaceStage1Arguments>(
+        orElse: () => CreateWorkspaceStage1Arguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const CreateWorkspaceStage1(),
+        builder: (context) => CreateWorkspaceStage1(key: args.key),
         settings: data,
       );
     },
@@ -194,7 +200,7 @@ class StackedRouter extends RouterBase {
       );
     },
     WorkspaceView: (data) {
-      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const WorkspaceView(),
         settings: data,
       );
@@ -204,9 +210,11 @@ class StackedRouter extends RouterBase {
 
 class WorkspaceViewRoutes {
   static const String channelsView = '/';
+  static const String channelsDisplayView = '/channels-display-view';
   static const String dmView = '/dm-view';
   static const all = <String>{
     channelsView,
+    channelsDisplayView,
     dmView,
   };
 }
@@ -216,6 +224,8 @@ class WorkspaceViewRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(WorkspaceViewRoutes.channelsView, page: ChannelsView),
+    RouteDef(WorkspaceViewRoutes.channelsDisplayView,
+        page: ChannelsDisplayView),
     RouteDef(WorkspaceViewRoutes.dmView, page: DmView),
   ];
   @override
@@ -227,6 +237,12 @@ class WorkspaceViewRouter extends RouterBase {
         settings: data,
       );
     },
+    ChannelsDisplayView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const ChannelsDisplayView(),
+        settings: data,
+      );
+    },
     DmView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const DmView(),
@@ -234,4 +250,20 @@ class WorkspaceViewRouter extends RouterBase {
       );
     },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// CreateWorkspaceView arguments holder class
+class CreateWorkspaceViewArguments {
+  final Key? key;
+  CreateWorkspaceViewArguments({this.key});
+}
+
+/// CreateWorkspaceStage1 arguments holder class
+class CreateWorkspaceStage1Arguments {
+  final Key? key;
+  CreateWorkspaceStage1Arguments({this.key});
 }
