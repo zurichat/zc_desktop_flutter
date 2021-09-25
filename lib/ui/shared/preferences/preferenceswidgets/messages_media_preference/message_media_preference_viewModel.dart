@@ -7,7 +7,6 @@ import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.
 import 'message_media_preferenceview.dart';
 
 class MessageMediaPreferenceViewModel extends BaseViewModel {
-  final _mmpStorageKey = 'mmpKey';
   final _sharedPref = locator<LocalStorageService>();
   var _msgmediapref = MessagesAndMedia();
   PrefTheme _themePref = PrefTheme.Clean;
@@ -155,12 +154,11 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
   List<String> get longText => _longText;
 
   void saveToDisk() {
-    _sharedPref.saveToDisk(_mmpStorageKey, jsonEncode(_msgmediapref));
+    _sharedPref.setMessagesAndMedia(_msgmediapref);
   }
 
-  Future<void> fetchAndSetMsgSetting() async {
-    final result = await _sharedPref.getFromDisk(_mmpStorageKey);
-    _msgmediapref = MessagesAndMedia.fromJson(jsonDecode(result.toString()));
+  void fetchAndSetMsgSetting() async {
+    final _msgmediapref = await _sharedPref.messagesAndMedia as MessagesAndMedia;
     _themePref = _msgmediapref.theme;
     _namePref = _msgmediapref.name;
     _displayEmojiAsText = _msgmediapref.displayEmojiAsPlain;

@@ -8,7 +8,6 @@ import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.
 
 class NotificationViewModel extends BaseViewModel {
   final _localStorage = locator<LocalStorageService>();
-  final _notificationStorageKey = 'notificationSetting';
   var _notifications = Notification();
 
   PrefMessageNotification _messageNotification =
@@ -133,7 +132,8 @@ class NotificationViewModel extends BaseViewModel {
 
   void setNotificationValue(String value) {
     _sendNotificationValue = value;
-    _notifications = Notification().copyWith(notificationValue: _sendNotificationValue);
+    _notifications =
+        Notification().copyWith(notificationValue: _sendNotificationValue);
     notifyListeners();
   }
 
@@ -226,14 +226,12 @@ class NotificationViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void saveSettings() => _localStorage.saveToDisk(
-      _notificationStorageKey, jsonEncode(_notifications));
+  void saveSettings() => _localStorage.setNotification(_notifications);
 
-  Future<void> fetchAndSetSetting() async {
-    final result = await _localStorage.getFromDisk(_notificationStorageKey);
-    _notifications = Notification.fromJson(jsonDecode(result.toString()));
-     Notification().copyWith(isEmail: _isEmail);
-     Notification().copyWith(notificationValue: _sendNotificationValue);
+  void fetchAndSetSetting() async {
+    _notifications = await (_localStorage.notification) as Notification;
+    _isEmail = _notifications.isEmail;
+    _sendNotificationValue = _notifications.notificationValue;
     _isPreviewMessage = _notifications.includePreview;
     _isMute = _notifications.muteAll;
     _scheduleValue = _notifications.duration;

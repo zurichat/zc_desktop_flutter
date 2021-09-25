@@ -51,7 +51,3 @@ const Color preferenceBorderblack = Color(0xFF323232);
 
 //status colors
 const Color clearStatusBtnBorderColor = Color(0xffa1a1a1);
-
-//Preferences colors
-const Color kcPrefTitleColor = Color.fromRGBO(29, 29, 29, 1);
-const Color kcPrefSubtitleColor = Color.fromRGBO(140, 140, 140, 1);

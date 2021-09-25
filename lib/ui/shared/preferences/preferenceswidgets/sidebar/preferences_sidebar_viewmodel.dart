@@ -9,7 +9,6 @@ import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.
 
 class SideBarViewModel extends BaseViewModel {
   final _localStorage = locator<LocalStorageService>();
-  final _sidebarStorageKey = 'sidebarSetting';
   var _sideBar = SideBar();
   PrefSidebar _sidebar = PrefSidebar.AllConversation;
   get sidebar => _sidebar;
@@ -97,7 +96,7 @@ class SideBarViewModel extends BaseViewModel {
 
   void togggleBrowser(bool? value) {
     _browser = value!;
-     _sideBar = _sideBar.copyWith(showFileBrowser: _browser);
+    _sideBar = _sideBar.copyWith(showFileBrowser: _browser);
     notifyListeners();
   }
 
@@ -138,13 +137,11 @@ class SideBarViewModel extends BaseViewModel {
   }
 
   void saveSettings() {
-    _localStorage.saveToDisk(_sidebarStorageKey, jsonEncode(_sideBar));
+    _localStorage.setSideBar(_sideBar);
   }
 
-  Future<void> fetchAndSetSetting() async {
-    final result = await _localStorage.getFromDisk(_sidebarStorageKey);
-    _sideBar = SideBar.fromJson(jsonDecode(result.toString()));
-
+  void fetchAndSetSetting() async {
+    _sideBar = await _localStorage.sideBar as SideBar;
     _insight = _sideBar.showInsights;
     _draft = _sideBar.showDrafts;
     _file = _sideBar.showFiles;

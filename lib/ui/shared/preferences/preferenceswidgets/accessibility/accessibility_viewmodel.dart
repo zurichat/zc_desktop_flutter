@@ -1,16 +1,14 @@
 import 'dart:convert';
-
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/models/preferences_model/accessibility/accessibility.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
-import 'package:zc_desktop_flutter/services/user_service/user_service.dart';
+
 
 enum UpButtonsChoice { option1, option2 }
 
 class AccessibilityViewModel extends BaseViewModel{
   final _localStorage = locator<LocalStorageService>();
-  final _accessibilityStorageKey = 'accessibilitySetting';
   var _accessibility = Accessibility();
   /// message settings
   bool? _animateValue = false;
@@ -81,11 +79,10 @@ class AccessibilityViewModel extends BaseViewModel{
   }
 
   void saveSettings() =>
-      _localStorage.saveToDisk(_accessibilityStorageKey, jsonEncode(_accessibility));
+      _localStorage.setAccessibility(_accessibility);
 
-  Future<void> fetchAndSetSetting() async {
-    final result = await _localStorage.getFromDisk(_accessibilityStorageKey);
-    _accessibility = Accessibility.fromJson(jsonDecode(result.toString()));
+  void fetchAndSetSetting() async {
+    _accessibility = await (_localStorage.accessibility) as Accessibility;
     _upButtonsChoice = _accessibility.upButtonsChoice;
     _animateValue = _accessibility.animateValue;
     _msgSound = _accessibility.msgSound;

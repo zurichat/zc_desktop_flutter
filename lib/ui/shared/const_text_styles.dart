@@ -214,30 +214,10 @@ final clearStatusTextStyle = TextStyle(
 
 //Preferences TextStyle
 
-final leftSideBarPrefTextStyle = TextStyle(
-  fontSize: 18.sp,
-  fontWeight: FontWeight.w600,
-  color: kcPrefTitleColor,
-  fontFamily: 'Lato',
-);
+final leftSideBarPrefTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w600);
 
-final prefHeaderTextStyle = TextStyle(
-  fontSize: 18.sp,
-  fontWeight: FontWeight.w700,
-  color: kcPrefTitleColor,
-  fontFamily: 'Lato',
-);
+final prefHeaderTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w700);
 
-final prefBodyTextStyle = TextStyle(
-  fontSize: 16.sp,
-  fontWeight: FontWeight.w600,
-  color: kcPrefTitleColor,
-  fontFamily: 'Lato',
-);
+final prefBodyTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600);
 
-final prefSubTitleTextStyle = TextStyle(
-  fontSize: 16.sp,
-  fontWeight: FontWeight.w600,
-  color: kcPrefSubtitleColor,
-  fontFamily: 'Lato',
-);
+final prefSubTitleTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600, color: bodyColor);

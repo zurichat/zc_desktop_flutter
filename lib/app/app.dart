@@ -33,9 +33,9 @@ import 'package:zc_desktop_flutter/ui/create_workspace/create_workspace_stage3.d
   routes: [
     MaterialRoute(
       page: LoginView,
-      
+      initial: true,
     ),
-    MaterialRoute(page: SplashView, initial: true,),
+    MaterialRoute(page: SplashView,),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),

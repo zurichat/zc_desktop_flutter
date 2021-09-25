@@ -42,7 +42,6 @@ class ThemeViewModel extends BaseViewModel {
   final log = getLogger("ThemeViewModel");
   final _themeService = locator<ThemeService>();
   final _localStorage = locator<LocalStorageService>();
-  final _themeStorageKey = 'themeSetting';
   var _themes = model.Themes();
 
   themeAccross _allWorkSpace = themeAccross.directMessage;
@@ -253,12 +252,10 @@ class ThemeViewModel extends BaseViewModel {
       _themeService.selectThemeAtIndex(themeData.index);
 
   void saveSettings() =>
-      _localStorage.saveToDisk(_themeStorageKey, jsonEncode(_themes));
+      _localStorage.setThemes(_themes);
 
-  Future<void> fetchAndSetSetting() async {
-    final result = await _localStorage.getFromDisk(_themeStorageKey);
-    _themes = model.Themes.fromJson(jsonDecode(result.toString()));
-
+  void fetchAndSetSetting() async {
+    _themes = await _localStorage.themes as model.Themes;
     _isChecked = _themes.isChecked;
     _allWorkSpace =  _themes.allWorkSpace;
     _switchLightDark = _themes.switchLightDark;

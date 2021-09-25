@@ -49,11 +49,11 @@ class LoginViewModel extends BaseViewModel {
   }
 
   Future<void> checkLoginStatus() async {
-    try {
-      await _user.fetchAndSetUserData();
-      _navigationService.navigateTo(Routes.workspaceView);
-    } catch (e) {
-      _navigationService.navigateTo(Routes.loginView);
-    }
+    // try {
+    //   await _user.fetchAndSetUserData();
+    //   _navigationService.navigateTo(Routes.workspaceView);
+    // } catch (e) {
+    //   _navigationService.navigateTo(Routes.loginView);
+    // }
   }
 }

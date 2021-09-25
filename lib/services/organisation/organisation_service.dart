@@ -1,12 +1,9 @@
 import 'dart:convert';
-
 import 'package:stacked/stacked_annotations.dart';
-
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../../models/organisation/organisation.dart';
 import '../api/api_service.dart';
-import '../authentication/auth_service.dart';
 import '../local_storage/local_storage_service.dart';
 
 const selectedOrganisationKey = 'selectedOrganisationKey';
@@ -36,7 +33,7 @@ class OrganizationService {
     // Getting stored AuthResponse from local storage
 
     final response = await _apiService.get(
-      _apiService.apiConstants.getOrganisationsUri(_authResponse.user.email),
+      _apiService.apiConstants.getOrganisationsUri(_authResponse!.user.email),
       // headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
     );
 
@@ -56,7 +53,7 @@ class OrganizationService {
         "creator_email": email,
       },
       headers: {
-        'Authorization': 'Bearer ${_authResponse.user.token}',
+        'Authorization': 'Bearer ${_authResponse!.user.token}',
       },
     );
 
@@ -96,9 +93,8 @@ class OrganizationService {
   ///
 
   /// This gets the currently logged in user respose
-  AuthResponse get _authResponse {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    return AuthResponse.fromMap(jsonDecode(authResponse as String));
+  AuthResponse? get _authResponse {
+    return _localStorageService.authResponse;
   }
 
   /// This is used to get a single organisation
@@ -106,7 +102,7 @@ class OrganizationService {
     final response = await _apiService.get(
       _apiService.apiConstants.getOrganisationUri(organisationId),
       headers: {
-        'Authorization': 'Bearer ${_authResponse.user.token}',
+        'Authorization': 'Bearer ${_authResponse!.user.token}',
       },
     );
 

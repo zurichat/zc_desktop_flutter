@@ -12,8 +12,7 @@ class UserService {
 
   Future<void> fetchAndSetUserData () async {
     try {
-      authResponse = AuthResponse.fromMap(
-        json.decode(_localStorageService.getFromDisk('localAuthResponse').toString()));
+      authResponse = _localStorageService.authResponse;
       user = authResponse!.user;
     } catch (e) {
      throw e;
