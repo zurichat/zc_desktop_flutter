@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 Future<void> setUpWindow() async {
   // Placing the window screen exactly in the middle and covering the available screen
   doWhenWindowReady(() {
-    final initialSize = Size(1200, 700);
+    final initialSize = Size(1200, 720);
     appWindow.minSize = initialSize;
     appWindow.size = initialSize;
     appWindow.alignment = Alignment.center;
