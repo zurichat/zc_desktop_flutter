@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-
 import 'search_modal_viewmodel.dart';
 
 class SearchModalView extends StatelessWidget {
@@ -221,10 +221,6 @@ class BuildSearchWidget extends StatelessWidget {
             child: ScrollableView(),
           ),
           SearchWidget(),
-          // Padding(
-          //   padding: const EdgeInsets.all(40.0),
-          //   child: BuildSearchList(),
-          // )
         ],
       ),
     );
@@ -429,8 +425,6 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
                   text: model.isClicked
                       ? 'Recent Searches in ${model.text}'
                       : 'Recent Searches'),
-
-              /// BuildSearchList(),
               recentSearchListTile(model.isClicked ? model.text : 'Adema'),
               recentSearchListTile(model.isClicked ? model.text : 'Adema'),
               recentSearchListTile(model.isClicked ? model.text : 'Adema'),
@@ -553,55 +547,16 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
                 child: ListView.builder(
                     itemCount: model.availableListLength,
                     itemBuilder: (context, index) {
-                      return recentSearchListTile(model.channels[index].name,
+                      return recentSearchListTile(model.searchList[index].name,
                           function: () {
                         model.toggleTextFieldActivated();
                         text.clear();
-
                         model.popDialog();
-                        model.searchChannels(model.channels[index]);
-
-                        // model.searchUser(model.userData[index]);
+                        model.searchNavigate(model.searchList[index]);
                       });
                     }),
               )
       ],
     );
   }
-
-// class BuildSearchList extends HookViewModelWidget<SearchModalViewmodel> {
-//   const BuildSearchList({
-//     Key? key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget buildViewModelWidget(
-//       BuildContext context, SearchModalViewmodel model) {
-//     return Container(
-//       height: 200,
-//       width: 600,
-//       child: ListView.builder(
-//         itemBuilder: (context, index) {
-//           final user = model.userData[index];
-
-//           return buildList(context, user, model);
-//         },
-//         itemCount: model.userData.length,
-//       ),
-//     );
-//   }
-
-//   Widget buildList(
-//           BuildContext context, User zuriUser, SearchModalViewmodel model) =>
-//       ListTile(
-//         title: Text(zuriUser.name!),
-//         onTap: () {
-//           print('opened center area with DM between you and ${zuriUser.name}');
-//           model.popDialog();
-//           print(zuriUser.name!);
-//           model.searchUser(zuriUser);
-//           print('Closed Dialog');
-//         },
-//       );
-// }
 }

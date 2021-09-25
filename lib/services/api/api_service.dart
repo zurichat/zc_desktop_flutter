@@ -20,13 +20,15 @@ class ApiService implements Api {
       );
 
   @override
-  Future<dynamic> get(Uri uri, {
-    Map<String, dynamic>? data,
-    Map<String, String>? headers,}) async {
+  Future<dynamic> get(
+    Uri uri, {
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  }) async {
     log.i('Making request to $uri');
     try {
       final response = await client.get(uri.toString(),
-          queryParameters: data, options: Options(headers: headers));
+          queryParameters: queryParameters, options: Options(headers: headers));
 
       log.i('Response from $uri \n${response.data}');
       return response.data;

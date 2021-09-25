@@ -10,8 +10,10 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/auth_response.dart';
+import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
 import 'package:zc_desktop_flutter/models/user.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_api_service.dart';
 
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
@@ -19,6 +21,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChannelsDisplayViewModel extends BaseViewModel {
   final log = getLogger("ChannelsDisplayViewModel");
+  final _auth = locator<ChannelsService>();
+  final _localStorageService = locator<LocalStorageService>();
 
   String _channelText1 = 'Channel browser';
   String _channelText2 = 'Search Channel';
@@ -101,7 +105,19 @@ class ChannelsDisplayViewModel extends BaseViewModel {
 
   Map<String, String> get sidebarItems => _sidebarItems;
 
-  final _localStorageService = locator<LocalStorageService>();
+    Future<void> getchannels() async {
+    
+      await runBusyFuture(
+          performGetChannel());
+   
+    notifyListeners();
+  }
+
+  Future<void> performGetChannel() async {
+    List<ChannelsDataModel> channelsList = await _auth.getChannelsList();
+    print(channelsList);
+  }
+
   User? user;
   AuthResponse? userdata;
   Future<void> fetchAndSetUserData() async {

@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/models/auth_response.dart';
+import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -14,6 +20,15 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 class ChannelsCreationView extends HookWidget {
   // const ChannelsCreationView({Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey();
+
+    //Declare the services that are dependent upon
+  final _localStorageService = locator<LocalStorageService>();
+
+  /// This gets the currently logged in user respose
+  AuthResponse get _authResponse {
+    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    return AuthResponse.fromMap(jsonDecode(authResponse as String));
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -21,12 +36,11 @@ class ChannelsCreationView extends HookWidget {
     final nameController = useTextEditingController();
     final descriptionController = useTextEditingController();
 
-
     return ViewModelBuilder<ChannelsCreationViewModel>.reactive(
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
         child: Container(
-          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 730.h : 650.h,
+          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 720.h : 680.h,
           width: 410.w,
           child: Padding(
             padding: EdgeInsets.only(
@@ -62,7 +76,7 @@ class ChannelsCreationView extends HookWidget {
                 ZcdeskText.textCreateChannel(
                     model.channelTextTwo),
                 verticalSpaceMedium,
-                if(model.isCreateChannelSuccessful)
+                if(model.isCreateChannelSuccessful) 
                 Text(model.channelTextTen, style: headline7.copyWith(color: kcSuccessColor)),
                 if(model.isCreateChannelNotSuccessful)
                 Text(model.errorMessage, style: headline7.copyWith(color: kcErrorColor)),
@@ -156,11 +170,11 @@ class ChannelsCreationView extends HookWidget {
                           if (!_formKey.currentState!.validate())
                                 return;
 
-                          await model.createchannel(
-                            name: nameController.text,
-                            owner: nameController.text,
-                            description: descriptionController.text,
-                            private: false,
+                          await model.createchannels(
+                            nameController.text,
+                            '${_authResponse.user.email}',
+                            descriptionController.text,
+                            model.isPrivate,
                           );
 
                         },

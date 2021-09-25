@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 class ChannelsDataModel {
+  String id;
   String name;
   String owner;
   String description;
   bool private;
 
   ChannelsDataModel({
+    required this.id,
     required this.name,
     required this.owner,
     required this.description,
@@ -15,6 +17,7 @@ class ChannelsDataModel {
 
   factory ChannelsDataModel.fromMap(Map<String, dynamic> map) {
     return ChannelsDataModel(
+      id: map['_id'],
       name: map['name'],
       owner: map['owner'],
       description: map['description'],
@@ -24,6 +27,7 @@ class ChannelsDataModel {
 
   Map<String, dynamic> toMap() {
     return {
+      '_id': id,
       'name': name,
       'owner': owner,
       'description': description,
@@ -38,6 +42,6 @@ class ChannelsDataModel {
 
   @override
   String toString() {
-    return 'ChannelsDataModel(name: $name, owner: $owner, description: $description, private: $private)';
+    return 'ChannelsDataModel(id: $id, name: $name, owner: $owner, description: $description, private: $private)';
   }
 }

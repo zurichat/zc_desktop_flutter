@@ -6,6 +6,7 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -18,16 +19,16 @@ import '../ui/auth/login_page/splash_view.dart';
 import '../ui/auth/reset_password_page/reset_password_view.dart';
 import '../ui/auth/sign_up_page/sign_up_view.dart';
 import '../ui/auth/success_page/success_view.dart';
+import '../ui/create_workspace/create_workspace.dart';
+import '../ui/create_workspace/create_workspace_stage1.dart';
+import '../ui/create_workspace/create_workspace_stage2.dart';
+import '../ui/create_workspace/create_workspace_stage3.dart';
 import '../ui/main/channels_creation/channels_creation_view.dart';
 import '../ui/main/channels_display/channels_display_view.dart';
 import '../ui/main/channels_page/channels_view.dart';
 import '../ui/main/dm/dm_view.dart';
 import '../ui/main/workspace_page/workspace_view.dart';
 import '../ui/startup_page/startup_view.dart';
-import '../ui/workspace_registeration_screen/create_workspace.dart';
-import '../ui/workspace_registeration_screen/create_workspace_stage1.dart';
-import '../ui/workspace_registeration_screen/create_workspace_stage2.dart';
-import '../ui/workspace_registeration_screen/create_workspace_stage3.dart';
 
 class Routes {
   static const String loginView = '/';
@@ -158,8 +159,11 @@ class StackedRouter extends RouterBase {
       );
     },
     CreateWorkspaceView: (data) {
+      var args = data.getArgs<CreateWorkspaceViewArguments>(
+        orElse: () => CreateWorkspaceViewArguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const CreateWorkspaceView(),
+        builder: (context) => CreateWorkspaceView(key: args.key),
         settings: data,
       );
     },
@@ -244,4 +248,14 @@ class WorkspaceViewRouter extends RouterBase {
       );
     },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// CreateWorkspaceView arguments holder class
+class CreateWorkspaceViewArguments {
+  final Key? key;
+  CreateWorkspaceViewArguments({this.key});
 }
