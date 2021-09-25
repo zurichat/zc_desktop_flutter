@@ -3,26 +3,23 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/models/auth_response.dart';
-import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
-import 'package:zc_desktop_flutter/models/dm_model/room_response.dart';
-import 'package:zc_desktop_flutter/models/user.dart' as currentLoggedInUser;
-import 'package:zc_desktop_flutter/models/user_model.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart' as currentLoggedInUser;
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class DMService {
   final log = getLogger("DMService");
-  User _user = User(name: "");
+  DummyUser _user = DummyUser(name: "");
   final _apiService = locator<ApiService>();
   final _localStorageService = locator<LocalStorageService>();
 
-  void setUser(User user) {
+  void setUser(DummyUser user) {
     this._user = user;
   }
 
-  Future<User> getUser() async {
+  Future<DummyUser> getUser() async {
     await Future.delayed(Duration(seconds: 2));
     log.i(_user.name);
     return _user;
@@ -33,7 +30,7 @@ class DMService {
     if (userJson != null) {
       if (userJson is String) {
         print(userJson);
-        return AuthResponse.fromMap(json.decode(userJson)).user;
+        return AuthResponse.fromJson(json.decode(userJson)).user;
       }
       return null;
     }
@@ -64,7 +61,7 @@ class DMService {
   }
 
   Future<String?> createRoom(
-      currentLoggedInUser.User currentUser, User user) async {
+      currentLoggedInUser.User currentUser, DummyUser user) async {
     final response = await _apiService.post(
       _apiService.apiConstants.dmCreateRoom,
       body: {
@@ -75,7 +72,7 @@ class DMService {
       },
     );
     //614ae41044a9bd81cedc08be
-    return CreateRoomResponse.fromMap(response).roomId;
+    return CreateRoomResponse.fromJson(response).roomId;
   }
 
   Future<void> getRoomInfo(var roomId) async {

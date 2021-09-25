@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/models/preferences_model/advanced/advanced.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 

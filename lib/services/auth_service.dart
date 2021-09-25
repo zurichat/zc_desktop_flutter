@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:stacked/stacked_annotations.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
 
 import '../app/app.locator.dart';
-import '../models/auth_response.dart';
 import 'api/api_service.dart';
 import 'local_storage_service.dart';
 
@@ -47,7 +47,7 @@ class AuthService {
       },
     );
 
-    authResponse = AuthResponse.fromMap(response['data']);
+    authResponse = AuthResponse.fromJson(response['data']);
 
     _localStorageService.saveToDisk(localAuthResponseKey,jsonEncode(response['data']));
   }

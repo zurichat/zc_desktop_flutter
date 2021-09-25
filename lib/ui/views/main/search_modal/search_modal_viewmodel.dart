@@ -3,8 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
-import 'package:zc_desktop_flutter/models/user_model.dart';
-import 'package:zc_desktop_flutter/models/workspace.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/users_loacal_data.dart';
@@ -26,7 +25,7 @@ class SearchModalViewmodel extends BaseViewModel {
   bool swap = false;
   bool textFieldActivated = false;
   ButtonType buttonType = ButtonType.CHANNELS;
-  late List<User> users;
+  late List<DummyUser> users;
   final userData = usersData;
 
   String searchQuery = '';
@@ -36,8 +35,8 @@ class SearchModalViewmodel extends BaseViewModel {
   String get textFieldText => _textFieldText!;
   List<dynamic> _searchList = [];
   List<dynamic> get searchList => [..._searchList];
-  List<User> _userNames = [];
-  List<User> get userDatas => [..._userNames];
+  List<DummyUser> _userNames = [];
+  List<DummyUser> get userDatas => [..._userNames];
   static const historyLength = 5;
   List<String> searchHistory = [];
   // List<Channels>? filteredChannelList;
@@ -153,7 +152,7 @@ class SearchModalViewmodel extends BaseViewModel {
         break;
       case ButtonType.PEOPLE:
         {
-          searchUser(data as User);
+          searchUser(data as DummyUser);
         }
         break;
       default:
@@ -165,7 +164,7 @@ class SearchModalViewmodel extends BaseViewModel {
     _navigationService.navigateTo(WorkspaceViewRoutes.channelsView, id: 1);
   }
 
-  void searchUser(User user) {
+  void searchUser(DummyUser user) {
     _dmService.setUser(user);
     _navigationService.navigateTo(WorkspaceViewRoutes.dmView, id: 1);
   }

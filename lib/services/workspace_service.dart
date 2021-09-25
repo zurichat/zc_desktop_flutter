@@ -1,6 +1,5 @@
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/models/user_model.dart';
-import 'package:zc_desktop_flutter/models/workspace.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
 
 class WorkspaceService {
   final _log = getLogger("WorkspaceService");
@@ -17,8 +16,8 @@ class WorkspaceService {
           name: "Announcements",
           private: false,
           topic: "For all important information",
-          users: <User>[
-            User(
+          users: <DummyUser>[
+            DummyUser(
               name: "John Doe",
             ),
           ],
@@ -27,8 +26,8 @@ class WorkspaceService {
           name: "Team-Desktop-Client",
           private: false,
           topic: "For all important information",
-          users: <User>[
-            User(
+          users: <DummyUser>[
+            DummyUser(
               name: "John Doe",
             ),
           ],
@@ -37,8 +36,8 @@ class WorkspaceService {
           name: "Games",
           private: false,
           topic: "For all important information",
-          users: <User>[
-            User(
+          users: <DummyUser>[
+            DummyUser(
               name: "John Doe",
             ),
           ],
@@ -46,52 +45,55 @@ class WorkspaceService {
       ],
       dms: <DM>[
         DM(
-          user: User(
+          user: DummyUser(
             name: "John Doe",
           ),
-        )
-          ..chats = [
+          baseChat: BaseChat(chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "John Doe",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
-          ],
+          ],)
+        ),
         DM(
-          user: User(
-            name: "John Snow",
-          ),
-        )
-          ..chats = [
+          baseChat: BaseChat(chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "John Snow",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
-          ],
+          ],),
+          user: DummyUser(
+            name: "John Snow",
+            
+          ),
+        ),
         DM(
-          user: User(
+          user: DummyUser(
             name: "John Wick",
           ),
-        )
-          ..chats = [
+          baseChat: BaseChat(chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "John Wick",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
-          ],
+          ],)
+        ),
+        
+          
       ],
-    )
-      ..user = User(
+      user: DummyUser(
         name: "Ademola Fadumo",
       ),
+    ),
     Workspace(
       id: 1,
       name: "Filledstacks",
@@ -101,11 +103,11 @@ class WorkspaceService {
           name: "Announcements",
           private: false,
           topic: "For all important information",
-          users: <User>[
-            User(
+          users: <DummyUser>[
+            DummyUser(
               name: "John Doe",
             ),
-            User(
+            DummyUser(
               name: "Ademola Fadumo",
             )
           ],
@@ -114,8 +116,8 @@ class WorkspaceService {
           name: "Arsenal Fan Club",
           private: false,
           topic: "For all important information",
-          users: <User>[
-            User(
+          users: <DummyUser>[
+            DummyUser(
               name: "John Doe",
             ),
           ],
@@ -123,52 +125,52 @@ class WorkspaceService {
       ],
       dms: <DM>[
         DM(
-          user: User(
-            name: "Marlon Humpreys",
-          ),
-        )
-          ..chats = [
+          baseChat: BaseChat(chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "Marlon Humpreys",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
-          ],
-        DM(
-          user: User(
-            name: "Tom Brady",
+          ],),
+          user: DummyUser(
+            name: "Marlon Humpreys",
           ),
-        )
-          ..chats = [
+        ),
+        DM(
+          baseChat: BaseChat(chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "Tom Brady",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
-          ],
-        DM(
-          user: User(
-            name: "Travis Kelce",
+          ],),
+          user: DummyUser(
+            name: "Tom Brady",
           ),
-        )
-          ..chats = [
+        ),
+        DM(
+          baseChat: BaseChat(chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "Travis Kelce",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
-          ],
+          ],),
+          user: DummyUser(
+            name: "Travis Kelce",
+          ),
+        ),
       ],
-    )
-      ..user = User(
+      user: DummyUser(
         name: "Ademola Fadumo",
-      ),
+      )
+    ),
     Workspace(
       id: 2,
       name: "GADS 2020",
@@ -178,8 +180,8 @@ class WorkspaceService {
           name: "Announcements",
           private: false,
           topic: "For all important information",
-          users: <User>[
-            User(
+          users: <DummyUser>[
+            DummyUser(
               name: "John Doe",
             ),
           ],
@@ -188,8 +190,8 @@ class WorkspaceService {
           name: "Nigeria Premier Football",
           private: false,
           topic: "For all important information",
-          users: <User>[
-            User(
+          users: <DummyUser>[
+            DummyUser(
               name: "John Doe",
             ),
           ],
@@ -197,51 +199,59 @@ class WorkspaceService {
       ],
       dms: <DM>[
         DM(
-          user: User(
-            name: "Patrick Mahomes",
-          ),
-        )
-          ..chats = [
+          baseChat: BaseChat(
+            chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "Patrick Mahomes",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
           ],
-        DM(
-          user: User(
-            name: "Tyreek Hill",
           ),
-        )
-          ..chats = [
+          user: DummyUser(
+            name: "Patrick Mahomes",
+          ),
+        ),
+        DM(
+          baseChat: BaseChat(
+            chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "Tyreek Hill",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
           ],
-        DM(
-          user: User(
-            name: "Kawhi Leonard",
           ),
-        )
-          ..chats = [
+          user: DummyUser(
+            name: "Tyreek Hill",
+          ),
+        ),
+        DM(
+          baseChat: BaseChat(
+            chats: [
             Chat(
-              user: User(
+              user: DummyUser(
                 name: "Kawhi Leonard",
               ),
               text: "",
               timestamp: 1590379587572,
             ),
           ],
+          ),
+          user: DummyUser(
+            name: "Kawhi Leonard",
+          ),
+        )
+          
       ],
-    )..user = User(
+      user:  DummyUser(
         name: "Ademola Fadumo",
       ),
+    ),
   ];
 
   int getSelectedWorkspaceIndex() => _selectedWorkspaceIndex;
