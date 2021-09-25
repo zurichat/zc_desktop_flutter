@@ -1,27 +1,30 @@
+import 'dart:convert';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
+import 'package:zc_desktop_flutter/models/auth_response.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channels_api_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class ChannelsCreationViewModel extends BaseViewModel with Validator {
   final _navigator = locator<NavigationService>();
-  // var _currentPageIndex = 0;
 
-  // get currentPageIndex => _currentPageIndex;
+  //Declare the services that are dependent upon
+  final _localStorageService = locator<LocalStorageService>();
 
-  // void updatePageIndex(int index) {
-  //   _currentPageIndex = index;
-  //   notifyListeners();
-  // }
+  /// This gets the currently logged in user respose
+  AuthResponse get _authResponse {
+    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    return AuthResponse.fromMap(jsonDecode(authResponse as String));
+  }
 
   final log = getLogger("CreateChannelViewModel");
   final _navigationService = locator<NavigationService>();
-  final _storageService = locator<LocalStorageService>();
   final _auth = locator<ChannelsService>();
 
   String _createChannel = 'Create a channel';
@@ -37,13 +40,6 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
   String _channelTextEight = 'it can be viewed or joined by invitation.';
   String _channelTextNine = 'Create';
   String _channelTextTen = 'Channel created, You will be redirected shortly';
-  double _paddingTop = 10.0;
-  double _paddingLeft = 15.0;
-  double _paddingRight = 17.0;
-  double _paddingBottom = 10.0;
-  double _paddingBottom2 = 3.0;
-  double _iconPadding = 8.0;
-  double _iconSize = 22.0;
   bool _isSwitched = false;
   String _errorMessage = '';
   bool _showError = false;
@@ -71,13 +67,8 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
   String get channelTextEight => _channelTextEight;
   String get channelTextNine => _channelTextNine;
   String get channelTextTen => _channelTextTen;
-  double get paddingTop => _paddingTop;
-  double get paddingLeft => _paddingLeft;
-  double get paddingRight => _paddingRight;
-  double get paddingBottom => _paddingBottom;
-  double get paddingBottom2 => _paddingBottom2;
-  double get iconPadding => _iconPadding;
-  double get iconSize => _iconSize;
+
+
   bool get isSwitched => _isSwitched;
   String get errorMessage => _errorMessage;
   bool get showError => _showError;
@@ -140,9 +131,8 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  void goToHome() {
-    //_navigationService.navigateTo(Routes.homeView);
-    notifyListeners();
+  String userEmail(){
+    return _authResponse.user.email;
   }
 
   Future<void> createchannels(
@@ -196,10 +186,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
       Duration(milliseconds: 1500),
     );
    _navigationService.popRepeated(1);
-    // _navigationService.navigateTo(Routes.checkEmailView, arguments: {
-    //   'email': email,
-    //   'isReset': false,
-    // });
+
   }
 
   /// Error should be handled here. It could be displaying a toast of something else

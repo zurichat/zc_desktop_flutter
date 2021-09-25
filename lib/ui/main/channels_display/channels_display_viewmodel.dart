@@ -35,17 +35,7 @@ class ChannelsDisplayViewModel extends BaseViewModel {
   String _channelText9 = ' members  ';
   String _channelText10 = 'View';
   String _channelText11 = 'Join';
-  double _channelWidth = double.infinity;
-  double _channelHeight = double.infinity;
-  double _paddingall = 10.0;
-  double _paddingTop = 1.0;
-  double _paddingTop2 = 5.0;
-  double _paddingLeft = 18.0;
-  double _paddingRight = 15.0;
-  double _paddingBottom = 5.0;
-  double _paddingBottom2 = 8.0;
-  double _paddingBottom3 = 2.5;
-  double _paddingBottom4 = 3.0;
+
   bool _isChannelHover = false;
   int? _selectedind;
 
@@ -62,17 +52,7 @@ class ChannelsDisplayViewModel extends BaseViewModel {
   String get channelText9 => _channelText9;
   String get channelText10 => _channelText10;
   String get channelText11 => _channelText11;
-  double get channelWidth => _channelWidth;
-  double get channelHeight => _channelHeight;
-  double get paddingall => _paddingall;
-  double get paddingTop => _paddingTop;
-  double get paddingTop2 => _paddingTop2;
-  double get paddingLeft => _paddingLeft;
-  double get paddingRight => _paddingRight;
-  double get paddingBottom => _paddingBottom;
-  double get paddingBottom2 => _paddingBottom2;
-  double get paddingBottom3 => _paddingBottom3;
-  double get paddingBottom4 => _paddingBottom4;
+
   bool get isChannelHover => _isChannelHover;
 
   int? get selectedind => _selectedind;

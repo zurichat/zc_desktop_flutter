@@ -19,10 +19,8 @@ class ChannelsDisplayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final _auth = locator<AuthService>();
-    Size _size = MediaQuery.of(context).size;
+
     final _scrollController = ScrollController();
-    int selectedIndex;
 
     return ViewModelBuilder<ChannelsDisplayViewModel>.reactive(
       // onModelReady: (model) async => await model.fetchAndSetUserData(),
@@ -42,8 +40,8 @@ class ChannelsDisplayView extends StatelessWidget {
             /////////////////////////////////////////
             Padding(
               padding: EdgeInsets.only(
-                top: 12.0,
-                bottom: 18.0,
+                top: 12.0.h,
+                bottom: 18.0.h,
               ),
               child: Container(
                 child: ChannelSearchInputField(
@@ -123,9 +121,9 @@ class ChannelsDisplayView extends StatelessWidget {
                                             'Annoucements'
                                         ? false
                                         : true,
-                                paddingBottom2: model.paddingBottom2,
-                                paddingall: model.paddingall,
-                                paddingBottom3: model.paddingBottom3,
+                                paddingBottom2: 8.0.h,
+                                paddingall: 10.0,
+                                paddingBottom3: 2.5.h,
                                 channelText6:
                                     model.sidebarItems.keys.toList()[index],
                                 channelText7: model.channelText7,
@@ -134,7 +132,7 @@ class ChannelsDisplayView extends StatelessWidget {
                                 channelText9: model.channelText9,
                                 channelText10: model.channelText10,
                                 channelText11: model.channelText11,
-                                paddingBottom4: model.paddingBottom4,
+                                paddingBottom4: 3.0.h,
                                 isChannelHover: (model.isChannelHover == false ||
                                         model.selectedind != index)
                                     ? whiteColor
@@ -349,7 +347,7 @@ class ChannelsDisplayList extends StatelessWidget {
                         //         color: whiteColor,
                         //       ),
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 3.0),
+                          padding: EdgeInsets.only(bottom: 3.0.h),
                           child: Text(
                             channelText11,
                             style: authBtnChannelDisplayStyle,

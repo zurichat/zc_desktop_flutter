@@ -20,15 +20,6 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 class ChannelsCreationView extends HookWidget {
   // const ChannelsCreationView({Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey();
-
-    //Declare the services that are dependent upon
-  final _localStorageService = locator<LocalStorageService>();
-
-  /// This gets the currently logged in user respose
-  AuthResponse get _authResponse {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    return AuthResponse.fromMap(jsonDecode(authResponse as String));
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -40,14 +31,14 @@ class ChannelsCreationView extends HookWidget {
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
         child: Container(
-          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 720.h : 680.h,
+          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 725.h : 680.h,
           width: 410.w,
           child: Padding(
             padding: EdgeInsets.only(
-              top: model.paddingTop,
-              left: model.paddingLeft,
-              right: model.paddingRight,
-              bottom: model.paddingBottom,
+              top: 10.0.h,
+              left: 15.0.w,
+              right: 17.0.w,
+              bottom: 10.0.h,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -59,8 +50,8 @@ class ChannelsCreationView extends HookWidget {
                     ZcdeskText.headingCreateChannel(model.createChannel),
                     IconButton(
                       padding: EdgeInsets.symmetric(
-                          vertical: model.iconPadding, horizontal: model.iconPadding),
-                      iconSize: model.iconSize,
+                          vertical: 8.0.h, horizontal: 8.0.w),
+                      iconSize: 22.0,
                       onPressed: () {
                         model.closeDialog();
                       },
@@ -157,8 +148,8 @@ class ChannelsCreationView extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      height: 55.h,
-                      width: 155.w,
+                      height: 55.0.h,
+                      width: 155.0.w,
                       child: TextButton(
                         style: ButtonStyle(
                             mouseCursor: MaterialStateMouseCursor.clickable,
@@ -172,7 +163,7 @@ class ChannelsCreationView extends HookWidget {
 
                           await model.createchannels(
                             nameController.text,
-                            '${_authResponse.user.email}',
+                            model.userEmail(),
                             descriptionController.text,
                             model.isPrivate,
                           );
@@ -180,7 +171,7 @@ class ChannelsCreationView extends HookWidget {
                         },
                         child: !model.isBusy
                             ? Padding(
-                          padding: EdgeInsets.only(bottom: model.paddingBottom2),
+                          padding: EdgeInsets.only(bottom: 3.0.h),
                           child: Text(
                                model.channelTextNine,
                                 style: authBtnChannelStyle,
