@@ -7,6 +7,12 @@ abstract class Api {
     Map<String, String>? headers,
   });
 
+  Future<dynamic> patch(
+    Uri uri, {
+    required Map<String, dynamic> body,
+    Map<String, String>? headers,
+  });
+
   Future<dynamic> put(
     Uri uri, {
     required Map<String, dynamic> body,

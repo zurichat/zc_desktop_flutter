@@ -1,17 +1,17 @@
-class Organisation {
+class Organization {
   final String id;
   final String logoUrl;
   final String name;
   final String workspaceUrl;
 
-  const Organisation({
+  const Organization({
     required this.id,
     required this.logoUrl,
     required this.name,
     required this.workspaceUrl,
   });
 
-  factory Organisation.fromMap(Map<String, dynamic> json) => Organisation(
+  factory Organization.fromMap(Map<String, dynamic> json) => Organization(
         id: json['id'] ?? json['_id'],
         logoUrl: json['logo_url'],
         name: json['name'],
@@ -29,6 +29,6 @@ class Organisation {
 
   @override
   String toString() {
-    return 'Organisation(id: $id, logoUrl: $logoUrl, name: $name, workspaceUrl: $workspaceUrl)';
+    return 'Organization(id: $id, logoUrl: $logoUrl, name: $name, workspaceUrl: $workspaceUrl)';
   }
 }
