@@ -3,16 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
-import 'package:zc_desktop_flutter/models/dm_model/room_response.dart';
-import 'package:zc_desktop_flutter/models/user.dart' as LoggedInUser;
-import 'package:zc_desktop_flutter/models/user_model.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {
   final log = getLogger("DmViewModel");
   final _dmService = locator<DMService>();
-  User _user = User(name: "");
+  DummyUser _user = DummyUser(name: "");
   late LoggedInUser.User _currentLoggedInUser;
   String? _roomId = '';
   List<Results> _messages = [];
@@ -40,7 +38,7 @@ class DmViewModel extends BaseViewModel {
     return 'No data';
   }
 
-  User get user => _user;
+  DummyUser get user => _user;
   String get roomId => _roomId!;
   LoggedInUser.User get currentLoggedInUser => _currentLoggedInUser;
   final DateTime currentMessageTime = DateTime.now();

@@ -40,7 +40,7 @@ import 'package:zc_desktop_flutter/ui/views/startup_page/startup_view.dart';
     MaterialRoute(page: ChangePasswordView),
     MaterialRoute(page: SuccessView),
     MaterialRoute(page: HomeView),
-    MaterialRoute(page: WorkspaceView),
+    //MaterialRoute(page: WorkspaceView),
     MaterialRoute(page: ChannelsView),
     MaterialRoute(page: CreateWorkspaceView),
     MaterialRoute(page: CreateWorkspaceStage1),

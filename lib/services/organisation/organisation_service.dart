@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:stacked/stacked_annotations.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 import '../../app/app.locator.dart';
-import '../../models/auth_response.dart';
-import '../../models/organisation/organisation.dart';
 import '../api/api_service.dart';
 
 const selectedOrganisationKey = 'selectedOrganisationKey';
@@ -41,7 +40,7 @@ class OrganizationService {
     );
 
     return List.from(
-      response['data'].map((map) => Organisation.fromMap(map)).toList(),
+      response['data'].map((map) => Organisation.fromJson(map)).toList(),
     );
   }
 
@@ -70,7 +69,7 @@ class OrganizationService {
   Future<void> saveUserSelectedOrganisations(
       List<Organisation> organisations) async {
     final organisationsToMap =
-        organisations.map((organisation) => organisation.toMap()).toList();
+        organisations.map((organisation) => organisation.toJson()).toList();
 
     await _localStorageService.saveToDisk(
       userSelectedOrganisationsKey,
@@ -87,7 +86,7 @@ class OrganizationService {
     );
 
     return List.from(
-      organisationMap.map((map) => Organisation.fromMap(map)).toList(),
+      organisationMap.map((map) => Organisation.fromJson(map)).toList(),
     );
   }
 
@@ -98,7 +97,7 @@ class OrganizationService {
   /// This gets the currently logged in user respose
   AuthResponse get _authResponse {
     final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    return AuthResponse.fromMap(jsonDecode(authResponse as String));
+    return AuthResponse.fromJson(jsonDecode(authResponse as String));
   }
 
   /// This is used to get a single organisation
@@ -110,7 +109,7 @@ class OrganizationService {
       },
     );
 
-    return Organisation.fromMap(response['data']);
+    return Organisation.fromJson(response['data']);
   }
 
   Future<void> _addOrgToOrganisationsList(Organisation organisation) async {
@@ -121,7 +120,7 @@ class OrganizationService {
       organisationJson,
     );
 
-    organisationMap.add(organisation.toMap());
+    organisationMap.add(organisation.toJson());
 
     await _localStorageService.saveToDisk(
       userSelectedOrganisationsKey,
