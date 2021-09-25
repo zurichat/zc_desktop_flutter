@@ -31,15 +31,18 @@ class APIConstants {
   Uri get requestPasswordResetCodeUri => Uri(
       scheme: scheme, host: host, path: '/account/request-password-reset-code');
 
-  // Organisation endpoints
-  Uri getOrganisationsUri(email) =>
+  // Organization endpoints
+  Uri getOrganizationsUri(email) =>
       Uri(scheme: scheme, host: host, path: '/users/$email/organizations');
 
-  Uri get createOrganisationUri =>
+  Uri get createOrganizationUri =>
       Uri(scheme: scheme, host: host, path: '/organizations');
 
-  Uri getOrganisationUri(String organisationId) =>
-      Uri(scheme: scheme, host: host, path: '/organizations/$organisationId');
+  Uri getOrganizationUri(String organizationId) =>
+      Uri(scheme: scheme, host: host, path: '/organizations/$organizationId');
+
+  Uri updateOrganizationNameUri(String organizationId) => Uri(
+      scheme: scheme, host: host, path: '/organizations/$organizationId/name');
 
   //DMs endpoints
   Uri get dmCreateRoom =>

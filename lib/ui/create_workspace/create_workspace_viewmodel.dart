@@ -3,7 +3,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/services/organisation/organisation_service.dart';
+
+import 'package:zc_desktop_flutter/services/organization/organization_service.dart';
 
 class CreateWorkspaceViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
@@ -138,8 +139,9 @@ class CreateWorkspaceViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.workspaceView);
   }
 
-  Future<void> createOrganization(String email) async {
-    await _organizationService.createOrganisation(email);
-    goToStage1();
+  Future<void> createOrganization(String organizationName) async {
+    // await _organizationService.createOrganisation(email);
+    await _organizationService.updateOrganizationName(organizationName);
+    goToStage2();
   }
 }
