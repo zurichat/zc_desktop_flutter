@@ -22,5 +22,4 @@ const String PinnedSvg = "assets/icons/pinned.svg";
 const String AddSvg = "assets/icons/add.svg";
 const String ThreadSvg = "assets/icons/threads.svg";
 const String NewDmSvg = "assets/icons/new_dm.svg";
-const String SuccessSvgPath = 'assets/images/success.svg';
-const String MarkSvgPath = 'assets/images/mark.svg';
+const String SuccessCheckPath = 'assets/images/success-check.svg';
