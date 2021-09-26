@@ -121,7 +121,7 @@ class LoginView extends HookWidget {
                                       TextButton(
                                         onPressed: model.goToSignUp,
                                         child: Text(
-                                          ' Sign Up',
+                                          'Sign Up',
                                           style: TextStyle(
                                             color: Color(0xff20C18C),
                                             fontSize: 16.sp,
@@ -131,7 +131,7 @@ class LoginView extends HookWidget {
                                       ),
                                     ],
                                   ),
-                                  verticalSpaceTiny,
+                                  verticalSpaceSmall,
                                   TextButton(
                                     onPressed: model.gotoForgetPassword,
                                     child: Text(

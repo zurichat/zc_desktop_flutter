@@ -147,36 +147,26 @@ class SignUpView extends HookWidget {
                                   twitterOnPressed: () {},
                                 ),
                                 verticalSpaceMedium,
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    bottom: 16,
-                                  ),
-                                  child: Center(
-                                    child: GestureDetector(
-                                      onTap: model.goToLogin,
-                                      child: RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Already have an account?',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: 'Lato',
-                                                  color: Colors.black),
-                                            ),
-                                            TextSpan(
-                                              text: ' Sign In',
-                                              style: TextStyle(
-                                                  color: Color(0xff20C18C),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontFamily: 'Lato'),
-                                            ),
-                                          ],
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Already have an account?',
+                                      style: subtitle2.copyWith(
+                                          color: leftNavBarColor),
+                                    ),
+                                    TextButton(
+                                      onPressed: model.goToLogin,
+                                      child: Text(
+                                        'Sign in',
+                                        style: TextStyle(
+                                          color: Color(0xff20C18C),
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),

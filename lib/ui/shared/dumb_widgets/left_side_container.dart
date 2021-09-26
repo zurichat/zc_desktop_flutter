@@ -21,9 +21,7 @@ class LeftSideContainer extends StatelessWidget {
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(),
-                child: Image.asset(
-                  CircularGifPath,
-                ),
+                child: Image.asset(CircularGifPath),
               ),
             ),
             Text(
