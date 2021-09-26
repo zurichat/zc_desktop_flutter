@@ -1,48 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zc_desktop_flutter/ui/main/channels_page/channels_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/user_avatar.dart';
 
 class WorkSpaceMembers extends StatelessWidget {
-  const WorkSpaceMembers({Key? key}) : super(key: key);
+  const WorkSpaceMembers({Key? key, required this.model}) : super(key: key);
+
+    final ChannelsViewModel model;
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 150.w,
+        width: 150,
+        padding: EdgeInsets.only(right: 10.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
             border: Border.all(color: Colors.grey)),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              flex: 3,
-              child: Stack(
+             Row(
                 children: [
-                  Positioned(child: MemberAvatar()),
-                  Positioned(
-                      right: 20,
-                      bottom: 0,
-                      top: 0,
-                      left: 0,
-                      child: MemberAvatar()),
-                  Positioned(
-                      right: 50,
-                      bottom: 0,
-                      top: 0,
-                      left: 0,
-                      child: MemberAvatar())
+                  MemberAvatar(
+                  model: model,
+                ),
+                MemberAvatar(
+                  model: model,
+                ),
+                MemberAvatar(
+                  model: model,
+                ),
                 ],
               ),
-            ),
-            Expanded(flex: 1, child: Text('300'))
+            
+            Flexible(child: Text('300'))
           ],
         ));
   }
 }
 
 class MemberAvatar extends StatelessWidget {
-  const MemberAvatar({Key? key}) : super(key: key);
-
+ const MemberAvatar({Key? key, required this.model}) : super(key: key);
+  final ChannelsViewModel model;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,8 +50,9 @@ class MemberAvatar extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(image: AssetImage('assets/images/1.png')),
           borderRadius: BorderRadius.all(Radius.circular(3.0))),
-      height: 40.h,
-      width: 40.w,
+      height: 25,
+      width: 25,
+      child: UserAvatar(imageUri: model.userDefaultImageUrl),
     );
   }
 }

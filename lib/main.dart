@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
+import 'package:window_size/window_size.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 
 import 'app/app.router.dart';
@@ -11,6 +14,10 @@ import 'ui/shared/preferences/preferenceswidgets/theme/themes.dart';
 Future main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowMinSize(const Size(700, 500));
+    setWindowMaxSize(Size.infinite);
+  }
   await ThemeManager.initialise();
   runApp(const ZcDesktop());
 }

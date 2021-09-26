@@ -23,6 +23,20 @@ class ChannelsViewModel extends BaseViewModel {
   String userPost =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
+
+
+
+  int _msgIndex = 0;
+  int get msgIndex => _msgIndex;
+  bool _onReplyWidgetHover = false;
+  bool get onReplyWidgetHover => _onReplyWidgetHover;
+
+  void onReplyWidgetHovered(bool hover, int index) {
+    _onReplyWidgetHover = hover;
+    _msgIndex = index;
+    notifyListeners();
+  }
+  
   void increaseReactionNumber() {
     numberOfReactions++;
     notifyListeners();
