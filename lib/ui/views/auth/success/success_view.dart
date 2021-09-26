@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/views/auth/success/success_view_model.dart';
+import 'package:zc_desktop_flutter/ui/views/auth/success/success_viewmodel.dart';
 
 class SuccessView extends StatefulWidget {
   const SuccessView({Key? key}) : super(key: key);

@@ -15,36 +15,34 @@ class HomeView extends StatelessWidget {
     Size _size = MediaQuery.of(context).size;
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       builder: (context, model, child) => Scaffold(
-          body: Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                OrganizationBarView(),
-                LeftSideBarView(),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 5,
-                        child: CenterArea(),
-                      ),
-                      if (_size.width > 1040)
+        body: Column(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  OrganizationBarView(),
+                  LeftSideBarView(),
+                  Expanded(
+                    child: Row(
+                      children: [
                         Expanded(
-                          flex: 3,
-                          child: RightSideBarView(),
-                        )
-                    ],
-                  ),
-                )
-              ],
+                          flex: 5,
+                          child: CenterArea(),
+                        ),
+                        if (_size.width > 1040)
+                          Expanded(
+                            flex: 3,
+                            child: RightSideBarView(),
+                          )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
-      )
-          //   ],
-          // ),
-          ),
+          ],
+        ),
+      ),
       viewModelBuilder: () => HomeViewModel(),
     );
   }

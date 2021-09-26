@@ -10,7 +10,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 
-import 'check_email_view_model.dart';
+import 'check_email_viewmodel.dart';
 
 class CheckEmailView extends StatelessWidget {
   const CheckEmailView({Key? key}) : super(key: key);
