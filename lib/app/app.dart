@@ -3,11 +3,12 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/authentication/channels_service.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_api_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
-import 'package:zc_desktop_flutter/services/organisation/organisation_service.dart';
+
+import 'package:zc_desktop_flutter/services/organization/organization_service.dart';
 import 'package:zc_desktop_flutter/services/user_service/user_service.dart';
 import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.dart';
 import 'package:zc_desktop_flutter/ui/auth/change_password_page/change_password_view.dart';
@@ -25,9 +26,9 @@ import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_view.dart';
 import 'package:zc_desktop_flutter/ui/startup_page/startup_view.dart';
 import 'package:zc_desktop_flutter/ui/create_workspace/create_workspace.dart';
-import 'package:zc_desktop_flutter/ui/create_workspace/create_workspace_stage1.dart';
-import 'package:zc_desktop_flutter/ui/create_workspace/create_workspace_stage2.dart';
-import 'package:zc_desktop_flutter/ui/create_workspace/create_workspace_stage3.dart';
+import 'package:zc_desktop_flutter/ui/create_workspace/create_organization_name.dart';
+import 'package:zc_desktop_flutter/ui/create_workspace/create_initial_channel.dart';
+import 'package:zc_desktop_flutter/ui/create_workspace/invite_user_to_organization.dart';
 
 @StackedApp(
   routes: [
