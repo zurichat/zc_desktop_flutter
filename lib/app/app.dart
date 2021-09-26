@@ -30,10 +30,7 @@ import 'package:zc_desktop_flutter/ui/create_workspace/create_workspace_stage3.d
 
 @StackedApp(
   routes: [
-    MaterialRoute(
-      page: LoginView,
-      initial: true,
-    ),
+    MaterialRoute(page: LoginView),
     MaterialRoute(page: SplashView),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
@@ -51,6 +48,7 @@ import 'package:zc_desktop_flutter/ui/create_workspace/create_workspace_stage3.d
     MaterialRoute(page: ChannelsCreationView),
     MaterialRoute(
       page: WorkspaceView,
+      initial: true,
       children: [
         MaterialRoute(page: ChannelsView, initial: true),
         MaterialRoute(page: ChannelsDisplayView),
