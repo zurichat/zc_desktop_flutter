@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/main/status_dialog/status_dialog_min/status_dialog_min_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -8,8 +8,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/preferences/preferences_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_drop/profile_drop_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/profile/profile_edit/profile_edit_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/shared/profile/profile_upload_image/profile_upload_view.dart';
 
 class ProfileDropdownView extends StatelessWidget {
   ProfileDropdownView({Key? key}) : super(key: key);
@@ -202,7 +200,7 @@ class DropDownItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         text,
-                        style: prefBodyTextStyle,
+                        style: preferenceStyleNormal,
                       ),
                       Spacer(),
                       Icon(
@@ -241,7 +239,7 @@ class ProfilePicture extends StatelessWidget {
               children: [
                 Text(
                   "Bernice_Perp",
-                  style: prefBodyTextStyle,
+                  style: preferenceStyleNormal,
                 ),
                 verticalSpaceTiny,
                 Row(
@@ -255,7 +253,7 @@ class ProfilePicture extends StatelessWidget {
                     ),
                     Text(
                       "Away",
-                      style: prefBodyTextStyle,
+                      style: preferenceStyleNormal,
                     )
                   ],
                 )

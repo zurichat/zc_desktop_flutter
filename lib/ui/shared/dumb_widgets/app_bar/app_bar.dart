@@ -15,7 +15,7 @@ Widget buildAppBar(BuildContext context,
   final iconc = Icons.watch_later_outlined;
 
   return Container(
-    height: 50,
+    height: 50.h,
     color: Theme.of(context).appBarTheme.backgroundColor,
     child: WindowTitleBarBox(
       child: MoveWindow(
@@ -91,7 +91,7 @@ Widget buildAppBar(BuildContext context,
                   child: MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: Container(
-                      height: 30.0,
+                      height: 38.h,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(153, 153, 153, 0.2),
                         borderRadius: BorderRadius.circular(6),
@@ -102,7 +102,7 @@ Widget buildAppBar(BuildContext context,
                         child: Text('Search here',
                             style: TextStyle(
                                 color: Color.fromRGBO(231, 231, 231, 1),
-                                fontSize: 13,
+                                fontSize: 13.sp,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Lato')),
                       ),

@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/models/auth_response.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channels_api_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class ChannelsCreationViewModel extends BaseViewModel with Validator {
@@ -19,7 +19,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
 
   /// This gets the currently logged in user respose
   AuthResponse get _authResponse {
-    final authResponse = _localStorageService.authResponse;
+    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
     return AuthResponse.fromMap(jsonDecode(authResponse as String));
   }
 
@@ -101,7 +101,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
   }
 
   void goToViewChannels() {
-    _navigationService.navigateTo(Routes.workspaceView);
+    _navigationService.navigateTo(Routes.organizationView);
     notifyListeners();
   }
 

@@ -1,16 +1,18 @@
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/user_service/user_service.dart';
 
 class LoginViewModel extends BaseViewModel {
   final log = getLogger("LoginViewModel");
+
   final _navigationService = locator<NavigationService>();
   final _auth = locator<AuthService>();
-  final _user = locator<UserService>();
+
+  // final _fakeApiService = locator<FakeApi>();
+
   bool _passwordVisibility = true;
 
   bool get passwordVisibily => _passwordVisibility;
@@ -34,12 +36,12 @@ class LoginViewModel extends BaseViewModel {
     required String email,
     required String password,
   }) async {
-    await performLogin(email, password);
+    await runBusyFuture(performLogin(email, password));
   }
 
   Future<void> performLogin(String email, String password) async {
     await _auth.login(email, password);
-    _navigationService.navigateTo(Routes.workspaceView);
+    _navigationService.navigateTo(Routes.organizationView);
   }
 
   @override
@@ -50,10 +52,12 @@ class LoginViewModel extends BaseViewModel {
 
   Future<void> checkLoginStatus() async {
     // try {
-    //   await _user.fetchAndSetUserData();
-    //   _navigationService.navigateTo(Routes.workspaceView);
+    //   await _auth.checkToken();
+    //   _goToHome();
+
     // } catch (e) {
-    //   _navigationService.navigateTo(Routes.loginView);
+    await Future.delayed(Duration(milliseconds: 1000));
+    _navigationService.navigateTo(Routes.loginView);
     // }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -10,13 +9,11 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dar
 
 import 'create_workspace_viewmodel.dart';
 
-class CreateWorkspaceStage1 extends HookWidget {
-  CreateWorkspaceStage1({Key? key}) : super(key: key);
-  final _formKey = GlobalKey<FormState>();
+class CreateWorkspaceStage1 extends StatelessWidget {
+  const CreateWorkspaceStage1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final nameController = useTextEditingController();
     return ViewModelBuilder<CreateWorkspaceViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: SingleChildScrollView(
@@ -90,22 +87,22 @@ class CreateWorkspaceStage1 extends HookWidget {
                             verticalSpaceSmall,
                             Container(
                               width: 600.w,
-                              child: Form(
-                                key: _formKey,
-                                child: AuthInputField(
-                                  controller: nameController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  onChanged: (value) {
-                                    model.setCompanyName(value);
-                                  },
-                                  hintPlaceHolder: model.companyNameHint,
-                                  trailing: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text('50',
-                                        style: TextStyle(
-                                            color: lightIconColor,
-                                            fontWeight: FontWeight.w200)),
-                                  ),
+                              child: AuthInputField(
+                                controller: TextEditingController(),
+                                keyboardType: TextInputType.emailAddress,
+                                onChanged: (value) {
+                                  model.setCompanyName(value);
+                                },
+                                onSaved: (value) {
+                                  model.setCompanyName(value.toString());
+                                },
+                                hintPlaceHolder: model.companyNameHint,
+                                trailing: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Text('50',
+                                      style: TextStyle(
+                                          color: lightIconColor,
+                                          fontWeight: FontWeight.w200)),
                                 ),
                               ),
                             ),
@@ -118,8 +115,7 @@ class CreateWorkspaceStage1 extends HookWidget {
                                     backgroundColor: MaterialStateProperty.all(
                                         lightIconColor)),
                                 onPressed: () {
-                                  // TODO: pass name to patch request to update Organization name.
-                                  model.createOrganization(nameController.text);
+                                  model.goToStage2();
                                 },
                                 child: Text(
                                   model.btnText,

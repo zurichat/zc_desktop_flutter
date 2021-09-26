@@ -4,7 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 
@@ -50,13 +49,12 @@ Widget bringEmailIntoZuriSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(
           model.messagepreferencetitles[7],
-          style: prefHeaderTextStyle,
+          style: preferenceStyleBold,
         ),
         verticalSpaceSmall,
         SizedBox(
           width: 350,
-          child: Text(model.longText[0],
-              style: prefBodyTextStyle),
+          child: Text(model.longText[0], style: preferenceStyleNormal),
         ),
         verticalSpaceMedium,
         PreferenceButton(
@@ -73,8 +71,7 @@ Widget inLineMediaSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(model.messagepreferencetitles[6],
-            style: prefHeaderTextStyle),
+        Text(model.messagepreferencetitles[6], style: preferenceStyleBold),
         verticalSpaceSmall,
         ZcCheckBox1(
             onChanged: (v) {
@@ -120,9 +117,7 @@ Widget additionalOptionsSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          model.messagepreferencetitles[3],
-          style: prefHeaderTextStyle  ),
+        Text(model.messagepreferencetitles[3], style: preferenceStyleBold),
         verticalSpaceSmall,
         ZcCheckBox1(
             onChanged: (v) {
@@ -176,9 +171,7 @@ class ZcCheckBox1 extends StatelessWidget {
           ),
         ),
         horizontalSpaceVeryTiny,
-        Flexible(
-            child: Text(txt!,
-                style:prefBodyTextStyle)),
+        Flexible(child: Text(txt!, style: preferenceStyleNormal)),
       ],
     );
   }
@@ -192,16 +185,15 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
       children: <Widget>[
         Text(
           model.messagepreferencetitles[4],
-          style: prefHeaderTextStyle,
+          style: preferenceStyleBold,
         ),
         verticalSpaceSmall,
         Text(
           model.messagepreferencetitles[5],
-          style: prefBodyTextStyle,
+          style: preferenceStyleNormal,
         ),
         verticalSpaceSmall,
-        Text(model.longText[1],
-            style: prefBodyTextStyle),
+        Text(model.longText[1], style: preferenceStyleNormal),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -251,11 +243,10 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
           width: 400.w,
           child: Text(
               'Display the jumbo versions of emoji (up to 23 at a time!) in messages without text.',
-              style: prefBodyTextStyle),
+              style: preferenceStyleNormal),
         ),
         verticalSpaceMedium,
-        Text('Here is an Example',
-            style: prefBodyTextStyle),
+        Text('Here is an Example', style: preferenceStyleNormal),
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/People of Brooklyn Avatar 2.png',
@@ -280,12 +271,10 @@ Widget themeSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(model.messagepreferencetitles[0],
-            style: prefHeaderTextStyle),
+        Text(model.messagepreferencetitles[0], style: preferenceStyleBold),
         buildThemeRadioColumn(model),
         verticalSpaceSmall,
-        Text('Here is an Example',
-            style: prefBodyTextStyle),
+        Text('Here is an Example', style: preferenceStyleNormal),
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/GroupLogo.png',
@@ -310,8 +299,7 @@ Widget nameSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(model.messagepreferencetitles[2],
-            style:prefHeaderTextStyle),
+        Text(model.messagepreferencetitles[2], style: preferenceStyleBold),
         buildNameRadioColumn(model),
         verticalSpaceSmall,
         ReusableContainer(
@@ -399,7 +387,7 @@ class ReusableContainer extends StatelessWidget {
                             children: [
                               Text(
                                 title!,
-                                style: prefHeaderTextStyle,
+                                style: preferenceStyleBold,
                               ),
                               horizontalSpaceSmall,
                               Column(
@@ -407,7 +395,7 @@ class ReusableContainer extends StatelessWidget {
                                   verticalSpaceTiny,
                                   Text(
                                     time!,
-                                    style: prefBodyTextStyle,
+                                    style: preferenceStyleNormal,
                                   ),
                                 ],
                               )
@@ -423,7 +411,7 @@ class ReusableContainer extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     text: TextSpan(
                                         text: subtitle!,
-                                        style: prefBodyTextStyle,
+                                        style: preferenceStyleNormal,
                                         children: [
                                           TextSpan(
                                             text: subtxt,
@@ -466,7 +454,7 @@ buildRadio(
       ),
       Text(
         txt,
-        style: prefBodyTextStyle,
+        style: preferenceStyleNormal,
       )
     ],
   );

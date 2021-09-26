@@ -1,22 +1,15 @@
-import 'dart:convert';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/models/auth_response.dart';
-import 'package:zc_desktop_flutter/models/user.dart';
-import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
-
+import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/models/users_model/user_model.dart';
+import 'package:zc_desktop_flutter/services/api/api_service.dart';
 
 class UserService {
-  final _localStorageService = locator<LocalStorageService>();
-  User? user;
-  AuthResponse? authResponse;
+  final log = getLogger("UserService");
+  final _apiService = locator<ApiService>();
 
-  Future<void> fetchAndSetUserData () async {
-    try {
-      authResponse = _localStorageService.authResponse;
-      user = authResponse!.user;
-    } catch (e) {
-     throw e;
-    }
+  Future<User> getUserDetails(String? id) async {
+    final response =
+        await _apiService.get(Uri.parse("https://api.zuri.chat/users/$id}"));
+    return User.fromJson(response);
   }
-  
 }

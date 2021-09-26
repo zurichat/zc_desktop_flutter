@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class APIConstants {
   static const String scheme = 'https';
 
@@ -30,24 +28,27 @@ class APIConstants {
   Uri get requestPasswordResetCodeUri => Uri(
       scheme: scheme, host: host, path: '/account/request-password-reset-code');
 
-  // Organization endpoints
+  // Organisation endpoints
   Uri getOrganizationsUri(email) =>
       Uri(scheme: scheme, host: host, path: '/users/$email/organizations');
 
   Uri get createOrganizationUri =>
       Uri(scheme: scheme, host: host, path: '/organizations');
 
-  Uri getOrganizationUri(String organizationId) =>
-      Uri(scheme: scheme, host: host, path: '/organizations/$organizationId');
-
-  Uri updateOrganizationNameUri(String organizationId) => Uri(
-      scheme: scheme, host: host, path: '/organizations/$organizationId/name');
+  Uri getOrganisationUri(String organisationId) =>
+      Uri(scheme: scheme, host: host, path: '/organizations/$organisationId');
 
   // Channels Endpoints
 
-  Uri getcreateChannelUri(String organisationId) => Uri(scheme: scheme, host: channelHost, path: '/api/v1/$organisationId/channels/');
+  Uri getcreateChannelUri(String organisationId) => Uri(
+      scheme: scheme,
+      host: channelHost,
+      path: '/api/v1/$organisationId/channels/');
 
-  Uri getuserChannelUri(String organisationId, String channelId) => Uri(scheme: scheme, host: channelHost, path: '/api/v1/$organisationId/channels/$channelId/members/');
+  Uri getuserChannelUri(String organisationId, String channelId) => Uri(
+      scheme: scheme,
+      host: channelHost,
+      path: '/api/v1/$organisationId/channels/$channelId/members/');
 
   //DMs endpoints
   Uri get dmCreateRoom =>

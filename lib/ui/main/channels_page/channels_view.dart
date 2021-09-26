@@ -6,6 +6,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/message.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 
 import 'channels_viewmodel.dart';
 
@@ -31,25 +32,29 @@ class ChannelsView extends StatelessWidget {
               child: Column(
                 children: [
                   DetailedCustomAppBar(
-                    leading: Text("# ${model.getChannelName()}",
-                        style: TextStyle(overflow: TextOverflow.fade)),
-                    trailing: WorkSpaceMembers(
-                      model: model,
+                    margin: EdgeInsets.only(left: 2.0.w),
+                    leading: WorkSpaceTitle(
+                      channelTitle: model.currentChannel!.name,
                     ),
+                    trailing: WorkSpaceMembers(),
                   ),
-                  Expanded(
-                    child: Scrollbar(
-                      controller: model.controllerOne,
-                      child: SingleChildScrollView(
-                        physics: ScrollPhysics(),
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.0.w, vertical: 10.h),
+                      child: Scrollbar(
                         controller: model.controllerOne,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            MessageWidget(model: model, messageIndex: 0),
-                            MessageWidget(model: model, messageIndex: 1),
-                            MessageWidget(model: model, messageIndex: 2),
-                          ],
+                        child: SingleChildScrollView(
+                          physics: ScrollPhysics(),
+                          controller: model.controllerOne,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              MessageWidget(model: model),
+                              MessageWidget(model: model),
+                              MessageWidget(model: model),
+                            ],
+                          ),
                         ),
                       ),
                     ),

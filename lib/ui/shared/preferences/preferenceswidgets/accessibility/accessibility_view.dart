@@ -23,6 +23,7 @@ class AccessibilityView extends StatelessWidget {
           return Scrollbar(
             controller: _rightSideBarController,
             isAlwaysShown: true,
+            scrollbarOrientation: ScrollbarOrientation.right,
             thickness: 8,
             showTrackOnHover: true,
             child: SingleChildScrollView(
@@ -41,10 +42,7 @@ class AccessibilityView extends StatelessWidget {
               ),
             ),
           );
-        },
-        onModelReady: (model)=>model.fetchAndSetSetting(),
-        onDispose: (model)=>model.saveSettings(),
-        );
+        });
   }
 }
 
@@ -61,7 +59,7 @@ class MessageAnimationSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // animation setting
-          Text('Animation', style: prefHeaderTextStyle),
+          Text('Animation', style: preferenceStyleBold),
           Row(
             children: [
               ZcCheckBox(
@@ -72,18 +70,18 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text('Allow animated images and emoji',
-                      style: prefBodyTextStyle)),
+                      style: preferenceStyleNormal)),
             ],
           ),
           verticalSpaceRegular,
 
           //messaging setting
-          Text('Direct message announcements', style: prefHeaderTextStyle),
+          Text('Direct message announcements', style: preferenceStyleBold),
 
           verticalSpaceSmall,
-          Text.rich(TextSpan(style: prefBodyTextStyle, children: [
+          Text.rich(TextSpan(style: preferenceStyleNormal, children: [
             TextSpan(text: model.msg),
-            TextSpan(text: ' ' + model.boldMsg, style: prefHeaderTextStyle)
+            TextSpan(text: ' ' + model.boldMsg, style: preferenceStyleBold)
           ])),
           verticalSpaceRegular,
 
@@ -98,7 +96,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child:
-                      Text(model.sentMsgSound, style: prefBodyTextStyle)),
+                      Text(model.sentMsgSound, style: preferenceStyleNormal)),
             ],
           ),
 
@@ -115,7 +113,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text(model.receiveMsgSound,
-                      style: prefBodyTextStyle)),
+                      style: preferenceStyleNormal)),
             ],
           ),
           verticalSpaceSmall,
@@ -131,7 +129,7 @@ class MessageAnimationSection extends StatelessWidget {
               horizontalSpaceTiny,
               Flexible(
                   child: Text(model.readIncomingMsg,
-                      style: prefBodyTextStyle)),
+                      style: preferenceStyleNormal)),
             ],
           ),
           verticalSpaceSmall,
@@ -161,26 +159,23 @@ class KeyBoardSettingsSection extends StatelessWidget {
           GestureDetector(
             onTap: () {},
             child: Text.rich(TextSpan(
-                style: prefHeaderTextStyle,
-                children: [
-                  TextSpan(text: model.shortCutMsg),
-                  TextSpan(
-                      text: ' ' + model.boldShortCutMsg,
-                      style:
-                          TextStyle(color: kcSecondaryColor, fontSize: 15.sp))
-                ])),
+                style: preferenceStyleBold, children: [
+              TextSpan(text: model.shortCutMsg),
+              TextSpan(
+                  text: ' ' + model.boldShortCutMsg,
+                  style: TextStyle(color: kcSecondaryColor, fontSize: 15.sp))
+            ])),
           ),
           verticalSpaceRegular,
 
           // desc2
           Row(
             children: [
-              Text('Press', style: prefHeaderTextStyle),
+              Text('Press', style: preferenceStyleBold),
               horizontalSpaceTiny,
               ShortCuts().up(),
               horizontalSpaceTiny,
-              Text('in the empty message field to:',
-                  style: prefHeaderTextStyle)
+              Text('in the empty message field to:', style: preferenceStyleBold)
             ],
           ),
           verticalSpaceSmall,
@@ -204,10 +199,10 @@ class ShortCutDescription extends StatelessWidget {
       children: [
         ListTile(
           title: Text('Move focus to the message list',
-              style: prefHeaderTextStyle),
+              style: preferenceStyleBold),
           subtitle: Text(
               'The last visible message in the list will be selected',
-              style: prefBodyTextStyle),
+              style: preferenceStyleNormal),
           leading: Radio(
             value: UpButtonsChoice.option1,
             groupValue: model.upButtonsChoice,
@@ -218,11 +213,10 @@ class ShortCutDescription extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Edit your last message',
-              style: prefHeaderTextStyle),
+          title: Text('Edit your last message', style: preferenceStyleBold),
           subtitle: Text(
               'The last message you sent will be selected and in editing mode',
-              style: prefBodyTextStyle),
+              style: preferenceStyleNormal),
           leading: Radio(
             value: UpButtonsChoice.option2,
             groupValue: model.upButtonsChoice,
@@ -238,14 +232,13 @@ class ShortCutDescription extends StatelessWidget {
         //notice
         Wrap(
           children: [
-            Text('Note: press ',
-                style: prefBodyTextStyle),
+            Text('Note: press ', style: preferenceStyleNormal),
             ShortCuts().ctrl(),
-            Text(' + ', style: prefBodyTextStyle),
+            Text(' + ', style: preferenceStyleNormal),
             ShortCuts().up(),
             Flexible(
                 child: Text(' to edit your last message, with either option',
-                    style: prefBodyTextStyle)),
+                    style: preferenceStyleNormal)),
           ],
         )
       ],
