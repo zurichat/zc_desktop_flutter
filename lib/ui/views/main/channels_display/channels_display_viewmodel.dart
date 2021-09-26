@@ -1,8 +1,16 @@
+import 'dart:convert';
+
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/channels_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class ChannelsDisplayViewModel extends BaseViewModel {
   final log = getLogger("ChannelsDisplayViewModel");
+  final _channelService = locator<ChannelsService>();
+  final _localStorageService = locator<LocalStorageService>();
 
   String _channelText1 = 'Channel browser';
   String _channelText2 = 'Search Channel';
@@ -15,17 +23,7 @@ class ChannelsDisplayViewModel extends BaseViewModel {
   String _channelText9 = ' members  ';
   String _channelText10 = 'View';
   String _channelText11 = 'Join';
-  double _channelWidth = double.infinity;
-  double _channelHeight = double.infinity;
-  double _paddingall = 10.0;
-  double _paddingTop = 1.0;
-  double _paddingTop2 = 5.0;
-  double _paddingLeft = 18.0;
-  double _paddingRight = 15.0;
-  double _paddingBottom = 5.0;
-  double _paddingBottom2 = 8.0;
-  double _paddingBottom3 = 2.5;
-  double _paddingBottom4 = 3.0;
+
   bool _isChannelHover = false;
   int? _selectedind;
 
@@ -42,17 +40,7 @@ class ChannelsDisplayViewModel extends BaseViewModel {
   String get channelText9 => _channelText9;
   String get channelText10 => _channelText10;
   String get channelText11 => _channelText11;
-  double get channelWidth => _channelWidth;
-  double get channelHeight => _channelHeight;
-  double get paddingall => _paddingall;
-  double get paddingTop => _paddingTop;
-  double get paddingTop2 => _paddingTop2;
-  double get paddingLeft => _paddingLeft;
-  double get paddingRight => _paddingRight;
-  double get paddingBottom => _paddingBottom;
-  double get paddingBottom2 => _paddingBottom2;
-  double get paddingBottom3 => _paddingBottom3;
-  double get paddingBottom4 => _paddingBottom4;
+
   bool get isChannelHover => _isChannelHover;
 
   int? get selectedind => _selectedind;
@@ -78,12 +66,30 @@ class ChannelsDisplayViewModel extends BaseViewModel {
   }
 
   Map<String, String> _sidebarItems = {
-    'Annoucements': '34',
-    'Team-Desktop-Client': '500',
-    'Games': '45',
+    'announcements': '34',
+    'team-Desktop-Client': '500',
+    'games': '45',
   };
 
   Map<String, String> get sidebarItems => _sidebarItems;
 
- 
+  Future<void> getchannels() async {
+    await runBusyFuture(performGetChannel());
+
+    notifyListeners();
+  }
+
+  Future<void> performGetChannel() async {
+    // List<ChannelsDataModel> channelsList = await _channelService.getChannelsList();
+  }
+
+  User? user;
+  AuthResponse? userdata;
+  Future<void> fetchAndSetUserData() async {
+    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    final resUser = AuthResponse.fromJson(jsonDecode(authResponse as String));
+
+    print(resUser.user.token);
+    notifyListeners();
+  }
 }

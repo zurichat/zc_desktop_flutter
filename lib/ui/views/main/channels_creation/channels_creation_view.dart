@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -21,19 +22,18 @@ class ChannelsCreationView extends HookWidget {
     final nameController = useTextEditingController();
     final descriptionController = useTextEditingController();
 
-
     return ViewModelBuilder<ChannelsCreationViewModel>.reactive(
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
         child: Container(
-          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 730.h : 650.h,
+          height: (model.isCreateChannelNotSuccessful == true || model.isCreateChannelSuccessful == true || model.channelNameError != null) ? 725.h : 680.h,
           width: 410.w,
           child: Padding(
             padding: EdgeInsets.only(
-              top: model.paddingTop,
-              left: model.paddingLeft,
-              right: model.paddingRight,
-              bottom: model.paddingBottom,
+              top: 10.0.h,
+              left: 15.0.w,
+              right: 17.0.w,
+              bottom: 10.0.h,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -45,8 +45,8 @@ class ChannelsCreationView extends HookWidget {
                     ZcdeskText.headingCreateChannel(model.createChannel),
                     IconButton(
                       padding: EdgeInsets.symmetric(
-                          vertical: model.iconPadding, horizontal: model.iconPadding),
-                      iconSize: model.iconSize,
+                          vertical: 8.0.h, horizontal: 8.0.w),
+                      iconSize: 22.0,
                       onPressed: () {
                         model.closeDialog();
                       },
@@ -62,7 +62,7 @@ class ChannelsCreationView extends HookWidget {
                 ZcdeskText.textCreateChannel(
                     model.channelTextTwo),
                 verticalSpaceMedium,
-                if(model.isCreateChannelSuccessful)
+                if(model.isCreateChannelSuccessful) 
                 Text(model.channelTextTen, style: headline7.copyWith(color: kcSuccessColor)),
                 if(model.isCreateChannelNotSuccessful)
                 Text(model.errorMessage, style: headline7.copyWith(color: kcErrorColor)),
@@ -143,8 +143,8 @@ class ChannelsCreationView extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      height: 55.h,
-                      width: 155.w,
+                      height: 55.0.h,
+                      width: 155.0.w,
                       child: TextButton(
                         style: ButtonStyle(
                             mouseCursor: MaterialStateMouseCursor.clickable,
@@ -156,17 +156,17 @@ class ChannelsCreationView extends HookWidget {
                           if (!_formKey.currentState!.validate())
                                 return;
 
-                          await model.createchannel(
-                            name: nameController.text,
-                            owner: nameController.text,
-                            description: descriptionController.text,
-                            private: false,
+                          await model.createchannels(
+                            nameController.text,
+                            model.userEmail(),
+                            descriptionController.text,
+                            model.isPrivate,
                           );
 
                         },
                         child: !model.isBusy
                             ? Padding(
-                          padding: EdgeInsets.only(bottom: model.paddingBottom2),
+                          padding: EdgeInsets.only(bottom: 3.0.h),
                           child: Text(
                                model.channelTextNine,
                                 style: authBtnChannelStyle,

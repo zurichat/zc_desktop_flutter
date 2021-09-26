@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/core/network/api_constants.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
+
 import 'api.dart';
 
 //TODO: Refactor error handling logic and properly intialize DIO and write code for interceptors
-@LazySingleton()
 class ApiService implements Api {
   final log = getLogger('APIService');
 
@@ -52,6 +51,33 @@ class ApiService implements Api {
       final response = await client.post(
         uri.toString(),
         data: body,
+        options: Options(headers: headers),
+      );
+
+      log.i('Response from $uri \n${response.data}');
+      return response.data;
+    } on DioError catch (error) {
+      log.e(error.response!.statusCode);
+      log.e(error.response!.data['message']);
+      throw Failure(error.response!.data['message']);
+    } catch (error) {
+      log.e(error.toString());
+      throw Failure(error.toString());
+    }
+  }
+
+  @override
+  Future<dynamic> patch(
+    Uri uri, {
+    required Map<String, dynamic> body,
+    Map<String, String>? headers,
+  }) async {
+    log.i('Making request to $uri');
+    try {
+      final response = await client.patch(
+        uri.toString(),
+        data: body,
+        options: Options(headers: headers),
       );
 
       log.i('Response from $uri \n${response.data}');

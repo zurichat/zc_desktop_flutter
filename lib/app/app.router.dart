@@ -155,8 +155,11 @@ class StackedRouter extends RouterBase {
       );
     },
     CreateWorkspaceStage1: (data) {
+      var args = data.getArgs<CreateWorkspaceStage1Arguments>(
+        orElse: () => CreateWorkspaceStage1Arguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const CreateWorkspaceStage1(),
+        builder: (context) => CreateWorkspaceStage1(key: args.key),
         settings: data,
       );
     },
@@ -239,4 +242,10 @@ class WorkspaceViewRouter extends RouterBase {
 class CreateWorkspaceViewArguments {
   final Key? key;
   CreateWorkspaceViewArguments({this.key});
+}
+
+/// CreateWorkspaceStage1 arguments holder class
+class CreateWorkspaceStage1Arguments {
+  final Key? key;
+  CreateWorkspaceStage1Arguments({this.key});
 }

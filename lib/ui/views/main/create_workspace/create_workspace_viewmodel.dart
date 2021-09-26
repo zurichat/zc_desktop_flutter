@@ -138,8 +138,8 @@ class CreateWorkspaceViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.workspaceView);
   }
 
-  Future<void> createOrganization(String email) async {
-    await _organizationService.createOrganisation(email);
-    goToStage1();
+  Future<void> createOrganization(String organizationName) async {
+    await _organizationService.updateOrganizationName(organizationName);
+    goToStage2();
   }
 }

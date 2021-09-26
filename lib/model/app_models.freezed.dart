@@ -4749,7 +4749,7 @@ abstract class _Advanced implements Advanced {
       throw _privateConstructorUsedError;
 }
 
-Organisation _$OrganisationFromJson(Map<String, dynamic> json) {
+Organization _$OrganisationFromJson(Map<String, dynamic> json) {
   return _Organisation.fromJson(json);
 }
 
@@ -4770,8 +4770,8 @@ class _$OrganisationTearOff {
     );
   }
 
-  Organisation fromJson(Map<String, Object> json) {
-    return Organisation.fromJson(json);
+  Organization fromJson(Map<String, Object> json) {
+    return Organization.fromJson(json);
   }
 }
 
@@ -4790,14 +4790,14 @@ mixin _$Organisation {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $OrganisationCopyWith<Organisation> get copyWith =>
+  $OrganisationCopyWith<Organization> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $OrganisationCopyWith<$Res> {
   factory $OrganisationCopyWith(
-          Organisation value, $Res Function(Organisation) then) =
+          Organization value, $Res Function(Organization) then) =
       _$OrganisationCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: '_id') String id,
@@ -4810,9 +4810,9 @@ abstract class $OrganisationCopyWith<$Res> {
 class _$OrganisationCopyWithImpl<$Res> implements $OrganisationCopyWith<$Res> {
   _$OrganisationCopyWithImpl(this._value, this._then);
 
-  final Organisation _value;
+  final Organization _value;
   // ignore: unused_field
-  final $Res Function(Organisation) _then;
+  final $Res Function(Organization) _then;
 
   @override
   $Res call({
@@ -4958,7 +4958,7 @@ class _$_Organisation implements _Organisation {
   }
 }
 
-abstract class _Organisation implements Organisation {
+abstract class _Organisation implements Organization {
   factory _Organisation(
           {@JsonKey(name: '_id') required String id,
           @JsonKey(name: 'logo_url') required String logoUrl,
