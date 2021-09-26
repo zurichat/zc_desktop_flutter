@@ -429,7 +429,7 @@ class ClassicThemeWidgetDark extends StatelessWidget {
 }
 
 class ClassicThemeWidgetLight extends StatelessWidget {
-  ThemeViewModel model;
+  final ThemeViewModel model;
   ClassicThemeWidgetLight({required this.model});
   @override
   Widget build(BuildContext context) {
@@ -603,11 +603,11 @@ class ExpandableWidget extends StatelessWidget {
 }
 
 class BuildRadio extends StatelessWidget {
-  Object value;
-  Object groupValue;
-  void Function(Object? value)? onChanged;
-  String txt;
-  Color color;
+  final Object value;
+  final Object groupValue;
+  final void Function(Object? value)? onChanged;
+  final String txt;
+  final Color color;
   BuildRadio(
       {required this.value,
       required this.groupValue,
