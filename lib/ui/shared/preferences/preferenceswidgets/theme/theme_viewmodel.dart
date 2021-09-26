@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -151,6 +151,17 @@ class ThemeViewModel extends BaseViewModel {
         notifyListeners();
         break;
     }
+  }
+
+  Future loadLightDarkData() async {
+    final pref =
+        await _storageService.getFromDisk('switch_light_dark') as String;
+    _switchLightDark = (EnumToString.fromString(toggleBtwTheme.values, pref))!;
+    final pref2 = await _storageService.getFromDisk("apperance_accross");
+    _isChecked = pref2 as bool;
+    // (_storageService.getFromDisk('switch_light_dark'))
+    //     as toggleBtwTheme;
+    notifyListeners();
   }
 
   void switchCleanTheme(Object? value) {

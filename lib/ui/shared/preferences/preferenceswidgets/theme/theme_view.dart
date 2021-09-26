@@ -1,3 +1,4 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -10,7 +11,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 
 class ThemeView extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     final ScrollController _controller = ScrollController();
@@ -30,12 +30,15 @@ class ThemeView extends StatelessWidget {
               child: SingleChildScrollView(
                   controller: _controller,
                   child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, bottom: 20.0),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(padding: EdgeInsets.all(10)),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 10)),
                             Container(
                                 child: Padding(
                                     padding: EdgeInsets.only(
@@ -126,7 +129,7 @@ class ThemeView extends StatelessWidget {
                                       style: kSubHeadingTextStyle.copyWith(
                                           color: Theme.of(context)
                                               .colorScheme
-                                              .primary)),
+                                              .onSecondary)),
                                   TextSpan(
                                       text: 'create a custom theme',
                                       style: kSubHeadingTextStyle.copyWith(
@@ -197,87 +200,9 @@ class ThemeView extends StatelessWidget {
                                 child: Theme(
                                     data: ThemeData().copyWith(
                                         dividerColor: Colors.transparent),
-                                    child: ExpansionTile(
-                                        tilePadding: EdgeInsets.all(0),
-                                        childrenPadding: EdgeInsets.all(0),
-                                        trailing: SizedBox.shrink(),
-                                        title: Row(
-                                          children: [
-                                            Icon(Icons.arrow_downward,
-                                                color: Color.fromRGBO(
-                                                    0, 184, 124, 1),
-                                                size: 20),
-                                            Text('Show all classic themes',
-                                                style: kBodyTextStyle.copyWith(
-                                                    fontSize: 14.sp,
-                                                    color: Color.fromRGBO(
-                                                        0, 184, 124, 1))),
-                                          ],
-                                        ),
-                                        children: [
-                                          Container(
-                                              width: 500,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                      child: Column(
-                                                    children: [
-                                                      Container(
-                                                        width: 198,
-                                                        height: 115,
-                                                        alignment:
-                                                            Alignment.center,
-                                                        decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                                image: AssetImage(
-                                                                    model
-                                                                        .aubergine2),
-                                                                fit: BoxFit
-                                                                    .fill)),
-                                                      ),
-                                                      BottomContainerWidget(
-                                                          value: cleanThemes
-                                                              .aubergine1,
-                                                          groupValue:
-                                                              model.cleanTheme,
-                                                          onChanged: model
-                                                              .switchCleanTheme,
-                                                          txt: model.aubergine)
-                                                    ],
-                                                  )),
-                                                  horizontalSpaceSmall,
-                                                  Column(
-                                                    children: [
-                                                      Container(
-                                                        width: 198,
-                                                        height: 115,
-                                                        alignment:
-                                                            Alignment.center,
-                                                        decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                                image: AssetImage(
-                                                                    model
-                                                                        .aubergine3),
-                                                                fit: BoxFit
-                                                                    .fill)),
-                                                      ),
-                                                      BottomContainerWidget(
-                                                          value: cleanThemes
-                                                              .aubergine2,
-                                                          groupValue:
-                                                              model.cleanTheme,
-                                                          onChanged: model
-                                                              .switchCleanTheme,
-                                                          txt: model.aubergine)
-                                                    ],
-                                                  ),
-                                                ],
-                                              )),
-                                        ]))),
+                                    child: ExpandableWidget(
+                                      model: model,
+                                    ))),
                             verticalSpaceSmall,
                             Padding(
                                 padding: EdgeInsets.all(10),
@@ -442,7 +367,9 @@ class ThemeView extends StatelessWidget {
                                 )),
                           ])))),
       viewModelBuilder: () {
-        return ThemeViewModel();
+        final viewModel = ThemeViewModel();
+        viewModel.loadLightDarkData();
+        return viewModel;
       },
       onModelReady: (model) => model.fetchAndSetSetting(),
       onDispose: (model) => model.saveSettings(),
@@ -525,7 +452,7 @@ class ClassicThemeWidgetLight extends StatelessWidget {
                 width: 10,
               ),
               Text(model.date(),
-                  style: prefBodyTextStyle)
+                  style: prefBodyTextStyle),
             ]),
             subtitle: Container(
                 margin: EdgeInsets.only(top: 10),
@@ -583,8 +510,95 @@ class BottomContainerWidget extends StatelessWidget {
               )),
           horizontalSpaceSmall,
           Text(txt,
-              style:prefHeaderTextStyle)
+              style:prefHeaderTextStyle),
         ]));
+  }
+}
+
+class ExpandableWidget extends StatelessWidget {
+  final ThemeViewModel model;
+  ExpandableWidget({required this.model});
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpandableNotifier(
+        child: Column(children: [
+      Expandable(
+        collapsed: ExpandableButton(
+            child: Row(
+          children: [
+            Icon(Icons.arrow_downward,
+                color: Color.fromRGBO(0, 184, 124, 1), size: 20),
+            Text('Show all classic themes',
+                style: kBodyTextStyle.copyWith(
+                    fontSize: 14.sp, color: Color.fromRGBO(0, 184, 124, 1))),
+          ],
+        )),
+        expanded: Column(
+          children: [
+            Container(
+                width: 500,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        child: Column(
+                      children: [
+                        Container(
+                          width: 198,
+                          height: 115,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(model.aubergine2),
+                                  fit: BoxFit.fill)),
+                        ),
+                        BottomContainerWidget(
+                            value: cleanThemes.aubergine1,
+                            groupValue: model.cleanTheme,
+                            onChanged: model.switchCleanTheme,
+                            txt: model.aubergine)
+                      ],
+                    )),
+                    horizontalSpaceSmall,
+                    Column(
+                      children: [
+                        Container(
+                          width: 198,
+                          height: 115,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(model.aubergine3),
+                                  fit: BoxFit.fill)),
+                        ),
+                        BottomContainerWidget(
+                            value: cleanThemes.aubergine2,
+                            groupValue: model.cleanTheme,
+                            onChanged: model.switchCleanTheme,
+                            txt: model.aubergine)
+                      ],
+                    ),
+                  ],
+                )),
+            ExpandableButton(
+                child: Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Row(
+                      children: [
+                        Icon(Icons.arrow_upward,
+                            color: Color.fromRGBO(0, 184, 124, 1), size: 20),
+                        Text('Collapse classic themes',
+                            style: kBodyTextStyle.copyWith(
+                                fontSize: 14.sp,
+                                color: Color.fromRGBO(0, 184, 124, 1))),
+                      ],
+                    )))
+          ],
+        ),
+      ),
+    ]));
   }
 }
 
