@@ -71,6 +71,7 @@ final kLeftSideBarStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
+  overflow: TextOverflow.ellipsis,
   fontFamily: 'Lato',
 );
 
@@ -78,6 +79,7 @@ final dropDownBodyTextStyle = TextStyle(
   fontSize: 15.sp,
   color: Colors.white,
   fontWeight: FontWeight.w400,
+  overflow: TextOverflow.ellipsis,
   fontFamily: 'Lato',
 );
 final leftSideBarLogoText = TextStyle(
