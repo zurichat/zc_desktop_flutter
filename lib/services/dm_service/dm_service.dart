@@ -8,7 +8,6 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class DMService {
