@@ -79,7 +79,8 @@ class WorkspaceViewModel extends BaseViewModel {
 
   // TODO: go to workspace creation page
   void goToCreateWorkspace() {
-    _navigationService.navigateTo(Routes.createWorkspaceView);
+    // _navigationService.navigateTo(Routes.createWorkspaceView);
+    _navigationService.navigateTo(Routes.createWorkspaceStage1);
   }
 
   // get workspaces
