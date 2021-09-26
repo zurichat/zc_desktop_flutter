@@ -1,4 +1,4 @@
-import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+ import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
 
 class Workspace {
   int? id;

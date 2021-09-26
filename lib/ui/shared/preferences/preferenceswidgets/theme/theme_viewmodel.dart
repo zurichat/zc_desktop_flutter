@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/models/preferences_model/themes/themes.dart'
+    as model;
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 const testLocalKey = 'TESTKEY';
@@ -37,9 +41,9 @@ enum cleanThemes { aubergine, versatile, aubergine1, aubergine2 }
 
 class ThemeViewModel extends BaseViewModel {
   final log = getLogger("ThemeViewModel");
-
   final _themeService = locator<ThemeService>();
-  final _storageService = locator<LocalStorageService>();
+  final _localStorage = locator<LocalStorageService>();
+  var _themes = model.Themes();
 
   themeAccross _allWorkSpace = themeAccross.directMessage;
   toggleBtwTheme _switchLightDark = toggleBtwTheme.LightTheme;
@@ -124,20 +128,20 @@ class ThemeViewModel extends BaseViewModel {
   Color activeColor() => _activeColor;
 
   void setChecked(bool? newValue) {
-    _isChecked = newValue as bool;
-    _storageService.saveToDisk("apperance_accross", _isChecked);
+    _isChecked = newValue!;
+    _themes = _themes.copyWith(isChecked: _isChecked);
     notifyListeners();
   }
 
   void setChecked2(themeAccross? newValue) {
     _allWorkSpace = newValue!;
+    _themes = _themes.copyWith(allWorkSpace: _allWorkSpace);
     notifyListeners();
   }
 
   void switchBtwLightDark(Object? newValue) {
     _switchLightDark = (newValue) as toggleBtwTheme;
-    _storageService.saveToDisk(
-        'switch_light_dark', EnumToString.convertToString(_switchLightDark));
+    _themes = _themes.copyWith(switchLightDark: _switchLightDark);
     switch (_switchLightDark) {
       case toggleBtwTheme.LightTheme:
         setTheme(themes[0]);
@@ -152,9 +156,9 @@ class ThemeViewModel extends BaseViewModel {
 
   Future loadLightDarkData() async {
     final pref =
-        await _storageService.getFromDisk('switch_light_dark') as String;
+        await _localStorage.getFromDisk('switch_light_dark') as String;
     _switchLightDark = (EnumToString.fromString(toggleBtwTheme.values, pref))!;
-    final pref2 = await _storageService.getFromDisk("apperance_accross");
+    final pref2 = await _localStorage.getFromDisk("apperance_accross");
     _isChecked = pref2 as bool;
     // (_storageService.getFromDisk('switch_light_dark'))
     //     as toggleBtwTheme;
@@ -163,6 +167,7 @@ class ThemeViewModel extends BaseViewModel {
 
   void switchCleanTheme(Object? value) {
     _cleanTheme = (value) as cleanThemes;
+     _themes = _themes.copyWith(cleanTheme: _cleanTheme);
     switch (_cleanTheme) {
       case cleanThemes.aubergine:
         setTheme(themes[2]);
@@ -184,6 +189,7 @@ class ThemeViewModel extends BaseViewModel {
 
   void switchDramaticTheme(Object? value) {
     _darkDramaTheme = (value) as darkDramaticTheme;
+    _themes = _themes.copyWith(darkDramaTheme: _darkDramaTheme);
     switch (_darkDramaTheme) {
       case darkDramaticTheme.coast:
         setTheme(themes[6]);
@@ -256,4 +262,18 @@ class ThemeViewModel extends BaseViewModel {
 
   void setTheme(ThemeModel themeData) =>
       _themeService.selectThemeAtIndex(themeData.index);
+
+  void saveSettings() =>
+      _localStorage.setThemes(_themes);
+
+  void fetchAndSetSetting() async {
+    _themes = await _localStorage.themes as model.Themes;
+    _isChecked = _themes.isChecked;
+    _allWorkSpace =  _themes.allWorkSpace;
+    _switchLightDark = _themes.switchLightDark;
+    _darkDramaTheme = _themes.darkDramaTheme;
+    _cleanTheme = _themes.cleanTheme;
+
+    notifyListeners();
+  }
 }

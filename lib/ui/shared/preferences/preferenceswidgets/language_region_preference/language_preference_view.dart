@@ -21,90 +21,95 @@ class LanguagePreference extends StatelessWidget {
     return ViewModelBuilder<LanguagePreferenceViewModel>.reactive(
       builder: (context, model, child) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-        child: SingleChildScrollView(
+        child: Scrollbar(
           controller: _rightSideBarController,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(model.preferencetitles[0],
-                  style: preferenceStyleBold),
-              verticalSpaceTiny,
-              buildDropDown(
-                  kcBackgroundColor2, model.languages, model.dropDownLanguage,
-                  (value) {
-                model.setSelectedLanguage(value);
-              }),
-              verticalSpaceSmall,
-              SizedBox(
-                width: 304.w,
-                child: Text(
-                  model.subHeadings[0],
-                  style: preferenceStyleNormal,
+          isAlwaysShown: true,
+          thickness: 5,
+          child: SingleChildScrollView(
+            controller: _rightSideBarController,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(model.preferencetitles[0],
+                    style: prefHeaderTextStyle),
+                verticalSpaceTiny,
+                buildDropDown(
+                    kcBackgroundColor2, model.languages, model.dropDownLanguage,
+                    (value) {
+                  model.setSelectedLanguage(value);
+                }),
+                verticalSpaceSmall,
+                SizedBox(
+                  width: 304.w,
+                  child: Text(
+                    model.subHeadings[0],
+                    style: prefBodyTextStyle,
+                  ),
                 ),
-              ),
 
-              verticalSpaceRegular,
+                verticalSpaceRegular,
 
-              Text(
-                model.preferencetitles[1],
-                style: preferenceStyleBold,
-              ),
-
-              ZcCheckBox2(
-                  value: model.checkBox1,
-                  onChanged: (v) {
-                    model.setCheckbox1 = v;
-                  },
-                  txt: model.checkBoxText[0]),
-
-              verticalSpaceTiny,
-              buildDropDown(
-                  model.checkBox1 == true ? lightIconColor : kcBackgroundColor2,
-                  model.timeZone,
-                  model.dropDownTimeZone, (value) {
-                model.setSelectedTimeZone(value);
-              }),
-
-              SizedBox(
-                width: 400.w,
-                child: Text(
-                  model.subHeadings[1],
-                  style: preferenceStyleNormal,
+                Text(
+                  model.preferencetitles[1],
+                  style: prefHeaderTextStyle,
                 ),
-              ),
 
-              //-----------------------//
-              verticalSpaceMedium,
-              Text(
-                model.preferencetitles[2],
-                style: preferenceStyleBold,
-              ),
-              verticalSpaceTiny,
+                ZcCheckBox2(
+                    value: model.checkBox1,
+                    onChanged: (v) {
+                      model.setCheckbox1 = v;
+                    },
+                    txt: model.checkBoxText[0]),
 
-              buildDropDown(kcBackgroundColor2, model.languages,
-                  model.dropDownKeyboard, (value) {}),
+                verticalSpaceTiny,
+                buildDropDown(
+                    model.checkBox1 == true ? lightIconColor : kcBackgroundColor2,
+                    model.timeZone,
+                    model.dropDownTimeZone, (value) {
+                  model.setSelectedTimeZone(value);
+                }),
 
-              verticalSpaceRegular,
+                SizedBox(
+                  width: 400.w,
+                  child: Text(
+                    model.subHeadings[1],
+                    style: prefBodyTextStyle,
+                  ),
+                ),
 
-              // ------------------ //
-              verticalSpaceRegular,
-              Text(
-                model.preferencetitles[3],
-                style: preferenceStyleNormal,
-              ),
-              ZcCheckBox2(
-                  value: model.checkBox2,
-                  onChanged: (v) {
-                    model.setcheckBox2 = v;
-                  },
-                  txt: model.checkBoxText[1]),
+                //-----------------------//
+                verticalSpaceMedium,
+                Text(
+                  model.preferencetitles[2],
+                  style: prefHeaderTextStyle,
+                ),
+                verticalSpaceTiny,
 
-              Text(
-                "AppLocalizations.of(context)!.language",
-                style: preferenceStyleNormal,
-              )
-            ],
+                buildDropDown(kcBackgroundColor2, model.languages,
+                    model.dropDownKeyboard, (value) {}),
+
+                verticalSpaceRegular,
+
+                // ------------------ //
+                verticalSpaceRegular,
+                Text(
+                  model.preferencetitles[3],
+                  style: prefBodyTextStyle,
+                ),
+                ZcCheckBox2(
+                    value: model.checkBox2,
+                    onChanged: (v) {
+                      model.setcheckBox2 = v;
+                    },
+                    txt: model.checkBoxText[1]),
+
+                Text(
+                  "AppLocalizations.of(context)!.language",
+                  style: prefBodyTextStyle,
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -140,7 +145,7 @@ buildDropDown(
           items: items
               .map<DropdownMenuItem<String>>((String value) => DropdownMenuItem(
                     child: Text(value,
-                        style: preferenceStyleNormal),
+                        style: prefBodyTextStyle),
                     value: value,
                   ))
               .toList()),
@@ -174,7 +179,7 @@ class ZcCheckBox2 extends StatelessWidget {
         horizontalSpaceVeryTiny,
         Flexible(
             child: Text(txt!,
-                style: preferenceStyleNormal)),
+                style: prefBodyTextStyle)),
       ],
     );
   }

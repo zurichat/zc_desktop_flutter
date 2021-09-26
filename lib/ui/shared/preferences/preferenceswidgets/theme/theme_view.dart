@@ -371,6 +371,8 @@ class ThemeView extends StatelessWidget {
         viewModel.loadLightDarkData();
         return viewModel;
       },
+      onModelReady: (model) => model.fetchAndSetSetting(),
+      onDispose: (model) => model.saveSettings(),
     );
   }
 }
@@ -427,7 +429,7 @@ class ClassicThemeWidgetDark extends StatelessWidget {
 }
 
 class ClassicThemeWidgetLight extends StatelessWidget {
-  ThemeViewModel model;
+  final ThemeViewModel model;
   ClassicThemeWidgetLight({required this.model});
   @override
   Widget build(BuildContext context) {
@@ -445,18 +447,17 @@ class ClassicThemeWidgetLight extends StatelessWidget {
             leading: Image(image: AssetImage(model.logoLight)),
             title: Row(children: [
               Text(model.title,
-                  style: preferenceStyleBold.copyWith(color: Colors.black)),
+                  style: prefHeaderTextStyle),
               SizedBox(
                 width: 10,
               ),
               Text(model.date(),
-                  style: preferenceStyleNormal.copyWith(color: Colors.black))
+                  style: prefBodyTextStyle)
             ]),
             subtitle: Container(
                 margin: EdgeInsets.only(top: 10),
                 child: Text('Look nice today',
-                    style:
-                        preferenceStyleNormal.copyWith(color: Colors.black38))),
+                    style: prefBodyTextStyle)),
           ),
           Spacer(),
           BuildRadio(
@@ -508,7 +509,8 @@ class BottomContainerWidget extends StatelessWidget {
                 onChanged: onChanged,
               )),
           horizontalSpaceSmall,
-          Text(txt, style: preferenceStyleBold.copyWith(color: Colors.black87))
+          Text(txt,
+              style:prefHeaderTextStyle)
         ]));
   }
 }
@@ -601,11 +603,11 @@ class ExpandableWidget extends StatelessWidget {
 }
 
 class BuildRadio extends StatelessWidget {
-  Object value;
-  Object groupValue;
-  void Function(Object? value)? onChanged;
-  String txt;
-  Color color;
+  final Object value;
+  final Object groupValue;
+  final void Function(Object? value)? onChanged;
+  final String txt;
+  final Color color;
   BuildRadio(
       {required this.value,
       required this.groupValue,
@@ -639,10 +641,8 @@ class BuildRadio extends StatelessWidget {
                 )),
             horizontalSpaceSmall,
             Expanded(
-                child: Text(
-              txt,
-              style: preferenceStyleBold.copyWith(color: Colors.black87),
-            ))
+                child: Text(txt,
+                    style: prefHeaderTextStyle))
           ],
         ));
   }

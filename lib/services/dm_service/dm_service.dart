@@ -8,7 +8,6 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
-import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class DMService {
@@ -28,11 +27,11 @@ class DMService {
   }
 
   currentLoggedInUser.User? getCurrentLoggedInUser() {
-    var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
+    var userJson = _localStorageService.authResponse;
     if (userJson != null) {
       if (userJson is String) {
         print(userJson);
-        return AuthResponse.fromMap(json.decode(userJson)).user;
+        return AuthResponse.fromMap(json.decode(userJson.toString())).user;
       }
       return null;
     }
