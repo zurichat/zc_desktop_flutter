@@ -128,18 +128,6 @@ final bodyText1 = TextStyle(
   fontFamily: 'Lato',
 );
 
-final preferenceStyleNormal = TextStyle(
-  fontSize: 16.sp,
-  fontFamily: 'Lato',
-  fontWeight: FontWeight.w600,
-);
-
-final preferenceStyleBold = TextStyle(
-  fontSize: 16.sp,
-  fontFamily: 'Lato',
-  fontWeight: FontWeight.w700,
-);
-
 final messageSenderStyleBold = TextStyle(
   fontSize: 16.sp,
   fontFamily: 'Lato',
@@ -223,3 +211,13 @@ final clearStatusTextStyle = TextStyle(
   color: bodyColor,
   fontFamily: 'Lato',
 );
+
+//Preferences TextStyle
+
+final leftSideBarPrefTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w600);
+
+final prefHeaderTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w700);
+
+final prefBodyTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600);
+
+final prefSubTitleTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600, color: bodyColor);

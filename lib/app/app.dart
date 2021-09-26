@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 import 'package:zc_desktop_flutter/services/organization/organization_service.dart';
+import 'package:zc_desktop_flutter/services/user_service/user_service.dart';
 import 'package:zc_desktop_flutter/services/workspace_service/workspace_service.dart';
 import 'package:zc_desktop_flutter/ui/auth/change_password_page/change_password_view.dart';
 import 'package:zc_desktop_flutter/ui/auth/check_email_page/check_email_view.dart';
@@ -35,7 +36,7 @@ import 'package:zc_desktop_flutter/ui/create_workspace/invite_user_to_organizati
       page: LoginView,
       initial: true,
     ),
-    MaterialRoute(page: SplashView),
+    MaterialRoute(page: SplashView,),
     MaterialRoute(page: StartUpView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
@@ -71,6 +72,7 @@ import 'package:zc_desktop_flutter/ui/create_workspace/invite_user_to_organizati
     LazySingleton(classType: WorkspaceService),
     LazySingleton(classType: DMService),
     LazySingleton(classType: ChannelService),
+    LazySingleton(classType: UserService),
     LazySingleton(classType: OrganizationService),
     LazySingleton(
         classType: ThemeService, resolveUsing: ThemeService.getInstance)

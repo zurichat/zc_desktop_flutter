@@ -1,14 +1,12 @@
 import 'dart:convert';
-
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
-import 'package:zc_desktop_flutter/models/user.dart';
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../api/api_service.dart';
 import '../local_storage/local_storage_service.dart';
-import '../authentication/auth_service.dart';
+
 
 
 const insertedOrganisationId = 'insertedId';
@@ -37,7 +35,7 @@ class ChannelsService {
   
   /// This gets the currently logged in user respose
   AuthResponse get _authResponse {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    final authResponse = _localStorageService.authResponse;
     return AuthResponse.fromMap(jsonDecode(authResponse as String));
   }
 

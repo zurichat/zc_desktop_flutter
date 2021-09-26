@@ -69,7 +69,7 @@ class AdvancedViewInputOptions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Input options
-          Text('Input options', style: preferenceStyleBold),
+          Text('Input options', style: prefHeaderTextStyle),
           ListTile(
             leading: ZcCheckBox(
                 value: model.onEnter,
@@ -82,10 +82,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 Text('When typing code with ````, ',
-                    style: preferenceStyleBold),
+                    style: prefHeaderTextStyle),
                 ShortCuts().enter(),
                 Text(' should send the message',
-                    style: preferenceStyleBold),
+                    style: prefHeaderTextStyle),
               ],
             ),
             subtitle: Wrap(
@@ -94,10 +94,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 Text('With this ticked, use ',
-                    style: preferenceStyleNormal),
+                    style: prefBodyTextStyle),
                 ShortCuts().shift(),
                 ShortCuts().enter(),
-                Text(' to send', style: preferenceStyleNormal),
+                Text(' to send', style: prefBodyTextStyle),
               ],
             ),
           ),
@@ -108,10 +108,10 @@ class AdvancedViewInputOptions extends StatelessWidget {
                   model.setAllowMsgFormat = v;
                 }),
             title: Text('Format messages with markup',
-                style: preferenceStyleBold),
+                style: prefHeaderTextStyle),
             subtitle: Text(
                 'The text formatting toolbar won’t show in the composer',
-                style: preferenceStyleNormal),
+                style: prefBodyTextStyle),
           ),
 
           verticalSpaceMedium,
@@ -123,14 +123,14 @@ class AdvancedViewInputOptions extends StatelessWidget {
             runAlignment: WrapAlignment.spaceEvenly,
             children: [
               Text('When writing a message, press',
-                  style: preferenceStyleBold),
+                  style: prefHeaderTextStyle),
               ShortCuts().enter(),
-              Text('to:', style: preferenceStyleBold),
+              Text('to:', style: prefHeaderTextStyle),
               SizedBox(
                 height: 25.0,
                 child: ListTile(
                   title: Text('Send the message',
-                      style: preferenceStyleBold),
+                      style: prefHeaderTextStyle),
                   leading: Radio(
                     value: EnterButtonsChoice.sendMsg,
                     groupValue: model.enterButtonsChoice,
@@ -150,11 +150,11 @@ class AdvancedViewInputOptions extends StatelessWidget {
                     runAlignment: WrapAlignment.spaceEvenly,
                     children: [
                       Text('Start a new line ( use',
-                          style: preferenceStyleBold),
+                          style: prefHeaderTextStyle),
                       ShortCuts().ctrl(),
                       ShortCuts().enter(),
                       Text('to send )',
-                          style: preferenceStyleBold),
+                          style: prefHeaderTextStyle),
                     ],
                   ),
                   leading: Radio(
@@ -187,7 +187,7 @@ class AdvancedViewSearchOptions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Input options
-          Text('Search options', style: preferenceStyleBold),
+          Text('Search options', style: prefHeaderTextStyle),
           ListTile(
             leading: ZcCheckBox(
                 value: model.ctrlF,
@@ -202,11 +202,11 @@ class AdvancedViewSearchOptions extends StatelessWidget {
                 ShortCuts().ctrl(),
                 ShortCuts().fKey(),
                 Text('Starts a Zurichat search',
-                    style: preferenceStyleBold),
+                    style: prefHeaderTextStyle),
               ],
             ),
             subtitle: Text('Overrides normal behavaiour in search behaviour',
-                style: preferenceStyleNormal),
+                style: prefBodyTextStyle),
           ),
           ListTile(
             leading: ZcCheckBox(
@@ -222,15 +222,15 @@ class AdvancedViewSearchOptions extends StatelessWidget {
                 ShortCuts().ctrl(),
                 ShortCuts().kKey(),
                 Text('Starts the quick switcher',
-                    style: preferenceStyleBold),
+                    style: prefHeaderTextStyle),
               ],
             ),
             subtitle: Text('Overrides normal behavaiour in some browsers',
-                style: preferenceStyleNormal),
+                style: prefBodyTextStyle),
           ),
 
           Text('Exclude these channels from search results:',
-              style: preferenceStyleBold),
+              style: prefHeaderTextStyle),
           AuthInputField(
             hintPlaceHolder: 'Type a channel name...',
           )
@@ -251,7 +251,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Other Options', style: preferenceStyleBold),
+          Text('Other Options', style: prefHeaderTextStyle),
           verticalSpaceRegular,
           ListTile(
             leading: ZcCheckBox(
@@ -265,14 +265,14 @@ class AdvancedViewMoreOptions extends StatelessWidget {
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
                 ShortCuts().pageUp(),
-                Text(',', style: preferenceStyleNormal),
+                Text(',', style: prefBodyTextStyle),
                 ShortCuts().pageDown(),
-                Text(',', style: preferenceStyleNormal),
+                Text(',', style: prefBodyTextStyle),
                 ShortCuts().home(),
-                Text('and', style: preferenceStyleNormal),
+                Text('and', style: prefBodyTextStyle),
                 ShortCuts().end(),
                 Text('Starts a Zurichat search',
-                    style: preferenceStyleNormal),
+                    style: prefBodyTextStyle),
               ],
             ),
           ),
@@ -286,7 +286,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                   }),
               title: Text(
                   'Ask if I want to toggle my away status when I log in after having set myself away ',
-                  style: preferenceStyleNormal)),
+                  style: prefBodyTextStyle)),
 
           // zuri bot setting
           ListTile(
@@ -297,10 +297,10 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                 }),
             title: Text(
                 'Send me occassional survey via Zurichat bot',
-                style: preferenceStyleBold),
+                style: prefHeaderTextStyle),
             subtitle: Text(
                 'We’re working to make Zurichat better. We’d always love to hear your thoughts',
-                style: preferenceStyleNormal),
+                style: prefBodyTextStyle),
           ),
 
           ListTile(
@@ -311,7 +311,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                   }),
               title: Text(
                   'Warn me about potential malicious links',
-                  style: preferenceStyleNormal)),
+                  style: prefBodyTextStyle)),
         ],
       ),
     );

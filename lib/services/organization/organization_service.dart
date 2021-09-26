@@ -118,7 +118,7 @@ class OrganizationService {
 
   /// This gets the currently logged in user respose
   AuthResponse get _authResponse {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    final authResponse = _localStorageService.authResponse;
     return AuthResponse.fromMap(jsonDecode(authResponse as String));
   }
 

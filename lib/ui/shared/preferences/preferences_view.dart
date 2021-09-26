@@ -24,8 +24,6 @@ class PreferenceView extends StatelessWidget {
     final _rightSideBarController = ScrollController();
 
     //List of datas to be used to populate the leftside and the right side side of the preferences view
-    //TODO Update the widgets in map
-
     final List _data = [
       {
         'text': 'Notifications',
@@ -70,7 +68,7 @@ class PreferenceView extends StatelessWidget {
         'assetName': 'assets/icons/mark.svg', //Icons.launch,
         'widget': Container(
           child: Center(
-            child:  MarkAsRead(),
+            child: MarkAsRead(),
           ),
         )
       },
@@ -125,12 +123,12 @@ class PreferenceView extends StatelessWidget {
                       height: 600.h,
                       width: 244.w,
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: ListView.builder(
                             clipBehavior: Clip.none,
                             itemCount: _data.length,
                             itemBuilder: (context, index) {
-                              return buildListItem(
+                              return BuildListItem(
                                   text: _data[index]['text'],
                                   assetName: _data[index]['assetName'],
                                   isSelected: model.currentPageIndex == index,
@@ -162,23 +160,32 @@ class PreferenceView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => PreferenceViewModel(),
+      onDispose: (_) => _rightSideBarController.dispose(),
     );
   }
 }
 
-Widget buildListItem({
-  required String text,
-  required String assetName,
-  required isSelected,
-  VoidCallback? onClicked,
-}) {
-  final hoverColor = Colors.grey[200];
+class BuildListItem extends StatelessWidget {
+  final String text, assetName;
+  final bool isSelected;
+  final VoidCallback? onClicked;
+  const BuildListItem({ Key? key, required this.text,
+  required this.assetName,
+  required this.isSelected,
+  this.onClicked, }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final hoverColor = Colors.grey[200];
+    final color = isSelected ? Colors.white : null;
   return ListTile(
     tileColor: isSelected ? KStartupContainerColor : null,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
     minLeadingWidth: 5,
-    leading: SvgPicture.asset(assetName),
-    title: Text(text, style: preferenceStyleNormal),
+    leading: SvgPicture.asset(assetName, color: color,),
+    title: Text(text, style: leftSideBarPrefTextStyle.copyWith(color: color)),
     hoverColor: isSelected ? KStartupContainerColor : hoverColor,
     onTap: onClicked,
   );
+  }
 }

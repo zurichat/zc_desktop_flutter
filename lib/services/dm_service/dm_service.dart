@@ -28,11 +28,11 @@ class DMService {
   }
 
   currentLoggedInUser.User? getCurrentLoggedInUser() {
-    var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
+    var userJson = _localStorageService.authResponse;
     if (userJson != null) {
       if (userJson is String) {
         print(userJson);
-        return AuthResponse.fromMap(json.decode(userJson)).user;
+        return AuthResponse.fromMap(json.decode(userJson.toString())).user;
       }
       return null;
     }
