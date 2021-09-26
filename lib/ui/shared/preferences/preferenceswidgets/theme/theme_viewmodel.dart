@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +45,7 @@ class ThemeViewModel extends BaseViewModel {
   final _localStorage = locator<LocalStorageService>();
   var _themes = model.Themes();
 
-  final _storageService = locator<LocalStorageService>();
+  //final _storageService = locator<LocalStorageService>();
 
 
   themeAccross _allWorkSpace = themeAccross.directMessage;
@@ -136,8 +135,8 @@ class ThemeViewModel extends BaseViewModel {
     _isChecked = newValue!;
     _themes = _themes.copyWith(isChecked: _isChecked);
 
-    _isChecked = newValue as bool;
-    _storageService.saveToDisk("apperance_accross", _isChecked);
+    _isChecked = newValue;
+    //_storageService.saveToDisk("apperance_accross", _isChecked);
     notifyListeners();
   }
 
@@ -152,8 +151,8 @@ class ThemeViewModel extends BaseViewModel {
 
     _themes = _themes.copyWith(switchLightDark: _switchLightDark);
 
-    _storageService.saveToDisk(
-        'switch_light_dark', EnumToString.convertToString(_switchLightDark));
+    // _storageService.saveToDisk(
+    //     'switch_light_dark', EnumToString.convertToString(_switchLightDark));
 
     switch (_switchLightDark) {
       case toggleBtwTheme.LightTheme:
@@ -168,11 +167,11 @@ class ThemeViewModel extends BaseViewModel {
   }
 
   Future loadLightDarkData() async {
-    final pref =
-        await _storageService.getFromDisk('switch_light_dark') as String;
-    _switchLightDark = (EnumToString.fromString(toggleBtwTheme.values, pref))!;
-    final pref2 = await _storageService.getFromDisk("apperance_accross");
-    _isChecked = pref2 as bool;
+    // final pref =
+    //     await _storageService.getFromDisk('switch_light_dark') as String;
+    //_switchLightDark = (EnumToString.fromString(toggleBtwTheme.values, pref))!;
+   // final pref2 = await _storageService.getFromDisk("apperance_accross");
+   // _isChecked = pref2 as bool;
     // (_storageService.getFromDisk('switch_light_dark'))
     //     as toggleBtwTheme;
     notifyListeners();
