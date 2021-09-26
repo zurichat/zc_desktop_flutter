@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service.dart';
 
 class ChannelsViewModel extends BaseViewModel {
   final log = getLogger("MessageViewModel");

@@ -5,8 +5,8 @@ import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
-import '../../app/app.locator.dart';
-import '../api/api_service.dart';
+import '../app/app.locator.dart';
+import 'api/api_service.dart';
 
 const selectedOrganisationKey = 'selectedOrganisationKey';
 const userSelectedOrganisationsKey = 'userSelectedOrganisationsKey';

@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/services/organisation/organisation_service.dart';
+import 'package:zc_desktop_flutter/services/organisation_service.dart';
 
 class CreateWorkspaceViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();

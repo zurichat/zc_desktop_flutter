@@ -4,8 +4,8 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
-import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service.dart';
+import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/users_loacal_data.dart';
 
 // import 'package:zc_desktop_flutter/models/channels_model/channels_model.dart';

@@ -5,8 +5,8 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
-import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service.dart';
+import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/workspace_service.dart';
 
 class WorkspaceViewModel extends BaseViewModel {

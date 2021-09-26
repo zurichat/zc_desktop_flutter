@@ -4,7 +4,7 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
-import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
+import 'package:zc_desktop_flutter/services/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {
   final log = getLogger("DmViewModel");
