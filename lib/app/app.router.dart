@@ -19,10 +19,10 @@ import '../ui/auth/login_page/splash_view.dart';
 import '../ui/auth/reset_password_page/reset_password_view.dart';
 import '../ui/auth/sign_up_page/sign_up_view.dart';
 import '../ui/auth/success_page/success_view.dart';
+import '../ui/create_workspace/create_initial_channel.dart';
+import '../ui/create_workspace/create_organization_name.dart';
 import '../ui/create_workspace/create_workspace.dart';
-import '../ui/create_workspace/create_workspace_stage1.dart';
-import '../ui/create_workspace/create_workspace_stage2.dart';
-import '../ui/create_workspace/create_workspace_stage3.dart';
+import '../ui/create_workspace/invite_user_to_organization.dart';
 import '../ui/main/channels_creation/channels_creation_view.dart';
 import '../ui/main/channels_display/channels_display_view.dart';
 import '../ui/main/channels_page/channels_view.dart';
@@ -168,8 +168,11 @@ class StackedRouter extends RouterBase {
       );
     },
     CreateWorkspaceStage1: (data) {
+      var args = data.getArgs<CreateWorkspaceStage1Arguments>(
+        orElse: () => CreateWorkspaceStage1Arguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const CreateWorkspaceStage1(),
+        builder: (context) => CreateWorkspaceStage1(key: args.key),
         settings: data,
       );
     },
@@ -258,4 +261,10 @@ class WorkspaceViewRouter extends RouterBase {
 class CreateWorkspaceViewArguments {
   final Key? key;
   CreateWorkspaceViewArguments({this.key});
+}
+
+/// CreateWorkspaceStage1 arguments holder class
+class CreateWorkspaceStage1Arguments {
+  final Key? key;
+  CreateWorkspaceStage1Arguments({this.key});
 }
