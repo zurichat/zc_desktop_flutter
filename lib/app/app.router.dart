@@ -31,8 +31,8 @@ import '../ui/main/workspace_page/workspace_view.dart';
 import '../ui/startup_page/startup_view.dart';
 
 class Routes {
-  static const String loginView = '/login-view';
-  static const String splashView = '/';
+  static const String loginView = '/';
+  static const String splashView = '/splash-view';
   static const String startUpView = '/start-up-view';
   static const String signUpView = '/sign-up-view';
   static const String forgotPasswordView = '/forgot-password-view';
