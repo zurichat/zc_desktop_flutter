@@ -14,10 +14,10 @@ import 'ui/shared/preferences/preferenceswidgets/theme/themes.dart';
 Future main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+  /*if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowMinSize(const Size(700, 500));
     setWindowMaxSize(Size.infinite);
-  }
+  }*/
   await ThemeManager.initialise();
   runApp(const ZcDesktop());
 }

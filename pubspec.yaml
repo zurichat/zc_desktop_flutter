@@ -29,10 +29,10 @@ dependencies:
   desktop_window: ^0.4.0
   intl: ^0.17.0
   flutter_hooks: ^0.17.0
-  window_size:
-    git:
-      url: git://github.com/google/flutter-desktop-embedding.git
-      path: plugins/window_size
+#  window_size:
+#    git:
+#      url: git://github.com/google/flutter-desktop-embedding.git
+#      path: plugins/window_size/
 
   # animation
   lottie: ^1.1.0
