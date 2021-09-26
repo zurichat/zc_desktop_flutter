@@ -121,21 +121,18 @@ class SignUpView extends HookWidget {
                                   ],
                                 ),
                                 verticalSpaceMedium,
-                                SizedBox(
-                                    height: 45.h,
-                                    width: 440.w,
-                                    child: AuthButton(
-                                      label: 'Register',
-                                      onTap: () async {
-                                        if (!_formKey.currentState!.validate())
-                                          return;
-                                        await model.signUp(
-                                          email: emailController.text,
-                                          password: passwordController.text,
-                                        );
-                                      },
-                                      isBusy: model.isBusy,
-                                    )),
+                                AuthButton(
+                                  label: 'Register',
+                                  onTap: () async {
+                                    if (!_formKey.currentState!.validate())
+                                      return;
+                                    await model.signUp(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    );
+                                  },
+                                  isBusy: model.isBusy,
+                                ),
                                 verticalSpaceMedium,
                                 Center(
                                   child: Text(

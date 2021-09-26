@@ -82,22 +82,18 @@ class LoginView extends HookWidget {
                                 ),
                               ),
                               verticalSpaceMedium,
-                              SizedBox(
-                                height: 45.h,
-                                width: 440.w,
-                                child: AuthButton(
-                                  label: 'Login',
-                                  isBusy: model.isBusy,
-                                  onTap: () async {
-                                    if (!_formKey.currentState!.validate())
-                                      return;
+                              AuthButton(
+                                label: 'Login',
+                                isBusy: model.isBusy,
+                                onTap: () async {
+                                  if (!_formKey.currentState!.validate())
+                                    return;
 
-                                    await model.login(
-                                      email: emailController.text,
-                                      password: passwordController.text,
-                                    );
-                                  },
-                                ),
+                                  await model.login(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  );
+                                },
                               ),
                               verticalSpaceMediumTwo,
                               Column(
