@@ -255,6 +255,7 @@ class WorkspaceViewRouter extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
 /// CreateWorkspaceView arguments holder class
 class CreateWorkspaceViewArguments {
   final Key? key;
