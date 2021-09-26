@@ -1,11 +1,12 @@
 import 'dart:convert';
-
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+
 import 'package:zc_desktop_flutter/models/preferences_model/themes/themes.dart'
     as model;
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
@@ -41,8 +42,12 @@ enum cleanThemes { aubergine, versatile, aubergine1, aubergine2 }
 class ThemeViewModel extends BaseViewModel {
   final log = getLogger("ThemeViewModel");
   final _themeService = locator<ThemeService>();
+
   final _localStorage = locator<LocalStorageService>();
   var _themes = model.Themes();
+
+  final _storageService = locator<LocalStorageService>();
+
 
   themeAccross _allWorkSpace = themeAccross.directMessage;
   toggleBtwTheme _switchLightDark = toggleBtwTheme.LightTheme;
@@ -127,8 +132,12 @@ class ThemeViewModel extends BaseViewModel {
   Color activeColor() => _activeColor;
 
   void setChecked(bool? newValue) {
+
     _isChecked = newValue!;
     _themes = _themes.copyWith(isChecked: _isChecked);
+
+    _isChecked = newValue as bool;
+    _storageService.saveToDisk("apperance_accross", _isChecked);
     notifyListeners();
   }
 
@@ -140,7 +149,12 @@ class ThemeViewModel extends BaseViewModel {
 
   void switchBtwLightDark(Object? newValue) {
     _switchLightDark = (newValue) as toggleBtwTheme;
+
     _themes = _themes.copyWith(switchLightDark: _switchLightDark);
+
+    _storageService.saveToDisk(
+        'switch_light_dark', EnumToString.convertToString(_switchLightDark));
+
     switch (_switchLightDark) {
       case toggleBtwTheme.LightTheme:
         setTheme(themes[0]);
@@ -151,6 +165,17 @@ class ThemeViewModel extends BaseViewModel {
         notifyListeners();
         break;
     }
+  }
+
+  Future loadLightDarkData() async {
+    final pref =
+        await _storageService.getFromDisk('switch_light_dark') as String;
+    _switchLightDark = (EnumToString.fromString(toggleBtwTheme.values, pref))!;
+    final pref2 = await _storageService.getFromDisk("apperance_accross");
+    _isChecked = pref2 as bool;
+    // (_storageService.getFromDisk('switch_light_dark'))
+    //     as toggleBtwTheme;
+    notifyListeners();
   }
 
   void switchCleanTheme(Object? value) {

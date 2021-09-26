@@ -82,7 +82,7 @@ class WorkspaceWrapper extends StatelessWidget {
                     children: [
                       //TODO: organization side bar
                       Container(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         width: 70.w,
                         height: double.infinity,
                         child: Column(
@@ -124,7 +124,7 @@ class WorkspaceWrapper extends StatelessWidget {
                       ),
                       //TODO: Left side bar
                       Container(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         width: 260.w,
                         height: double.infinity,
                         child: Column(
@@ -145,7 +145,7 @@ class WorkspaceWrapper extends StatelessWidget {
                                             workspaceTitle:
                                                 model!.getWorkspaceName(),
                                           ),
-                                          trailing: NewMessageBtn(),
+                                          trailing: Flexible(child: NewMessageBtn()),
                                         ),
                                         DisplayMenu(model!),
                                         verticalSpaceRegular,
@@ -336,7 +336,7 @@ class ReusableDropDown extends StatelessWidget {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  Container(
+                  Flexible(
                     child: Text(title, style: kLeftSideBarStyle),
                   ),
                   Spacer(),
@@ -380,7 +380,7 @@ class ReusableDropDown extends StatelessWidget {
                         ),
                       ),
                       horizontalSpaceSmall,
-                      Text(addButtonTitle!, style: kLeftSideBarStyle),
+                      Flexible(child: Text(addButtonTitle!, style: kLeftSideBarStyle)),
                       horizontalSpaceSmall,
                     ],
                   ),
@@ -549,7 +549,7 @@ class ChannelItem extends StatelessWidget {
             child: SvgPicture.asset(SVGAssetPaths.channelsListIcon),
           ),
           horizontalSpaceSmall,
-          ZcdeskText.dropDownBodyTextStyle(channelName!),
+          Flexible(child: ZcdeskText.dropDownBodyTextStyle(channelName!)),
         ],
       ),
     );

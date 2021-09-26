@@ -8,9 +8,10 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/reaction.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/user_avatar.dart';
 
 class MessageWidget extends StatelessWidget {
-  const MessageWidget({Key? key, required this.model}) : super(key: key);
+  const MessageWidget({Key? key, required this.model, required this.messageIndex}) : super(key: key);
 
   final ChannelsViewModel model;
+   final int messageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,10 @@ class MessageWidget extends StatelessWidget {
                         ReactionWidget(model: model),
                       ],
                     ),
-                    MessageReplyWidget(model: model)
+                     MessageReplyWidget(
+                      model: model,
+                      index: messageIndex,
+                    )
                   ],
                 ),
               )

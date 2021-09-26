@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/main/dm/dm_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/main/profile_modal/profile_modal_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/message.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/reaction.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/user_avatar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 
 import 'channels_viewmodel.dart';
 
@@ -37,30 +31,25 @@ class ChannelsView extends StatelessWidget {
               child: Column(
                 children: [
                   DetailedCustomAppBar(
-                    margin: EdgeInsets.only(left: 2.0.w),
-                    leading: WorkSpaceTitle(
-                      channelTitle: model.getChannelName(),
+                    leading: Text("# ${model.getChannelName()}",
+                        style: TextStyle(overflow: TextOverflow.fade)),
+                    trailing: WorkSpaceMembers(
+                      model: model,
                     ),
-                    trailing: WorkSpaceMembers(),
                   ),
-                  Container(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 12.0.w, vertical: 10.h),
-                      child: Scrollbar(
+                  Expanded(
+                    child: Scrollbar(
+                      controller: model.controllerOne,
+                      child: SingleChildScrollView(
+                        physics: ScrollPhysics(),
                         controller: model.controllerOne,
-                        child: SingleChildScrollView(
-                          physics: ScrollPhysics(),
-                          controller: model.controllerOne,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              MessageWidget(model: model),
-                              MessageWidget(model: model),
-                              MessageWidget(model: model),
-                              
-                            ],
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            MessageWidget(model: model, messageIndex: 0),
+                            MessageWidget(model: model, messageIndex: 1),
+                            MessageWidget(model: model, messageIndex: 2),
+                          ],
                         ),
                       ),
                     ),
@@ -72,9 +61,6 @@ class ChannelsView extends StatelessWidget {
     );
   }
 }
-
-
-
 
 Widget messageReplies(ChannelsViewModel model) {
   return InkWell(
