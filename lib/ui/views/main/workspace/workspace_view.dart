@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/constants/app_images.dart';
+import 'package:zc_desktop_flutter/constants/asset_paths.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -23,9 +23,7 @@ class WorkspaceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<WorkspaceViewModel>.reactive(
-      onModelReady: (model) {
-        model.setup();
-      },
+      onModelReady: (model) => model.setup(),
       builder: (context, model, child) => Scaffold(
         body: WorkspaceWrapper(
           model,

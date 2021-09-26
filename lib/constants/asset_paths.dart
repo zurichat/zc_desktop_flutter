@@ -1,9 +1,9 @@
-// TODO: Arrange strings alphabetically
+// TODO: Arrange strings alphabetically and add Path to the ending string
 
-const String CircularImageGif = 'assets/lottie/hng.gif';
-const String AppSvg = 'assets/icons/zuri.svg';
-const String ZuriLogo = 'assets/images/zc_logo2.png';
-const String ZuriSvg = "assets/images/zc_icon.svg";
+const String CircularGifPath = 'assets/lottie/hng.gif';
+const String AppSvgPath = 'assets/icons/zuri.svg';
+const String ZuriLogoPath = 'assets/images/zc_logo2.png';
+const String ZuriSvgPath = "assets/images/zc_icon.svg";
 const String GoogleLogo = 'assets/images/google.png';
 const String FacebookLogo = 'assets/images/facebook.png';
 const String TwitterLogo = 'assets/images/twitter.png';
@@ -22,3 +22,5 @@ const String PinnedSvg = "assets/icons/pinned.svg";
 const String AddSvg = "assets/icons/add.svg";
 const String ThreadSvg = "assets/icons/threads.svg";
 const String NewDmSvg = "assets/icons/new_dm.svg";
+const String SuccessSvgPath = 'assets/images/success.svg';
+const String MarkSvgPath = 'assets/images/mark.svg';

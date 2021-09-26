@@ -5,6 +5,7 @@ import 'package:zc_desktop_flutter/core/enums/pre_sidebar.dart';
 import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/advanced/advanced_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
+
 part 'app_models.freezed.dart';
 part 'app_models.g.dart';
 
@@ -255,15 +256,15 @@ class Advanced with _$Advanced {
 }
 
 @freezed
-class Organisation with _$Organisation{
-  factory Organisation({
+class Organization with _$Organisation{
+  factory Organization({
     @JsonKey(name: '_id') required String id,
     @JsonKey(name: 'logo_url') required String logoUrl,
     required String name,
     @JsonKey(name: 'workspace_url') required String workspaceUrl,
   })= _Organisation;
 
-    factory Organisation.fromJson(Map<String, dynamic> json) => _$OrganisationFromJson(json);
+    factory Organization.fromJson(Map<String, dynamic> json) => _$OrganisationFromJson(json);
 
 }
 
