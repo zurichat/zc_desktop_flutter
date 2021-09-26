@@ -41,10 +41,15 @@ class CreateWorkspaceStage3 extends StatelessWidget {
                   height: 890.h,
                   width: 731.w,
                   color: Colors.grey[200],
+                  // margin: EdgeInsets.symmetric(horizontal: 72.w),
                   child: Container(
                     width: 644.w,
                     child: Column(
                       children: [
+                        // Container(
+                        //     height: 40,
+                        //     child: buildAppBar(context,
+                        //         isSignIn: true, text: 'Forget Password | Zuri')),
                         verticalSpaceLarge,
                         verticalSpaceLarge,
                         verticalSpaceMedium,
@@ -92,6 +97,7 @@ class CreateWorkspaceStage3 extends StatelessWidget {
                               child: AuthInputField(
                                 controller: TextEditingController(),
                                 keyboardType: TextInputType.emailAddress,
+                                onChanged: (_) {},
                                 hintPlaceHolder: model.stage3EmailHint,
                               ),
                             ),

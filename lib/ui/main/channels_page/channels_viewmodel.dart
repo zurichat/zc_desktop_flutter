@@ -2,14 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
+import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 
 class ChannelsViewModel extends BaseViewModel {
   final log = getLogger("MessageViewModel");
-  final _channelService = locator<ChannelService>();
+  final _channelService = locator<ChannelsService>();
 
-  Channel _channel = Channel();
+  int currentSelectedChannel = 0;
+
+  Channel? _currentChannel;
+
+  Channel? get currentChannel => _currentChannel;
 
   final DateTime currentMessageTime = DateTime.now();
   final ScrollController controllerOne = ScrollController();
@@ -23,20 +27,6 @@ class ChannelsViewModel extends BaseViewModel {
   String userPost =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-
-
-
-  int _msgIndex = 0;
-  int get msgIndex => _msgIndex;
-  bool _onReplyWidgetHover = false;
-  bool get onReplyWidgetHover => _onReplyWidgetHover;
-
-  void onReplyWidgetHovered(bool hover, int index) {
-    _onReplyWidgetHover = hover;
-    _msgIndex = index;
-    notifyListeners();
-  }
-  
   void increaseReactionNumber() {
     numberOfReactions++;
     notifyListeners();
@@ -47,13 +37,6 @@ class ChannelsViewModel extends BaseViewModel {
   }
 
   void runTask() async {
-    _channel = await runBusyFuture(_channelService.getChannel());
-  }
-
-  String? getChannelName() {
-    if (_channel.name!.isNotEmpty) {
-      return _channel.name;
-    }
-    return "No data";
+    _currentChannel = await runBusyFuture(_channelService.getChannel());
   }
 }

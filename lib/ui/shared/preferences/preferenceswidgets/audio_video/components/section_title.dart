@@ -15,7 +15,7 @@ class SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: prefHeaderTextStyle,
+      style: preferenceStyleBold,
     );
   }
 }

@@ -1,37 +1,38 @@
 import 'dart:convert';
+
 import 'package:intl/intl.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/auth_response.dart';
 import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
 import 'package:zc_desktop_flutter/models/dm_model/room_response.dart';
-import 'package:zc_desktop_flutter/models/user.dart' as currentLoggedInUser;
-import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
+import 'package:zc_desktop_flutter/models/user.dart' as currentLoggedInUser;
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
+import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class DMService {
   final log = getLogger("DMService");
-  User _user = User(name: "");
+  User? _user;
   final _apiService = locator<ApiService>();
   final _localStorageService = locator<LocalStorageService>();
 
-  void setUser(User user) {
+  void setUser(User? user) {
     this._user = user;
   }
 
-  Future<User> getUser() async {
+  Future<User?> getUser() async {
     await Future.delayed(Duration(seconds: 2));
-    log.i(_user.name);
-    return _user;
+    return this._user;
   }
 
   currentLoggedInUser.User? getCurrentLoggedInUser() {
-    var userJson = _localStorageService.authResponse;
+    var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
     if (userJson != null) {
       if (userJson is String) {
         print(userJson);
-        return AuthResponse.fromMap(json.decode(userJson.toString())).user;
+        return AuthResponse.fromMap(json.decode(userJson)).user;
       }
       return null;
     }

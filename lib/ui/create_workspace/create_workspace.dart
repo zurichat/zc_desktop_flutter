@@ -63,7 +63,9 @@ class CreateWorkspaceView extends HookWidget {
                         isBusy: model.isBusy,
                         onTap: () {
                           if (!_formKey.currentState!.validate()) return;
-                          model.createOrganization(emailController.text);
+                          print(emailController.text);
+
+                          model.createOrganization(emailController.text.trim());
                         },
                       ),
                     ),

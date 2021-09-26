@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
 import 'package:zc_desktop_flutter/ui/main/dm/dm_viewmodel.dart';
@@ -76,7 +76,7 @@ class DmView extends StatelessWidget {
                                       controller: _rightSideBarController,
                                       children: [
                                         NewDmView(
-                                          userName: model.user.name!,
+                                          userName: model.user!.name!,
                                         ),
                                         ListView.builder(
                                             itemCount: model.messages.length,

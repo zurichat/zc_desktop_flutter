@@ -9,8 +9,10 @@ import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.
 
 class SideBarViewModel extends BaseViewModel {
   final _localStorage = locator<LocalStorageService>();
+  final _sidebarStorageKey = 'sidebarSetting';
   var _sideBar = SideBar();
   PrefSidebar _sidebar = PrefSidebar.AllConversation;
+
   get sidebar => _sidebar;
 
   void toggleSidebar(Object? value) {
@@ -137,11 +139,13 @@ class SideBarViewModel extends BaseViewModel {
   }
 
   void saveSettings() {
-    _localStorage.setSideBar(_sideBar);
+    _localStorage.saveToDisk(_sidebarStorageKey, jsonEncode(_sideBar));
   }
 
-  void fetchAndSetSetting() async {
-    _sideBar = await _localStorage.sideBar as SideBar;
+  Future<void> fetchAndSetSetting() async {
+    final result = await _localStorage.getFromDisk(_sidebarStorageKey);
+    _sideBar = SideBar.fromJson(jsonDecode(result.toString()));
+
     _insight = _sideBar.showInsights;
     _draft = _sideBar.showDrafts;
     _file = _sideBar.showFiles;

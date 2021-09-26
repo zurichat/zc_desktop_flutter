@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../const_app_colors.dart';
 import '../../../../const_text_styles.dart';
 
 class DropDownField<T> extends StatelessWidget {
@@ -43,7 +42,7 @@ class DropDownField<T> extends StatelessWidget {
                     value: value,
                     child: Text(
                       getLabel(value),
-                      style: prefBodyTextStyle,
+                      style: preferenceStyleNormal,
                       overflow: TextOverflow.ellipsis,
                     ),
                   );

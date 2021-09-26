@@ -1,12 +1,23 @@
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+
+import 'package:stacked_services/stacked_services.dart';
+
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/auth_response.dart';
 import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
 import 'package:zc_desktop_flutter/models/user.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channels_api_service.dart';
+import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
+
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
+import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChannelsDisplayViewModel extends BaseViewModel {
   final log = getLogger("ChannelsDisplayViewModel");
@@ -83,18 +94,18 @@ class ChannelsDisplayViewModel extends BaseViewModel {
   }
 
   Future<void> performGetChannel() async {
-    List<ChannelsDataModel> channelsList = await _auth.getChannelsList();
+    List<Channel> channelsList = await _auth.getChannelsList("1");
     print(channelsList);
   }
 
   User? user;
   AuthResponse? userdata;
   Future<void> fetchAndSetUserData() async {
-    final authResponse = _localStorageService.authResponse;
+    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
     final resUser = AuthResponse.fromMap(jsonDecode(authResponse as String));
 
-  print(resUser.user.token);
-  notifyListeners(); 
+    print(resUser.user.token);
+    notifyListeners();
   }
  
 }

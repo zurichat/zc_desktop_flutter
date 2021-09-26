@@ -71,7 +71,6 @@ final kLeftSideBarStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
-  overflow: TextOverflow.ellipsis,
   fontFamily: 'Lato',
 );
 
@@ -79,7 +78,6 @@ final dropDownBodyTextStyle = TextStyle(
   fontSize: 15.sp,
   color: Colors.white,
   fontWeight: FontWeight.w400,
-  overflow: TextOverflow.ellipsis,
   fontFamily: 'Lato',
 );
 final leftSideBarLogoText = TextStyle(
@@ -128,6 +126,18 @@ final bodyText1 = TextStyle(
   fontWeight: FontWeight.w600,
   color: leftNavBarColor,
   fontFamily: 'Lato',
+);
+
+final preferenceStyleNormal = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w600,
+);
+
+final preferenceStyleBold = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w700,
 );
 
 final messageSenderStyleBold = TextStyle(
@@ -213,13 +223,3 @@ final clearStatusTextStyle = TextStyle(
   color: bodyColor,
   fontFamily: 'Lato',
 );
-
-//Preferences TextStyle
-
-final leftSideBarPrefTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w600);
-
-final prefHeaderTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w700);
-
-final prefBodyTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600);
-
-final prefSubTitleTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600, color: bodyColor);

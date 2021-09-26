@@ -2,7 +2,9 @@ import 'package:stacked/stacked.dart';
 
 class LanguagePreferenceViewModel extends BaseViewModel {
   String _selectedLanguage = 'Englis (US)';
+
   String get selectedLanguage => _selectedLanguage;
+
   List<String> _preferencetitles = [
     'Language',
     'Time Zone',
@@ -10,12 +12,14 @@ class LanguagePreferenceViewModel extends BaseViewModel {
     'Spellcheck'
   ];
 
-  String _dropDownLanguage = 'English (US)';
+  String _dropDownLanguage = 'Englis (US)';
   String _dropDownTimeZone = 'UTC+01:00 West Central Africa';
-  String _dropDownKeyboard = 'English (US)';
+  String _dropDownKeyboard = 'Englis (US)';
 
   String get dropDownLanguage => _dropDownLanguage;
+
   String get dropDownTimeZone => _dropDownTimeZone;
+
   String get dropDownKeyboard => _dropDownKeyboard;
 
   List<String> get preferencetitles => _preferencetitles;
@@ -49,7 +53,7 @@ class LanguagePreferenceViewModel extends BaseViewModel {
     'cantonese',
     'Czech',
     'Danish',
-    'English (US)',
+    'Englis (US)',
     'Espanol (Espana)',
     'Francais (France)',
     'Italino',

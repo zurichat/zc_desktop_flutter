@@ -42,14 +42,14 @@ Widget build(BuildContext context) {
                 title,
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                style: prefBodyTextStyle,
+                style: preferenceStyleNormal,
               ),
             ),
             if (useSubtitle) SizedBox(height: 2.h),
             if (useSubtitle)
               Text(
                 subtitle!,
-                style: prefBodyTextStyle,
+                style: preferenceStyleNormal,
               ),
           ],
         )
