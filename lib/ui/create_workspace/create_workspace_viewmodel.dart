@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 import 'package:zc_desktop_flutter/services/organization/organization_service.dart';
 
@@ -111,6 +112,9 @@ class CreateWorkspaceViewModel extends BaseViewModel {
 
   void goToStage2() {
     _navigationService.navigateTo(Routes.createWorkspaceStage2);
+    final result =
+        _localStorageService.getFromDisk(userSelectedOrganizationsKey);
+    print(result);
   }
 
   String _stage3PageNum = "Stage 3 of 3 ";
@@ -136,9 +140,10 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   }
 
   void goToHome() {
-    _navigationService.navigateTo(Routes.workspaceView);
+    _navigationService.navigateTo(Routes.organizationView);
   }
 
+  final _localStorageService = locator<LocalStorageService>();
   Future<void> createOrganization(String organizationName) async {
     // await _organizationService.createOrganisation(email);
     await _organizationService.updateOrganizationName(organizationName);

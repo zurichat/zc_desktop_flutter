@@ -5,9 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
+import 'package:zc_desktop_flutter/models/organization/organization.dart';
 import 'package:zc_desktop_flutter/ui/main/channels_creation/channels_creation_view.dart';
-import 'package:zc_desktop_flutter/ui/main/workspace_page/workspace_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/main/organization_page/organization_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
@@ -17,36 +17,36 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
-class WorkspaceView extends StatelessWidget {
-  const WorkspaceView({Key? key}) : super(key: key);
+class OrganizationView extends StatelessWidget {
+  const OrganizationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<WorkspaceViewModel>.reactive(
+    return ViewModelBuilder<OrganizationViewModel>.reactive(
       onModelReady: (model) {
         model.setup();
       },
       builder: (context, model, child) => Scaffold(
-        body: WorkspaceWrapper(
+        body: OrganizationWrapper(
           model,
           centerChild: Expanded(
             child: ExtendedNavigator(
               navigatorKey: StackedService.nestedNavigationKey(1),
-              router: WorkspaceViewRouter(),
+              router: OrganizationViewRouter(),
             ),
           ),
         ),
       ),
-      viewModelBuilder: () => WorkspaceViewModel(),
+      viewModelBuilder: () => OrganizationViewModel(),
     );
   }
 }
 
-class WorkspaceWrapper extends StatelessWidget {
-  final WorkspaceViewModel? model;
+class OrganizationWrapper extends StatelessWidget {
+  final OrganizationViewModel? model;
   final Widget? centerChild;
 
-  WorkspaceWrapper(this.model, {Key? key, this.centerChild}) : super(key: key);
+  OrganizationWrapper(this.model, {Key? key, this.centerChild}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,16 +91,16 @@ class WorkspaceWrapper extends StatelessWidget {
                             ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: model!.workspace.length.toInt(),
+                              itemCount: model!.organization.length,
                               itemBuilder: (context, index) {
                                 return Container(
                                   child: GestureDetector(
                                     onTap: () {
                                       print("Workspace $index tapped");
-                                      model!.setCurrentWorkspaceIndex(index);
+                                      model!.reloadWithSelectedOrganization(index);
                                     },
-                                    child: WorkspaceItem(
-                                      workspace: model!.workspace[index],
+                                    child: OrganizationItem(
+                                      organization: model!.organization[index],
                                     ),
                                   ),
                                 );
@@ -143,7 +143,7 @@ class WorkspaceWrapper extends StatelessWidget {
                                         DetailedCustomAppBar(
                                           leading: WorkSpaceSetting(
                                             workspaceTitle:
-                                                model!.getWorkspaceName(),
+                                                model!.currentOrganization!.name,
                                           ),
                                           trailing: NewMessageBtn(),
                                         ),
@@ -166,7 +166,7 @@ class WorkspaceWrapper extends StatelessWidget {
                                             model!.openChannelsList();
                                           },
                                           list: List.generate(
-                                            model!.channels.length.toInt(),
+                                            model!.channels.length,
                                             (index) => MouseRegion(
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
@@ -177,12 +177,10 @@ class WorkspaceWrapper extends StatelessWidget {
                                                     print(
                                                         "channel item $index tapped");
                                                     //model.showChannel(index);
-                                                    model!.goToChannelsView(
-                                                        index);
+                                                    //model!.goToChannelsView(index);
                                                   },
                                                   child: ChannelItem(
-                                                    channelName: model!
-                                                        .channels[index].name!,
+                                                    channelName: model!.channels[index].name,
                                                   ),
                                                 ),
                                               ),
@@ -200,8 +198,7 @@ class WorkspaceWrapper extends StatelessWidget {
                                           displayChannel: () {},
                                           addTap: () {},
                                           list: List.generate(
-                                            model!.directMessages.length
-                                                .toInt(),
+                                            1,
                                             (index) => MouseRegion(
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
@@ -212,15 +209,11 @@ class WorkspaceWrapper extends StatelessWidget {
                                                     print(
                                                         "dm item $index tapped");
                                                     //model.showDM(index);
-                                                    model!.goToDmView(index);
+                                                    //model!.goToDmView(index);
                                                   },
                                                   child: DMItem(
-                                                    userName: model!
-                                                        .directMessages[index]
-                                                        .user!
-                                                        .name,
-                                                    userIcon:
-                                                        'assets/icons/users.svg',
+                                                    //userName: model!.directMessages[index].user!.name,
+                                                    //userIcon:'assets/icons/users.svg',
                                                   ),
                                                 ),
                                               ),
@@ -249,7 +242,7 @@ class WorkspaceWrapper extends StatelessWidget {
 }
 
 class DisplayMenu extends StatelessWidget {
-  final WorkspaceViewModel model;
+  final OrganizationViewModel model;
 
   const DisplayMenu(this.model, {Key? key}) : super(key: key);
 
@@ -434,19 +427,19 @@ class ReusableMenuItem extends StatelessWidget {
   }
 }
 
-class WorkspaceItem extends StatelessWidget {
+class OrganizationItem extends StatelessWidget {
   final int? index;
   final bool? selected;
-  final Workspace? workspace;
+  final Organization? organization;
   final void Function()? onTap;
   final bool? hover;
   final void Function(PointerHoverEvent)? onHover;
   final void Function(PointerExitEvent)? onExit;
 
-  WorkspaceItem(
+  OrganizationItem(
       {this.index,
       this.selected,
-      this.workspace,
+      this.organization,
       this.onTap,
       this.hover,
       this.onHover,
@@ -480,7 +473,7 @@ class WorkspaceItem extends StatelessWidget {
                             : Colors.transparent,
                     width: 3),*/
               ),
-              child: workspace!.logo == null
+              child: organization!.logoUrl == null
                   ? Container(
                       decoration: BoxDecoration(
                         color: Colors.grey,
@@ -488,7 +481,7 @@ class WorkspaceItem extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          workspace!.name!,
+                          organization!.name!,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -502,7 +495,7 @@ class WorkspaceItem extends StatelessWidget {
                       child: Container(
                           width: 38.0,
                           height: 38.0,
-                          child: SvgPicture.asset(workspace!.logo!)),
+                          child: SvgPicture.asset(organization!.logoUrl!)),
                     ),
             ),
           ),

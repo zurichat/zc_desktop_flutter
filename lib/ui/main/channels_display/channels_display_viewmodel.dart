@@ -13,7 +13,7 @@ import 'package:zc_desktop_flutter/models/auth_response.dart';
 import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
 import 'package:zc_desktop_flutter/models/user.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channels_api_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
@@ -85,17 +85,15 @@ class ChannelsDisplayViewModel extends BaseViewModel {
 
   Map<String, String> get sidebarItems => _sidebarItems;
 
-    Future<void> getchannels() async {
-    
-      await runBusyFuture(
-          performGetChannel());
-   
+  Future<void> getchannels() async {
+    await runBusyFuture(performGetChannel());
+
     notifyListeners();
   }
 
   Future<void> performGetChannel() async {
-    List<ChannelsDataModel> channelsList = await _auth.getChannelsList();
-    print(channelsList);
+    // List<Channel> channelsList = await _auth.getChannelsList();
+    // print(channelsList);
   }
 
   User? user;
@@ -104,8 +102,7 @@ class ChannelsDisplayViewModel extends BaseViewModel {
     final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
     final resUser = AuthResponse.fromMap(jsonDecode(authResponse as String));
 
-  print(resUser.user.token);
-  notifyListeners(); 
+    print(resUser.user.token);
+    notifyListeners();
   }
- 
 }

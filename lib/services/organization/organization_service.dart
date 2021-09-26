@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:stacked/stacked_annotations.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
+
+import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
@@ -17,6 +20,46 @@ const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
 class OrganizationService {
   final _localStorageService = locator<LocalStorageService>();
   final _apiService = locator<ApiService>();
+  final _channelService = locator<ChannelsService>();
+  final log = getLogger('OrganizationService');
+
+  List<Organization> _organizations = [
+    Organization(
+      id: "1",
+      name: "Zuri chat",
+      logoUrl: "assets/icons/zuri_logo_only.svg",
+      workspaceUrl: "",
+    ),
+    Organization(
+      id: "2",
+      name: "HNGi8",
+      logoUrl: "assets/images/gmail.svg",
+      workspaceUrl: "",
+    ),
+    Organization(
+      id: "3",
+      name: "Tamborin",
+      logoUrl: "assets/images/twitter.svg",
+      workspaceUrl: "",
+    ),
+    Organization(
+      id: "4",
+      name: "Filledstacks",
+      logoUrl: "assets/images/facebook.svg",
+      workspaceUrl: "",
+    ),
+    Organization(
+      id: "5",
+      name: "GADS 2021",
+      logoUrl: "assets/images/google.svg",
+      workspaceUrl: "",
+    ),
+  ];
+
+  // Future<List<Organization>> getOrganizations() async {
+  //   await Future.delayed(Duration(seconds: 2));
+  //   return _organizations;
+  // }
 
   /// This gets the selected organization from the sidebar
   int get selectedOrganization {
@@ -34,15 +77,27 @@ class OrganizationService {
   /// ... the actual home view (organization view)
   Future<List<Organization>> getOrganizations() async {
     // Getting stored AuthResponse from local storage
-
+    log.i('Getting user organizations');
+    log.i(_authResponse.user.email);
     final response = await _apiService.get(
-      _apiService.apiConstants.getOrganizationsUri(_authResponse.user.email),
-      // headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
+      _apiService.apiConstants
+          .getUserOrganizationsByEmailUri(_authResponse.user.email),
+      headers: {
+        'Cookie':
+            'f6822af94e29ba112be310d3af45d5c7=MTYzMjY1OTUxMnxHd3dBR0RZeE5UQTJPRE00Tm1Sak16Tm1OalZoWWpReU5UVTBZdz09fFuQUNebZiiYyadcGkyltamz1UhLZyfwKoIHnv8nEYXt'
+      },
     );
-
-    return List.from(
-      response['data'].map((map) => Organization.fromMap(map)).toList(),
-    );
+    // final response = null;
+    log.i(response['data']);
+    // List<Organization> organizations = [];
+    if (response != null) {
+      List<Organization> organizations = List.from(
+        response['data'].map((map) => Organization.fromMap(map)).toList(),
+      );
+      return organizations;
+    } else {
+      return _organizations;
+    }
   }
 
   /// This is used the create an organization
@@ -79,13 +134,17 @@ class OrganizationService {
       },
     );
 
+    // // TODO: create general, random and user initial channels when organization
+    // // created. Channel service not implemeneted yet.
+    // List<String> listOfChannels = ['general', 'random'];
+    // // add user channel to list.
+    // // iterate over the list and create channels
+    // _channelService.createChannel("general")
+
     Organization insertedOrganization = await _getOrganization(insertedId);
     print(insertedOrganization);
 
     await _addOrgToOrganizationsList(insertedOrganization);
-
-    // TODO: create general, random and user initial channels when organization
-    // created. Channel service not implemeneted yet.
   }
 
   Future<void> saveUserSelectedOrganizations(
@@ -135,12 +194,18 @@ class OrganizationService {
   }
 
   Future<void> _addOrgToOrganizationsList(Organization organization) async {
-    final organizationJson = _localStorageService
-        .getFromDisk(userSelectedOrganizationsKey) as String;
+    final organizationJson =
+        _localStorageService.getFromDisk(userSelectedOrganizationsKey);
 
-    final List<Map<String, dynamic>> organizationMap = jsonDecode(
-      organizationJson,
-    );
+    final List<dynamic> organizationMap;
+
+    if (organizationJson != null) {
+      organizationMap = jsonDecode(
+        organizationJson as String,
+      );
+    } else {
+      organizationMap = <dynamic>[];
+    }
 
     organizationMap.add(organization.toMap());
 

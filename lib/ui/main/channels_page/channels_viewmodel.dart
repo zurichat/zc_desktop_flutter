@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
+import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
+
+import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 
 class ChannelsViewModel extends BaseViewModel {
   final log = getLogger("MessageViewModel");
-  final _channelService = locator<ChannelService>();
+  final _channelService = locator<ChannelsService>();
 
-  Channel _channel = Channel();
+  // Channel _channel = Channel();
 
   final DateTime currentMessageTime = DateTime.now();
   final ScrollController controllerOne = ScrollController();
@@ -28,18 +29,18 @@ class ChannelsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void setup() {
-    runTask();
-  }
+  // void setup() {
+  //   runTask();
+  // }
 
-  void runTask() async {
-    _channel = await runBusyFuture(_channelService.getChannel());
-  }
+  // void runTask() async {
+  //   _channel = await runBusyFuture(_channelService.getChannel());
+  // }
 
-  String? getChannelName() {
-    if (_channel.name!.isNotEmpty) {
-      return _channel.name;
-    }
-    return "No data";
-  }
+  // String? getChannelName() {
+  //   if (_channel.name!.isNotEmpty) {
+  //     return _channel.name;
+  //   }
+  //   return "No data";
+  // }
 }

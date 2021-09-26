@@ -38,7 +38,7 @@ class LoginViewModel extends BaseViewModel {
 
   Future<void> performLogin(String email, String password) async {
     await _auth.login(email, password);
-    _navigationService.navigateTo(Routes.workspaceView);
+    _navigationService.navigateTo(Routes.organizationView);
   }
 
   @override

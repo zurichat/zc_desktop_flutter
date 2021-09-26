@@ -4,8 +4,6 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 
 class StartUpViewModel extends BaseViewModel {
-  final _navigationService = locator<NavigationService>();
-
   final log = getLogger("StartUpViewModel");
 
   String _appName = 'Zuri Chat';

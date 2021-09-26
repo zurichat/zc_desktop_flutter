@@ -3,9 +3,10 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
+import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
 import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
-import 'package:zc_desktop_flutter/models/workspace_model/workspace.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channel_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
+
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/search_workspace/users_loacal_data.dart';
 
@@ -15,7 +16,7 @@ import 'package:zc_desktop_flutter/services/search_workspace/users_loacal_data.d
 class SearchModalViewmodel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _dmService = locator<DMService>();
-  final _channelService = locator<ChannelService>();
+  final _channelService = locator<ChannelsService>();
 
   String? _text;
   String? _hintText;
@@ -64,7 +65,7 @@ class SearchModalViewmodel extends BaseViewModel {
         {
           _text = 'channel';
           _hintText = 'Search in Channels';
-          availableListLength = _channelService.channelListLength;
+          // availableListLength = _channelService.channelListLength;
         }
         break;
       case ButtonType.MESSAGE:
@@ -130,7 +131,7 @@ class SearchModalViewmodel extends BaseViewModel {
   }
 
   void getSuggestionsForChannels(String query) {
-    _searchList = _channelService.channelList;
+    // _searchList = _channelService.channelList;
     var filteredList;
     filteredList = List.of(_searchList).where((e) {
       final channelNameToLower = e.name!.toLowerCase();
@@ -161,12 +162,12 @@ class SearchModalViewmodel extends BaseViewModel {
   }
 
   void searchChannels(Channel channel) {
-    _channelService.setChannel(channel);
-    _navigationService.navigateTo(WorkspaceViewRoutes.channelsView, id: 1);
+    // _channelService.setChannel(channel);
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
   void searchUser(User user) {
     _dmService.setUser(user);
-    _navigationService.navigateTo(WorkspaceViewRoutes.dmView, id: 1);
+    _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 }

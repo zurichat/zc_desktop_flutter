@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/models/auth_response.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/services/channel_service/channels_api_service.dart';
+import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
 class ChannelsCreationViewModel extends BaseViewModel with Validator {
@@ -68,7 +68,6 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
   String get channelTextNine => _channelTextNine;
   String get channelTextTen => _channelTextTen;
 
-
   bool get isSwitched => _isSwitched;
   String get errorMessage => _errorMessage;
   bool get showError => _showError;
@@ -101,7 +100,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
   }
 
   void goToViewChannels() {
-    _navigationService.navigateTo(Routes.workspaceView);
+    _navigationService.navigateTo(Routes.organizationView);
     notifyListeners();
   }
 
@@ -131,7 +130,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  String userEmail(){
+  String userEmail() {
     return _authResponse.user.email;
   }
 
@@ -144,15 +143,15 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
     bool isChannelNameValid = nameValidator(_channelName);
     bool isChannelDescriptionValid = nameValidator(_channelDescription);
 
-    if (!isChannelNameValid ||
-        !isChannelDescriptionValid) {
+    if (!isChannelNameValid || !isChannelDescriptionValid) {
       if (!isChannelNameValid) {
         _channelNameError = 'Channel Name must be at least 3 characters long';
       } else {
         _channelNameError = null;
       }
       if (!isChannelDescriptionValid) {
-        _channelDescriptionError = 'Channel Description must be at least 3 characters long';
+        _channelDescriptionError =
+            'Channel Description must be at least 3 characters long';
       } else {
         _channelDescriptionError = null;
       }
@@ -161,32 +160,30 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
       return;
     }
 
-      _setIsBusy();
-      // if()
-      await runBusyFuture(
-          performCreateChannel(name, owner, description, private));
+    _setIsBusy();
+    // if()
+    await runBusyFuture(
+        performCreateChannel(name, owner, description, private));
 
-      if(_showError == false){
-        setErrorMessage('An unexpected error occured!');
-        _setIsBusy();
-        _setIsCreateChannelNotSuccessful();
-      } else {
-        _setIsCreateChannelSuccessful();
-      }
-   
+    if (_showError == false) {
+      setErrorMessage('An unexpected error occured!');
+      _setIsBusy();
+      _setIsCreateChannelNotSuccessful();
+    } else {
+      _setIsCreateChannelSuccessful();
+    }
+
     notifyListeners();
   }
 
   Future<void> performCreateChannel(
       String name, String owner, String description, bool private) async {
-    await _auth.createChannels(
-        name, owner, description, private);
+    await _auth.createChannels(name, owner, description, private);
     _showError = true;
     await Future.delayed(
       Duration(milliseconds: 1500),
     );
-   _navigationService.popRepeated(1);
-
+    _navigationService.popRepeated(1);
   }
 
   /// Error should be handled here. It could be displaying a toast of something else
@@ -195,5 +192,4 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
     print('Handle Error here');
     super.onFutureError(error, key);
   }
-
 }

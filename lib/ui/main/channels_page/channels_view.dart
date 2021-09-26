@@ -20,7 +20,7 @@ class ChannelsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ChannelsViewModel>.reactive(
       onModelReady: (model) {
-        model.setup();
+        // model.setup();
       },
       builder: (context, model, child) => model.isBusy
           ? Center(
@@ -39,7 +39,7 @@ class ChannelsView extends StatelessWidget {
                   DetailedCustomAppBar(
                     margin: EdgeInsets.only(left: 2.0.w),
                     leading: WorkSpaceTitle(
-                      channelTitle: model.getChannelName(),
+                      channelTitle: 'model.getChannelName()',
                     ),
                     trailing: WorkSpaceMembers(),
                   ),
@@ -58,7 +58,6 @@ class ChannelsView extends StatelessWidget {
                               MessageWidget(model: model),
                               MessageWidget(model: model),
                               MessageWidget(model: model),
-                              
                             ],
                           ),
                         ),
@@ -72,9 +71,6 @@ class ChannelsView extends StatelessWidget {
     );
   }
 }
-
-
-
 
 Widget messageReplies(ChannelsViewModel model) {
   return InkWell(

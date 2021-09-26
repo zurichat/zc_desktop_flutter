@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class APIConstants {
   static const String scheme = 'https';
 
@@ -31,7 +29,7 @@ class APIConstants {
       scheme: scheme, host: host, path: '/account/request-password-reset-code');
 
   // Organization endpoints
-  Uri getOrganizationsUri(email) =>
+  Uri getUserOrganizationsByEmailUri(String email) =>
       Uri(scheme: scheme, host: host, path: '/users/$email/organizations');
 
   Uri get createOrganizationUri =>
@@ -45,9 +43,15 @@ class APIConstants {
 
   // Channels Endpoints
 
-  Uri getcreateChannelUri(String organisationId) => Uri(scheme: scheme, host: channelHost, path: '/api/v1/$organisationId/channels/');
+  Uri getcreateChannelUri(String organisationId) => Uri(
+      scheme: scheme,
+      host: channelHost,
+      path: '/api/v1/$organisationId/channels/');
 
-  Uri getuserChannelUri(String organisationId, String channelId) => Uri(scheme: scheme, host: channelHost, path: '/api/v1/$organisationId/channels/$channelId/members/');
+  Uri getuserChannelUri(String organisationId, String channelId) => Uri(
+      scheme: scheme,
+      host: channelHost,
+      path: '/api/v1/$organisationId/channels/$channelId/members/');
 
   //DMs endpoints
   Uri get dmCreateRoom =>
