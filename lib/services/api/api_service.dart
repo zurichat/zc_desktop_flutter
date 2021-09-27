@@ -53,6 +53,7 @@ class ApiService implements Api {
       final response = await client.post(
         uri.toString(),
         data: body,
+        options: Options(headers: headers)
       );
 
       log.i('Response from $uri \n${response.data}');
@@ -78,6 +79,7 @@ class ApiService implements Api {
       final response = await client.put(
         uri.toString(),
         data: body,
+        options: Options(headers: headers)
       );
 
       log.i('Response from $uri \n${response.data}');
