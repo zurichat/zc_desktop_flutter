@@ -25,14 +25,14 @@ class OrganizationViewModel extends BaseViewModel {
   bool _showMenus = false;
   bool _showChannels = false;
 
-  List<Organization> _organization = [];
-  List<Channel> _channels = [];
+  List<Organization?>? _organization = [];
+  List<Channel>? _channels = [];
 
   //List<DM> _directMessages = [];
 
-  List<Organization> get organization => _organization;
+  List<Organization?>? get organization => _organization;
 
-  List<Channel> get channels => _channels;
+  List<Channel>? get channels => _channels;
 
   //List<DM> get directMessages => _directMessages;
 
@@ -44,21 +44,25 @@ class OrganizationViewModel extends BaseViewModel {
 
   bool get showChannels => _showChannels;
 
+  /// This is the first function that is fired when the viewmodel is activated
   void setup() async {
-    setSelectedOrganization(0);
+    setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
-
+    _organizationService.saveOrganizationId(_currentOrganization.id!);
     // log.i(_currentOrganization);
     // log.i(_channels);
   }
 
+  /// function fired when another workspace is tapped on.
   void reloadWithSelectedOrganization(int index) async {
+    _channels = [];
+    log.i("###################### $_channels");
     log.i(
         "current selected organization index ${getSelectedOrganizationIndex()} and index to change to $index");
-    if (index != getSelectedOrganizationIndex().toInt()) {
+    if (index != getSelectedOrganizationIndex()!) {
       await runBusyFuture(setupOrganization());
       setSelectedOrganization(index);
-      _currentOrganization = organization[getSelectedOrganizationIndex()];
+      _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
     }
     return;
   }
@@ -68,24 +72,25 @@ class OrganizationViewModel extends BaseViewModel {
     _organizationService.changeSelectedOrganization(index);
   }
 
-  int getSelectedOrganizationIndex() {
+  int? getSelectedOrganizationIndex() {
     return _organizationService.selectedOrganization;
   }
 
   Future<void> setupOrganization() async {
     await getOrganizations();
-    _currentOrganization = organization[getSelectedOrganizationIndex()];
+    _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
     await getChannels();
   }
 
   Future<void> getOrganizations() async {
     _organization = await _organizationService.getOrganizations();
+    log.i(_organization);
     log.d(" current organization id ${_currentOrganization.id}");
   }
 
   Future<void> getChannels() async {
     _channels = await _channelService.getChannelsList(_currentOrganization.id);
-    _channelService.setChannel(_channels[0]);
+    _channelService.setChannel(_channels!.first);
     log.d("${_channels}");
   }
 
@@ -110,13 +115,20 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToChannelsView({int index = 0}) {
-    _channelService.setChannel(_channels[index]);
+    _channelService.setChannel(_channels![index]);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
   void goToDmView(int index) {
     //_dmService.setUser();
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
+  }
+
+  bool showSelectedOrg(int index) {
+    if (index == getSelectedOrganizationIndex()!) {
+      return true;
+    }
+    return false;
   }
 
   @override

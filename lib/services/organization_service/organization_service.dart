@@ -1,7 +1,9 @@
 import 'dart:convert';
+
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/organization/organization.dart';
+
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../api/api_service.dart';
@@ -10,6 +12,7 @@ import '../local_storage/local_storage_service.dart';
 
 const selectedOrganizationKey = 'selectedOrganizationKey';
 const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
+const organizationIdKey = 'organizationIdKey';
 
 /// Refactor class to store objects with a proper db
 @LazySingleton()
@@ -55,6 +58,14 @@ class OrganizationService {
     await Future.delayed(Duration(seconds: 2));
     return _organizations;
   }*/
+
+  void saveOrganizationId(String orgId) {
+    _localStorageService.saveToDisk(organizationIdKey, orgId);
+  }
+
+  String getOrganizationId() {
+    return _localStorageService.getFromDisk(organizationIdKey) as String;
+  }
 
   /// This gets the selected organization_service from the sidebar
   int get selectedOrganization {

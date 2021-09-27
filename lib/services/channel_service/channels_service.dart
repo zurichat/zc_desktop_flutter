@@ -1,12 +1,14 @@
 import 'dart:convert';
+
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
+
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../api/api_service.dart';
-import '../local_storage/local_storage_service.dart';
 import '../authentication/auth_service.dart';
+import '../local_storage/local_storage_service.dart';
 
 const insertedOrganisationId = 'insertedId';
 const insertedOrganisation = '614679ee1a5607b13c00bcb7';
@@ -82,44 +84,45 @@ class ChannelsService {
   // https://channels.zuri.chat/api/v1/61459d8e62688da5302acdb1/channels/
 
   /// This is used to get the list of channels on the page
-  Future<List<Channel>> getChannelsList(String? organizationId) async {
+  Future<List<Channel>?> getChannelsList(String? organizationId) async {
     final response = await _apiService.get(
       _apiService.apiConstants.getcreateChannelUri(organizationId!),
       headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
     );
 
-    //log.d(response);
+    log.i(response);
 
     return List.from(
-      response.map((map) => Channel.fromMap(map)).toList(),
+      response.map((map) => Channel.fromMap(map)).toList() ?? [],
     );
   }
 
-/// This is used to create a channel on the page
+  /// This is used to create a channel on the page
   Future<void> createChannels(
     String name,
     String owner,
     String description,
     bool private,
   ) async {
-      // Getting stored AuthResponse from local storage
-      final response = await _apiService.post(
-        _apiService.apiConstants.getcreateChannelUri(insertedOrganisation),
-        body: {
-          "name": name,
-          "owner": owner,
-          "description": description,
-          "private": private,
-        },
-        headers: {'Authorization': 'Bearer ${_authResponse.sessionID}'},
-      );
-      
-      String insertedId = response['_id'];
-      _localStorageService.saveToDisk(
+    final orgId =
+        _localStorageService.getFromDisk('organizationIdKey') as String;
+    // Getting stored AuthResponse from local storage
+    final response = await _apiService.post(
+      _apiService.apiConstants.getcreateChannelUri(orgId),
+      body: {
+        "name": name,
+        "owner": owner,
+        "description": description,
+        "private": private,
+      },
+      headers: {'Authorization': 'Bearer ${_authResponse.sessionID}'},
+    );
+
+    String insertedId = response['_id'];
+    _localStorageService.saveToDisk(
       userChannelId,
       jsonEncode(insertedId),
     );
-
   }
 
   /// This is used to create a channel on the page
@@ -131,22 +134,21 @@ class ChannelsService {
     String prop2,
     String prop3,
   ) async {
-      // Getting stored AuthResponse from local storage
-      await _apiService.post(
-        _apiService.apiConstants.getuserChannelUri(insertedOrganisation, insertedChannel),
-        body: {
-          "_id": id,
-          "owner": role_id,
-          "description": is_admin,
-          "notifications": {
-            "additionalProp1": prop1,
-            "additionalProp2": prop2,
-            "additionalProp3": prop3
-          },
+    // Getting stored AuthResponse from local storage
+    await _apiService.post(
+      _apiService.apiConstants
+          .getuserChannelUri(insertedOrganisation, insertedChannel),
+      body: {
+        "_id": id,
+        "owner": role_id,
+        "description": is_admin,
+        "notifications": {
+          "additionalProp1": prop1,
+          "additionalProp2": prop2,
+          "additionalProp3": prop3
         },
-        headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
-      );
-
+      },
+      headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
+    );
   }
-
 }
