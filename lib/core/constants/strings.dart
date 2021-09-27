@@ -9,4 +9,7 @@ class AppStrings {
   static const String createAccount = 'Create Account';
   static const String policyText =
       "By signing up, you agree that you have accepted our User Notice \nand Privacy Policy";
+
+  //Error Message
+  static const String internetError = 'await _auth.login(email, password)';
 }

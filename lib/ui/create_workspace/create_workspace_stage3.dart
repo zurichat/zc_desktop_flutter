@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 
 import 'create_workspace_viewmodel.dart';
@@ -15,7 +16,9 @@ class CreateWorkspaceStage3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CreateWorkspaceViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Column(children: [
+        body: Column(
+          children: [
+            buildAppBar(context, isHome: false, text: 'Create'),
           Row(
             children: [
               Container(

@@ -83,21 +83,28 @@ class OrganizationService {
     );
   }
 
+  /// This is used to add user to an organization_service
+  Future<void> addMemberToOrganization(String orgID) async {
+     await _apiService.post(
+      _apiService.apiConstants.getaddUserToOganization(orgID),
+      body: {'user_email': _authResponse.user.email},
+      headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
+    );
+  }
+
   /// This is used the create an organization_service
   Future<void> createOrganization(String email) async {
     // Getting stored AuthResponse from local storage
-
+    print('Bearer ${_authResponse.sessionID}');
     final response = await _apiService.post(
       _apiService.apiConstants.createOrganizationUri,
       body: {
         // "creator_email": _authResponse.user.email,
         "creator_email": email,
       },
-      headers: {
-        'Authorization': 'Bearer ${_authResponse.user.token}',
-      },
+      headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
     );
-
+    addMemberToOrganization(response['data']['_id']);
     String insertedId = response['data']['InsertedID'];
 
     Organization insertedOrganisation = await _getOrganization(insertedId);

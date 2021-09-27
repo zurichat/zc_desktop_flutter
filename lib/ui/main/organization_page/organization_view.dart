@@ -38,6 +38,7 @@ class OrganizationView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => OrganizationViewModel(),
+      
     );
   }
 }
@@ -145,7 +146,7 @@ class OrganizationWrapper extends StatelessWidget {
                                         DetailedCustomAppBar(
                                           leading: WorkSpaceSetting(
                                             workspaceTitle: model!
-                                                .currentOrganization!.name,
+                                                .currentOrganization!.name ?? '',
                                           ),
                                           trailing: NewMessageBtn(),
                                         ),

@@ -5,7 +5,6 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
-import 'package:zc_desktop_flutter/models/dummy_user_model/user_model.dart';
 import 'package:zc_desktop_flutter/models/organization/organization.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';

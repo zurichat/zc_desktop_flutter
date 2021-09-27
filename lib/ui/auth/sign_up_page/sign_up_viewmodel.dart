@@ -58,8 +58,11 @@ class SignUpViewModel extends BaseViewModel with Validator {
       this.clearErrors();
       notifyListeners();
     }
-
-    await _authService.signup(email: email, password: password);
+    try {
+      await _authService.signup(email: email, password: password);
+    } catch (e) {
+      throw Failure(e.toString());
+    }
 
     _navigationService.navigateTo(Routes.checkEmailView, arguments: {
       'email': email,

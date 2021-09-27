@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
-import 'package:zc_desktop_flutter/models/user.dart';
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../api/api_service.dart';
@@ -113,11 +111,10 @@ class ChannelsService {
           "description": description,
           "private": private,
         },
-        headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
+        headers: {'Authorization': 'Bearer ${_authResponse.sessionID}'},
       );
-
-      String insertedId = response['data']['_id'];
-
+      
+      String insertedId = response['_id'];
       _localStorageService.saveToDisk(
       userChannelId,
       jsonEncode(insertedId),
