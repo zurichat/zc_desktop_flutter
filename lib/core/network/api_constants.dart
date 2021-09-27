@@ -38,6 +38,9 @@ class APIConstants {
   Uri getOrganisationUri(String organisationId) =>
       Uri(scheme: scheme, host: host, path: '/organizations/$organisationId');
 
+  Uri getaddUserToOganization(orgID) => 
+    Uri(scheme: scheme, host: host, path: '/organizations/$orgID/members');
+
   // Channels Endpoints
 
   Uri getcreateChannelUri(String organisationId) => Uri(

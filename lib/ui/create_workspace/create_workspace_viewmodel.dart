@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/organization_service/organization_service.dart';
 
 class CreateWorkspaceViewModel extends BaseViewModel {
@@ -79,7 +80,6 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String get companyName => _companyName;
   void setCompanyName(String value) {
     _companyName = value.toString();
-    print(_companyName);
     notifyListeners();
   }
 
@@ -139,8 +139,16 @@ class CreateWorkspaceViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.organizationView);
   }
 
+  Future<void> performCreateOrganization(String email) async {
+    await runBusyFuture(_organizationService.createOrganization(email));
+  }
+
   Future<void> createOrganization(String email) async {
-    await _organizationService.createOrganization(email);
-    goToStage1();
+    try {
+      await performCreateOrganization(email);
+    } catch (e) {
+      throw Failure(e.toString());
+    }
+      goToStage1();
   }
 }

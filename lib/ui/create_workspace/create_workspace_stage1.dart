@@ -5,6 +5,9 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 
 import 'create_workspace_viewmodel.dart';
@@ -18,6 +21,7 @@ class CreateWorkspaceStage1 extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: SingleChildScrollView(
           child: Column(children: [
+            buildAppBar(context, isHome: false, text: 'Create WorkSpace'),
             Row(
               children: [
                 Container(
@@ -88,7 +92,6 @@ class CreateWorkspaceStage1 extends StatelessWidget {
                             Container(
                               width: 600.w,
                               child: AuthInputField(
-                                controller: TextEditingController(),
                                 keyboardType: TextInputType.emailAddress,
                                 onChanged: (value) {
                                   model.setCompanyName(value);
@@ -110,22 +113,26 @@ class CreateWorkspaceStage1 extends StatelessWidget {
                             Container(
                               height: 58.h,
                               width: 150.w,
-                              child: TextButton(
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        lightIconColor)),
-                                onPressed: () {
+                              child: AuthButton(label: model.btnText, onTap: () {
                                   model.goToStage2();
-                                },
-                                child: Text(
-                                  model.btnText,
-                                  style: authBtnStyle,
-                                ),
-                              ),
+                                },)
+                              // TextButton(
+                              //   style: ButtonStyle(
+                              //       backgroundColor: MaterialStateProperty.all(
+                              //           lightIconColor)),
+                              //   onPressed: () {
+                              //     model.goToStage2();
+                              //   },
+                              //   child: Text(
+                              //     model.btnText,
+                              //     style: authBtnStyle,
+                              //   ),
+                              // ),
                             ),
                           ],
                         ),
                         verticalSpaceMedium,
+                        GotoLoginButton(isHome: true,)
                       ],
                     ),
                   ),
