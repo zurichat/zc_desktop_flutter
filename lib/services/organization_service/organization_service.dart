@@ -57,9 +57,9 @@ class OrganizationService {
     return _organizations;
   }*/
 
-  void saveOrganizationId(String orgId) {
+  Future<void> saveOrganizationId(String orgId) async {
     print('saved orgId ${orgId}');
-    _localStorageService.saveToDisk(organizationIdKey, orgId);
+    await _localStorageService.saveToDisk(organizationIdKey, orgId);
   }
 
   String getOrganizationId() {

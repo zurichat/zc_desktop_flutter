@@ -25,7 +25,7 @@ class OrganizationViewModel extends BaseViewModel {
   bool _showMenus = false;
   bool _showChannels = false;
 
-  List<Organization?>? _organization;
+  List<Organization?>? _organization = [];
   List<Channel>? _channels = [];
 
   //List<DM> _directMessages = [];
@@ -44,22 +44,27 @@ class OrganizationViewModel extends BaseViewModel {
 
   bool get showChannels => _showChannels;
 
+  /// This is the first function that is fired when the viewmodel is activated
   void setup() async {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
-    _organizationService.saveOrganizationId(_currentOrganization.id!);
-    // log.i(_currentOrganization);
+    await _organizationService.saveOrganizationId(_currentOrganization.id!);
+    log.i(_currentOrganization.id);
     // log.i(_channels);
   }
 
+  /// function fired when another workspace is tapped on.
   void reloadWithSelectedOrganization(int index) async {
+    _channels = [];
+    log.i("###################### $_channels");
     log.i(
         "current selected organization index ${getSelectedOrganizationIndex()} and index to change to $index");
     if (index != getSelectedOrganizationIndex()!) {
       await runBusyFuture(setupOrganization());
+      // Save the newly selected org id in preferences when a new organization item is tapped
+      await _organizationService.saveOrganizationId(_currentOrganization.id!);
       setSelectedOrganization(index);
       _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
-      _organizationService.saveOrganizationId(_currentOrganization.id!);
     }
     return;
   }
@@ -76,7 +81,6 @@ class OrganizationViewModel extends BaseViewModel {
   Future<void> setupOrganization() async {
     await getOrganizations();
     _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
-    _organizationService.saveOrganizationId(_currentOrganization.id!);
     await getChannels();
   }
 
@@ -88,7 +92,7 @@ class OrganizationViewModel extends BaseViewModel {
 
   Future<void> getChannels() async {
     _channels = await _channelService.getChannelsList(_currentOrganization.id);
-    _channelService.setChannel(_channels![0]);
+    _channelService.setChannel(_channels!.first);
     log.d("${_channels}");
   }
 

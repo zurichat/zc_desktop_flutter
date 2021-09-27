@@ -45,8 +45,11 @@ class LoginViewModel extends BaseViewModel {
     try {
       await _auth.login(email, password);
     } catch (e) {
-      if(e.toString().contains('Invalid')) {
+      if (e.toString().contains('Invalid')) {
         throw Failure(e.toString());
+      }
+      if (e.toString().contains('await')) {
+        throw Failure("Something unexpected happened, please try again.");
       }
       throw Failure(AppStrings.internetError);
     }

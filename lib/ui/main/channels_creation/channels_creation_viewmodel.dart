@@ -179,16 +179,14 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
 
   Future<void> performCreateChannel(
       String name, String owner, String description, bool private) async {
-    await _auth.createChannels(
-        name, owner, description, private);
-        
+    await _auth.createChannels(name, owner, description, private);
+
     _showError = true;
     await Future.delayed(
       Duration(milliseconds: 1500),
     );
     notifyListeners();
-   _navigationService.popRepeated(1);
-
+    _navigationService.pushNamedAndRemoveUntil(Routes.organizationView);
   }
 
   /// Error should be handled here. It could be displaying a toast of something else

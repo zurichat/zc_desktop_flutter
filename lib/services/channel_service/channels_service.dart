@@ -1,15 +1,17 @@
 import 'dart:convert';
+
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
+import 'package:zc_desktop_flutter/models/user.dart' as currentLoggedInUser;
 import 'package:zc_desktop_flutter/services/organization_service/organization_service.dart';
+
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../api/api_service.dart';
-import '../local_storage/local_storage_service.dart';
 import '../authentication/auth_service.dart';
-import 'package:zc_desktop_flutter/models/user.dart' as currentLoggedInUser;
+import '../local_storage/local_storage_service.dart';
 
 const insertedOrganisationId = 'insertedId';
 const insertedOrganisation = '614679ee1a5607b13c00bcb7';
@@ -153,9 +155,10 @@ class ChannelsService {
     String prop3,
   ) async {
     // Getting stored AuthResponse from local storage
+    final orgId = await _organizationService.getOrganizationId();
+    log.i(orgId);
     var res = await _apiService.post(
-      _apiService.apiConstants.getuserChannelUri(
-          _organizationService.getOrganizationId(), _currentChannel!.id ?? '0'),
+      _apiService.apiConstants.getuserChannelUri(orgId, getChannel().id!),
       body: {
         "_id": id,
         "role_id": role_id,
@@ -192,8 +195,8 @@ class ChannelsService {
   Future<List<ChannelMessage>> fetchChannelMessages(
       var org_id, var channel_id) async {
     final response = await _apiService.get(_apiService.apiConstants
-        .channelFetchMessages(_currentChannel!.id ?? '0',
-            _organizationService.getOrganizationId()));
+        .channelFetchMessages(
+            _currentChannel!.id!, _organizationService.getOrganizationId()));
     print(response);
     try {
       return ChannelMessagesResponse.fromJson(response).data;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/core/constants/images.dart';
+import 'package:zc_desktop_flutter/core/constants/strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
-import 'package:zc_desktop_flutter/core/constants/strings.dart';
 import 'package:zc_desktop_flutter/ui/auth/login_page/login_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -12,8 +13,6 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/app_bar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_left_startup_image.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginView extends HookWidget {
   final _formKey = GlobalKey<FormState>();
@@ -67,7 +66,8 @@ class LoginView extends HookWidget {
                             if (model.hasError)
                               Text(
                                 (model.modelError as Failure).message,
-                                style: headline6.copyWith(color: Colors.red),
+                                style: headline6.copyWith(
+                                    color: Colors.red, fontSize: 12.sp),
                               ),
                             verticalSpaceMedium,
                             Form(
