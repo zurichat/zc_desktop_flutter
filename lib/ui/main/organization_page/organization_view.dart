@@ -38,7 +38,6 @@ class OrganizationView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => OrganizationViewModel(),
-      
     );
   }
 }
@@ -64,181 +63,429 @@ class OrganizationWrapper extends StatelessWidget {
           // verticalSpaceSmall,
           model!.isBusy
               ? Expanded(
-                  child: Container(
-                    height: fullHeight(context),
-                    width: fullHeight(context),
-                    child: Center(
-                      child: Container(
-                        width: 24.0,
-                        height: 24.0,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 3.0.r,
-                          valueColor: AlwaysStoppedAnimation(Colors.grey),
-                        ),
-                      ),
-                    ),
+            child: Container(
+              height: fullHeight(context),
+              width: fullHeight(context),
+              child: Center(
+                child: Container(
+                  width: 24.0,
+                  height: 24.0,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 3.0.r,
+                    valueColor: AlwaysStoppedAnimation(Colors.grey),
                   ),
-                )
+                ),
+              ),
+            ),
+          )
               : Expanded(
-                  child: Row(
+            child: Row(
+              children: [
+                //TODO: organization side bar
+                Container(
+                  color: Theme.of(context).accentColor,
+                  width: 70.w,
+                  height: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      //TODO: organization side bar
-                      Container(
-                        color: Theme.of(context).accentColor,
-                        width: 70.w,
-                        height: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: model!.organization.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      print("Workspace $index tapped");
-                                      model!.reloadWithSelectedOrganization(
-                                          index);
-                                    },
-                                    child: OrganizationItem(
-                                      organization: model!.organization[index],
-                                    ),
-                                  ),
-                                );
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: model!.organization!.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            child: GestureDetector(
+                              onTap: () {
+                                print("Workspace $index tapped");
+                                model!
+                                    .reloadWithSelectedOrganization(
+                                    index);
                               },
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  model!.goToCreateWorkspace();
-                                },
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      //TODO: Left side bar
-                      Container(
-                        color: Theme.of(context).accentColor,
-                        width: 260.w,
-                        height: double.infinity,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: SingleChildScrollView(
-                                controller: model!.controller,
-                                physics: ScrollPhysics(),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    ListView(
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      children: [
-                                        DetailedCustomAppBar(
-                                          leading: WorkSpaceSetting(
-                                            workspaceTitle: model!
-                                                .currentOrganization!.name ?? '',
-                                          ),
-                                          trailing: NewMessageBtn(),
-                                        ),
-                                        DisplayMenu(model!),
-                                        verticalSpaceRegular,
-                                        ReusableDropDown(
-                                          title: 'Channels',
-                                          addButtonTitle: 'Add channels',
-                                          toggleTap: () {
-                                            model!.openChannelsDropDownMenu();
-                                          },
-                                          show: model!.showChannels,
-                                          addTap: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) =>
-                                                    ChannelsCreationView());
-                                          },
-                                          displayChannel: () {
-                                            model!.openChannelsList();
-                                          },
-                                          list: List.generate(
-                                            model!.channels.length,
-                                            (index) => MouseRegion(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 16.0,
-                                                ),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    print(
-                                                        "channel item $index tapped");
-                                                    // model.showChannel(index);
-                                                    model!.goToChannelsView(
-                                                        index: index);
-                                                  },
-                                                  child: ChannelItem(
-                                                    channelName: model!
-                                                        .channels[index].name,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        verticalSpaceRegular,
-                                        ReusableDropDown(
-                                          title: 'Direct Messages',
-                                          addButtonTitle: 'Add teammates',
-                                          show: model!.showDMs,
-                                          toggleTap: () {
-                                            model!.openDMsDropDownMenu();
-                                          },
-                                          displayChannel: () {},
-                                          addTap: () {},
-                                          list: List.generate(
-                                            1,
-                                            (index) => MouseRegion(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 16.0,
-                                                ),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    print(
-                                                        "dm item $index tapped");
-                                                    //model.showDM(index);
-                                                    model!.goToDmView(index);
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        verticalSpaceRegular,
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                              child: OrganizationItem(
+                                organization:
+                                model!.organization![index],
+                                selected:
+                                model!.showSelectedOrg(index),
                               ),
                             ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
-                      //TODO: Center Area
-                      centerChild!,
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            model!.goToCreateWorkspace();
+                          },
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
+                //TODO: Left side bar
+                Container(
+                  color: Theme.of(context).accentColor,
+                  width: 260.w,
+                  height: double.infinity,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          controller: model!.controller,
+                          physics: ScrollPhysics(),
+                          child: Column(
+                            mainAxisAlignment:
+                            MainAxisAlignment.start,
+                            children: [
+                              ListView(
+                                physics:
+                                NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                children: [
+                                  DetailedCustomAppBar(
+                                    leading: WorkSpaceSetting(
+                                      workspaceTitle: model!
+                                          .currentOrganization!
+                                          .name ??
+                                          '',
+                                    ),
+                                    trailing: NewMessageBtn(),
+                                  ),
+                                  DisplayMenu(model!),
+                                  verticalSpaceRegular,
+                                  ReusableDropDown(
+                                    title: 'Channels',
+                                    addButtonTitle: 'Add channels',
+                                    toggleTap: () {
+                                      model!
+                                          .openChannelsDropDownMenu();
+                                    },
+                                    show: model!.showChannels,
+                                    addTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              ChannelsCreationView());
+                                    },
+                                    displayChannel: () {
+                                      model!.openChannelsList();
+                                    },
+                                    list: List.generate(
+                                      model!.channels!.length,
+                                          (index) => MouseRegion(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.only(
+                                            bottom: 16.0,
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              print(
+                                                  "channel item $index tapped");
+                                              // model.showChannel(index);
+                                              model!
+                                                  .goToChannelsView(
+                                                  index: index);
+                                            },
+                                            child: ChannelItem(
+                                              channelName: model!
+                                                  .channels![index]
+                                                  .name,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  verticalSpaceRegular,
+                                  ReusableDropDown(
+                                    title: 'Direct Messages',
+                                    addButtonTitle: 'Add teammates',
+                                    show: model!.showDMs,
+                                    toggleTap: () {
+                                      model!.openDMsDropDownMenu();
+                                    },
+                                    displayChannel: () {},
+                                    addTap: () {},
+                                    list: List.generate(
+                                      1,
+                                          (index) => MouseRegion(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.only(
+                                            bottom: 16.0,
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              print(
+                                                  "dm item $index tapped");
+                                              //model.showDM(index);
+                                              model!.goToDmView(
+                                                  index);
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  verticalSpaceRegular,
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                //TODO: Center Area
+                centerChild!,
+              ],
+            ),
+          ),
         ],
       ),
     );
+    /*return FutureBuilder(builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.none && snapshot.hasData == null) {
+        return Container(
+          child: Center(
+            child: SizedBox(
+              width: 60,
+              height: 20,
+              child: ElevatedButton(
+                onPressed: () {
+                  model!.setup();
+                },
+                child: model!.isBusy
+                    ? Center(
+                  child: Container(
+                    width: 24.0,
+                    height: 24.0,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3.0.r,
+                      valueColor: AlwaysStoppedAnimation(Colors.grey),
+                    ),
+                  ),
+                )
+                    : Text('Refresh'),
+              ),
+            ),
+          ),
+        );
+      }
+      else {
+        return Container(
+          child: Column(
+            children: [
+              Container(
+                child: buildAppBar(
+                  context,
+                  isActive: true,
+                ),
+              ),
+              // verticalSpaceSmall,
+              model!.isBusy
+                  ? Expanded(
+                child: Container(
+                  height: fullHeight(context),
+                  width: fullHeight(context),
+                  child: Center(
+                    child: Container(
+                      width: 24.0,
+                      height: 24.0,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 3.0.r,
+                        valueColor: AlwaysStoppedAnimation(Colors.grey),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+                  : Expanded(
+                child: Row(
+                  children: [
+                    //TODO: organization side bar
+                    Container(
+                      color: Theme.of(context).accentColor,
+                      width: 70.w,
+                      height: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: model!.organization!.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    print("Workspace $index tapped");
+                                    model!
+                                        .reloadWithSelectedOrganization(
+                                        index);
+                                  },
+                                  child: OrganizationItem(
+                                    organization:
+                                    model!.organization![index],
+                                    selected:
+                                    model!.showSelectedOrg(index),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                model!.goToCreateWorkspace();
+                              },
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    //TODO: Left side bar
+                    Container(
+                      color: Theme.of(context).accentColor,
+                      width: 260.w,
+                      height: double.infinity,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              controller: model!.controller,
+                              physics: ScrollPhysics(),
+                              child: Column(
+                                mainAxisAlignment:
+                                MainAxisAlignment.start,
+                                children: [
+                                  ListView(
+                                    physics:
+                                    NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    children: [
+                                      DetailedCustomAppBar(
+                                        leading: WorkSpaceSetting(
+                                          workspaceTitle: model!
+                                              .currentOrganization!
+                                              .name ??
+                                              '',
+                                        ),
+                                        trailing: NewMessageBtn(),
+                                      ),
+                                      DisplayMenu(model!),
+                                      verticalSpaceRegular,
+                                      ReusableDropDown(
+                                        title: 'Channels',
+                                        addButtonTitle: 'Add channels',
+                                        toggleTap: () {
+                                          model!
+                                              .openChannelsDropDownMenu();
+                                        },
+                                        show: model!.showChannels,
+                                        addTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  ChannelsCreationView());
+                                        },
+                                        displayChannel: () {
+                                          model!.openChannelsList();
+                                        },
+                                        list: List.generate(
+                                          model!.channels!.length,
+                                              (index) => MouseRegion(
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets.only(
+                                                bottom: 16.0,
+                                              ),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  print(
+                                                      "channel item $index tapped");
+                                                  // model.showChannel(index);
+                                                  model!
+                                                      .goToChannelsView(
+                                                      index: index);
+                                                },
+                                                child: ChannelItem(
+                                                  channelName: model!
+                                                      .channels![index]
+                                                      .name,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      verticalSpaceRegular,
+                                      ReusableDropDown(
+                                        title: 'Direct Messages',
+                                        addButtonTitle: 'Add teammates',
+                                        show: model!.showDMs,
+                                        toggleTap: () {
+                                          model!.openDMsDropDownMenu();
+                                        },
+                                        displayChannel: () {},
+                                        addTap: () {},
+                                        list: List.generate(
+                                          1,
+                                              (index) => MouseRegion(
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets.only(
+                                                bottom: 16.0,
+                                              ),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  print(
+                                                      "dm item $index tapped");
+                                                  //model.showDM(index);
+                                                  model!.goToDmView(
+                                                      index);
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      verticalSpaceRegular,
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    //TODO: Center Area
+                    centerChild!,
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+    },
+    future: model!.getOrganizations(),
+    );*/
   }
 }
 
@@ -493,7 +740,7 @@ class OrganizationItem extends StatelessWidget {
                       ),
                     )
                   : ClipRRect(
-                borderRadius: BorderRadius.circular(5.r),
+                      borderRadius: BorderRadius.circular(5.r),
                       child: Container(
                           width: 38.0,
                           height: 38.0,
@@ -501,7 +748,7 @@ class OrganizationItem extends StatelessWidget {
                     ),
             ),
           ),
-          /*if (selected!)
+          if (selected!)
             Container(
               padding: const EdgeInsets.all(8),
               child: Align(
@@ -522,7 +769,7 @@ class OrganizationItem extends StatelessWidget {
                   ),
                 ),
               ),
-            ),*/
+            ),
         ],
       ),
     );

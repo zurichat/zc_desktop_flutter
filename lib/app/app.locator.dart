@@ -10,15 +10,14 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
+import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 
 import '../services/api/api_service.dart';
 import '../services/authentication/auth_service.dart';
-import '../services/channel_service/channel_service.dart';
-import '../services/channel_service/channels_api_service.dart';
+import '../services/channel_service/channels_service.dart';
 import '../services/dm_service/dm_service.dart';
 import '../services/local_storage/local_storage_service.dart';
-import '../services/organization/organization_service.dart';
-import '../services/workspace_service/workspace_service.dart';
+import '../services/organization_service/organization_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -36,9 +35,8 @@ Future setupLocator(
   locator.registerLazySingleton(() => AuthService());
   locator.registerLazySingleton(() => ChannelsService());
   locator.registerLazySingleton(() => ApiService());
-  locator.registerLazySingleton(() => WorkspaceService());
   locator.registerLazySingleton(() => DMService());
-  locator.registerLazySingleton(() => ChannelService());
   locator.registerLazySingleton(() => OrganizationService());
+  locator.registerLazySingleton(() => CentrifugeService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
 }
