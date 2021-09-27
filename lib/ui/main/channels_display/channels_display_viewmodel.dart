@@ -9,7 +9,6 @@ import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
 
-
 class ChannelsDisplayViewModel extends BaseViewModel {
   final log = getLogger("ChannelsDisplayViewModel");
   final _auth = locator<ChannelsService>();
@@ -76,17 +75,19 @@ class ChannelsDisplayViewModel extends BaseViewModel {
 
   Map<String, String> get sidebarItems => _sidebarItems;
 
-    Future<void> getchannels() async {
-    
-      await runBusyFuture(
-          performGetChannel());
-   
+  Future<void> getchannels() async {
+    await runBusyFuture(performGetChannel());
+
     notifyListeners();
   }
 
   Future<void> performGetChannel() async {
     List<Channel> channelsList = await _auth.getChannelsList("1");
     print(channelsList);
+  }
+
+  void selectChannel() {
+    _auth.setSelectedChannel(_selectedind);
   }
 
   User? user;
@@ -98,5 +99,4 @@ class ChannelsDisplayViewModel extends BaseViewModel {
     print(resUser.user.token);
     notifyListeners();
   }
- 
 }

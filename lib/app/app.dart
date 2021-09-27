@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/authentication/auth_service.dart';
+import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channel_service/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage/local_storage_service.dart';
@@ -66,6 +67,7 @@ const USE_FAKE_API_IMPL = false;
         LazySingleton(classType: ApiService),
     LazySingleton(classType: DMService),
     LazySingleton(classType: OrganizationService),
+    LazySingleton(classType: CentrifugeService),
     LazySingleton(
         classType: ThemeService, resolveUsing: ThemeService.getInstance),
   ],

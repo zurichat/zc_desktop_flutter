@@ -43,6 +43,7 @@ class AuthService {
         "password": password,
       },
     );
+    print(response);
 
     authResponse = AuthResponse.fromMap(response['data']);
 

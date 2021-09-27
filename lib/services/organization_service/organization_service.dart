@@ -10,6 +10,7 @@ import '../local_storage/local_storage_service.dart';
 
 const selectedOrganizationKey = 'selectedOrganizationKey';
 const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
+const organizationIdKey = 'organizationIdKey';
 
 /// Refactor class to store objects with a proper db
 @LazySingleton()
@@ -56,6 +57,15 @@ class OrganizationService {
     return _organizations;
   }*/
 
+  void saveOrganizationId(String orgId) {
+    print('saved orgId ${orgId}');
+    _localStorageService.saveToDisk(organizationIdKey, orgId);
+  }
+
+  String getOrganizationId() {
+    return _localStorageService.getFromDisk(organizationIdKey) as String;
+  }
+
   /// This gets the selected organization_service from the sidebar
   int get selectedOrganization {
     return _localStorageService.getFromDisk(selectedOrganizationKey) as int;
@@ -85,7 +95,7 @@ class OrganizationService {
 
   /// This is used to add user to an organization_service
   Future<void> addMemberToOrganization(String orgID) async {
-     await _apiService.post(
+    await _apiService.post(
       _apiService.apiConstants.getaddUserToOganization(orgID),
       body: {'user_email': _authResponse.user.email},
       headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
@@ -112,9 +122,10 @@ class OrganizationService {
     _addOrgToOrganizationsList(insertedOrganisation);
   }
 
-  Future<void> saveUserSelectedOrganizations(List<Organization> organizations) async {
+  Future<void> saveUserSelectedOrganizations(
+      List<Organization> organizations) async {
     final organizationsToMap =
-    organizations.map((organization) => organization.toMap()).toList();
+        organizations.map((organization) => organization.toMap()).toList();
 
     await _localStorageService.saveToDisk(
       userSelectedOrganizationsKey,
