@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/models/organization/organization.dart';
-
 import '../../app/app.locator.dart';
 import '../../models/auth_response.dart';
 import '../api/api_service.dart';
@@ -60,6 +58,7 @@ class OrganizationService {
   }*/
 
   void saveOrganizationId(String orgId) {
+    print('saved orgId ${orgId}');
     _localStorageService.saveToDisk(organizationIdKey, orgId);
   }
 
@@ -96,7 +95,7 @@ class OrganizationService {
 
   /// This is used to add user to an organization_service
   Future<void> addMemberToOrganization(String orgID) async {
-     await _apiService.post(
+    await _apiService.post(
       _apiService.apiConstants.getaddUserToOganization(orgID),
       body: {'user_email': _authResponse.user.email},
       headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
@@ -123,9 +122,10 @@ class OrganizationService {
     _addOrgToOrganizationsList(insertedOrganisation);
   }
 
-  Future<void> saveUserSelectedOrganizations(List<Organization> organizations) async {
+  Future<void> saveUserSelectedOrganizations(
+      List<Organization> organizations) async {
     final organizationsToMap =
-    organizations.map((organization) => organization.toMap()).toList();
+        organizations.map((organization) => organization.toMap()).toList();
 
     await _localStorageService.saveToDisk(
       userSelectedOrganizationsKey,

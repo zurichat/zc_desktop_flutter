@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
+import 'package:zc_desktop_flutter/models/dm_model/messages_response.dart';
+import 'package:zc_desktop_flutter/ui/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/app_bar/detailed_screen_custom_appbar.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/message.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 
 import 'channels_viewmodel.dart';
 
 class ChannelsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _rightSideBarController = ScrollController();
     return ViewModelBuilder<ChannelsViewModel>.reactive(
       onModelReady: (model) {
         model.setup();
@@ -38,25 +45,75 @@ class ChannelsView extends StatelessWidget {
                     ),
                     trailing: WorkSpaceMembers(),
                   ),
-                  Container(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 12.0.w, vertical: 10.h),
-                      child: Scrollbar(
-                        controller: model.controllerOne,
-                        child: SingleChildScrollView(
-                          physics: ScrollPhysics(),
-                          controller: model.controllerOne,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              MessageWidget(model: model),
-                              MessageWidget(model: model),
-                              MessageWidget(model: model),
-                            ],
-                          ),
-                        ),
-                      ),
+                  Flexible(
+                      fit: FlexFit.tight,
+                      child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: Container(
+                                color: kcBackgroundColor2,
+                                child: Scrollbar(
+                                  controller: _rightSideBarController,
+                                  isAlwaysShown: true,
+                                  scrollbarOrientation:
+                                      ScrollbarOrientation.right,
+                                  thickness: 10,
+                                  showTrackOnHover: true,
+                                  child: ListView(
+                                    physics: AlwaysScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    controller: _rightSideBarController,
+                                    children: [
+                                      ListView.builder(
+                                          itemCount: model.messages.length,
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemBuilder: (context, index) {
+                                            if ((!model.isSameDate(index)) ||
+                                                index == 0) {
+                                              return Column(
+                                                children: [
+                                                  DateWidget(
+                                                      date: model.formatDate(
+                                                          model
+                                                              .messages
+                                                              .elementAt(
+                                                                  index ==
+                                                                          0
+                                                                      ? index
+                                                                      : index +
+                                                                          1)
+                                                              .timestamp)),
+                                                  MessageTile(
+                                                    model: model,
+                                                    messageIndex: index,
+                                                    message: model.messages
+                                                        .elementAt(index),
+                                                  ),
+                                                ],
+                                              );
+                                            }
+                                            return MessageTile(
+                                              model: model,
+                                              messageIndex: index,
+                                              message: model.messages
+                                                  .elementAt(index),
+                                            );
+                                          }),
+                                    ],
+                                  ),
+                                ),
+                              )))),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SendMessageInputField(
+                      sendMessage: (message) {
+                        if (message.isNotEmpty) {
+                          model.sendMessage(message);
+                        }
+                      },
                     ),
                   ),
                 ],
@@ -120,4 +177,195 @@ Widget constructRepliesHighLightAvatars({
       ),
     ),
   );
+}
+
+class MessageTile extends StatelessWidget {
+  final ChannelMessage message;
+  final int messageIndex;
+  final ChannelsViewModel model;
+
+  MessageTile({
+    required this.message,
+    required this.messageIndex,
+    required this.model,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 2, 0, 2),
+      child: MouseRegion(
+        opaque: false,
+        key: UniqueKey(),
+        onHover: (event) {
+          model.onMessageHovered(true, messageIndex);
+        },
+        onExit: (event) {
+          model.onMessageHovered(false, messageIndex);
+        },
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              foregroundDecoration: BoxDecoration(
+                  color: model.onMessageTileHover &&
+                          model.onMessageHoveredIndex == messageIndex
+                      ? hoverColor
+                      : Colors.transparent),
+              color: kcBackgroundColor2,
+              padding: EdgeInsets.fromLTRB(0, 2, 10, 2),
+              child:  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(2.0),
+                          height: 50.h,
+                          width: 50.w,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: lightIconColor),
+                              borderRadius: BorderRadius.circular(8.r),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                    model
+                                        .getUser(message.user_id)
+                                        .displayName,
+                                    scale: 5),
+                              )),
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        Expanded(
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      //u will have to change this using real data
+                                      model
+                                              .getUser(message.user_id)
+                                              .displayName
+                                              .isEmpty
+                                          ? 'Zuri Me'
+                                          : model
+                                              .getUser(message.user_id)
+                                              .displayName,
+                                      style: kHeading1TextStyle.copyWith(
+                                          fontSize: 15.sp),
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Text(
+                                      model.formatTime(message.timestamp),
+                                      style:
+                                          subtitle2.copyWith(color: timeColor),
+                                    )
+                                  ],
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                                  child: Text(message.content),
+                                ), ]),
+                        )
+                      ],
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SameSenderMessageTile extends StatelessWidget {
+  final ChannelsViewModel model;
+  final Results message;
+  final int messageIndex;
+  SameSenderMessageTile(
+      {required this.message, required this.model, required this.messageIndex});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          model.onMessageTileHover &&
+                  model.onMessageHoveredIndex == messageIndex
+              ? Text(
+                  model.formatTime(message.created_at),
+                  style: subtitle2.copyWith(color: timeColor),
+                )
+              : SizedBox(
+                  width: 60.w,
+                ),
+          SizedBox(
+            width: 5.w,
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(message.message),
+                Padding(
+                  padding: EdgeInsets.all(4),
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 40,
+                          childAspectRatio: 3 / 2,
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 20),
+                      shrinkWrap: true,
+                      itemCount: message.reactions.length + 1,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        if (index == message.reactions.length) {
+                          return Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                color: reactionBackground,
+                                borderRadius: BorderRadius.circular(25.r),
+                                border: Border.all(color: reactionBackground)),
+                            child: Center(
+                                child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(SVGAssetPaths.fluentEmoji),
+                                Text('+')
+                              ],
+                            )),
+                          );
+                        } else {
+                          return SizedBox();
+                          /* return EmojiReaction(
+                            onTap: () {
+                              model.reactToMessage(messageIndex, index);
+                            },
+                            model: model,
+                            isReacted: false,
+                            emoji: '',
+                            count: 0,
+                          ); */
+                        }
+                      }),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
