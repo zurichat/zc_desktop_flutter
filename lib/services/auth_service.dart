@@ -16,10 +16,7 @@ class AuthService {
 
   AuthResponse? authResponse;
 
-  Future<void> signup({
-    required String password,
-    required String email,
-  }) async {
+  Future<void> signup({required String password, required String email}) async {
     await _apiService.post(
       _apiService.apiConstants.signupUri,
       body: {
@@ -46,10 +43,12 @@ class AuthService {
         "password": password,
       },
     );
+    print(response);
 
     authResponse = AuthResponse.fromJson(response['data']);
 
-    _localStorageService.saveToDisk(localAuthResponseKey,jsonEncode(response['data']));
+    _localStorageService.saveToDisk(
+        localAuthResponseKey, jsonEncode(response['data']));
   }
 
   Future<void> getResetCode(String email) async {

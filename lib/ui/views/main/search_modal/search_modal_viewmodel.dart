@@ -5,6 +5,7 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channel_service.dart';
+import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/users_loacal_data.dart';
 
@@ -14,7 +15,7 @@ import 'package:zc_desktop_flutter/services/users_loacal_data.dart';
 class SearchModalViewmodel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _dmService = locator<DMService>();
-  final _channelService = locator<ChannelService>();
+  final _channelService = locator<ChannelsService>();
 
   String? _text;
   String? _hintText;
@@ -63,7 +64,7 @@ class SearchModalViewmodel extends BaseViewModel {
         {
           _text = 'channel';
           _hintText = 'Search in Channels';
-          availableListLength = _channelService.channelListLength;
+          //availableListLength = _channelService.channelListLength;
         }
         break;
       case ButtonType.MESSAGE:
@@ -129,7 +130,7 @@ class SearchModalViewmodel extends BaseViewModel {
   }
 
   void getSuggestionsForChannels(String query) {
-    _searchList = _channelService.channelList;
+    //_searchList = _channelService.channelList;
     var filteredList;
     filteredList = List.of(_searchList).where((e) {
       final channelNameToLower = e.name!.toLowerCase();
@@ -160,12 +161,11 @@ class SearchModalViewmodel extends BaseViewModel {
   }
 
   void searchChannels(Channel channel) {
-    _channelService.setChannel(channel);
-    _navigationService.navigateTo(WorkspaceViewRoutes.channelsView, id: 1);
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
   void searchUser(DummyUser user) {
     _dmService.setUser(user);
-    _navigationService.navigateTo(WorkspaceViewRoutes.dmView, id: 1);
+    _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 }

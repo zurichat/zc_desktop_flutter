@@ -15,32 +15,20 @@ class WorkspaceService {
         Channel(
           name: "Announcements",
           private: false,
-          topic: "For all important information",
-          users: <DummyUser>[
-            DummyUser(
-              name: "John Doe",
-            ),
-          ],
+          description: "For all important information",
+          
         ),
         Channel(
           name: "Team-Desktop-Client",
           private: false,
-          topic: "For all important information",
-          users: <DummyUser>[
-            DummyUser(
-              name: "John Doe",
-            ),
-          ],
+          description: "For all important information",
+          
         ),
         Channel(
           name: "Games",
           private: false,
-          topic: "For all important information",
-          users: <DummyUser>[
-            DummyUser(
-              name: "John Doe",
-            ),
-          ],
+          description: "For all important information",
+          
         ),
       ],
       dms: <DM>[
@@ -102,25 +90,14 @@ class WorkspaceService {
         Channel(
           name: "Announcements",
           private: false,
-          topic: "For all important information",
-          users: <DummyUser>[
-            DummyUser(
-              name: "John Doe",
-            ),
-            DummyUser(
-              name: "Ademola Fadumo",
-            )
-          ],
+          description: "For all important information",
+          
         ),
         Channel(
           name: "Arsenal Fan Club",
           private: false,
-          topic: "For all important information",
-          users: <DummyUser>[
-            DummyUser(
-              name: "John Doe",
-            ),
-          ],
+          description: "For all important information",
+          
         ),
       ],
       dms: <DM>[
@@ -179,22 +156,14 @@ class WorkspaceService {
         Channel(
           name: "Announcements",
           private: false,
-          topic: "For all important information",
-          users: <DummyUser>[
-            DummyUser(
-              name: "John Doe",
-            ),
-          ],
+          description: "For all important information",
+          
         ),
         Channel(
           name: "Nigeria Premier Football",
           private: false,
-          topic: "For all important information",
-          users: <DummyUser>[
-            DummyUser(
-              name: "John Doe",
-            ),
-          ],
+          description: "For all important information",
+         
         ),
       ],
       dms: <DM>[

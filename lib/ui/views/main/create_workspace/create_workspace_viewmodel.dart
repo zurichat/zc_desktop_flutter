@@ -3,7 +3,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/services/organisation_service.dart';
+import 'package:zc_desktop_flutter/core/network/failure.dart';
+import 'package:zc_desktop_flutter/services/organization_service/organization_service.dart';
 
 class CreateWorkspaceViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
@@ -79,7 +80,6 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String get companyName => _companyName;
   void setCompanyName(String value) {
     _companyName = value.toString();
-    print(_companyName);
     notifyListeners();
   }
 
@@ -128,6 +128,7 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String get stage3EmailHint => _stage3EmailHint;
 
   String _btnText2 = "Skip this step";
+
   String get btnText2 => _btnText2;
 
   void goToStage3() {
@@ -135,11 +136,19 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   }
 
   void goToHome() {
-    _navigationService.navigateTo(Routes.workspaceView);
+    _navigationService.navigateTo(Routes.organizationView);
   }
 
-  Future<void> createOrganization(String organizationName) async {
-    await _organizationService.updateOrganizationName(organizationName);
-    goToStage2();
+  Future<void> performCreateOrganization(String email) async {
+    await runBusyFuture(_organizationService.createOrganization(email));
+  }
+
+  Future<void> createOrganization(String email) async {
+    try {
+      await performCreateOrganization(email);
+    } catch (e) {
+      throw Failure(e.toString());
+    }
+      goToStage1();
   }
 }

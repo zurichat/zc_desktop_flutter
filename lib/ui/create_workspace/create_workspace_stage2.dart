@@ -8,8 +8,8 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+import 'package:zc_desktop_flutter/ui/views/main/create_workspace/create_workspace_viewmodel.dart';
 
-import 'create_workspace_viewmodel.dart';
 
 class CreateWorkspaceStage2 extends StatelessWidget {
   const CreateWorkspaceStage2({Key? key}) : super(key: key);

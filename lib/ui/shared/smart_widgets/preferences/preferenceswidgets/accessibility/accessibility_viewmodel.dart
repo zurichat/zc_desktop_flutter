@@ -3,8 +3,6 @@ import 'package:stacked/stacked.dart';
 enum UpButtonsChoice { option1, option2 }
 
 class AccessibilityViewModel extends BaseViewModel{
-
-
   /// message settings
   bool? _animateValue = false;
   bool? get animateValue => _animateValue;

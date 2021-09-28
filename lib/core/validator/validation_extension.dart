@@ -19,11 +19,11 @@ extension ValidationExtension on BuildContext {
   String? validatePassword(String? password) {
     if (password == null || password.isEmpty) return 'Field cannot be empty';
 
-    bool isPasswordValid = (password.length >= 8 &&
+    /*bool isPasswordValid = (password.length >= 8 &&
         RegExp(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$")
-            .hasMatch(password));
+            .hasMatch(password));*/
 
-    return (isPasswordValid) ? null : 'Please enter a valid password';
+    //return (isPasswordValid) ? null : 'Please enter a valid password';
   }
 
   String? validateConfirmPassword(String password, String? confirmPassword) {

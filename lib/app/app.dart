@@ -3,11 +3,12 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channel_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
-import 'package:zc_desktop_flutter/services/organisation_service.dart';
+import 'package:zc_desktop_flutter/services/organization_service/organization_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'package:zc_desktop_flutter/services/workspace_service.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
@@ -46,27 +47,29 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     MaterialRoute(page: CreateWorkspaceStage3),
     MaterialRoute(page: ChannelsCreationView),
     MaterialRoute(
-      page: WorkspaceView,
+      page: OrganizationView,
       children: [
         MaterialRoute(page: ChannelsView, initial: true),
         MaterialRoute(page: ChannelsDisplayView),
+        MaterialRoute(page: ChannelsCreationView),
         MaterialRoute(page: DmView),
       ],
     ),
   ],
   dependencies: [
     Presolve(
-      classType: LocalStorageService,
-      presolveUsing: LocalStorageService.getInstance,
-    ),
+        classType: LocalStorageService,
+        presolveUsing: LocalStorageService.getInstance),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: ChannelsService),
-    LazySingleton(classType: ApiService),
-    LazySingleton(classType: WorkspaceService),
+    // USE_FAKE_API_IMPL
+    //     ? LazySingleton(classType: FakeApiService, asType: FakeApi)
+    //     : 
+        LazySingleton(classType: ApiService),
     LazySingleton(classType: DMService),
-    LazySingleton(classType: ChannelService),
     LazySingleton(classType: OrganizationService),
+    LazySingleton(classType: CentrifugeService),
     LazySingleton(
       classType: ThemeService,
       resolveUsing: ThemeService.getInstance,

@@ -6,14 +6,15 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 
 class GotoLoginButton extends StatelessWidget {
-  const GotoLoginButton({Key? key}) : super(key: key);
+  final bool isHome;
+  const GotoLoginButton({Key? key, this.isHome = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
           onTap: (){
             final _navigate = locator<NavigationService>();
-            _navigate.navigateTo(Routes.loginView);
+            _navigate.navigateTo(!isHome ? Routes.loginView : Routes.organizationView);
           },
           child: Text(
             'Back to Login',

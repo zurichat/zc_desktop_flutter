@@ -299,19 +299,6 @@ class Workspace with _$Workspace {
 }
 
 @freezed
-class Channel with _$Channel {
-  factory Channel(
-      {String? name,
-      String? topic,
-      List<DummyUser>? users,
-      bool? private,
-      BaseChat? baseChat}) = _Channel;
-
-  factory Channel.fromJson(Map<String, dynamic> json) =>
-      _$ChannelFromJson(json);
-}
-
-@freezed
 class DM with _$DM {
   factory DM({DummyUser? user, BaseChat? baseChat}) = _DM;
   factory DM.fromJson(Map<String, dynamic> json) => _$DMFromJson(json);
@@ -331,28 +318,53 @@ abstract class BaseChat with _$BaseChat {
 }
 
 @freezed
-class ChannelsDataModel with _$ChannelsDataModel {
-  factory ChannelsDataModel({
-    required String id,
-    required String name,
-    required String owner,
-    required String description,
-    required bool private,
-  }) = _ChannelsDataModel;
+class Channel with _$Channel{
+  factory Channel({
+     String? id,
+     String? name,
+     String? owner,
+     String? description,
+     bool? private,
+  }) = _Channel;
 
-  factory ChannelsDataModel.fromJson(Map<String, dynamic> json) =>
-      _$ChannelsDataModelFromJson(json);
+  factory Channel.fromJson(Map<String, dynamic> json) =>
+      _$ChannelFromJson(json);
 }
 
 @freezed
 class Organization with _$Organization{
   factory Organization({
-    @JsonKey(name: '_id') required  String id,
-    @JsonKey(name: 'logo_url') required String logoUrl,
-    required String name,
-    @JsonKey(name: 'workspace_url') required String workspaceUrl,
+    @JsonKey(name: '_id')   String? id,
+    @JsonKey(name: 'logo_url')  String? logoUrl,
+    required String? name,
+    @JsonKey(name: 'workspace_url') String? workspaceUrl,
   })= _Organization;
 
 factory Organization.fromJson(Map<String, dynamic> json) =>
       _$OrganizationFromJson(json);
+}
+
+@freezed
+class ChannelMessagesResponse with _$ChannelMessagesResponse{
+
+  factory ChannelMessagesResponse({
+    int? status,
+    String? message,
+    @Default([]) List<ChannelMessage> data
+  }) = _ChannelMessagesResponse; 
+  
+  factory ChannelMessagesResponse.fromJson(Map<String, dynamic> json) => _$ChannelMessagesResponseFromJson(json);
+}
+
+@freezed
+class ChannelMessage with _$ChannelMessage{
+  
+  factory ChannelMessage(
+      {@Default('') @JsonKey(name: '_id') String? id,
+      @Default('') String content,
+      @Default('') String channel_id,
+      @Default('') String timestamp,
+      @Default('') String user_id,})= _ChannelMessage;
+
+  factory ChannelMessage.fromJson(Map<String, dynamic> json) => _$ChannelMessageFromJson(json);
 }

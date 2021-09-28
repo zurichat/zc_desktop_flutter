@@ -47,7 +47,7 @@ class WorkspaceViewModel extends BaseViewModel {
   bool get displayChannels => _displayChannels;
 
   void openChannelsList() {
-    _navigationService.navigateTo(WorkspaceViewRoutes.channelsDisplayView,
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsDisplayView,
         id: 1);
   }
 
@@ -105,12 +105,12 @@ class WorkspaceViewModel extends BaseViewModel {
 
   void goToDmView(int index) {
     _dmService.setUser(_directMessages[index].user!);
-    _navigationService.navigateTo(WorkspaceViewRoutes.dmView, id: 1);
+    _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
   void goToChannelsView(int index) {
     _channelService.setChannel(_channels[index]);
-    _navigationService.navigateTo(WorkspaceViewRoutes.channelsView, id: 1);
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
   String? getWorkspaceName() {

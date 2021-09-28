@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
@@ -81,6 +82,12 @@ class ChannelsDisplayViewModel extends BaseViewModel {
 
   Future<void> performGetChannel() async {
     // List<ChannelsDataModel> channelsList = await _channelService.getChannelsList();
+    List<Channel>? channelsList = await _channelService.getChannelsList("1");
+    print(channelsList);
+  }
+
+  void selectChannel() {
+    _channelService.setSelectedChannel(_selectedind);
   }
 
   User? user;

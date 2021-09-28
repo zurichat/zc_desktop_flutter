@@ -7,6 +7,7 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
@@ -100,7 +101,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
   }
 
   void goToViewChannels() {
-    _navigationService.navigateTo(Routes.workspaceView);
+    _navigationService.navigateTo(Routes.organizationView);
     notifyListeners();
   }
 
@@ -180,12 +181,14 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
       String name, String owner, String description, bool private) async {
     // await _auth.createChannels(
     //     name, owner, description, private);
+    await _auth.createChannels(name, owner, description, private);
+
     _showError = true;
     await Future.delayed(
       Duration(milliseconds: 1500),
     );
-   _navigationService.popRepeated(1);
-
+    notifyListeners();
+    _navigationService.pushNamedAndRemoveUntil(Routes.organizationView);
   }
 
   /// Error should be handled here. It could be displaying a toast of something else

@@ -12,6 +12,7 @@ class SideBarViewModel extends BaseViewModel {
   final _sidebarStorageKey = 'sidebarSetting';
   var _sideBar = SideBar();
   PrefSidebar _sidebar = PrefSidebar.AllConversation;
+
   get sidebar => _sidebar;
 
   void toggleSidebar(Object? value) {
@@ -97,7 +98,7 @@ class SideBarViewModel extends BaseViewModel {
 
   void togggleBrowser(bool? value) {
     _browser = value!;
-     _sideBar = _sideBar.copyWith(showFileBrowser: _browser);
+    _sideBar = _sideBar.copyWith(showFileBrowser: _browser);
     notifyListeners();
   }
 
