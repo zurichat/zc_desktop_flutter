@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/models/channels/channels_datamodel.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
@@ -53,7 +52,7 @@ class ChannelsService {
     );
 
     return List.from(
-      response['data'].map((map) => ChannelsDataModel.fromMap(map)).toList(),
+      response['data'].map((map) => ChannelsDataModel.fromJson(map)).toList(),
     );
   }
 
