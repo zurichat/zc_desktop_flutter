@@ -76,7 +76,7 @@ class DmView extends StatelessWidget {
                                       controller: _rightSideBarController,
                                       children: [
                                         NewDmView(
-                                          userName: model.user!.name!,
+                                          userName: model.user.name!,
                                         ),
                                         ListView.builder(
                                             itemCount: model.messages.length,
@@ -242,12 +242,16 @@ class MessageTile extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(//u will have to change this using real data
+                                    Text(
+                                      //u will have to change this using real data
                                       model
-                                          .getUser(message.sender_id)
-                                          .displayName.isEmpty ? 'Zuri Me' : model
-                                          .getUser(message.sender_id)
-                                          .displayName,
+                                              .getUser(message.sender_id)
+                                              .displayName
+                                              .isEmpty
+                                          ? 'Zuri Me'
+                                          : model
+                                              .getUser(message.sender_id)
+                                              .displayName,
                                       style: kHeading1TextStyle.copyWith(
                                           fontSize: 15.sp),
                                     ),

@@ -4749,243 +4749,6 @@ abstract class _Advanced implements Advanced {
       throw _privateConstructorUsedError;
 }
 
-Organization _$OrganisationFromJson(Map<String, dynamic> json) {
-  return _Organisation.fromJson(json);
-}
-
-/// @nodoc
-class _$OrganisationTearOff {
-  const _$OrganisationTearOff();
-
-  _Organisation call(
-      {@JsonKey(name: '_id') required String id,
-      @JsonKey(name: 'logo_url') required String logoUrl,
-      required String name,
-      @JsonKey(name: 'workspace_url') required String workspaceUrl}) {
-    return _Organisation(
-      id: id,
-      logoUrl: logoUrl,
-      name: name,
-      workspaceUrl: workspaceUrl,
-    );
-  }
-
-  Organization fromJson(Map<String, Object> json) {
-    return Organization.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Organisation = _$OrganisationTearOff();
-
-/// @nodoc
-mixin _$Organisation {
-  @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'logo_url')
-  String get logoUrl => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'workspace_url')
-  String get workspaceUrl => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $OrganisationCopyWith<Organization> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OrganisationCopyWith<$Res> {
-  factory $OrganisationCopyWith(
-          Organization value, $Res Function(Organization) then) =
-      _$OrganisationCopyWithImpl<$Res>;
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      @JsonKey(name: 'logo_url') String logoUrl,
-      String name,
-      @JsonKey(name: 'workspace_url') String workspaceUrl});
-}
-
-/// @nodoc
-class _$OrganisationCopyWithImpl<$Res> implements $OrganisationCopyWith<$Res> {
-  _$OrganisationCopyWithImpl(this._value, this._then);
-
-  final Organization _value;
-  // ignore: unused_field
-  final $Res Function(Organization) _then;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? logoUrl = freezed,
-    Object? name = freezed,
-    Object? workspaceUrl = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      logoUrl: logoUrl == freezed
-          ? _value.logoUrl
-          : logoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      workspaceUrl: workspaceUrl == freezed
-          ? _value.workspaceUrl
-          : workspaceUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$OrganisationCopyWith<$Res>
-    implements $OrganisationCopyWith<$Res> {
-  factory _$OrganisationCopyWith(
-          _Organisation value, $Res Function(_Organisation) then) =
-      __$OrganisationCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      @JsonKey(name: 'logo_url') String logoUrl,
-      String name,
-      @JsonKey(name: 'workspace_url') String workspaceUrl});
-}
-
-/// @nodoc
-class __$OrganisationCopyWithImpl<$Res> extends _$OrganisationCopyWithImpl<$Res>
-    implements _$OrganisationCopyWith<$Res> {
-  __$OrganisationCopyWithImpl(
-      _Organisation _value, $Res Function(_Organisation) _then)
-      : super(_value, (v) => _then(v as _Organisation));
-
-  @override
-  _Organisation get _value => super._value as _Organisation;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? logoUrl = freezed,
-    Object? name = freezed,
-    Object? workspaceUrl = freezed,
-  }) {
-    return _then(_Organisation(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      logoUrl: logoUrl == freezed
-          ? _value.logoUrl
-          : logoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      workspaceUrl: workspaceUrl == freezed
-          ? _value.workspaceUrl
-          : workspaceUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Organisation implements _Organisation {
-  _$_Organisation(
-      {@JsonKey(name: '_id') required this.id,
-      @JsonKey(name: 'logo_url') required this.logoUrl,
-      required this.name,
-      @JsonKey(name: 'workspace_url') required this.workspaceUrl});
-
-  factory _$_Organisation.fromJson(Map<String, dynamic> json) =>
-      _$$_OrganisationFromJson(json);
-
-  @override
-  @JsonKey(name: '_id')
-  final String id;
-  @override
-  @JsonKey(name: 'logo_url')
-  final String logoUrl;
-  @override
-  final String name;
-  @override
-  @JsonKey(name: 'workspace_url')
-  final String workspaceUrl;
-
-  @override
-  String toString() {
-    return 'Organisation(id: $id, logoUrl: $logoUrl, name: $name, workspaceUrl: $workspaceUrl)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Organisation &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.logoUrl, logoUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.logoUrl, logoUrl)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.workspaceUrl, workspaceUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.workspaceUrl, workspaceUrl)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(logoUrl) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(workspaceUrl);
-
-  @JsonKey(ignore: true)
-  @override
-  _$OrganisationCopyWith<_Organisation> get copyWith =>
-      __$OrganisationCopyWithImpl<_Organisation>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_OrganisationToJson(this);
-  }
-}
-
-abstract class _Organisation implements Organization {
-  factory _Organisation(
-          {@JsonKey(name: '_id') required String id,
-          @JsonKey(name: 'logo_url') required String logoUrl,
-          required String name,
-          @JsonKey(name: 'workspace_url') required String workspaceUrl}) =
-      _$_Organisation;
-
-  factory _Organisation.fromJson(Map<String, dynamic> json) =
-      _$_Organisation.fromJson;
-
-  @override
-  @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(name: 'logo_url')
-  String get logoUrl => throw _privateConstructorUsedError;
-  @override
-  String get name => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(name: 'workspace_url')
-  String get workspaceUrl => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$OrganisationCopyWith<_Organisation> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
 DummyUser _$DummyUserFromJson(Map<String, dynamic> json) {
   return _DummyUser.fromJson(json);
 }
@@ -5576,262 +5339,6 @@ abstract class _Workspace implements Workspace {
       throw _privateConstructorUsedError;
 }
 
-Channel _$ChannelFromJson(Map<String, dynamic> json) {
-  return _Channel.fromJson(json);
-}
-
-/// @nodoc
-class _$ChannelTearOff {
-  const _$ChannelTearOff();
-
-  _Channel call(
-      {String? name,
-      String? topic,
-      List<DummyUser>? users,
-      bool? private,
-      BaseChat? baseChat}) {
-    return _Channel(
-      name: name,
-      topic: topic,
-      users: users,
-      private: private,
-      baseChat: baseChat,
-    );
-  }
-
-  Channel fromJson(Map<String, Object> json) {
-    return Channel.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Channel = _$ChannelTearOff();
-
-/// @nodoc
-mixin _$Channel {
-  String? get name => throw _privateConstructorUsedError;
-  String? get topic => throw _privateConstructorUsedError;
-  List<DummyUser>? get users => throw _privateConstructorUsedError;
-  bool? get private => throw _privateConstructorUsedError;
-  BaseChat? get baseChat => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ChannelCopyWith<Channel> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ChannelCopyWith<$Res> {
-  factory $ChannelCopyWith(Channel value, $Res Function(Channel) then) =
-      _$ChannelCopyWithImpl<$Res>;
-  $Res call(
-      {String? name,
-      String? topic,
-      List<DummyUser>? users,
-      bool? private,
-      BaseChat? baseChat});
-
-  $BaseChatCopyWith<$Res>? get baseChat;
-}
-
-/// @nodoc
-class _$ChannelCopyWithImpl<$Res> implements $ChannelCopyWith<$Res> {
-  _$ChannelCopyWithImpl(this._value, this._then);
-
-  final Channel _value;
-  // ignore: unused_field
-  final $Res Function(Channel) _then;
-
-  @override
-  $Res call({
-    Object? name = freezed,
-    Object? topic = freezed,
-    Object? users = freezed,
-    Object? private = freezed,
-    Object? baseChat = freezed,
-  }) {
-    return _then(_value.copyWith(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      topic: topic == freezed
-          ? _value.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as String?,
-      users: users == freezed
-          ? _value.users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<DummyUser>?,
-      private: private == freezed
-          ? _value.private
-          : private // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      baseChat: baseChat == freezed
-          ? _value.baseChat
-          : baseChat // ignore: cast_nullable_to_non_nullable
-              as BaseChat?,
-    ));
-  }
-
-  @override
-  $BaseChatCopyWith<$Res>? get baseChat {
-    if (_value.baseChat == null) {
-      return null;
-    }
-
-    return $BaseChatCopyWith<$Res>(_value.baseChat!, (value) {
-      return _then(_value.copyWith(baseChat: value));
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$ChannelCopyWith<$Res> implements $ChannelCopyWith<$Res> {
-  factory _$ChannelCopyWith(_Channel value, $Res Function(_Channel) then) =
-      __$ChannelCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {String? name,
-      String? topic,
-      List<DummyUser>? users,
-      bool? private,
-      BaseChat? baseChat});
-
-  @override
-  $BaseChatCopyWith<$Res>? get baseChat;
-}
-
-/// @nodoc
-class __$ChannelCopyWithImpl<$Res> extends _$ChannelCopyWithImpl<$Res>
-    implements _$ChannelCopyWith<$Res> {
-  __$ChannelCopyWithImpl(_Channel _value, $Res Function(_Channel) _then)
-      : super(_value, (v) => _then(v as _Channel));
-
-  @override
-  _Channel get _value => super._value as _Channel;
-
-  @override
-  $Res call({
-    Object? name = freezed,
-    Object? topic = freezed,
-    Object? users = freezed,
-    Object? private = freezed,
-    Object? baseChat = freezed,
-  }) {
-    return _then(_Channel(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      topic: topic == freezed
-          ? _value.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as String?,
-      users: users == freezed
-          ? _value.users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<DummyUser>?,
-      private: private == freezed
-          ? _value.private
-          : private // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      baseChat: baseChat == freezed
-          ? _value.baseChat
-          : baseChat // ignore: cast_nullable_to_non_nullable
-              as BaseChat?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Channel implements _Channel {
-  _$_Channel({this.name, this.topic, this.users, this.private, this.baseChat});
-
-  factory _$_Channel.fromJson(Map<String, dynamic> json) =>
-      _$$_ChannelFromJson(json);
-
-  @override
-  final String? name;
-  @override
-  final String? topic;
-  @override
-  final List<DummyUser>? users;
-  @override
-  final bool? private;
-  @override
-  final BaseChat? baseChat;
-
-  @override
-  String toString() {
-    return 'Channel(name: $name, topic: $topic, users: $users, private: $private, baseChat: $baseChat)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Channel &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.topic, topic) ||
-                const DeepCollectionEquality().equals(other.topic, topic)) &&
-            (identical(other.users, users) ||
-                const DeepCollectionEquality().equals(other.users, users)) &&
-            (identical(other.private, private) ||
-                const DeepCollectionEquality()
-                    .equals(other.private, private)) &&
-            (identical(other.baseChat, baseChat) ||
-                const DeepCollectionEquality()
-                    .equals(other.baseChat, baseChat)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(topic) ^
-      const DeepCollectionEquality().hash(users) ^
-      const DeepCollectionEquality().hash(private) ^
-      const DeepCollectionEquality().hash(baseChat);
-
-  @JsonKey(ignore: true)
-  @override
-  _$ChannelCopyWith<_Channel> get copyWith =>
-      __$ChannelCopyWithImpl<_Channel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ChannelToJson(this);
-  }
-}
-
-abstract class _Channel implements Channel {
-  factory _Channel(
-      {String? name,
-      String? topic,
-      List<DummyUser>? users,
-      bool? private,
-      BaseChat? baseChat}) = _$_Channel;
-
-  factory _Channel.fromJson(Map<String, dynamic> json) = _$_Channel.fromJson;
-
-  @override
-  String? get name => throw _privateConstructorUsedError;
-  @override
-  String? get topic => throw _privateConstructorUsedError;
-  @override
-  List<DummyUser>? get users => throw _privateConstructorUsedError;
-  @override
-  bool? get private => throw _privateConstructorUsedError;
-  @override
-  BaseChat? get baseChat => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$ChannelCopyWith<_Channel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
 DM _$DMFromJson(Map<String, dynamic> json) {
   return _DM.fromJson(json);
 }
@@ -6355,5 +5862,938 @@ abstract class _BaseChat implements BaseChat {
   @override
   @JsonKey(ignore: true)
   _$BaseChatCopyWith<_BaseChat> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Channel _$ChannelFromJson(Map<String, dynamic> json) {
+  return _Channel.fromJson(json);
+}
+
+/// @nodoc
+class _$ChannelTearOff {
+  const _$ChannelTearOff();
+
+  _Channel call(
+      {String? id,
+      String? name,
+      String? owner,
+      String? description,
+      bool? private}) {
+    return _Channel(
+      id: id,
+      name: name,
+      owner: owner,
+      description: description,
+      private: private,
+    );
+  }
+
+  Channel fromJson(Map<String, Object> json) {
+    return Channel.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Channel = _$ChannelTearOff();
+
+/// @nodoc
+mixin _$Channel {
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get owner => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  bool? get private => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ChannelCopyWith<Channel> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ChannelCopyWith<$Res> {
+  factory $ChannelCopyWith(Channel value, $Res Function(Channel) then) =
+      _$ChannelCopyWithImpl<$Res>;
+  $Res call(
+      {String? id,
+      String? name,
+      String? owner,
+      String? description,
+      bool? private});
+}
+
+/// @nodoc
+class _$ChannelCopyWithImpl<$Res> implements $ChannelCopyWith<$Res> {
+  _$ChannelCopyWithImpl(this._value, this._then);
+
+  final Channel _value;
+  // ignore: unused_field
+  final $Res Function(Channel) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? owner = freezed,
+    Object? description = freezed,
+    Object? private = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      owner: owner == freezed
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      private: private == freezed
+          ? _value.private
+          : private // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ChannelCopyWith<$Res> implements $ChannelCopyWith<$Res> {
+  factory _$ChannelCopyWith(_Channel value, $Res Function(_Channel) then) =
+      __$ChannelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? id,
+      String? name,
+      String? owner,
+      String? description,
+      bool? private});
+}
+
+/// @nodoc
+class __$ChannelCopyWithImpl<$Res> extends _$ChannelCopyWithImpl<$Res>
+    implements _$ChannelCopyWith<$Res> {
+  __$ChannelCopyWithImpl(_Channel _value, $Res Function(_Channel) _then)
+      : super(_value, (v) => _then(v as _Channel));
+
+  @override
+  _Channel get _value => super._value as _Channel;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? owner = freezed,
+    Object? description = freezed,
+    Object? private = freezed,
+  }) {
+    return _then(_Channel(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      owner: owner == freezed
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      private: private == freezed
+          ? _value.private
+          : private // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Channel implements _Channel {
+  _$_Channel({this.id, this.name, this.owner, this.description, this.private});
+
+  factory _$_Channel.fromJson(Map<String, dynamic> json) =>
+      _$$_ChannelFromJson(json);
+
+  @override
+  final String? id;
+  @override
+  final String? name;
+  @override
+  final String? owner;
+  @override
+  final String? description;
+  @override
+  final bool? private;
+
+  @override
+  String toString() {
+    return 'Channel(id: $id, name: $name, owner: $owner, description: $description, private: $private)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Channel &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.owner, owner) ||
+                const DeepCollectionEquality().equals(other.owner, owner)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.private, private) ||
+                const DeepCollectionEquality().equals(other.private, private)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(owner) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(private);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ChannelCopyWith<_Channel> get copyWith =>
+      __$ChannelCopyWithImpl<_Channel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ChannelToJson(this);
+  }
+}
+
+abstract class _Channel implements Channel {
+  factory _Channel(
+      {String? id,
+      String? name,
+      String? owner,
+      String? description,
+      bool? private}) = _$_Channel;
+
+  factory _Channel.fromJson(Map<String, dynamic> json) = _$_Channel.fromJson;
+
+  @override
+  String? get id => throw _privateConstructorUsedError;
+  @override
+  String? get name => throw _privateConstructorUsedError;
+  @override
+  String? get owner => throw _privateConstructorUsedError;
+  @override
+  String? get description => throw _privateConstructorUsedError;
+  @override
+  bool? get private => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$ChannelCopyWith<_Channel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Organization _$OrganizationFromJson(Map<String, dynamic> json) {
+  return _Organization.fromJson(json);
+}
+
+/// @nodoc
+class _$OrganizationTearOff {
+  const _$OrganizationTearOff();
+
+  _Organization call(
+      {@JsonKey(name: '_id') String? id,
+      @JsonKey(name: 'logo_url') String? logoUrl,
+      required String? name,
+      @JsonKey(name: 'workspace_url') String? workspaceUrl}) {
+    return _Organization(
+      id: id,
+      logoUrl: logoUrl,
+      name: name,
+      workspaceUrl: workspaceUrl,
+    );
+  }
+
+  Organization fromJson(Map<String, Object> json) {
+    return Organization.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Organization = _$OrganizationTearOff();
+
+/// @nodoc
+mixin _$Organization {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'logo_url')
+  String? get logoUrl => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'workspace_url')
+  String? get workspaceUrl => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OrganizationCopyWith<Organization> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OrganizationCopyWith<$Res> {
+  factory $OrganizationCopyWith(
+          Organization value, $Res Function(Organization) then) =
+      _$OrganizationCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      @JsonKey(name: 'logo_url') String? logoUrl,
+      String? name,
+      @JsonKey(name: 'workspace_url') String? workspaceUrl});
+}
+
+/// @nodoc
+class _$OrganizationCopyWithImpl<$Res> implements $OrganizationCopyWith<$Res> {
+  _$OrganizationCopyWithImpl(this._value, this._then);
+
+  final Organization _value;
+  // ignore: unused_field
+  final $Res Function(Organization) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? logoUrl = freezed,
+    Object? name = freezed,
+    Object? workspaceUrl = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      logoUrl: logoUrl == freezed
+          ? _value.logoUrl
+          : logoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      workspaceUrl: workspaceUrl == freezed
+          ? _value.workspaceUrl
+          : workspaceUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$OrganizationCopyWith<$Res>
+    implements $OrganizationCopyWith<$Res> {
+  factory _$OrganizationCopyWith(
+          _Organization value, $Res Function(_Organization) then) =
+      __$OrganizationCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      @JsonKey(name: 'logo_url') String? logoUrl,
+      String? name,
+      @JsonKey(name: 'workspace_url') String? workspaceUrl});
+}
+
+/// @nodoc
+class __$OrganizationCopyWithImpl<$Res> extends _$OrganizationCopyWithImpl<$Res>
+    implements _$OrganizationCopyWith<$Res> {
+  __$OrganizationCopyWithImpl(
+      _Organization _value, $Res Function(_Organization) _then)
+      : super(_value, (v) => _then(v as _Organization));
+
+  @override
+  _Organization get _value => super._value as _Organization;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? logoUrl = freezed,
+    Object? name = freezed,
+    Object? workspaceUrl = freezed,
+  }) {
+    return _then(_Organization(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      logoUrl: logoUrl == freezed
+          ? _value.logoUrl
+          : logoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      workspaceUrl: workspaceUrl == freezed
+          ? _value.workspaceUrl
+          : workspaceUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Organization implements _Organization {
+  _$_Organization(
+      {@JsonKey(name: '_id') this.id,
+      @JsonKey(name: 'logo_url') this.logoUrl,
+      required this.name,
+      @JsonKey(name: 'workspace_url') this.workspaceUrl});
+
+  factory _$_Organization.fromJson(Map<String, dynamic> json) =>
+      _$$_OrganizationFromJson(json);
+
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
+  @JsonKey(name: 'logo_url')
+  final String? logoUrl;
+  @override
+  final String? name;
+  @override
+  @JsonKey(name: 'workspace_url')
+  final String? workspaceUrl;
+
+  @override
+  String toString() {
+    return 'Organization(id: $id, logoUrl: $logoUrl, name: $name, workspaceUrl: $workspaceUrl)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Organization &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.logoUrl, logoUrl) ||
+                const DeepCollectionEquality()
+                    .equals(other.logoUrl, logoUrl)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.workspaceUrl, workspaceUrl) ||
+                const DeepCollectionEquality()
+                    .equals(other.workspaceUrl, workspaceUrl)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(logoUrl) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(workspaceUrl);
+
+  @JsonKey(ignore: true)
+  @override
+  _$OrganizationCopyWith<_Organization> get copyWith =>
+      __$OrganizationCopyWithImpl<_Organization>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_OrganizationToJson(this);
+  }
+}
+
+abstract class _Organization implements Organization {
+  factory _Organization(
+      {@JsonKey(name: '_id') String? id,
+      @JsonKey(name: 'logo_url') String? logoUrl,
+      required String? name,
+      @JsonKey(name: 'workspace_url') String? workspaceUrl}) = _$_Organization;
+
+  factory _Organization.fromJson(Map<String, dynamic> json) =
+      _$_Organization.fromJson;
+
+  @override
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'logo_url')
+  String? get logoUrl => throw _privateConstructorUsedError;
+  @override
+  String? get name => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'workspace_url')
+  String? get workspaceUrl => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$OrganizationCopyWith<_Organization> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ChannelMessagesResponse _$ChannelMessagesResponseFromJson(
+    Map<String, dynamic> json) {
+  return _ChannelMessagesResponse.fromJson(json);
+}
+
+/// @nodoc
+class _$ChannelMessagesResponseTearOff {
+  const _$ChannelMessagesResponseTearOff();
+
+  _ChannelMessagesResponse call(
+      {int? status, String? message, List<ChannelMessage> data = const []}) {
+    return _ChannelMessagesResponse(
+      status: status,
+      message: message,
+      data: data,
+    );
+  }
+
+  ChannelMessagesResponse fromJson(Map<String, Object> json) {
+    return ChannelMessagesResponse.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ChannelMessagesResponse = _$ChannelMessagesResponseTearOff();
+
+/// @nodoc
+mixin _$ChannelMessagesResponse {
+  int? get status => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  List<ChannelMessage> get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ChannelMessagesResponseCopyWith<ChannelMessagesResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ChannelMessagesResponseCopyWith<$Res> {
+  factory $ChannelMessagesResponseCopyWith(ChannelMessagesResponse value,
+          $Res Function(ChannelMessagesResponse) then) =
+      _$ChannelMessagesResponseCopyWithImpl<$Res>;
+  $Res call({int? status, String? message, List<ChannelMessage> data});
+}
+
+/// @nodoc
+class _$ChannelMessagesResponseCopyWithImpl<$Res>
+    implements $ChannelMessagesResponseCopyWith<$Res> {
+  _$ChannelMessagesResponseCopyWithImpl(this._value, this._then);
+
+  final ChannelMessagesResponse _value;
+  // ignore: unused_field
+  final $Res Function(ChannelMessagesResponse) _then;
+
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<ChannelMessage>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ChannelMessagesResponseCopyWith<$Res>
+    implements $ChannelMessagesResponseCopyWith<$Res> {
+  factory _$ChannelMessagesResponseCopyWith(_ChannelMessagesResponse value,
+          $Res Function(_ChannelMessagesResponse) then) =
+      __$ChannelMessagesResponseCopyWithImpl<$Res>;
+  @override
+  $Res call({int? status, String? message, List<ChannelMessage> data});
+}
+
+/// @nodoc
+class __$ChannelMessagesResponseCopyWithImpl<$Res>
+    extends _$ChannelMessagesResponseCopyWithImpl<$Res>
+    implements _$ChannelMessagesResponseCopyWith<$Res> {
+  __$ChannelMessagesResponseCopyWithImpl(_ChannelMessagesResponse _value,
+      $Res Function(_ChannelMessagesResponse) _then)
+      : super(_value, (v) => _then(v as _ChannelMessagesResponse));
+
+  @override
+  _ChannelMessagesResponse get _value =>
+      super._value as _ChannelMessagesResponse;
+
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_ChannelMessagesResponse(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<ChannelMessage>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ChannelMessagesResponse implements _ChannelMessagesResponse {
+  _$_ChannelMessagesResponse({this.status, this.message, this.data = const []});
+
+  factory _$_ChannelMessagesResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_ChannelMessagesResponseFromJson(json);
+
+  @override
+  final int? status;
+  @override
+  final String? message;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<ChannelMessage> data;
+
+  @override
+  String toString() {
+    return 'ChannelMessagesResponse(status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ChannelMessagesResponse &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(status) ^
+      const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(data);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ChannelMessagesResponseCopyWith<_ChannelMessagesResponse> get copyWith =>
+      __$ChannelMessagesResponseCopyWithImpl<_ChannelMessagesResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ChannelMessagesResponseToJson(this);
+  }
+}
+
+abstract class _ChannelMessagesResponse implements ChannelMessagesResponse {
+  factory _ChannelMessagesResponse(
+      {int? status,
+      String? message,
+      List<ChannelMessage> data}) = _$_ChannelMessagesResponse;
+
+  factory _ChannelMessagesResponse.fromJson(Map<String, dynamic> json) =
+      _$_ChannelMessagesResponse.fromJson;
+
+  @override
+  int? get status => throw _privateConstructorUsedError;
+  @override
+  String? get message => throw _privateConstructorUsedError;
+  @override
+  List<ChannelMessage> get data => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$ChannelMessagesResponseCopyWith<_ChannelMessagesResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ChannelMessage _$ChannelMessageFromJson(Map<String, dynamic> json) {
+  return _ChannelMessage.fromJson(json);
+}
+
+/// @nodoc
+class _$ChannelMessageTearOff {
+  const _$ChannelMessageTearOff();
+
+  _ChannelMessage call(
+      {@JsonKey(name: '_id') String? id = '',
+      String content = '',
+      String channel_id = '',
+      String timestamp = '',
+      String user_id = ''}) {
+    return _ChannelMessage(
+      id: id,
+      content: content,
+      channel_id: channel_id,
+      timestamp: timestamp,
+      user_id: user_id,
+    );
+  }
+
+  ChannelMessage fromJson(Map<String, Object> json) {
+    return ChannelMessage.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ChannelMessage = _$ChannelMessageTearOff();
+
+/// @nodoc
+mixin _$ChannelMessage {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  String get content => throw _privateConstructorUsedError;
+  String get channel_id => throw _privateConstructorUsedError;
+  String get timestamp => throw _privateConstructorUsedError;
+  String get user_id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ChannelMessageCopyWith<ChannelMessage> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ChannelMessageCopyWith<$Res> {
+  factory $ChannelMessageCopyWith(
+          ChannelMessage value, $Res Function(ChannelMessage) then) =
+      _$ChannelMessageCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String content,
+      String channel_id,
+      String timestamp,
+      String user_id});
+}
+
+/// @nodoc
+class _$ChannelMessageCopyWithImpl<$Res>
+    implements $ChannelMessageCopyWith<$Res> {
+  _$ChannelMessageCopyWithImpl(this._value, this._then);
+
+  final ChannelMessage _value;
+  // ignore: unused_field
+  final $Res Function(ChannelMessage) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? content = freezed,
+    Object? channel_id = freezed,
+    Object? timestamp = freezed,
+    Object? user_id = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      content: content == freezed
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      channel_id: channel_id == freezed
+          ? _value.channel_id
+          : channel_id // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: timestamp == freezed
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String,
+      user_id: user_id == freezed
+          ? _value.user_id
+          : user_id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ChannelMessageCopyWith<$Res>
+    implements $ChannelMessageCopyWith<$Res> {
+  factory _$ChannelMessageCopyWith(
+          _ChannelMessage value, $Res Function(_ChannelMessage) then) =
+      __$ChannelMessageCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String content,
+      String channel_id,
+      String timestamp,
+      String user_id});
+}
+
+/// @nodoc
+class __$ChannelMessageCopyWithImpl<$Res>
+    extends _$ChannelMessageCopyWithImpl<$Res>
+    implements _$ChannelMessageCopyWith<$Res> {
+  __$ChannelMessageCopyWithImpl(
+      _ChannelMessage _value, $Res Function(_ChannelMessage) _then)
+      : super(_value, (v) => _then(v as _ChannelMessage));
+
+  @override
+  _ChannelMessage get _value => super._value as _ChannelMessage;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? content = freezed,
+    Object? channel_id = freezed,
+    Object? timestamp = freezed,
+    Object? user_id = freezed,
+  }) {
+    return _then(_ChannelMessage(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      content: content == freezed
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      channel_id: channel_id == freezed
+          ? _value.channel_id
+          : channel_id // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: timestamp == freezed
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String,
+      user_id: user_id == freezed
+          ? _value.user_id
+          : user_id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ChannelMessage implements _ChannelMessage {
+  _$_ChannelMessage(
+      {@JsonKey(name: '_id') this.id = '',
+      this.content = '',
+      this.channel_id = '',
+      this.timestamp = '',
+      this.user_id = ''});
+
+  factory _$_ChannelMessage.fromJson(Map<String, dynamic> json) =>
+      _$$_ChannelMessageFromJson(json);
+
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
+  @JsonKey(defaultValue: '')
+  @override
+  final String content;
+  @JsonKey(defaultValue: '')
+  @override
+  final String channel_id;
+  @JsonKey(defaultValue: '')
+  @override
+  final String timestamp;
+  @JsonKey(defaultValue: '')
+  @override
+  final String user_id;
+
+  @override
+  String toString() {
+    return 'ChannelMessage(id: $id, content: $content, channel_id: $channel_id, timestamp: $timestamp, user_id: $user_id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ChannelMessage &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.content, content) ||
+                const DeepCollectionEquality()
+                    .equals(other.content, content)) &&
+            (identical(other.channel_id, channel_id) ||
+                const DeepCollectionEquality()
+                    .equals(other.channel_id, channel_id)) &&
+            (identical(other.timestamp, timestamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.timestamp, timestamp)) &&
+            (identical(other.user_id, user_id) ||
+                const DeepCollectionEquality().equals(other.user_id, user_id)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(content) ^
+      const DeepCollectionEquality().hash(channel_id) ^
+      const DeepCollectionEquality().hash(timestamp) ^
+      const DeepCollectionEquality().hash(user_id);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ChannelMessageCopyWith<_ChannelMessage> get copyWith =>
+      __$ChannelMessageCopyWithImpl<_ChannelMessage>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ChannelMessageToJson(this);
+  }
+}
+
+abstract class _ChannelMessage implements ChannelMessage {
+  factory _ChannelMessage(
+      {@JsonKey(name: '_id') String? id,
+      String content,
+      String channel_id,
+      String timestamp,
+      String user_id}) = _$_ChannelMessage;
+
+  factory _ChannelMessage.fromJson(Map<String, dynamic> json) =
+      _$_ChannelMessage.fromJson;
+
+  @override
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  @override
+  String get content => throw _privateConstructorUsedError;
+  @override
+  String get channel_id => throw _privateConstructorUsedError;
+  @override
+  String get timestamp => throw _privateConstructorUsedError;
+  @override
+  String get user_id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$ChannelMessageCopyWith<_ChannelMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }

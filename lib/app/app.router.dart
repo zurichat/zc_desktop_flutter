@@ -18,15 +18,14 @@ import '../ui/views/auth/reset_password/reset_password_view.dart';
 import '../ui/views/auth/sign_up/sign_up_view.dart';
 import '../ui/views/auth/success/success_view.dart';
 import '../ui/views/main/channels/channels_view.dart';
-import '../ui/views/main/channels_creation/channels_creation_view.dart';
-import '../ui/views/main/channels_display/channels_display_view.dart';
-import '../ui/views/main/create_workspace/create_workspace.dart';
-import '../ui/views/main/create_workspace/create_workspace_stage1.dart';
-import '../ui/views/main/create_workspace/create_workspace_stage2.dart';
-import '../ui/views/main/create_workspace/create_workspace_stage3.dart';
+import '../ui/views/main/channels_list/channels_list_view.dart';
+import '../ui/views/main/create_channel/create_channel_view.dart';
+import '../ui/views/main/create_organization/create_organization_name.dart';
+import '../ui/views/main/create_organization/create_workspace.dart';
+import '../ui/views/main/create_organization/create_workspace_stage2.dart';
+import '../ui/views/main/create_organization/create_workspace_stage3.dart';
 import '../ui/views/main/dm/dm_view.dart';
-import '../ui/views/main/home/home_view.dart';
-import '../ui/views/main/workspace/workspace_view.dart';
+import '../ui/views/main/organization/organization_view.dart';
 import '../ui/views/startup/startup_view.dart';
 
 class Routes {
@@ -38,13 +37,11 @@ class Routes {
   static const String resetPasswordView = '/reset-password-view';
   static const String changePasswordView = '/change-password-view';
   static const String successView = '/success-view';
-  static const String homeView = '/home-view';
   static const String createWorkspaceView = '/create-workspace-view';
   static const String createWorkspaceStage1 = '/create-workspace-stage1';
   static const String createWorkspaceStage2 = '/create-workspace-stage2';
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
-  static const String channelsCreationView = '/channels-creation-view';
-  static const String workspaceView = '/workspace-view';
+  static const String organizationView = '/organization-view';
   static const all = <String>{
     startUpView,
     loginView,
@@ -54,13 +51,11 @@ class Routes {
     resetPasswordView,
     changePasswordView,
     successView,
-    homeView,
     createWorkspaceView,
     createWorkspaceStage1,
     createWorkspaceStage2,
     createWorkspaceStage3,
-    channelsCreationView,
-    workspaceView,
+    organizationView,
   };
 }
 
@@ -76,16 +71,14 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
     RouteDef(Routes.changePasswordView, page: ChangePasswordView),
     RouteDef(Routes.successView, page: SuccessView),
-    RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.createWorkspaceView, page: CreateWorkspaceView),
     RouteDef(Routes.createWorkspaceStage1, page: CreateWorkspaceStage1),
     RouteDef(Routes.createWorkspaceStage2, page: CreateWorkspaceStage2),
     RouteDef(Routes.createWorkspaceStage3, page: CreateWorkspaceStage3),
-    RouteDef(Routes.channelsCreationView, page: ChannelsCreationView),
     RouteDef(
-      Routes.workspaceView,
-      page: WorkspaceView,
-      generator: WorkspaceViewRouter(),
+      Routes.organizationView,
+      page: OrganizationView,
+      generator: OrganizationViewRouter(),
     ),
   ];
   @override
@@ -139,12 +132,6 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    HomeView: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const HomeView(),
-        settings: data,
-      );
-    },
     CreateWorkspaceView: (data) {
       var args = data.getArgs<CreateWorkspaceViewArguments>(
         orElse: () => CreateWorkspaceViewArguments(),
@@ -155,11 +142,8 @@ class StackedRouter extends RouterBase {
       );
     },
     CreateWorkspaceStage1: (data) {
-      var args = data.getArgs<CreateWorkspaceStage1Arguments>(
-        orElse: () => CreateWorkspaceStage1Arguments(),
-      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => CreateWorkspaceStage1(key: args.key),
+        builder: (context) => const CreateWorkspaceStage1(),
         settings: data,
       );
     },
@@ -175,40 +159,36 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    ChannelsCreationView: (data) {
+    OrganizationView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => ChannelsCreationView(),
-        settings: data,
-      );
-    },
-    WorkspaceView: (data) {
-      return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const WorkspaceView(),
+        builder: (context) => const OrganizationView(),
         settings: data,
       );
     },
   };
 }
 
-class WorkspaceViewRoutes {
+class OrganizationViewRoutes {
   static const String channelsView = '/';
-  static const String channelsDisplayView = '/channels-display-view';
+  static const String channelsListView = '/channels-list-view';
+  static const String createChannelView = '/create-channel-view';
   static const String dmView = '/dm-view';
   static const all = <String>{
     channelsView,
-    channelsDisplayView,
+    channelsListView,
+    createChannelView,
     dmView,
   };
 }
 
-class WorkspaceViewRouter extends RouterBase {
+class OrganizationViewRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(WorkspaceViewRoutes.channelsView, page: ChannelsView),
-    RouteDef(WorkspaceViewRoutes.channelsDisplayView,
-        page: ChannelsDisplayView),
-    RouteDef(WorkspaceViewRoutes.dmView, page: DmView),
+    RouteDef(OrganizationViewRoutes.channelsView, page: ChannelsView),
+    RouteDef(OrganizationViewRoutes.channelsListView, page: ChannelsListView),
+    RouteDef(OrganizationViewRoutes.createChannelView, page: CreateChannelView),
+    RouteDef(OrganizationViewRoutes.dmView, page: DmView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -219,9 +199,15 @@ class WorkspaceViewRouter extends RouterBase {
         settings: data,
       );
     },
-    ChannelsDisplayView: (data) {
+    ChannelsListView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const ChannelsDisplayView(),
+        builder: (context) => const ChannelsListView(),
+        settings: data,
+      );
+    },
+    CreateChannelView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => CreateChannelView(),
         settings: data,
       );
     },
@@ -242,10 +228,4 @@ class WorkspaceViewRouter extends RouterBase {
 class CreateWorkspaceViewArguments {
   final Key? key;
   CreateWorkspaceViewArguments({this.key});
-}
-
-/// CreateWorkspaceStage1 arguments holder class
-class CreateWorkspaceStage1Arguments {
-  final Key? key;
-  CreateWorkspaceStage1Arguments({this.key});
 }

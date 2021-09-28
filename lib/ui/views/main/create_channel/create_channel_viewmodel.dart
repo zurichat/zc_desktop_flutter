@@ -11,7 +11,7 @@ import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
-class ChannelsCreationViewModel extends BaseViewModel with Validator {
+class CreateChannelViewModel extends BaseViewModel with Validator {
   final _navigator = locator<NavigationService>();
 
   //Declare the services that are dependent upon
@@ -67,7 +67,6 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
   String get channelTextEight => _channelTextEight;
   String get channelTextNine => _channelTextNine;
   String get channelTextTen => _channelTextTen;
-
 
   bool get isSwitched => _isSwitched;
   String get errorMessage => _errorMessage;
@@ -131,7 +130,7 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  String userEmail(){
+  String userEmail() {
     return _authResponse.user.email;
   }
 
@@ -144,15 +143,15 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
     bool isChannelNameValid = nameValidator(_channelName);
     bool isChannelDescriptionValid = nameValidator(_channelDescription);
 
-    if (!isChannelNameValid ||
-        !isChannelDescriptionValid) {
+    if (!isChannelNameValid || !isChannelDescriptionValid) {
       if (!isChannelNameValid) {
         _channelNameError = 'Channel Name must be at least 3 characters long';
       } else {
         _channelNameError = null;
       }
       if (!isChannelDescriptionValid) {
-        _channelDescriptionError = 'Channel Description must be at least 3 characters long';
+        _channelDescriptionError =
+            'Channel Description must be at least 3 characters long';
       } else {
         _channelDescriptionError = null;
       }
@@ -161,19 +160,19 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
       return;
     }
 
-      _setIsBusy();
-      // if()
-      await runBusyFuture(
-          performCreateChannel(name, owner, description, private));
+    _setIsBusy();
+    // if()
+    await runBusyFuture(
+        performCreateChannel(name, owner, description, private));
 
-      if(_showError == false){
-        setErrorMessage('An unexpected error occured!');
-        _setIsBusy();
-        _setIsCreateChannelNotSuccessful();
-      } else {
-        _setIsCreateChannelSuccessful();
-      }
-   
+    if (_showError == false) {
+      setErrorMessage('An unexpected error occured!');
+      _setIsBusy();
+      _setIsCreateChannelNotSuccessful();
+    } else {
+      _setIsCreateChannelSuccessful();
+    }
+
     notifyListeners();
   }
 
@@ -197,5 +196,4 @@ class ChannelsCreationViewModel extends BaseViewModel with Validator {
     print('Handle Error here');
     super.onFutureError(error, key);
   }
-
 }

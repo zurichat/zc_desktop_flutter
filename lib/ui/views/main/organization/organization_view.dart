@@ -7,7 +7,6 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/asset_paths.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/ui/main/organization_page/organization_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
@@ -15,8 +14,8 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
-import 'package:zc_desktop_flutter/ui/views/main/channels_creation/channels_creation_view.dart';
-import 'package:zc_desktop_flutter/ui/views/main/workspace/workspace_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
 class OrganizationView extends StatelessWidget {
   const OrganizationView({Key? key}) : super(key: key);
@@ -158,9 +157,10 @@ class OrganizationWrapper extends StatelessWidget {
                                           show: model!.showChannels,
                                           addTap: () {
                                             showDialog(
-                                                context: context,
-                                                builder: (context) =>
-                                                    ChannelsCreationView());
+                                              context: context,
+                                              builder: (context) =>
+                                                  CreateChannelView(),
+                                            );
                                           },
                                           displayChannel: () {
                                             model!.openChannelsList();
@@ -236,240 +236,6 @@ class OrganizationWrapper extends StatelessWidget {
         ],
       ),
     );
-    /*return FutureBuilder(builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.none && snapshot.hasData == null) {
-        return Container(
-          child: Center(
-            child: SizedBox(
-              width: 60,
-              height: 20,
-              child: ElevatedButton(
-                onPressed: () {
-                  model!.setup();
-                },
-                child: model!.isBusy
-                    ? Center(
-                  child: Container(
-                    width: 24.0,
-                    height: 24.0,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3.0.r,
-                      valueColor: AlwaysStoppedAnimation(Colors.grey),
-                    ),
-                  ),
-                )
-                    : Text('Refresh'),
-              ),
-            ),
-          ),
-        );
-      }
-      else {
-        return Container(
-          child: Column(
-            children: [
-              Container(
-                child: buildAppBar(
-                  context,
-                  isActive: true,
-                ),
-              ),
-              // verticalSpaceSmall,
-              model!.isBusy
-                  ? Expanded(
-                child: Container(
-                  height: fullHeight(context),
-                  width: fullHeight(context),
-                  child: Center(
-                    child: Container(
-                      width: 24.0,
-                      height: 24.0,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 3.0.r,
-                        valueColor: AlwaysStoppedAnimation(Colors.grey),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-                  : Expanded(
-                child: Row(
-                  children: [
-                    //TODO: organization side bar
-                    Container(
-                      color: Theme.of(context).accentColor,
-                      width: 70.w,
-                      height: double.infinity,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: model!.organization!.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    print("Workspace $index tapped");
-                                    model!
-                                        .reloadWithSelectedOrganization(
-                                        index);
-                                  },
-                                  child: OrganizationItem(
-                                    organization:
-                                    model!.organization![index],
-                                    selected:
-                                    model!.showSelectedOrg(index),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                model!.goToCreateWorkspace();
-                              },
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //TODO: Left side bar
-                    Container(
-                      color: Theme.of(context).accentColor,
-                      width: 260.w,
-                      height: double.infinity,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: SingleChildScrollView(
-                              controller: model!.controller,
-                              physics: ScrollPhysics(),
-                              child: Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment.start,
-                                children: [
-                                  ListView(
-                                    physics:
-                                    NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    children: [
-                                      DetailedCustomAppBar(
-                                        leading: WorkSpaceSetting(
-                                          workspaceTitle: model!
-                                              .currentOrganization!
-                                              .name ??
-                                              '',
-                                        ),
-                                        trailing: NewMessageBtn(),
-                                      ),
-                                      DisplayMenu(model!),
-                                      verticalSpaceRegular,
-                                      ReusableDropDown(
-                                        title: 'Channels',
-                                        addButtonTitle: 'Add channels',
-                                        toggleTap: () {
-                                          model!
-                                              .openChannelsDropDownMenu();
-                                        },
-                                        show: model!.showChannels,
-                                        addTap: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  ChannelsCreationView());
-                                        },
-                                        displayChannel: () {
-                                          model!.openChannelsList();
-                                        },
-                                        list: List.generate(
-                                          model!.channels!.length,
-                                              (index) => MouseRegion(
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets.only(
-                                                bottom: 16.0,
-                                              ),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  print(
-                                                      "channel item $index tapped");
-                                                  // model.showChannel(index);
-                                                  model!
-                                                      .goToChannelsView(
-                                                      index: index);
-                                                },
-                                                child: ChannelItem(
-                                                  channelName: model!
-                                                      .channels![index]
-                                                      .name,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      verticalSpaceRegular,
-                                      ReusableDropDown(
-                                        title: 'Direct Messages',
-                                        addButtonTitle: 'Add teammates',
-                                        show: model!.showDMs,
-                                        toggleTap: () {
-                                          model!.openDMsDropDownMenu();
-                                        },
-                                        displayChannel: () {},
-                                        addTap: () {},
-                                        list: List.generate(
-                                          1,
-                                              (index) => MouseRegion(
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets.only(
-                                                bottom: 16.0,
-                                              ),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  print(
-                                                      "dm item $index tapped");
-                                                  //model.showDM(index);
-                                                  model!.goToDmView(
-                                                      index);
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      verticalSpaceRegular,
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //TODO: Center Area
-                    centerChild!,
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      }
-    },
-    future: model!.getOrganizations(),
-    );*/
   }
 }
 

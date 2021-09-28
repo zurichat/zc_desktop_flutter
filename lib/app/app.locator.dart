@@ -17,7 +17,7 @@ import '../services/centrifuge_service.dart';
 import '../services/channels_service.dart';
 import '../services/dm_service.dart';
 import '../services/local_storage_service.dart';
-import '../services/organization_service/organization_service.dart';
+import '../services/organization_service.dart';
 import '../services/window_title_bar_service.dart';
 
 final locator = StackedLocator.instance;

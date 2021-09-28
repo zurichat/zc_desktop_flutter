@@ -456,22 +456,6 @@ const _$EnterButtonsChoiceEnumMap = {
   EnterButtonsChoice.newLine: 'newLine',
 };
 
-_$_Organisation _$$_OrganisationFromJson(Map<String, dynamic> json) =>
-    _$_Organisation(
-      id: json['_id'] as String,
-      logoUrl: json['logo_url'] as String,
-      name: json['name'] as String,
-      workspaceUrl: json['workspace_url'] as String,
-    );
-
-Map<String, dynamic> _$$_OrganisationToJson(_$_Organisation instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'logo_url': instance.logoUrl,
-      'name': instance.name,
-      'workspace_url': instance.workspaceUrl,
-    };
-
 _$_DummyUser _$$_DummyUserFromJson(Map<String, dynamic> json) => _$_DummyUser(
       name: json['name'] as String?,
       profileImage: json['profileImage'] as String?,
@@ -520,27 +504,6 @@ Map<String, dynamic> _$$_WorkspaceToJson(_$_Workspace instance) =>
       'currentDM': instance.currentDM,
     };
 
-_$_Channel _$$_ChannelFromJson(Map<String, dynamic> json) => _$_Channel(
-      name: json['name'] as String?,
-      topic: json['topic'] as String?,
-      users: (json['users'] as List<dynamic>?)
-          ?.map((e) => DummyUser.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      private: json['private'] as bool?,
-      baseChat: json['baseChat'] == null
-          ? null
-          : BaseChat.fromJson(json['baseChat'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$$_ChannelToJson(_$_Channel instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'topic': instance.topic,
-      'users': instance.users,
-      'private': instance.private,
-      'baseChat': instance.baseChat,
-    };
-
 _$_DM _$$_DMFromJson(Map<String, dynamic> json) => _$_DM(
       user: json['user'] == null
           ? null
@@ -578,4 +541,74 @@ _$_BaseChat _$$_BaseChatFromJson(Map<String, dynamic> json) => _$_BaseChat(
 Map<String, dynamic> _$$_BaseChatToJson(_$_BaseChat instance) =>
     <String, dynamic>{
       'chats': instance.chats,
+    };
+
+_$_Channel _$$_ChannelFromJson(Map<String, dynamic> json) => _$_Channel(
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      owner: json['owner'] as String?,
+      description: json['description'] as String?,
+      private: json['private'] as bool?,
+    );
+
+Map<String, dynamic> _$$_ChannelToJson(_$_Channel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'owner': instance.owner,
+      'description': instance.description,
+      'private': instance.private,
+    };
+
+_$_Organization _$$_OrganizationFromJson(Map<String, dynamic> json) =>
+    _$_Organization(
+      id: json['_id'] as String?,
+      logoUrl: json['logo_url'] as String?,
+      name: json['name'] as String?,
+      workspaceUrl: json['workspace_url'] as String?,
+    );
+
+Map<String, dynamic> _$$_OrganizationToJson(_$_Organization instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'logo_url': instance.logoUrl,
+      'name': instance.name,
+      'workspace_url': instance.workspaceUrl,
+    };
+
+_$_ChannelMessagesResponse _$$_ChannelMessagesResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_ChannelMessagesResponse(
+      status: json['status'] as int?,
+      message: json['message'] as String?,
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => ChannelMessage.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$$_ChannelMessagesResponseToJson(
+        _$_ChannelMessagesResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+_$_ChannelMessage _$$_ChannelMessageFromJson(Map<String, dynamic> json) =>
+    _$_ChannelMessage(
+      id: json['_id'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+      channel_id: json['channel_id'] as String? ?? '',
+      timestamp: json['timestamp'] as String? ?? '',
+      user_id: json['user_id'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_ChannelMessageToJson(_$_ChannelMessage instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'content': instance.content,
+      'channel_id': instance.channel_id,
+      'timestamp': instance.timestamp,
+      'user_id': instance.user_id,
     };
