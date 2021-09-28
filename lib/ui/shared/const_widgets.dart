@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//TODO: Remove this class and delete the file
 class SVGAssetPaths {
   static final channelsListIcon = "assets/icons/hash_inactive.svg";
   static final dropDownOpenIcon = "assets/icons/drop_down_open.svg";

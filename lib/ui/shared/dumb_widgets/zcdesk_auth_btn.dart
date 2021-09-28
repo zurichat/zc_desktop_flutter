@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../const_app_colors.dart';
 import '../const_text_styles.dart';
 
@@ -7,28 +8,36 @@ class AuthButton extends StatelessWidget {
   final String label;
   final VoidCallback? onTap;
   final bool isBusy;
+  final double? height;
+  final double? width;
 
-  AuthButton({required this.label, this.onTap, this.isBusy = false});
+  AuthButton(
+      {required this.label,
+      this.onTap,
+      this.isBusy = false,
+      this.height,
+      this.width});
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(
-          Color.fromRGBO(0, 184, 124, 1),
+    return SizedBox(
+      height: height ?? 48.h,
+      width: width ?? 440.w,
+      child: TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            Color.fromRGBO(0, 184, 124, 1),
+          ),
         ),
-      ),
-      onPressed: onTap,
-      child: !isBusy
-          ? Text(
-              label,
-              style: authBtnStyle,
-            )
-          : Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
+        onPressed: onTap,
+        child: !isBusy
+            ? Text(label, style: authBtnStyle)
+            : Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
               ),
-            ),
+      ),
     );
   }
 }
@@ -62,15 +71,5 @@ class PreferenceButton extends StatelessWidget {
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.w400),
             ))));
-
-    // ElevatedButton(
-    //     onPressed: onTap,
-    //     style: ElevatedButton.styleFrom(
-    //         onSurface: kcBackgroundColor1,
-    //         side: BorderSide(color: preferenceBorderblack)
-    //         // fixedSize: Size(double.infinity, 60.h
-    //         // )
-    //         ),
-    //     child: ZcdeskText.extraSmallText(label));
   }
 }

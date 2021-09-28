@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/core/network/api_constants.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
@@ -7,7 +6,6 @@ import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'api.dart';
 
 //TODO: Refactor error handling logic and properly intialize DIO and write code for interceptors
-@LazySingleton()
 class ApiService implements Api {
   final log = getLogger('APIService');
 
