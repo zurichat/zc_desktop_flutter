@@ -8,17 +8,10 @@ class StartUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<StartUpViewModel>.reactive(
+    return ViewModelBuilder<StartUpViewModel>.nonReactive(
+      onModelReady: (model) => model.initialise(),
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(
-          title: Text(model.appName),
-        ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: model.goToHome,
-            child: Text("Get Started"),
-          ),
-        ),
+        body: Center(child: CircularProgressIndicator()),
       ),
       viewModelBuilder: () => StartUpViewModel(),
     );
