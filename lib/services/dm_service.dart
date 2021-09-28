@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart' as currentLoggedInUser;
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
-import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class DMService {
@@ -41,8 +41,7 @@ class DMService {
     print(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         .format(DateTime.now().toUtc())
         .toString());
-    final response = await _apiService
-        .post(_apiService.apiConstants.dmSendMessage(roomId), body: {
+    final response = await _apiService.post(dmSendMessage(roomId), body: {
       "sender_id": senderId,
       "room_id": roomId,
       "message": message,
@@ -63,7 +62,7 @@ class DMService {
   Future<String?> createRoom(
       currentLoggedInUser.User currentUser, DummyUser user) async {
     final response = await _apiService.post(
-      _apiService.apiConstants.dmCreateRoom,
+      dmCreateRoom,
       body: {
         "org_id": "1",
         "room_user_ids": [currentUser.id, user.id],
@@ -76,16 +75,14 @@ class DMService {
   }
 
   Future<void> getRoomInfo(var roomId) async {
-    final response = await _apiService.get(
-        _apiService.apiConstants.dmGetRoomInfo,
-        queryParameters: {'room_id': roomId});
+    final response = await _apiService
+        .get(dmGetRoomInfo, queryParameters: {'room_id': roomId});
     var res = RoomInfoResponse.fromJson(response).numberOfUsers;
     print("number of users: ${res}");
   }
 
   Future<List<Results>> fetchRoomMessages(var roomId) async {
-    final response = await _apiService
-        .get(_apiService.apiConstants.dmFetchRoomMessages(roomId));
+    final response = await _apiService.get(dmFetchRoomMessages(roomId));
     try {
       return MessagesResponse.fromJson(response).results;
     } catch (on, stacktrace) {
@@ -95,8 +92,8 @@ class DMService {
   }
 
   Future<void> markMessageAsRead(var messageId) async {
-    final response = await _apiService
-        .put(_apiService.apiConstants.dmMarkMessageAsRead(messageId), body: {});
+    final response =
+        await _apiService.put(dmMarkMessageAsRead(messageId), body: {});
     var res = MarkMessageAsReadResponse.fromJson(response).read;
     print("message has been read: ${res}");
   }

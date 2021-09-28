@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/check_email/check_email_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/forgot_password/forgot_password_view.dart';
@@ -63,6 +64,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     LazySingleton(classType: DMService),
     LazySingleton(classType: OrganizationService),
     LazySingleton(classType: CentrifugeService),
+    LazySingleton(classType: ZuriApiService),
     LazySingleton(
       classType: ThemeService,
       resolveUsing: ThemeService.getInstance,
