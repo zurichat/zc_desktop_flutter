@@ -7,7 +7,7 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
-import 'package:zc_desktop_flutter/services/organization_service/organization_service.dart';
+import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 class OrganizationViewModel extends BaseViewModel {
   final log = getLogger("OrganizationViewModel");
@@ -96,7 +96,7 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void openChannelsList() {
-    _navigationService.navigateTo(OrganizationViewRoutes.channelsDisplayView,
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsListView,
         id: 1);
   }
 

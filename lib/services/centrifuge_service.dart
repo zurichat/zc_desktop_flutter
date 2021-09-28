@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:centrifuge/centrifuge.dart' as centrifuge;
 import 'package:centrifuge/centrifuge.dart';
 import 'package:stacked/stacked.dart';

@@ -4,12 +4,13 @@ import 'package:intl/intl.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/model/app_models.dart' as currentLoggedInUser;
+import 'package:zc_desktop_flutter/model/app_models.dart'
+    as currentLoggedInUser;
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
-import 'package:zc_desktop_flutter/services/organization_service/organization_service.dart';
+import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 const insertedOrganisationId = 'insertedId';
 const insertedOrganisation = '614679ee1a5607b13c00bcb7';

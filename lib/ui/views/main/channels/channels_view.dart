@@ -8,13 +8,11 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/message.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels/channels_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
-
 
 class ChannelsView extends StatelessWidget {
   @override

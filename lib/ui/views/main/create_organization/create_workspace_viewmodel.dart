@@ -4,7 +4,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
-import 'package:zc_desktop_flutter/services/organization_service/organization_service.dart';
+import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 class CreateWorkspaceViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
@@ -149,6 +149,6 @@ class CreateWorkspaceViewModel extends BaseViewModel {
     } catch (e) {
       throw Failure(e.toString());
     }
-      goToStage1();
+    goToStage1();
   }
 }
