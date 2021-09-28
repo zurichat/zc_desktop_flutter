@@ -9,22 +9,12 @@ import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 const testLocalKey = 'TESTKEY';
 
 class StartUpViewModel extends BaseViewModel {
+  final log = getLogger('StartUpViewModel');
   final _navigationService = locator<NavigationService>();
 
-  final log = getLogger("StartUpViewModel");
+  void initialise() async {
+    await Future.delayed(Duration(milliseconds: 1000));
 
-  // TODO: 1, This is to test that the local storage service is working properly. Remove after review
-  final _storageService = locator<LocalStorageService>();
-
-
-  String _appName = 'Zuri Chat';
-  String get appName => _appName;
-
-  void goToHome() {
-    // TODO: 3, This is part of the local storage test. Remove this as well
-    _storageService.saveToDisk(testLocalKey, 'This is a test');
-
-    _navigationService.navigateTo(Routes.homeView);
-    notifyListeners();
+    await _navigationService.navigateTo(Routes.loginView);
   }
 }

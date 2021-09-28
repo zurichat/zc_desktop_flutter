@@ -1,84 +1,110 @@
-import 'package:dio/dio.dart' ;
-import '/app/app.logger.dart';
+import 'package:dio/dio.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/core/network/api_constants.dart';
+import 'package:zc_desktop_flutter/core/network/failure.dart';
+
 import 'api.dart';
 
+//TODO: Refactor error handling logic and properly intialize DIO and write code for interceptors
 class ApiService implements Api {
-  final log = getLogger('PiService');
-  Response? _response;
-  var responseData;
-  final client = Dio();
-  static const _BASE_URL = "";
-  static const _sendTimeOut = 5000;
- 
-  
- 
+  final log = getLogger('APIService');
+
+  APIConstants get apiConstants => APIConstants.production();
+  Dio get client => Dio(
+        BaseOptions(
+          baseUrl: apiConstants.baseUri.toString(),
+          sendTimeout: apiConstants.sendTimeout,
+          receiveTimeout: apiConstants.receiveTimeout,
+        ),
+      );
 
   @override
-  Future get(String endPoint, {Map<String, dynamic>? queryParameters}) async {
-    var url = _BASE_URL + endPoint;
+  Future<dynamic> get(
+    Uri uri, {
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  }) async {
+    log.i('Making request to $uri');
     try {
-      _response = await client.get(url,
-          options: Options(sendTimeout: _sendTimeOut, receiveTimeout: 3000));
-      log.i(url);
-      responseData = _response!.data;
-      log.i(responseData);
-    } on DioError catch (error) {
-      log.i(error);
-    } catch (error) {
-      log.i(error);
-    }
+      final response = await client.get(uri.toString(),
+          queryParameters: queryParameters, options: Options(headers: headers));
 
-    return responseData;
-  }
-
-  @override
-  Future post(String endPoint, Map<String, dynamic>? body,
-      {Map<String, dynamic>? headers}) async {
-    var url = _BASE_URL + endPoint;
-    try {
-      _response = await client.post(url,
-          data: body, options: Options(sendTimeout: _sendTimeOut));
-      log.i(url);
-      log.i(_response!.statusCode);
+      //log.i('Response from $uri \n${response.data}');
+      return response.data;
     } on DioError catch (error) {
-      //write code for interceptors
-      log.i(error);
+      log.e(error.response!.data['message']);
+      throw Failure(error.response!.data['message']);
     } catch (error) {
-      log.i(error);
+      log.e(error.toString());
+      throw Failure(error.toString());
     }
   }
 
   @override
-  Future<Response> put(String endPoint, data,
-      {Map<String, dynamic>? queryParameters}) async {
-    var url = _BASE_URL + endPoint;
+  Future<dynamic> post(
+    Uri uri, {
+    required Map<String, dynamic> body,
+    Map<String, String>? headers,
+  }) async {
+    log.i('Making request to $uri');
     try {
-      _response = await client.put(url,
-          data: data, options: Options(sendTimeout: _sendTimeOut));
-      log.i(url);
-      responseData = _response!.data;
+      final response = await client.post(
+        uri.toString(),
+        data: body,
+        options: Options(headers: headers)
+      );
+
+      log.i('Response from $uri \n${response.data}');
+      return response.data;
     } on DioError catch (error) {
-      log.i(error);
+      log.e(error.response!.statusCode);
+      log.e(error.response!.data['message']);
+      throw Failure(error.response!.data['message']);
     } catch (error) {
-      log.i(error);
+      log.e(error.toString());
+      throw Failure(error.toString());
     }
-    return responseData;
   }
 
   @override
-  Future delete(String endPoint,
-      {dynamic  data, Map<String, dynamic>? queryParameters}) async {
-    var url = _BASE_URL + endPoint;
+  Future<dynamic> put(
+    Uri uri, {
+    required Map<String, dynamic> body,
+    Map<String, String>? headers,
+  }) async {
+    log.i('Making request to $uri');
     try {
-      _response = await client.delete(url, options: Options(sendTimeout: _sendTimeOut));
-      log.i(url);
-      responseData = _response!.data;
+      final response = await client.put(
+        uri.toString(),
+        data: body,
+        options: Options(headers: headers)
+      );
+
+      log.i('Response from $uri \n${response.data}');
+      return response.data;
     } on DioError catch (error) {
-      //write code for interceptors
-      log.i(error);
+      log.e(error.message);
+      throw Failure(error.message);
     } catch (error) {
-      log.i(error);
+      log.e(error.toString());
+      throw Failure(error.toString());
     }
   }
-  
+
+  @override
+  Future<dynamic> delete(Uri uri) async {
+    log.i('Making request to $uri');
+    try {
+      final response = await client.delete(uri.toString());
+
+      log.i('Response from $uri \n${response.data}');
+      return response.data;
+    } on DioError catch (error) {
+      log.e(error.message);
+      throw Failure(error.message);
+    } catch (error) {
+      log.e(error.toString());
+      throw Failure(error.toString());
+    }
+  }
 }
