@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
-class ChannelsDisplayViewModel extends BaseViewModel {
+class ChannelsListViewModel extends BaseViewModel {
   final log = getLogger("ChannelsDisplayViewModel");
   final _channelService = locator<ChannelsService>();
   final _localStorageService = locator<LocalStorageService>();

@@ -11,6 +11,6 @@ class StartUpViewModel extends BaseViewModel {
   void initialise() async {
     await Future.delayed(Duration(milliseconds: 1000));
 
-   await _navigationService.navigateTo(Routes.successView);
+    await _navigationService.navigateTo(Routes.successView);
   }
 }

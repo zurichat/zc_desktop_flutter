@@ -11,17 +11,16 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesck_search_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
-import 'package:zc_desktop_flutter/ui/views/main/channels_display/channels_display_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels_list/channels_list_viewmodel.dart';
 
-class ChannelsDisplayView extends StatelessWidget {
-  const ChannelsDisplayView({Key? key}) : super(key: key);
+class ChannelsListView extends StatelessWidget {
+  const ChannelsListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final _scrollController = ScrollController();
 
-    return ViewModelBuilder<ChannelsDisplayViewModel>.reactive(
+    return ViewModelBuilder<ChannelsListViewModel>.reactive(
       // onModelReady: (model) async => await model.fetchAndSetUserData(),
       builder: (context, model, child) => Container(
         color: whiteColor,
@@ -161,7 +160,7 @@ class ChannelsDisplayView extends StatelessWidget {
       ),
       //   ],
       // ),
-      viewModelBuilder: () => ChannelsDisplayViewModel(),
+      viewModelBuilder: () => ChannelsListViewModel(),
     );
   }
 }

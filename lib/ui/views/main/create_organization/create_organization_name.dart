@@ -8,8 +8,8 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-import 'package:zc_desktop_flutter/ui/views/main/create_workspace/create_workspace_viewmodel.dart';
 
+import 'create_workspace_viewmodel.dart';
 
 class CreateWorkspaceStage1 extends StatelessWidget {
   const CreateWorkspaceStage1({Key? key}) : super(key: key);
@@ -24,29 +24,32 @@ class CreateWorkspaceStage1 extends StatelessWidget {
             Row(
               children: [
                 Container(
-                    color: Colors.white,
-                    height: 890.h,
-                    width: 269.w,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 60.h,
-                          width: 269.w,
-                          color: KStartupContainerColor,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(model.companyName,
-                                  style: subtitle2.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color: kcBackgroundColor1,
-                                  )),
+                  color: Colors.white,
+                  height: 890.h,
+                  width: 269.w,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 60.h,
+                        width: 269.w,
+                        color: KStartupContainerColor,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Text(
+                              model.companyName,
+                              style: subtitle2.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: kcBackgroundColor1,
+                              ),
                             ),
                           ),
                         ),
-                      ],
-                    )),
+                      ),
+                    ],
+                  ),
+                ),
                 Expanded(
                   flex: 3,
                   child: Container(
@@ -65,10 +68,11 @@ class CreateWorkspaceStage1 extends StatelessWidget {
                             Text(
                               model.stage1PageNum,
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18.sp,
-                                  fontFamily: 'Lato',
-                                  fontWeight: FontWeight.w400),
+                                color: Colors.black,
+                                fontSize: 18.sp,
+                                fontFamily: 'Lato',
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                             verticalSpaceSmall,
                             Text(
@@ -82,10 +86,11 @@ class CreateWorkspaceStage1 extends StatelessWidget {
                             Text(
                               model.signInSubtext,
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18.sp,
-                                  fontFamily: 'Lato',
-                                  fontWeight: FontWeight.w400),
+                                color: Colors.black,
+                                fontSize: 18.sp,
+                                fontFamily: 'Lato',
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                             verticalSpaceSmall,
                             Container(
@@ -101,37 +106,42 @@ class CreateWorkspaceStage1 extends StatelessWidget {
                                 hintPlaceHolder: model.companyNameHint,
                                 trailing: Padding(
                                   padding: const EdgeInsets.all(15.0),
-                                  child: Text('50',
-                                      style: TextStyle(
-                                          color: lightIconColor,
-                                          fontWeight: FontWeight.w200)),
+                                  child: Text(
+                                    '50',
+                                    style: TextStyle(
+                                        color: lightIconColor,
+                                        fontWeight: FontWeight.w200),
+                                  ),
                                 ),
                               ),
                             ),
                             verticalSpaceRegular,
                             Container(
-                              height: 58.h,
-                              width: 150.w,
-                              child: AuthButton(label: model.btnText, onTap: () {
-                                  model.goToStage2();
-                                },)
-                              // TextButton(
-                              //   style: ButtonStyle(
-                              //       backgroundColor: MaterialStateProperty.all(
-                              //           lightIconColor)),
-                              //   onPressed: () {
-                              //     model.goToStage2();
-                              //   },
-                              //   child: Text(
-                              //     model.btnText,
-                              //     style: authBtnStyle,
-                              //   ),
-                              // ),
-                            ),
+                                height: 58.h,
+                                width: 150.w,
+                                child: AuthButton(
+                                  label: model.btnText,
+                                  onTap: () {
+                                    model.goToStage2();
+                                  },
+                                )
+                                // TextButton(
+                                //   style: ButtonStyle(
+                                //       backgroundColor: MaterialStateProperty.all(
+                                //           lightIconColor)),
+                                //   onPressed: () {
+                                //     model.goToStage2();
+                                //   },
+                                //   child: Text(
+                                //     model.btnText,
+                                //     style: authBtnStyle,
+                                //   ),
+                                // ),
+                                ),
                           ],
                         ),
                         verticalSpaceMedium,
-                        GotoLoginButton(isHome: true,)
+                        GotoLoginButton(isHome: true)
                       ],
                     ),
                   ),
