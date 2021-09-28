@@ -14,22 +14,22 @@ class ProfileDropdownView extends StatelessWidget {
 
   final GlobalKey actionKey = GlobalKey();
   late double height, width, xPosition, yPosition;
-  late OverlayEntry floatingDropdown;
+  late OverlayEntry _floatingDropdown;
 
-  get floatingDrop => floatingDropdown;
+  get floatingDrop => _floatingDropdown;
 
-  OverlayEntry createFloatingDropdown() {
+  OverlayEntry _createFloatingDropdown() {
     return OverlayEntry(builder: (context) {
       return Positioned(
         right: 100.w,
-        width: 300.w,
+        width: 250.w,
         height: 450.h,
         top: 60.h,
         child: Container(
           child: Material(
             child: InkWell(
               onTap: () {
-                _toggleDropdown(close: true, context: context);
+                _toggleDropdown(context: context, close: true);
               },
               child: DropDown(
                 onPress: () {
@@ -43,50 +43,34 @@ class ProfileDropdownView extends StatelessWidget {
     });
   }
 
-void findDropdownData() {
-    RenderBox? renderBox =
-        actionKey.currentContext!.findRenderObject() as RenderBox;
-    height = renderBox.size.height;
-    width = renderBox.size.width;
-    // Offset offset = renderBox.localToGlobal(Offset.zero);
-  }
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileDropdownViewModel>.reactive(
-      builder: (context, model, child) => InkWell(
-        onTap: () {
-          _toggleDropdown(context: context);
-          // setState(() {
-          //   _toggleDropdown(close: true);
-          //   // if (model.isDropped) {
-          //   //   model.floatingDropdown.remove();
-          //   // } else {
-          //   //   model.floatingDropdown = model.createFloatingDropdown();
-          //   //   Overlay.of(context)!.insert(model.floatingDropdown);
-          //   // }
-
-          //   // model.isDropped = !model.isDropped;
-          // });
-        },
-        child: Container(
-          width: 40.w,
-          height: 40.h,
-          child: ClipRRect(),
+      builder: (context, model, child) => Material(
+        child: InkWell(
+          onTap: () {
+            _toggleDropdown(context: context);
+          },
+          child: Container(
+            width: 40.w,
+            height: 40.h,
+            child: ClipRRect(),
+          ),
         ),
       ),
       viewModelBuilder: () => ProfileDropdownViewModel(),
     );
   }
 
-  void _toggleDropdown({bool close = false, BuildContext? context}) {
+  void _toggleDropdown(
+      {bool close = false, required BuildContext context}) async {
     final model = ProfileDropdownViewModel();
     if (model.isDropped || close) {
-      this.floatingDropdown.remove();
+      this._floatingDropdown.remove();
       model.setIsDropped(false);
     } else {
-      this.floatingDropdown = this.createFloatingDropdown();
-      Overlay.of(context!)!.insert(this.floatingDropdown);
+      this._floatingDropdown = this._createFloatingDropdown();
+      Overlay.of(context)!.insert(this._floatingDropdown);
       model.setIsDropped(true);
     }
   }
@@ -108,21 +92,26 @@ class DropDown extends StatelessWidget {
               elevation: 20,
               child: Container(
                 color: kcBackgroundColor2,
-                // height: 300.h,
                 child: Column(
                   children: <Widget>[
                     ProfilePicture(),
                     Container(
-                      width: 300.w,
+                      width: 250.w,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 5),
                       child: OutlineButton(
                         onPressed: () {
+                          onPress!();
                           showDialog(
                               context: context,
                               builder: (context) => StatusDialogMinView());
                         },
-                        child: Icon(Icons.edit_outlined),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Icon(
+                            Icons.edit_outlined,
+                          ),
+                        ),
                       ),
                     ),
                     DropDownItem(
@@ -182,8 +171,6 @@ class DropDownItem extends StatelessWidget {
     this.iconData,
   }) : super(key: key);
 
-  late FocusNode focusNode;
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileDropdownViewModel>.reactive(
@@ -200,12 +187,12 @@ class DropDownItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         text,
-                        style: preferenceStyleNormal,
+                        style: model.isHover ? subtitlec2 : subtitle2,
                       ),
                       Spacer(),
                       Icon(
                         iconData,
-                        color: headerColor,
+                        color: model.isHover ? kcBackgroundColor2 : headerColor,
                       ),
                     ],
                   ),
@@ -216,7 +203,9 @@ class DropDownItem extends StatelessWidget {
 }
 
 class ProfilePicture extends StatelessWidget {
-  const ProfilePicture({Key? key}) : super(key: key);
+  bool isActive = false;
+
+  ProfilePicture({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -236,21 +225,26 @@ class ProfilePicture extends StatelessWidget {
           Container(
             width: 100.w,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Bernice_Perp",
-                  style: preferenceStyleNormal,
+                  style: subtitle3b,
                 ),
                 verticalSpaceTiny,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.circle,
-                      size: 10,
-                      color: kcSuccessColor,
+                    Container(
+                      height: 8,
+                      width: 8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: isActive
+                              ? createChannelTextColor
+                              : kcSuccessColor),
                     ),
+                    horizontalSpaceTiny,
                     Text(
                       "Away",
                       style: preferenceStyleNormal,
@@ -265,13 +259,3 @@ class ProfilePicture extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
- 

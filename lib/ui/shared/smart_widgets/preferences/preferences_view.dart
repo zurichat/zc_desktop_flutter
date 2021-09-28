@@ -71,7 +71,7 @@ class PreferenceView extends StatelessWidget {
         'assetName': 'assets/icons/mark.svg', //Icons.launch,
         'widget': Container(
           child: Center(
-            child:  MarkAsRead(),
+            child: MarkAsRead(),
           ),
         )
       },

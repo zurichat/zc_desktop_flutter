@@ -27,8 +27,7 @@ class LanguagePreference extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(model.preferencetitles[0],
-                  style: preferenceStyleBold),
+              Text(model.preferencetitles[0], style: preferenceStyleBold),
               verticalSpaceTiny,
               buildDropDown(
                   kcBackgroundColor2, model.languages, model.dropDownLanguage,
@@ -139,8 +138,7 @@ buildDropDown(
           onChanged: onChange,
           items: items
               .map<DropdownMenuItem<String>>((String value) => DropdownMenuItem(
-                    child: Text(value,
-                        style: preferenceStyleNormal),
+            child: Text(value, style: preferenceStyleNormal),
                     value: value,
                   ))
               .toList()),
@@ -172,9 +170,7 @@ class ZcCheckBox2 extends StatelessWidget {
           ),
         ),
         horizontalSpaceVeryTiny,
-        Flexible(
-            child: Text(txt!,
-                style: preferenceStyleNormal)),
+        Flexible(child: Text(txt!, style: preferenceStyleNormal)),
       ],
     );
   }

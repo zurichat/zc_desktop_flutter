@@ -11,15 +11,10 @@ class MessageReplyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      customBorder: Border.all(
-        color: Colors.green,
-        width: 20
-      ),
+      customBorder: Border.all(color: Colors.green, width: 20),
       borderRadius: BorderRadius.all(Radius.circular(5.0)),
       hoverColor: Colors.grey[400],
-      onHover: (v){
-
-      },
+      onHover: (v) {},
       onTap: () {
         print("Threads opened");
       },

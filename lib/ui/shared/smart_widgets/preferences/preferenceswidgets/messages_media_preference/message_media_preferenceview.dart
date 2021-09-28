@@ -54,8 +54,7 @@ Widget bringEmailIntoZuriSection(MessageMediaPreferenceViewModel model) {
         verticalSpaceSmall,
         SizedBox(
           width: 350,
-          child: Text(model.longText[0],
-              style: preferenceStyleNormal),
+          child: Text(model.longText[0], style: preferenceStyleNormal),
         ),
         verticalSpaceMedium,
         PreferenceButton(
@@ -72,8 +71,7 @@ Widget inLineMediaSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(model.messagepreferencetitles[6],
-            style: preferenceStyleBold),
+        Text(model.messagepreferencetitles[6], style: preferenceStyleBold),
         verticalSpaceSmall,
         ZcCheckBox1(
             onChanged: (v) {
@@ -119,9 +117,7 @@ Widget additionalOptionsSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          model.messagepreferencetitles[3],
-          style: preferenceStyleBold  ),
+        Text(model.messagepreferencetitles[3], style: preferenceStyleBold),
         verticalSpaceSmall,
         ZcCheckBox1(
             onChanged: (v) {
@@ -175,9 +171,7 @@ class ZcCheckBox1 extends StatelessWidget {
           ),
         ),
         horizontalSpaceVeryTiny,
-        Flexible(
-            child: Text(txt!,
-                style:preferenceStyleNormal)),
+        Flexible(child: Text(txt!, style: preferenceStyleNormal)),
       ],
     );
   }
@@ -199,8 +193,7 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
           style: preferenceStyleNormal,
         ),
         verticalSpaceSmall,
-        Text(model.longText[1],
-            style: preferenceStyleNormal),
+        Text(model.longText[1], style: preferenceStyleNormal),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -253,8 +246,7 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
               style: preferenceStyleNormal),
         ),
         verticalSpaceMedium,
-        Text('Here is an Example',
-            style: preferenceStyleNormal),
+        Text('Here is an Example', style: preferenceStyleNormal),
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/People of Brooklyn Avatar 2.png',
@@ -279,12 +271,10 @@ Widget themeSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(model.messagepreferencetitles[0],
-            style: preferenceStyleBold),
+        Text(model.messagepreferencetitles[0], style: preferenceStyleBold),
         buildThemeRadioColumn(model),
         verticalSpaceSmall,
-        Text('Here is an Example',
-            style: preferenceStyleNormal),
+        Text('Here is an Example', style: preferenceStyleNormal),
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/GroupLogo.png',
@@ -309,8 +299,7 @@ Widget nameSection(MessageMediaPreferenceViewModel model) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(model.messagepreferencetitles[2],
-            style:preferenceStyleBold),
+        Text(model.messagepreferencetitles[2], style: preferenceStyleBold),
         buildNameRadioColumn(model),
         verticalSpaceSmall,
         ReusableContainer(

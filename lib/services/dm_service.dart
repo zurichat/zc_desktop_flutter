@@ -6,6 +6,7 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart' as currentLoggedInUser;
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
@@ -21,8 +22,7 @@ class DMService {
 
   Future<DummyUser> getUser() async {
     await Future.delayed(Duration(seconds: 2));
-    log.i(_user.name);
-    return _user;
+    return this._user;
   }
 
   currentLoggedInUser.User? getCurrentLoggedInUser() {

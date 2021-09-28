@@ -5,9 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-
-import 'create_workspace_viewmodel.dart';
-
+import 'package:zc_desktop_flutter/ui/views/main/create_workspace/create_workspace_viewmodel.dart';
 class CreateWorkspaceStage3 extends StatelessWidget {
   const CreateWorkspaceStage3({Key? key}) : super(key: key);
 

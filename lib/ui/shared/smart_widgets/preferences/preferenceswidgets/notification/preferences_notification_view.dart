@@ -185,7 +185,7 @@ class NotificationView extends StatelessWidget {
               items: items
                   .map<DropdownMenuItem<String>>(
                       (String value) => DropdownMenuItem(
-                            child: Text(value,style: preferenceStyleNormal),
+                            child: Text(value, style: preferenceStyleNormal),
                             value: value,
                           ))
                   .toList()),
@@ -246,6 +246,3 @@ class NotificationView extends StatelessWidget {
     ]);
   }
 }
-
-
-

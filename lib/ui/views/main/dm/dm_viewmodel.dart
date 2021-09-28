@@ -21,17 +21,17 @@ class DmViewModel extends BaseViewModel {
   void runTask() async {
     _user = await runBusyFuture(_dmService.getUser());
     _currentLoggedInUser = _dmService.getCurrentLoggedInUser()!;
-    _roomId = await _dmService.createRoom(_currentLoggedInUser, _user);
+    _roomId = await _dmService.createRoom(_currentLoggedInUser, _user!);
     _dmService.getRoomInfo(_roomId);
     _messages = await _dmService.fetchRoomMessages(_roomId);
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
-    log.i(_user.name);
+    log.i(_user!.name);
     notifyListeners();
   }
 
   String? getChatUserName() {
-    if (_user.name!.isNotEmpty) {
-      return _user.name;
+    if (_user!.name!.isNotEmpty) {
+      return _user!.name;
     }
 
     return 'No data';
@@ -123,10 +123,10 @@ class DmViewModel extends BaseViewModel {
       return _currentLoggedInUser;
     } else {
       return LoggedInUser.User(
-          id: _user.id.toString(),
+          id: _user!.id!.toString(),
           firstName: 'firstName',
           lastName: 'lastName',
-          displayName: _user.name!,
+          displayName: _user!.name!,
           email: 'email',
           phone: 'phone',
           status: 1,

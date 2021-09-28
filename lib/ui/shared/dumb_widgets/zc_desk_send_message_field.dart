@@ -10,7 +10,7 @@ class SendMessageInputField extends StatefulWidget {
     Key? key,
     required this.sendMessage,
   }) : super(key: key);
-  final Function() sendMessage;
+  final Function(String message) sendMessage;
 
   @override
   State<SendMessageInputField> createState() => _SendMessageInputFieldState();
@@ -85,7 +85,7 @@ class _SendMessageInputFieldState extends State<SendMessageInputField> {
             },
             sendPressed: () {
               keepFocusActive();
-              widget.sendMessage();
+              widget.sendMessage(_messageController.text);
             },
             schedulePressed: () {
               keepFocusActive();

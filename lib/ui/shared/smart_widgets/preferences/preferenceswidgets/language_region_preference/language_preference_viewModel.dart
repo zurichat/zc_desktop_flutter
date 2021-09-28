@@ -2,6 +2,7 @@ import 'package:stacked/stacked.dart';
 
 class LanguagePreferenceViewModel extends BaseViewModel {
   String _selectedLanguage = 'Englis (US)';
+
   String get selectedLanguage => _selectedLanguage;
 
   List<String> _preferencetitles = [
@@ -16,7 +17,9 @@ class LanguagePreferenceViewModel extends BaseViewModel {
   String _dropDownKeyboard = 'Englis (US)';
 
   String get dropDownLanguage => _dropDownLanguage;
+
   String get dropDownTimeZone => _dropDownTimeZone;
+
   String get dropDownKeyboard => _dropDownKeyboard;
 
   List<String> get preferencetitles => _preferencetitles;

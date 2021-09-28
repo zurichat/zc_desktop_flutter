@@ -159,14 +159,12 @@ class KeyBoardSettingsSection extends StatelessWidget {
           GestureDetector(
             onTap: () {},
             child: Text.rich(TextSpan(
-                style: preferenceStyleBold,
-                children: [
-                  TextSpan(text: model.shortCutMsg),
-                  TextSpan(
-                      text: ' ' + model.boldShortCutMsg,
-                      style:
-                          TextStyle(color: kcSecondaryColor, fontSize: 15.sp))
-                ])),
+                style: preferenceStyleBold, children: [
+              TextSpan(text: model.shortCutMsg),
+              TextSpan(
+                  text: ' ' + model.boldShortCutMsg,
+                  style: TextStyle(color: kcSecondaryColor, fontSize: 15.sp))
+            ])),
           ),
           verticalSpaceRegular,
 
@@ -177,8 +175,7 @@ class KeyBoardSettingsSection extends StatelessWidget {
               horizontalSpaceTiny,
               ShortCuts().up(),
               horizontalSpaceTiny,
-              Text('in the empty message field to:',
-                  style: preferenceStyleBold)
+              Text('in the empty message field to:', style: preferenceStyleBold)
             ],
           ),
           verticalSpaceSmall,
@@ -216,8 +213,7 @@ class ShortCutDescription extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Edit your last message',
-              style: preferenceStyleBold),
+          title: Text('Edit your last message', style: preferenceStyleBold),
           subtitle: Text(
               'The last message you sent will be selected and in editing mode',
               style: preferenceStyleNormal),
@@ -236,8 +232,7 @@ class ShortCutDescription extends StatelessWidget {
         //notice
         Wrap(
           children: [
-            Text('Note: press ',
-                style: preferenceStyleNormal),
+            Text('Note: press ', style: preferenceStyleNormal),
             ShortCuts().ctrl(),
             Text(' + ', style: preferenceStyleNormal),
             ShortCuts().up(),

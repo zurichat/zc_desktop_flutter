@@ -28,8 +28,7 @@ class SideBarView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Always show in the side bar',
-                    style: preferenceStyleBold),
+                Text('Always show in the side bar', style: preferenceStyleBold),
                 SizedBox(height: 14),
                 DisplayCheckBox(
                   value: model.insight,
