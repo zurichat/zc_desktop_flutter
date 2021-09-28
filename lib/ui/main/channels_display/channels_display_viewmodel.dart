@@ -82,7 +82,7 @@ class ChannelsDisplayViewModel extends BaseViewModel {
   }
 
   Future<void> performGetChannel() async {
-    List<Channel> channelsList = await _auth.getChannelsList("1");
+    List<Channel>? channelsList = await _auth.getChannelsList("1");
     print(channelsList);
   }
 

@@ -214,71 +214,68 @@ class MessageTile extends StatelessWidget {
                       : Colors.transparent),
               color: kcBackgroundColor2,
               padding: EdgeInsets.fromLTRB(0, 2, 10, 2),
-              child:  Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(2.0),
-                          height: 50.h,
-                          width: 50.w,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: lightIconColor),
-                              borderRadius: BorderRadius.circular(8.r),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(
-                                    model
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(2.0),
+                    height: 50.h,
+                    width: 50.w,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: lightIconColor),
+                        borderRadius: BorderRadius.circular(8.r),
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(
+                              model.getUser(message.user_id).displayName,
+                              scale: 5),
+                        )),
+                  ),
+                  SizedBox(
+                    width: 8.w,
+                  ),
+                  Expanded(
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                //u will have to change this using real data
+                                model
+                                        .getUser(message.user_id)
+                                        .displayName
+                                        .isEmpty
+                                    ? 'Zuri Me'
+                                    : model
                                         .getUser(message.user_id)
                                         .displayName,
-                                    scale: 5),
-                              )),
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Expanded(
-                          child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      //u will have to change this using real data
-                                      model
-                                              .getUser(message.user_id)
-                                              .displayName
-                                              .isEmpty
-                                          ? 'Zuri Me'
-                                          : model
-                                              .getUser(message.user_id)
-                                              .displayName,
-                                      style: kHeading1TextStyle.copyWith(
-                                          fontSize: 15.sp),
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Text(
-                                      model.formatTime(message.timestamp),
-                                      style:
-                                          subtitle2.copyWith(color: timeColor),
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 30, 0),
-                                  child: Text(message.content),
-                                ), ]),
-                        )
-                      ],
-                    ),
+                                style: kHeading1TextStyle.copyWith(
+                                    fontSize: 15.sp),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Text(
+                                model.formatTime(message.timestamp),
+                                style: subtitle2.copyWith(color: timeColor),
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                            child: Text(message.content),
+                          ),
+                        ]),
+                  )
+                ],
+              ),
             ),
           ],
         ),
@@ -291,8 +288,10 @@ class SameSenderMessageTile extends StatelessWidget {
   final ChannelsViewModel model;
   final Results message;
   final int messageIndex;
+
   SameSenderMessageTile(
       {required this.message, required this.model, required this.messageIndex});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
