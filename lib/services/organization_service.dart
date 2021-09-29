@@ -3,7 +3,6 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
@@ -24,39 +23,6 @@ class OrganizationService {
     final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
     return AuthResponse.fromJson(jsonDecode(authResponse as String));
   }
-
-  List<Organization> _organizations = [
-    Organization(
-      id: "1",
-      name: "Zuri chat",
-      logoUrl: "assets/icons/zuri_logo_only.svg",
-      workspaceUrl: "",
-    ),
-    Organization(
-      id: "2",
-      name: "HNGi8",
-      logoUrl: "assets/images/gmail.svg",
-      workspaceUrl: "",
-    ),
-    Organization(
-      id: "3",
-      name: "Tamborin",
-      logoUrl: "assets/images/twitter.svg",
-      workspaceUrl: "",
-    ),
-    Organization(
-      id: "4",
-      name: "Filledstacks",
-      logoUrl: "assets/images/facebook.svg",
-      workspaceUrl: "",
-    ),
-    Organization(
-      id: "5",
-      name: "GADS 2021",
-      logoUrl: "assets/images/google.svg",
-      workspaceUrl: "",
-    ),
-  ];
 
   /*Future<List<Organization>> getOrganizations() async {
     await Future.delayed(Duration(seconds: 2));
@@ -89,7 +55,7 @@ class OrganizationService {
   Future<List<Organization>> getOrganizations() async {
     // Getting stored AuthResponse from local storage
     return await _zuriApiService.fetchOrganizationsListFromRemote(
-        _authResponse.user.email, _authResponse.user.token);
+        email: _authResponse.user.email, token: _authResponse.user.token);
   }
 
   /// This is used to add user to an organization_service
@@ -103,7 +69,6 @@ class OrganizationService {
   /// This is used the create an organization_service
   Future<void> createOrganization(String email) async {
     // Getting stored AuthResponse from local storage
-    print('Bearer ${_authResponse.sessionID}');
     final response = await _zuriApiService.createOrganizationUsingEmail(
         email: email, token: _authResponse.user.token);
     addMemberToOrganization(response['data']['_id']);
@@ -143,7 +108,7 @@ class OrganizationService {
   /// This is used to get a single organization_service
   Future<Organization> _getOrganization(String organizationId) async {
     return await _zuriApiService.fetchOrganizationDetails(
-        organizationId: organizationId);
+        organizationId: organizationId, token: _authResponse.user.token);
   }
 
   Future<void> _addOrgToOrganizationsList(Organization organization) async {

@@ -48,6 +48,7 @@ class OrganizationViewModel extends BaseViewModel {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
     await _organizationService.saveOrganizationId(_currentOrganization.id!);
+    log.i(_organization);
     log.i(_currentOrganization.id);
     // log.i(_channels);
   }
@@ -85,12 +86,12 @@ class OrganizationViewModel extends BaseViewModel {
 
   Future<void> getOrganizations() async {
     _organization = await _organizationService.getOrganizations();
-    log.i(_organization);
     log.d(" current organization id ${_currentOrganization.id}");
   }
 
   Future<void> getChannels() async {
-    _channels = await _channelService.getChannelsList(_currentOrganization.id);
+    _channels = await _channelService.getChannelsList(
+        organizationId: _currentOrganization.id);
     _channelService.setChannel(_channels!.first);
     log.d("${_channels}");
   }
@@ -128,6 +129,7 @@ class OrganizationViewModel extends BaseViewModel {
   bool showSelectedOrg(int index) {
     if (index == getSelectedOrganizationIndex()!) {
       return true;
+      notifyListeners();
     }
     return false;
   }

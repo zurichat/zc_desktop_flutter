@@ -60,7 +60,7 @@ abstract class Api {
   ///
   /// function parameters; [String] email, token.
   Future<List<Organization>> fetchOrganizationsListFromRemote(
-      String email, token);
+      {required String email, required token});
 
   /// returns [Future]<[void]>, add logged in user to organization.
   ///
@@ -78,7 +78,7 @@ abstract class Api {
   ///
   /// function parameters; [String] email, token.
   Future<Map<String, dynamic>> createOrganizationUsingEmail(
-      {String? email, token});
+      {required String email, required token});
 
   /// returns [Future]<[Organization]>, private function to get a single organization details from remote
   /// source using organization id.
@@ -88,7 +88,7 @@ abstract class Api {
   ///
   /// function parameters; [String] organizationId, token
   Future<Organization> fetchOrganizationDetails(
-      {required String organizationId, token});
+      {required String organizationId, required token});
 
   /* CHANNEL SERVICE */
 
@@ -98,18 +98,25 @@ abstract class Api {
   /// get request;
   /// * headers: {"Authorization": logged in user token}
   ///
-  /// function parameters; [String] organizationId.
-  Future<List<Channel>> fetchChannelsListUsingOrgId({String? organizationId});
+  /// function parameters; [String] organizationId, token
+  Future<List<Channel>> fetchChannelsListUsingOrgId(
+      {required String organizationId, required token});
 
-  /// returns [Future]<[void]>, create channel in current organization using organization id.
+  /// returns [Future]<[dynamic]>, create channel in current organization using organization id.
   ///
   /// post request;
   /// * body: {"name": [name], "owner": [owner], "description": [description], "private": [private]}
   /// * headers: {"Authorization" : logged in user token}.
   ///
-  /// function parameters; [String] name, [String] owner, [String] description, [String] private
-  Future<void> createChannelsUsingOrgId(
-      {String name, String owner, String description, bool private});
+  /// function parameters; [String] name, [String] owner, [String] description, [String] private. sessionId,
+  /// insertedOrganization.
+  Future<dynamic> createChannelsUsingOrgId(
+      {required sessionId,
+      required insertedOrganization,
+      String? name,
+      String? owner,
+      String? description,
+      bool? private});
 
   /// returns [Future]<[void]>, adds a user to channel using current organization id and current channel id.
   ///
@@ -118,7 +125,7 @@ abstract class Api {
   /// "prop1": [prop1], "prop2": [prop2], "prop3": [prop3]}
   ///
   /// function parameters; [String] id, [String] role_id, [String] is_admin, [String] prop1, [String] prop2, [String] prop3.
-  Future<void> addUserToChannel(
+  Future<void> addUserToChannel(organizationId, channelId,
       {String id,
       String role_id,
       bool is_admin,
@@ -142,16 +149,20 @@ abstract class Api {
   ///
   /// query parameters; organization id, channel id
   ///
-  /// function parameters; none
-  Future<List<ChannelMessage>> fetchChannelMessages();
+  /// function parameters; [String] channelId, [String] organizationId
+  Future<List<ChannelMessage>> fetchChannelMessages(
+      {required String channelId, required String organizationId});
 
   /// returns [Future]<[String]>, to get socket id of a channel using channel id and organization id associated with it.
   ///
   /// get request;
   /// * headers: {"Authorization": logged in user token}.
   ///
-  /// function parameters; none.
-  Future<String> fetchChannelSocketId();
+  /// function parameters; [String] channelId, [String] organization id, token.
+  Future<String> fetchChannelSocketId(
+      {required String channelId,
+      required String organizationId,
+      required token});
 
   /* USER SERVICE */
 
@@ -181,7 +192,7 @@ abstract class Api {
   /// * body: {}
   ///
   /// parameters;
-  Future<String?> createRoom({User currentUser, DummyUser user});
+  Future<String> createRoom({User currentUser, DummyUser user});
 
   /// returns [Future]<[void]>, get a particular room info using room id.
   ///

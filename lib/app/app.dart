@@ -1,7 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
-import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
@@ -60,7 +59,6 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: ChannelsService),
-    LazySingleton(classType: ApiService),
     LazySingleton(classType: DMService),
     LazySingleton(classType: OrganizationService),
     LazySingleton(classType: CentrifugeService),
