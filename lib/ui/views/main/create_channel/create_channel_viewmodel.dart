@@ -180,7 +180,8 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
       String name, String owner, String description, bool private) async {
     // await _auth.createChannels(
     //     name, owner, description, private);
-    await _auth.createChannels(name, owner, description, private);
+    await _auth.createChannels(
+        name: name, owner: owner, description: description, private: private);
 
     _showError = true;
     await Future.delayed(

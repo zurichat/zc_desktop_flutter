@@ -321,10 +321,10 @@ abstract class BaseChat with _$BaseChat {
 class Channel with _$Channel{
   factory Channel({
      String? id,
-     String? name,
-     String? owner,
-     String? description,
-     bool? private,
+    String? name,
+    String? owner,
+    String? description,
+    bool? private,
   }) = _Channel;
 
   factory Channel.fromJson(Map<String, dynamic> json) =>
@@ -332,15 +332,27 @@ class Channel with _$Channel{
 }
 
 @freezed
-class Organization with _$Organization{
-  factory Organization({
-    @JsonKey(name: '_id')   String? id,
-    @JsonKey(name: 'logo_url')  String? logoUrl,
-    required String? name,
-    @JsonKey(name: 'workspace_url') String? workspaceUrl,
-  })= _Organization;
+class OrganizationResponse with _$OrganizationResponse {
+  factory OrganizationResponse({
+    int? status,
+    String? message,
+    List<Organization>? data,
+  }) = _OrganizationResponse;
 
-factory Organization.fromJson(Map<String, dynamic> json) =>
+  factory OrganizationResponse.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationResponseFromJson(json);
+}
+
+@freezed
+class Organization with _$Organization {
+  factory Organization({
+    String? id,
+    String? logoUrl,
+    String? name,
+    String? workspaceUrl,
+  }) = _Organization;
+
+  factory Organization.fromJson(Map<String, dynamic> json) =>
       _$OrganizationFromJson(json);
 }
 

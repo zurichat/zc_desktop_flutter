@@ -1,15 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 class ZuriApiService implements Api {
-  final log = getLogger('ZuriApi');
-  final _apiService = locator<ApiService>();
+  final log = getLogger('ZuriApiService');
   final dio = Dio(
     BaseOptions(
       baseUrl: baseUri.toString(),
@@ -32,7 +30,7 @@ class ZuriApiService implements Api {
       final response = await dio.get(uri.toString(),
           queryParameters: queryParameters, options: Options(headers: headers));
 
-      //log.i('Response from $uri \n${response.data}');
+      log.i('Response from $uri \n${response.data}');
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.data['message']);
@@ -180,7 +178,7 @@ class ZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> createOrganizationUsingEmail(
-      {String? email, token}) async {
+      {required String email, required token}) async {
     return await post(
       createOrganizationUri,
       body: {
@@ -192,7 +190,7 @@ class ZuriApiService implements Api {
 
   @override
   Future<Organization> fetchOrganizationDetails(
-      {required String organizationId, token}) async {
+      {required String organizationId, required token}) async {
     final response = await get(
       getOrganisationUri(organizationId),
       headers: {
@@ -204,14 +202,15 @@ class ZuriApiService implements Api {
 
   @override
   Future<List<Organization>> fetchOrganizationsListFromRemote(
-      String email, token) async {
+      {required String email, required token}) async {
     final response = await get(
       getOrganizationsUri(email),
       headers: {'Authorization': "Bearer ${token}"},
     );
-    return List.from(
-      response['data'].map((map) => Organization.fromJson(map)).toList(),
-    );
+
+    log.i(response['data']);
+    //return Organization.fromJson(json).
+    return OrganizationResponse.fromJson(response).data!;
   }
 
   /* USER SERVICE */
@@ -226,77 +225,146 @@ class ZuriApiService implements Api {
 
   @override
   Future sendMessageToChannel(
-      {channel_id, senderId, message, organization_id}) {
-    // TODO: implement sendMessageToChannel
-    throw UnimplementedError();
+      {channel_id, senderId, message, organization_id}) async {
+    return await post(channelSendMessage(channel_id, organization_id), body: {
+      "user_id": senderId,
+      "content": message,
+      "files": [],
+      "event": {}
+    });
   }
 
   @override
-  Future<String> fetchChannelSocketId() {
-    // TODO: implement fetchChannelSocketId
-    throw UnimplementedError();
+  Future<String> fetchChannelSocketId(
+      {required String channelId,
+      required String organizationId,
+      required token}) async {
+    String socketName = '';
+    final response = await get(
+      getChannelSocketId(channelId, organizationId),
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
+    socketName = response['socket_name'] ?? '';
+    return socketName;
   }
 
   @override
-  Future<List<Channel>> fetchChannelsListUsingOrgId({String? organizationId}) {
-    // TODO: implement fetchChannelsListUsingOrgId
-    throw UnimplementedError();
+  Future<List<Channel>> fetchChannelsListUsingOrgId(
+      {String? organizationId, required token}) async {
+    final response = await get(
+      getCreateChannelUri(organizationId!),
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
+    log.i(response);
+    return List.from(
+      response.map((map) => Channel.fromJson(map)).toList(),
+    );
   }
 
   @override
-  Future<void> addUserToChannel(
+  Future<dynamic> addUserToChannel(organizationId, channelId,
       {String? id,
       String? role_id,
       bool? is_admin,
       String? prop1,
       String? prop2,
-      String? prop3}) {
-    // TODO: implement addUserToChannel
-    throw UnimplementedError();
+      String? prop3}) async {
+    return await post(
+      getUserChannelUri(organizationId, channelId),
+      body: {
+        "_id": id,
+        "role_id": role_id,
+        "is_admin": is_admin,
+        "notifications": {
+          "additionalProp1": prop1,
+          "additionalProp2": prop2,
+          "additionalProp3": prop3
+        },
+      },
+    );
   }
 
   @override
-  Future<void> createChannelsUsingOrgId(
-      {String? name, String? owner, String? description, bool? private}) {
-    // TODO: implement createChannelsUsingOrgId
-    throw UnimplementedError();
+  Future<dynamic> createChannelsUsingOrgId(
+      {required sessionId,
+      required insertedOrganization,
+      String? name,
+      String? owner,
+      String? description,
+      bool? private}) async {
+    return await post(
+      getCreateChannelUri(insertedOrganization),
+      body: {
+        "name": name,
+        "owner": owner,
+        "description": description,
+        "private": private,
+      },
+      headers: {'Authorization': 'Bearer ${sessionId}'},
+    );
   }
 
   @override
-  Future<List<ChannelMessage>> fetchChannelMessages() {
-    // TODO: implement fetchChannelMessages
-    throw UnimplementedError();
+  Future<List<ChannelMessage>> fetchChannelMessages(
+      {required String channelId, required String organizationId}) async {
+    final response = await get(channelFetchMessages(channelId, organizationId));
+    return ChannelMessagesResponse.fromJson(response).data;
   }
 
   /* DIRECT MESSAGES SERVICE */
 
   @override
-  Future<SendMessageResponse> sendMessageToDM({roomId, senderId, message}) {
-    // TODO: implement sendMessageToDM
-    throw UnimplementedError();
+  Future<SendMessageResponse> sendMessageToDM(
+      {roomId, senderId, message}) async {
+    final response = await post(dmSendMessage(roomId), body: {
+      "sender_id": senderId,
+      "room_id": roomId,
+      "message": message,
+      "media": [],
+      "read": false,
+      "pinned": false,
+      "saved_by": [],
+      "threads": [],
+      "reactions": [],
+      "created_at": DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+          .format(DateTime.now())
+          .toString(),
+    });
+
+    return SendMessageResponse.fromJson(response);
   }
 
   @override
-  Future<void> markMessageAsRead(messageId) {
-    // TODO: implement markMessageAsRead
-    throw UnimplementedError();
+  Future<void> markMessageAsRead(messageId) async {
+    final response = await put(dmMarkMessageAsRead(messageId), body: {});
+    var res = MarkMessageAsReadResponse.fromJson(response).read;
   }
 
   @override
-  Future<void> getRoomInfo({roomId}) {
-    // TODO: implement getRoomInfo
-    throw UnimplementedError();
+  Future<void> getRoomInfo({roomId}) async {
+    final response =
+        await get(dmGetRoomInfo, queryParameters: {'room_id': roomId});
+    var res = RoomInfoResponse.fromJson(response).numberOfUsers;
+    print("number of users: ${res}");
   }
 
   @override
-  Future<List<Results>> fetchRoomMessages({roomId}) {
-    // TODO: implement fetchRoomMessages
-    throw UnimplementedError();
+  Future<List<Results>> fetchRoomMessages({roomId}) async {
+    final response = await get(dmFetchRoomMessages(roomId));
+    return MessagesResponse.fromJson(response).results;
   }
 
   @override
-  Future<String?> createRoom({User? currentUser, DummyUser? user}) {
-    // TODO: implement createRoom
-    throw UnimplementedError();
+  Future<String> createRoom({User? currentUser, DummyUser? user}) async {
+    final response = await post(
+      dmCreateRoom,
+      body: {
+        "org_id": "1",
+        "room_user_ids": [currentUser!.id, user!.id],
+        "bookmarks": ["0"],
+        "pinned": ["0"]
+      },
+    );
+    return CreateRoomResponse.fromJson(response).roomId;
   }
 }

@@ -80,43 +80,49 @@ class OrganizationWrapper extends StatelessWidget {
                         color: Theme.of(context).accentColor,
                         width: 70.w,
                         height: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: model!.organization!.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      print("Workspace $index tapped");
-                                      model!.reloadWithSelectedOrganization(
-                                          index);
-                                    },
-                                    child: OrganizationItem(
-                                      organization: model!.organization![index],
-                                      selected: model!.showSelectedOrg(index),
+                        child: SingleChildScrollView(
+                          physics: ScrollPhysics(),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: model!.organization!.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        print("Workspace $index tapped");
+                                        model!.reloadWithSelectedOrganization(
+                                            index);
+                                      },
+                                      child: OrganizationItem(
+                                        organization:
+                                            model!.organization![index],
+                                        selected: model!.showSelectedOrg(index),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  model!.goToCreateWorkspace();
+                                  );
                                 },
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                  size: 20,
+                              ),
+                              verticalSpaceSmall,
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    model!.goToCreateWorkspace();
+                                  },
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
                                 ),
                               ),
-                            )
-                          ],
+                              verticalSpaceMedium,
+                            ],
+                          ),
                         ),
                       ),
                       //TODO: Left side bar
