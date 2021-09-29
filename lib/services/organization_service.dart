@@ -6,17 +6,24 @@ import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 
 const selectedOrganizationKey = 'selectedOrganizationKey';
 const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
 const organizationIdKey = 'organizationIdKey';
 
 /// Refactor class to store objects with a proper db
-@LazySingleton()
+
 class OrganizationService {
   final log = getLogger("OrganizationService");
   final _localStorageService = locator<LocalStorageService>();
-  final _apiService = locator<ApiService>();
+  final _zuriApiService = locator<ZuriApiService>();
+
+  /// This gets the currently logged in user respose
+  AuthResponse get _authResponse {
+    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    return AuthResponse.fromJson(jsonDecode(authResponse as String));
+  }
 
   List<Organization> _organizations = [
     Organization(
@@ -81,55 +88,28 @@ class OrganizationService {
   /// ... the actual home view (organization_service view)
   Future<List<Organization>> getOrganizations() async {
     // Getting stored AuthResponse from local storage
-
-    final response = await _apiService.get(
-      _apiService.apiConstants.getOrganizationsUri(_authResponse.user.email),
-      headers: {'Authorization': "Bearer ${_authResponse.user.token}"},
-    );
-
-    return List.from(
-      response['data'].map((map) => Organization.fromJson(map)).toList(),
-    );
+    return await _zuriApiService.fetchOrganizationsListFromRemote(
+        _authResponse.user.email, _authResponse.user.token);
   }
 
   /// This is used to add user to an organization_service
-  Future<void> addMemberToOrganization(String orgID) async {
-    await _apiService.post(
-      _apiService.apiConstants.getaddUserToOganization(orgID),
-      body: {'user_email': _authResponse.user.email},
-      headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
-    );
+  Future<void> addMemberToOrganization(String organizationId) async {
+    await _zuriApiService.addLoggedInUserToOrganization(
+        organizationId: organizationId,
+        email: _authResponse.user.email,
+        token: _authResponse.user.token);
   }
 
   /// This is used the create an organization_service
   Future<void> createOrganization(String email) async {
     // Getting stored AuthResponse from local storage
     print('Bearer ${_authResponse.sessionID}');
-    final response = await _apiService.post(
-      _apiService.apiConstants.createOrganizationUri,
-      body: {
-        // "creator_email": _authResponse.user.email,
-        "creator_email": email,
-      },
-      headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
-    );
+    final response = await _zuriApiService.createOrganizationUsingEmail(
+        email: email, token: _authResponse.user.token);
     addMemberToOrganization(response['data']['_id']);
     String insertedId = response['data']['InsertedID'];
-
     Organization insertedOrganisation = await _getOrganization(insertedId);
-
     _addOrgToOrganizationsList(insertedOrganisation);
-  }
-
-  Future<void> saveUserSelectedOrganizations(
-      List<Organization> organizations) async {
-    final organizationsToMap =
-        organizations.map((organization) => organization.toJson()).toList();
-
-    await _localStorageService.saveToDisk(
-      userSelectedOrganizationsKey,
-      jsonEncode(organizationsToMap),
-    );
   }
 
   List<Organization> getUserSelectedOrganisations() {
@@ -145,26 +125,25 @@ class OrganizationService {
     );
   }
 
+  Future<void> saveUserSelectedOrganizations(
+      List<Organization> organizations) async {
+    final organizationsToMap =
+        organizations.map((organization) => organization.toJson()).toList();
+
+    await _localStorageService.saveToDisk(
+      userSelectedOrganizationsKey,
+      jsonEncode(organizationsToMap),
+    );
+  }
+
   /// Private methods
   /// They should not be used outside this file
   ///
 
-  /// This gets the currently logged in user respose
-  AuthResponse get _authResponse {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    return AuthResponse.fromJson(jsonDecode(authResponse as String));
-  }
-
   /// This is used to get a single organization_service
   Future<Organization> _getOrganization(String organizationId) async {
-    final response = await _apiService.get(
-      _apiService.apiConstants.getOrganisationUri(organizationId),
-      headers: {
-        'Authorization': 'Bearer ${_authResponse.user.token}',
-      },
-    );
-
-    return Organization.fromJson(response['data']);
+    return await _zuriApiService.fetchOrganizationDetails(
+        organizationId: organizationId);
   }
 
   Future<void> _addOrgToOrganizationsList(Organization organization) async {

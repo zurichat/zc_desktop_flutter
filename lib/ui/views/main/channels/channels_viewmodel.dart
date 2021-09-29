@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
-
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
@@ -84,7 +83,7 @@ class ChannelsViewModel extends BaseViewModel {
   }
 
   void getChannelSocketId() async {
-    String channelSockId = await _channelService.getChannelSocketId();
+    String channelSockId = await _channelService.fetchChannelSocketId();
 
     websocketConnect(channelSockId);
   }

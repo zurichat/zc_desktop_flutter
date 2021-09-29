@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart'
     as currentLoggedInUser;
 import 'package:zc_desktop_flutter/model/app_models.dart';
@@ -105,7 +106,7 @@ class ChannelsService {
   /// This is used to get the list of channels on the page
   Future<List<Channel>> getChannelsList(String? organizationId) async {
     final response = await _apiService.get(
-      _apiService.apiConstants.getcreateChannelUri(organizationId!),
+      getCreateChannelUri(organizationId!),
       headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
     );
 
@@ -126,7 +127,7 @@ class ChannelsService {
   ) async {
     // Getting stored AuthResponse from local storage
     final response = await _apiService.post(
-      _apiService.apiConstants.getcreateChannelUri(insertedOrganisation),
+      getCreateChannelUri(insertedOrganisation),
       body: {
         "name": name,
         "owner": owner,
@@ -157,7 +158,7 @@ class ChannelsService {
     final orgId = await _organizationService.getOrganizationId();
     log.i(orgId);
     var res = await _apiService.post(
-      _apiService.apiConstants.getuserChannelUri(orgId, getChannel().id!),
+      getUserChannelUri(orgId, getChannel().id!),
       body: {
         "_id": id,
         "role_id": role_id,
@@ -179,7 +180,7 @@ class ChannelsService {
         .format(DateTime.now().toUtc())
         .toString());
     final response = await _apiService.post(
-        _apiService.apiConstants.channelSendMessage(_currentChannel!.id ?? '0',
+        channelSendMessage(_currentChannel!.id ?? '0',
             _organizationService.getOrganizationId()),
         body: {
           "user_id": senderId,
@@ -193,9 +194,8 @@ class ChannelsService {
 
   Future<List<ChannelMessage>> fetchChannelMessages(
       var org_id, var channel_id) async {
-    final response = await _apiService.get(_apiService.apiConstants
-        .channelFetchMessages(
-            _currentChannel!.id!, _organizationService.getOrganizationId()));
+    final response = await _apiService.get(channelFetchMessages(
+        _currentChannel!.id!, _organizationService.getOrganizationId()));
     print(response);
     try {
       return ChannelMessagesResponse.fromJson(response).data;
@@ -205,15 +205,15 @@ class ChannelsService {
     }
   }
 
-  Future<String> getChannelSocketId() async {
+  Future<String> fetchChannelSocketId() async {
     final orgId = _organizationService.getOrganizationId();
 
     String socketName = '';
 
     try {
       final response = await _apiService.get(
-        _apiService.apiConstants.getChannelSocketId(_currentChannel!.id ?? '0',
-            _organizationService.getOrganizationId()),
+        getChannelSocketId(
+            _currentChannel!.id!, _organizationService.getOrganizationId()),
         headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
       );
       print(response);

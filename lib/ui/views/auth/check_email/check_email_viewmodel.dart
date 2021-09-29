@@ -103,7 +103,7 @@ class CheckEmailViewModel extends BaseViewModel {
         if(!isReset){
           await _auth.confirmEmail(otp);
         } else {
-          await _auth.confirmResetCode(otp);
+          await _auth.verifyPasswordResetCode(otp);
         }
         _navigator.navigateTo(isReset ? Routes.changePasswordView : Routes.successView);
       } catch (e) {
