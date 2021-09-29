@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
