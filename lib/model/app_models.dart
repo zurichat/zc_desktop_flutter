@@ -31,12 +31,23 @@ class User with _$User {
 @freezed
 class AuthResponse with _$AuthResponse {
   factory AuthResponse({
-    @JsonKey(name: 'session_id') required String sessionID,
-    required User user,
+    int? status,
+    String? message,
+    Auth? data,
   }) = _AuthResponse;
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) =>
       _$AuthResponseFromJson(json);
+}
+
+@freezed
+class Auth with _$Auth {
+  factory Auth({
+    String? sessionID,
+    User? user,
+  }) = _Auth;
+
+  factory Auth.fromJson(Map<String, dynamic> json) => _$AuthFromJson(json);
 }
 
 @freezed
@@ -307,20 +318,32 @@ class DM with _$DM {
 @freezed
 class Chat with _$Chat {
   factory Chat({int? timestamp, String? text, DummyUser? user}) = _Chat;
+
   factory Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);
 }
 
 @freezed
 abstract class BaseChat with _$BaseChat {
   factory BaseChat({List<Chat>? chats}) = _BaseChat;
+
   factory BaseChat.fromJson(Map<String, dynamic> json) =>
       _$BaseChatFromJson(json);
 }
 
 @freezed
-class Channel with _$Channel{
+class ChannelResponse with _$ChannelResponse {
+  factory ChannelResponse({
+    List<Channel>? data,
+  }) = _ChannelResponse;
+
+  factory ChannelResponse.fromJson(Map<String, dynamic> json) =>
+      _$ChannelResponseFromJson(json);
+}
+
+@freezed
+class Channel with _$Channel {
   factory Channel({
-     String? id,
+    String? id,
     String? name,
     String? owner,
     String? description,

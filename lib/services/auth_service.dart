@@ -14,15 +14,14 @@ class AuthService {
   final _zuriApiService = locator<ZuriApiService>();
   final _localStorageService = locator<LocalStorageService>();
 
-  AuthResponse? authResponse;
+  Auth? auth;
 
   Future<void> loginUser(
       {required String email, required String password}) async {
     final response =
         await _zuriApiService.login(email: email, password: password);
-    _localStorageService.saveToDisk(
-        localAuthResponseKey, jsonEncode(response['data']));
-    authResponse = AuthResponse.fromJson(response['data']);
+    auth = AuthResponse.fromJson(response).data!;
+    _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
   }
 
   Future<void> signup({required String password, required String email}) async {

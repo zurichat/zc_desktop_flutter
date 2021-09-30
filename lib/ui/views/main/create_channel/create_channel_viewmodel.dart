@@ -18,14 +18,14 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   final _localStorageService = locator<LocalStorageService>();
 
   /// This gets the currently logged in user respose
-  AuthResponse get _authResponse {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    return AuthResponse.fromJson(jsonDecode(authResponse as String));
+  Auth get _auth {
+    final auth = _localStorageService.getFromDisk(localAuthResponseKey);
+    return Auth.fromJson(jsonDecode(auth as String));
   }
 
   final log = getLogger("CreateChannelViewModel");
   final _navigationService = locator<NavigationService>();
-  final _auth = locator<ChannelsService>();
+  final _channelsService = locator<ChannelsService>();
 
   String _createChannel = 'Create a channel';
   String _channelTextOne =
@@ -131,7 +131,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   }
 
   String userEmail() {
-    return _authResponse.user.email;
+    return _auth.user!.email;
   }
 
   Future<void> createchannels(
@@ -180,7 +180,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
       String name, String owner, String description, bool private) async {
     // await _auth.createChannels(
     //     name, owner, description, private);
-    await _auth.createChannels(
+    await _channelsService.createChannels(
         name: name, owner: owner, description: description, private: private);
 
     _showError = true;

@@ -8,19 +8,16 @@ import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 class ZuriApiService implements Api {
   final log = getLogger('ZuriApiService');
-  final dio = Dio(
-    BaseOptions(
-      baseUrl: baseUri.toString(),
-      sendTimeout: sendTimeout,
-      receiveTimeout: receiveTimeout,
-    ),
-  );
+  final dio = Dio();
 
   ZuriApiService() {
+    dio.options.baseUrl = baseUri.toString();
+    dio.options.sendTimeout = sendTimeout;
+    dio.options.receiveTimeout = receiveTimeout;
     log.i('Zuri Api constructed and DIO setup register');
   }
 
-  Future<dynamic> get(
+  Future<dynamic> _get(
     Uri uri, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
@@ -41,7 +38,7 @@ class ZuriApiService implements Api {
     }
   }
 
-  Future<dynamic> post(
+  Future<dynamic> _post(
     Uri uri, {
     required Map<String, dynamic> body,
     Map<String, String>? headers,
@@ -63,7 +60,7 @@ class ZuriApiService implements Api {
     }
   }
 
-  Future<dynamic> put(
+  Future<dynamic> _put(
     Uri uri, {
     required Map<String, dynamic> body,
     Map<String, String>? headers,
@@ -84,7 +81,7 @@ class ZuriApiService implements Api {
     }
   }
 
-  Future<dynamic> delete(Uri uri) async {
+  Future<dynamic> _delete(Uri uri) async {
     log.i('Making request to $uri');
     try {
       final response = await dio.delete(uri.toString());
@@ -100,11 +97,34 @@ class ZuriApiService implements Api {
     }
   }
 
+  Future<dynamic> _patch(
+    Uri uri, {
+    required Map<String, dynamic> body,
+    Map<String, String>? headers,
+  }) async {
+    log.i('Making request to $uri');
+    try {
+      final response = await dio.patch(
+        uri.toString(),
+        data: body,
+        options: Options(headers: headers),
+      );
+      log.i('Response from $uri \n${response.data}');
+      return response.data;
+    } on DioError catch (error) {
+      log.e(error.message);
+      throw Failure(error.message);
+    } catch (error) {
+      log.e(error.toString());
+      throw Failure(error.toString());
+    }
+  }
+
   /* AUTH SERVICE */
 
   @override
   Future<void> confirmEmail({required String otpCode}) async {
-    await post(
+    await _post(
       confirmEmailUri,
       body: {
         "code": otpCode,
@@ -115,7 +135,7 @@ class ZuriApiService implements Api {
   @override
   Future<dynamic> login(
       {required String email, required String password}) async {
-    return await post(
+    return await _post(
       signInUri,
       body: {
         "email": email,
@@ -126,7 +146,7 @@ class ZuriApiService implements Api {
 
   @override
   Future<void> requestPasswordResetCode({required String email}) async {
-    await post(
+    await _post(
       requestPasswordResetCodeUri,
       body: {"email": email},
     );
@@ -134,7 +154,7 @@ class ZuriApiService implements Api {
 
   @override
   Future<void> signup({required String email, required String password}) async {
-    await post(
+    await _post(
       signupUri,
       body: {
         'email': email,
@@ -145,7 +165,7 @@ class ZuriApiService implements Api {
 
   @override
   Future<void> updateUserPassword({required String password}) async {
-    await post(
+    await _post(
       verifyResetPasswordUri,
       body: {
         "password": password,
@@ -156,7 +176,7 @@ class ZuriApiService implements Api {
 
   @override
   Future<void> verifyPasswordResetCode({required String resetCode}) async {
-    await post(
+    await _post(
       verifyResetPasswordUri,
       body: {"code": resetCode},
     );
@@ -169,7 +189,7 @@ class ZuriApiService implements Api {
       {required String organizationId,
       required String email,
       required token}) async {
-    await post(
+    await _post(
       getAddUserToOrganizationUri(organizationId),
       body: {'user_email': email},
       headers: {'Authorization': 'Bearer ${token}'},
@@ -179,7 +199,7 @@ class ZuriApiService implements Api {
   @override
   Future<Map<String, dynamic>> createOrganizationUsingEmail(
       {required String email, required token}) async {
-    return await post(
+    return await _post(
       createOrganizationUri,
       body: {
         "creator_email": email,
@@ -191,19 +211,19 @@ class ZuriApiService implements Api {
   @override
   Future<Organization> fetchOrganizationDetails(
       {required String organizationId, required token}) async {
-    final response = await get(
+    final response = await _get(
       getOrganisationUri(organizationId),
       headers: {
         'Authorization': 'Bearer ${token}',
       },
     );
-    return Organization.fromJson(response['data']);
+    return Organization.fromJson(response);
   }
 
   @override
   Future<List<Organization>> fetchOrganizationsListFromRemote(
       {required String email, required token}) async {
-    final response = await get(
+    final response = await _get(
       getOrganizationsUri(email),
       headers: {'Authorization': "Bearer ${token}"},
     );
@@ -226,7 +246,7 @@ class ZuriApiService implements Api {
   @override
   Future sendMessageToChannel(
       {channel_id, senderId, message, organization_id}) async {
-    return await post(channelSendMessage(channel_id, organization_id), body: {
+    return await _post(channelSendMessage(channel_id, organization_id), body: {
       "user_id": senderId,
       "content": message,
       "files": [],
@@ -240,7 +260,7 @@ class ZuriApiService implements Api {
       required String organizationId,
       required token}) async {
     String socketName = '';
-    final response = await get(
+    final response = await _get(
       getChannelSocketId(channelId, organizationId),
       headers: {'Authorization': 'Bearer ${token}'},
     );
@@ -251,14 +271,12 @@ class ZuriApiService implements Api {
   @override
   Future<List<Channel>> fetchChannelsListUsingOrgId(
       {String? organizationId, required token}) async {
-    final response = await get(
+    final response = await _get(
       getCreateChannelUri(organizationId!),
       headers: {'Authorization': 'Bearer ${token}'},
     );
     log.i(response);
-    return List.from(
-      response.map((map) => Channel.fromJson(map)).toList(),
-    );
+    return ChannelResponse.fromJson(response).data!;
   }
 
   @override
@@ -269,7 +287,7 @@ class ZuriApiService implements Api {
       String? prop1,
       String? prop2,
       String? prop3}) async {
-    return await post(
+    return await _post(
       getUserChannelUri(organizationId, channelId),
       body: {
         "_id": id,
@@ -292,7 +310,7 @@ class ZuriApiService implements Api {
       String? owner,
       String? description,
       bool? private}) async {
-    return await post(
+    return await _post(
       getCreateChannelUri(insertedOrganization),
       body: {
         "name": name,
@@ -307,7 +325,8 @@ class ZuriApiService implements Api {
   @override
   Future<List<ChannelMessage>> fetchChannelMessages(
       {required String channelId, required String organizationId}) async {
-    final response = await get(channelFetchMessages(channelId, organizationId));
+    final response =
+        await _get(channelFetchMessages(channelId, organizationId));
     return ChannelMessagesResponse.fromJson(response).data;
   }
 
@@ -316,7 +335,7 @@ class ZuriApiService implements Api {
   @override
   Future<SendMessageResponse> sendMessageToDM(
       {roomId, senderId, message}) async {
-    final response = await post(dmSendMessage(roomId), body: {
+    final response = await _post(dmSendMessage(roomId), body: {
       "sender_id": senderId,
       "room_id": roomId,
       "message": message,
@@ -336,27 +355,27 @@ class ZuriApiService implements Api {
 
   @override
   Future<void> markMessageAsRead(messageId) async {
-    final response = await put(dmMarkMessageAsRead(messageId), body: {});
+    final response = await _put(dmMarkMessageAsRead(messageId), body: {});
     var res = MarkMessageAsReadResponse.fromJson(response).read;
   }
 
   @override
   Future<void> getRoomInfo({roomId}) async {
     final response =
-        await get(dmGetRoomInfo, queryParameters: {'room_id': roomId});
+        await _get(dmGetRoomInfo, queryParameters: {'room_id': roomId});
     var res = RoomInfoResponse.fromJson(response).numberOfUsers;
     print("number of users: ${res}");
   }
 
   @override
   Future<List<Results>> fetchRoomMessages({roomId}) async {
-    final response = await get(dmFetchRoomMessages(roomId));
+    final response = await _get(dmFetchRoomMessages(roomId));
     return MessagesResponse.fromJson(response).results;
   }
 
   @override
   Future<String> createRoom({User? currentUser, DummyUser? user}) async {
-    final response = await post(
+    final response = await _post(
       dmCreateRoom,
       body: {
         "org_id": "1",
