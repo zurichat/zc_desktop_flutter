@@ -36,3 +36,5 @@ const String chooseWorkspace = 'Choose a workspace';
 const String addWorkspace =
     'we\'ll add the workspaces you choose to your desktop app';
 const String EmailHintText2 = 'someoneElse@gmail.com';
+const String AuthErrorMessage = 'Unfortunately something went wrong. Please try again.';
+const String GmailUrlText = 'https://www.gmail.com';

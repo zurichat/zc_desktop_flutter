@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
-import 'package:zc_desktop_flutter/core/network/failure.dart';
+import 'package:zc_desktop_flutter/core/exceptions/http_exception.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
@@ -31,10 +31,10 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.data['message']);
-      throw Failure(error.response!.data['message']);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
-      throw Failure(error.toString());
+      throw HttpException(error.toString());
     }
   }
 
@@ -53,10 +53,10 @@ class ZuriApiService implements Api {
     } on DioError catch (error) {
       log.e(error.response!.statusCode);
       log.e(error.response!.data['message']);
-      throw Failure(error.response!.data['message']);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
-      throw Failure(error.toString());
+      throw HttpException(error.toString());
     }
   }
 
@@ -74,10 +74,10 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw Failure(error.message);
+      throw HttpException(error.message);
     } catch (error) {
       log.e(error.toString());
-      throw Failure(error.toString());
+      throw HttpException(error.toString());
     }
   }
 
@@ -90,10 +90,10 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw Failure(error.message);
+      throw HttpException(error.message);
     } catch (error) {
       log.e(error.toString());
-      throw Failure(error.toString());
+      throw HttpException(error.toString());
     }
   }
 
