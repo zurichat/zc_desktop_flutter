@@ -7,8 +7,9 @@ import 'package:zc_desktop_flutter/services/auth_service.dart';
 
 class ChangePasswordViewModel extends BaseViewModel with Validator{
   final _navigationService = locator<NavigationService>();
+  final _authService = locator<AuthService>();
   bool _isNotPasswordVisible = true;
-  String? _confirmErrorMsg, _passwordMsg; 
+  String? _confirmErrorMsg, _passwordMsg;
   String _password = '';
   bool _isError = false;
   bool _isBusy = false;
@@ -40,8 +41,6 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
   get isError => _isError;
   get isShowDialog => _isShowDialog;
   get isBusy => _isBusy;
-
-  final _authService = locator<AuthService>();
 
   _setIsError() {
     _isError = !_isError;
@@ -100,7 +99,7 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
     }
     try{
       _setIsBusy();
-      await _authService.updatePassword(_password);
+      await _authService.updateUserPassword(_password);
       _setIsBusy();
       _setIsShowDialog(true);
     } catch (e) {

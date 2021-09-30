@@ -41,7 +41,7 @@ class LoginViewModel extends BaseViewModel {
 
   Future<void> performLogin(String email, String password) async {
     try {
-      await _auth.login(email, password);
+      await _auth.loginUser(email: email, password: password);
     } catch (e) {
       if (e.toString().contains('Invalid')) {
         throw Failure(e.toString());

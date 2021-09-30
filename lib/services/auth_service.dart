@@ -1,78 +1,47 @@
 import 'dart:convert';
 
-import 'package:stacked/stacked_annotations.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 
-import '../app/app.locator.dart';
-import 'api/api_service.dart';
 import 'local_storage_service.dart';
 
 const localAuthResponseKey = 'localAuthResponse';
 
-@LazySingleton()
 class AuthService {
+  final log = getLogger("AuthService");
+  final _zuriApiService = locator<ZuriApiService>();
   final _localStorageService = locator<LocalStorageService>();
-  final _apiService = locator<ApiService>();
 
-  AuthResponse? authResponse;
+  Auth? auth;
+
+  Future<void> loginUser(
+      {required String email, required String password}) async {
+    final response =
+        await _zuriApiService.login(email: email, password: password);
+    auth = AuthResponse.fromJson(response).data!;
+    _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
+  }
 
   Future<void> signup({required String password, required String email}) async {
-    await _apiService.post(
-      _apiService.apiConstants.signupUri,
-      body: {
-        'email': email,
-        'password': password,
-      },
-    );
+    await _zuriApiService.signup(email: email, password: password);
   }
 
-  Future<void> confirmEmail(String otp) async {
-    await _apiService.post(
-      _apiService.apiConstants.confirmEmailUri,
-      body: {
-        "code": otp,
-      },
-    );
+  Future<void> confirmEmail(String otpCode) async {
+    await _zuriApiService.confirmEmail(otpCode: otpCode);
   }
 
-  Future<void> login(String email, String password) async {
-    final response = await _apiService.post(
-      _apiService.apiConstants.signinUri,
-      body: {
-        "email": email,
-        "password": password,
-      },
-    );
-    print(response);
-
-    authResponse = AuthResponse.fromJson(response['data']);
-
-    _localStorageService.saveToDisk(
-        localAuthResponseKey, jsonEncode(response['data']));
+  Future<void> requestPasswordResetCode(String email) async {
+    await _zuriApiService.requestPasswordResetCode(email: email);
   }
 
-  Future<void> getResetCode(String email) async {
-    await _apiService.post(
-      _apiService.apiConstants.requestPasswordResetCodeUri,
-      body: {"email": email},
-    );
+  Future<void> verifyPasswordResetCode(String resetCode) async {
+    await _zuriApiService.verifyPasswordResetCode(resetCode: resetCode);
   }
 
-  Future<void> confirmResetCode(String code) async {
-    await _apiService.post(
-      _apiService.apiConstants.verifyResetPasswordUri,
-      body: {"code": code},
-    );
-  }
-
-  Future<void> updatePassword(String password) async {
-    await _apiService.post(
-      _apiService.apiConstants.verifyResetPasswordUri,
-      body: {
-        "password": password,
-        "confirm_password": password,
-      },
-    );
+  Future<void> updateUserPassword(String password) async {
+    await _zuriApiService.updateUserPassword(password: password);
   }
 
   void logOut() {

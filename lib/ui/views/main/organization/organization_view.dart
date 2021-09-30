@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
-import 'package:zc_desktop_flutter/constants/asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -80,43 +80,49 @@ class OrganizationWrapper extends StatelessWidget {
                         color: Theme.of(context).accentColor,
                         width: 70.w,
                         height: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: model!.organization!.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      print("Workspace $index tapped");
-                                      model!.reloadWithSelectedOrganization(
-                                          index);
-                                    },
-                                    child: OrganizationItem(
-                                      organization: model!.organization![index],
-                                      selected: model!.showSelectedOrg(index),
+                        child: SingleChildScrollView(
+                          physics: ScrollPhysics(),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: model!.organization!.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        print("Workspace $index tapped");
+                                        model!.reloadWithSelectedOrganization(
+                                            index);
+                                      },
+                                      child: OrganizationItem(
+                                        organization:
+                                            model!.organization![index],
+                                        selected: model!.showSelectedOrg(index),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  model!.goToCreateWorkspace();
+                                  );
                                 },
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                  size: 20,
+                              ),
+                              verticalSpaceSmall,
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    model!.goToCreateWorkspace();
+                                  },
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
                                 ),
                               ),
-                            )
-                          ],
+                              verticalSpaceMedium,
+                            ],
+                          ),
                         ),
                       ),
                       //TODO: Left side bar
@@ -162,32 +168,21 @@ class OrganizationWrapper extends StatelessWidget {
                                                   CreateChannelView(),
                                             );
                                           },
-                                          displayChannel: () {
+                                          showChannelListDisplay: () {
                                             model!.openChannelsList();
                                           },
-                                          list: List.generate(
-                                            model!.channels!.length,
-                                            (index) => MouseRegion(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 16.0,
-                                                ),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    print(
-                                                        "channel item $index tapped");
-                                                    // model.showChannel(index);
-                                                    model!.goToChannelsView(
-                                                        index: index);
-                                                  },
-                                                  child: ChannelItem(
-                                                    channelName: model!
-                                                        .channels![index].name,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                          listItemCount:
+                                              model!.channels!.length,
+                                          onListItemTapped: (index) {
+                                            model!
+                                                .goToChannelsView(index: index);
+                                          },
+                                          itemChild: (index) {
+                                            return ChannelItem(
+                                              channelName:
+                                                  model!.channels![index].name,
+                                            );
+                                          },
                                         ),
                                         verticalSpaceRegular,
                                         ReusableDropDown(
@@ -197,26 +192,16 @@ class OrganizationWrapper extends StatelessWidget {
                                           toggleTap: () {
                                             model!.openDMsDropDownMenu();
                                           },
-                                          displayChannel: () {},
+                                          showChannelListDisplay: () {},
                                           addTap: () {},
-                                          list: List.generate(
-                                            1,
-                                            (index) => MouseRegion(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 16.0,
-                                                ),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    print(
-                                                        "dm item $index tapped");
-                                                    //model.showDM(index);
-                                                    model!.goToDmView(index);
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                          listItemCount: 3,
+                                          onListItemTapped: (index) {},
+                                          itemChild: (index) {
+                                            return DMItem(
+                                              userName: 'John snow',
+                                              userIcon: '',
+                                            );
+                                          },
                                         ),
                                         verticalSpaceRegular,
                                       ],
@@ -285,9 +270,11 @@ class ReusableDropDown extends StatelessWidget {
   final GestureTapCallback toggleTap;
   final bool show;
   final GestureTapCallback addTap;
-  final List<Widget>? list;
   final String? addButtonTitle;
-  final GestureTapCallback displayChannel;
+  final GestureTapCallback showChannelListDisplay;
+  final int listItemCount;
+  final void Function(int index)? onListItemTapped;
+  final Widget? Function(int index)? itemChild;
 
   const ReusableDropDown({
     Key? key,
@@ -295,9 +282,11 @@ class ReusableDropDown extends StatelessWidget {
     required this.toggleTap,
     required this.show,
     required this.addTap,
-    this.list,
+    required this.listItemCount,
     this.addButtonTitle,
-    required this.displayChannel,
+    required this.showChannelListDisplay,
+    this.onListItemTapped,
+    this.itemChild,
   }) : super(key: key);
 
   @override
@@ -334,7 +323,7 @@ class ReusableDropDown extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(right: 15.0.w),
                     child: InkWell(
-                      onTap: displayChannel,
+                      onTap: showChannelListDisplay,
                       child: SvgPicture.asset(
                         AddSvg,
                         height: 10,
@@ -355,7 +344,19 @@ class ReusableDropDown extends StatelessWidget {
               child: Column(
                 children: [
                   Column(
-                    children: list!,
+                    children: List.generate(listItemCount, (index) {
+                      return MouseRegion(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 16.0,
+                          ),
+                          child: InkWell(
+                            onTap: () => onListItemTapped!(index),
+                            child: itemChild!(index),
+                          ),
+                        ),
+                      );
+                    }),
                   ),
                   verticalSpaceTiny,
                   Row(
