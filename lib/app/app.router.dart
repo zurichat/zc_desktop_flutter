@@ -29,7 +29,7 @@ import '../ui/views/main/organization/organization_view.dart';
 import '../ui/views/startup/startup_view.dart';
 
 class Routes {
-  static const String startUpView = '/';
+  static const String startUpView = '/start-up-view';
   static const String loginView = '/login-view';
   static const String signUpView = '/sign-up-view';
   static const String forgotPasswordView = '/forgot-password-view';
@@ -41,7 +41,7 @@ class Routes {
   static const String createWorkspaceStage1 = '/create-workspace-stage1';
   static const String createWorkspaceStage2 = '/create-workspace-stage2';
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
-  static const String organizationView = '/organization-view';
+  static const String organizationView = '/';
   static const all = <String>{
     startUpView,
     loginView,

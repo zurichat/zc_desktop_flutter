@@ -29,7 +29,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: StartUpView, initial: true),
+    MaterialRoute(page: StartUpView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
@@ -43,6 +43,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     MaterialRoute(page: CreateWorkspaceStage3),
     MaterialRoute(
       page: OrganizationView,
+      initial: true,
       children: [
         MaterialRoute(page: ChannelsView, initial: true),
         MaterialRoute(page: ChannelsListView),

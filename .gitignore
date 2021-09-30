@@ -32,8 +32,8 @@
 .pub/
 build/
 lib/generated_plugin_registrant.dart
-lib/models/preferences_model/**/*.g.dart
-lib/models/preferences_model/**/*.freezed.dart
+lib/model/app_models.g.dart
+lib/model/app_models.freezed.dart
 
 
 # Android related
