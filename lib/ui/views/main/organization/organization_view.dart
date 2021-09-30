@@ -263,7 +263,9 @@ class DisplayMenu extends StatelessWidget {
           ReusableMenuItem(
             iconPath: 'assets/icons/alldms.svg',
             text: 'All DMs',
-            onTap: () {},
+            onTap: () {
+              model.goToAllDmsView();
+            },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/drafts.svg',

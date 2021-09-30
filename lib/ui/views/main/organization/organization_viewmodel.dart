@@ -125,6 +125,9 @@ class OrganizationViewModel extends BaseViewModel {
     //_dmService.setUser();
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
+  void goToAllDmsView(){
+    _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
+  }
 
   bool showSelectedOrg(int index) {
     if (index == getSelectedOrganizationIndex()!) {
