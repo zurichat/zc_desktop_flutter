@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart'
     as currentLoggedInUser;
 import 'package:zc_desktop_flutter/model/app_models.dart';
@@ -30,7 +29,7 @@ class ChannelsService {
     var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
     if (userJson != null) {
       if (userJson is String) {
-        return AuthResponse.fromJson(json.decode(userJson)).user;
+        return Auth.fromJson(json.decode(userJson)).user;
       }
       return null;
     }
@@ -86,9 +85,9 @@ class ChannelsService {
   }
 
   /// This gets the currently logged in user respose
-  AuthResponse get _authResponse {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    return AuthResponse.fromJson(jsonDecode(authResponse as String));
+  Auth get _auth {
+    final auth = _localStorageService.getFromDisk(localAuthResponseKey);
+    return Auth.fromJson(jsonDecode(auth as String));
   }
 
   // The function for Channels api calls can go in here
@@ -97,7 +96,7 @@ class ChannelsService {
   /// This is used to get the list of channels on the page
   Future<List<Channel>> getChannelsList({String? organizationId}) async {
     return await _zuriApiService.fetchChannelsListUsingOrgId(
-        organizationId: organizationId, token: _authResponse.user.token);
+        organizationId: organizationId, token: _auth.user!.token);
   }
 
   /// This is used to create a channel on the page
@@ -108,7 +107,7 @@ class ChannelsService {
     required bool private,
   }) async {
     final response = await _zuriApiService.createChannelsUsingOrgId(
-        sessionId: _authResponse.sessionID,
+        sessionId: _auth.sessionID,
         insertedOrganization: insertedOrganisationId,
         name: name,
         owner: owner,
@@ -166,6 +165,6 @@ class ChannelsService {
     return _zuriApiService.fetchChannelSocketId(
         organizationId: orgId,
         channelId: _currentChannel!.id!,
-        token: _authResponse.user.token);
+        token: _auth.user!.token);
   }
 }

@@ -28,7 +28,7 @@ class DMService {
     if (userJson != null) {
       if (userJson is String) {
         print(userJson);
-        return AuthResponse.fromJson(json.decode(userJson)).user;
+        return Auth.fromJson(json.decode(userJson)).user;
       }
       return null;
     }

@@ -202,6 +202,9 @@ abstract class Api {
   Future<void> getRoomInfo({var roomId});
 
   /// returns [Future]<[List]<[Results]>>, fetch messages in a room from remote source using room id.
+  ///
+  ///
+  ///
   Future<List<Results>> fetchRoomMessages({var roomId});
 
   /// returns [Future]<[void]>, mark a message as read and reflect those changes in remote source.
