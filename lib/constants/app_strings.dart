@@ -20,3 +20,4 @@ const String CheckInternetText = 'Check your internet connection.';
 const String RestartZuriText = 'Restart Zuri Chat.';
 const String CheckHelpText  = 'Check our Help center ';
 const String MoreDetailsText = 'for more details.';
+const String AuthErrorMessage = 'Unfortunately something went wrong. Please try again.';

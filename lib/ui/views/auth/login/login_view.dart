@@ -52,7 +52,7 @@ class LoginView extends HookWidget {
                                 verticalSpaceMedium,
                                 Text(
                                   (model.modelError as Failure).message,
-                                  style: headline6.copyWith(color: Colors.red),
+                                  style: boldCaptionStyle.copyWith(color: Colors.red),
                                 ),
                               ],
                               verticalSpaceMedium,
