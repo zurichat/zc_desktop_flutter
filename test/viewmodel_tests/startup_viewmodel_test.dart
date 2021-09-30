@@ -13,7 +13,7 @@ void main() {
 
     group('runStartupLogic -', () {
       test('Check if a user is saved to disk', () {
-        final startupService = getAndRegisterStartupService(hasLoggedInUser: false);
+        final startupService = getAndRegisterStartupService(hasLoggedInUser: true);
         var model = _getModel();
         model.runStartupLogic();
         verify(startupService.hasLoggedInUser);

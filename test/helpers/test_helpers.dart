@@ -33,71 +33,70 @@ import 'test_helpers.mocks.dart';
   MockSpec<UserService>(returnNullOnMissingStub: true),
   MockSpec<WindowTitleBarService>(returnNullOnMissingStub: true),
 ])
-
-StartupService getAndRegisterStartupService({bool hasLoggedInUser = false,}) {
- _removeRegistrationIfExists<StartupService>();
- final service = MockStartupService();
- when(service.hasLoggedInUser).thenReturn(hasLoggedInUser);
- locator.registerSingleton<StartupService>(service);
- return service;
-
- 
+StartupService getAndRegisterStartupService({
+  bool hasLoggedInUser = false,
+}) {
+  _removeRegistrationIfExists<StartupService>();
+  final service = MockStartupService();
+  when(service.hasLoggedInUser).thenReturn(hasLoggedInUser);
+  locator.registerSingleton<StartupService>(service);
+  return service;
 }
 
 WindowTitleBarService getAndRegisterWindowTitleBarService() {
- _removeRegistrationIfExists<WindowTitleBarService>();
- final service = MockWindowTitleBarService();
- locator.registerSingleton<WindowTitleBarService>(service);
- return service;
+  _removeRegistrationIfExists<WindowTitleBarService>();
+  final service = MockWindowTitleBarService();
+  locator.registerSingleton<WindowTitleBarService>(service);
+  return service;
 }
 
 UserService getAndRegisterUserService() {
- _removeRegistrationIfExists<UserService>();
- final service = MockUserService();
- locator.registerSingleton<UserService>(service);
- return service;
+  _removeRegistrationIfExists<UserService>();
+  final service = MockUserService();
+  locator.registerSingleton<UserService>(service);
+  return service;
 }
 
 RecentSearchService getAndRegisterRecentSearchService() {
- _removeRegistrationIfExists<RecentSearchService>();
- final service = MockRecentSearchService();
- locator.registerSingleton<RecentSearchService>(service);
- return service;
+  _removeRegistrationIfExists<RecentSearchService>();
+  final service = MockRecentSearchService();
+  locator.registerSingleton<RecentSearchService>(service);
+  return service;
 }
 
 OrganizationService getAndRegisterOrganizationService() {
- _removeRegistrationIfExists<OrganizationService>();
- final service = MockOrganizationService();
- locator.registerSingleton<OrganizationService>(service);
- return service;
+  _removeRegistrationIfExists<OrganizationService>();
+  final service = MockOrganizationService();
+  locator.registerSingleton<OrganizationService>(service);
+  return service;
 }
 
 LocalStorageService getAndRegisterLocalStorageService() {
- _removeRegistrationIfExists<LocalStorageService>();
- final service = MockLocalStorageService();
- locator.registerSingleton<LocalStorageService>(service);
- return service;
+  _removeRegistrationIfExists<LocalStorageService>();
+  final service = MockLocalStorageService();
+  locator.registerSingleton<LocalStorageService>(service);
+  return service;
 }
 
 DMService getAndRegisterDMService() {
- _removeRegistrationIfExists<DMService>();
- final service = MockDMService();
- locator.registerSingleton<DMService>(service);
- return service;
+  _removeRegistrationIfExists<DMService>();
+  final service = MockDMService();
+  locator.registerSingleton<DMService>(service);
+  return service;
 }
 
 ChannelsService getAndRegisterChannelsService() {
- _removeRegistrationIfExists<ChannelsService>();
- final service = MockChannelsService();
- locator.registerSingleton<ChannelsService>(service);
- return service;
+  _removeRegistrationIfExists<ChannelsService>();
+  final service = MockChannelsService();
+  locator.registerSingleton<ChannelsService>(service);
+  return service;
 }
 
 ZuriApiService getAndRegisterZuriApiService() {
- _removeRegistrationIfExists<ZuriApiService>();
- final service = MockZuriApiService();
- locator.registerSingleton<ZuriApiService>(service);
- return service;
+  _removeRegistrationIfExists<ZuriApiService>();
+  final service = MockZuriApiService();
+  locator.registerSingleton<ZuriApiService>(service);
+  return service;
 }
 
 AuthService getAndRegisterAuthService() {
@@ -124,6 +123,17 @@ NavigationService getAndRegisterNavigationService() {
 void registerServices() {
   getAndRegisterAuthService();
   getAndRegisterCentrifugeService();
+  getAndRegisterChannelsService();
+  getAndRegisterDMService();
+  getAndRegisterLocalStorageService();
+  getAndRegisterNavigationService();
+  getAndRegisterOrganizationService();
+  getAndRegisterRecentSearchService();
+  getAndRegisterStartupService();
+  getAndRegisterUserService();
+  getAndRegisterWindowTitleBarService();
+  getAndRegisterZuriApiService();
+  
 }
 
 void unregisterServices() {
