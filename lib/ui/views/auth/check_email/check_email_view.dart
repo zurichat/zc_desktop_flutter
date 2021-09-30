@@ -35,7 +35,7 @@ class CheckEmailView extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                        width: 481.w,
+                        width: 581.w,
                         child: AuthHeader(
                             title: _isResetPassword != null
                                 ? _isResetPassword
@@ -47,21 +47,18 @@ class CheckEmailView extends StatelessWidget {
                     verticalSpaceSmall,
                     Text(
                       model.errorMsg,
-                      style: headline6.copyWith(
+                      style: boldCaptionStyle.copyWith(
                         color: Theme.of(context).errorColor,
                       ),
                     ),
                     verticalSpaceSmall,
-                    verticalSpaceLarge,
                     Container(
                         width: 768.w,
-                        height: 130.h,
+                        height: 100,
                         child: buildOtp(model, _isResetPassword ?? false)),
-                    SizedBox(
-                      height: 91.h,
-                    ),
+                    verticalSpaceLarge,
                     GestureDetector(
-                      onTap: () {},
+                      onTap: model.openGmail,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
