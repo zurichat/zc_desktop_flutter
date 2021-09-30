@@ -37,6 +37,9 @@ const Color reactionBackground = Color(0xFFE1E8ED);
 const Color whiteColor = Color(0xFFFFFFFF);
 const Color searchBarColor = Color(0xFF1B1818);
 const Color emojiBackground = Color(0xFFBBDDF5);
+const Color ZuriWorkspaceTextColor = Color(0xFF292929);
+const Color createAccountColor = Color(0xFF333333);
+
 
 // Avatar Colors
 const Color avatarColor1 = Color(0xffF7E0FF);
@@ -48,6 +51,9 @@ const Color avatarColor5 = Color(0xffE3EEFF);
 //Button colors
 const Color authBtnColor = Color(0xff363636);
 const Color preferenceBorderblack = Color(0xFF323232);
+
+//BoxBorder Color
+const Color boxBorderColor = Color(0xFFE5E5E5);
 
 //status colors
 const Color clearStatusBtnBorderColor = Color(0xffa1a1a1);

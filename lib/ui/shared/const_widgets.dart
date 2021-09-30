@@ -24,6 +24,7 @@ class SVGAssetPaths {
   static final more_actions_container = "assets/icons/more_actions_container.svg";
   static final reply_thread_container = "assets/icons/reply_thread_container.svg";
   static final share_message_container = "assets/icons/share_message_container.svg";
+  
 }
 
 
