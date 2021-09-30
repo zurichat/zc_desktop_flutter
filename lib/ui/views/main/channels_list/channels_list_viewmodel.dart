@@ -82,7 +82,8 @@ class ChannelsListViewModel extends BaseViewModel {
 
   Future<void> performGetChannel() async {
     // List<ChannelsDataModel> channelsList = await _channelService.getChannelsList();
-    List<Channel>? channelsList = await _channelService.getChannelsList("1");
+    List<Channel>? channelsList =
+        await _channelService.getChannelsList(organizationId: "1");
     print(channelsList);
   }
 
@@ -95,8 +96,6 @@ class ChannelsListViewModel extends BaseViewModel {
   Future<void> fetchAndSetUserData() async {
     final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
     final resUser = AuthResponse.fromJson(jsonDecode(authResponse as String));
-
-    print(resUser.user.token);
     notifyListeners();
   }
 }

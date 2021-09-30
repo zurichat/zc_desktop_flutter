@@ -41,7 +41,7 @@ class ResetPasswordViewModel extends BaseViewModel with Validator {
     _setIsBusy();
 
     try {
-      await _authService.getResetCode(_email);
+      await _authService.requestPasswordResetCode(_email);
       _setIsBusy();
       _navigator.navigateTo(Routes.checkEmailView,
           arguments: {'email': _email, 'isReset': true});
