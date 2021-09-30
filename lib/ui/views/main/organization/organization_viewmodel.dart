@@ -93,7 +93,7 @@ class OrganizationViewModel extends BaseViewModel {
     _channels = await _channelService.getChannelsList(
         organizationId: _currentOrganization.id);
     _channelService.setChannel(_channels!.first);
-    log.d("${_channels}");
+    log.i("${_channels}");
   }
 
   void openChannelsList() {

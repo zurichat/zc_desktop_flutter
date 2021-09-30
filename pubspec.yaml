@@ -44,6 +44,8 @@ dependencies:
 
   # Centrifuge
   centrifuge: ^0.7.0
+  # Url Launcher
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
