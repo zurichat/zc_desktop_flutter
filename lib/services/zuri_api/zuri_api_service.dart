@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
 import 'package:zc_desktop_flutter/core/exceptions/http_exception.dart';
+import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
