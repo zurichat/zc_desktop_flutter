@@ -7,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
@@ -27,6 +28,7 @@ class OrganizationView extends StatelessWidget {
         model.setup();
       },
       builder: (context, model, child) => Scaffold(
+        backgroundColor: whiteColor,
         body: OrganizationWrapper(
           model,
           centerChild: Expanded(
@@ -57,17 +59,13 @@ class OrganizationWrapper extends StatelessWidget {
         children: [
           model!.isBusy
               ? Expanded(
-                  child: Container(
-                    height: fullHeight(context),
-                    width: fullHeight(context),
-                    child: Center(
-                      child: Container(
-                        width: 24.0,
-                        height: 24.0,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 3.0.r,
-                          valueColor: AlwaysStoppedAnimation(Colors.grey),
-                        ),
+                  child: Center(
+                    child: Container(
+                      width: 24.0,
+                      height: 24.0,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.0.r,
+                        valueColor: AlwaysStoppedAnimation(Colors.grey),
                       ),
                     ),
                   ),
@@ -77,8 +75,8 @@ class OrganizationWrapper extends StatelessWidget {
                     children: [
                       //TODO: organization side bar
                       Container(
-                        color: Theme.of(context).accentColor,
-                        width: 70.w,
+                        color: whiteColor,
+                        width: 60.w,
                         height: double.infinity,
                         child: SingleChildScrollView(
                           physics: ScrollPhysics(),
@@ -115,8 +113,9 @@ class OrganizationWrapper extends StatelessWidget {
                                   },
                                   child: Icon(
                                     Icons.add,
-                                    color: Colors.white,
-                                    size: 20,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                    size: 30,
                                   ),
                                 ),
                               ),
@@ -127,86 +126,86 @@ class OrganizationWrapper extends StatelessWidget {
                       ),
                       //TODO: Left side bar
                       Container(
-                        color: Theme.of(context).accentColor,
+                        color: whiteColor,
                         width: 260.w,
                         height: double.infinity,
                         child: Column(
                           children: [
+                            DetailedCustomAppBar(
+                              leading: WorkSpaceSetting(
+                                workspaceTitle:
+                                    model!.currentOrganization!.name ?? '',
+                              ),
+                              trailing: Flexible(child: NewMessageBtn()),
+                            ),
                             Expanded(
                               child: SingleChildScrollView(
                                 controller: model!.controller,
                                 physics: ScrollPhysics(),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    ListView(
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      children: [
-                                        DetailedCustomAppBar(
-                                          leading: WorkSpaceSetting(
-                                            workspaceTitle: model!
-                                                    .currentOrganization!
-                                                    .name ??
-                                                '',
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      ListView(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        children: [
+                                          DisplayMenu(model!),
+                                          verticalSpaceRegular,
+                                          ReusableDropDown(
+                                            title: 'Channels',
+                                            addButtonTitle: 'Add channels',
+                                            toggleTap: () {
+                                              model!.openChannelsDropDownMenu();
+                                            },
+                                            show: model!.showChannels,
+                                            addTap: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    CreateChannelView(),
+                                              );
+                                            },
+                                            showChannelListDisplay: () {
+                                              model!.openChannelsList();
+                                            },
+                                            listItemCount:
+                                                model!.channels!.length,
+                                            onListItemTapped: (index) {
+                                              model!.goToChannelsView(
+                                                  index: index);
+                                            },
+                                            itemChild: (index) {
+                                              return ChannelItem(
+                                                channelName: model!
+                                                    .channels![index].name,
+                                              );
+                                            },
                                           ),
-                                          trailing: NewMessageBtn(),
-                                        ),
-                                        DisplayMenu(model!),
-                                        verticalSpaceRegular,
-                                        ReusableDropDown(
-                                          title: 'Channels',
-                                          addButtonTitle: 'Add channels',
-                                          toggleTap: () {
-                                            model!.openChannelsDropDownMenu();
-                                          },
-                                          show: model!.showChannels,
-                                          addTap: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  CreateChannelView(),
-                                            );
-                                          },
-                                          showChannelListDisplay: () {
-                                            model!.openChannelsList();
-                                          },
-                                          listItemCount:
-                                              model!.channels!.length,
-                                          onListItemTapped: (index) {
-                                            model!
-                                                .goToChannelsView(index: index);
-                                          },
-                                          itemChild: (index) {
-                                            return ChannelItem(
-                                              channelName:
-                                                  model!.channels![index].name,
-                                            );
-                                          },
-                                        ),
-                                        verticalSpaceRegular,
-                                        ReusableDropDown(
-                                          title: 'Direct Messages',
-                                          addButtonTitle: 'Add teammates',
-                                          show: model!.showDMs,
-                                          toggleTap: () {
-                                            model!.openDMsDropDownMenu();
-                                          },
-                                          showChannelListDisplay: () {},
-                                          addTap: () {},
-                                          listItemCount: 3,
-                                          onListItemTapped: (index) {},
-                                          itemChild: (index) {
-                                            return DMItem(
-                                              userName: 'John snow',
-                                              userIcon: '',
-                                            );
-                                          },
-                                        ),
-                                        verticalSpaceRegular,
-                                      ],
-                                    ),
-                                  ],
+                                          verticalSpaceRegular,
+                                          ReusableDropDown(
+                                            title: 'Direct Messages',
+                                            addButtonTitle: 'Add teammates',
+                                            show: model!.showDMs,
+                                            toggleTap: () {
+                                              model!.openDMsDropDownMenu();
+                                            },
+                                            showChannelListDisplay: () {},
+                                            addTap: () {},
+                                            listItemCount: 3,
+                                            onListItemTapped: (index) {},
+                                            itemChild: (index) {
+                                              return DMItem(
+                                                userName: 'John snow',
+                                                userIcon: '',
+                                              );
+                                            },
+                                          ),
+                                          verticalSpaceRegular,
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -312,14 +311,14 @@ class ReusableDropDown extends StatelessWidget {
                       ),
               ),
             ),
-            SizedBox(width: 8),
+            horizontalSpaceSmall,
             Expanded(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     child: Text(title, style: kLeftSideBarStyle),
                   ),
-                  Spacer(),
                   Padding(
                     padding: EdgeInsets.only(right: 15.0.w),
                     child: InkWell(
@@ -335,7 +334,7 @@ class ReusableDropDown extends StatelessWidget {
             ),
           ],
         ),
-        verticalSpaceSmall,
+        verticalSpaceTiny,
         if (show)
           Container(
             padding: EdgeInsets.only(left: 20.0),
@@ -464,37 +463,13 @@ class OrganizationItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                      color: Colors.black.withOpacity(0.2),
+                      color: selected!
+                          ? Theme.of(context).colorScheme.secondary
+                          : Colors.white,
                       width: 3,
                     ),
-                    /*border: Border.all(
-                        color: selected!
-                            ? Colors.white
-                            : hover!
-                                ? Colors.white.withOpacity(0.2)
-                                : Colors.transparent,
-                        width: 3),*/
                   ),
-                  child: /*organization!.logoUrl!.isEmpty
-                      ? Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(5.r),
-                          ),
-                          child: Center(
-                            child: Text(
-                              organization!.name!,
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        )
-                      : */
-                      ClipRRect(
+                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(5.r),
                     child: Container(
                       width: 38.0,
@@ -505,46 +480,7 @@ class OrganizationItem extends StatelessWidget {
                   ),
                 ),
               ),
-              if (selected!)
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: ClipOval(
-                      child: Container(
-                        width: 12,
-                        height: 12,
-                        color: Color(0xFE1D2229),
-                        padding: const EdgeInsets.all(3),
-                        child: ClipOval(
-                          child: Container(
-                            width: 12,
-                            height: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
             ],
-          ),
-        ),
-        Container(
-          child: Center(
-            child: Wrap(
-              children: [
-                Text(
-                  organization!.name!,
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ],
@@ -589,9 +525,9 @@ class DMItem extends StatelessWidget {
           children: [
             CircleAvatar(
               child: SvgPicture.asset(userIcon!),
-              radius: 18.r,
+              radius: 12.r,
             ),
-            horizontalSpaceRegular,
+            horizontalSpaceSmall,
             ZcdeskText.dropDownBodyTextStyle(userName!),
           ],
         ),

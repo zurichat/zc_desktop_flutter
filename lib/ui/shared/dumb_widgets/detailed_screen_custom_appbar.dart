@@ -17,9 +17,9 @@ class DetailedCustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.h,
+      height: 40.h,
       width: fullWidth(context),
-      //color: Theme.of(context).accentColor,
+      color: Theme.of(context).colorScheme.secondary,
       margin: margin,
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.0.h),
       child: Row(

@@ -267,18 +267,6 @@ class Advanced with _$Advanced {
       _$AdvancedFromJson(json);
 }
 
-/* @freezed
-class Organization with _$Organisation {
-  factory Organization({
-    @JsonKey(name: '_id') required String id,
-    @JsonKey(name: 'logo_url') required String logoUrl,
-    required String name,
-    @JsonKey(name: 'workspace_url') required String workspaceUrl,
-  }) = _Organisation;
-
-  factory Organization.fromJson(Map<String, dynamic> json) =>
-      _$OrganisationFromJson(json);
-} */
 
 @freezed
 class DummyUser with _$DummyUser {
@@ -289,24 +277,6 @@ class DummyUser with _$DummyUser {
 
   factory DummyUser.fromJson(Map<String, dynamic> json) =>
       _$DummyUserFromJson(json);
-}
-
-@freezed
-class Workspace with _$Workspace {
-  factory Workspace(
-      {int? id,
-      String? name,
-      String? url,
-      String? logo,
-      DummyUser? user,
-      List<DummyUser>? users,
-      List<Channel>? channels,
-      List<DM>? dms,
-      @Default(0) int? currentChannel,
-      @Default(-1) int? currentDM}) = _Workspace;
-
-  factory Workspace.fromJson(Map<String, dynamic> json) =>
-      _$WorkspaceFromJson(json);
 }
 
 @freezed
@@ -335,11 +305,9 @@ class ChannelResponse with _$ChannelResponse {
   factory ChannelResponse({
     List<Channel>? data,
   }) = _ChannelResponse;
-
   factory ChannelResponse.fromJson(Map<String, dynamic> json) =>
       _$ChannelResponseFromJson(json);
 }
-
 @freezed
 class Channel with _$Channel {
   factory Channel({
@@ -349,7 +317,6 @@ class Channel with _$Channel {
     String? description,
     bool? private,
   }) = _Channel;
-
   factory Channel.fromJson(Map<String, dynamic> json) =>
       _$ChannelFromJson(json);
 }

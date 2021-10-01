@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:stacked/stacked_annotations.dart';
+
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
@@ -24,14 +24,9 @@ class OrganizationService {
     return Auth.fromJson(jsonDecode(auth as String));
   }
 
-  /*Future<List<Organization>> getOrganizations() async {
-    await Future.delayed(Duration(seconds: 2));
-    return _organizations;
-  }*/
-
-  Future<void> saveOrganizationId(String orgId) async {
-    print('saved orgId ${orgId}');
-    await _localStorageService.saveToDisk(organizationIdKey, orgId);
+  void saveOrganizationId(String orgId) {
+    log.i('saved orgId ${orgId}');
+    _localStorageService.saveToDisk(organizationIdKey, orgId);
   }
 
   String getOrganizationId() {
@@ -54,8 +49,10 @@ class OrganizationService {
   /// ... the actual home view (organization_service view)
   Future<List<Organization>> getOrganizations() async {
     // Getting stored AuthResponse from local storage
-    return await _zuriApiService.fetchOrganizationsListFromRemote(
+    final response = await _zuriApiService.fetchOrganizationsListFromRemote(
         email: _auth.user!.email, token: _auth.user!.token);
+    log.i(response);
+    return response;
   }
 
   /// This is used to add user to an organization_service

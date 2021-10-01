@@ -75,7 +75,7 @@ final authBtnStyle = TextStyle(
 
 final kLeftSideBarStyle = TextStyle(
   fontSize: 15.sp,
-  color: Colors.white,
+  color: Colors.black,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
   fontFamily: 'Lato',
