@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -20,7 +21,7 @@ class AllDmsView extends StatelessWidget {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(
-              model.appbarText,
+              AppbarText,
               style: allDmsAppbarStyle,
             ),
           ),
@@ -32,7 +33,7 @@ class AllDmsView extends StatelessWidget {
                  child: TextField(
                    decoration: InputDecoration(
                      contentPadding: EdgeInsets.fromLTRB(20.w, 12.h, 0, 12.h),
-                     hintText: model.searchBarText,
+                     hintText: SearchBarText,
                      hintStyle: allDmsSubtitleStyle
                    ),
                  ),
@@ -42,7 +43,7 @@ class AllDmsView extends StatelessWidget {
                   padding: EdgeInsetsDirectional.only(start: 20.w),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    model.dayPlaceholder,
+                    DayPlaceholder,
                     style: allDmsDayStyle,
                   ),
                 ),
@@ -56,18 +57,18 @@ class AllDmsView extends StatelessWidget {
                             backgroundColor: kcPrimaryColor,
                             foregroundColor: kcPrimaryLight,
                             shape: GFAvatarShape.standard,
-                            child: Text(model.imagePlaceholder),
+                            child: Text(ImagePlaceholder),
                           ),
                           title: Text(
-                            model.titlePlaceholder,
+                            TitlePlaceholder,
                             style: allDmsTitleStyle,
                           ),
                           subtitle: Text(
-                            model.subtitlePlaceholder,
+                            SubtitlePlaceholder,
                             style: allDmsSubtitleStyle,
                           ),
                           trailing: Text(
-                            model.timePlaceholder,
+                            TimePlaceholder,
                             style: allDmsTrailingStyle,
                           ),
                           shape: RoundedRectangleBorder(
@@ -79,18 +80,18 @@ class AllDmsView extends StatelessWidget {
                             backgroundColor: kcPrimaryColor,
                             foregroundColor: kcPrimaryLight,
                             shape: GFAvatarShape.standard,
-                            child: Text("B"),
+                            child: Text(ImagePlaceholder),
                           ),
                           title: Text(
-                            model.titlePlaceholder,
+                            TitlePlaceholder,
                             style: allDmsTitleStyle,
                           ),
                           subtitle: Text(
-                            model.subtitlePlaceholder,
+                            SubtitlePlaceholder,
                             style: allDmsSubtitleStyle,
                           ),
                           trailing: Text(
-                            model.timePlaceholder,
+                            TimePlaceholder,
                             style: allDmsTrailingStyle,
                           ),
                           shape: ContinuousRectangleBorder(
