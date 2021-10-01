@@ -20,6 +20,22 @@ const String CheckInternetText = 'Check your internet connection.';
 const String RestartZuriText = 'Restart Zuri Chat.';
 const String CheckHelpText  = 'Check our Help center ';
 const String MoreDetailsText = 'for more details.';
+const String hngText = 'HNGI9 x I4G';
+const String hotelsNg = 'Hotels.ng';
+const String memberText = 'members';
+const String workspaceText = 'Workspace for';
+const String openText = 'Open';
+const String selectText = ' None Selected';
+const String signIntoNewWorkspace = 'or sign into a new workspace here';
+const String privacyText = 'Privacy & Terms';
+const String contactUs = 'Contact Us';
+const String changeRegion = 'Change Region';
+const String zuriChat = 'New to zuri chat?';
+const String createAccount = 'Create an account';
+const String chooseWorkspace = 'Choose a workspace';
+const String addWorkspace =
+    'we\'ll add the workspaces you choose to your desktop app';
+const String EmailHintText2 = 'someoneElse@gmail.com';
 const String AuthErrorMessage = 'Unfortunately something went wrong. Please try again.';
 const String GmailUrlText = 'https://www.gmail.com';
 const String HngText = 'HNGI9 x I4G';
@@ -37,4 +53,4 @@ const String CreateAccount = 'Create an account';
 const String ChooseWorkspace = 'Choose a workspace';
 const String AddWorkspace =
     'we\'ll add the workspaces you choose to your desktop app';
-const String EmailHintText2 = 'someoneElse@gmail.com';
+
