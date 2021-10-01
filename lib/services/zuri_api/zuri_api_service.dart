@@ -277,7 +277,7 @@ class ZuriApiService implements Api {
       headers: {'Authorization': 'Bearer ${token}'},
     );
     log.i(response);
-    return ChannelResponse.fromJson(response).data!;
+    return List.from(response.map((value) => Channel.fromJson(value)));
   }
 
   @override

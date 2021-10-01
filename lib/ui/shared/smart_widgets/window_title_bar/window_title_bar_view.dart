@@ -33,8 +33,7 @@ class WindowTitleBar extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.w),
+                  padding: EdgeInsets.symmetric(vertical: 4.w),
                   child: WindowTitleBarBox(
                     child: Row(
                       children: [
@@ -98,7 +97,13 @@ class LeftSideAuth extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.menu, color: lightIconColor),
+        Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+            child: Icon(
+              Icons.menu,
+              color: lightIconColor,
+              size: 20,
+            )),
         horizontalSpaceMedium,
         Text('Sign in | Zuri',
             style: preferenceStyleBold.copyWith(color: lightIconColor)),

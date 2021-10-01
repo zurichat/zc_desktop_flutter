@@ -39,7 +39,7 @@ class ChannelsView extends StatelessWidget {
                   DetailedCustomAppBar(
                     margin: EdgeInsets.only(left: 2.0.w),
                     leading: WorkSpaceTitle(
-                      channelTitle: model.currentChannel!.name,
+                      channelTitle: model.currentChannel.name,
                     ),
                     trailing: WorkSpaceMembers(),
                   ),
@@ -114,6 +114,7 @@ class ChannelsView extends StatelessWidget {
                       },
                     ),
                   ),
+                  verticalSpaceRegular,
                 ],
               ),
             ),

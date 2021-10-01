@@ -18,7 +18,7 @@ class OrganizationViewModel extends BaseViewModel {
 
   ScrollController controller = ScrollController();
 
-  Organization _currentOrganization = Organization(name: '');
+  Organization? _currentOrganization;
 
   bool _showDMs = false;
   bool _showMenus = false;
@@ -47,9 +47,8 @@ class OrganizationViewModel extends BaseViewModel {
   void setup() async {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
-    await _organizationService.saveOrganizationId(_currentOrganization.id!);
-    log.i(_organization);
-    log.i(_currentOrganization.id);
+    _organizationService.saveOrganizationId(_currentOrganization!.id!);
+    log.d(" current organization id ${_currentOrganization!.id}");
     // log.i(_channels);
   }
 
@@ -62,7 +61,7 @@ class OrganizationViewModel extends BaseViewModel {
     if (index != getSelectedOrganizationIndex()!) {
       await runBusyFuture(setupOrganization());
       // Save the newly selected org id in preferences when a new organization item is tapped
-      await _organizationService.saveOrganizationId(_currentOrganization.id!);
+      _organizationService.saveOrganizationId(_currentOrganization!.id!);
       setSelectedOrganization(index);
       _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
     }
@@ -80,19 +79,18 @@ class OrganizationViewModel extends BaseViewModel {
 
   Future<void> setupOrganization() async {
     await getOrganizations();
-    _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
     await getChannels();
   }
 
   Future<void> getOrganizations() async {
     _organization = await _organizationService.getOrganizations();
-    log.d(" current organization id ${_currentOrganization.id}");
   }
 
   Future<void> getChannels() async {
-    _channels = await _channelService.getChannelsList(
-        organizationId: _currentOrganization.id);
-    _channelService.setChannel(_channels!.first);
+    _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
+    _channels = await _channelService.getChannels(
+        organizationId: _currentOrganization!.id);
+    _channelService.setChannel(_channels![0]);
     log.i("${_channels}");
   }
 
