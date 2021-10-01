@@ -229,7 +229,7 @@ class ZuriApiService implements Api {
       headers: {'Authorization': "Bearer ${token}"},
     );
 
-    log.i(response['data']);
+    log.i(response);
     //return Organization.fromJson(json).
     return OrganizationResponse.fromJson(response).data!;
   }

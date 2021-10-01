@@ -124,7 +124,7 @@ class ChannelsService with ReactiveServiceMixin {
 
   Future<List<ChannelMessage>> fetchChannelMessages() async {
     return await _zuriApiService.fetchChannelMessages(
-        channelId: _currentChannel.id!,
+        channelId: _currentChannel.id,
         organizationId: _organizationService.getOrganizationId());
   }
 
@@ -132,7 +132,7 @@ class ChannelsService with ReactiveServiceMixin {
     final orgId = _organizationService.getOrganizationId();
     return _zuriApiService.fetchChannelSocketId(
         organizationId: orgId,
-        channelId: _currentChannel.id!,
+        channelId: _currentChannel.id,
         token: _auth.user!.token);
   }
 }
