@@ -23,3 +23,11 @@ const String AddSvg = "assets/icons/add.svg";
 const String ThreadSvg = "assets/icons/threads.svg";
 const String NewDmSvg = "assets/icons/new_dm.svg";
 const String SuccessCheckPath = 'assets/images/success-check.svg';
+const String Zuri = "assets/icons/zuri_logo&text.svg";
+const String Hotels_ng = "assets/images/hotels_ng.png";
+const String LeftArrow = "assets/icons/left_arrow.svg";
+const String WksImage = 'assets/images/wks_image.png';
+const String ZuriI4gLogo = "assets/images/zuri_i4g_logo.png";
+const String Web = "assets/icons/web.svg";
+const String ArrowDown= "assets/icons/arrow_down.svg";
+

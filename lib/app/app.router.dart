@@ -24,6 +24,7 @@ import '../ui/views/main/create_organization/create_organization_name.dart';
 import '../ui/views/main/create_organization/create_workspace.dart';
 import '../ui/views/main/create_organization/create_workspace_stage2.dart';
 import '../ui/views/main/create_organization/create_workspace_stage3.dart';
+import '../ui/views/main/dm/all_dms/all_dms_view.dart';
 import '../ui/views/main/dm/dm_view.dart';
 import '../ui/views/main/organization/organization_view.dart';
 import '../ui/views/startup/startup_view.dart';
@@ -173,11 +174,13 @@ class OrganizationViewRoutes {
   static const String channelsListView = '/channels-list-view';
   static const String createChannelView = '/create-channel-view';
   static const String dmView = '/dm-view';
+  static const String allDmsView = '/all-dms-view';
   static const all = <String>{
     channelsView,
     channelsListView,
     createChannelView,
     dmView,
+    allDmsView,
   };
 }
 
@@ -189,6 +192,7 @@ class OrganizationViewRouter extends RouterBase {
     RouteDef(OrganizationViewRoutes.channelsListView, page: ChannelsListView),
     RouteDef(OrganizationViewRoutes.createChannelView, page: CreateChannelView),
     RouteDef(OrganizationViewRoutes.dmView, page: DmView),
+    RouteDef(OrganizationViewRoutes.allDmsView, page: AllDmsView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -214,6 +218,12 @@ class OrganizationViewRouter extends RouterBase {
     DmView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const DmView(),
+        settings: data,
+      );
+    },
+    AllDmsView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const AllDmsView(),
         settings: data,
       );
     },

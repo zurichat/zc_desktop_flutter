@@ -254,6 +254,18 @@ TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
 
+    TextStyle newToZuriChatTextstyle = TextStyle(
+    fontSize: 13.sp,
+    color: createAccountColor,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Lato');
+
+TextStyle ZuriTextstyle = TextStyle(
+    fontSize: 38.71.sp,
+    color: ZuriWorkspaceTextColor,
+    fontWeight: FontWeight.w900,
+    fontFamily: 'Lato');
+
 //status dialogs styles
 final clearStatusTextStyle = TextStyle(
   fontSize: 16.sp,
