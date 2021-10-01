@@ -76,7 +76,7 @@ class DmView extends StatelessWidget {
                                       controller: _rightSideBarController,
                                       children: [
                                         NewDmView(
-                                          userName: model.user.name!,
+                                          userName: model.user.name,
                                         ),
                                         ListView.builder(
                                             itemCount: model.messages.length,

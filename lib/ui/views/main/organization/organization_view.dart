@@ -86,7 +86,7 @@ class OrganizationWrapper extends StatelessWidget {
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
-                                itemCount: model!.organization!.length,
+                                itemCount: model!.organization.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     child: GestureDetector(
@@ -97,7 +97,7 @@ class OrganizationWrapper extends StatelessWidget {
                                       },
                                       child: OrganizationItem(
                                         organization:
-                                            model!.organization![index],
+                                            model!.organization[index],
                                         selected: model!.showSelectedOrg(index),
                                       ),
                                     ),
@@ -133,8 +133,7 @@ class OrganizationWrapper extends StatelessWidget {
                           children: [
                             DetailedCustomAppBar(
                               leading: WorkSpaceSetting(
-                                workspaceTitle:
-                                    model!.currentOrganization!.name ?? '',
+                                workspaceTitle: model!.currentOrganization.name,
                               ),
                               trailing: Flexible(child: NewMessageBtn()),
                             ),
@@ -170,15 +169,15 @@ class OrganizationWrapper extends StatelessWidget {
                                               model!.openChannelsList();
                                             },
                                             listItemCount:
-                                                model!.channels!.length,
+                                                model!.channels.length,
                                             onListItemTapped: (index) {
                                               model!.goToChannelsView(
                                                   index: index);
                                             },
                                             itemChild: (index) {
                                               return ChannelItem(
-                                                channelName: model!
-                                                    .channels![index].name,
+                                                channelName:
+                                                    model!.channels[index].name,
                                               );
                                             },
                                           ),

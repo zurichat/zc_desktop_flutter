@@ -54,7 +54,6 @@ class ZcDesktop extends StatelessWidget {
             theme: regularTheme,
             darkTheme: darkTheme,
             themeMode: themeMode,
-            initialRoute: Routes.chooseWorkspaceView,
             navigatorKey: StackedService.navigatorKey,
             onGenerateRoute: StackedRouter().onGenerateRoute,
             supportedLocales: L10n.all,

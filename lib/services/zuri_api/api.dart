@@ -214,6 +214,6 @@ abstract class Api {
   /// parameters;
   Future<void> markMessageAsRead(var messageId);
 
-/* CENTRIFUGE SERVICE */
+  /* CENTRIFUGE SERVICE */
 
 }
