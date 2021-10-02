@@ -54,12 +54,12 @@ abstract class Api {
 
   /* ORGANIZATION SERVICE */
 
-  /// returns [Future]<[List]<[Organization]>>, fetch a list of organizations from remote source,
+  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch a list of organizations from remote source,
   ///
   /// get request;
   ///
   /// function parameters; [String] email, token.
-  Future<List<Organization>> fetchOrganizationsListFromRemote(
+  Future<Map<String, dynamic>> fetchOrganizationsListFromRemote(
       {required String email, required token});
 
   /// returns [Future]<[void]>, add logged in user to organization.
@@ -80,26 +80,26 @@ abstract class Api {
   Future<Map<String, dynamic>> createOrganizationUsingEmail(
       {required String email, required token});
 
-  /// returns [Future]<[Organization]>, private function to get a single organization details from remote
-  /// source using organization id.
+  /// returns [Future]<[Map]<[String], [dynamic]>>, private function to get a single organization
+  /// details from remote source using organization id.
   ///
   /// post request;
   /// * headers: {"Authorization": logged in user token}
   ///
   /// function parameters; [String] organizationId, token
-  Future<Organization> fetchOrganizationDetails(
+  Future<Map<String, dynamic>> fetchOrganizationDetails(
       {required String organizationId, required token});
 
   /* CHANNEL SERVICE */
 
-  /// returns [Future]<[List]<[Channel]>>, get list of channels associated with an organization
+  /// returns [Future]<[dynamic]>, get list of channels associated with an organization
   /// from remote source using the organizations id.
   ///
   /// get request;
   /// * headers: {"Authorization": logged in user token}
   ///
   /// function parameters; [String] organizationId, token
-  Future<List<Channel>> fetchChannelsListUsingOrgId(
+  Future<dynamic> fetchChannelsListUsingOrgId(
       {required String organizationId, required token});
 
   /// returns [Future]<[dynamic]>, create channel in current organization using organization id.
@@ -142,7 +142,7 @@ abstract class Api {
   Future<dynamic> sendMessageToChannel(
       {var channel_id, var senderId, var message, var organization_id});
 
-  /// returns [Future]<[List]<[ChannelMessage]>>, fetch messages in channel from remote source using organization id
+  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch messages in channel from remote source using organization id
   /// and channel id.
   ///
   /// get request;
@@ -150,7 +150,7 @@ abstract class Api {
   /// query parameters; organization id, channel id
   ///
   /// function parameters; [String] channelId, [String] organizationId
-  Future<List<ChannelMessage>> fetchChannelMessages(
+  Future<Map<String, dynamic>> fetchChannelMessages(
       {required String channelId, required String organizationId});
 
   /// returns [Future]<[String]>, to get socket id of a channel using channel id and organization id associated with it.
@@ -166,16 +166,17 @@ abstract class Api {
 
   /* USER SERVICE */
 
-  /// returns [Future]<[User]>, get a single user details using the users id from remote source.
+  /// returns [Future]<[Map]<[String], [dynamic]>>, get a single user details using the users id from remote source.
   ///
   /// get request;
   ///
   /// function parameters; none.
-  Future<User> fetchUserDetails({String? userId});
+  Future<Map<String, dynamic>> fetchUserDetails({String? userId});
 
   /* DIRECT MESSAGES SERVICE */
 
-  /// returns [Future]<[SendMessageResponse]>, send message to DM using room id and logged in user id or senderId.
+  /// returns [Future]<[Map]<[String], [dynamic]>>, send message to DM using room id and logged in
+  /// user id or senderId.
   ///
   /// post request;
   /// * body: {}
@@ -183,36 +184,37 @@ abstract class Api {
   /// query parameters; roomid
   ///
   /// function parameters;
-  Future<SendMessageResponse> sendMessageToDM(
+  Future<Map<String, dynamic>> sendMessageToDM(
       {var roomId, var senderId, var message});
 
-  /// returns [Future]<[String]>, create a room using organization id.
+  /// returns [Future]<[Map]<[String], [dynamic]>>, create a room using organization id.
   ///
   /// post request;
   /// * body: {}
   ///
   /// parameters;
-  Future<String> createRoom({User currentUser, DummyUser user});
+  Future<Map<String, dynamic>> createRoom({User currentUser, DummyUser user});
 
-  /// returns [Future]<[void]>, get a particular room info using room id.
+  /// returns [Future]<[Map]<[String], [dynamic]>>, get a particular room info using room id.
   ///
   /// get request;
   ///
   /// parameters;
-  Future<void> getRoomInfo({var roomId});
+  Future<Map<String, dynamic>> getRoomInfo({var roomId});
 
-  /// returns [Future]<[List]<[Results]>>, fetch messages in a room from remote source using room id.
+  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch messages in a room from remote source using room id.
   ///
   ///
   ///
-  Future<List<Results>> fetchRoomMessages({var roomId});
+  Future<Map<String, dynamic>> fetchRoomMessages({var roomId});
 
-  /// returns [Future]<[void]>, mark a message as read and reflect those changes in remote source.
+  /// returns [Future]<[Map]<[String], [dynamic]>>, mark a message as read and reflect those changes
+  /// in remote source.
   ///
   /// put request;
   ///
   /// parameters;
-  Future<void> markMessageAsRead(var messageId);
+  Future<Map<String, dynamic>> markMessageAsRead(var messageId);
 
   /* CENTRIFUGE SERVICE */
 

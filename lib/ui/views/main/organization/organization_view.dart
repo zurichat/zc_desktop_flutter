@@ -14,7 +14,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
@@ -98,7 +97,7 @@ class OrganizationWrapper extends StatelessWidget {
                                       child: OrganizationItem(
                                         organization:
                                             model!.organization[index],
-                                        selected: model!.showSelectedOrg(index),
+                                        selected: model!.selectedOrg(index),
                                       ),
                                     ),
                                   );
@@ -178,6 +177,7 @@ class OrganizationWrapper extends StatelessWidget {
                                               return ChannelItem(
                                                 channelName:
                                                     model!.channels[index].name,
+                                                selected: false,
                                               );
                                             },
                                           ),
@@ -196,7 +196,9 @@ class OrganizationWrapper extends StatelessWidget {
                                             itemChild: (index) {
                                               return DMItem(
                                                 userName: 'John snow',
-                                                userIcon: '',
+                                                userIcon:
+                                                    'assets/icons/users.svg',
+                                                selected: false,
                                               );
                                             },
                                           ),
@@ -300,15 +302,18 @@ class ReusableDropDown extends StatelessWidget {
               child: Container(
                 child: show
                     ? Container(
-                        height: 8,
+                  height: 8,
                         width: 8,
-                        child: SvgPicture.asset(SVGAssetPaths.dropDownOpenIcon),
+                        child: SvgPicture.asset(
+                          SVGAssetPaths.dropDownOpenIcon,
+                        ),
                       )
                     : Container(
-                        height: 8,
+                  height: 8,
                         width: 8,
-                        child:
-                            SvgPicture.asset(SVGAssetPaths.dropDownClosedIcon),
+                        child: SvgPicture.asset(
+                          SVGAssetPaths.dropDownClosedIcon,
+                        ),
                       ),
               ),
             ),
@@ -335,7 +340,6 @@ class ReusableDropDown extends StatelessWidget {
             ),
           ],
         ),
-        verticalSpaceTiny,
         if (show)
           Container(
             padding: EdgeInsets.only(left: 20.0),
@@ -491,8 +495,9 @@ class OrganizationItem extends StatelessWidget {
 
 class ChannelItem extends StatelessWidget {
   final String? channelName;
+  final bool? selected;
 
-  ChannelItem({Key? key, this.channelName}) : super(key: key);
+  ChannelItem({Key? key, this.channelName, this.selected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -501,10 +506,23 @@ class ChannelItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            child: SvgPicture.asset(SVGAssetPaths.channelsListIcon),
+            child: selected!
+                ? SvgPicture.asset(
+                    SVGAssetPaths.channelsListIcon,
+                    color: Theme.of(context).colorScheme.secondary,
+                  )
+                : SvgPicture.asset(SVGAssetPaths.channelsListIcon,
+                    color: Colors.black),
           ),
           horizontalSpaceSmall,
-          ZcdeskText.dropDownBodyTextStyle(channelName!),
+          Text(
+            channelName!,
+            style: dropDownBodyTextStyle.copyWith(
+              color: selected!
+                  ? Theme.of(context).colorScheme.secondary
+                  : Colors.black,
+            ),
+          ),
         ],
       ),
     );
@@ -514,8 +532,10 @@ class ChannelItem extends StatelessWidget {
 class DMItem extends StatelessWidget {
   final String? userIcon;
   final String? userName;
+  final bool? selected;
 
-  DMItem({Key? key, this.userIcon, this.userName}) : super(key: key);
+  DMItem({Key? key, this.userIcon, this.userName, this.selected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -524,12 +544,23 @@ class DMItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CircleAvatar(
+            Container(
+              height: 20.0,
+              width: 20.0,
               child: SvgPicture.asset(userIcon!),
-              radius: 12.r,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
             ),
             horizontalSpaceSmall,
-            ZcdeskText.dropDownBodyTextStyle(userName!),
+            Text(
+              userName!,
+              style: dropDownBodyTextStyle.copyWith(
+                color: selected!
+                    ? Theme.of(context).colorScheme.secondary
+                    : Colors.black,
+              ),
+            ),
           ],
         ),
       ),
