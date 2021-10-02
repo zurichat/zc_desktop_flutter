@@ -70,8 +70,8 @@ Uri getRemoveChannelMemberUri(
 
 // DM Endpoints
 
-Uri get dmCreateRoom =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/createroom');
+Uri dmCreateRoom(String orgId) =>
+    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/room');
 
 Uri dmSendMessage(String roomId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');
