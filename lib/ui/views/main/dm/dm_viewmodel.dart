@@ -23,7 +23,7 @@ class DmViewModel extends BaseViewModel {
     _currentLoggedInUser = _dmService.getCurrentLoggedInUser()!;
     _roomId = await _dmService.createRoom(_currentLoggedInUser, _user);
     _dmService.getRoomInfo(_roomId);
-    _messages = await _dmService.fetchRoomMessages(_roomId);
+    _messages = (await _dmService.fetchRoomMessages(_roomId)) as List<Results>;
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
     log.i(_user.name);
     notifyListeners();

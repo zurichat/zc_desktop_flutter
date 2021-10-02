@@ -184,7 +184,7 @@ abstract class Api {
   /// query parameters; roomid
   ///
   /// function parameters;
-  Future<Map<String, dynamic>> sendMessageToDM(
+  Future<SendMessageResponse> sendMessageToDM(
       {var roomId, var senderId, var message});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, create a room using organization id.
@@ -193,7 +193,7 @@ abstract class Api {
   /// * body: {}
   ///
   /// parameters;
-  Future<Map<String, dynamic>> createRoom({User currentUser, DummyUser user});
+  Future<String> createRoom({User currentUser, DummyUser user, String orgId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, get a particular room info using room id.
   ///
@@ -206,7 +206,7 @@ abstract class Api {
   ///
   ///
   ///
-  Future<Map<String, dynamic>> fetchRoomMessages({var roomId});
+  Future<SendMessageResponse> fetchRoomMessages({var roomId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, mark a message as read and reflect those changes
   /// in remote source.
