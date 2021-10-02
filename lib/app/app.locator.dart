@@ -38,6 +38,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => ChannelsService());
   locator.registerLazySingleton(() => DMService());
   locator.registerLazySingleton(() => OrganizationService());
+  locator.registerLazySingleton(() => StartupService());
   locator.registerLazySingleton(() => CentrifugeService());
   locator.registerLazySingleton(() => ZuriApiService());
   locator.registerLazySingleton(() => StartupService());
