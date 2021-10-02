@@ -5,6 +5,7 @@
 // **************************************************************************
 
 // ignore_for_file: public_member_api_docs
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -29,6 +30,7 @@ import '../ui/views/main/create_organization/create_workspace_stage3.dart';
 import '../ui/views/main/dm/all_dms/all_dms_view.dart';
 import '../ui/views/main/dm/dm_view.dart';
 import '../ui/views/main/organization/organization_view.dart';
+import '../ui/views/main/saved_items/saved_items_view.dart';
 import '../ui/views/startup/startup_view.dart';
 
 class Routes {
@@ -187,6 +189,7 @@ class OrganizationViewRoutes {
   static const String createChannelView = '/create-channel-view';
   static const String dmView = '/dm-view';
   static const String allDmsView = '/all-dms-view';
+  static const String savedItemsView = '/saved-items-view';
   static const all = <String>{
     channelsView,
     channelDmView,
@@ -194,6 +197,7 @@ class OrganizationViewRoutes {
     createChannelView,
     dmView,
     allDmsView,
+    savedItemsView,
   };
 }
 
@@ -207,6 +211,7 @@ class OrganizationViewRouter extends RouterBase {
     RouteDef(OrganizationViewRoutes.createChannelView, page: CreateChannelView),
     RouteDef(OrganizationViewRoutes.dmView, page: DmView),
     RouteDef(OrganizationViewRoutes.allDmsView, page: AllDmsView),
+    RouteDef(OrganizationViewRoutes.savedItemsView, page: SavedItemsView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -255,6 +260,12 @@ class OrganizationViewRouter extends RouterBase {
     AllDmsView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const AllDmsView(),
+        settings: data,
+      );
+    },
+    SavedItemsView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const SavedItemsView(),
         settings: data,
       );
     },
