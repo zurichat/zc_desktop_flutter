@@ -16,6 +16,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
 
 class OrganizationView extends StatelessWidget {
   const OrganizationView({Key? key}) : super(key: key);
@@ -250,6 +251,11 @@ class DisplayMenu extends StatelessWidget {
             iconPath: 'assets/icons/drafts.svg',
             text: 'Draft',
             onTap: () {},
+          ),
+          ReusableMenuItem(
+            iconPath: 'assets/icons/ribbon.svg',
+            text: 'Saved Items',
+            onTap: model.goTOSavedItems,
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/files.svg',
