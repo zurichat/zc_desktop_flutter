@@ -368,7 +368,7 @@ class ZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, DummyUser? user}) async {
+      {User? currentUser, Users? user}) async {
     return await _post(
       dmCreateRoom,
       body: {
@@ -378,5 +378,25 @@ class ZuriApiService implements Api {
         "pinned": ["0"]
       },
     );
+  }
+
+  @override
+  Future fetchFileListUsingOrgId(
+      {required String orgId, required token}) async {
+    return await _get(
+      getMemberUri(orgId),
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
+  }
+
+  @override
+  Future<List<Users>> fetchMemberListUsingOrgId(
+      {required String organizationId, required token}) async {
+    final response = await _get(
+      getMemberUri(organizationId),
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
+    log.i(response);
+    return List.from(response['data'].map((value) => Users.fromJson(value)));
   }
 }

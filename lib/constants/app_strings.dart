@@ -60,8 +60,27 @@ const String AppbarText = "# All direct messages";
 const String SearchBarText = "To: @somebody or @somebody@example.com";
 const String DayPlaceholder = "Today";
 const String TitlePlaceholder = "Beckylicious";
-const String SubtitlePlaceholder = "Rebecca: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ";
+const String SubtitlePlaceholder =
+    "Rebecca: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ";
 const String TimePlaceholder = "13:02";
 const String ImagePlaceholder = "B";
 
 const String SavedItems = 'Saved Items';
+const String SearchModalHintText = 'Find in direct messages with rafiu';
+const String LookingForWidget = 'I’m looking for...';
+const String ButtonText = 'Messages';
+const String ButtonText2 = 'Files';
+const String ButtonText3 = 'People';
+const String ButtonText4 = 'Channel';
+const String RecentSearch = 'Recent Searches';
+const String ModelText = 'Adema';
+const String SearchModalHintText1 =
+    'Scour your archives and fish out the answers';
+const String ButtonText5 = 'Not the results that you expected? ';
+const String ButtonText6 = 'Give feedback ';
+const String ButtonText7 = 'or ';
+const String ButtonText8 = 'learn more';
+const String SearchModal = 'Search in Channels';
+const String SearchModal1 = 'Search in Messages';
+const String SearchModal2 = 'Search in Files';
+const String SearchModal3 = 'Search anyone in workspace';

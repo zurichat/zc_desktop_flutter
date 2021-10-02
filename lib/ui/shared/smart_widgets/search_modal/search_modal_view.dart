@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -16,11 +18,15 @@ class SearchModalView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.reactive(
-      viewModelBuilder: () => SearchModalViewmodel(),
+    return ViewModelBuilder<SearchViewModel>.reactive(
       builder: (context, model, _) => Dialog(
-        child: BuildContainerWidget(model: model as SearchModalViewmodel),
-      ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.r)),
+          //alignment: Alignment.topCenter,
+          child: BuildContainerWidget(model: model)),
+      onDispose: (model) => model.saveSearch(),
+      onModelReady: (model) => model.fetchAndSetSearchHistory(),
+      viewModelBuilder: () => SearchViewModel(),
     );
   }
 }
@@ -31,13 +37,13 @@ class BuildContainerWidget extends StatelessWidget {
     this.model,
   }) : super(key: key);
 
-  final SearchModalViewmodel? model;
+  final SearchViewModel? model;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: model!.isClicked ? 400.h : 514.h,
-      width: 1008.w,
+      // height: model!.isClicked ? 400.h : 514.h,
+      //width: 1008.w,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -56,50 +62,24 @@ bottomText() {
   return Container(
     height: 50.h,
     width: 1008.w,
-    padding: EdgeInsets.only(left: 540.w, right: 50.w, top: 11.h, bottom: 21.h),
+    padding: EdgeInsets.only(left: 400.w, right: 50.w, top: 11.h, bottom: 21.h),
     child: Wrap(
       children: [
         Text(
-          'Not the results that you expected? ',
-          style: TextStyle(
-            color: lightIconColor,
-            fontSize: 15.sp,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Lato',
-          ),
+          ButtonText5,
+          style: preferenceStyleNormal,
         ),
         MouseRegion(
           cursor: SystemMouseCursors.click,
-          child: Text(
-            'Give feedback ',
-            style: TextStyle(
-              color: avatarColor4,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Lato',
-            ),
-          ),
+          child: Text(ButtonText6, style: searchModal),
         ),
         Text(
-          'or ',
-          style: TextStyle(
-            color: lightIconColor,
-            fontSize: 15.sp,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Lato',
-          ),
+          ButtonText7,
+          style: preferenceStyleNormal,
         ),
         MouseRegion(
           cursor: SystemMouseCursors.click,
-          child: Text(
-            'learn more',
-            style: TextStyle(
-              color: avatarColor4,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Lato',
-            ),
-          ),
+          child: Text(ButtonText8, style: searchModal),
         ),
       ],
     ),
@@ -116,16 +96,8 @@ recentSearchListTile(String? text, {VoidCallback? function}) {
           hoverColor: kcSecondaryColor,
           tileColor: whiteColor,
           onTap: function,
-          leading: SvgPicture.asset('assets/icons/clock.svg'),
-          title: Text(
-            text!,
-            style: TextStyle(
-              color: headerColor,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
-              fontFamily: 'Lato',
-            ),
-          ),
+          leading: SvgPicture.asset(Clock, width: 18.w, height: 18.h),
+          title: Text(text!, style: searchModal1),
         ),
       ),
     ),
@@ -136,13 +108,10 @@ lookingForWidget({
   @required String? text,
 }) {
   return Container(
-    height: 18.h,
+    height: 22.h,
     width: 300.w,
-    margin: EdgeInsets.only(left: 65.w, top: 18.h, right: 708.w, bottom: 13.h),
-    child: Text(
-      text!,
-      style: kLeftSideBarStyle,
-    ),
+    margin: EdgeInsets.only(left: 65.w, top: 16.h, right: 708.w, bottom: 13.h),
+    child: Text(text!, style: preferenceStyleNormal),
   );
 }
 
@@ -150,7 +119,7 @@ searchButtons(
     {@required String? assetPath,
     @required String? buttonText,
     @required ButtonType? buttonType,
-    SearchModalViewmodel? model}) {
+    SearchViewModel? model}) {
   return MouseRegion(
     cursor: SystemMouseCursors.click,
     child: ElevatedButton.icon(
@@ -177,15 +146,7 @@ searchButtons(
         }
       },
       icon: SvgPicture.asset(assetPath!),
-      label: Text(
-        buttonText!,
-        style: TextStyle(
-          fontFamily: 'Lato',
-          fontWeight: FontWeight.w500,
-          fontSize: 18.sp,
-          color: bodyColor,
-        ),
-      ),
+      label: Text(buttonText!, style: searchModal2),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
         if (states.contains(MaterialState.hovered)) return kcSecondaryColor;
@@ -201,7 +162,7 @@ class BuildSearchWidget extends StatelessWidget {
     this.model,
   }) : super(key: key);
 
-  final SearchModalViewmodel? model;
+  final SearchViewModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -227,14 +188,13 @@ class BuildSearchWidget extends StatelessWidget {
   }
 }
 
-class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
+class ScrollableView extends HookViewModelWidget<SearchViewModel> {
   const ScrollableView({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, SearchModalViewmodel model) {
+  Widget buildViewModelWidget(BuildContext context, SearchViewModel model) {
     var scrollController = useScrollController();
     return Container(
       height: model.isClicked ? 285.h : 406.5.h,
@@ -259,27 +219,17 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
                           children: [
                             Container(
                                 margin: EdgeInsets.only(left: 65.w),
-                                child: SvgPicture.asset(
-                                    'assets/icons/align_left.svg')),
+                                child: SvgPicture.asset(AlignLeft)),
                             SizedBox(
                               width: 23.w,
                             ),
                             Expanded(
                               child: TextField(
                                 maxLines: 1,
-                                style: TextStyle(
-                                  color: bodyColor,
-                                  fontSize: 18.sp,
-                                ),
+                                style: searchModal4,
                                 decoration: InputDecoration(
-                                  hintText:
-                                      'Find in direct messages with rafiu',
-                                  hintStyle: TextStyle(
-                                    color: bodyColor,
-                                    fontFamily: 'Lato',
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18.sp,
-                                  ),
+                                  hintText: SearchModalHintText,
+                                  hintStyle: searchModal3,
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                 ),
@@ -297,26 +247,15 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
                         children: [
                           Container(
                               margin: EdgeInsets.only(left: 65.w),
-                              child: SvgPicture.asset(
-                                  'assets/icons/align_left.svg')),
-                          SizedBox(
-                            width: 23.w,
-                          ),
+                              child: SvgPicture.asset(AlignLeft)),
+                          SizedBox(width: 23.w),
                           Expanded(
                             child: TextField(
                               maxLines: 1,
-                              style: TextStyle(
-                                color: bodyColor,
-                                fontSize: 18.sp,
-                              ),
+                              style: searchModal4,
                               decoration: InputDecoration(
-                                hintText: 'Find in direct messages with rafiu',
-                                hintStyle: TextStyle(
-                                  color: bodyColor,
-                                  fontFamily: 'Lato',
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.sp,
-                                ),
+                                hintText: SearchModalHintText,
+                                hintStyle: searchModal3,
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                               ),
@@ -328,14 +267,14 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
               model.isClicked
                   ? Visibility(
                       visible: false,
-                      child: lookingForWidget(text: 'I’m looking for...'),
+                      child: lookingForWidget(text: LookingForWidget),
                     )
-                  : lookingForWidget(text: 'I’m looking for...'),
+                  : lookingForWidget(text: LookingForWidget),
               model.isClicked
                   ? Visibility(
                       visible: false,
                       child: Container(
-                        margin: EdgeInsets.only(bottom: 39.h),
+                        margin: EdgeInsets.only(bottom: 10.h),
                         padding: EdgeInsets.only(
                           left: 65.w,
                         ),
@@ -343,35 +282,29 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             searchButtons(
-                              assetPath: 'assets/icons/message_circle.svg',
-                              buttonText: 'Messages',
+                              assetPath: Circle,
+                              buttonText: ButtonText,
                               buttonType: ButtonType.MESSAGE,
                               model: model,
                             ),
-                            SizedBox(
-                              width: 19.w,
-                            ),
+                            SizedBox(width: 19.w),
                             searchButtons(
-                              assetPath: 'assets/icons/layers.svg',
-                              buttonText: 'Files',
+                              assetPath: Layers,
+                              buttonText: ButtonText2,
                               buttonType: ButtonType.FILE,
                               model: model,
                             ),
-                            SizedBox(
-                              width: 19.w,
-                            ),
+                            SizedBox(width: 19.w),
                             searchButtons(
-                              assetPath: 'assets/icons/hash.svg',
-                              buttonText: 'Channels',
+                              assetPath: Hash,
+                              buttonText: ButtonText4,
                               buttonType: ButtonType.CHANNELS,
                               model: model,
                             ),
-                            SizedBox(
-                              width: 19.w,
-                            ),
+                            SizedBox(width: 19.w),
                             searchButtons(
-                                assetPath: 'assets/icons/users.svg',
-                                buttonText: 'People',
+                                assetPath: Users,
+                                buttonText: ButtonText3,
                                 buttonType: ButtonType.PEOPLE,
                                 model: model),
                           ],
@@ -379,7 +312,7 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
                       ),
                     )
                   : Container(
-                      margin: EdgeInsets.only(bottom: 39.h),
+                      margin: EdgeInsets.only(bottom: 10.h),
                       padding: EdgeInsets.only(
                         left: 65.w,
                       ),
@@ -387,35 +320,29 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           searchButtons(
-                            assetPath: 'assets/icons/message_circle.svg',
-                            buttonText: 'Messages',
+                            assetPath: Circle,
+                            buttonText: ButtonText,
                             buttonType: ButtonType.MESSAGE,
                             model: model,
                           ),
-                          SizedBox(
-                            width: 19.w,
-                          ),
+                          SizedBox(width: 19.w),
                           searchButtons(
-                            assetPath: 'assets/icons/layers.svg',
-                            buttonText: 'Files',
+                            assetPath: Layers,
+                            buttonText: ButtonText2,
                             buttonType: ButtonType.FILE,
                             model: model,
                           ),
-                          SizedBox(
-                            width: 19.w,
-                          ),
+                          SizedBox(width: 19.w),
                           searchButtons(
-                            assetPath: 'assets/icons/hash.svg',
-                            buttonText: 'Channels',
+                            assetPath: Hash,
+                            buttonText: ButtonText4,
                             buttonType: ButtonType.CHANNELS,
                             model: model,
                           ),
-                          SizedBox(
-                            width: 19.w,
-                          ),
+                          SizedBox(width: 19.w),
                           searchButtons(
-                              assetPath: 'assets/icons/users.svg',
-                              buttonText: 'People',
+                              assetPath: Users,
+                              buttonText: ButtonText3,
                               buttonType: ButtonType.PEOPLE,
                               model: model),
                         ],
@@ -424,11 +351,13 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
               lookingForWidget(
                   text: model.isClicked
                       ? 'Recent Searches in ${model.text}'
-                      : 'Recent Searches'),
-              recentSearchListTile(model.isClicked ? model.text : 'Adema'),
-              recentSearchListTile(model.isClicked ? model.text : 'Adema'),
-              recentSearchListTile(model.isClicked ? model.text : 'Adema'),
-              recentSearchListTile(model.isClicked ? model.text : 'Adema'),
+                      : RecentSearch),
+              /*Container(
+                       height: 150.h,
+                       width: 350.w,
+                       child: ListView.builder(itemCount:model.historyLenth ,itemBuilder:
+                       (context, index) => recentSearchListTile(model.searchHistory[index])) ,
+                     )*/
             ],
           ),
         ),
@@ -437,17 +366,17 @@ class ScrollableView extends HookViewModelWidget<SearchModalViewmodel> {
   }
 }
 
-class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
+class SearchWidget extends HookViewModelWidget<SearchViewModel> {
   const SearchWidget({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, SearchModalViewmodel model) {
+  Widget buildViewModelWidget(BuildContext context, SearchViewModel model) {
     final text = useTextEditingController();
 
     return Column(
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           height: 56.5.h,
@@ -464,6 +393,7 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
             width: 1.h,
           ))),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               model.isClicked
                   ? MouseRegion(
@@ -480,14 +410,7 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(
-                              model.text,
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                                fontFamily: 'Lato',
-                                color: bodyColor,
-                              ),
-                            ),
+                            Text(model.text, style: preferenceStyleNormal),
                             GestureDetector(
                                 onTap: () {
                                   model.toggleButtonClicked();
@@ -495,32 +418,24 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
                                   text.clear();
                                   model.toggleTextFieldActivated();
                                 },
-                                child: SvgPicture.asset(
-                                    'assets/icons/cancel.svg')),
+                                child: SvgPicture.asset(Cancel)),
                           ],
                         ),
                       ),
                     )
-                  : SvgPicture.asset('assets/icons/search.svg'),
+                  : SvgPicture.asset(Search, width: 15.w, height: 15.h),
+              SizedBox(width: 10.w),
               Expanded(
                 child: TextField(
                   controller: text,
                   textAlign: TextAlign.left,
                   maxLines: 1,
-                  style: TextStyle(
-                    color: headerColor,
-                    fontSize: 18.sp,
-                  ),
+                  style: searchModal4,
                   onChanged: model.onChange,
                   decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.only(left: 31.w, top: 17.h, bottom: 16.h),
-                    hintText: model.isClicked
-                        ? model.hintText
-                        : 'Scour your archives and fish out the answers',
-                    hintStyle: TextStyle(
-                      color: leftNavBarColor,
-                    ),
+                    hintText:
+                        model.isClicked ? model.hintText : SearchModalHintText1,
+                    hintStyle: preferenceStyleNormal,
                     enabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
                   ),
@@ -529,9 +444,9 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
               GestureDetector(
                   child: MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: SvgPicture.asset('assets/icons/cancel.svg')),
+                      child: SvgPicture.asset(Cancel)),
                   onTap: () {
-                    model.popDialog();
+                    Navigator.pop(context, true);
                   }),
             ],
           ),
@@ -547,13 +462,19 @@ class SearchWidget extends HookViewModelWidget<SearchModalViewmodel> {
                 child: ListView.builder(
                     itemCount: model.availableListLength,
                     itemBuilder: (context, index) {
-                      return recentSearchListTile(model.searchList[index].name,
-                          function: () {
-                        model.toggleTextFieldActivated();
-                        text.clear();
-                        model.popDialog();
-                        model.searchNavigate(model.searchList[index]);
-                      });
+                      if (model.searchList.length <=
+                              model.availableListLength &&
+                          model.searchList.isNotEmpty) {
+                        return recentSearchListTile(
+                            model.searchList[index].name, function: () {
+                          model.toggleTextFieldActivated();
+                          text.clear();
+                          Navigator.of(context).pop();
+                          model.searchNavigate(model.searchList[index]);
+                        });
+                      } else {
+                        return SizedBox();
+                      }
                     }),
               )
       ],

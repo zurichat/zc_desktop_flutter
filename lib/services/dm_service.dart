@@ -11,14 +11,14 @@ import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 class DMService {
   final log = getLogger("DMService");
   final _zuriApiService = locator<ZuriApiService>();
-  DummyUser _user = DummyUser(name: "");
+  Users _user = Users(name: "");
   final _localStorageService = locator<LocalStorageService>();
 
-  void setUser(DummyUser user) {
+  void setUser(Users user) {
     this._user = user;
   }
 
-  Future<DummyUser> getUser() async {
+  Future<Users> getUser() async {
     await Future.delayed(Duration(seconds: 2));
     return this._user;
   }
@@ -46,7 +46,7 @@ class DMService {
   }
 
   Future<String?> createRoom(
-      currentLoggedInUser.User currentUser, DummyUser user) async {
+      currentLoggedInUser.User currentUser, Users user) async {
     final response =
         await _zuriApiService.createRoom(currentUser: currentUser, user: user);
     log.i(response);
