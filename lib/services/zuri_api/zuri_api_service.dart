@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
+import 'package:zc_desktop_flutter/core/exceptions/http_exception.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
@@ -27,14 +28,14 @@ class ZuriApiService implements Api {
       final response = await dio.get(uri.toString(),
           queryParameters: queryParameters, options: Options(headers: headers));
 
-      log.i('Response from $uri \n${response.data}');
+      //log.i('Response from $uri \n${response.data}');
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.data['message']);
-      throw Failure(error.response!.data['message']);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
-      throw Failure(error.toString());
+      throw HttpException(error.toString());
     }
   }
 
@@ -48,15 +49,15 @@ class ZuriApiService implements Api {
       final response = await dio.post(uri.toString(),
           data: body, options: Options(headers: headers));
 
-      log.i('Response from $uri \n${response.data}');
+      //log.i('Response from $uri \n${response.data}');
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.statusCode);
       log.e(error.response!.data['message']);
-      throw Failure(error.response!.data['message']);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
-      throw Failure(error.toString());
+      throw HttpException(error.toString());
     }
   }
 
@@ -70,14 +71,14 @@ class ZuriApiService implements Api {
       final response = await dio.put(uri.toString(),
           data: body, options: Options(headers: headers));
 
-      log.i('Response from $uri \n${response.data}');
+      //log.i('Response from $uri \n${response.data}');
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw Failure(error.message);
+      throw HttpException(error.message);
     } catch (error) {
       log.e(error.toString());
-      throw Failure(error.toString());
+      throw HttpException(error.toString());
     }
   }
 
@@ -86,14 +87,14 @@ class ZuriApiService implements Api {
     try {
       final response = await dio.delete(uri.toString());
 
-      log.i('Response from $uri \n${response.data}');
+      //log.i('Response from $uri \n${response.data}');
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw Failure(error.message);
+      throw HttpException(error.message);
     } catch (error) {
       log.e(error.toString());
-      throw Failure(error.toString());
+      throw HttpException(error.toString());
     }
   }
 
@@ -109,7 +110,7 @@ class ZuriApiService implements Api {
         data: body,
         options: Options(headers: headers),
       );
-      log.i('Response from $uri \n${response.data}');
+      //log.i('Response from $uri \n${response.data}');
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
@@ -209,34 +210,29 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Organization> fetchOrganizationDetails(
+  Future<Map<String, dynamic>> fetchOrganizationDetails(
       {required String organizationId, required token}) async {
-    final response = await _get(
+    return await _get(
       getOrganisationUri(organizationId),
       headers: {
         'Authorization': 'Bearer ${token}',
       },
     );
-    return Organization.fromJson(response);
   }
 
   @override
-  Future<List<Organization>> fetchOrganizationsListFromRemote(
+  Future<Map<String, dynamic>> fetchOrganizationsListFromRemote(
       {required String email, required token}) async {
-    final response = await _get(
+    return await _get(
       getOrganizationsUri(email),
       headers: {'Authorization': "Bearer ${token}"},
     );
-
-    log.i(response['data']);
-    //return Organization.fromJson(json).
-    return OrganizationResponse.fromJson(response).data!;
   }
 
   /* USER SERVICE */
 
   @override
-  Future<User> fetchUserDetails({String? userId}) {
+  Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
     // TODO: implement fetchUserDetails
     throw UnimplementedError();
   }
@@ -269,14 +265,12 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<List<Channel>> fetchChannelsListUsingOrgId(
+  Future<dynamic> fetchChannelsListUsingOrgId(
       {String? organizationId, required token}) async {
-    final response = await _get(
+    return await _get(
       getCreateChannelUri(organizationId!),
       headers: {'Authorization': 'Bearer ${token}'},
     );
-    log.i(response);
-    return ChannelResponse.fromJson(response).data!;
   }
 
   @override
@@ -303,6 +297,14 @@ class ZuriApiService implements Api {
   }
 
   @override
+  Future<dynamic> removeUserFromChannel(
+      {required organizationId, required channelId, required memberId}) async {
+    return await _delete(
+      getRemoveChannelMemberUri(channelId, organizationId, memberId),
+    );
+  }
+
+  @override
   Future<dynamic> createChannelsUsingOrgId(
       {required sessionId,
       required insertedOrganization,
@@ -323,19 +325,17 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<List<ChannelMessage>> fetchChannelMessages(
+  Future<Map<String, dynamic>> fetchChannelMessages(
       {required String channelId, required String organizationId}) async {
-    final response =
-        await _get(channelFetchMessages(channelId, organizationId));
-    return ChannelMessagesResponse.fromJson(response).data;
+    return await _get(channelFetchMessages(channelId, organizationId));
   }
 
   /* DIRECT MESSAGES SERVICE */
 
   @override
-  Future<SendMessageResponse> sendMessageToDM(
+  Future<Map<String, dynamic>> sendMessageToDM(
       {roomId, senderId, message}) async {
-    final response = await _post(dmSendMessage(roomId), body: {
+    return await _post(dmSendMessage(roomId), body: {
       "sender_id": senderId,
       "room_id": roomId,
       "message": message,
@@ -349,33 +349,27 @@ class ZuriApiService implements Api {
           .format(DateTime.now())
           .toString(),
     });
-
-    return SendMessageResponse.fromJson(response);
   }
 
   @override
-  Future<void> markMessageAsRead(messageId) async {
-    final response = await _put(dmMarkMessageAsRead(messageId), body: {});
-    var res = MarkMessageAsReadResponse.fromJson(response).read;
+  Future<Map<String, dynamic>> markMessageAsRead(messageId) async {
+    return await _put(dmMarkMessageAsRead(messageId), body: {});
   }
 
   @override
-  Future<void> getRoomInfo({roomId}) async {
-    final response =
-        await _get(dmGetRoomInfo, queryParameters: {'room_id': roomId});
-    var res = RoomInfoResponse.fromJson(response).numberOfUsers;
-    print("number of users: ${res}");
+  Future<Map<String, dynamic>> getRoomInfo({roomId}) async {
+    return await _get(dmGetRoomInfo, queryParameters: {'room_id': roomId});
   }
 
   @override
-  Future<List<Results>> fetchRoomMessages({roomId}) async {
-    final response = await _get(dmFetchRoomMessages(roomId));
-    return MessagesResponse.fromJson(response).results;
+  Future<Map<String, dynamic>> fetchRoomMessages({roomId}) async {
+    return await _get(dmFetchRoomMessages(roomId));
   }
 
   @override
-  Future<String> createRoom({User? currentUser, DummyUser? user}) async {
-    final response = await _post(
+  Future<Map<String, dynamic>> createRoom(
+      {User? currentUser, DummyUser? user}) async {
+    return await _post(
       dmCreateRoom,
       body: {
         "org_id": "1",
@@ -384,6 +378,5 @@ class ZuriApiService implements Api {
         "pinned": ["0"]
       },
     );
-    return CreateRoomResponse.fromJson(response).roomId;
   }
 }

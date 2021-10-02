@@ -7,10 +7,12 @@ import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 class ChannelsListViewModel extends BaseViewModel {
   final log = getLogger("ChannelsDisplayViewModel");
   final _channelService = locator<ChannelsService>();
+  final _organizationService = locator<OrganizationService>();
   final _localStorageService = locator<LocalStorageService>();
 
   String _channelText1 = 'Channel browser';
@@ -82,13 +84,9 @@ class ChannelsListViewModel extends BaseViewModel {
 
   Future<void> performGetChannel() async {
     // List<ChannelsDataModel> channelsList = await _channelService.getChannelsList();
-    List<Channel>? channelsList =
-        await _channelService.getChannelsList(organizationId: "1");
+    List<Channel>? channelsList = await _channelService.getChannels(
+        organizationId: _organizationService.getOrganizationId());
     print(channelsList);
-  }
-
-  void selectChannel() {
-    _channelService.setSelectedChannel(_selectedind);
   }
 
   User? user;

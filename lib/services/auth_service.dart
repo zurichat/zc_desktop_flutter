@@ -5,6 +5,7 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 
+
 import 'local_storage_service.dart';
 
 const localAuthResponseKey = 'localAuthResponse';
@@ -20,6 +21,7 @@ class AuthService {
       {required String email, required String password}) async {
     final response =
         await _zuriApiService.login(email: email, password: password);
+    log.i(response);
     auth = AuthResponse.fromJson(response).data!;
     _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
   }

@@ -32,7 +32,7 @@ class ForgotPasswordView extends StatelessWidget {
                 verticalSpaceLarge,
                 Container(
                   width: 440.w,
-                  child: AuthInputField(
+                  child: ZuriDeskInputField(
                     label: 'Email',
                     controller: TextEditingController(),
                     keyboardType: TextInputType.emailAddress,

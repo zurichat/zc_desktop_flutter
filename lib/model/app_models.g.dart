@@ -473,8 +473,8 @@ const _$EnterButtonsChoiceEnumMap = {
 };
 
 _$_DummyUser _$$_DummyUserFromJson(Map<String, dynamic> json) => _$_DummyUser(
-      name: json['name'] as String?,
-      profileImage: json['profileImage'] as String?,
+      name: json['name'] as String? ?? '',
+      profileImage: json['profileImage'] as String? ?? '',
       id: json['id'] as int? ?? 1,
     );
 
@@ -483,41 +483,6 @@ Map<String, dynamic> _$$_DummyUserToJson(_$_DummyUser instance) =>
       'name': instance.name,
       'profileImage': instance.profileImage,
       'id': instance.id,
-    };
-
-_$_Workspace _$$_WorkspaceFromJson(Map<String, dynamic> json) => _$_Workspace(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      url: json['url'] as String?,
-      logo: json['logo'] as String?,
-      user: json['user'] == null
-          ? null
-          : DummyUser.fromJson(json['user'] as Map<String, dynamic>),
-      users: (json['users'] as List<dynamic>?)
-          ?.map((e) => DummyUser.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      channels: (json['channels'] as List<dynamic>?)
-          ?.map((e) => Channel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      dms: (json['dms'] as List<dynamic>?)
-          ?.map((e) => DM.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      currentChannel: json['currentChannel'] as int? ?? 0,
-      currentDM: json['currentDM'] as int? ?? -1,
-    );
-
-Map<String, dynamic> _$$_WorkspaceToJson(_$_Workspace instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'url': instance.url,
-      'logo': instance.logo,
-      'user': instance.user,
-      'users': instance.users,
-      'channels': instance.channels,
-      'dms': instance.dms,
-      'currentChannel': instance.currentChannel,
-      'currentDM': instance.currentDM,
     };
 
 _$_DM _$$_DMFromJson(Map<String, dynamic> json) => _$_DM(
@@ -535,8 +500,8 @@ Map<String, dynamic> _$$_DMToJson(_$_DM instance) => <String, dynamic>{
     };
 
 _$_Chat _$$_ChatFromJson(Map<String, dynamic> json) => _$_Chat(
-      timestamp: json['timestamp'] as int?,
-      text: json['text'] as String?,
+      timestamp: json['timestamp'] as int? ?? 0,
+      text: json['text'] as String? ?? '',
       user: json['user'] == null
           ? null
           : DummyUser.fromJson(json['user'] as Map<String, dynamic>),
@@ -550,8 +515,9 @@ Map<String, dynamic> _$$_ChatToJson(_$_Chat instance) => <String, dynamic>{
 
 _$_BaseChat _$$_BaseChatFromJson(Map<String, dynamic> json) => _$_BaseChat(
       chats: (json['chats'] as List<dynamic>?)
-          ?.map((e) => Chat.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Chat.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_BaseChatToJson(_$_BaseChat instance) =>
@@ -562,8 +528,9 @@ Map<String, dynamic> _$$_BaseChatToJson(_$_BaseChat instance) =>
 _$_ChannelResponse _$$_ChannelResponseFromJson(Map<String, dynamic> json) =>
     _$_ChannelResponse(
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Channel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Channel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_ChannelResponseToJson(_$_ChannelResponse instance) =>
@@ -572,11 +539,11 @@ Map<String, dynamic> _$$_ChannelResponseToJson(_$_ChannelResponse instance) =>
     };
 
 _$_Channel _$$_ChannelFromJson(Map<String, dynamic> json) => _$_Channel(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      owner: json['owner'] as String?,
-      description: json['description'] as String?,
-      private: json['private'] as bool?,
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      owner: json['owner'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      private: json['private'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_ChannelToJson(_$_Channel instance) =>
@@ -591,11 +558,12 @@ Map<String, dynamic> _$$_ChannelToJson(_$_Channel instance) =>
 _$_OrganizationResponse _$$_OrganizationResponseFromJson(
         Map<String, dynamic> json) =>
     _$_OrganizationResponse(
-      status: json['status'] as int?,
-      message: json['message'] as String?,
+      status: json['status'] as int? ?? 0,
+      message: json['message'] as String? ?? '',
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Organization.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Organization.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_OrganizationResponseToJson(
@@ -608,10 +576,10 @@ Map<String, dynamic> _$$_OrganizationResponseToJson(
 
 _$_Organization _$$_OrganizationFromJson(Map<String, dynamic> json) =>
     _$_Organization(
-      id: json['id'] as String?,
-      logoUrl: json['logoUrl'] as String?,
-      name: json['name'] as String?,
-      workspaceUrl: json['workspaceUrl'] as String?,
+      id: json['id'] as String? ?? '',
+      logoUrl: json['logoUrl'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      workspaceUrl: json['workspaceUrl'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OrganizationToJson(_$_Organization instance) =>
@@ -625,8 +593,8 @@ Map<String, dynamic> _$$_OrganizationToJson(_$_Organization instance) =>
 _$_ChannelMessagesResponse _$$_ChannelMessagesResponseFromJson(
         Map<String, dynamic> json) =>
     _$_ChannelMessagesResponse(
-      status: json['status'] as int?,
-      message: json['message'] as String?,
+      status: json['status'] as int? ?? 0,
+      message: json['message'] as String? ?? '',
       data: (json['data'] as List<dynamic>?)
               ?.map((e) => ChannelMessage.fromJson(e as Map<String, dynamic>))
               .toList() ??

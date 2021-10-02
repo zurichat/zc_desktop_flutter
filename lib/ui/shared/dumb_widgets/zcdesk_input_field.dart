@@ -4,7 +4,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
-class AuthInputField extends StatelessWidget {
+class ZuriDeskInputField extends StatelessWidget {
   final String hintPlaceHolder;
   final Color? filledColor;
   final ValueChanged<String?>? onSaved;
@@ -12,10 +12,12 @@ class AuthInputField extends StatelessWidget {
   final String? helperText;
   final int? maxLines;
   final Widget? trailing;
+  final Widget? prefix;
   final TextInputType? inputType;
   final bool password;
   final bool isVisible;
   final String? errorText;
+  final Color? focusColor;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final void Function()? onTrailingTapped;
@@ -23,26 +25,28 @@ class AuthInputField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final String? Function(String?)? validator;
 
-  const AuthInputField({
-    Key? key,
-    this.onSaved,
-    this.filledColor = kcBackgroundColor2,
-    this.hintPlaceHolder = '',
-    this.label,
-    this.maxLines,
-    this.keyboardType,
-    this.inputType,
-    this.trailing,
-    this.onTrailingTapped,
-    this.password = false,
-    this.controller,
-    this.onChanged,
-    this.errorText,
-    this.validator,
-    this.onVisibilityTap,
-    this.isVisible = false,
-    this.helperText,
-  }) : super(key: key);
+  const ZuriDeskInputField(
+      {Key? key,
+      this.onSaved,
+      this.filledColor = kcBackgroundColor2,
+      this.hintPlaceHolder = '',
+      this.label,
+      this.maxLines,
+      this.keyboardType,
+      this.inputType,
+      this.trailing,
+      this.prefix,
+      this.onTrailingTapped,
+      this.password = false,
+      this.controller,
+      this.onChanged,
+      this.errorText,
+      this.validator,
+      this.onVisibilityTap,
+      this.isVisible = false,
+      this.helperText,
+      this.focusColor = bodyColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +56,15 @@ class AuthInputField extends StatelessWidget {
         // if label is empty, label text will not be visible
         Visibility(
           visible: label == null ? false : true,
-          child: ZcdeskText.subheading(label ?? ''),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ZcdeskText.subheading(label ?? ''),
+              verticalSpaceRegular,
+            ],
+          ),
         ),
-        verticalSpaceRegular,
+
         Stack(
           children: [
             TextFormField(
@@ -64,7 +74,7 @@ class AuthInputField extends StatelessWidget {
               keyboardType: keyboardType,
               autofocus: false,
               obscureText: isVisible,
-              cursorColor: Theme.of(context).accentColor,
+              cursorColor: Theme.of(context).colorScheme.secondary,
               textInputAction: TextInputAction.done,
               maxLines: maxLines ?? 1,
               style: headline7,
@@ -74,6 +84,8 @@ class AuthInputField extends StatelessWidget {
                 filled: false,
                 errorText: errorText,
                 errorStyle: kBodyTextStyle.copyWith(color: kcErrorColor),
+                prefixIcon: prefix,
+                prefixStyle: TextStyle(color: focusColor),
                 suffixIcon: trailing != null
                     ? GestureDetector(
                         onTap: onTrailingTapped,
@@ -85,8 +97,8 @@ class AuthInputField extends StatelessWidget {
                 hintText: hintPlaceHolder,
                 hintStyle: TextStyle(
                   color: Colors.grey,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
                 ),
                 errorBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.red),
@@ -98,7 +110,11 @@ class AuthInputField extends StatelessWidget {
                   borderSide: BorderSide(color: leftNavBarColor),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: bodyColor),
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(focusColor == bodyColor ? 4.0 : 10)),
+                  borderSide: BorderSide(
+                      color: focusColor!,
+                      width: focusColor == bodyColor ? 1.0 : 2.0),
                 ),
               ),
             ),

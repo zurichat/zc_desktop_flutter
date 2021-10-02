@@ -225,7 +225,7 @@ class AdvancedViewSearchOptions extends StatelessWidget {
 
           Text('Exclude these channels from search results:',
               style: preferenceStyleBold),
-          AuthInputField(
+          ZuriDeskInputField(
             hintPlaceHolder: 'Type a channel name...',
           )
         ],

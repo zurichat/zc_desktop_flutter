@@ -54,18 +54,19 @@ class SignUpView extends HookWidget {
                                   CreateAccountText,
                                   style: headline3,
                                 ),
-                                if (model.hasError)
-                                  Text(
-                                    (model.modelError as Failure).message,
-                                    style:
-                                        headline6.copyWith(color: Colors.red),
-                                  ),
+                                if (model.hasError) ...[
+                                verticalSpaceMedium,
+                                Text(
+                                  (model.modelError as Failure).message,
+                                  style: boldCaptionStyle.copyWith(color: Colors.red),
+                                ),
+                              ],
                                 verticalSpaceMedium,
                                 Form(
                                   key: _formKey,
                                   child: Column(
                                     children: [
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Email',
                                         controller: emailController,
                                         keyboardType:
@@ -74,7 +75,7 @@ class SignUpView extends HookWidget {
                                         validator: context.validateEmail,
                                       ),
                                       verticalSpaceMedium,
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Password',
                                         password: true,
                                         isVisible: model.passwordVisibility,
@@ -85,7 +86,7 @@ class SignUpView extends HookWidget {
                                         validator: context.validatePassword,
                                       ),
                                       verticalSpaceMedium,
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Confirm Password',
                                         password: true,
                                         isVisible:

@@ -95,7 +95,7 @@ class CreateWorkspaceStage1 extends StatelessWidget {
                             verticalSpaceSmall,
                             Container(
                               width: 600.w,
-                              child: AuthInputField(
+                              child: ZuriDeskInputField(
                                 keyboardType: TextInputType.emailAddress,
                                 onChanged: (value) {
                                   model.setCompanyName(value);

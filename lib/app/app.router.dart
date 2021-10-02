@@ -20,17 +20,20 @@ import '../ui/views/auth/sign_up/sign_up_view.dart';
 import '../ui/views/auth/success/success_view.dart';
 import '../ui/views/main/channels/channels_view.dart';
 import '../ui/views/main/channels_list/channels_list_view.dart';
+import '../ui/views/main/choose_workspace.dart/choose_workspace_view.dart';
 import '../ui/views/main/create_channel/create_channel_view.dart';
 import '../ui/views/main/create_organization/create_organization_name.dart';
 import '../ui/views/main/create_organization/create_workspace.dart';
 import '../ui/views/main/create_organization/create_workspace_stage2.dart';
 import '../ui/views/main/create_organization/create_workspace_stage3.dart';
+import '../ui/views/main/dm/all_dms/all_dms_view.dart';
 import '../ui/views/main/dm/dm_view.dart';
 import '../ui/views/main/organization/organization_view.dart';
 import '../ui/views/startup/startup_view.dart';
 
 class Routes {
   static const String startUpView = '/';
+  static const String chooseWorkspaceView = '/choose-workspace-view';
   static const String loginView = '/login-view';
   static const String signUpView = '/sign-up-view';
   static const String forgotPasswordView = '/forgot-password-view';
@@ -45,6 +48,7 @@ class Routes {
   static const String organizationView = '/organization-view';
   static const all = <String>{
     startUpView,
+    chooseWorkspaceView,
     loginView,
     signUpView,
     forgotPasswordView,
@@ -65,6 +69,7 @@ class StackedRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.startUpView, page: StartUpView),
+    RouteDef(Routes.chooseWorkspaceView, page: ChooseWorkspaceView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.signUpView, page: SignUpView),
     RouteDef(Routes.forgotPasswordView, page: ForgotPasswordView),
@@ -88,6 +93,12 @@ class StackedRouter extends RouterBase {
     StartUpView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const StartUpView(),
+        settings: data,
+      );
+    },
+    ChooseWorkspaceView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const ChooseWorkspaceView(),
         settings: data,
       );
     },
@@ -175,12 +186,14 @@ class OrganizationViewRoutes {
   static const String channelsListView = '/channels-list-view';
   static const String createChannelView = '/create-channel-view';
   static const String dmView = '/dm-view';
+  static const String allDmsView = '/all-dms-view';
   static const all = <String>{
     channelsView,
     channelDmView,
     channelsListView,
     createChannelView,
     dmView,
+    allDmsView,
   };
 }
 
@@ -193,6 +206,7 @@ class OrganizationViewRouter extends RouterBase {
     RouteDef(OrganizationViewRoutes.channelsListView, page: ChannelsListView),
     RouteDef(OrganizationViewRoutes.createChannelView, page: CreateChannelView),
     RouteDef(OrganizationViewRoutes.dmView, page: DmView),
+    RouteDef(OrganizationViewRoutes.allDmsView, page: AllDmsView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -204,8 +218,19 @@ class OrganizationViewRouter extends RouterBase {
       );
     },
     ChannelDmView: (data) {
+      var args = data.getArgs<ChannelDmViewArguments>(
+        orElse: () => ChannelDmViewArguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => ChannelDmView(),
+        builder: (context) => ChannelDmView(
+          key: args.key,
+          margin: args.margin,
+          color: args.color,
+          leading: args.leading,
+          trailing: args.trailing,
+          channel: args.channel,
+          dm: args.dm,
+        ),
         settings: data,
       );
     },
@@ -227,6 +252,12 @@ class OrganizationViewRouter extends RouterBase {
         settings: data,
       );
     },
+    AllDmsView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const AllDmsView(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -238,4 +269,23 @@ class OrganizationViewRouter extends RouterBase {
 class CreateWorkspaceViewArguments {
   final Key? key;
   CreateWorkspaceViewArguments({this.key});
+}
+
+/// ChannelDmView arguments holder class
+class ChannelDmViewArguments {
+  final Key? key;
+  final EdgeInsetsGeometry? margin;
+  final Color? color;
+  final Widget leading;
+  final Widget trailing;
+  final bool? channel;
+  final bool? dm;
+  ChannelDmViewArguments(
+      {this.key,
+      this.margin,
+      this.color,
+      this.leading = const SizedBox(),
+      this.trailing = const SizedBox(),
+      this.channel,
+      this.dm});
 }
