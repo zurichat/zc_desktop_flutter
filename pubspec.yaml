@@ -38,7 +38,7 @@ dependencies:
 
   # Network calls
   dio: ^4.0.0
-  dio_http_cache: ^0.3.0
+  dio_cache_interceptor: ^3.0.2
   freezed_annotation:
   json_annotation:
   file_picker: ^4.1.1
@@ -56,7 +56,7 @@ dev_dependencies:
   freezed: 
   json_serializable: ^5.0.2
   mockito:
-  analyzer: ^2.4.0
+
 
 flutter:
   generate: true
