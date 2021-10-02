@@ -47,20 +47,21 @@ class CreateWorkspaceView extends HookWidget {
                         verticalSpaceSmall,
                         Text(
                           model.signInText2,
-                          style: kLeftSideBarStyle.copyWith(color: Colors.black),
+                          style:
+                              kLeftSideBarStyle.copyWith(color: Colors.black),
                         ),
                         verticalSpaceRegular,
-                            if (model.hasError)
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'An error occured',
-                                  style: headline6.copyWith(color: Colors.red),
-                                ),
-                              ),
+                        if (model.hasError)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'An error occured',
+                              style: headline6.copyWith(color: Colors.red),
+                            ),
+                          ),
                         Form(
                           key: _formKey,
-                          child: AuthInputField(
+                          child: ZuriDeskInputField(
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
                             hintPlaceHolder: 'example@work.com',
@@ -78,7 +79,8 @@ class CreateWorkspaceView extends HookWidget {
                               if (!_formKey.currentState!.validate()) return;
                               print(emailController.text);
 
-                              model.createOrganization(emailController.text.trim());
+                              model.createOrganization(
+                                  emailController.text.trim());
                             },
                           ),
                         ),
@@ -127,7 +129,8 @@ class CreateWorkspaceView extends HookWidget {
                               ),
                               Text(
                                 model.changeRegion,
-                                style: subtitle2.copyWith(color: leftNavBarColor),
+                                style:
+                                    subtitle2.copyWith(color: leftNavBarColor),
                               ),
                               IconButton(
                                 onPressed: () {},
@@ -137,7 +140,9 @@ class CreateWorkspaceView extends HookWidget {
                           )
                         ]),
                     verticalSpaceMedium,
-                    GotoLoginButton(isHome: true,)
+                    GotoLoginButton(
+                      isHome: true,
+                    )
                   ],
                 ),
               ),

@@ -90,7 +90,7 @@ class CreateWorkspaceStage2 extends StatelessWidget {
                               verticalSpaceSmall,
                               Container(
                                 width: 600.w,
-                                child: AuthInputField(
+                                child: ZuriDeskInputField(
                                   //controller: TextEditingController(),
                                   keyboardType: TextInputType.emailAddress,
                                   onChanged: (_) {},
@@ -106,27 +106,32 @@ class CreateWorkspaceStage2 extends StatelessWidget {
                               ),
                               verticalSpaceRegular,
                               Container(
-                                height: 58.h,
-                                width: 150.w,
-                                child: AuthButton(label: model.btnText, onTap: model.goToStage3,)
-                                // TextButton(
-                                //   style: ButtonStyle(
-                                //       backgroundColor:
-                                //           MaterialStateProperty.all(
-                                //               lightIconColor)),
-                                //   onPressed: () {
-                                //     model.goToStage3();
-                                //   },
-                                //   child: Text(
-                                //     model.btnText,
-                                //     style: authBtnStyle,
-                                //   ),
-                                // ),
-                              ),
+                                  height: 58.h,
+                                  width: 150.w,
+                                  child: AuthButton(
+                                    label: model.btnText,
+                                    onTap: model.goToStage3,
+                                  )
+                                  // TextButton(
+                                  //   style: ButtonStyle(
+                                  //       backgroundColor:
+                                  //           MaterialStateProperty.all(
+                                  //               lightIconColor)),
+                                  //   onPressed: () {
+                                  //     model.goToStage3();
+                                  //   },
+                                  //   child: Text(
+                                  //     model.btnText,
+                                  //     style: authBtnStyle,
+                                  //   ),
+                                  // ),
+                                  ),
                             ],
                           ),
                           verticalSpaceMedium,
-                          GotoLoginButton(isHome: true,)
+                          GotoLoginButton(
+                            isHome: true,
+                          )
                         ],
                       ),
                     ),

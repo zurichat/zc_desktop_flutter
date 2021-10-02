@@ -15,9 +15,8 @@ class CreateWorkspaceStage3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CreateWorkspaceViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Column(
-          children: [
-            //buildAppBar(context, isHome: false, text: 'Create'),
+        body: Column(children: [
+          //buildAppBar(context, isHome: false, text: 'Create'),
           Row(
             children: [
               Container(
@@ -96,7 +95,7 @@ class CreateWorkspaceStage3 extends StatelessWidget {
                             verticalSpaceSmall,
                             Container(
                               width: 650.w,
-                              child: AuthInputField(
+                              child: ZuriDeskInputField(
                                 controller: TextEditingController(),
                                 keyboardType: TextInputType.emailAddress,
                                 onChanged: (_) {},
