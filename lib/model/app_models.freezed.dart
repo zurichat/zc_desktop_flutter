@@ -430,12 +430,11 @@ AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) {
 class _$AuthResponseTearOff {
   const _$AuthResponseTearOff();
 
-  _AuthResponse call(
-      {@JsonKey(name: 'session_id') required String sessionID,
-      required User user}) {
+  _AuthResponse call({int? status, String? message, Auth? data}) {
     return _AuthResponse(
-      sessionID: sessionID,
-      user: user,
+      status: status,
+      message: message,
+      data: data,
     );
   }
 
@@ -449,9 +448,9 @@ const $AuthResponse = _$AuthResponseTearOff();
 
 /// @nodoc
 mixin _$AuthResponse {
-  @JsonKey(name: 'session_id')
-  String get sessionID => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
+  int? get status => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  Auth? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -464,9 +463,9 @@ abstract class $AuthResponseCopyWith<$Res> {
   factory $AuthResponseCopyWith(
           AuthResponse value, $Res Function(AuthResponse) then) =
       _$AuthResponseCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'session_id') String sessionID, User user});
+  $Res call({int? status, String? message, Auth? data});
 
-  $UserCopyWith<$Res> get user;
+  $AuthCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -479,25 +478,34 @@ class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? sessionID = freezed,
-    Object? user = freezed,
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
-      sessionID: sessionID == freezed
-          ? _value.sessionID
-          : sessionID // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Auth?,
     ));
   }
 
   @override
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+  $AuthCopyWith<$Res>? get data {
+    if (_value.data == null) {
+      return null;
+    }
+
+    return $AuthCopyWith<$Res>(_value.data!, (value) {
+      return _then(_value.copyWith(data: value));
     });
   }
 }
@@ -509,10 +517,10 @@ abstract class _$AuthResponseCopyWith<$Res>
           _AuthResponse value, $Res Function(_AuthResponse) then) =
       __$AuthResponseCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'session_id') String sessionID, User user});
+  $Res call({int? status, String? message, Auth? data});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $AuthCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -527,18 +535,23 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? sessionID = freezed,
-    Object? user = freezed,
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
   }) {
     return _then(_AuthResponse(
-      sessionID: sessionID == freezed
-          ? _value.sessionID
-          : sessionID // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Auth?,
     ));
   }
 }
@@ -546,28 +559,211 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AuthResponse implements _AuthResponse {
-  _$_AuthResponse(
-      {@JsonKey(name: 'session_id') required this.sessionID,
-      required this.user});
+  _$_AuthResponse({this.status, this.message, this.data});
 
   factory _$_AuthResponse.fromJson(Map<String, dynamic> json) =>
       _$$_AuthResponseFromJson(json);
 
   @override
-  @JsonKey(name: 'session_id')
-  final String sessionID;
+  final int? status;
   @override
-  final User user;
+  final String? message;
+  @override
+  final Auth? data;
 
   @override
   String toString() {
-    return 'AuthResponse(sessionID: $sessionID, user: $user)';
+    return 'AuthResponse(status: $status, message: $message, data: $data)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _AuthResponse &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(status) ^
+      const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(data);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AuthResponseCopyWith<_AuthResponse> get copyWith =>
+      __$AuthResponseCopyWithImpl<_AuthResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AuthResponseToJson(this);
+  }
+}
+
+abstract class _AuthResponse implements AuthResponse {
+  factory _AuthResponse({int? status, String? message, Auth? data}) =
+      _$_AuthResponse;
+
+  factory _AuthResponse.fromJson(Map<String, dynamic> json) =
+      _$_AuthResponse.fromJson;
+
+  @override
+  int? get status => throw _privateConstructorUsedError;
+  @override
+  String? get message => throw _privateConstructorUsedError;
+  @override
+  Auth? get data => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$AuthResponseCopyWith<_AuthResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Auth _$AuthFromJson(Map<String, dynamic> json) {
+  return _Auth.fromJson(json);
+}
+
+/// @nodoc
+class _$AuthTearOff {
+  const _$AuthTearOff();
+
+  _Auth call({String? sessionID, User? user}) {
+    return _Auth(
+      sessionID: sessionID,
+      user: user,
+    );
+  }
+
+  Auth fromJson(Map<String, Object> json) {
+    return Auth.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Auth = _$AuthTearOff();
+
+/// @nodoc
+mixin _$Auth {
+  String? get sessionID => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthCopyWith<Auth> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthCopyWith<$Res> {
+  factory $AuthCopyWith(Auth value, $Res Function(Auth) then) =
+      _$AuthCopyWithImpl<$Res>;
+  $Res call({String? sessionID, User? user});
+
+  $UserCopyWith<$Res>? get user;
+}
+
+/// @nodoc
+class _$AuthCopyWithImpl<$Res> implements $AuthCopyWith<$Res> {
+  _$AuthCopyWithImpl(this._value, this._then);
+
+  final Auth _value;
+  // ignore: unused_field
+  final $Res Function(Auth) _then;
+
+  @override
+  $Res call({
+    Object? sessionID = freezed,
+    Object? user = freezed,
+  }) {
+    return _then(_value.copyWith(
+      sessionID: sessionID == freezed
+          ? _value.sessionID
+          : sessionID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$AuthCopyWith<$Res> implements $AuthCopyWith<$Res> {
+  factory _$AuthCopyWith(_Auth value, $Res Function(_Auth) then) =
+      __$AuthCopyWithImpl<$Res>;
+  @override
+  $Res call({String? sessionID, User? user});
+
+  @override
+  $UserCopyWith<$Res>? get user;
+}
+
+/// @nodoc
+class __$AuthCopyWithImpl<$Res> extends _$AuthCopyWithImpl<$Res>
+    implements _$AuthCopyWith<$Res> {
+  __$AuthCopyWithImpl(_Auth _value, $Res Function(_Auth) _then)
+      : super(_value, (v) => _then(v as _Auth));
+
+  @override
+  _Auth get _value => super._value as _Auth;
+
+  @override
+  $Res call({
+    Object? sessionID = freezed,
+    Object? user = freezed,
+  }) {
+    return _then(_Auth(
+      sessionID: sessionID == freezed
+          ? _value.sessionID
+          : sessionID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Auth implements _Auth {
+  _$_Auth({this.sessionID, this.user});
+
+  factory _$_Auth.fromJson(Map<String, dynamic> json) => _$$_AuthFromJson(json);
+
+  @override
+  final String? sessionID;
+  @override
+  final User? user;
+
+  @override
+  String toString() {
+    return 'Auth(sessionID: $sessionID, user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Auth &&
             (identical(other.sessionID, sessionID) ||
                 const DeepCollectionEquality()
                     .equals(other.sessionID, sessionID)) &&
@@ -583,32 +779,27 @@ class _$_AuthResponse implements _AuthResponse {
 
   @JsonKey(ignore: true)
   @override
-  _$AuthResponseCopyWith<_AuthResponse> get copyWith =>
-      __$AuthResponseCopyWithImpl<_AuthResponse>(this, _$identity);
+  _$AuthCopyWith<_Auth> get copyWith =>
+      __$AuthCopyWithImpl<_Auth>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AuthResponseToJson(this);
+    return _$$_AuthToJson(this);
   }
 }
 
-abstract class _AuthResponse implements AuthResponse {
-  factory _AuthResponse(
-      {@JsonKey(name: 'session_id') required String sessionID,
-      required User user}) = _$_AuthResponse;
+abstract class _Auth implements Auth {
+  factory _Auth({String? sessionID, User? user}) = _$_Auth;
 
-  factory _AuthResponse.fromJson(Map<String, dynamic> json) =
-      _$_AuthResponse.fromJson;
+  factory _Auth.fromJson(Map<String, dynamic> json) = _$_Auth.fromJson;
 
   @override
-  @JsonKey(name: 'session_id')
-  String get sessionID => throw _privateConstructorUsedError;
+  String? get sessionID => throw _privateConstructorUsedError;
   @override
-  User get user => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AuthResponseCopyWith<_AuthResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$AuthCopyWith<_Auth> get copyWith => throw _privateConstructorUsedError;
 }
 
 MessagesResponse _$MessagesResponseFromJson(Map<String, dynamic> json) {
@@ -4758,8 +4949,8 @@ class _$DummyUserTearOff {
   const _$DummyUserTearOff();
 
   _DummyUser call(
-      {String? name,
-      @JsonKey(name: 'profileImage') String? profileImage,
+      {String name = '',
+      @JsonKey(name: 'profileImage') String profileImage = '',
       int id = 1}) {
     return _DummyUser(
       name: name,
@@ -4778,9 +4969,9 @@ const $DummyUser = _$DummyUserTearOff();
 
 /// @nodoc
 mixin _$DummyUser {
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'profileImage')
-  String? get profileImage => throw _privateConstructorUsedError;
+  String get profileImage => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -4794,8 +4985,8 @@ abstract class $DummyUserCopyWith<$Res> {
   factory $DummyUserCopyWith(DummyUser value, $Res Function(DummyUser) then) =
       _$DummyUserCopyWithImpl<$Res>;
   $Res call(
-      {String? name,
-      @JsonKey(name: 'profileImage') String? profileImage,
+      {String name,
+      @JsonKey(name: 'profileImage') String profileImage,
       int id});
 }
 
@@ -4817,11 +5008,11 @@ class _$DummyUserCopyWithImpl<$Res> implements $DummyUserCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       profileImage: profileImage == freezed
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -4837,8 +5028,8 @@ abstract class _$DummyUserCopyWith<$Res> implements $DummyUserCopyWith<$Res> {
       __$DummyUserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? name,
-      @JsonKey(name: 'profileImage') String? profileImage,
+      {String name,
+      @JsonKey(name: 'profileImage') String profileImage,
       int id});
 }
 
@@ -4861,11 +5052,11 @@ class __$DummyUserCopyWithImpl<$Res> extends _$DummyUserCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       profileImage: profileImage == freezed
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -4878,18 +5069,19 @@ class __$DummyUserCopyWithImpl<$Res> extends _$DummyUserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_DummyUser implements _DummyUser {
   _$_DummyUser(
-      {this.name,
-      @JsonKey(name: 'profileImage') this.profileImage,
+      {this.name = '',
+      @JsonKey(name: 'profileImage') this.profileImage = '',
       this.id = 1});
 
   factory _$_DummyUser.fromJson(Map<String, dynamic> json) =>
       _$$_DummyUserFromJson(json);
 
+  @JsonKey(defaultValue: '')
   @override
-  final String? name;
+  final String name;
   @override
   @JsonKey(name: 'profileImage')
-  final String? profileImage;
+  final String profileImage;
   @JsonKey(defaultValue: 1)
   @override
   final int id;
@@ -4932,410 +5124,23 @@ class _$_DummyUser implements _DummyUser {
 
 abstract class _DummyUser implements DummyUser {
   factory _DummyUser(
-      {String? name,
-      @JsonKey(name: 'profileImage') String? profileImage,
+      {String name,
+      @JsonKey(name: 'profileImage') String profileImage,
       int id}) = _$_DummyUser;
 
   factory _DummyUser.fromJson(Map<String, dynamic> json) =
       _$_DummyUser.fromJson;
 
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'profileImage')
-  String? get profileImage => throw _privateConstructorUsedError;
+  String get profileImage => throw _privateConstructorUsedError;
   @override
   int get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DummyUserCopyWith<_DummyUser> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Workspace _$WorkspaceFromJson(Map<String, dynamic> json) {
-  return _Workspace.fromJson(json);
-}
-
-/// @nodoc
-class _$WorkspaceTearOff {
-  const _$WorkspaceTearOff();
-
-  _Workspace call(
-      {int? id,
-      String? name,
-      String? url,
-      String? logo,
-      DummyUser? user,
-      List<DummyUser>? users,
-      List<Channel>? channels,
-      List<DM>? dms,
-      int? currentChannel = 0,
-      int? currentDM = -1}) {
-    return _Workspace(
-      id: id,
-      name: name,
-      url: url,
-      logo: logo,
-      user: user,
-      users: users,
-      channels: channels,
-      dms: dms,
-      currentChannel: currentChannel,
-      currentDM: currentDM,
-    );
-  }
-
-  Workspace fromJson(Map<String, Object> json) {
-    return Workspace.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Workspace = _$WorkspaceTearOff();
-
-/// @nodoc
-mixin _$Workspace {
-  int? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get url => throw _privateConstructorUsedError;
-  String? get logo => throw _privateConstructorUsedError;
-  DummyUser? get user => throw _privateConstructorUsedError;
-  List<DummyUser>? get users => throw _privateConstructorUsedError;
-  List<Channel>? get channels => throw _privateConstructorUsedError;
-  List<DM>? get dms => throw _privateConstructorUsedError;
-  int? get currentChannel => throw _privateConstructorUsedError;
-  int? get currentDM => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $WorkspaceCopyWith<Workspace> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $WorkspaceCopyWith<$Res> {
-  factory $WorkspaceCopyWith(Workspace value, $Res Function(Workspace) then) =
-      _$WorkspaceCopyWithImpl<$Res>;
-  $Res call(
-      {int? id,
-      String? name,
-      String? url,
-      String? logo,
-      DummyUser? user,
-      List<DummyUser>? users,
-      List<Channel>? channels,
-      List<DM>? dms,
-      int? currentChannel,
-      int? currentDM});
-
-  $DummyUserCopyWith<$Res>? get user;
-}
-
-/// @nodoc
-class _$WorkspaceCopyWithImpl<$Res> implements $WorkspaceCopyWith<$Res> {
-  _$WorkspaceCopyWithImpl(this._value, this._then);
-
-  final Workspace _value;
-  // ignore: unused_field
-  final $Res Function(Workspace) _then;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? url = freezed,
-    Object? logo = freezed,
-    Object? user = freezed,
-    Object? users = freezed,
-    Object? channels = freezed,
-    Object? dms = freezed,
-    Object? currentChannel = freezed,
-    Object? currentDM = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      url: url == freezed
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      logo: logo == freezed
-          ? _value.logo
-          : logo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as DummyUser?,
-      users: users == freezed
-          ? _value.users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<DummyUser>?,
-      channels: channels == freezed
-          ? _value.channels
-          : channels // ignore: cast_nullable_to_non_nullable
-              as List<Channel>?,
-      dms: dms == freezed
-          ? _value.dms
-          : dms // ignore: cast_nullable_to_non_nullable
-              as List<DM>?,
-      currentChannel: currentChannel == freezed
-          ? _value.currentChannel
-          : currentChannel // ignore: cast_nullable_to_non_nullable
-              as int?,
-      currentDM: currentDM == freezed
-          ? _value.currentDM
-          : currentDM // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-
-  @override
-  $DummyUserCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $DummyUserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$WorkspaceCopyWith<$Res> implements $WorkspaceCopyWith<$Res> {
-  factory _$WorkspaceCopyWith(
-          _Workspace value, $Res Function(_Workspace) then) =
-      __$WorkspaceCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {int? id,
-      String? name,
-      String? url,
-      String? logo,
-      DummyUser? user,
-      List<DummyUser>? users,
-      List<Channel>? channels,
-      List<DM>? dms,
-      int? currentChannel,
-      int? currentDM});
-
-  @override
-  $DummyUserCopyWith<$Res>? get user;
-}
-
-/// @nodoc
-class __$WorkspaceCopyWithImpl<$Res> extends _$WorkspaceCopyWithImpl<$Res>
-    implements _$WorkspaceCopyWith<$Res> {
-  __$WorkspaceCopyWithImpl(_Workspace _value, $Res Function(_Workspace) _then)
-      : super(_value, (v) => _then(v as _Workspace));
-
-  @override
-  _Workspace get _value => super._value as _Workspace;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? url = freezed,
-    Object? logo = freezed,
-    Object? user = freezed,
-    Object? users = freezed,
-    Object? channels = freezed,
-    Object? dms = freezed,
-    Object? currentChannel = freezed,
-    Object? currentDM = freezed,
-  }) {
-    return _then(_Workspace(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      url: url == freezed
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      logo: logo == freezed
-          ? _value.logo
-          : logo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as DummyUser?,
-      users: users == freezed
-          ? _value.users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<DummyUser>?,
-      channels: channels == freezed
-          ? _value.channels
-          : channels // ignore: cast_nullable_to_non_nullable
-              as List<Channel>?,
-      dms: dms == freezed
-          ? _value.dms
-          : dms // ignore: cast_nullable_to_non_nullable
-              as List<DM>?,
-      currentChannel: currentChannel == freezed
-          ? _value.currentChannel
-          : currentChannel // ignore: cast_nullable_to_non_nullable
-              as int?,
-      currentDM: currentDM == freezed
-          ? _value.currentDM
-          : currentDM // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Workspace implements _Workspace {
-  _$_Workspace(
-      {this.id,
-      this.name,
-      this.url,
-      this.logo,
-      this.user,
-      this.users,
-      this.channels,
-      this.dms,
-      this.currentChannel = 0,
-      this.currentDM = -1});
-
-  factory _$_Workspace.fromJson(Map<String, dynamic> json) =>
-      _$$_WorkspaceFromJson(json);
-
-  @override
-  final int? id;
-  @override
-  final String? name;
-  @override
-  final String? url;
-  @override
-  final String? logo;
-  @override
-  final DummyUser? user;
-  @override
-  final List<DummyUser>? users;
-  @override
-  final List<Channel>? channels;
-  @override
-  final List<DM>? dms;
-  @JsonKey(defaultValue: 0)
-  @override
-  final int? currentChannel;
-  @JsonKey(defaultValue: -1)
-  @override
-  final int? currentDM;
-
-  @override
-  String toString() {
-    return 'Workspace(id: $id, name: $name, url: $url, logo: $logo, user: $user, users: $users, channels: $channels, dms: $dms, currentChannel: $currentChannel, currentDM: $currentDM)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Workspace &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.url, url) ||
-                const DeepCollectionEquality().equals(other.url, url)) &&
-            (identical(other.logo, logo) ||
-                const DeepCollectionEquality().equals(other.logo, logo)) &&
-            (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)) &&
-            (identical(other.users, users) ||
-                const DeepCollectionEquality().equals(other.users, users)) &&
-            (identical(other.channels, channels) ||
-                const DeepCollectionEquality()
-                    .equals(other.channels, channels)) &&
-            (identical(other.dms, dms) ||
-                const DeepCollectionEquality().equals(other.dms, dms)) &&
-            (identical(other.currentChannel, currentChannel) ||
-                const DeepCollectionEquality()
-                    .equals(other.currentChannel, currentChannel)) &&
-            (identical(other.currentDM, currentDM) ||
-                const DeepCollectionEquality()
-                    .equals(other.currentDM, currentDM)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(url) ^
-      const DeepCollectionEquality().hash(logo) ^
-      const DeepCollectionEquality().hash(user) ^
-      const DeepCollectionEquality().hash(users) ^
-      const DeepCollectionEquality().hash(channels) ^
-      const DeepCollectionEquality().hash(dms) ^
-      const DeepCollectionEquality().hash(currentChannel) ^
-      const DeepCollectionEquality().hash(currentDM);
-
-  @JsonKey(ignore: true)
-  @override
-  _$WorkspaceCopyWith<_Workspace> get copyWith =>
-      __$WorkspaceCopyWithImpl<_Workspace>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_WorkspaceToJson(this);
-  }
-}
-
-abstract class _Workspace implements Workspace {
-  factory _Workspace(
-      {int? id,
-      String? name,
-      String? url,
-      String? logo,
-      DummyUser? user,
-      List<DummyUser>? users,
-      List<Channel>? channels,
-      List<DM>? dms,
-      int? currentChannel,
-      int? currentDM}) = _$_Workspace;
-
-  factory _Workspace.fromJson(Map<String, dynamic> json) =
-      _$_Workspace.fromJson;
-
-  @override
-  int? get id => throw _privateConstructorUsedError;
-  @override
-  String? get name => throw _privateConstructorUsedError;
-  @override
-  String? get url => throw _privateConstructorUsedError;
-  @override
-  String? get logo => throw _privateConstructorUsedError;
-  @override
-  DummyUser? get user => throw _privateConstructorUsedError;
-  @override
-  List<DummyUser>? get users => throw _privateConstructorUsedError;
-  @override
-  List<Channel>? get channels => throw _privateConstructorUsedError;
-  @override
-  List<DM>? get dms => throw _privateConstructorUsedError;
-  @override
-  int? get currentChannel => throw _privateConstructorUsedError;
-  @override
-  int? get currentDM => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$WorkspaceCopyWith<_Workspace> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -5536,7 +5341,7 @@ Chat _$ChatFromJson(Map<String, dynamic> json) {
 class _$ChatTearOff {
   const _$ChatTearOff();
 
-  _Chat call({int? timestamp, String? text, DummyUser? user}) {
+  _Chat call({int timestamp = 0, String text = '', DummyUser? user}) {
     return _Chat(
       timestamp: timestamp,
       text: text,
@@ -5554,8 +5359,8 @@ const $Chat = _$ChatTearOff();
 
 /// @nodoc
 mixin _$Chat {
-  int? get timestamp => throw _privateConstructorUsedError;
-  String? get text => throw _privateConstructorUsedError;
+  int get timestamp => throw _privateConstructorUsedError;
+  String get text => throw _privateConstructorUsedError;
   DummyUser? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -5567,7 +5372,7 @@ mixin _$Chat {
 abstract class $ChatCopyWith<$Res> {
   factory $ChatCopyWith(Chat value, $Res Function(Chat) then) =
       _$ChatCopyWithImpl<$Res>;
-  $Res call({int? timestamp, String? text, DummyUser? user});
+  $Res call({int timestamp, String text, DummyUser? user});
 
   $DummyUserCopyWith<$Res>? get user;
 }
@@ -5590,11 +5395,11 @@ class _$ChatCopyWithImpl<$Res> implements $ChatCopyWith<$Res> {
       timestamp: timestamp == freezed
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -5619,7 +5424,7 @@ abstract class _$ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
   factory _$ChatCopyWith(_Chat value, $Res Function(_Chat) then) =
       __$ChatCopyWithImpl<$Res>;
   @override
-  $Res call({int? timestamp, String? text, DummyUser? user});
+  $Res call({int timestamp, String text, DummyUser? user});
 
   @override
   $DummyUserCopyWith<$Res>? get user;
@@ -5644,11 +5449,11 @@ class __$ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res>
       timestamp: timestamp == freezed
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -5660,14 +5465,16 @@ class __$ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Chat implements _Chat {
-  _$_Chat({this.timestamp, this.text, this.user});
+  _$_Chat({this.timestamp = 0, this.text = '', this.user});
 
   factory _$_Chat.fromJson(Map<String, dynamic> json) => _$$_ChatFromJson(json);
 
+  @JsonKey(defaultValue: 0)
   @override
-  final int? timestamp;
+  final int timestamp;
+  @JsonKey(defaultValue: '')
   @override
-  final String? text;
+  final String text;
   @override
   final DummyUser? user;
 
@@ -5708,14 +5515,14 @@ class _$_Chat implements _Chat {
 }
 
 abstract class _Chat implements Chat {
-  factory _Chat({int? timestamp, String? text, DummyUser? user}) = _$_Chat;
+  factory _Chat({int timestamp, String text, DummyUser? user}) = _$_Chat;
 
   factory _Chat.fromJson(Map<String, dynamic> json) = _$_Chat.fromJson;
 
   @override
-  int? get timestamp => throw _privateConstructorUsedError;
+  int get timestamp => throw _privateConstructorUsedError;
   @override
-  String? get text => throw _privateConstructorUsedError;
+  String get text => throw _privateConstructorUsedError;
   @override
   DummyUser? get user => throw _privateConstructorUsedError;
   @override
@@ -5731,7 +5538,7 @@ BaseChat _$BaseChatFromJson(Map<String, dynamic> json) {
 class _$BaseChatTearOff {
   const _$BaseChatTearOff();
 
-  _BaseChat call({List<Chat>? chats}) {
+  _BaseChat call({List<Chat> chats = const []}) {
     return _BaseChat(
       chats: chats,
     );
@@ -5747,7 +5554,7 @@ const $BaseChat = _$BaseChatTearOff();
 
 /// @nodoc
 mixin _$BaseChat {
-  List<Chat>? get chats => throw _privateConstructorUsedError;
+  List<Chat> get chats => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -5759,7 +5566,7 @@ mixin _$BaseChat {
 abstract class $BaseChatCopyWith<$Res> {
   factory $BaseChatCopyWith(BaseChat value, $Res Function(BaseChat) then) =
       _$BaseChatCopyWithImpl<$Res>;
-  $Res call({List<Chat>? chats});
+  $Res call({List<Chat> chats});
 }
 
 /// @nodoc
@@ -5778,7 +5585,7 @@ class _$BaseChatCopyWithImpl<$Res> implements $BaseChatCopyWith<$Res> {
       chats: chats == freezed
           ? _value.chats
           : chats // ignore: cast_nullable_to_non_nullable
-              as List<Chat>?,
+              as List<Chat>,
     ));
   }
 }
@@ -5788,7 +5595,7 @@ abstract class _$BaseChatCopyWith<$Res> implements $BaseChatCopyWith<$Res> {
   factory _$BaseChatCopyWith(_BaseChat value, $Res Function(_BaseChat) then) =
       __$BaseChatCopyWithImpl<$Res>;
   @override
-  $Res call({List<Chat>? chats});
+  $Res call({List<Chat> chats});
 }
 
 /// @nodoc
@@ -5808,7 +5615,7 @@ class __$BaseChatCopyWithImpl<$Res> extends _$BaseChatCopyWithImpl<$Res>
       chats: chats == freezed
           ? _value.chats
           : chats // ignore: cast_nullable_to_non_nullable
-              as List<Chat>?,
+              as List<Chat>,
     ));
   }
 }
@@ -5816,13 +5623,14 @@ class __$BaseChatCopyWithImpl<$Res> extends _$BaseChatCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_BaseChat implements _BaseChat {
-  _$_BaseChat({this.chats});
+  _$_BaseChat({this.chats = const []});
 
   factory _$_BaseChat.fromJson(Map<String, dynamic> json) =>
       _$$_BaseChatFromJson(json);
 
+  @JsonKey(defaultValue: const [])
   @override
-  final List<Chat>? chats;
+  final List<Chat> chats;
 
   @override
   String toString() {
@@ -5853,15 +5661,165 @@ class _$_BaseChat implements _BaseChat {
 }
 
 abstract class _BaseChat implements BaseChat {
-  factory _BaseChat({List<Chat>? chats}) = _$_BaseChat;
+  factory _BaseChat({List<Chat> chats}) = _$_BaseChat;
 
   factory _BaseChat.fromJson(Map<String, dynamic> json) = _$_BaseChat.fromJson;
 
   @override
-  List<Chat>? get chats => throw _privateConstructorUsedError;
+  List<Chat> get chats => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BaseChatCopyWith<_BaseChat> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ChannelResponse _$ChannelResponseFromJson(Map<String, dynamic> json) {
+  return _ChannelResponse.fromJson(json);
+}
+
+/// @nodoc
+class _$ChannelResponseTearOff {
+  const _$ChannelResponseTearOff();
+
+  _ChannelResponse call({List<Channel> data = const []}) {
+    return _ChannelResponse(
+      data: data,
+    );
+  }
+
+  ChannelResponse fromJson(Map<String, Object> json) {
+    return ChannelResponse.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ChannelResponse = _$ChannelResponseTearOff();
+
+/// @nodoc
+mixin _$ChannelResponse {
+  List<Channel> get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ChannelResponseCopyWith<ChannelResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ChannelResponseCopyWith<$Res> {
+  factory $ChannelResponseCopyWith(
+          ChannelResponse value, $Res Function(ChannelResponse) then) =
+      _$ChannelResponseCopyWithImpl<$Res>;
+  $Res call({List<Channel> data});
+}
+
+/// @nodoc
+class _$ChannelResponseCopyWithImpl<$Res>
+    implements $ChannelResponseCopyWith<$Res> {
+  _$ChannelResponseCopyWithImpl(this._value, this._then);
+
+  final ChannelResponse _value;
+  // ignore: unused_field
+  final $Res Function(ChannelResponse) _then;
+
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Channel>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ChannelResponseCopyWith<$Res>
+    implements $ChannelResponseCopyWith<$Res> {
+  factory _$ChannelResponseCopyWith(
+          _ChannelResponse value, $Res Function(_ChannelResponse) then) =
+      __$ChannelResponseCopyWithImpl<$Res>;
+  @override
+  $Res call({List<Channel> data});
+}
+
+/// @nodoc
+class __$ChannelResponseCopyWithImpl<$Res>
+    extends _$ChannelResponseCopyWithImpl<$Res>
+    implements _$ChannelResponseCopyWith<$Res> {
+  __$ChannelResponseCopyWithImpl(
+      _ChannelResponse _value, $Res Function(_ChannelResponse) _then)
+      : super(_value, (v) => _then(v as _ChannelResponse));
+
+  @override
+  _ChannelResponse get _value => super._value as _ChannelResponse;
+
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_ChannelResponse(
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Channel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ChannelResponse implements _ChannelResponse {
+  _$_ChannelResponse({this.data = const []});
+
+  factory _$_ChannelResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_ChannelResponseFromJson(json);
+
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<Channel> data;
+
+  @override
+  String toString() {
+    return 'ChannelResponse(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ChannelResponse &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(data);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ChannelResponseCopyWith<_ChannelResponse> get copyWith =>
+      __$ChannelResponseCopyWithImpl<_ChannelResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ChannelResponseToJson(this);
+  }
+}
+
+abstract class _ChannelResponse implements ChannelResponse {
+  factory _ChannelResponse({List<Channel> data}) = _$_ChannelResponse;
+
+  factory _ChannelResponse.fromJson(Map<String, dynamic> json) =
+      _$_ChannelResponse.fromJson;
+
+  @override
+  List<Channel> get data => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$ChannelResponseCopyWith<_ChannelResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -5874,11 +5832,11 @@ class _$ChannelTearOff {
   const _$ChannelTearOff();
 
   _Channel call(
-      {String? id,
-      String? name,
-      String? owner,
-      String? description,
-      bool? private}) {
+      {String id = '',
+      String name = '',
+      String owner = '',
+      String description = '',
+      bool private = false}) {
     return _Channel(
       id: id,
       name: name,
@@ -5898,11 +5856,11 @@ const $Channel = _$ChannelTearOff();
 
 /// @nodoc
 mixin _$Channel {
-  String? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get owner => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  bool? get private => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get owner => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  bool get private => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -5914,11 +5872,7 @@ abstract class $ChannelCopyWith<$Res> {
   factory $ChannelCopyWith(Channel value, $Res Function(Channel) then) =
       _$ChannelCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
-      String? name,
-      String? owner,
-      String? description,
-      bool? private});
+      {String id, String name, String owner, String description, bool private});
 }
 
 /// @nodoc
@@ -5941,23 +5895,23 @@ class _$ChannelCopyWithImpl<$Res> implements $ChannelCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       owner: owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       private: private == freezed
           ? _value.private
           : private // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -5968,11 +5922,7 @@ abstract class _$ChannelCopyWith<$Res> implements $ChannelCopyWith<$Res> {
       __$ChannelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
-      String? name,
-      String? owner,
-      String? description,
-      bool? private});
+      {String id, String name, String owner, String description, bool private});
 }
 
 /// @nodoc
@@ -5996,23 +5946,23 @@ class __$ChannelCopyWithImpl<$Res> extends _$ChannelCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       owner: owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       private: private == freezed
           ? _value.private
           : private // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -6020,21 +5970,31 @@ class __$ChannelCopyWithImpl<$Res> extends _$ChannelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Channel implements _Channel {
-  _$_Channel({this.id, this.name, this.owner, this.description, this.private});
+  _$_Channel(
+      {this.id = '',
+      this.name = '',
+      this.owner = '',
+      this.description = '',
+      this.private = false});
 
   factory _$_Channel.fromJson(Map<String, dynamic> json) =>
       _$$_ChannelFromJson(json);
 
+  @JsonKey(defaultValue: '')
   @override
-  final String? id;
+  final String id;
+  @JsonKey(defaultValue: '')
   @override
-  final String? name;
+  final String name;
+  @JsonKey(defaultValue: '')
   @override
-  final String? owner;
+  final String owner;
+  @JsonKey(defaultValue: '')
   @override
-  final String? description;
+  final String description;
+  @JsonKey(defaultValue: false)
   @override
-  final bool? private;
+  final bool private;
 
   @override
   String toString() {
@@ -6080,27 +6040,227 @@ class _$_Channel implements _Channel {
 
 abstract class _Channel implements Channel {
   factory _Channel(
-      {String? id,
-      String? name,
-      String? owner,
-      String? description,
-      bool? private}) = _$_Channel;
+      {String id,
+      String name,
+      String owner,
+      String description,
+      bool private}) = _$_Channel;
 
   factory _Channel.fromJson(Map<String, dynamic> json) = _$_Channel.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @override
-  String? get owner => throw _privateConstructorUsedError;
+  String get owner => throw _privateConstructorUsedError;
   @override
-  String? get description => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
   @override
-  bool? get private => throw _privateConstructorUsedError;
+  bool get private => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ChannelCopyWith<_Channel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+OrganizationResponse _$OrganizationResponseFromJson(Map<String, dynamic> json) {
+  return _OrganizationResponse.fromJson(json);
+}
+
+/// @nodoc
+class _$OrganizationResponseTearOff {
+  const _$OrganizationResponseTearOff();
+
+  _OrganizationResponse call(
+      {int status = 0,
+      String message = '',
+      List<Organization> data = const []}) {
+    return _OrganizationResponse(
+      status: status,
+      message: message,
+      data: data,
+    );
+  }
+
+  OrganizationResponse fromJson(Map<String, Object> json) {
+    return OrganizationResponse.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $OrganizationResponse = _$OrganizationResponseTearOff();
+
+/// @nodoc
+mixin _$OrganizationResponse {
+  int get status => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
+  List<Organization> get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OrganizationResponseCopyWith<OrganizationResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OrganizationResponseCopyWith<$Res> {
+  factory $OrganizationResponseCopyWith(OrganizationResponse value,
+          $Res Function(OrganizationResponse) then) =
+      _$OrganizationResponseCopyWithImpl<$Res>;
+  $Res call({int status, String message, List<Organization> data});
+}
+
+/// @nodoc
+class _$OrganizationResponseCopyWithImpl<$Res>
+    implements $OrganizationResponseCopyWith<$Res> {
+  _$OrganizationResponseCopyWithImpl(this._value, this._then);
+
+  final OrganizationResponse _value;
+  // ignore: unused_field
+  final $Res Function(OrganizationResponse) _then;
+
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Organization>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$OrganizationResponseCopyWith<$Res>
+    implements $OrganizationResponseCopyWith<$Res> {
+  factory _$OrganizationResponseCopyWith(_OrganizationResponse value,
+          $Res Function(_OrganizationResponse) then) =
+      __$OrganizationResponseCopyWithImpl<$Res>;
+  @override
+  $Res call({int status, String message, List<Organization> data});
+}
+
+/// @nodoc
+class __$OrganizationResponseCopyWithImpl<$Res>
+    extends _$OrganizationResponseCopyWithImpl<$Res>
+    implements _$OrganizationResponseCopyWith<$Res> {
+  __$OrganizationResponseCopyWithImpl(
+      _OrganizationResponse _value, $Res Function(_OrganizationResponse) _then)
+      : super(_value, (v) => _then(v as _OrganizationResponse));
+
+  @override
+  _OrganizationResponse get _value => super._value as _OrganizationResponse;
+
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_OrganizationResponse(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Organization>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_OrganizationResponse implements _OrganizationResponse {
+  _$_OrganizationResponse(
+      {this.status = 0, this.message = '', this.data = const []});
+
+  factory _$_OrganizationResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_OrganizationResponseFromJson(json);
+
+  @JsonKey(defaultValue: 0)
+  @override
+  final int status;
+  @JsonKey(defaultValue: '')
+  @override
+  final String message;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<Organization> data;
+
+  @override
+  String toString() {
+    return 'OrganizationResponse(status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _OrganizationResponse &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(status) ^
+      const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(data);
+
+  @JsonKey(ignore: true)
+  @override
+  _$OrganizationResponseCopyWith<_OrganizationResponse> get copyWith =>
+      __$OrganizationResponseCopyWithImpl<_OrganizationResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_OrganizationResponseToJson(this);
+  }
+}
+
+abstract class _OrganizationResponse implements OrganizationResponse {
+  factory _OrganizationResponse(
+      {int status,
+      String message,
+      List<Organization> data}) = _$_OrganizationResponse;
+
+  factory _OrganizationResponse.fromJson(Map<String, dynamic> json) =
+      _$_OrganizationResponse.fromJson;
+
+  @override
+  int get status => throw _privateConstructorUsedError;
+  @override
+  String get message => throw _privateConstructorUsedError;
+  @override
+  List<Organization> get data => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$OrganizationResponseCopyWith<_OrganizationResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -6113,10 +6273,10 @@ class _$OrganizationTearOff {
   const _$OrganizationTearOff();
 
   _Organization call(
-      {@JsonKey(name: '_id') String? id,
-      @JsonKey(name: 'logo_url') String? logoUrl,
-      required String? name,
-      @JsonKey(name: 'workspace_url') String? workspaceUrl}) {
+      {String id = '',
+      String logoUrl = '',
+      String name = '',
+      String workspaceUrl = ''}) {
     return _Organization(
       id: id,
       logoUrl: logoUrl,
@@ -6135,13 +6295,10 @@ const $Organization = _$OrganizationTearOff();
 
 /// @nodoc
 mixin _$Organization {
-  @JsonKey(name: '_id')
-  String? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'logo_url')
-  String? get logoUrl => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'workspace_url')
-  String? get workspaceUrl => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get logoUrl => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get workspaceUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -6154,11 +6311,7 @@ abstract class $OrganizationCopyWith<$Res> {
   factory $OrganizationCopyWith(
           Organization value, $Res Function(Organization) then) =
       _$OrganizationCopyWithImpl<$Res>;
-  $Res call(
-      {@JsonKey(name: '_id') String? id,
-      @JsonKey(name: 'logo_url') String? logoUrl,
-      String? name,
-      @JsonKey(name: 'workspace_url') String? workspaceUrl});
+  $Res call({String id, String logoUrl, String name, String workspaceUrl});
 }
 
 /// @nodoc
@@ -6180,19 +6333,19 @@ class _$OrganizationCopyWithImpl<$Res> implements $OrganizationCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       logoUrl: logoUrl == freezed
           ? _value.logoUrl
           : logoUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       workspaceUrl: workspaceUrl == freezed
           ? _value.workspaceUrl
           : workspaceUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -6204,11 +6357,7 @@ abstract class _$OrganizationCopyWith<$Res>
           _Organization value, $Res Function(_Organization) then) =
       __$OrganizationCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {@JsonKey(name: '_id') String? id,
-      @JsonKey(name: 'logo_url') String? logoUrl,
-      String? name,
-      @JsonKey(name: 'workspace_url') String? workspaceUrl});
+  $Res call({String id, String logoUrl, String name, String workspaceUrl});
 }
 
 /// @nodoc
@@ -6232,19 +6381,19 @@ class __$OrganizationCopyWithImpl<$Res> extends _$OrganizationCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       logoUrl: logoUrl == freezed
           ? _value.logoUrl
           : logoUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       workspaceUrl: workspaceUrl == freezed
           ? _value.workspaceUrl
           : workspaceUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -6253,25 +6402,26 @@ class __$OrganizationCopyWithImpl<$Res> extends _$OrganizationCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Organization implements _Organization {
   _$_Organization(
-      {@JsonKey(name: '_id') this.id,
-      @JsonKey(name: 'logo_url') this.logoUrl,
-      required this.name,
-      @JsonKey(name: 'workspace_url') this.workspaceUrl});
+      {this.id = '',
+      this.logoUrl = '',
+      this.name = '',
+      this.workspaceUrl = ''});
 
   factory _$_Organization.fromJson(Map<String, dynamic> json) =>
       _$$_OrganizationFromJson(json);
 
+  @JsonKey(defaultValue: '')
   @override
-  @JsonKey(name: '_id')
-  final String? id;
+  final String id;
+  @JsonKey(defaultValue: '')
   @override
-  @JsonKey(name: 'logo_url')
-  final String? logoUrl;
+  final String logoUrl;
+  @JsonKey(defaultValue: '')
   @override
-  final String? name;
+  final String name;
+  @JsonKey(defaultValue: '')
   @override
-  @JsonKey(name: 'workspace_url')
-  final String? workspaceUrl;
+  final String workspaceUrl;
 
   @override
   String toString() {
@@ -6315,25 +6465,22 @@ class _$_Organization implements _Organization {
 
 abstract class _Organization implements Organization {
   factory _Organization(
-      {@JsonKey(name: '_id') String? id,
-      @JsonKey(name: 'logo_url') String? logoUrl,
-      required String? name,
-      @JsonKey(name: 'workspace_url') String? workspaceUrl}) = _$_Organization;
+      {String id,
+      String logoUrl,
+      String name,
+      String workspaceUrl}) = _$_Organization;
 
   factory _Organization.fromJson(Map<String, dynamic> json) =
       _$_Organization.fromJson;
 
   @override
-  @JsonKey(name: '_id')
-  String? get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   @override
-  @JsonKey(name: 'logo_url')
-  String? get logoUrl => throw _privateConstructorUsedError;
+  String get logoUrl => throw _privateConstructorUsedError;
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @override
-  @JsonKey(name: 'workspace_url')
-  String? get workspaceUrl => throw _privateConstructorUsedError;
+  String get workspaceUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$OrganizationCopyWith<_Organization> get copyWith =>
@@ -6350,7 +6497,9 @@ class _$ChannelMessagesResponseTearOff {
   const _$ChannelMessagesResponseTearOff();
 
   _ChannelMessagesResponse call(
-      {int? status, String? message, List<ChannelMessage> data = const []}) {
+      {int status = 0,
+      String message = '',
+      List<ChannelMessage> data = const []}) {
     return _ChannelMessagesResponse(
       status: status,
       message: message,
@@ -6368,8 +6517,8 @@ const $ChannelMessagesResponse = _$ChannelMessagesResponseTearOff();
 
 /// @nodoc
 mixin _$ChannelMessagesResponse {
-  int? get status => throw _privateConstructorUsedError;
-  String? get message => throw _privateConstructorUsedError;
+  int get status => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
   List<ChannelMessage> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -6383,7 +6532,7 @@ abstract class $ChannelMessagesResponseCopyWith<$Res> {
   factory $ChannelMessagesResponseCopyWith(ChannelMessagesResponse value,
           $Res Function(ChannelMessagesResponse) then) =
       _$ChannelMessagesResponseCopyWithImpl<$Res>;
-  $Res call({int? status, String? message, List<ChannelMessage> data});
+  $Res call({int status, String message, List<ChannelMessage> data});
 }
 
 /// @nodoc
@@ -6405,11 +6554,11 @@ class _$ChannelMessagesResponseCopyWithImpl<$Res>
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -6425,7 +6574,7 @@ abstract class _$ChannelMessagesResponseCopyWith<$Res>
           $Res Function(_ChannelMessagesResponse) then) =
       __$ChannelMessagesResponseCopyWithImpl<$Res>;
   @override
-  $Res call({int? status, String? message, List<ChannelMessage> data});
+  $Res call({int status, String message, List<ChannelMessage> data});
 }
 
 /// @nodoc
@@ -6450,11 +6599,11 @@ class __$ChannelMessagesResponseCopyWithImpl<$Res>
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -6466,15 +6615,18 @@ class __$ChannelMessagesResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ChannelMessagesResponse implements _ChannelMessagesResponse {
-  _$_ChannelMessagesResponse({this.status, this.message, this.data = const []});
+  _$_ChannelMessagesResponse(
+      {this.status = 0, this.message = '', this.data = const []});
 
   factory _$_ChannelMessagesResponse.fromJson(Map<String, dynamic> json) =>
       _$$_ChannelMessagesResponseFromJson(json);
 
+  @JsonKey(defaultValue: 0)
   @override
-  final int? status;
+  final int status;
+  @JsonKey(defaultValue: '')
   @override
-  final String? message;
+  final String message;
   @JsonKey(defaultValue: const [])
   @override
   final List<ChannelMessage> data;
@@ -6518,17 +6670,17 @@ class _$_ChannelMessagesResponse implements _ChannelMessagesResponse {
 
 abstract class _ChannelMessagesResponse implements ChannelMessagesResponse {
   factory _ChannelMessagesResponse(
-      {int? status,
-      String? message,
+      {int status,
+      String message,
       List<ChannelMessage> data}) = _$_ChannelMessagesResponse;
 
   factory _ChannelMessagesResponse.fromJson(Map<String, dynamic> json) =
       _$_ChannelMessagesResponse.fromJson;
 
   @override
-  int? get status => throw _privateConstructorUsedError;
+  int get status => throw _privateConstructorUsedError;
   @override
-  String? get message => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
   @override
   List<ChannelMessage> get data => throw _privateConstructorUsedError;
   @override

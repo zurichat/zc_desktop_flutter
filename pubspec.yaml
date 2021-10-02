@@ -38,6 +38,7 @@ dependencies:
 
   # Network calls
   dio: ^4.0.0
+  dio_http_cache: ^0.3.0
   freezed_annotation:
   json_annotation:
   file_picker: ^4.1.1

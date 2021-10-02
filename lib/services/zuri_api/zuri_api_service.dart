@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
@@ -15,6 +16,12 @@ class ZuriApiService implements Api {
     dio.options.baseUrl = baseUri.toString();
     dio.options.sendTimeout = sendTimeout;
     dio.options.receiveTimeout = receiveTimeout;
+
+    /// This is used to effectively cache http response
+    /// Find usage below in the get request
+    dio.interceptors.add(
+      DioCacheManager(CacheConfig(baseUrl: baseUri.toString())).interceptor,
+    );
     log.i('Zuri Api constructed and DIO setup register');
   }
 
@@ -22,11 +29,28 @@ class ZuriApiService implements Api {
     Uri uri, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
+    bool forceRefresh = false,
   }) async {
     log.i('Making request to $uri');
     try {
-      final response = await dio.get(uri.toString(),
-          queryParameters: queryParameters, options: Options(headers: headers));
+      final response = await dio.get(
+        uri.toString(),
+        queryParameters: queryParameters,
+
+        /// In the first 1 minute Return data from cache directly.
+        /// Then In the next 24 hours
+        /// - Get data from network first.
+        /// - If getting data from network succeeds, refresh cache.
+        /// - If getting data from network fails or no network avaliable, try get data from cache instead of an error
+        /// Set this to true when you forcefully want cache to refresh, for example
+        /// ... in the pull to refresh scenerio
+        options: buildCacheOptions(
+          Duration(minutes: 1),
+          maxStale: Duration(days: 1),
+          forceRefresh: forceRefresh,
+          options: Options(headers: headers),
+        ),
+      );
 
       //log.i('Response from $uri \n${response.data}');
       return response.data;

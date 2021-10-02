@@ -7,6 +7,7 @@ import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/startup_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
@@ -60,6 +61,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
       classType: LocalStorageService,
       presolveUsing: LocalStorageService.getInstance,
     ),
+    LazySingleton(classType: StartupService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: ChannelsService),
