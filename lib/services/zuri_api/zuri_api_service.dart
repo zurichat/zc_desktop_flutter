@@ -364,7 +364,7 @@ class ZuriApiService implements Api {
   /* DIRECT MESSAGES SERVICE */
 
   @override
-  Future<Map<String, dynamic>> sendMessageToDM(
+  Future<SendMessageResponse> sendMessageToDM(
       {roomId, senderId, message}) async {
     return await _post(dmSendMessage(roomId), body: {
       "sender_id": senderId,
@@ -393,15 +393,15 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> fetchRoomMessages({roomId}) async {
+  Future<SendMessageResponse> fetchRoomMessages({roomId}) async {
     return await _get(dmFetchRoomMessages(roomId));
   }
 
   @override
-  Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, DummyUser? user}) async {
+  Future<String> createRoom(
+      {User? currentUser, DummyUser? user, String? orgId}) async {
     return await _post(
-      dmCreateRoom,
+      dmCreateRoom(orgId!),
       body: {
         "org_id": "1",
         "room_user_ids": [currentUser!.id, user!.id],

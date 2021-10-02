@@ -124,13 +124,24 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToDmView(int index) {
-    //_dmService.setUser();
+    ///_dmService.setUser();
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
   bool selectedOrg(int index) {
     log.d(
         "new selected index $index currently seletected channel index ${getSelectedOrganizationIndex()!}");
+    if (index == getSelectedOrganizationIndex()!) {
+      return true;
+    }
+    return false;
+  }
+
+  void goToAllDmView() {
+    _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
+  }
+
+  bool showSelectedOrg(int index) {
     if (index == getSelectedOrganizationIndex()!) {
       return true;
     }

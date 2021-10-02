@@ -194,7 +194,9 @@ class OrganizationWrapper extends StatelessWidget {
                                             showChannelListDisplay: () {},
                                             addTap: () {},
                                             listItemCount: 3,
-                                            onListItemTapped: (index) {},
+                                            onListItemTapped: (index) {
+                                              model!.goToDmView(index);
+                                            },
                                             itemChild: (index) {
                                               return DMItem(
                                                 userName: 'John snow',
