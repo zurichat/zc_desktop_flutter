@@ -5,6 +5,7 @@ import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
+import 'package:zc_desktop_flutter/services/files_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/startup_service.dart';
@@ -69,6 +70,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     LazySingleton(classType: CentrifugeService),
     LazySingleton(classType: ZuriApiService),
     LazySingleton(classType: StartupService),
+    LazySingleton(classType: FilesService),
     LazySingleton(
       classType: ThemeService,
       resolveUsing: ThemeService.getInstance,

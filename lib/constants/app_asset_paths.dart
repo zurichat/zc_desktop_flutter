@@ -30,4 +30,16 @@ const String WksImage = 'assets/images/wks_image.png';
 const String ZuriI4gLogo = "assets/images/zuri_i4g_logo.png";
 const String Web = "assets/icons/web.svg";
 const String ArrowDown= "assets/icons/arrow_down.svg";
+const String Clock= 'assets/icons/clock.svg';
+const String AlignLeft= 'assets/icons/align_left.svg';
+const String Circle = 'assets/icons/message_circle.svg';
+const String Layers = 'assets/icons/layers.svg';
+const String Hash = 'assets/icons/hash.svg';
+const String Users = 'assets/icons/users.svg';
+const String Cancel = 'assets/icons/cancel.svg';
+const String Search = 'assets/icons/search.svg';
+
+
+
+
 

@@ -184,6 +184,40 @@ final preferenceStyleBold = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
+final searchModal = TextStyle(
+  color: avatarColor4,
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w600,
+);
+
+final searchModal1 = TextStyle(
+  color: headerColor,
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+final searchModal2 = TextStyle(
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w500,
+  fontSize: 18.sp,
+  color: bodyColor,
+);
+
+final searchModal3 = TextStyle(
+ color: bodyColor,
+ fontFamily: 'Lato',
+ fontWeight: FontWeight.w700,
+ fontSize: 18.sp, 
+);
+
+final searchModal4 = TextStyle(
+ color: bodyColor,
+ fontSize: 18.sp,
+ fontFamily: 'Lato',
+);
+
 final messageSenderStyleBold = TextStyle(
   fontSize: 16.sp,
   fontFamily: 'Lato',

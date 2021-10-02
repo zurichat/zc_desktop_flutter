@@ -8,11 +8,13 @@ import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class OrganizationViewModel extends BaseViewModel {
   final log = getLogger("OrganizationViewModel");
   final _navigationService = locator<NavigationService>();
   final _organizationService = locator<OrganizationService>();
+  final _windowTitleBarService = locator<WindowTitleBarService>();
   final _channelService = locator<ChannelsService>();
   final _dmService = locator<DMService>();
 
@@ -23,6 +25,7 @@ class OrganizationViewModel extends BaseViewModel {
   bool _showDMs = false;
   bool _showMenus = false;
   bool _showChannels = false;
+
 
   List<Organization> _organization = [];
   List<Channel> _channels = [];

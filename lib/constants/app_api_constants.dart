@@ -38,6 +38,17 @@ Uri getCreateChannelUri(String organisationId) => Uri(
     host: channelHost,
     path: '/api/v1/$organisationId/channels/');
 
+Uri getMemberUri(String organisationId) => Uri(
+    scheme: scheme,
+    host: host,
+    path: '/organizations/$organisationId/members');
+
+Uri getFileUri(String orgId, String channelId) => Uri(
+    scheme: scheme,
+    host: channelHost,
+    path: '/v1/$orgId/channels/$channelId/files/');
+
+
 Uri getUserChannelUri(String organisationId, String channelId) => Uri(
     scheme: scheme,
     host: channelHost,
