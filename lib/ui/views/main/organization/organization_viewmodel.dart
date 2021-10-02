@@ -109,10 +109,6 @@ class OrganizationViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void goToAllDmView() {
-    _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
-  }
-
   // TODO: go to workspace creation page
   void goToCreateWorkspace() {
     _navigationService.navigateTo(Routes.createWorkspaceView);
@@ -121,6 +117,10 @@ class OrganizationViewModel extends BaseViewModel {
   void goToChannelsView({int index = 0}) {
     _channelService.setChannel(_channels[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
+  }
+
+  void goTOSavedItems() {
+    _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
   }
 
   void goToDmView(int index) {
