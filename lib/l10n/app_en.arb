@@ -131,5 +131,25 @@
     "authErrorMessage" : "Unfortunately something went wrong. Please try again.",
     "@authErrorMessage": {
         "description" : "auth error message"
+    },
+    "logInText" : "Log in",
+    "@logInText": {
+        "description" : "Log In"
+    },
+    "easySignIn" : "Easy Sign in With",
+    "@easySignIn": {
+        "description" : "Easy sign in"
+    },
+    "noAccountText" : "Don't have an Account?",
+    "@noAccountText": {
+        "description" : "Do not have an account?"
+    },
+    "signUpText" : "Sign Up",
+    "@signUpText": {
+        "description" : "Sign Up"
+    },
+    "forgotPasswordText" : "Forgot Password?",
+    "@forgotPasswordText": {
+        "description" : "Forgot Password"
     }
 }

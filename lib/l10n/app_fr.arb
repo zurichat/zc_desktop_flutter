@@ -31,5 +31,10 @@
     "createAnAccount" : "Créer un compte",
     "chooseWorkspace" : "Choisissez un espace de travail",
     "addWorkspace" : "nous ajouterons les espaces de travail que vous choisissez à votre application de bureau",
-    "authErrorMessage" : "Malheureusement, quelque chose s'est mal passé. Veuillez réessayer."
+    "authErrorMessage" : "Malheureusement, quelque chose s'est mal passé. Veuillez réessayer.",
+    "logInText" : "Connexion",
+    "easySignIn" : "Connectez-vous facilement avec",
+    "noAccountText" : "Vous n'avez pas de compte ?",
+    "signUpText" : "S'inscrire",
+    "forgotPasswordText" : "Mot de passe oublié?"
 }

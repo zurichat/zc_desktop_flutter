@@ -31,5 +31,10 @@
     "createAnAccount" : "Crea una cuenta",
     "chooseWorkspace" : "Elige un espacio de trabajo",
     "addWorkspace" : "agregaremos los espacios de trabajo que elija a su aplicación de escritorio",
-    "authErrorMessage" : "Desafortunadamente, algo salió mal. Inténtalo de nuevo."
+    "authErrorMessage" : "Desafortunadamente, algo salió mal. Inténtalo de nuevo.",
+    "logInText" : "Iniciar sesión",
+    "easySignIn" : "Fácil inicio de sesión con",
+    "noAccountText" : "¿No tienes una cuenta?",
+    "signUpText" : "Inscribirse",
+    "forgotPasswordText" : "¿Has olvidado tu contraseña?"
 }
