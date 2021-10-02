@@ -401,7 +401,7 @@ class ZuriApiService implements Api {
   Future<Map<String, dynamic>> createRoom(
       {User? currentUser, Users? user}) async {
     return await _post(
-      dmCreateRoom,
+      dmCreateRoom("1"),
       body: {
         "org_id": "1",
         "room_user_ids": [currentUser!.id, user!.id],
