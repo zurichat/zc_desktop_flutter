@@ -24,7 +24,7 @@ class MessageWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InkWell(child: UserAvatar(imageUri: model.userDefaultImageUrl)),
+              InkWell(child: AvatarPlaceHolder(imageUri: model.userDefaultImageUrl)),
               horizontalSpaceSmall,
               Expanded(
                 child: Column(

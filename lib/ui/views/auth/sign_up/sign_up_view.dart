@@ -66,7 +66,7 @@ class SignUpView extends HookWidget {
                                   key: _formKey,
                                   child: Column(
                                     children: [
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Email',
                                         controller: emailController,
                                         keyboardType:
@@ -75,7 +75,7 @@ class SignUpView extends HookWidget {
                                         validator: context.validateEmail,
                                       ),
                                       verticalSpaceMedium,
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Password',
                                         password: true,
                                         isVisible: model.passwordVisibility,
@@ -86,7 +86,7 @@ class SignUpView extends HookWidget {
                                         validator: context.validatePassword,
                                       ),
                                       verticalSpaceMedium,
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Confirm Password',
                                         password: true,
                                         isVisible:

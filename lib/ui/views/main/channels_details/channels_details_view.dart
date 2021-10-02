@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -22,7 +21,7 @@ class ChannelsDetailsView extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
             child: Container(
-              height: 850.h,
+              height: fullHeight(context)/1.2,
               width: 550,
               child: DefaultTabController(
                 length: 4,
@@ -32,7 +31,12 @@ class ChannelsDetailsView extends StatelessWidget {
                       model: model,
                       handleCloseDialog: () => Navigator.pop(context),
                     ),
-                    Expanded(flex: 10, child: ChannelDetailTabView()),
+                    Expanded(
+                      flex: 10,
+                      child: ChannelDetailTabView(
+                            model: model,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -66,10 +70,15 @@ class ChannelDescriptionBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ChannelName(),
-              IconButton(
-                onPressed: handleCloseDialog,
-                icon: Icon(Icons.clear, size: 20),
-                splashRadius: 35.0,
+              Container(
+                height: 35.0,
+                width: 35.0,
+                child: IconButton(
+                  tooltip: 'close this dialog',
+                  onPressed: handleCloseDialog,
+                  icon: Icon(Icons.clear, size: 20),
+                  splashRadius: 35.0,
+                ),
               )
             ],
           ),
@@ -220,8 +229,9 @@ class ChannelDetailsTab extends StatelessWidget {
 }
 
 class ChannelDetailTabView extends StatelessWidget {
-  const ChannelDetailTabView({Key? key}) : super(key: key);
+  const ChannelDetailTabView({Key? key, required this.model}) : super(key: key);
 
+  final ChannelsDetailsViewModel model;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -229,19 +239,25 @@ class ChannelDetailTabView extends StatelessWidget {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(10.0),
               bottomRight: Radius.circular(10.0))),
-      child:
-          ClipRRect(
-             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10.0),
-              bottomRight: Radius.circular(10.0)),
-            clipBehavior: Clip.hardEdge,
-            child: const TabBarView(physics: NeverScrollableScrollPhysics(), children: [
-                  AboutChannelTab(),
-                  ChannelMembersTab(),
-                  ChannelIntegrationTab(),
-                  ChannelSettingTab(),
-                ]),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10.0),
+            bottomRight: Radius.circular(10.0)),
+        clipBehavior: Clip.hardEdge,
+        child: TabBarView(physics: NeverScrollableScrollPhysics(), children: [
+          AboutChannelTab(
+            key: UniqueKey(),
+            model: model,
           ),
+          ChannelMembersTab(
+            model: model,
+          ),
+          ChannelIntegrationTab(
+          ),
+          ChannelSettingTab(
+          ),
+        ]),
+      ),
     );
   }
 }

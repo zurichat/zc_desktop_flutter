@@ -9,4 +9,52 @@ class ChannelsDetailsViewModel extends BaseViewModel {
     _navigator.popRepeated(1);
     notifyListeners();
   }
+
+  bool _onTileHover = false;
+  bool get onTileHover => _onTileHover;
+  int _onTileHoveredIndex = 0;
+  int get onTileHoveredIndex => _onTileHoveredIndex;
+
+  void onTileHovered(bool hover, int index) {
+    _onTileHover = hover;
+    _onTileHoveredIndex = index;
+    notifyListeners();
+  }
+
+  bool _onFileTileHover = false;
+  bool get onFileTileHover => _onFileTileHover;
+  int _onFileTileHoveredIndex = 0;
+  int get onFileTileHoveredIndex => _onFileTileHoveredIndex;
+
+  void onFileTileHovered(bool hover, int index) {
+    _onFileTileHover = hover;
+    _onFileTileHoveredIndex = index;
+    notifyListeners();
+  }
+
+  bool _onActionTextHover = false;
+  bool get onActionTextHover => _onActionTextHover;
+  int _onActionTextHoverredIndex = 0;
+  int get onActionTextHoveredIndex => _onActionTextHoverredIndex;
+
+  void onActionTextHovered(bool hover, int index) {
+    _onActionTextHover = hover;
+    _onActionTextHoverredIndex = index;
+    notifyListeners();
+  }
+
+  bool _onHoverActionsHovered = false;
+  bool get onHoverActionsHover => _onHoverActionsHovered;
+
+  String _hoverAction = '';
+  String get hoverAction => _hoverAction;
+  double _hoverWidth = 0;
+  double get hoverWidth => _hoverWidth;
+
+  void onHoverActionsHovered(bool hover, String action, double width) {
+    _onHoverActionsHovered = hover;
+    _hoverAction = action;
+    _hoverWidth = width;
+    notifyListeners();
+  }
 }

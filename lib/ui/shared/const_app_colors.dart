@@ -28,6 +28,8 @@ const Color hoverColor = Color(0x113A3A3A);
 const Color hoverBackgroundColor = Color(0x22C4C4C4);
 const Color lightDarkColor = Color(0x993A3A3A);
 
+
+
 // Text Colors
 const Color headerColor = Color(0xff242424);
 const Color bodyColor = Color(0xff3A3A3A);

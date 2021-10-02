@@ -7,6 +7,7 @@ import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/startup_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
@@ -46,7 +47,6 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     MaterialRoute(page: CreateWorkspaceStage3),
     MaterialRoute(
       page: OrganizationView,
-      initial: true,
       children: [
         MaterialRoute(page: ChannelsView, initial: true),
         MaterialRoute(page: ChannelsListView),
@@ -68,6 +68,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     LazySingleton(classType: OrganizationService),
     LazySingleton(classType: CentrifugeService),
     LazySingleton(classType: ZuriApiService),
+    LazySingleton(classType: StartupService),
     LazySingleton(
       classType: ThemeService,
       resolveUsing: ThemeService.getInstance,
