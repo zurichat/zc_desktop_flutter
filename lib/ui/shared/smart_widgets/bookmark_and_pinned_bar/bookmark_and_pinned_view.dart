@@ -162,7 +162,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                     ),
                   ),
                   BookMarkedItem(
-                      tip: 'www.zurichat.com',
+                      // tip: 'www.zurichat.com',
                       label: 'zurichat',
                       icon: SVGAssetPaths.linkIcon,
                       onClicked: () {
@@ -841,13 +841,13 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
 
   BookMarkedItem(
           {required String label,
-          required String tip,
+          // required String tip,
           required final String icon,
           required VoidCallback onClicked}) =>
       ViewModelBuilder<BookmarkAndPinnedMessagesViewModel>.reactive(
           viewModelBuilder: () => BookmarkAndPinnedMessagesViewModel(),
           builder: (context, model, child) => Tooltip(
-                message: tip,
+                //message: tip,
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: InkWell(
