@@ -12,11 +12,16 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_viewmodel.dart';
 
-class SavedItemsView extends StatelessWidget {
+class SavedItemsView extends StatefulWidget {
   const SavedItemsView({Key? key}) : super(key: key);
   @override
+  _SavedItemsViewState createState() => _SavedItemsViewState();
+}
+
+class _SavedItemsViewState extends State<SavedItemsView> {
+  @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<SavedItemsViewModel>.nonReactive(
+    return ViewModelBuilder<SavedItemsViewModel>.reactive(
       viewModelBuilder: () => SavedItemsViewModel(),
       builder: (
         BuildContext context,
@@ -24,20 +29,17 @@ class SavedItemsView extends StatelessWidget {
         Widget? child,
       ) {
         return Container(
-          child: Expanded(
-            child: Column(
-              children: [
-                DetailedCustomAppBar(
-                  margin: EdgeInsets.only(left: 2.0.w),
-                  leading: WorkSpaceTitle(
-                    channelTitle: SavedItems,
-                  ),
+          child: Column(
+            children: [
+              DetailedCustomAppBar(
+                margin: EdgeInsets.only(left: 2.0.w),
+                leading: WorkSpaceTitle(
+                  channelTitle: SavedItems,
                 ),
-                // verticalSpaceLarge,
-                FineContainer(),
-                verticalSpaceTiny,
-              ],
-            ),
+              ),
+              FineContainer(),
+              verticalSpaceTiny,
+            ],
           ),
         );
       },
@@ -49,11 +51,11 @@ class SavedItemsView extends StatelessWidget {
       color: Colors.grey[50],
       width: 1132,
       height: 96,
-      margin: EdgeInsets.fromLTRB(24, 26, 16, 32),
+      margin: EdgeInsets.fromLTRB(24, 26, 12, 32),
       padding: EdgeInsets.only(left: 10, top: 20),
       child: Column(
         children: [
-          horizontalSpaceMedium,
+          horizontalSpaceTiny,
           Row(
             children: [
               SvgPicture.asset(
@@ -64,6 +66,16 @@ class SavedItemsView extends StatelessWidget {
               horizontalSpaceSmall,
               Text('Add messages and files to come back to later',
                   style: headline3.copyWith(fontSize: 17)),
+              Spacer(
+                flex: 1,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Icon(
+                  Icons.close,
+                  size: 20,
+                ),
+              ),
             ],
           ),
           verticalSpaceMedium,

@@ -243,9 +243,7 @@ class DisplayMenu extends StatelessWidget {
           ReusableMenuItem(
             iconPath: 'assets/icons/alldms.svg',
             text: 'All DMs',
-            onTap: () {
-              model.goToAllDmView();
-            },
+            onTap: () {},
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/drafts.svg',
@@ -308,14 +306,14 @@ class ReusableDropDown extends StatelessWidget {
               child: Container(
                 child: show
                     ? Container(
-                  height: 8,
+                        height: 8,
                         width: 8,
                         child: SvgPicture.asset(
                           SVGAssetPaths.dropDownOpenIcon,
                         ),
                       )
                     : Container(
-                  height: 8,
+                        height: 8,
                         width: 8,
                         child: SvgPicture.asset(
                           SVGAssetPaths.dropDownClosedIcon,

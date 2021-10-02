@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 //TODO: Remove this class and delete the file
 class SVGAssetPaths {
   static final channelsListIcon = "assets/icons/hash_inactive.svg";
+  static final linkIcon = "assets/icons/linkIcon.svg";
   static final dropDownOpenIcon = "assets/icons/drop_down_open.svg";
   static final dropDownClosedIcon = "assets/icons/channel_close.svg";
   static final channelDropDown = "assets/icons/channel_drop_down.svg";

@@ -109,10 +109,6 @@ class OrganizationViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void goToAllDmView() {
-    _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
-  }
-
   // TODO: go to workspace creation page
   void goToCreateWorkspace() {
     _navigationService.navigateTo(Routes.createWorkspaceView);
