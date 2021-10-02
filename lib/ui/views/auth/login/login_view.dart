@@ -64,7 +64,7 @@ class LoginView extends HookWidget {
                                 key: _formKey,
                                 child: Column(
                                   children: [
-                                    AuthInputField(
+                                    ZuriDeskInputField(
                                       label: _appLocalization.emailHintText,
                                       // 'Email',
                                       controller: emailController,
@@ -74,7 +74,7 @@ class LoginView extends HookWidget {
                                       validator: context.validateEmail,
                                     ),
                                     verticalSpaceMedium,
-                                    AuthInputField(
+                                    ZuriDeskInputField(
                                       label: _appLocalization.passwordHintText,
                                       // 'Password',
                                       password: true,
