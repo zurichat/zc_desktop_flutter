@@ -29,6 +29,7 @@ class SVGAssetPaths {
       "assets/icons/reply_thread_container.svg";
   static final share_message_container =
       "assets/icons/share_message_container.svg";
+  static final ribbon = "assets/icons/ribbon.svg";
 }
 
 class ShortCuts {
