@@ -9,7 +9,7 @@ import 'package:zc_desktop_flutter/services/dm_service.dart';
 class DmViewModel extends BaseViewModel {
   final log = getLogger("DmViewModel");
   final _dmService = locator<DMService>();
-  DummyUser _user = DummyUser(name: "");
+  Users _user = Users(name: "");
   late LoggedInUser.User _currentLoggedInUser;
   String? _roomId = '';
   List<Results> _messages = [];
@@ -37,7 +37,7 @@ class DmViewModel extends BaseViewModel {
     return 'No data';
   }
 
-  DummyUser get user => _user;
+  Users get user => _user;
   String get roomId => _roomId!;
   LoggedInUser.User get currentLoggedInUser => _currentLoggedInUser;
   final DateTime currentMessageTime = DateTime.now();

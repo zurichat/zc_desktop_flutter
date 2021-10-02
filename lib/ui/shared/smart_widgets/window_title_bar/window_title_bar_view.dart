@@ -11,6 +11,7 @@ import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/search_modal/search_modal_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/window_title_bar/window_title_bar_viewmodel.dart';
 
 class WindowTitleBar extends StatelessWidget {
@@ -146,7 +147,13 @@ class LeftSideHome extends HookWidget {
             ),
             horizontalSpaceSmall,
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                /*showDialog(
+                          context: context,
+                          builder: (context) {
+                            return PreferenceView();
+                          });*/
+              },
               icon: Icon(
                 Icons.watch_later_outlined,
                 size: 20.w,
@@ -159,23 +166,29 @@ class LeftSideHome extends HookWidget {
         SizedBox(
           width: 500.w,
           height: 30.w,
-          child: TextField(
-            controller: searchTextFieldController,
-            style: TextStyle(color: lightIconColor),
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
-              hintText: "Search here",
-              hintStyle: TextStyle(color: lightIconColor),
-              filled: true,
-              fillColor: bodyColor,
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: authBtnColor, width: 2.0),
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              border: OutlineInputBorder(
-                borderSide: const BorderSide(color: authBtnColor, width: 2.0),
-                borderRadius: BorderRadius.circular(20.0),
+          child: GestureDetector(
+            onTap: () {
+              showDialog(context: context, builder: (_) => SearchModalView());
+            },
+            child: TextField(
+              enabled: false,
+              controller: searchTextFieldController,
+              style: TextStyle(color: lightIconColor),
+              decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+                hintText: "Search here",
+                hintStyle: TextStyle(color: lightIconColor),
+                filled: true,
+                fillColor: bodyColor,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: authBtnColor, width: 2.0),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: authBtnColor, width: 2.0),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
               ),
             ),
           ),

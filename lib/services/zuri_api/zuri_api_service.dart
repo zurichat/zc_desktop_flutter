@@ -364,7 +364,7 @@ class ZuriApiService implements Api {
   /* DIRECT MESSAGES SERVICE */
 
   @override
-  Future<SendMessageResponse> sendMessageToDM(
+  Future<Map<String, dynamic>> sendMessageToDM(
       {roomId, senderId, message}) async {
     return await _post(dmSendMessage(roomId), body: {
       "sender_id": senderId,
@@ -393,15 +393,15 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<SendMessageResponse> fetchRoomMessages({roomId}) async {
+  Future<Map<String, dynamic>> fetchRoomMessages({roomId}) async {
     return await _get(dmFetchRoomMessages(roomId));
   }
 
   @override
-  Future<String> createRoom(
-      {User? currentUser, DummyUser? user, String? orgId}) async {
+  Future<Map<String, dynamic>> createRoom(
+      {User? currentUser, Users? user}) async {
     return await _post(
-      dmCreateRoom(orgId!),
+      dmCreateRoom("1"),
       body: {
         "org_id": "1",
         "room_user_ids": [currentUser!.id, user!.id],
@@ -409,5 +409,25 @@ class ZuriApiService implements Api {
         "pinned": ["0"]
       },
     );
+  }
+
+  @override
+  Future fetchFileListUsingOrgId(
+      {required String orgId, required token}) async {
+    return await _get(
+      getMemberUri(orgId),
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
+  }
+
+  @override
+  Future<List<Users>> fetchMemberListUsingOrgId(
+      {required String organizationId, required token}) async {
+    final response = await _get(
+      getMemberUri(organizationId),
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
+    log.i(response);
+    return List.from(response['data'].map((value) => Users.fromJson(value)));
   }
 }

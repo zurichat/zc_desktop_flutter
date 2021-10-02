@@ -267,7 +267,6 @@ class Advanced with _$Advanced {
       _$AdvancedFromJson(json);
 }
 
-
 @freezed
 class DummyUser with _$DummyUser {
   factory DummyUser(
@@ -314,6 +313,7 @@ class ChannelResponse with _$ChannelResponse {
   factory ChannelResponse.fromJson(Map<String, dynamic> json) =>
       _$ChannelResponseFromJson(json);
 }
+
 @freezed
 class Channel with _$Channel {
   factory Channel({
@@ -353,25 +353,49 @@ class Organization with _$Organization {
 }
 
 @freezed
-class ChannelMessagesResponse with _$ChannelMessagesResponse{
-
+class ChannelMessagesResponse with _$ChannelMessagesResponse {
   factory ChannelMessagesResponse(
       {@Default(0) int status,
       @Default('') String message,
       @Default([]) List<ChannelMessage> data}) = _ChannelMessagesResponse;
-  
-  factory ChannelMessagesResponse.fromJson(Map<String, dynamic> json) => _$ChannelMessagesResponseFromJson(json);
+
+  factory ChannelMessagesResponse.fromJson(Map<String, dynamic> json) =>
+      _$ChannelMessagesResponseFromJson(json);
 }
 
 @freezed
-class ChannelMessage with _$ChannelMessage{
-  
-  factory ChannelMessage(
-      {@Default('') @JsonKey(name: '_id') String? id,
-      @Default('') String content,
-      @Default('') String channel_id,
-      @Default('') String timestamp,
-      @Default('') String user_id,})= _ChannelMessage;
+class ChannelMessage with _$ChannelMessage {
+  factory ChannelMessage({
+    @Default('') @JsonKey(name: '_id') String? id,
+    @Default('') String content,
+    @Default('') String channel_id,
+    @Default('') String timestamp,
+    @Default('') String user_id,
+  }) = _ChannelMessage;
 
-  factory ChannelMessage.fromJson(Map<String, dynamic> json) => _$ChannelMessageFromJson(json);
+  factory ChannelMessage.fromJson(Map<String, dynamic> json) =>
+      _$ChannelMessageFromJson(json);
+}
+
+@freezed
+class Users with _$Users {
+  factory Users({
+    @Default('') @JsonKey(name: '_id') String? id,
+    @Default('') @JsonKey(name: 'image_url') String profileImage,
+    @Default('') String display_name,
+    @Default('') String name,
+  }) = _Users;
+
+  factory Users.fromJson(Map<String, dynamic> json) => _$UsersFromJson(json);
+}
+
+@freezed
+class Files with _$Files {
+  factory Files({
+    @Default('') String message,
+    @Default([]) List channelfiles,
+    @Default([]) List threadfiles,
+  }) = _Files;
+
+  factory Files.fromJson(Map<String, dynamic> json) => _$FilesFromJson(json);
 }

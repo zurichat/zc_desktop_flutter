@@ -54,7 +54,7 @@ class WorkSpaceMembers extends StatelessWidget {
                 padding: EdgeInsets.only(left: 2.0.w),
                 child: Text(
                   '300',
-                  style: messageTimeStyleNormal1,
+                  style: messageTimeStyleNormal,
                 ),
               ),
             ),

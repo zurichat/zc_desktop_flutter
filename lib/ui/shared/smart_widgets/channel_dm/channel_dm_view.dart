@@ -67,7 +67,7 @@ class ChannelDmView extends StatelessWidget {
                       margin: EdgeInsets.only(left: 2.0.w),
                       leading: (channel == true)
                           ? WorkSpaceTitle(
-                              channelTitle: model.currentChannel!.name,
+                              channelTitle: model.currentChannel.name,
                             )
                           : Container(
                               width: 200.w,
@@ -87,7 +87,7 @@ class ChannelDmView extends StatelessWidget {
                                     width: 40.w,
                                   ),
                                   Text(
-                                    "${model.currentChannel!.name!}",
+                                    "${model.currentChannel.name}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20.sp,
@@ -190,15 +190,15 @@ class ChannelDmView extends StatelessWidget {
                                     children: [
                                       Text(
                                         'This is the very beginning of the ',
-                                        style: messageTimeStyleNormal2,
+                                        style: messageTimeStyleNormal,
                                       ),
                                       Text(
-                                        '${model.currentChannel!.name}',
-                                        style: messageTimeStyleNormal3,
+                                        '${model.currentChannel.name}',
+                                        style: messageTimeStyleNormal,
                                       ),
                                       Text(
                                         ' channel',
-                                        style: messageTimeStyleNormal2,
+                                        style: messageTimeStyleNormal,
                                       ),
                                     ],
                                   ),
@@ -206,12 +206,12 @@ class ChannelDmView extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        '${model.currentChannel!.name}',
-                                        style: messageTimeStyleNormal3,
+                                        '${model.currentChannel.name}',
+                                        style: messageTimeStyleNormal,
                                       ),
                                       Text(
                                         ' created this channel on Aug 30th.',
-                                        style: messageTimeStyleNormal4,
+                                        style: messageTimeStyleNormal,
                                       ),
                                     ],
                                   ),
@@ -225,7 +225,7 @@ class ChannelDmView extends StatelessWidget {
                                       ),
                                       Text(
                                         ' Add members',
-                                        style: messageTimeStyleNormal2,
+                                        style: messageTimeStyleNormal,
                                       ),
                                     ],
                                   ),
@@ -254,75 +254,77 @@ class ChannelDmView extends StatelessWidget {
                                 controller: _rightSideBarController,
                                 children: [
                                   (dm == true)
-                                  ?
-                                  Container(
-                                    padding: EdgeInsets.only(left: 20.w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {},
-                                          child: Container(
-                                            width: 40.w,
-                                            height: 55.h,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/dmConvo.png')),
-                                            ),
+                                      ? Container(
+                                          padding: EdgeInsets.only(left: 20.w),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Container(
+                                                  width: 40.w,
+                                                  height: 55.h,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            'assets/images/dmConvo.png')),
+                                                  ),
+                                                ),
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  verticalSpaceTiny,
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'This conversation is just between you and ',
+                                                        style:
+                                                            messageTimeStyleNormal,
+                                                      ),
+                                                      Text(
+                                                        '${model.currentChannel.name}',
+                                                        style:
+                                                            messageTimeStyleNormal,
+                                                      ),
+                                                      Text(
+                                                        ' no one else can see it',
+                                                        style:
+                                                            messageTimeStyleNormal,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  verticalSpaceTinyTwo,
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Here you can send messages and share files with .',
+                                                        style:
+                                                            messageTimeStyleNormal,
+                                                      ),
+                                                      Text(
+                                                        '${model.currentChannel.name}',
+                                                        style:
+                                                            messageTimeStyleNormal,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            verticalSpaceTiny,
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'This conversation is just between you and ',
-                                                  style:
-                                                      messageTimeStyleNormal2,
-                                                ),
-                                                Text(
-                                                  '${model.currentChannel!.name}',
-                                                  style:
-                                                      messageTimeStyleNormal2,
-                                                ),
-                                                Text(
-                                                  ' no one else can see it',
-                                                  style:
-                                                      messageTimeStyleNormal2,
-                                                ),
-                                              ],
-                                            ),
-                                            verticalSpaceTinyTwo,
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Here you can send messages and share files with .',
-                                                  style:
-                                                      messageTimeStyleNormal4,
-                                                ),
-                                                Text(
-                                                  '${model.currentChannel!.name}',
-                                                  style:
-                                                      messageTimeStyleNormal4,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ) : SizedBox(),
+                                        )
+                                      : SizedBox(),
                                   ListView.builder(
                                       itemCount: model.messages.length,
                                       shrinkWrap: true,
@@ -370,7 +372,7 @@ class ChannelDmView extends StatelessWidget {
                             model.sendMessage(message);
                           }
                         },
-                        placeHolder: '${model.currentChannel!.name}',
+                        placeHolder: '${model.currentChannel.name}',
                       ),
                     ),
                   ],
@@ -522,7 +524,7 @@ class MessageTile extends StatelessWidget {
                               ),
                               Text(
                                 model.formatTime(message.timestamp),
-                                style: subtitle1c.copyWith(color: timeColor),
+                                style: subtitle3b.copyWith(color: timeColor),
                               )
                             ],
                           ),
