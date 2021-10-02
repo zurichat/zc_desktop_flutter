@@ -273,6 +273,7 @@ final clearStatusTextStyle = TextStyle(
   color: bodyColor,
   fontFamily: 'Lato',
 );
+
 //All DMs TextStyle
 TextStyle allDmsTitleStyle = TextStyle(
     fontSize: 15.sp,
