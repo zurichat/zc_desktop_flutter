@@ -1,3 +1,4 @@
+
 { 
     "language" : "English",
     "@language": {
@@ -6,5 +7,129 @@
     "helloWorld" : "Hello World",
     "@helloWorld": {
         "description" : "A programmers first greeting"
+    },
+    "createAccounText" : "Create Account",
+    "@createAccounText": {
+        "description" : "Text to create Account"
+    },
+    "emailHintText" : "Email",
+    "@passwordHintText": {
+        "description" : "Hint text of email"
+    },
+    "passwordHintText" : "password",
+    "@passwordHintText": {
+        "description" : "Hint text of password"
+    },
+    "policyText" : "By signing up, you agree that you have accepted our User Notice and Privacy Policy",
+    "@policyText": {
+        "description" : "Policy text"
+    },
+    "signInText" : "Sign in",
+    "@signInText": {
+        "description" : "Text on sign in button"
+    },
+    "startUpTitleText" : "Unlimited Team Collaboration Platform",
+    "@startUpTitleText": {
+        "description" : "start up text"
+    },
+    "startUpSubtitleText1" : "Unlimited team collaboration platform with emphasis on team building,",
+    "@startUpSubtitleText1": {
+        "description" : "start up subtitle text"
+    },
+    "startUpSubtitleText2" : "fun, team management and above all, project management",
+    "@startUpSubtitleText2": {
+        "description" : "start up subtitle text2"
+    },
+    "errorHeaderText" : "For some reason, {appName} couldn’t load 😓",
+    "@errorHeaderText": {
+        "description" : "Error text"
+    },
+    "weAreSorryText" : "We’re quite sorry about this! Before you try to troubleshoot, please do check ",
+    "@weAreSorryText": {
+        "description" : "Apology text"
+    },
+    "troubleshoot" : "Troubleshoot",
+    "@troubleshoot": {
+        "description" : "Text to troubleshoot"
+    },
+    "mightBeFromOurEndText" : "- the problem maybe from our end",
+    "@mightBeFromOurEndText": {
+        "description" : "Blame Acceptance"
+    },
+    "fewThingsToTryText" : "Here are a few things to try:",
+    "@fewThingsToTryText": {
+        "description" : "Suggestions to users"
+    },
+    "internetIsNotBlockText" : "Make sure your security software isn’t blocking {appName}",
+    "@internetIsNotBlockText": {
+        "description" : "Internet text"
+    },
+    "checkInternetText" : "Check your internet connection.",
+    "@checkInternetText": {
+        "description" : "Suggestion to check internet"
+    },
+    "restartZuriChat" : "Restart {appName}",
+    "@restartZuriChat": {
+        "description" : "Restart Zuri Chat"
+    },
+    "checkHelpText" : "Check our Help center ",
+    "@checkHelpText": {
+        "description" : "Suggestion to check help center"
+    },
+    "moreDetailsText" : "for more details.",
+    "@moreDetailsText": {
+        "description" : "Suggestion to check for more details"
+    },
+    "memberText" : "members",
+    "@memberText": {
+        "description" : "member text"
+    },
+    "workspaceText" : "Workspace for",
+    "@workspaceText": {
+        "description" : "defining who workspace belongs to"
+    },
+    "openText" : "Open",
+    "@openText": {
+        "description" : "Open text on button"
+    },
+    "selectText" : " None Selected",
+    "@selectText": {
+        "description" : "None selected text"
+    },
+    "signIntoNewWorkspace" : "or sign into a new workspace here",
+    "@signIntoNewWorkspace": {
+        "description" : "Suggestion to sign into new workspace"
+    },
+    "privacyText" : "Privacy & Terms",
+    "@privacyText": {
+        "description" : "privacy text"
+    },
+    "contactUs" : "Contact Us",
+    "@contactUs": {
+        "description" : "Urging user to contact organization"
+    },
+    "changeRegion" : "Change Region",
+    "@changeRegion": {
+        "description" : "changeRegion"
+    },
+    "zuriChat" : "New to {appName}?",
+    "@zuriChat": {
+        "description" : "New to zuri chat text"
+    },
+    "createAnAccount" : "Create an account",
+    "@createAnAccount": {
+        "description" : "create an account hyperlink"
+    },
+    "chooseWorkspace" : "Choose a workspace",
+    "@chooseWorkspace": {
+        "description" : "Choose workspace text"
+    },
+    "addWorkspace" : "we'll add the workspaces you choose to your desktop app",
+    "@addWorkspace": {
+        "description" : "Promise to add workspace chosen by user"
+    },
+    "authErrorMessage" : "Unfortunately something went wrong. Please try again.",
+    "@authErrorMessage": {
+        "description" : "auth error message"
     }
 }

@@ -45,7 +45,7 @@ class LoginView extends HookWidget {
                               Image.asset(ZuriLogoPath),
                               verticalSpaceMedium,
                               Text(
-                                SignInText,
+                                 SignInText,
                                 style: headline3,
                               ),
                               if (model.hasError) ...[

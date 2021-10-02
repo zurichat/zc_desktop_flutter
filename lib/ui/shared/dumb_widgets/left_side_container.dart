@@ -31,7 +31,7 @@ class LeftSideContainer extends StatelessWidget {
             ),
             verticalSpaceSmall,
             Text(
-              StartUpSubTitleText,
+              "$StartUpSubTitleText1 \n $StartUpSubTitleText2",
               textAlign: TextAlign.center,
               style: subtitle2.copyWith(color: Colors.white),
             ),
