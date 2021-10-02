@@ -28,6 +28,7 @@ dependencies:
   intl: ^0.17.0
   flutter_hooks: ^0.17.0
   logger: ^1.0.0
+  getwidget: ^2.0.4
 
   # animation
   lottie: ^1.1.0
@@ -37,12 +38,15 @@ dependencies:
 
   # Network calls
   dio: ^4.0.0
+  dio_http_cache: ^0.3.0
   freezed_annotation:
   json_annotation:
   file_picker: ^4.1.1
 
   # Centrifuge
   centrifuge: ^0.7.0
+  # Url Launcher
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
@@ -50,7 +54,9 @@ dev_dependencies:
   stacked_generator: ^0.5.1
   build_runner: ^2.1.2
   freezed: 
-  json_serializable:
+  json_serializable: ^5.0.2
+  mockito:
+  analyzer: ^2.4.0
 
 flutter:
   generate: true

@@ -3,8 +3,8 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
-import 'package:zc_desktop_flutter/constants/asset_paths.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -54,18 +54,19 @@ class SignUpView extends HookWidget {
                                   CreateAccountText,
                                   style: headline3,
                                 ),
-                                if (model.hasError)
-                                  Text(
-                                    (model.modelError as Failure).message,
-                                    style:
-                                        headline6.copyWith(color: Colors.red),
-                                  ),
+                                if (model.hasError) ...[
+                                verticalSpaceMedium,
+                                Text(
+                                  (model.modelError as Failure).message,
+                                  style: boldCaptionStyle.copyWith(color: Colors.red),
+                                ),
+                              ],
                                 verticalSpaceMedium,
                                 Form(
                                   key: _formKey,
                                   child: Column(
                                     children: [
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Email',
                                         controller: emailController,
                                         keyboardType:
@@ -74,7 +75,7 @@ class SignUpView extends HookWidget {
                                         validator: context.validateEmail,
                                       ),
                                       verticalSpaceMedium,
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Password',
                                         password: true,
                                         isVisible: model.passwordVisibility,
@@ -85,7 +86,7 @@ class SignUpView extends HookWidget {
                                         validator: context.validatePassword,
                                       ),
                                       verticalSpaceMedium,
-                                      AuthInputField(
+                                      ZuriDeskInputField(
                                         label: 'Confirm Password',
                                         password: true,
                                         isVisible:

@@ -4,6 +4,8 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CheckEmailViewModel extends BaseViewModel {
   final _navigator = locator<NavigationService>();
@@ -103,7 +105,7 @@ class CheckEmailViewModel extends BaseViewModel {
         if(!isReset){
           await _auth.confirmEmail(otp);
         } else {
-          await _auth.confirmResetCode(otp);
+          await _auth.verifyPasswordResetCode(otp);
         }
         _navigator.navigateTo(isReset ? Routes.changePasswordView : Routes.successView);
       } catch (e) {
@@ -126,4 +128,16 @@ class CheckEmailViewModel extends BaseViewModel {
     super.dispose();
   }
 
+
+  void openGmail() async {
+    if (await canLaunch(GmailUrlText)) {
+      await launch(
+        GmailUrlText,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      throw 'Could not lauch the $GmailUrlText';
+    }
+  }
 } 

@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/constants/asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -33,8 +33,7 @@ class WindowTitleBar extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.w),
+                  padding: EdgeInsets.symmetric(vertical: 4.w),
                   child: WindowTitleBarBox(
                     child: Row(
                       children: [
@@ -98,7 +97,13 @@ class LeftSideAuth extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.menu, color: lightIconColor),
+        Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+            child: Icon(
+              Icons.menu,
+              color: lightIconColor,
+              size: 20,
+            )),
         horizontalSpaceMedium,
         Text('Sign in | Zuri',
             style: preferenceStyleBold.copyWith(color: lightIconColor)),

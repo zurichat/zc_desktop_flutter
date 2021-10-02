@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
@@ -59,7 +60,10 @@ class SignUpViewModel extends BaseViewModel with Validator {
     try {
       await _authService.signup(email: email, password: password);
     } catch (e) {
-      throw Failure(e.toString());
+      if(e.toString().contains('email')){
+        throw Failure(e.toString());
+      }
+      throw Failure(AuthErrorMessage);
     }
 
     _navigationService.navigateTo(Routes.checkEmailView, arguments: {

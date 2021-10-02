@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
-import 'package:zc_desktop_flutter/constants/asset_paths.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -52,7 +52,7 @@ class LoginView extends HookWidget {
                                 verticalSpaceMedium,
                                 Text(
                                   (model.modelError as Failure).message,
-                                  style: headline6.copyWith(color: Colors.red),
+                                  style: boldCaptionStyle.copyWith(color: Colors.red),
                                 ),
                               ],
                               verticalSpaceMedium,
@@ -60,7 +60,7 @@ class LoginView extends HookWidget {
                                 key: _formKey,
                                 child: Column(
                                   children: [
-                                    AuthInputField(
+                                    ZuriDeskInputField(
                                       label: 'Email',
                                       controller: emailController,
                                       keyboardType: TextInputType.emailAddress,
@@ -68,7 +68,7 @@ class LoginView extends HookWidget {
                                       validator: context.validateEmail,
                                     ),
                                     verticalSpaceMedium,
-                                    AuthInputField(
+                                    ZuriDeskInputField(
                                       label: 'Password',
                                       password: true,
                                       controller: passwordController,

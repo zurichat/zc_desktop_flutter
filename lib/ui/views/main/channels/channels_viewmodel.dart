@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
-
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
@@ -20,11 +19,13 @@ class ChannelsViewModel extends BaseViewModel {
   String? _orgId = '0';
   String? channelId = '0';
   List<ChannelMessage> _messages = [];
-  List<ChannelMessage> get messages => _messages;
-  Channel? _currentChannel;
 
-  Channel? get currentChannel => _currentChannel;
+  List<ChannelMessage> get messages => _messages;
+  Channel _currentChannel = Channel();
+
+  Channel get currentChannel => _currentChannel;
   bool _onMessageTileHover = false;
+
   bool get onMessageTileHover => _onMessageTileHover;
   bool _onHoverActionsHovered = false;
 
@@ -73,18 +74,20 @@ class ChannelsViewModel extends BaseViewModel {
   void runTask() async {
     _currentChannel = _channelService.getChannel();
     _currentLoggedInUser = _channelService.getCurrentLoggedInUser()!;
-    _channelService.addUserChannel(
-        _currentLoggedInUser.id, '1', true, 'prop1', 'prop2', 'prop3');
-    _messages = await _channelService.fetchChannelMessages('', '');
-    channelId = _channelService.getChannel().id;
-    notifyListeners();
+    _channelService.addUserToChannel(
+        id: _currentLoggedInUser.id,
+        role_id: '1',
+        is_admin: true,
+        prop1: 'prop1',
+        prop2: 'prop2',
+        prop3: 'prop3');
+    _messages = await _channelService.fetchChannelMessages();
     getChannelSocketId();
-
     listenToNewMessages();
   }
 
   void getChannelSocketId() async {
-    String channelSockId = await _channelService.getChannelSocketId();
+    String channelSockId = await _channelService.fetchChannelSocketId();
 
     websocketConnect(channelSockId);
   }
@@ -96,7 +99,7 @@ class ChannelsViewModel extends BaseViewModel {
 
   void listenToNewMessages() {
     _centrifugeService.messageStreamController.stream.listen((event) async {
-      _messages = await _channelService.fetchChannelMessages('', '');
+      _messages = await _channelService.fetchChannelMessages();
       notifyListeners();
     });
   }
@@ -133,8 +136,8 @@ class ChannelsViewModel extends BaseViewModel {
         int.parse(DateFormat('yyyy').format(dateToCheck)),
         int.parse(DateFormat('MM').format(dateToCheck)),
         int.parse(DateFormat('dd').format(dateToCheck)));
-    print(DateFormat('dd').format(dateToCheck));
-    print(aDate);
+    //print(DateFormat('dd').format(dateToCheck));
+    //print(aDate);
     if (aDate == today) {
       return 'Today ' +
           today.day.toString() +
@@ -170,7 +173,10 @@ class ChannelsViewModel extends BaseViewModel {
     notifyListeners();
     //u can get index by getting list length and minus 1
     var res = await _channelService.sendMessage(
-        _channelId, _currentLoggedInUser.id, message, _orgId);
+        channel_id: _channelId,
+        senderId: _currentLoggedInUser.id,
+        message: message,
+        org_id: _orgId);
     /* var index = _messages.indexWhere((Results) {
       return Results.message == res.data.message;
     });

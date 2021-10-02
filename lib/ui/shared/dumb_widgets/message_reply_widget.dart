@@ -24,13 +24,13 @@ class MessageReplyWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            UserAvatar(h: 30, w: 25, imageUri: model.userDefaultImageUrl),
+            AvatarPlaceHolder(h: 30, w: 25, imageUri: model.userDefaultImageUrl),
             horizontalSpaceTiny,
-            UserAvatar(h: 30, w: 25, imageUri: model.userDefaultImageUrl),
+            AvatarPlaceHolder(h: 30, w: 25, imageUri: model.userDefaultImageUrl),
             horizontalSpaceTiny,
-            UserAvatar(h: 30, w: 25, imageUri: model.userDefaultImageUrl),
+            AvatarPlaceHolder(h: 30, w: 25, imageUri: model.userDefaultImageUrl),
             horizontalSpaceTiny,
-            UserAvatar(h: 30, w: 25, imageUri: model.userDefaultImageUrl),
+            AvatarPlaceHolder(h: 30, w: 25, imageUri: model.userDefaultImageUrl),
             horizontalSpaceTiny,
 
             //TODO: Get message time of last reply in a thread

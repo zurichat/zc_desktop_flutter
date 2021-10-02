@@ -1,19 +1,17 @@
 import 'dart:convert';
 
-import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart' as currentLoggedInUser;
-import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
-import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 
 class DMService {
   final log = getLogger("DMService");
+  final _zuriApiService = locator<ZuriApiService>();
   DummyUser _user = DummyUser(name: "");
-  final _apiService = locator<ApiService>();
   final _localStorageService = locator<LocalStorageService>();
 
   void setUser(DummyUser user) {
@@ -30,7 +28,7 @@ class DMService {
     if (userJson != null) {
       if (userJson is String) {
         print(userJson);
-        return AuthResponse.fromJson(json.decode(userJson)).user;
+        return Auth.fromJson(json.decode(userJson)).user;
       }
       return null;
     }
@@ -38,66 +36,39 @@ class DMService {
 
   Future<SendMessageResponse> sendMessage(
       var roomId, var senderId, var message) async {
-    print(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    /*print(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         .format(DateTime.now().toUtc())
-        .toString());
-    final response = await _apiService
-        .post(_apiService.apiConstants.dmSendMessage(roomId), body: {
-      "sender_id": senderId,
-      "room_id": roomId,
-      "message": message,
-      "media": [],
-      "read": false,
-      "pinned": false,
-      "saved_by": [],
-      "threads": [],
-      "reactions": [],
-      "created_at": DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
-          .format(DateTime.now())
-          .toString(),
-    });
-
+        .toString());*/
+    final response = await _zuriApiService.sendMessageToDM(
+        roomId: roomId, senderId: senderId, message: message);
+    log.i(response);
     return SendMessageResponse.fromJson(response);
   }
 
   Future<String?> createRoom(
       currentLoggedInUser.User currentUser, DummyUser user) async {
-    final response = await _apiService.post(
-      _apiService.apiConstants.dmCreateRoom,
-      body: {
-        "org_id": "1",
-        "room_user_ids": [currentUser.id, user.id],
-        "bookmarks": ["0"],
-        "pinned": ["0"]
-      },
-    );
-    //614ae41044a9bd81cedc08be
+    final response =
+        await _zuriApiService.createRoom(currentUser: currentUser, user: user);
+    log.i(response);
     return CreateRoomResponse.fromJson(response).roomId;
   }
 
   Future<void> getRoomInfo(var roomId) async {
-    final response = await _apiService.get(
-        _apiService.apiConstants.dmGetRoomInfo,
-        queryParameters: {'room_id': roomId});
+    final response = await _zuriApiService.getRoomInfo(roomId: roomId);
+    log.i(response);
     var res = RoomInfoResponse.fromJson(response).numberOfUsers;
-    print("number of users: ${res}");
+    //print("number of users: ${res}");
   }
 
   Future<List<Results>> fetchRoomMessages(var roomId) async {
-    final response = await _apiService
-        .get(_apiService.apiConstants.dmFetchRoomMessages(roomId));
-    try {
-      return MessagesResponse.fromJson(response).results;
-    } catch (on, stacktrace) {
-      print(stacktrace);
-      return [];
-    }
+    final response = await _zuriApiService.fetchRoomMessages(roomId: roomId);
+    log.i(response);
+    return MessagesResponse.fromJson(response).results;
   }
 
   Future<void> markMessageAsRead(var messageId) async {
-    final response = await _apiService
-        .put(_apiService.apiConstants.dmMarkMessageAsRead(messageId), body: {});
+    final response = await _zuriApiService.markMessageAsRead(messageId);
+    log.i(response);
     var res = MarkMessageAsReadResponse.fromJson(response).read;
-    print("message has been read: ${res}");
   }
 }

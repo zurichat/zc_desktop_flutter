@@ -18,24 +18,24 @@ class OrganizationViewModel extends BaseViewModel {
 
   ScrollController controller = ScrollController();
 
-  Organization _currentOrganization = Organization(name: '');
+  Organization _currentOrganization = Organization();
 
   bool _showDMs = false;
   bool _showMenus = false;
   bool _showChannels = false;
 
-  List<Organization?>? _organization = [];
-  List<Channel>? _channels = [];
+  List<Organization> _organization = [];
+  List<Channel> _channels = [];
 
   //List<DM> _directMessages = [];
 
-  List<Organization?>? get organization => _organization;
+  List<Organization> get organization => _organization;
 
-  List<Channel>? get channels => _channels;
+  List<Channel> get channels => _channels;
 
   //List<DM> get directMessages => _directMessages;
 
-  Organization? get currentOrganization => _currentOrganization;
+  Organization get currentOrganization => _currentOrganization;
 
   bool get showDMs => _showDMs;
 
@@ -47,8 +47,8 @@ class OrganizationViewModel extends BaseViewModel {
   void setup() async {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
-    await _organizationService.saveOrganizationId(_currentOrganization.id!);
-    log.i(_currentOrganization.id);
+    _organizationService.saveOrganizationId(_currentOrganization.id);
+    log.d(" current organization id ${_currentOrganization.id}");
     // log.i(_channels);
   }
 
@@ -57,13 +57,13 @@ class OrganizationViewModel extends BaseViewModel {
     _channels = [];
     log.i("###################### $_channels");
     log.i(
-        "current selected organization index ${getSelectedOrganizationIndex()} and index to change to $index");
+        "current selected organization ${getSelectedOrganizationIndex()! + 1} and to change to ${index + 1}");
     if (index != getSelectedOrganizationIndex()!) {
       await runBusyFuture(setupOrganization());
       // Save the newly selected org id in preferences when a new organization item is tapped
-      await _organizationService.saveOrganizationId(_currentOrganization.id!);
+      _organizationService.saveOrganizationId(_currentOrganization.id);
       setSelectedOrganization(index);
-      _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
+      _currentOrganization = organization[getSelectedOrganizationIndex()!];
     }
     return;
   }
@@ -79,20 +79,19 @@ class OrganizationViewModel extends BaseViewModel {
 
   Future<void> setupOrganization() async {
     await getOrganizations();
-    _currentOrganization = organization![getSelectedOrganizationIndex()!]!;
     await getChannels();
   }
 
   Future<void> getOrganizations() async {
     _organization = await _organizationService.getOrganizations();
-    log.i(_organization);
-    log.d(" current organization id ${_currentOrganization.id}");
   }
 
   Future<void> getChannels() async {
-    _channels = await _channelService.getChannelsList(_currentOrganization.id);
-    _channelService.setChannel(_channels!.first);
-    log.d("${_channels}");
+    _currentOrganization = organization[getSelectedOrganizationIndex()!];
+    _channels = await _channelService.getChannels(
+        organizationId: _currentOrganization.id);
+    _channelService.setChannel(_channels[0]);
+    log.i("${_channels}");
   }
 
   void openChannelsList() {
@@ -110,13 +109,17 @@ class OrganizationViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void goToAllDmView() {
+    _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
+  }
+
   // TODO: go to workspace creation page
   void goToCreateWorkspace() {
     _navigationService.navigateTo(Routes.createWorkspaceView);
   }
 
   void goToChannelsView({int index = 0}) {
-    _channelService.setChannel(_channels![index]);
+    _channelService.setChannel(_channels[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
@@ -125,12 +128,22 @@ class OrganizationViewModel extends BaseViewModel {
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
-  bool showSelectedOrg(int index) {
+  bool selectedOrg(int index) {
+    log.d(
+        "new selected index $index currently seletected channel index ${getSelectedOrganizationIndex()!}");
     if (index == getSelectedOrganizationIndex()!) {
       return true;
     }
     return false;
   }
+
+  /*bool selectedChannel(int index) {
+    log.d("new selected index $index currently seletected channel index $selectedChannelIndex");
+    if (index == selectedChannelIndex) {
+      return true;
+    }
+    return false;
+  }*/
 
   @override
   void dispose() {

@@ -42,7 +42,7 @@ class ResetPasswordView extends StatelessWidget {
                   verticalSpaceSmall,
                   Container(
                     width: 502.w,
-                    child: AuthInputField(
+                    child: ZuriDeskInputField(
                       label: 'Email',
                       onChanged: (value) {
                         model.setEmail(value);

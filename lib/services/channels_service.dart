@@ -1,141 +1,89 @@
 import 'dart:convert';
 
 import 'package:intl/intl.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart'
     as currentLoggedInUser;
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/api/api_service.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 
 const insertedOrganisationId = 'insertedId';
-const insertedOrganisation = '614679ee1a5607b13c00bcb7';
 const userChannelId = 'userChannelId';
-const insertedChannel = '614679ee1a5607b13c00bcb7';
 
 @LazySingleton()
-class ChannelsService {
-  final log = getLogger('ChannelsApiService');
+class ChannelsService with ReactiveServiceMixin {
+  final log = getLogger('ChannelsService');
 
   //Declare the services that are dependent upon
   final _localStorageService = locator<LocalStorageService>();
   final _organizationService = locator<OrganizationService>();
-
-  final _apiService = locator<ApiService>();
-  List<Channel> channelsList = [];
+  final _zuriApiService = locator<ZuriApiService>();
 
   currentLoggedInUser.User? getCurrentLoggedInUser() {
     var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
     if (userJson != null) {
       if (userJson is String) {
-        print(userJson);
-        return AuthResponse.fromJson(json.decode(userJson)).user;
+        return Auth.fromJson(json.decode(userJson)).user;
       }
       return null;
     }
   }
 
-  Channel? _currentChannel =
-      Channel(id: "", private: false, name: "", description: "", owner: "");
-
-  List<Channel> _channels = [
-    Channel(
-        id: "1",
-        name: "General",
-        owner: "Mark",
-        description: "",
-        private: false),
-    Channel(
-        id: "2",
-        name: "Announcements",
-        owner: "Mark",
-        description: "",
-        private: false),
-    Channel(
-        id: "3",
-        name: "team-zuri-desktop-client",
-        owner: "Mark",
-        description: "",
-        private: false),
-    Channel(
-        id: "4",
-        name: "stage 9",
-        owner: "Mark",
-        description: "",
-        private: false),
-    Channel(
-        id: "5", name: "games", owner: "Mark", description: "", private: false),
-  ];
+  Channel _currentChannel = Channel();
 
   void setChannel(Channel channel) {
     this._currentChannel = channel;
   }
 
-  void setSelectedChannel(int? index) {
-    _currentChannel = channelsList.elementAt(index ?? 0);
-  }
-
   Channel getChannel() {
-    return this._currentChannel!;
+    return this._currentChannel;
   }
 
   // This gets the selected organisation_id
-  String get selectedOrganisationId {
+  String get selectedCreatedOrganisationId {
     return _localStorageService.getFromDisk(insertedOrganisationId) as String;
   }
 
-  /*Future<List<Channel>> getChannelsList() async {
-    await Future.delayed(Duration(seconds: 2));
-    return _channels;
-  }*/
-
   /// This gets the currently logged in user respose
-  AuthResponse get _authResponse {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    return AuthResponse.fromJson(jsonDecode(authResponse as String));
+  Auth get _auth {
+    final auth = _localStorageService.getFromDisk(localAuthResponseKey);
+    return Auth.fromJson(jsonDecode(auth as String));
   }
 
   // The function for Channels api calls can go in here
   // https://channels.zuri.chat/api/v1/61459d8e62688da5302acdb1/channels/
 
   /// This is used to get the list of channels on the page
-  Future<List<Channel>> getChannelsList(String? organizationId) async {
-    final response = await _apiService.get(
-      _apiService.apiConstants.getcreateChannelUri(organizationId!),
-      headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
-    );
-
-    //log.d(response);
-
-    channelsList = List.from(
-      response.map((map) => Channel.fromJson(map)).toList(),
-    );
-    return channelsList;
+  Future<List<Channel>> getChannels({String? organizationId}) async {
+    log.i("getChannels called");
+    final response = await _zuriApiService.fetchChannelsListUsingOrgId(
+        organizationId: organizationId, token: _auth.user!.token);
+    log.i(response);
+    return List.from(response.map((value) => Channel.fromJson(value)));
   }
 
   /// This is used to create a channel on the page
-  Future<void> createChannels(
-    String name,
-    String owner,
-    String description,
-    bool private,
-  ) async {
+  Future<void> createChannels({
+    String? name,
+    String? owner,
+    String? description,
+    required bool private,
+  }) async {
+    final response = await _zuriApiService.createChannelsUsingOrgId(
+        sessionId: _auth.sessionID,
+        insertedOrganization: insertedOrganisationId,
+        name: name,
+        owner: owner,
+        description: description,
+        private: private);
+    log.i(response);
     // Getting stored AuthResponse from local storage
-    final response = await _apiService.post(
-      _apiService.apiConstants.getcreateChannelUri(insertedOrganisation),
-      body: {
-        "name": name,
-        "owner": owner,
-        "description": description,
-        "private": private,
-      },
-      headers: {'Authorization': 'Bearer ${_authResponse.sessionID}'},
-    );
-
     String insertedId = response['_id'];
     print(insertedId);
     _localStorageService.saveToDisk(
@@ -145,87 +93,61 @@ class ChannelsService {
   }
 
   /// This is used to create a channel on the page
-  Future<void> addUserChannel(
-    String id,
-    String role_id,
-    bool is_admin,
-    String prop1,
-    String prop2,
-    String prop3,
-  ) async {
-    // Getting stored AuthResponse from local storage
-    final orgId = await _organizationService.getOrganizationId();
-    log.i(orgId);
-    var res = await _apiService.post(
-      _apiService.apiConstants.getuserChannelUri(orgId, getChannel().id!),
-      body: {
-        "_id": id,
-        "role_id": role_id,
-        "is_admin": is_admin,
-        "notifications": {
-          "additionalProp1": prop1,
-          "additionalProp2": prop2,
-          "additionalProp3": prop3
-        },
-      },
-      //headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
-    );
-    print(res);
+  Future<void> addUserToChannel({
+    required String id,
+    required String role_id,
+    required bool is_admin,
+    String? prop1,
+    String? prop2,
+    String? prop3,
+  }) async {
+    await _zuriApiService.addUserToChannel(
+        _organizationService.getOrganizationId(), _currentChannel.id,
+        id: id,
+        role_id: role_id,
+        is_admin: is_admin,
+        prop1: prop1,
+        prop2: prop2,
+        prop3: prop3);
+  }
+
+  ///[handleRemoveUserFromChannel] takes current channel id and [member_id] or user_id
+  Future<void> handleRemoveUserFromChannel({
+    required String channel_id,
+    required String member_id,
+  }) async {
+    final org_id = await _organizationService.getOrganizationId();
+    await _zuriApiService.removeUserFromChannel(
+        organizationId: org_id,
+        channelId: channel_id,
+        memberId: member_id);
   }
 
   Future<dynamic> sendMessage(
-      var channel_id, var senderId, var message, var org_id) async {
+      {var channel_id, var senderId, var message, var org_id}) async {
     print(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         .format(DateTime.now().toUtc())
         .toString());
-    final response = await _apiService.post(
-        _apiService.apiConstants.channelSendMessage(_currentChannel!.id ?? '0',
-            _organizationService.getOrganizationId()),
-        body: {
-          "user_id": senderId,
-          "content": message,
-          "files": [],
-          "event": {}
-        });
-
-    return response;
+    return await _zuriApiService.sendMessageToChannel(
+        channel_id: channel_id,
+        message: message,
+        senderId: senderId,
+        organization_id: org_id);
   }
 
-  Future<List<ChannelMessage>> fetchChannelMessages(
-      var org_id, var channel_id) async {
-    final response = await _apiService.get(_apiService.apiConstants
-        .channelFetchMessages(
-            _currentChannel!.id!, _organizationService.getOrganizationId()));
-    print(response);
-    try {
-      return ChannelMessagesResponse.fromJson(response).data;
-    } catch (on, stacktrace) {
-      print(stacktrace);
-      return [];
-    }
+  Future<List<ChannelMessage>> fetchChannelMessages() async {
+    final response = await _zuriApiService.fetchChannelMessages(
+        channelId: _currentChannel.id,
+        organizationId: _organizationService.getOrganizationId());
+    log.i(response);
+    return ChannelMessagesResponse.fromJson(response).data;
   }
 
-  Future<String> getChannelSocketId() async {
+  Future<String> fetchChannelSocketId() async {
     final orgId = _organizationService.getOrganizationId();
-
-    String socketName = '';
-
-    try {
-      final response = await _apiService.get(
-        _apiService.apiConstants.getChannelSocketId(_currentChannel!.id ?? '0',
-            _organizationService.getOrganizationId()),
-        headers: {'Authorization': 'Bearer ${_authResponse.user.token}'},
-      );
-      print(response);
-      socketName = response['socket_name'] ?? '';
-      log.i(socketName);
-    } on Exception catch (e) {
-      log.e(e.toString());
-      return 'error';
-    }
-    print('found socket name ');
-    print(socketName);
-
-    return socketName;
+    return _zuriApiService.fetchChannelSocketId(
+        organizationId: orgId,
+        channelId: _currentChannel.id,
+        token: _auth.user!.token);
   }
 }
