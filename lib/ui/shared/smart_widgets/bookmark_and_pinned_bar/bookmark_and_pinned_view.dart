@@ -668,7 +668,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
           viewModelBuilder: () => BookmarkAndPinnedMessagesViewModel(),
           builder: (context, model, child) => Container(
                 width: 580.w,
-                height: 240.h,
+                height: 280.h,
                 padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
                 child: Column(children: [
                   Column(
@@ -755,7 +755,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
           viewModelBuilder: () => BookmarkAndPinnedMessagesViewModel(),
           builder: (context, model, child) => Container(
                 width: 270.w,
-                height: 240.h,
+                height: 280.h,
                 padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
                 child: Column(children: [
                   Column(
