@@ -93,7 +93,7 @@ class CreateWorkspaceStage1 extends HookWidget {
                               width: 600.w,
                               child: Form(
                                 key: _formKey,
-                                child: AuthInputField(
+                                child: ZuriDeskInputField(
                                   controller: nameController,
                                   keyboardType: TextInputType.emailAddress,
                                   onChanged: (value) {

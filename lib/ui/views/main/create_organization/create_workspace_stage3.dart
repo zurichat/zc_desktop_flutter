@@ -96,7 +96,7 @@ class CreateWorkspaceStage3 extends StatelessWidget {
                             verticalSpaceSmall,
                             Container(
                               width: 650.w,
-                              child: AuthInputField(
+                              child: ZuriDeskInputField(
                                 controller: TextEditingController(),
                                 keyboardType: TextInputType.emailAddress,
                                 onChanged: (_) {},

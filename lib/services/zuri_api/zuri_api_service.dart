@@ -297,6 +297,14 @@ class ZuriApiService implements Api {
   }
 
   @override
+  Future<dynamic> removeUserFromChannel(
+      {required organizationId, required channelId, required memberId}) async {
+    return await _delete(
+      getRemoveChannelMemberUri(channelId, organizationId, memberId),
+    );
+  }
+
+  @override
   Future<dynamic> createChannelsUsingOrgId(
       {required sessionId,
       required insertedOrganization,

@@ -16,6 +16,12 @@ final kHeading2TextStyle = TextStyle(
   fontFamily: 'Lato',
 );
 
+final channelDetailTitleTextStyle = TextStyle(
+  fontSize: 17.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
 final kHeading3TextStyle = TextStyle(
   fontSize: 31.sp,
   fontWeight: FontWeight.w600,

@@ -55,7 +55,7 @@ class ChangePasswordView extends StatelessWidget {
                               verticalSpaceMedium,
                               Column(
                                 children: [
-                                  AuthInputField(
+                                  ZuriDeskInputField(
                                     label: 'Password',
                                     password: true,
                                     isVisible: model.isPasswordVisible,
@@ -67,7 +67,7 @@ class ChangePasswordView extends StatelessWidget {
                                     hintPlaceHolder: 'Password',
                                   ),
                                   verticalSpaceSmall,
-                                  AuthInputField(
+                                  ZuriDeskInputField(
                                     label: 'Confirm Password',
                                     password: true,
                                     isVisible: model.isPasswordVisible,
