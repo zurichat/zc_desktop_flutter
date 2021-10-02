@@ -42,13 +42,13 @@ class ErrorView extends StatelessWidget {
                     verticalSpaceSmall,
                     RichText(
                         text: TextSpan(
-                            text:
-                                WeAreSorryText,
+                            text: WeAreSorryText,
                             style: boldCaptionStyle,
                             children: [
                           TextSpan(
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () => model.launchUrl(ZuriStatusUrlText),
+                                ..onTap =
+                                    () => model.launchUrl(ZuriStatusUrlText),
                               text: '$ZuriStatusUrlText ',
                               style: boldCaptionStyle.copyWith(
                                 color: kcPrimaryColor,
@@ -75,9 +75,9 @@ class ErrorView extends StatelessWidget {
                       const BuildCircularDot(),
                       horizontalSpaceSmall,
                       Text(
-                          InternetIsnotBlockText,
-                          style: boldCaptionStyle,
-                        )
+                        InternetIsnotBlockText,
+                        style: boldCaptionStyle,
+                      )
                     ]),
                     verticalSpaceRegularOne,
                     Row(
@@ -128,16 +128,16 @@ class ErrorView extends StatelessWidget {
   }
 }
 
-// class BuildCircularDot extends StatelessWidget {
-//   const BuildCircularDot({Key? key}) : super(key: key);
+class BuildCircularDot extends StatelessWidget {
+  const BuildCircularDot({Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 10,
-//       width: 10,
-//       decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(10), color: hoverColor),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 10,
+      width: 10,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: hoverColor),
+    );
+  }
+}
