@@ -31,5 +31,10 @@
     "createAnAccount" : "انشئ حساب",
     "chooseWorkspace" : "اختر مساحة العمل",
     "addWorkspace" : "سنضيف مساحات العمل التي تختارها إلى تطبيق سطح المكتب الخاص بك",
-    "authErrorMessage" : "للأسف حدث خطأ ما. حاول مرة اخرى"
+    "authErrorMessage" : "للأسف حدث خطأ ما. حاول مرة اخرى",
+    "logInText" : "يسجل دخول",
+    "easySignIn" : "من السهل تسجيل الدخول باستخدام",
+    "noAccountText" : "ليس لديك حساب؟",
+    "signUpText" : "اشتراك",
+    "forgotPasswordText" : "هل نسيت كلمة السر؟"
 }
