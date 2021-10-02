@@ -31,5 +31,10 @@
     "createAnAccount" : "Ein Konto erstellen",
     "chooseWorkspace" : "Wählen Sie einen Arbeitsbereich",
     "addWorkspace" : "Wir fügen die von Ihnen ausgewählten Arbeitsbereiche zu Ihrer Desktop-App hinzu",
-    "authErrorMessage" : "Leider ist etwas schief gelaufen. Bitte versuche es erneut."
+    "authErrorMessage" : "Leider ist etwas schief gelaufen. Bitte versuche es erneut.",
+    "logInText" : "Einloggen",
+    "easySignIn" : "Einfach anmelden mit",
+    "noAccountText" : "Sie haben kein Konto?",
+    "signUpText" : "Anmeldung",
+    "forgotPasswordText" : "Passwort vergessen?"
 }
