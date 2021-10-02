@@ -7,10 +7,17 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+=======
+import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
+
+import '../ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
+>>>>>>> a0b5fabe5eea3446523809d41fa052d87dc9c459
 import '../ui/views/auth/change_password/change_password_view.dart';
 import '../ui/views/auth/check_email/check_email_view.dart';
 import '../ui/views/auth/forgot_password/forgot_password_view.dart';
@@ -182,12 +189,20 @@ class StackedRouter extends RouterBase {
 
 class OrganizationViewRoutes {
   static const String channelsView = '/';
+<<<<<<< HEAD
+=======
+  static const String channelDmView = '/channel-dm-view';
+>>>>>>> a0b5fabe5eea3446523809d41fa052d87dc9c459
   static const String channelsListView = '/channels-list-view';
   static const String createChannelView = '/create-channel-view';
   static const String dmView = '/dm-view';
   static const String allDmsView = '/all-dms-view';
   static const all = <String>{
     channelsView,
+<<<<<<< HEAD
+=======
+    channelDmView,
+>>>>>>> a0b5fabe5eea3446523809d41fa052d87dc9c459
     channelsListView,
     createChannelView,
     dmView,
@@ -200,6 +215,10 @@ class OrganizationViewRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(OrganizationViewRoutes.channelsView, page: ChannelsView),
+<<<<<<< HEAD
+=======
+    RouteDef(OrganizationViewRoutes.channelDmView, page: ChannelDmView),
+>>>>>>> a0b5fabe5eea3446523809d41fa052d87dc9c459
     RouteDef(OrganizationViewRoutes.channelsListView, page: ChannelsListView),
     RouteDef(OrganizationViewRoutes.createChannelView, page: CreateChannelView),
     RouteDef(OrganizationViewRoutes.dmView, page: DmView),
@@ -214,6 +233,26 @@ class OrganizationViewRouter extends RouterBase {
         settings: data,
       );
     },
+<<<<<<< HEAD
+=======
+    ChannelDmView: (data) {
+      var args = data.getArgs<ChannelDmViewArguments>(
+        orElse: () => ChannelDmViewArguments(),
+      );
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => ChannelDmView(
+          key: args.key,
+          margin: args.margin,
+          color: args.color,
+          leading: args.leading,
+          trailing: args.trailing,
+          channel: args.channel,
+          dm: args.dm,
+        ),
+        settings: data,
+      );
+    },
+>>>>>>> a0b5fabe5eea3446523809d41fa052d87dc9c459
     ChannelsListView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const ChannelsListView(),
@@ -250,3 +289,25 @@ class CreateWorkspaceViewArguments {
   final Key? key;
   CreateWorkspaceViewArguments({this.key});
 }
+<<<<<<< HEAD
+=======
+
+/// ChannelDmView arguments holder class
+class ChannelDmViewArguments {
+  final Key? key;
+  final EdgeInsetsGeometry? margin;
+  final Color? color;
+  final Widget leading;
+  final Widget trailing;
+  final bool? channel;
+  final bool? dm;
+  ChannelDmViewArguments(
+      {this.key,
+      this.margin,
+      this.color,
+      this.leading = const SizedBox(),
+      this.trailing = const SizedBox(),
+      this.channel,
+      this.dm});
+}
+>>>>>>> a0b5fabe5eea3446523809d41fa052d87dc9c459

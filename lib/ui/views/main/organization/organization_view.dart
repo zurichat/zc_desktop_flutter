@@ -14,6 +14,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
@@ -215,7 +216,9 @@ class OrganizationWrapper extends StatelessWidget {
                         ),
                       ),
                       //TODO: Center Area
-                      centerChild!,
+                      // centerChild!,
+                      //TODO: Reusable view for channel and dms
+                      ChannelDmView(channel: true, dm: false),
                     ],
                   ),
                 ),
