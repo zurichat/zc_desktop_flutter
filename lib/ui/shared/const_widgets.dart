@@ -18,14 +18,18 @@ class SVGAssetPaths {
   static final thread = "assets/icons/threads.svg";
   static final newDm = "assets/icons/new_dm.svg";
   static final right_icon = "assets/icons/right_icon.svg";
-  static final shortcut = "assets/icons/shortcuts.svg"; 
-  static final add_reaction_container = "assets/icons/add_reaction_container.svg";
+  static final shortcut = "assets/icons/shortcuts.svg";
+  static final add_reaction_container =
+      "assets/icons/add_reaction_container.svg";
   static final add_saved_container = "assets/icons/add_saved_container.svg";
-  static final more_actions_container = "assets/icons/more_actions_container.svg";
-  static final reply_thread_container = "assets/icons/reply_thread_container.svg";
-  static final share_message_container = "assets/icons/share_message_container.svg";
+  static final more_actions_container =
+      "assets/icons/more_actions_container.svg";
+  static final reply_thread_container =
+      "assets/icons/reply_thread_container.svg";
+  static final share_message_container =
+      "assets/icons/share_message_container.svg";
+  static final ribbon = "assets/icons/ribbon.svg";
 }
-
 
 class ShortCuts {
   Widget contain({Widget? child, double h = 17, double w = 30}) {
@@ -143,32 +147,25 @@ class ShortCuts {
     );
   }
 
-   Widget slash() {
+  Widget slash() {
     return contain(
-      child: Center(
-        child: Text('/'),
-      )
-      
-    );
+        child: Center(
+      child: Text('/'),
+    ));
   }
 
-   Widget esc() {
+  Widget esc() {
     return contain(
       child: Center(
         child: Text('ESC'),
       ),
-      
     );
   }
 
-   Widget alt() {
+  Widget alt() {
     return contain(
-      child: Center(
-        child: Text('/'),
-      )
-      
-    );
+        child: Center(
+      child: Text('/'),
+    ));
   }
-
 }
-
