@@ -36,13 +36,29 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
 
 _$_AuthResponse _$$_AuthResponseFromJson(Map<String, dynamic> json) =>
     _$_AuthResponse(
-      sessionID: json['session_id'] as String,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      status: json['status'] as int?,
+      message: json['message'] as String?,
+      data: json['data'] == null
+          ? null
+          : Auth.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_AuthResponseToJson(_$_AuthResponse instance) =>
     <String, dynamic>{
-      'session_id': instance.sessionID,
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+_$_Auth _$$_AuthFromJson(Map<String, dynamic> json) => _$_Auth(
+      sessionID: json['sessionID'] as String?,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_AuthToJson(_$_Auth instance) => <String, dynamic>{
+      'sessionID': instance.sessionID,
       'user': instance.user,
     };
 
@@ -543,6 +559,18 @@ Map<String, dynamic> _$$_BaseChatToJson(_$_BaseChat instance) =>
       'chats': instance.chats,
     };
 
+_$_ChannelResponse _$$_ChannelResponseFromJson(Map<String, dynamic> json) =>
+    _$_ChannelResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Channel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_ChannelResponseToJson(_$_ChannelResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
 _$_Channel _$$_ChannelFromJson(Map<String, dynamic> json) => _$_Channel(
       id: json['id'] as String?,
       name: json['name'] as String?,
@@ -560,20 +588,38 @@ Map<String, dynamic> _$$_ChannelToJson(_$_Channel instance) =>
       'private': instance.private,
     };
 
+_$_OrganizationResponse _$$_OrganizationResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_OrganizationResponse(
+      status: json['status'] as int?,
+      message: json['message'] as String?,
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Organization.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_OrganizationResponseToJson(
+        _$_OrganizationResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
 _$_Organization _$$_OrganizationFromJson(Map<String, dynamic> json) =>
     _$_Organization(
-      id: json['_id'] as String?,
-      logoUrl: json['logo_url'] as String?,
+      id: json['id'] as String?,
+      logoUrl: json['logoUrl'] as String?,
       name: json['name'] as String?,
-      workspaceUrl: json['workspace_url'] as String?,
+      workspaceUrl: json['workspaceUrl'] as String?,
     );
 
 Map<String, dynamic> _$$_OrganizationToJson(_$_Organization instance) =>
     <String, dynamic>{
-      '_id': instance.id,
-      'logo_url': instance.logoUrl,
+      'id': instance.id,
+      'logoUrl': instance.logoUrl,
       'name': instance.name,
-      'workspace_url': instance.workspaceUrl,
+      'workspaceUrl': instance.workspaceUrl,
     };
 
 _$_ChannelMessagesResponse _$$_ChannelMessagesResponseFromJson(

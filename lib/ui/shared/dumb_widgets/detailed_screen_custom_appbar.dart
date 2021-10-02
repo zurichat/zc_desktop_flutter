@@ -6,6 +6,7 @@ class DetailedCustomAppBar extends StatelessWidget {
   const DetailedCustomAppBar(
       {Key? key,
       this.margin,
+      this.color,
       this.leading = const SizedBox(),
       this.trailing = const SizedBox()})
       : super(key: key);
@@ -13,15 +14,16 @@ class DetailedCustomAppBar extends StatelessWidget {
   final Widget leading;
   final Widget trailing;
   final EdgeInsetsGeometry? margin;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50.h,
       width: fullWidth(context),
-      //color: Theme.of(context).accentColor,
+      color: color,
       margin: margin,
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.0.h),
+      padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 5.0.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

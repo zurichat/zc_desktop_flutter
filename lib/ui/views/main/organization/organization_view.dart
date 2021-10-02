@@ -14,6 +14,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
@@ -150,7 +151,7 @@ class OrganizationWrapper extends StatelessWidget {
                                                     .name ??
                                                 '',
                                           ),
-                                          trailing: NewMessageBtn(),
+                                          // trailing: NewMessageBtn(),
                                         ),
                                         DisplayMenu(model!),
                                         verticalSpaceRegular,
@@ -214,7 +215,8 @@ class OrganizationWrapper extends StatelessWidget {
                         ),
                       ),
                       //TODO: Center Area
-                      centerChild!,
+                      // centerChild!,
+                      ChannelDmView(channel: true, dm: false,),
                     ],
                   ),
                 ),

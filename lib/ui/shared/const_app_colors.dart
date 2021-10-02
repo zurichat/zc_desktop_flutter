@@ -15,6 +15,7 @@ const Color kcDisplayChannelColor2 = Color.fromRGBO(153, 153, 153, 0.4);
 const Color kcDisplayChannelColor3 = Color.fromRGBO(153, 153, 153, 0.1);
 const Color kcDisplayChannelColor4 = Color.fromRGBO(153, 153, 153, 1);
 const Color kcCreateChannelHoverColor = Color.fromRGBO(225, 253, 244, 1);
+const Color kcCreateChannelHoverColor1 = Color.fromRGBO(188, 249, 230, 1);
 const Color kcBorderColor = Color.fromRGBO(231, 231, 231, 1);
 const Color kcViewColor = Color.fromRGBO(196, 196, 196, 0.1);
 const Color createChannelHeaderColor = Color(0xFF1D1C1D);

@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/check_email/check_email_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/forgot_password/forgot_password_view.dart';
@@ -45,6 +46,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
       page: OrganizationView,
       children: [
         MaterialRoute(page: ChannelsView, initial: true),
+        MaterialRoute(page: ChannelDmView),
         MaterialRoute(page: ChannelsListView),
         MaterialRoute(page: CreateChannelView),
         MaterialRoute(page: DmView),

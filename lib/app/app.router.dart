@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import '../ui/views/auth/change_password/change_password_view.dart';
 import '../ui/views/auth/check_email/check_email_view.dart';
 import '../ui/views/auth/forgot_password/forgot_password_view.dart';
@@ -170,11 +171,13 @@ class StackedRouter extends RouterBase {
 
 class OrganizationViewRoutes {
   static const String channelsView = '/';
+  static const String channelDmView = '/channel-dm-view';
   static const String channelsListView = '/channels-list-view';
   static const String createChannelView = '/create-channel-view';
   static const String dmView = '/dm-view';
   static const all = <String>{
     channelsView,
+    channelDmView,
     channelsListView,
     createChannelView,
     dmView,
@@ -186,6 +189,7 @@ class OrganizationViewRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(OrganizationViewRoutes.channelsView, page: ChannelsView),
+    RouteDef(OrganizationViewRoutes.channelDmView, page: ChannelDmView),
     RouteDef(OrganizationViewRoutes.channelsListView, page: ChannelsListView),
     RouteDef(OrganizationViewRoutes.createChannelView, page: CreateChannelView),
     RouteDef(OrganizationViewRoutes.dmView, page: DmView),
@@ -196,6 +200,12 @@ class OrganizationViewRouter extends RouterBase {
     ChannelsView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => ChannelsView(),
+        settings: data,
+      );
+    },
+    ChannelDmView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => ChannelDmView(),
         settings: data,
       );
     },
