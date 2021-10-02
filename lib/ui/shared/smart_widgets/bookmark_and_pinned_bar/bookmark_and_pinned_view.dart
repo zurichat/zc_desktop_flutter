@@ -169,7 +169,6 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (context) => Dialog(
-                                  alignment: Alignment.center,
                                   child: ActionsBookmarkDialog(),
                                 ));
                       }),
@@ -335,9 +334,8 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                     toggleDropdownForAddBookmark(close: true, context: context);
                     showDialog(
                         context: context,
-                        builder: (context) => Dialog(
-                            alignment: Alignment.center,
-                            child: AddBookmarkDialog()));
+                        builder: (context) =>
+                            Dialog(child: AddBookmarkDialog()));
                     model.onPinnedMessage(false);
                     // view.toggleDropdownForAddBookmarkForAddBookmarkForAddBookmarkForAddBookmark(context: context, close: true);
                     print('AddBookMark Clicked');
@@ -668,7 +666,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
           viewModelBuilder: () => BookmarkAndPinnedMessagesViewModel(),
           builder: (context, model, child) => Container(
                 width: 580.w,
-                height: 240.h,
+                height: 280.h,
                 padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
                 child: Column(children: [
                   Column(
@@ -755,7 +753,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
           viewModelBuilder: () => BookmarkAndPinnedMessagesViewModel(),
           builder: (context, model, child) => Container(
                 width: 270.w,
-                height: 240.h,
+                height: 280.h,
                 padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
                 child: Column(children: [
                   Column(
@@ -796,9 +794,8 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                           Navigator.pop(context, true);
                           showDialog(
                               context: context,
-                              builder: (context) => Dialog(
-                                  alignment: Alignment.center,
-                                  child: EditBookmarkDialog()));
+                              builder: (context) =>
+                                  Dialog(child: EditBookmarkDialog()));
                         },
                       ),
                       verticalSpaceSmall,
@@ -810,9 +807,8 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                           Navigator.pop(context, true);
                           showDialog(
                               context: context,
-                              builder: (context) => Dialog(
-                                  alignment: Alignment.center,
-                                  child: DeleteBookmarkDialog()));
+                              builder: (context) =>
+                                  Dialog(child: DeleteBookmarkDialog()));
                         },
                       ),
                     ],
@@ -845,7 +841,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
 
   BookMarkedItem(
           {required String label,
-          String? tip,
+          required String tip,
           required final String icon,
           required VoidCallback onClicked}) =>
       ViewModelBuilder<BookmarkAndPinnedMessagesViewModel>.reactive(
@@ -973,7 +969,6 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                             showDialog(
                                 context: context,
                                 builder: (context) => Dialog(
-                                    alignment: Alignment.center,
                                     child: DeletePinnedItemDialog(
                                         message:
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit placerat tincidunt ,consectetur adipiscing elit. Vestibulum sit placerat tincidunt,consectetur adipiscing elit. Vestibulum sit placerat tincidunt',
