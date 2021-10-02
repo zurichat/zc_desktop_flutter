@@ -332,7 +332,7 @@ class OrganizationResponse with _$OrganizationResponse {
   factory OrganizationResponse({
     @Default(0) int status,
     @Default('') String message,
-    @Default([]) List<Organization>? data,
+    @Default([]) List<Organization> data,
   }) = _OrganizationResponse;
 
   factory OrganizationResponse.fromJson(Map<String, dynamic> json) =>

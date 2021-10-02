@@ -82,8 +82,8 @@ final kLeftSideBarStyle = TextStyle(
 );
 
 final dropDownBodyTextStyle = TextStyle(
-  fontSize: 15.sp,
-  color: Colors.white,
+  fontSize: 12.sp,
+  color: Colors.black,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );

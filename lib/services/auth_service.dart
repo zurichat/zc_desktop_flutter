@@ -20,6 +20,7 @@ class AuthService {
       {required String email, required String password}) async {
     final response =
         await _zuriApiService.login(email: email, password: password);
+    log.i(response);
     auth = AuthResponse.fromJson(response).data!;
     _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
   }

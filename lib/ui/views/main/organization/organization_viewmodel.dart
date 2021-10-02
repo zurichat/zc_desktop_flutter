@@ -57,7 +57,7 @@ class OrganizationViewModel extends BaseViewModel {
     _channels = [];
     log.i("###################### $_channels");
     log.i(
-        "current selected organization index ${getSelectedOrganizationIndex()} and index to change to $index");
+        "current selected organization ${getSelectedOrganizationIndex()! + 1} and to change to ${index + 1}");
     if (index != getSelectedOrganizationIndex()!) {
       await runBusyFuture(setupOrganization());
       // Save the newly selected org id in preferences when a new organization item is tapped
@@ -124,13 +124,22 @@ class OrganizationViewModel extends BaseViewModel {
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
-  bool showSelectedOrg(int index) {
+  bool selectedOrg(int index) {
+    log.d(
+        "new selected index $index currently seletected channel index ${getSelectedOrganizationIndex()!}");
     if (index == getSelectedOrganizationIndex()!) {
       return true;
-      notifyListeners();
     }
     return false;
   }
+
+  /*bool selectedChannel(int index) {
+    log.d("new selected index $index currently seletected channel index $selectedChannelIndex");
+    if (index == selectedChannelIndex) {
+      return true;
+    }
+    return false;
+  }*/
 
   @override
   void dispose() {

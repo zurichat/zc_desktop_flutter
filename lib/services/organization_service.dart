@@ -52,7 +52,7 @@ class OrganizationService {
     final response = await _zuriApiService.fetchOrganizationsListFromRemote(
         email: _auth.user!.email, token: _auth.user!.token);
     log.i(response);
-    return response;
+    return OrganizationResponse.fromJson(response).data;
   }
 
   /// This is used to add user to an organization_service
@@ -68,6 +68,7 @@ class OrganizationService {
     // Getting stored AuthResponse from local storage
     final response = await _zuriApiService.createOrganizationUsingEmail(
         email: email, token: _auth.user!.token);
+    log.i(response);
     addMemberToOrganization(response['data']['_id']);
     String insertedId = response['data']['InsertedID'];
     Organization insertedOrganisation = await _getOrganization(insertedId);
@@ -104,8 +105,10 @@ class OrganizationService {
 
   /// This is used to get a single organization_service
   Future<Organization> _getOrganization(String organizationId) async {
-    return await _zuriApiService.fetchOrganizationDetails(
+    final response = await _zuriApiService.fetchOrganizationDetails(
         organizationId: organizationId, token: _auth.user!.token);
+    log.i(response);
+    return Organization.fromJson(response);
   }
 
   Future<void> _addOrgToOrganizationsList(Organization organization) async {

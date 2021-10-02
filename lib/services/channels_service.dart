@@ -18,7 +18,7 @@ const userChannelId = 'userChannelId';
 
 @LazySingleton()
 class ChannelsService with ReactiveServiceMixin {
-  final log = getLogger('ChannelsApiService');
+  final log = getLogger('ChannelsService');
 
   //Declare the services that are dependent upon
   final _localStorageService = locator<LocalStorageService>();
@@ -64,8 +64,8 @@ class ChannelsService with ReactiveServiceMixin {
     log.i("getChannels called");
     final response = await _zuriApiService.fetchChannelsListUsingOrgId(
         organizationId: organizationId, token: _auth.user!.token);
-    log.i(response.toList());
-    return response;
+    log.i(response);
+    return List.from(response.map((value) => Channel.fromJson(value)));
   }
 
   /// This is used to create a channel on the page
@@ -82,6 +82,7 @@ class ChannelsService with ReactiveServiceMixin {
         owner: owner,
         description: description,
         private: private);
+    log.i(response);
     // Getting stored AuthResponse from local storage
     String insertedId = response['_id'];
     print(insertedId);
@@ -123,9 +124,11 @@ class ChannelsService with ReactiveServiceMixin {
   }
 
   Future<List<ChannelMessage>> fetchChannelMessages() async {
-    return await _zuriApiService.fetchChannelMessages(
+    final response = await _zuriApiService.fetchChannelMessages(
         channelId: _currentChannel.id,
         organizationId: _organizationService.getOrganizationId());
+    log.i(response);
+    return ChannelMessagesResponse.fromJson(response).data;
   }
 
   Future<String> fetchChannelSocketId() async {

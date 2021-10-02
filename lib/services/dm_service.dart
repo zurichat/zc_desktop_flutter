@@ -39,25 +39,36 @@ class DMService {
     /*print(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         .format(DateTime.now().toUtc())
         .toString());*/
-    return await _zuriApiService.sendMessageToDM(
+    final response = await _zuriApiService.sendMessageToDM(
         roomId: roomId, senderId: senderId, message: message);
+    log.i(response);
+    return SendMessageResponse.fromJson(response);
   }
 
   Future<String?> createRoom(
       currentLoggedInUser.User currentUser, DummyUser user) async {
-    return await _zuriApiService.createRoom(
-        currentUser: currentUser, user: user);
+    final response =
+        await _zuriApiService.createRoom(currentUser: currentUser, user: user);
+    log.i(response);
+    return CreateRoomResponse.fromJson(response).roomId;
   }
 
   Future<void> getRoomInfo(var roomId) async {
-    await _zuriApiService.getRoomInfo(roomId: roomId);
+    final response = await _zuriApiService.getRoomInfo(roomId: roomId);
+    log.i(response);
+    var res = RoomInfoResponse.fromJson(response).numberOfUsers;
+    //print("number of users: ${res}");
   }
 
   Future<List<Results>> fetchRoomMessages(var roomId) async {
-    return await _zuriApiService.fetchRoomMessages(roomId: roomId);
+    final response = await _zuriApiService.fetchRoomMessages(roomId: roomId);
+    log.i(response);
+    return MessagesResponse.fromJson(response).results;
   }
 
   Future<void> markMessageAsRead(var messageId) async {
-    await _zuriApiService.markMessageAsRead(messageId);
+    final response = await _zuriApiService.markMessageAsRead(messageId);
+    log.i(response);
+    var res = MarkMessageAsReadResponse.fromJson(response).read;
   }
 }
