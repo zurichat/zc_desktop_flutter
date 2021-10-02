@@ -128,16 +128,16 @@ class ErrorView extends StatelessWidget {
   }
 }
 
-class BuildCircularDot extends StatelessWidget {
-  const BuildCircularDot({Key? key}) : super(key: key);
+// class BuildCircularDot extends StatelessWidget {
+//   const BuildCircularDot({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 10,
-      width: 10,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: hoverColor),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 10,
+//       width: 10,
+//       decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(10), color: hoverColor),
+//     );
+//   }
+// }

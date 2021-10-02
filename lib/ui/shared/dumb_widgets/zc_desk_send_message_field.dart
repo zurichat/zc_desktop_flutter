@@ -9,8 +9,10 @@ class SendMessageInputField extends StatefulWidget {
   const SendMessageInputField({
     Key? key,
     required this.sendMessage,
+    this.placeHolder,
   }) : super(key: key);
   final Function(String message) sendMessage;
+  final String? placeHolder;
 
   @override
   State<SendMessageInputField> createState() => _SendMessageInputFieldState();
@@ -56,42 +58,49 @@ class _SendMessageInputFieldState extends State<SendMessageInputField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 12),
-      width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(3),
-        border: Border.all(color: hasFocus ? Colors.black : leftNavBarColor),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildMessageTextField(
-            placeholder: '#designers',
-          ),
-          _SendMessageFunctions(
-            isActive: hasFocus,
-            isTyping: isTyping,
-            shortcutPressed: () {
-              keepFocusActive();
-            },
-            formatPressed: () {
-              keepFocusActive();
-            },
-            tagPressed: () {
-              keepFocusActive();
-            },
-            attachPressed: () {
-              keepFocusActive();
-            },
-            sendPressed: () {
-              keepFocusActive();
-              widget.sendMessage(_messageController.text);
-            },
-            schedulePressed: () {
-              keepFocusActive();
-            },
-          ),
-        ],
+          color: kcBackgroundColor1,
+        ),
+      child: Container(
+        margin: EdgeInsets.only(left: 12, right: 12, bottom: 10, top: 6,),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: whiteColor,
+          borderRadius: BorderRadius.circular(3),
+          border: Border.all(color: hasFocus ? Colors.black : leftNavBarColor),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildMessageTextField(
+              placeholder: widget.placeHolder!,
+            ),
+            _SendMessageFunctions(
+              isActive: hasFocus,
+              isTyping: isTyping,
+              shortcutPressed: () {
+                keepFocusActive();
+              },
+              formatPressed: () {
+                keepFocusActive();
+              },
+              tagPressed: () {
+                keepFocusActive();
+              },
+              attachPressed: () {
+                keepFocusActive();
+              },
+              sendPressed: () {
+                keepFocusActive();
+                widget.sendMessage(_messageController.text);
+              },
+              schedulePressed: () {
+                keepFocusActive();
+              },
+            ),
+            
+          ],
+        ),
       ),
     );
   }
@@ -105,7 +114,7 @@ class _SendMessageInputFieldState extends State<SendMessageInputField> {
       decoration: InputDecoration(
         border: UnderlineInputBorder(borderSide: BorderSide.none),
         contentPadding: EdgeInsets.all(5),
-        hintText: 'Send a message_page to $placeholder',
+        hintText: 'Send a message to $placeholder',
         hintStyle: TextStyle(
           fontSize: 15,
           color: leftNavBarColor,

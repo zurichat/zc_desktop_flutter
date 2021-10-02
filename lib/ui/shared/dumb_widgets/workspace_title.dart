@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 
 class WorkSpaceTitle extends StatelessWidget {
   final String? channelTitle;
@@ -23,7 +24,7 @@ class WorkSpaceTitle extends StatelessWidget {
           ),
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: SvgPicture.asset('assets/icons/vectordown_icon.svg'))
+              child: SvgPicture.asset('assets/icons/vectordown_icon.svg'),),
         ],
       ),
     );

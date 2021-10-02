@@ -138,6 +138,12 @@ final headline3 = TextStyle(
   fontFamily: 'Lato',
 );
 
+final subtitle1c = TextStyle(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
 final subtitle2 = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.w400,
@@ -201,6 +207,30 @@ final messageTimeStyleNormal = TextStyle(
   fontFamily: 'Lato',
   fontWeight: FontWeight.w300,
   // color: Colors.grey[300]
+);
+
+final messageTimeStyleNormal1 = TextStyle(
+  fontSize: 18.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w600,
+  // color: Colors.grey[300]
+);
+
+final messageTimeStyleNormal2 = TextStyle(
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w600,
+);
+
+final messageTimeStyleNormal3 = TextStyle(
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w600,
+  color: kcPrimaryColor,
+);
+
+final messageTimeStyleNormal4 = TextStyle(
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w500,
+  color: Colors.grey,
 );
 
 //Create and Display Channels Styles
