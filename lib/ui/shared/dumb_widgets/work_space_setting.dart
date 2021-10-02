@@ -10,16 +10,17 @@ class WorkSpaceSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).accentColor,
       width: 200.w,
       child: Row(
         children: [
           Text(workspaceTitle!,
               style: TextStyle(
                 color: Colors.white,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w700,
               )),
           Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              padding: EdgeInsets.symmetric(horizontal: 5.0.w),
               child: SvgPicture.asset('assets/icons/vectordown_icon.svg'))
         ],
       ),

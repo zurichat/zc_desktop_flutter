@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:intl/intl.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
@@ -16,14 +17,13 @@ const insertedOrganisationId = 'insertedId';
 const userChannelId = 'userChannelId';
 
 @LazySingleton()
-class ChannelsService {
+class ChannelsService with ReactiveServiceMixin {
   final log = getLogger('ChannelsApiService');
 
   //Declare the services that are dependent upon
   final _localStorageService = locator<LocalStorageService>();
   final _organizationService = locator<OrganizationService>();
   final _zuriApiService = locator<ZuriApiService>();
-  List<Channel> channelsList = [];
 
   currentLoggedInUser.User? getCurrentLoggedInUser() {
     var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
@@ -35,52 +35,18 @@ class ChannelsService {
     }
   }
 
-  Channel? _currentChannel =
-      Channel(id: "", private: false, name: "", description: "", owner: "");
-
-  List<Channel> _channels = [
-    Channel(
-        id: "1",
-        name: "General",
-        owner: "Mark",
-        description: "",
-        private: false),
-    Channel(
-        id: "2",
-        name: "Announcements",
-        owner: "Mark",
-        description: "",
-        private: false),
-    Channel(
-        id: "3",
-        name: "team-zuri-desktop-client",
-        owner: "Mark",
-        description: "",
-        private: false),
-    Channel(
-        id: "4",
-        name: "stage 9",
-        owner: "Mark",
-        description: "",
-        private: false),
-    Channel(
-        id: "5", name: "games", owner: "Mark", description: "", private: false),
-  ];
+  Channel _currentChannel = Channel();
 
   void setChannel(Channel channel) {
     this._currentChannel = channel;
   }
 
-  void setSelectedChannel(int? index) {
-    _currentChannel = channelsList.elementAt(index ?? 0);
-  }
-
   Channel getChannel() {
-    return this._currentChannel!;
+    return this._currentChannel;
   }
 
   // This gets the selected organisation_id
-  String get selectedOrganisationId {
+  String get selectedCreatedOrganisationId {
     return _localStorageService.getFromDisk(insertedOrganisationId) as String;
   }
 
@@ -94,9 +60,12 @@ class ChannelsService {
   // https://channels.zuri.chat/api/v1/61459d8e62688da5302acdb1/channels/
 
   /// This is used to get the list of channels on the page
-  Future<List<Channel>> getChannelsList({String? organizationId}) async {
-    return await _zuriApiService.fetchChannelsListUsingOrgId(
+  Future<List<Channel>> getChannels({String? organizationId}) async {
+    log.i("getChannels called");
+    final response = await _zuriApiService.fetchChannelsListUsingOrgId(
         organizationId: organizationId, token: _auth.user!.token);
+    log.i(response.toList());
+    return response;
   }
 
   /// This is used to create a channel on the page
@@ -131,15 +100,14 @@ class ChannelsService {
     String? prop2,
     String? prop3,
   }) async {
-    final orgId = await _organizationService.getOrganizationId();
-    await _zuriApiService.addUserToChannel(orgId, _currentChannel!.id,
+    await _zuriApiService.addUserToChannel(
+        _organizationService.getOrganizationId(), _currentChannel.id,
         id: id,
         role_id: role_id,
         is_admin: is_admin,
         prop1: prop1,
         prop2: prop2,
         prop3: prop3);
-    log.i(orgId);
   }
 
   ///[handleRemoveUserFromChannel] takes current channel id and [member_id] or user_id
@@ -166,17 +134,17 @@ class ChannelsService {
         organization_id: org_id);
   }
 
-  Future<List<ChannelMessage>> fetchChannelMessages(
-      {var org_id, var channel_id}) async {
+  Future<List<ChannelMessage>> fetchChannelMessages() async {
     return await _zuriApiService.fetchChannelMessages(
-        channelId: channel_id, organizationId: org_id);
+        channelId: _currentChannel.id,
+        organizationId: _organizationService.getOrganizationId());
   }
 
   Future<String> fetchChannelSocketId() async {
     final orgId = _organizationService.getOrganizationId();
     return _zuriApiService.fetchChannelSocketId(
         organizationId: orgId,
-        channelId: _currentChannel!.id!,
+        channelId: _currentChannel.id,
         token: _auth.user!.token);
   }
 }

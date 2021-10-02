@@ -18,18 +18,21 @@ import 'package:zc_desktop_flutter/ui/views/auth/sign_up/sign_up_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/success/success_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels/channels_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_list/channels_list_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/choose_workspace.dart/choose_workspace_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_organization_name.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_workspace.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_workspace_stage2.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_workspace_stage3.dart';
+import 'package:zc_desktop_flutter/ui/views/main/dm/all_dms/all_dms_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: StartUpView),
+    MaterialRoute(page: StartUpView, initial: true),
+    MaterialRoute(page: ChooseWorkspaceView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignUpView),
     MaterialRoute(page: ForgotPasswordView),
@@ -49,6 +52,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
         MaterialRoute(page: ChannelsListView),
         MaterialRoute(page: CreateChannelView),
         MaterialRoute(page: DmView),
+        MaterialRoute(page: AllDmsView)
       ],
     ),
   ],

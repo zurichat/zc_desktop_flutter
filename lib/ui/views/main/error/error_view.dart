@@ -48,7 +48,7 @@ class ErrorView extends StatelessWidget {
                             children: [
                           TextSpan(
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () => model.lauchUrl(ZuriStatusUrlText),
+                                ..onTap = () => model.launchUrl(ZuriStatusUrlText),
                               text: '$ZuriStatusUrlText ',
                               style: boldCaptionStyle.copyWith(
                                 color: kcPrimaryColor,
@@ -105,7 +105,7 @@ class ErrorView extends StatelessWidget {
                     RichText(
                       text: TextSpan(
                           recognizer: TapGestureRecognizer()
-                            ..onTap = () => model.lauchUrl(''),
+                            ..onTap = () => model.launchUrl(''),
                           text: CheckHelpText,
                           style: boldCaptionStyle.copyWith(
                             color: kcPrimaryColor,

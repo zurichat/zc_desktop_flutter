@@ -81,7 +81,7 @@ final authBtnStyle = TextStyle(
 
 final kLeftSideBarStyle = TextStyle(
   fontSize: 15.sp,
-  color: Colors.white,
+  color: Colors.black,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
   fontFamily: 'Lato',
@@ -128,7 +128,7 @@ final headline8 = TextStyle(
 
 final headline7 = TextStyle(
   fontSize: 18.sp,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w700,
   fontFamily: 'Lato',
 );
 
@@ -260,6 +260,18 @@ TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
 
+    TextStyle newToZuriChatTextstyle = TextStyle(
+    fontSize: 13.sp,
+    color: createAccountColor,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Lato');
+
+TextStyle ZuriTextstyle = TextStyle(
+    fontSize: 38.71.sp,
+    color: ZuriWorkspaceTextColor,
+    fontWeight: FontWeight.w900,
+    fontFamily: 'Lato');
+
 //status dialogs styles
 final clearStatusTextStyle = TextStyle(
   fontSize: 16.sp,
@@ -267,3 +279,33 @@ final clearStatusTextStyle = TextStyle(
   color: bodyColor,
   fontFamily: 'Lato',
 );
+//All DMs TextStyle
+TextStyle allDmsTitleStyle = TextStyle(
+    fontSize: 15.sp,
+    color: Color(0xff3A3A3A),
+    fontWeight: FontWeight.w700,
+    fontFamily: 'Lato');
+
+TextStyle allDmsSubtitleStyle = TextStyle(
+    fontSize: 15.sp,
+    color: Color(0xff3A3A3A),
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Lato');
+
+TextStyle allDmsTrailingStyle = TextStyle(
+    fontSize: 13.sp,
+    color: Color(0xffC1C1C1),
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Lato');
+
+TextStyle allDmsAppbarStyle = TextStyle(
+    fontSize: 18.sp,
+    color: kcPrimaryLight,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'Lato');
+
+TextStyle allDmsDayStyle = TextStyle(
+    fontSize: 13.sp,
+    color: Color(0xff242424),
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Lato');

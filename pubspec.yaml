@@ -28,6 +28,7 @@ dependencies:
   intl: ^0.17.0
   flutter_hooks: ^0.17.0
   logger: ^1.0.0
+  getwidget: ^2.0.4
 
   # animation
   lottie: ^1.1.0
@@ -53,6 +54,7 @@ dev_dependencies:
   build_runner: ^2.1.2
   freezed: 
   json_serializable:
+  mockito:
 
 flutter:
   generate: true

@@ -30,7 +30,7 @@ class DmViewModel extends BaseViewModel {
   }
 
   String? getChatUserName() {
-    if (_user.name!.isNotEmpty) {
+    if (_user.name.isNotEmpty) {
       return _user.name;
     }
 
@@ -126,7 +126,7 @@ class DmViewModel extends BaseViewModel {
           id: _user.id.toString(),
           firstName: 'firstName',
           lastName: 'lastName',
-          displayName: _user.name!,
+          displayName: _user.name,
           email: 'email',
           phone: 'phone',
           status: 1,
