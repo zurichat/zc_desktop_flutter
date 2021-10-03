@@ -93,7 +93,7 @@ class ChannelsService with ReactiveServiceMixin {
   }
 
   /// This is used to create a channel on the page
-  Future<void> addUserChannel({
+  Future<void> addUserToChannel({
     required String id,
     required String role_id,
     required bool is_admin,
@@ -109,6 +109,18 @@ class ChannelsService with ReactiveServiceMixin {
         prop1: prop1,
         prop2: prop2,
         prop3: prop3);
+  }
+
+  ///[handleRemoveUserFromChannel] takes current channel id and [member_id] or user_id
+  Future<void> handleRemoveUserFromChannel({
+    required String channel_id,
+    required String member_id,
+  }) async {
+    final org_id = await _organizationService.getOrganizationId();
+    await _zuriApiService.removeUserFromChannel(
+        organizationId: org_id,
+        channelId: channel_id,
+        memberId: member_id);
   }
 
   Future<dynamic> sendMessage(

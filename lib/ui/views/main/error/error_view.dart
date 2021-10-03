@@ -42,13 +42,13 @@ class ErrorView extends StatelessWidget {
                     verticalSpaceSmall,
                     RichText(
                         text: TextSpan(
-                            text:
-                                WeAreSorryText,
+                            text: WeAreSorryText,
                             style: boldCaptionStyle,
                             children: [
                           TextSpan(
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () => model.launchUrl(ZuriStatusUrlText),
+                                ..onTap =
+                                    () => model.launchUrl(ZuriStatusUrlText),
                               text: '$ZuriStatusUrlText ',
                               style: boldCaptionStyle.copyWith(
                                 color: kcPrimaryColor,
@@ -75,9 +75,9 @@ class ErrorView extends StatelessWidget {
                       const BuildCircularDot(),
                       horizontalSpaceSmall,
                       Text(
-                          InternetIsnotBlockText,
-                          style: boldCaptionStyle,
-                        )
+                        InternetIsnotBlockText,
+                        style: boldCaptionStyle,
+                      )
                     ]),
                     verticalSpaceRegularOne,
                     Row(

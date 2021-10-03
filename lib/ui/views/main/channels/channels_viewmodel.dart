@@ -74,7 +74,7 @@ class ChannelsViewModel extends BaseViewModel {
   void runTask() async {
     _currentChannel = _channelService.getChannel();
     _currentLoggedInUser = _channelService.getCurrentLoggedInUser()!;
-    _channelService.addUserChannel(
+    _channelService.addUserToChannel(
         id: _currentLoggedInUser.id,
         role_id: '1',
         is_admin: true,

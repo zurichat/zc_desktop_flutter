@@ -43,6 +43,9 @@ Uri getUserChannelUri(String organisationId, String channelId) => Uri(
     host: channelHost,
     path: '/api/v1/$organisationId/channels/$channelId/members/');
 
+Uri getMemberUri(String organisationId) => Uri(
+    scheme: scheme, host: host, path: '/organizations/$organisationId/members');
+
 Uri channelSendMessage(String channel_id, String org_id) => Uri(
     scheme: scheme,
     host: channelHost,
@@ -58,10 +61,17 @@ Uri getChannelSocketId(String channel_id, String org_id) => Uri(
     host: channelHost,
     path: '/api/v1/${org_id}/channels/${channel_id}/socket/');
 
+Uri getRemoveChannelMemberUri(
+        String channel_id, String org_id, String member_id) =>
+    Uri(
+        scheme: scheme,
+        host: channelHost,
+        path: '/api/v1/${org_id}/channels/${channel_id}/members/${member_id}/');
+
 // DM Endpoints
 
-Uri get dmCreateRoom =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/createroom');
+Uri dmCreateRoom(String orgId) =>
+    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/room');
 
 Uri dmSendMessage(String roomId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');

@@ -60,7 +60,7 @@ class CreateWorkspaceView extends HookWidget {
                               ),
                         Form(
                           key: _formKey,
-                          child: AuthInputField(
+                          child: ZuriDeskInputField(
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
                             hintPlaceHolder: 'example@work.com',

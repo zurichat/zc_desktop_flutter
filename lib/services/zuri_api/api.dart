@@ -62,6 +62,22 @@ abstract class Api {
   Future<Map<String, dynamic>> fetchOrganizationsListFromRemote(
       {required String email, required token});
 
+  /// returns [Future]<[List]<[Organization]>>, fetch a list of organizations from remote source,
+  ///
+  /// get request;
+  ///
+  /// function parameters; [String] email, token.
+  Future<List<Users>> fetchMemberListUsingOrgId(
+      {required String organizationId, required token});
+
+  /// returns [Future]<[dynamic]>, fetch files from remote using organization id.
+  ///
+  /// get request;
+  ///
+  /// function parameters; add the parameters here
+  Future<dynamic> fetchFileListUsingOrgId(
+      {required String orgId, required token});
+
   /// returns [Future]<[void]>, add logged in user to organization.
   ///
   /// post request;
@@ -193,7 +209,7 @@ abstract class Api {
   /// * body: {}
   ///
   /// parameters;
-  Future<Map<String, dynamic>> createRoom({User currentUser, DummyUser user});
+  Future<Map<String, dynamic>> createRoom({User currentUser, Users user});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, get a particular room info using room id.
   ///

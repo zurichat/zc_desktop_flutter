@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -25,13 +26,15 @@ class LeftSideContainer extends StatelessWidget {
               ),
             ),
             Text(
-              StartUpTitleText,
+              AppLocalizations.of(context)!.startUpTitleText,
+              //StartUpTitleText,
               textAlign: TextAlign.center,
               style: headline6.copyWith(color: Colors.white),
             ),
             verticalSpaceSmall,
             Text(
-              StartUpSubTitleText,
+              '${AppLocalizations.of(context)!.startUpSubtitleText1} \n ${AppLocalizations.of(context)!.startUpSubtitleText2}',
+              //"$StartUpSubTitleText1 \n $StartUpSubTitleText2",
               textAlign: TextAlign.center,
               style: subtitle2.copyWith(color: Colors.white),
             ),

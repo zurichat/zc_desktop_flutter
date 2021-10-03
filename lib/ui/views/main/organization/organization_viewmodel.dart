@@ -109,10 +109,6 @@ class OrganizationViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void goToAllDmView() {
-    _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
-  }
-
   // TODO: go to workspace creation page
   void goToCreateWorkspace() {
     _navigationService.navigateTo(Routes.createWorkspaceView);
@@ -123,14 +119,29 @@ class OrganizationViewModel extends BaseViewModel {
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
+  void goTOSavedItems() {
+    _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
+  }
+
   void goToDmView(int index) {
-    //_dmService.setUser();
+    ///_dmService.setUser();
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
   bool selectedOrg(int index) {
     log.d(
         "new selected index $index currently seletected channel index ${getSelectedOrganizationIndex()!}");
+    if (index == getSelectedOrganizationIndex()!) {
+      return true;
+    }
+    return false;
+  }
+
+  void goToAllDmView() {
+    _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
+  }
+
+  bool showSelectedOrg(int index) {
     if (index == getSelectedOrganizationIndex()!) {
       return true;
     }

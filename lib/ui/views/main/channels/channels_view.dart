@@ -13,6 +13,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/bookmark_and_pinned_bar/bookmark_and_pinned_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels/channels_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels_details/channels_details_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
 
 class ChannelsView extends StatelessWidget {
@@ -42,7 +43,11 @@ class ChannelsView extends StatelessWidget {
                     leading: WorkSpaceTitle(
                       channelTitle: model.currentChannel.name,
                     ),
-                    trailing: WorkSpaceMembers(),
+                    trailing: InkWell(
+                      onTap: ()=> showDialog(
+                            context: context,
+                            builder: (context) => ChannelsDetailsView()),
+                      child: WorkSpaceMembers()),
                   ),
                   Align(
                       alignment: Alignment.topCenter,

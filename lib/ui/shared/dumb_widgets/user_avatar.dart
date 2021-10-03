@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class UserAvatar extends StatelessWidget {
-  const UserAvatar({
+class AvatarPlaceHolder extends StatelessWidget {
+  const AvatarPlaceHolder({
     Key? key,
      required this.imageUri,
      this.h = 40,

@@ -14,8 +14,10 @@ import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
 
 class OrganizationView extends StatelessWidget {
   const OrganizationView({Key? key}) : super(key: key);
@@ -192,7 +194,9 @@ class OrganizationWrapper extends StatelessWidget {
                                             showChannelListDisplay: () {},
                                             addTap: () {},
                                             listItemCount: 3,
-                                            onListItemTapped: (index) {},
+                                            onListItemTapped: (index) {
+                                              model!.goToDmView(index);
+                                            },
                                             itemChild: (index) {
                                               return DMItem(
                                                 userName: 'John snow',
@@ -214,7 +218,9 @@ class OrganizationWrapper extends StatelessWidget {
                         ),
                       ),
                       //TODO: Center Area
-                      centerChild!,
+                      // centerChild!,
+                      //TODO: Reusable view for channel and dms
+                      ChannelDmView(channel: true, dm: false),
                     ],
                   ),
                 ),
@@ -242,14 +248,17 @@ class DisplayMenu extends StatelessWidget {
           ReusableMenuItem(
             iconPath: 'assets/icons/alldms.svg',
             text: 'All DMs',
-            onTap: () {
-              model.goToAllDmView();
-            },
+            onTap: () {},
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/drafts.svg',
             text: 'Draft',
             onTap: () {},
+          ),
+          ReusableMenuItem(
+            iconPath: 'assets/icons/ribbon.svg',
+            text: 'Saved Items',
+            onTap: model.goTOSavedItems,
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/files.svg',
@@ -302,14 +311,14 @@ class ReusableDropDown extends StatelessWidget {
               child: Container(
                 child: show
                     ? Container(
-                  height: 8,
+                        height: 8,
                         width: 8,
                         child: SvgPicture.asset(
                           SVGAssetPaths.dropDownOpenIcon,
                         ),
                       )
                     : Container(
-                  height: 8,
+                        height: 8,
                         width: 8,
                         child: SvgPicture.asset(
                           SVGAssetPaths.dropDownClosedIcon,

@@ -1,6 +1,5 @@
 import 'package:zc_desktop_flutter/model/app_models.dart';
 
-//TODO: Remove soon
 final usersData = <DummyUser>[
   DummyUser(name: 'Dan', profileImage: 'path/to/image'),
   DummyUser(name: 'Bunmi', profileImage: 'path/to/image'),

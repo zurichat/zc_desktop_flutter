@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/bookmark_and_pinned_bar/bookmark_and_pinned_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/hover_actions_view.dart';
@@ -145,16 +146,16 @@ class DmView extends StatelessWidget {
                                     ),
                                   ),
                                 )))),
-                    // Align(
-                    //   alignment: Alignment.bottomCenter,
-                    //   child: SendMessageInputField(
-                    //     sendMessage: (message) {
-                    //       if (message.isNotEmpty) {
-                    //         model.sendMessage(message);
-                    //       }
-                    //     },
-                    //   ),
-                    // ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SendMessageInputField(
+                        sendMessage: (message) {
+                          if (message.isNotEmpty) {
+                            model.sendMessage(message);
+                          }
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ));

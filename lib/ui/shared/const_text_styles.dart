@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 
 // Text Styles we will be using through the app.
-
 final kHeading1TextStyle = TextStyle(
   fontSize: 43.sp,
   fontWeight: FontWeight.bold,
@@ -13,6 +12,12 @@ final kHeading1TextStyle = TextStyle(
 final kHeading2TextStyle = TextStyle(
   fontSize: 37.sp,
   fontWeight: FontWeight.w600,
+  fontFamily: 'Lato',
+);
+
+final channelDetailTitleTextStyle = TextStyle(
+  fontSize: 17.sp,
+  fontWeight: FontWeight.w700,
   fontFamily: 'Lato',
 );
 
@@ -178,6 +183,40 @@ final preferenceStyleBold = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
+final searchModal = TextStyle(
+  color: avatarColor4,
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w600,
+);
+
+final searchModal1 = TextStyle(
+  color: headerColor,
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+final searchModal2 = TextStyle(
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w500,
+  fontSize: 18.sp,
+  color: bodyColor,
+);
+
+final searchModal3 = TextStyle(
+  color: bodyColor,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.w700,
+  fontSize: 18.sp,
+);
+
+final searchModal4 = TextStyle(
+  color: bodyColor,
+  fontSize: 18.sp,
+  fontFamily: 'Lato',
+);
+
 final messageSenderStyleBold = TextStyle(
   fontSize: 16.sp,
   fontFamily: 'Lato',
@@ -254,7 +293,7 @@ TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
 
-    TextStyle newToZuriChatTextstyle = TextStyle(
+TextStyle newToZuriChatTextstyle = TextStyle(
     fontSize: 13.sp,
     color: createAccountColor,
     fontWeight: FontWeight.w500,
