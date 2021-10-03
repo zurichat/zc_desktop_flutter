@@ -9,16 +9,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations: 
+  flutter_localizations:
     sdk: flutter
-  
+
   # stacked
   stacked: ^2.2.5
   stacked_services:
   stacked_themes: ^0.3.6
   stacked_hooks: ^0.2.1
 
- # utilities
+  # utilities
   cupertino_icons: ^1.0.2
   flutter_screenutil: ^5.0.0+2
   flutter_svg: ^0.22.0
@@ -53,7 +53,7 @@ dev_dependencies:
     sdk: flutter
   stacked_generator: ^0.5.1
   build_runner: ^2.1.2
-  freezed: 
+  freezed:
   json_serializable:
   mockito:
 

@@ -7,11 +7,12 @@ class WindowTitleBarModel extends BaseViewModel {
 
   WindowTitleBarModel() {
     _windowTitleBarService.addListener(() {
-      _isHomeView = _windowTitleBarService.isHome;
+      _isHomeView = _windowTitleBarService.IsHome;
       notifyListeners();
     });
   }
 
-  bool _isHomeView = true;
+  bool _isHomeView = false;
+
   bool get isHomeView => _isHomeView;
 }

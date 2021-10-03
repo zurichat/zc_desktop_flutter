@@ -33,8 +33,13 @@ class AuthButton extends StatelessWidget {
         child: !isBusy
             ? Text(label, style: authBtnStyle)
             : Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
+                child: Container(
+                  width: 16.0,
+                  height: 16.0,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2.0.r,
+                  ),
                 ),
               ),
       ),
