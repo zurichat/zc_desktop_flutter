@@ -267,6 +267,11 @@ class DisplayMenu extends StatelessWidget {
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
+            text: 'People and User Groups',
+            onTap: model.goToUserPeopleGroup
+          ),
+          ReusableMenuItem(
+            iconPath: 'assets/icons/plugins.svg',
             text: 'Plugins',
             onTap: () {},
           ),
