@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
@@ -99,9 +99,8 @@ class LoginView extends HookWidget {
                                 onTap: () async {
                                   if (!_formKey.currentState!.validate())
                                     return;
-
                                   await model.login(
-                                    email: emailController.text,
+                                    email: emailController.text.trim(),
                                     password: passwordController.text,
                                   );
                                 },

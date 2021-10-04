@@ -168,7 +168,10 @@ class LeftSideHome extends HookWidget {
           height: 30.w,
           child: GestureDetector(
             onTap: () {
-              showDialog(context: context, builder: (_) => SearchModalView());
+              showDialog(
+                context: context,
+                builder: (_) => SearchModalView(),
+              );
             },
             child: TextField(
               enabled: false,

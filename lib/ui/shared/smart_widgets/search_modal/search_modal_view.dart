@@ -19,11 +19,17 @@ class SearchModalView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchViewModel>.reactive(
-      builder: (context, model, _) => Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.r)),
-          //alignment: Alignment.topCenter,
-          child: BuildContainerWidget(model: model)),
+      builder: (context, model, _) => Align(
+        alignment: Alignment.topCenter,
+        child: Material(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.r),
+          ),
+          child: BuildContainerWidget(
+            model: model,
+          ),
+        ),
+      ),
       onDispose: (model) => model.saveSearch(),
       onModelReady: (model) => model.fetchAndSetSearchHistory(),
       viewModelBuilder: () => SearchViewModel(),
@@ -42,8 +48,8 @@ class BuildContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: model!.isClicked ? 400.h : 514.h,
-      //width: 1008.w,
+      height: model!.isClicked ? 400.h : 514.h,
+      width: 1008.w,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -469,7 +475,7 @@ class SearchWidget extends HookViewModelWidget<SearchViewModel> {
                             model.searchList[index].name, function: () {
                           model.toggleTextFieldActivated();
                           text.clear();
-                          Navigator.of(context).pop();
+                          model.goToChannelsView();
                           model.searchNavigate(model.searchList[index]);
                         });
                       } else {

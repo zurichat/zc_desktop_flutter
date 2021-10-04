@@ -184,6 +184,10 @@ class SearchViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void goToChannelsView() {
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
+  }
+
   void searchNavigate(dynamic data) {
     switch (buttonType) {
       case ButtonType.CHANNELS:
