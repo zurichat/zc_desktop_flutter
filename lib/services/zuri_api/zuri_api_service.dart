@@ -398,12 +398,12 @@ class ZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, Users? user}) async {
+      {User? currentUser, Users? user,String? orgId}) async {
     return await _post(
-      dmCreateRoom("1"),
+      dmCreateRoom(orgId!,currentUser!.id),
       body: {
         "org_id": "1",
-        "room_user_ids": [currentUser!.id, user!.id],
+        "room_user_ids": [currentUser.id, user!.id],
         "bookmarks": ["0"],
         "pinned": ["0"]
       },
@@ -428,5 +428,15 @@ class ZuriApiService implements Api {
     );
     log.i(response);
     return List.from(response['data'].map((value) => Users.fromJson(value)));
+  }
+
+  @override
+  Future<dynamic> fetchDMs({orgId,userId}) async {
+    return await _get(dmFetchDMs(orgId,userId));
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
+    return await _get(dmUserProfile(orgId, memberId));
   }
 }

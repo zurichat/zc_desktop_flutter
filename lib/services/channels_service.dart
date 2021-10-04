@@ -140,7 +140,8 @@ class ChannelsService with ReactiveServiceMixin {
         channelId: _currentChannel.id,
         organizationId: _organizationService.getOrganizationId());
     log.i(response);
-    return ChannelMessagesResponse.fromJson(response).data;
+return List<ChannelMessage>.from(response.map((model)=> ChannelMessage.fromJson(model)));
+   
   }
 
   Future<String> fetchChannelSocketId() async {
