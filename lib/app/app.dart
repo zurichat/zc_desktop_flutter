@@ -30,6 +30,7 @@ import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_work
 import 'package:zc_desktop_flutter/ui/views/main/dm/all_dms/all_dms_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/people_user_group/peopel_user_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
@@ -48,7 +49,6 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     MaterialRoute(page: CreateWorkspaceStage1),
     MaterialRoute(page: CreateWorkspaceStage2),
     MaterialRoute(page: CreateWorkspaceStage3),
-    // MaterialRoute(page: SavedItemsView),
     MaterialRoute(
       page: OrganizationView,
       children: [
@@ -59,6 +59,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
         MaterialRoute(page: DmView),
         MaterialRoute(page: AllDmsView),
         MaterialRoute(page: SavedItemsView),
+        MaterialRoute(page: PeopleUserGroupView,)
       ],
     ),
   ],

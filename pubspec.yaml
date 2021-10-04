@@ -63,4 +63,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+
     - assets/lottie/
+    - assets/people/
