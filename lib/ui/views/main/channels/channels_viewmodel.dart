@@ -67,11 +67,11 @@ class ChannelsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void setup() {
-    runTask();
+  void setup() async {
+    await runTask();
   }
 
-  void runTask() async {
+  Future<void> runTask() async {
     _currentChannel = _channelService.getChannel();
     _currentLoggedInUser = _channelService.getCurrentLoggedInUser()!;
     _channelService.addUserToChannel(

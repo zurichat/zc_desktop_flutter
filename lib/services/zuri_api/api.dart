@@ -158,7 +158,7 @@ abstract class Api {
   Future<dynamic> sendMessageToChannel(
       {var channel_id, var senderId, var message, var organization_id});
 
-  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch messages in channel from remote source using organization id
+  /// returns [dynamic], fetch messages in channel from remote source using organization id
   /// and channel id.
   ///
   /// get request;
@@ -166,7 +166,7 @@ abstract class Api {
   /// query parameters; organization id, channel id
   ///
   /// function parameters; [String] channelId, [String] organizationId
-  Future<Map<String, dynamic>> fetchChannelMessages(
+  Future<dynamic> fetchChannelMessages(
       {required String channelId, required String organizationId});
 
   /// returns [Future]<[String]>, to get socket id of a channel using channel id and organization id associated with it.

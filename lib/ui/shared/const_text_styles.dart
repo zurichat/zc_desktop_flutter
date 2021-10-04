@@ -127,7 +127,7 @@ final headline8 = TextStyle(
 
 final headline7 = TextStyle(
   fontSize: 18.sp,
-  fontWeight: FontWeight.w700,
+  fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
 

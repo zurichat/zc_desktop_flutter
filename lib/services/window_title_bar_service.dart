@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class WindowTitleBarService extends ChangeNotifier {
   bool _isHome = false;
-  bool get isHome => _isHome;
+  bool get IsHome => _isHome;
 
-  set isHome(bool value) {
+  void setHome(bool value) {
     _isHome = value;
     notifyListeners();
   }

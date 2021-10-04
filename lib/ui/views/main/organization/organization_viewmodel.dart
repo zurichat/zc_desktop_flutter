@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class OrganizationViewModel extends BaseViewModel {
   final log = getLogger("OrganizationViewModel");
@@ -15,6 +16,9 @@ class OrganizationViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
   final _channelService = locator<ChannelsService>();
   final _dmService = locator<DMService>();
+  final _windowTitleBarService = locator<WindowTitleBarService>();
+
+  int selectedChannelIndex = 0;
 
   ScrollController controller = ScrollController();
 
@@ -49,6 +53,8 @@ class OrganizationViewModel extends BaseViewModel {
     await runBusyFuture(setupOrganization());
     _organizationService.saveOrganizationId(_currentOrganization.id);
     log.d(" current organization id ${_currentOrganization.id}");
+    _windowTitleBarService.setHome(true);
+    //notifyListeners();
     // log.i(_channels);
   }
 
@@ -115,6 +121,8 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToChannelsView({int index = 0}) {
+    selectedChannelIndex = index;
+    notifyListeners();
     _channelService.setChannel(_channels[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
@@ -133,8 +141,6 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   bool selectedOrg(int index) {
-    log.d(
-        "new selected index $index currently seletected channel index ${getSelectedOrganizationIndex()!}");
     if (index == getSelectedOrganizationIndex()!) {
       return true;
     }
@@ -152,13 +158,12 @@ class OrganizationViewModel extends BaseViewModel {
     return false;
   }
 
-  /*bool selectedChannel(int index) {
-    log.d("new selected index $index currently seletected channel index $selectedChannelIndex");
+  bool selectedChannel(int index) {
     if (index == selectedChannelIndex) {
       return true;
     }
     return false;
-  }*/
+  }
 
   @override
   void dispose() {

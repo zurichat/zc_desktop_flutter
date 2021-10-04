@@ -17,7 +17,6 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dar
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
-import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
 
 class OrganizationView extends StatelessWidget {
   const OrganizationView({Key? key}) : super(key: key);
@@ -179,7 +178,8 @@ class OrganizationWrapper extends StatelessWidget {
                                               return ChannelItem(
                                                 channelName:
                                                     model!.channels[index].name,
-                                                selected: false,
+                                                selected: model!
+                                                    .selectedChannel(index),
                                               );
                                             },
                                           ),
