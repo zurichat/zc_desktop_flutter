@@ -196,13 +196,13 @@ class OrganizationWrapper extends StatelessWidget {
                                             },
                                             showChannelListDisplay: () {},
                                             addTap: () {},
-                                            listItemCount: 3,
+                                            listItemCount: model!.dms.length,
                                             onListItemTapped: (index) {
                                               model!.goToDmView(index);
                                             },
                                             itemChild: (index) {
                                               return DMItem(
-                                                userName: 'John snow',
+                                                userName: model!.dms.elementAt(index).userProfile.displayName,
                                                 userIcon:
                                                     'assets/icons/users.svg',
                                                 selected: false,
@@ -271,6 +271,11 @@ class DisplayMenu extends StatelessWidget {
             iconPath: 'assets/icons/files.svg',
             text: 'Files',
             onTap: () {},
+          ),
+          ReusableMenuItem(
+            iconPath: 'assets/icons/plugins.svg',
+            text: 'People and User Groups',
+            onTap: model.goToUserPeopleGroup
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',

@@ -77,7 +77,7 @@ class ZuriDeskInputField extends StatelessWidget {
               cursorColor: Theme.of(context).colorScheme.secondary,
               textInputAction: TextInputAction.done,
               maxLines: maxLines ?? 1,
-              style: headline7,
+              style: subtitle2,
               decoration: InputDecoration(
                 labelStyle: headline7,
                 fillColor: filledColor,

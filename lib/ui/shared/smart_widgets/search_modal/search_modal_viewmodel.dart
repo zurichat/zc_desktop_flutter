@@ -12,6 +12,7 @@ import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/files_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/user_service.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/search_modal/users_local_data.dart';
 
 class SearchViewModel extends BaseViewModel {
@@ -22,6 +23,7 @@ class SearchViewModel extends BaseViewModel {
   final _channelsService = locator<ChannelsService>();
   final _localStorageService = locator<LocalStorageService>();
   final _filesService = locator<FilesService>();
+  final _userService = locator<UserService>();
 
   String? _text;
   String? _hintText;
@@ -122,6 +124,8 @@ class SearchViewModel extends BaseViewModel {
   }
 
   void getSuggestionsForDM(String query) async {
+    _searchList = await _organizationService.fetchMemberListUsingOrgId(
+        _organizationService.getOrganizationId(), _userService.auth.user!.token);
     var userList = List.of(_searchList).where((e) {
       final userLower = e.name.toLowerCase();
       final queryLower = query.toLowerCase();

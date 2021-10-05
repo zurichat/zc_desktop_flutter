@@ -70,8 +70,8 @@ Uri getRemoveChannelMemberUri(
 
 // DM Endpoints
 
-Uri dmCreateRoom(String orgId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/room');
+Uri dmCreateRoom(String orgId,String userId) =>
+    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/users/${userId}/room');
 
 Uri dmSendMessage(String roomId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');
@@ -85,4 +85,11 @@ Uri dmFetchRoomMessages(String roomId) =>
 Uri dmMarkMessageAsRead(String messageId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/${messageId}/read/new/');
 
+Uri dmFetchDMs(String orgId,String userId) =>
+    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/users/${userId}/rooms');
+
+Uri dmUserProfile(String orgId, String memberId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/$orgId/members/$memberId/profile');
 //
