@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
@@ -17,6 +18,7 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/search_modal/users_lo
 
 class SearchViewModel extends BaseViewModel {
   static const savedSearchKey = 'savedSearches';
+  final _log = getLogger('SearchViewModel');
   final _navigationService = locator<NavigationService>();
   final _dmService = locator<DMService>();
   final _organizationService = locator<OrganizationService>();
@@ -55,7 +57,13 @@ class SearchViewModel extends BaseViewModel {
   List get searchHistory => _searchHistory;
 
   void saveSearch() {
-    _searchHistory.add(searchQuery);
+    if (_searchHistory.length < 4) {
+      _searchHistory.insert(0, searchQuery);
+    } else {
+      _searchHistory.removeAt(3);
+      _searchHistory.insert(0, searchQuery);
+    }
+    // _searchHistory.add(searchQuery);
 
     _localStorageService.saveToDisk(
         savedSearchKey, json.encode(_searchHistory));
@@ -65,10 +73,12 @@ class SearchViewModel extends BaseViewModel {
   void fetchAndSetSearchHistory() async {
     final search = _localStorageService.getFromDisk(savedSearchKey);
     _searchHistory = json.decode(search.toString()) ?? ['No recent search'];
+    _log.i(_searchHistory);
     _historyLength = _searchHistory.length > 4 ? 4 : _searchHistory.length;
     // get channels using the current organization id and store the list in _searchList
     _searchList = await _channelsService.getChannels(
         organizationId: _organizationService.getOrganizationId());
+    notifyListeners();
   }
 
   toggleButtonClicked() {
@@ -125,7 +135,8 @@ class SearchViewModel extends BaseViewModel {
 
   void getSuggestionsForDM(String query) async {
     _searchList = await _organizationService.fetchMemberListUsingOrgId(
-        _organizationService.getOrganizationId(), _userService.auth.user!.token);
+        _organizationService.getOrganizationId(),
+        _userService.auth.user!.token);
     var userList = List.of(_searchList).where((e) {
       final userLower = e.name.toLowerCase();
       final queryLower = query.toLowerCase();
@@ -139,6 +150,7 @@ class SearchViewModel extends BaseViewModel {
 
   void onChange(String value) {
     textFieldActivated = true;
+    searchQuery = value;
     switch (buttonType) {
       case ButtonType.CHANNELS:
         {
