@@ -84,11 +84,6 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   get channelName => _channelName;
   get channelDescription => _channelDescription;
 
-  void closeDialog() {
-    _navigator.popRepeated(1);
-    notifyListeners();
-  }
-
   void setchannelName(String value) {
     _channelName = value;
     notifyListeners();
