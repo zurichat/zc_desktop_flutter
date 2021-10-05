@@ -10,7 +10,6 @@ import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class LoginViewModel extends BaseViewModel {
   final log = getLogger("LoginViewModel");
-  final _windowTitleBarService = locator<WindowTitleBarService>();
   final _navigationService = locator<NavigationService>();
   final _auth = locator<AuthService>();
 

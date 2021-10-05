@@ -133,4 +133,23 @@ class OrganizationService {
       jsonEncode(organizationMap),
     );
   }
+
+  /// This is used to get a single user profile
+  Future<UserProfile> getUserProfile(
+      String organizationId, String memberId) async {
+    /* final response = await _zuriApiService.getUserProfile(orgId: organizationId,memberId: memberId);
+    log.i(response);
+    return UserProfile.fromJson(response); */
+
+    return UserProfile(
+        firstName: 'Lucy',
+        lastName: 'CocoMelon',
+        displayName: 'sweetcoco',
+        imageUrl: 'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg',
+        userName: 'sweetcoco',
+        phone: 'phone',
+        pronouns: 'pronouns',
+        bio: 'bio',
+        status: 'status');
+  }
 }

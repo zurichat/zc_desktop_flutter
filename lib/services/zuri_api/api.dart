@@ -158,7 +158,7 @@ abstract class Api {
   Future<dynamic> sendMessageToChannel(
       {var channel_id, var senderId, var message, var organization_id});
 
-  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch messages in channel from remote source using organization id
+  /// returns [dynamic], fetch messages in channel from remote source using organization id
   /// and channel id.
   ///
   /// get request;
@@ -166,7 +166,7 @@ abstract class Api {
   /// query parameters; organization id, channel id
   ///
   /// function parameters; [String] channelId, [String] organizationId
-  Future<Map<String, dynamic>> fetchChannelMessages(
+  Future<dynamic> fetchChannelMessages(
       {required String channelId, required String organizationId});
 
   /// returns [Future]<[String]>, to get socket id of a channel using channel id and organization id associated with it.
@@ -209,7 +209,7 @@ abstract class Api {
   /// * body: {}
   ///
   /// parameters;
-  Future<Map<String, dynamic>> createRoom({User currentUser, Users user});
+  Future<Map<String, dynamic>> createRoom({User currentUser, Users user,String orgId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, get a particular room info using room id.
   ///
@@ -222,7 +222,19 @@ abstract class Api {
   ///
   ///
   ///
+  ///
+  Future<Map<String, dynamic>> getUserProfile({var orgId,var memberId});
+
+  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch user profile
+  ///
+  ///
   Future<Map<String, dynamic>> fetchRoomMessages({var roomId});
+
+  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
+  ///
+  ///
+  ///
+  Future<dynamic>fetchDMs({var orgId,var userId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, mark a message as read and reflect those changes
   /// in remote source.

@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class OrganizationViewModel extends BaseViewModel {
   final log = getLogger("OrganizationViewModel");
@@ -15,6 +16,9 @@ class OrganizationViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
   final _channelService = locator<ChannelsService>();
   final _dmService = locator<DMService>();
+  final _windowTitleBarService = locator<WindowTitleBarService>();
+
+  int selectedChannelIndex = 0;
 
   ScrollController controller = ScrollController();
 
@@ -26,6 +30,7 @@ class OrganizationViewModel extends BaseViewModel {
 
   List<Organization> _organization = [];
   List<Channel> _channels = [];
+  List<DM> _dms = [];
 
   //List<DM> _directMessages = [];
 
@@ -33,7 +38,7 @@ class OrganizationViewModel extends BaseViewModel {
 
   List<Channel> get channels => _channels;
 
-  //List<DM> get directMessages => _directMessages;
+  List<DM> get dms => _dms;
 
   Organization get currentOrganization => _currentOrganization;
 
@@ -49,6 +54,8 @@ class OrganizationViewModel extends BaseViewModel {
     await runBusyFuture(setupOrganization());
     _organizationService.saveOrganizationId(_currentOrganization.id);
     log.d(" current organization id ${_currentOrganization.id}");
+    _windowTitleBarService.setHome(true);
+    //notifyListeners();
     // log.i(_channels);
   }
 
@@ -80,6 +87,7 @@ class OrganizationViewModel extends BaseViewModel {
   Future<void> setupOrganization() async {
     await getOrganizations();
     await getChannels();
+    await getDMs();
   }
 
   Future<void> getOrganizations() async {
@@ -92,6 +100,18 @@ class OrganizationViewModel extends BaseViewModel {
         organizationId: _currentOrganization.id);
     _channelService.setChannel(_channels[0]);
     log.i("${_channels}");
+  }
+
+  Future<void> getDMs() async {
+    _currentOrganization = organization[getSelectedOrganizationIndex()!];
+    List<DMRoomsResponse> res = await _dmService.getDMs(_currentOrganization.id);
+    for (var user_id in res) {
+      UserProfile userProfile = await _organizationService.getUserProfile(
+          _currentOrganization.id, user_id.roomUserIds.last);
+      DM dm = DM(userId: user_id.roomUserIds.last, userProfile: userProfile);
+      _dms.add(dm);
+    }
+    log.i("${_dms}");
   }
 
   void openChannelsList() {
@@ -115,6 +135,8 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToChannelsView({int index = 0}) {
+    selectedChannelIndex = index;
+    notifyListeners();
     _channelService.setChannel(_channels[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
@@ -124,7 +146,8 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToUserPeopleGroup() {
-    _navigationService.navigateTo(OrganizationViewRoutes.peopleUserGroupView, id: 1);
+    _navigationService.navigateTo(OrganizationViewRoutes.peopleUserGroupView,
+        id: 1);
   }
 
   void goToDmView(int index) {
@@ -133,8 +156,6 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   bool selectedOrg(int index) {
-    log.d(
-        "new selected index $index currently seletected channel index ${getSelectedOrganizationIndex()!}");
     if (index == getSelectedOrganizationIndex()!) {
       return true;
     }
@@ -152,13 +173,12 @@ class OrganizationViewModel extends BaseViewModel {
     return false;
   }
 
-  /*bool selectedChannel(int index) {
-    log.d("new selected index $index currently seletected channel index $selectedChannelIndex");
+  bool selectedChannel(int index) {
     if (index == selectedChannelIndex) {
       return true;
     }
     return false;
-  }*/
+  }
 
   @override
   void dispose() {
