@@ -13,42 +13,24 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'profile_edit_viewmodel.dart';
 
 class ProfileEditView extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
+  // final GlobalKey<FormFieldState> _fullNameFormKey =
+  //     GlobalKey<FormFieldState>();
+  // bool _isFormValid() {
+  //   return (_fullNameFormKey.currentState!.isValid);
+  // }
+
   ProfileEditView({
     Key? key,
   }) : super(key: key);
 
   final scrollcontroller = ScrollController();
-  File? imagefile;
-
-  Future chooceFileToUpload() async {
-    try {
-      FilePickerResult? result = await FilePicker.platform
-          .pickFiles(allowMultiple: false, type: FileType.image);
-
-      if (result != null) {
-        File file = File(result.files.single.path!);
-      } else {
-        // User canceled the picker
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future cropUploadedFile() async {
-    try {
-      FilePickerResult? result = await FilePicker.platform
-          .pickFiles(allowMultiple: false, type: FileType.image);
-
-      if (result != null) {
-        File file = File(result.files.single.path!);
-      } else {
-        // User canceled the picker
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _displayNameController = TextEditingController();
+  final TextEditingController _whoController = TextEditingController();
+  final TextEditingController _pronounController = TextEditingController();
+  final TextEditingController _phoneNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -107,16 +89,28 @@ class ProfileEditView extends StatelessWidget {
                                     children: [
                                       verticalSpaceRegular,
                                       ProfileInputField(
+                                        key: model.isFormValid,
+                                        controller: _fullNameController,
                                         label: 'Full Name',
-                                        onChanged: (value) {},
+                                        onChanged: model.onChanged,
                                         errorText:
                                             "Unfortunately, you can’t leave this blank.",
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         hintPlaceHolder: 'Full Name',
+                                        validator: (value) {
+                                          if (value!.isEmpty ||
+                                              !RegExp(r'^[a-z A-Z] +$')
+                                                  .hasMatch(value)) {
+                                            return 'Enter currect name format';
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                       ),
                                       verticalSpaceRegular,
                                       ProfileInputField(
+                                        controller: _displayNameController,
                                         label: 'Display Name',
                                         onChanged: (value) {},
                                         helperText:
@@ -124,19 +118,29 @@ class ProfileEditView extends StatelessWidget {
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         hintPlaceHolder: 'Display Name',
+                                        validator: (value) {
+                                          if (value!.isEmpty ||
+                                              !RegExp(r'^[a-z A-Z 1-0] +$')
+                                                  .hasMatch(value)) {
+                                            return 'Enter currect displayname';
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                       ),
                                       verticalSpaceMedium,
                                       Text(
                                         "Custom rules for this workspace:",
-                                        style: subtitle3b,
+                                        style: subtitle3bb,
                                       ),
                                       verticalSpaceRegular,
                                       Text(
                                         "Please use as ingle firstname or a permanent nickname. If someone uses your name, please change it",
-                                        style: subtitle3,
+                                        style: subtitle2,
                                       ),
                                       verticalSpaceMedium,
                                       ProfileInputField(
+                                        controller: _whoController,
                                         label: 'What I do',
                                         onChanged: (value) {},
                                         helperText:
@@ -144,9 +148,19 @@ class ProfileEditView extends StatelessWidget {
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         hintPlaceHolder: 'What I do',
+                                        validator: (value) {
+                                          if (value!.isEmpty ||
+                                              !RegExp(r'^[a-z A-Z] +$')
+                                                  .hasMatch(value)) {
+                                            return 'Enter currect what you do';
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                       ),
                                       verticalSpaceMedium,
                                       ProfileInputField(
+                                        controller: _pronounController,
                                         label: 'Pronouns',
                                         onChanged: (value) {},
                                         helperText:
@@ -154,15 +168,34 @@ class ProfileEditView extends StatelessWidget {
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         hintPlaceHolder: 'Ex. they/Them/theirs',
+                                        validator: (value) {
+                                          if (value!.isEmpty ||
+                                              !RegExp(r'^[a-z A-Z] +$')
+                                                  .hasMatch(value)) {
+                                            return 'Enter currect pronoun format';
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                       ),
                                       verticalSpaceMedium,
                                       ProfileInputField(
+                                        controller: _phoneNameController,
                                         label: 'Phone Number',
                                         onChanged: (value) {},
                                         helperText: "Enter a phone number.",
                                         keyboardType: TextInputType.phone,
                                         inputType: TextInputType.phone,
                                         hintPlaceHolder: '(123) 555-55555',
+                                        validator: (value) {
+                                          if (value!.isEmpty ||
+                                              !RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1[-\s\.\] +$')
+                                                  .hasMatch(value)) {
+                                            return 'Enter currect phone number';
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                       ),
                                       verticalSpaceMedium,
                                       InkWell(
@@ -197,10 +230,7 @@ class ProfileEditView extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        "Profile Photo",
-                                        style: headline8,
-                                      ),
+                                      Text("Profile Photo", style: headline8),
                                       verticalSpaceRegular,
                                       model.choosenImage != null
                                           ? Container(
@@ -246,10 +276,12 @@ class ProfileEditView extends StatelessWidget {
                                       ),
                                       verticalSpaceRegular,
                                       TextButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            model.isSubmit;
+                                          },
                                           child: Text(
                                             "Remove photo",
-                                            style: kSubHeadingTextStyle1,
+                                            style: kSubHeadingTextStyle2,
                                           )),
                                     ],
                                   ),
@@ -275,21 +307,21 @@ class ProfileEditView extends StatelessWidget {
                   children: [
                     Container(
                       height: 50.h,
-                      width: 80.w,
+                      // width: 80.w,
                       child: OutlineButton(
                         borderSide: BorderSide(color: createChannelHeaderColor),
                         onPressed: () {},
-                        child: Text(
-                          "Cancel",
-                          style: subtitle3,
-                        ),
+                        child: Text("Cancel", style: subtitle3),
                       ),
                     ),
                     horizontalSpaceSmall,
                     Container(
                       height: 50.h,
                       // width: 100.w,
-                      child: AuthButton(
+                      child: ProfileButton(
+                        onTap: () {
+                          model.getUserDetail();
+                        },
                         label: "Save Changes",
                       ),
                     ),

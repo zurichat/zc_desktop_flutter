@@ -86,7 +86,7 @@ class _ProfileInputFieldState extends State<ProfileInputField> {
             errorStyle: kBodyTextStyle.copyWith(color: kcErrorColor),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            helperStyle: subtitle3,
+            // helperStyle: subtitle2,
             helperText: widget.helperText,
             hintText: widget.hintPlaceHolder,
             hintStyle: TextStyle(

@@ -440,4 +440,104 @@ class ZuriApiService implements Api {
     return await _get(dmUserProfile(orgId, memberId));
   }
 
+  @override
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token}) async {
+    final uri = getMemberIdUri(organizationId, memberId);
+    final response =
+        await _get(uri, headers: {"Authorization": "Bearer $token"});
+    if (response.statusCode == 200) {
+      return Member.fromJson(response['data']);
+    } else {
+      throw Exception('Failed to load user');
+    }
+  }
+
+  @override
+  Future<User> fetchUserDetail({required String userId, required token}) async {
+    final uri = loginUri(userId);
+    final response =
+        await _get(uri, headers: {'Authorization': "Bearer{$token}"});
+    return User.fromJson(response['data']);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getMemberDetails({
+    required String organizationId,
+    required String memberId,
+    required String token,
+  }) async {
+    final uri = getMemberIdUri(organizationId, memberId);
+    final response =
+        await _get(uri, headers: {"Authorization": "Bearer $token"});
+    return response;
+  }
+
+  Future<void> updateUserDetails(
+      {required String organizationId,
+      required String memberId,
+      UpdateUserParam? parameter,
+      required String token}) async {
+    final uri = updateUserProfile(organizationId, memberId);
+    final response = await _put(
+      uri,
+      body: parameter!.toMap(),
+      headers: {
+        "Authorization": "Bearer ${token}",
+      },
+    );
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserDetails(
+      {required String userId, required String token}) async {
+    final uri = loginUri(userId);
+    final response =
+        await _get(uri, headers: {'Authorization': "Bearer{$token}"});
+    return response;
+  }
+
+  @override
+  Future<Member> patchProfilePicture(
+      {required String organizationId,
+      required String memberId,
+      required String token}) async {
+    final uri = updateUserProfilePicture(organizationId, memberId);
+    // final response = await
+    throw UnimplementedError();
+  }
+}
+
+class UpdateUserParam {
+  final String firstNName;
+  final String lastName;
+  final String displayName;
+  final String phoneNumber;
+  final String pronoun;
+  final String bio;
+  final String timeZone;
+
+  UpdateUserParam(
+      {required this.firstNName,
+      required this.lastName,
+      required this.displayName,
+      required this.phoneNumber,
+      required this.pronoun,
+      required this.bio,
+      required this.timeZone});
+
+  Map<String, dynamic> toMap() {
+    return {
+      "bio": bio,
+      "display_name": displayName,
+      "first_name": firstNName,
+      "last_name": lastName,
+      "phone": phoneNumber,
+      "pronouns": pronoun,
+      "time_zone": timeZone
+    };
+  }
 }

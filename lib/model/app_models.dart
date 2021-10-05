@@ -29,6 +29,25 @@ class User with _$User {
 }
 
 @freezed
+class Member with _$Member {
+  factory Member({
+    required String id,
+    required String orgId,
+    @JsonKey(name: 'name') required String fullName,
+    @JsonKey(name: 'display_name') required String displayName,
+    required String email,
+    required String phone,
+    required String status,
+    required String pronouns,
+    @JsonKey(name: 'time_zone') required String timeZone,
+    @JsonKey(name: 'created_at') required String createdAt,
+    @JsonKey(name: 'updated_at') required String updatedAt,
+  }) = _Member;
+
+  factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
+}
+
+@freezed
 class AuthResponse with _$AuthResponse {
   factory AuthResponse({
     int? status,

@@ -187,7 +187,27 @@ abstract class Api {
   /// get request;
   ///
   /// function parameters; none.
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId});
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+  Future<Map<String, dynamic>> getMemberDetails(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+  Future<Member> patchProfilePicture({
+    required String organizationId,
+    required String memberId,
+    required String token,
+  });
+
+  // Future<void> updateUserDetails({String? organizationId, User user});
+  Future<Map<String, dynamic>> getUserDetails({required String userId, required String token});
+
+  Future<User> fetchUserDetail({required String userId, required token});
+
 
   /* DIRECT MESSAGES SERVICE */
 
