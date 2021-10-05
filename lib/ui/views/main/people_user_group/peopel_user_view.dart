@@ -33,8 +33,8 @@ class PeopleUserGroupView extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   color: kcPrimaryColor,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 15, horizontal: 15),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -59,13 +59,12 @@ class PeopleUserGroupView extends StatelessWidget {
                 ),
                 verticalSpaceSmall,
                 if (model.hasError) ...[
-                                verticalSpaceMedium,
-                                Text(
-                                  (model.modelError as Failure).message,
-                                  style: boldCaptionStyle.copyWith(
-                                      color: Colors.red),
-                                ),
-                              ],
+                  verticalSpaceMedium,
+                  Text(
+                    (model.modelError as Failure).message,
+                    style: boldCaptionStyle.copyWith(color: Colors.red),
+                  ),
+                ],
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Row(
@@ -83,10 +82,11 @@ class PeopleUserGroupView extends StatelessWidget {
                         width: 107.w,
                         color: kcViewColor,
                         child: GestureDetector(
-                          onTap: () => model.addUserToOrg(_emailController.text),
+                          onTap: () =>
+                              model.addUserToOrg(_emailController.text),
                           child: Center(
-                            child:
-                                Text(AddButtonText, style: preferenceStyleNormal),
+                            child: Text(AddButtonText,
+                                style: preferenceStyleNormal),
                           ),
                         ),
                       )
@@ -98,8 +98,7 @@ class PeopleUserGroupView extends StatelessWidget {
                   height: 50,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16.0),
-                    child: Row(
-                      children: [
+                    child: Row(children: [
                       GestureDetector(
                         onTap: () => model.setPageIndex(0),
                         child: Text(
@@ -124,7 +123,14 @@ class PeopleUserGroupView extends StatelessWidget {
                   children: [
                     Divider(),
                     Padding(
-                      padding: EdgeInsets.only(left: width <= 1540 ? model.pageIndex == 0 ? 26.0.w : 146.w : model.pageIndex == 0 ? 10.0.w : 90.w),
+                      padding: EdgeInsets.only(
+                          left: width <= 1540
+                              ? model.pageIndex == 0
+                                  ? 26.0.w
+                                  : 146.w
+                              : model.pageIndex == 0
+                                  ? 10.0.w
+                                  : 90.w),
                       child: Container(
                         height: 4.h,
                         width: 36.w,
@@ -137,7 +143,6 @@ class PeopleUserGroupView extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 16.0),
                   child: model.pageIndex == 0 ? PeopleView() : GroupView(),
                 )
-                
               ],
             ));
       },

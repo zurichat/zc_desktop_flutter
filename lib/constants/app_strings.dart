@@ -78,7 +78,7 @@ const String SearchModal2 = 'Search in Files';
 const String SearchModal3 = 'Search anyone in workspace';
 const String AddPeopleText = 'Add People';
 const String AddPeopleUserGroupHeader = 'To see Zuri Chat in action, you’ll need a few more people here. Try inviting some of the teammates you talk with most.';
-const String InvitePeopleTextFieldHintText = 'Ex. ellis@gmail.com, maria@gmail.com';
+const String InvitePeopleTextFieldHintText = 'Ex. ellis@gmail.com';
 const String AddButtonText = 'Add';
 const String GroupText = 'User Groups';
 const String SearchPeopleTextFieldHintText = 'Search by name, role or team';
@@ -86,4 +86,7 @@ const String RecommendedSearchText = '50 Recommended Searches';
 const String MostRecommendedSortText = 'Sort: Most Recommended';
 const String FilterText = 'Filter';
 const String EmailErrorText = 'Invalid email address';
+const String BackToLoginText = 'Back To Login';
+const String BackToWorkspaceText = 'Back To Workspace';
+const String EmptyWorkspaceText = 'Oh no 😭😭😭, Your workspace is empty. You can invite people with their email';
 

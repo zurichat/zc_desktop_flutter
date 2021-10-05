@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/services/files_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/startup_service.dart';
+import 'package:zc_desktop_flutter/services/user_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
@@ -82,6 +83,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
       resolveUsing: ThemeService.getInstance,
     ),
     LazySingleton(classType: WindowTitleBarService),
+    LazySingleton(classType: UserService)
   ],
   logger: StackedLogger(),
 )

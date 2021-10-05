@@ -1,23 +1,22 @@
-import 'dart:convert';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/constants/app_strings.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/auth_service.dart';
-import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/user_service.dart';
 
-class PeopleUserGroupViewModel extends BaseViewModel with Validator{
+class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   final _organizationService = locator<OrganizationService>();
-  final _localStorageService = locator<LocalStorageService>();
+  final _userService = locator<UserService>();
+  final _log = getLogger("PeopleUserGroupViewModel");
   // _pageIndex is used to keep track of the current view.
   int _pageIndex = 0;
   int get pageIndex => _pageIndex;
 
-  //An error text to be displayed if the email verification failed. 
+  //An error text to be displayed if the email verification failed.
   String? _errorText;
   get errorText => _errorText;
   //The boolean value is used to keep track of the view state
@@ -31,11 +30,13 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator{
   // calls each time user want to perform a search
   List<Users> _dataList = [];
 
-  //The function is used to fetch and set data from the api into the data list.
-  // TODO yet to be written
-  void fetchAndSetOrgUser() async {
+  //The function is used to fetch and set the list of organization members.
+  void fetchAndSetOrgMembers() async {
     setIsloading();
-    await Future.delayed(Duration(milliseconds: 1000));
+    final response = await _organizationService.fetchMemberListUsingOrgId(
+        _organizationService.getOrganizationId(), _userService.auth.user!.token);
+    _dataList = response;
+    _log.i(_dataList);
     setIsloading();
   }
 
@@ -73,19 +74,14 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator{
   //The function set the list _dataList to an empty list when user leave the view to save memory.
   void setDataListTONull() {
     _dataList = [];
+    _suggestionsList = [];
     notifyListeners();
-  }
-
-  /// This gets the currently logged in user respose
-  Auth get _auth {
-    final auth = _localStorageService.getFromDisk(localAuthResponseKey);
-    return Auth.fromJson(jsonDecode(auth as String));
   }
 
   //This Function is used to add user to an organization using the org id and the user email
   Future<void> addUserToOrg(String email) async {
     try {
-      if(!emailValidator(email)) {
+      if (!emailValidator(email)) {
         _errorText = EmailErrorText;
         notifyListeners();
         return;
@@ -93,13 +89,13 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator{
       await runBusyFuture(_organizationService.addMemberToOrganization(
           _organizationService.getOrganizationId(),
           email: email,
-          token: _auth.user!.token));
+          token: _userService.auth.user!.token));
     } catch (e) {
       throw Failure(e.toString());
     }
   }
 
-   @override
+  @override
   void onFutureError(error, Object? key) {
     print('Handle Error here');
     super.onFutureError(error, key);
