@@ -62,7 +62,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.data);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -84,7 +84,7 @@ class ZuriApiService implements Api {
     } on DioError catch (error) {
       log.e(error.response!.statusCode);
       log.e(error.response!.data);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -105,7 +105,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -121,7 +121,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -144,7 +144,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -398,12 +398,12 @@ class ZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, Users? user}) async {
+      {User? currentUser, Users? user,String? orgId}) async {
     return await _post(
-      dmCreateRoom("1"),
+      dmCreateRoom(orgId!,currentUser!.id),
       body: {
         "org_id": "1",
-        "room_user_ids": [currentUser!.id, user!.id],
+        "room_user_ids": [currentUser.id, user!.id],
         "bookmarks": ["0"],
         "pinned": ["0"]
       },
@@ -428,5 +428,117 @@ class ZuriApiService implements Api {
     );
     log.i(response);
     return List.from(response['data'].map((value) => Users.fromJson(value)));
+  }
+
+  @override
+  Future<dynamic> fetchDMs({orgId,userId}) async {
+    return await _get(dmFetchDMs(orgId,userId));
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
+    return await _get(dmUserProfile(orgId, memberId));
+  }
+
+  @override
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token}) async {
+    final uri = getMemberIdUri(organizationId, memberId);
+    final response =
+        await _get(uri, headers: {"Authorization": "Bearer $token"});
+    if (response.statusCode == 200) {
+      return Member.fromJson(response['data']);
+    } else {
+      throw Exception('Failed to load user');
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> getMemberDetails({
+    required String organizationId,
+    required String memberId,
+    required String token,
+  }) async {
+    final uri = getMemberIdUri(organizationId, memberId);
+    final response =
+        await _get(uri, headers: {"Authorization": "Bearer $token"});
+    return response;
+  }
+
+  @override
+  Future<User> fetchUserDetail({required String userId, required token}) async {
+    final uri = loginUri(userId);
+    final response =
+        await _get(uri, headers: {'Authorization': "Bearer{$token}"});
+    return User.fromJson(response['data']);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserDetails(
+      {required String userId, required String token}) async {
+    final uri = loginUri(userId);
+    final response =
+        await _get(uri, headers: {'Authorization': "Bearer{$token}"});
+    return response;
+  }
+
+  Future<void> updateUserDetails(
+      {required String organizationId,
+      required String memberId,
+      UpdateUserParam? parameter,
+      required String token}) async {
+    final uri = updateUserProfile(organizationId, memberId);
+    final response = await _put(
+      uri,
+      body: parameter!.toMap(),
+      headers: {
+        "Authorization": "Bearer ${token}",
+      },
+    );
+    return response;
+  }
+
+
+  @override
+  Future<Member> patchProfilePicture(
+      {required String organizationId,
+      required String memberId,
+      required String token}) async {
+    final uri = updateUserProfilePicture(organizationId, memberId);
+    // final response = await
+    throw UnimplementedError();
+  }
+}
+
+class UpdateUserParam {
+  final String firstNName;
+  final String lastName;
+  final String displayName;
+  final String phoneNumber;
+  final String pronoun;
+  final String bio;
+  final String timeZone;
+
+  UpdateUserParam(
+      {required this.firstNName,
+      required this.lastName,
+      required this.displayName,
+      required this.phoneNumber,
+      required this.pronoun,
+      required this.bio,
+      required this.timeZone});
+
+  Map<String, dynamic> toMap() {
+    return {
+      "bio": bio,
+      "display_name": displayName,
+      "first_name": firstNName,
+      "last_name": lastName,
+      "phone": phoneNumber,
+      "pronouns": pronoun,
+      "time_zone": timeZone
+    };
   }
 }

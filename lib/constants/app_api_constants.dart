@@ -12,6 +12,7 @@ Uri baseUri = Uri(scheme: scheme, host: host, path: '/');
 
 Uri signInUri = Uri(scheme: scheme, host: host, path: '/auth/login');
 Uri signupUri = Uri(scheme: scheme, host: host, path: '/users');
+Uri loginUri(String userId) => Uri(scheme: scheme, host: host, path: '/users/$userId');
 Uri confirmEmailUri = Uri(scheme: scheme, host: host, path: '/verify-account');
 Uri verifyResetPasswordUri =
     Uri(scheme: scheme, host: host, path: '/account/verify-reset-password');
@@ -31,6 +32,21 @@ Uri getOrganisationUri(String organisationId) =>
 Uri getAddUserToOrganizationUri(orgID) =>
     Uri(scheme: scheme, host: host, path: '/organizations/$orgID/members');
 
+Uri updateUserProfile(String organizationId, String memberId) => Uri(
+    scheme: scheme,
+    host: host,
+    path: '/organizations/$organizationId/members/$memberId/profile');
+
+Uri updateUserProfilePicture(String organizationId, String memberId) => Uri(
+    scheme: scheme,
+    host: host,
+    path: '/organizations​/$organizationId}/members​/$memberId​/photo');
+
+Uri getMemberIdUri(String organizationId, String memberId) => Uri(
+    scheme: scheme,
+    host: host,
+    path: '/organizations/$organizationId/members/$memberId');
+    
 // Channel Endpoints
 
 Uri getCreateChannelUri(String organisationId) => Uri(
@@ -70,8 +86,8 @@ Uri getRemoveChannelMemberUri(
 
 // DM Endpoints
 
-Uri dmCreateRoom(String orgId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/room');
+Uri dmCreateRoom(String orgId,String userId) =>
+    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/users/${userId}/room');
 
 Uri dmSendMessage(String roomId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');
@@ -85,4 +101,11 @@ Uri dmFetchRoomMessages(String roomId) =>
 Uri dmMarkMessageAsRead(String messageId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/${messageId}/read/new/');
 
+Uri dmFetchDMs(String orgId,String userId) =>
+    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/users/${userId}/rooms');
+
+Uri dmUserProfile(String orgId, String memberId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/$orgId/members/$memberId/profile');
 //

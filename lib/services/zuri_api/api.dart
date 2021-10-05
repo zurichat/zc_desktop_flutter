@@ -187,7 +187,27 @@ abstract class Api {
   /// get request;
   ///
   /// function parameters; none.
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId});
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+  Future<Map<String, dynamic>> getMemberDetails(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+  Future<Member> patchProfilePicture({
+    required String organizationId,
+    required String memberId,
+    required String token,
+  });
+
+  // Future<void> updateUserDetails({String? organizationId, User user});
+  Future<Map<String, dynamic>> getUserDetails({required String userId, required String token});
+
+  Future<User> fetchUserDetail({required String userId, required token});
+
 
   /* DIRECT MESSAGES SERVICE */
 
@@ -209,7 +229,7 @@ abstract class Api {
   /// * body: {}
   ///
   /// parameters;
-  Future<Map<String, dynamic>> createRoom({User currentUser, Users user});
+  Future<Map<String, dynamic>> createRoom({User currentUser, Users user,String orgId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, get a particular room info using room id.
   ///
@@ -222,7 +242,19 @@ abstract class Api {
   ///
   ///
   ///
+  ///
+  Future<Map<String, dynamic>> getUserProfile({var orgId,var memberId});
+
+  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch user profile
+  ///
+  ///
   Future<Map<String, dynamic>> fetchRoomMessages({var roomId});
+
+  /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
+  ///
+  ///
+  ///
+  Future<dynamic>fetchDMs({var orgId,var userId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, mark a message as read and reflect those changes
   /// in remote source.

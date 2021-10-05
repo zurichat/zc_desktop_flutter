@@ -30,6 +30,7 @@ class OrganizationViewModel extends BaseViewModel {
 
   List<Organization> _organization = [];
   List<Channel> _channels = [];
+  List<DM> _dms = [];
 
   //List<DM> _directMessages = [];
 
@@ -37,7 +38,7 @@ class OrganizationViewModel extends BaseViewModel {
 
   List<Channel> get channels => _channels;
 
-  //List<DM> get directMessages => _directMessages;
+  List<DM> get dms => _dms;
 
   Organization get currentOrganization => _currentOrganization;
 
@@ -86,6 +87,7 @@ class OrganizationViewModel extends BaseViewModel {
   Future<void> setupOrganization() async {
     await getOrganizations();
     await getChannels();
+    await getDMs();
   }
 
   Future<void> getOrganizations() async {
@@ -98,6 +100,18 @@ class OrganizationViewModel extends BaseViewModel {
         organizationId: _currentOrganization.id);
     _channelService.setChannel(_channels[0]);
     log.i("${_channels}");
+  }
+
+  Future<void> getDMs() async {
+    _currentOrganization = organization[getSelectedOrganizationIndex()!];
+    List<DMRoomsResponse> res = await _dmService.getDMs(_currentOrganization.id);
+    for (var user_id in res) {
+      UserProfile userProfile = await _organizationService.getUserProfile(
+          _currentOrganization.id, user_id.roomUserIds.last);
+      DM dm = DM(userId: user_id.roomUserIds.last, userProfile: userProfile);
+      _dms.add(dm);
+    }
+    log.i("${_dms}");
   }
 
   void openChannelsList() {
@@ -129,6 +143,11 @@ class OrganizationViewModel extends BaseViewModel {
 
   void goTOSavedItems() {
     _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
+  }
+
+  void goToUserPeopleGroup() {
+    _navigationService.navigateTo(OrganizationViewRoutes.peopleUserGroupView,
+        id: 1);
   }
 
   void goToDmView(int index) {

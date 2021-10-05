@@ -16,14 +16,20 @@ class ProfileDropdownView extends StatelessWidget {
   late double height, width, xPosition, yPosition;
   late OverlayEntry _floatingDropdown;
 
+  late OverlayEntry _floatingDrop;
+
+  get floatingDropDown => floatingDrop;
+
+  bool _isDropped = false;
+
   get floatingDrop => _floatingDropdown;
 
   OverlayEntry _createFloatingDropdown() {
     return OverlayEntry(builder: (context) {
       return Positioned(
-        right: 100.w,
+        right: 100,
         width: 250.w,
-        height: 450.h,
+        height: 350.h,
         top: 60.h,
         child: Container(
           child: Material(
@@ -87,75 +93,75 @@ class DropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileDropdownViewModel>.reactive(
-        viewModelBuilder: () => ProfileDropdownViewModel(),
-        builder: (context, model, child) => Material(
-              elevation: 20,
-              child: Container(
-                color: kcBackgroundColor2,
-                child: Column(
-                  children: <Widget>[
-                    ProfilePicture(),
-                    Container(
-                      width: 250.w,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 5),
-                      child: OutlineButton(
-                        onPressed: () {
-                          onPress!();
-                          showDialog(
-                              context: context,
-                              builder: (context) => StatusDialogMinView());
-                        },
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Icon(
-                            Icons.edit_outlined,
-                          ),
-                        ),
-                      ),
+      viewModelBuilder: () => ProfileDropdownViewModel(),
+      builder: (context, model, child) => Material(
+        elevation: 20,
+        child: Container(
+          color: kcBackgroundColor2,
+          child: Column(
+            children: <Widget>[
+              ProfilePicture(),
+              Container(
+                width: 250.w,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                child: OutlineButton(
+                  onPressed: () {
+                    onPress!();
+                    showDialog(
+                        context: context,
+                        builder: (context) => StatusDialogMinView());
+                  },
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Icon(
+                      Icons.edit_outlined,
                     ),
-                    DropDownItem(
-                      text: "Clear Status",
-                    ),
-                    DropDownItem(
-                      text: "Set yourself as Away",
-                    ),
-                    DropDownItem(
-                      text: "Pause Notificatons",
-                    ),
-                    Divider(),
-                    DropDownItem(
-                      onTap: () {
-                        onPress!();
-                        showDialog(
-                            context: context,
-                            builder: (context) => ProfileEditView());
-                      },
-                      text: "Edit Profile",
-                    ),
-                    DropDownItem(
-                      onTap: () {
-                        onPress!();
-                      },
-                      text: "View Profile",
-                    ),
-                    DropDownItem(
-                      onTap: () {
-                        onPress!();
-                        showDialog(
-                            context: context,
-                            builder: (context) => PreferenceView());
-                      },
-                      text: "Preferences",
-                    ),
-                    Divider(),
-                    DropDownItem(
-                      text: "Sign out of Zuri",
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ));
+              DropDownItem(
+                text: "Clear Status",
+              ),
+              DropDownItem(
+                text: "Set yourself as Away",
+              ),
+              DropDownItem(
+                text: "Pause Notificatons",
+              ),
+              Divider(),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                  showDialog(
+                      context: context,
+                      builder: (context) => ProfileEditView());
+                },
+                text: "Edit Profile",
+              ),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                },
+                text: "View Profile",
+              ),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                  showDialog(
+                      context: context, builder: (context) => PreferenceView());
+                },
+                text: "Preferences",
+              ),
+              Divider(),
+              DropDownItem(
+                text: "Sign out of Zuri",
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -209,52 +215,58 @@ class ProfilePicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
-        children: [
-          Container(
-            height: 60.h,
-            width: 50.w,
-            decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(5),
-                color: kcSuccessColor),
-          ),
-          horizontalSpaceRegular,
-          Container(
-            width: 100.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Bernice_Perp",
-                  style: subtitle3b,
-                ),
-                verticalSpaceTiny,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 8,
-                      width: 8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: isActive
-                              ? createChannelTextColor
-                              : kcSuccessColor),
-                    ),
-                    horizontalSpaceTiny,
-                    Text(
-                      "Away",
-                      style: preferenceStyleNormal,
-                    )
-                  ],
-                )
-              ],
+    return ViewModelBuilder<ProfileDropdownViewModel>.reactive(
+      onModelReady: (model) {
+        model.getUserDetail();
+      },
+      viewModelBuilder: () => ProfileDropdownViewModel(),
+      builder: (context, model, child) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Row(
+          children: [
+            Container(
+              height: 60.h,
+              width: 50.w,
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(5),
+                  color: kcSuccessColor),
             ),
-          )
-        ],
+            horizontalSpaceRegular,
+            Container(
+              width: 100.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    model.email,
+                    style: subtitle3b,
+                  ),
+                  verticalSpaceTiny,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 8,
+                        width: 8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: isActive
+                                ? createChannelTextColor
+                                : kcSuccessColor),
+                      ),
+                      horizontalSpaceTiny,
+                      Text(
+                        "Away",
+                        style: preferenceStyleNormal,
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

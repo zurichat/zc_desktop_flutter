@@ -58,6 +58,13 @@ final kSubHeadingTextStyle1 = TextStyle(
   fontFamily: 'Lato',
 );
 
+final kSubHeadingTextStyle2 = TextStyle(
+  fontSize: 18.sp,
+  color: kcPrimaryColor,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
 final kCaptionTextStyle = TextStyle(
   fontSize: 20.sp,
   fontWeight: FontWeight.w400,
@@ -75,6 +82,13 @@ final authBtnStyle = TextStyle(
   fontSize: 20.sp,
   color: whiteColor,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Lato',
+);
+
+final profileBtnStyle = TextStyle(
+  fontSize: 18.sp,
+  color: whiteColor,
+  // fontWeight: FontWeight.bold,
   fontFamily: 'Lato',
 );
 
@@ -139,15 +153,22 @@ final headline3 = TextStyle(
 
 final subtitle2 = TextStyle(
   fontSize: 18.sp,
-  fontWeight: FontWeight.w400,
+  // fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
 
 final subtitlec2 = TextStyle(
   fontSize: 18.sp,
   color: kcBackgroundColor2,
-  fontWeight: FontWeight.w400,
+  // fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
+);
+
+final subtitle2b = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  color: createChannelHeaderColor,
+  fontWeight: FontWeight.bold,
 );
 
 final subtitle3 = TextStyle(
@@ -159,6 +180,13 @@ final subtitle3 = TextStyle(
 
 final subtitle3b = TextStyle(
   fontSize: 20.sp,
+  color: createChannelHeaderColor,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Lato',
+);
+
+final subtitle3bb = TextStyle(
+  fontSize: 16.sp,
   color: createChannelHeaderColor,
   fontWeight: FontWeight.w500,
   fontFamily: 'Lato',
