@@ -100,11 +100,10 @@ class PeopleView extends StatelessWidget {
                         itemCount: model.suggestionList.length,
                         itemBuilder: (context, index) =>
                             BuildSuggestionContainer(
-                          displayName: model.suggestionList[index].displayName,
+                          displayName: model.suggestionList[index].display_name,
                           displayPicture:
-                              model.suggestionList[index].displayImage,
+                              model.suggestionList[index].profileImage,
                           bio: model.suggestionList[index].bio,
-                          isActive: model.suggestionList[index].isActive,
                         ),
                       ),
                     ),
@@ -112,7 +111,7 @@ class PeopleView extends StatelessWidget {
                 ],
               );
       },
-      onModelReady: (model) => model.fetchAndOrgUser(),
+      onModelReady: (model) => model.fetchAndSetOrgUser(),
       onDispose: (model) {
         _searchController.dispose();
         _controller.dispose();

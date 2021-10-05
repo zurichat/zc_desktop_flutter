@@ -85,4 +85,5 @@ const String SearchPeopleTextFieldHintText = 'Search by name, role or team';
 const String RecommendedSearchText = '50 Recommended Searches';
 const String MostRecommendedSortText = 'Sort: Most Recommended';
 const String FilterText = 'Filter';
+const String EmailErrorText = 'Invalid email address';
 

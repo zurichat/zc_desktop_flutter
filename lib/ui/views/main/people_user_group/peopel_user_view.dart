@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
+import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -11,8 +12,8 @@ import 'package:zc_desktop_flutter/ui/views/main/people_user_group/widgets/group
 import 'package:zc_desktop_flutter/ui/views/main/people_user_group/widgets/people_view.dart';
 
 class PeopleUserGroupView extends StatelessWidget {
-  const PeopleUserGroupView({Key? key}) : super(key: key);
-
+  PeopleUserGroupView({Key? key}) : super(key: key);
+  final _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -57,6 +58,14 @@ class PeopleUserGroupView extends StatelessWidget {
                   ),
                 ),
                 verticalSpaceSmall,
+                if (model.hasError) ...[
+                                verticalSpaceMedium,
+                                Text(
+                                  (model.modelError as Failure).message,
+                                  style: boldCaptionStyle.copyWith(
+                                      color: Colors.red),
+                                ),
+                              ],
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Row(
@@ -65,6 +74,7 @@ class PeopleUserGroupView extends StatelessWidget {
                         width: 564.w,
                         child: ZuriDeskInputField(
                           hintPlaceHolder: InvitePeopleTextFieldHintText,
+                          errorText: model.errorText,
                         ),
                       ),
                       horizontalSpaceRegular,
@@ -72,9 +82,12 @@ class PeopleUserGroupView extends StatelessWidget {
                         height: 45.h,
                         width: 107.w,
                         color: kcViewColor,
-                        child: Center(
-                          child:
-                              Text(AddButtonText, style: preferenceStyleNormal),
+                        child: GestureDetector(
+                          onTap: () => model.addUserToOrg(_emailController.text),
+                          child: Center(
+                            child:
+                                Text(AddButtonText, style: preferenceStyleNormal),
+                          ),
                         ),
                       )
                     ],

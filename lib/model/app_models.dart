@@ -384,6 +384,7 @@ class Users with _$Users {
     @Default('') @JsonKey(name: 'image_url') String profileImage,
     @Default('') String display_name,
     @Default('') String name,
+    @Default('') String bio,
   }) = _Users;
 
   factory Users.fromJson(Map<String, dynamic> json) => _$UsersFromJson(json);
@@ -399,16 +400,5 @@ class Files with _$Files {
 
   factory Files.fromJson(Map<String, dynamic> json) => _$FilesFromJson(json);
 }
-// A dummy data model to model the suggestion used on the people view.
-//TODO to be replaced with the normal data model. This is just for testing.
-@freezed
-class SuggestionDummyModel with _$SuggestionDummyModel{
-  factory SuggestionDummyModel({
-    @Default('mark') String displayName,
-    @Default('assets/people/mark.png') String displayImage,
-    @Default(false) bool isActive,
-    @Default('') String bio,
-  }) = _SuggestionDummyModel;
 
-  factory SuggestionDummyModel.fromJson(Map<String, dynamic> json) => _$SuggestionDummyModelFromJson(json);
-}
+

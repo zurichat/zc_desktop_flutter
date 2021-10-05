@@ -56,11 +56,12 @@ class OrganizationService {
   }
 
   /// This is used to add user to an organization_service
-  Future<void> addMemberToOrganization(String organizationId) async {
+  Future<void> addMemberToOrganization(String organizationId,
+      {String? email, String? token}) async {
     await _zuriApiService.addLoggedInUserToOrganization(
         organizationId: organizationId,
-        email: _auth.user!.email,
-        token: _auth.user!.token);
+        email: email ?? _auth.user!.email,
+        token:token ?? _auth.user!.token);
   }
 
   /// This is used the create an organization_service

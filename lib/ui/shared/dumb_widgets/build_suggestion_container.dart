@@ -27,10 +27,9 @@ class BuildSuggestionContainer extends StatelessWidget {
           border: Border.all(color: kcDisplayChannelColor4)),
       child: Column(
         children: [
-          //TODO to be replaced with network image
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-            child: Image.asset(
+            child: Image.network(
               displayPicture,
               width: double.infinity,
               fit: BoxFit.fill,
