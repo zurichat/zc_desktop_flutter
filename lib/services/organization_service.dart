@@ -56,11 +56,21 @@ class OrganizationService {
   }
 
   /// This is used to add user to an organization_service
-  Future<void> addMemberToOrganization(String organizationId) async {
+  Future<void> addMemberToOrganization(String organizationId,
+      {String? email, String? token}) async {
     await _zuriApiService.addLoggedInUserToOrganization(
         organizationId: organizationId,
-        email: _auth.user!.email,
-        token: _auth.user!.token);
+        email: email ?? _auth.user!.email,
+        token: token ?? _auth.user!.token);
+  }
+
+  ///This is used to get the list of users in an organization
+  Future<List<Users>> fetchMemberListUsingOrgId(
+      String organizationId, String token) async {
+    final response = await _zuriApiService.fetchMemberListUsingOrgId(
+        organizationId: organizationId, token: token);
+    log.i(response);
+    return response;
   }
 
   /// This is used the create an organization_service
@@ -144,7 +154,8 @@ class OrganizationService {
         firstName: 'Lucy',
         lastName: 'CocoMelon',
         displayName: 'sweetcoco',
-        imageUrl: 'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg',
+        imageUrl:
+            'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg',
         userName: 'sweetcoco',
         phone: 'phone',
         pronouns: 'pronouns',

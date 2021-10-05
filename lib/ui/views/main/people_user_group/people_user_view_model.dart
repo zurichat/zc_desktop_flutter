@@ -1,11 +1,24 @@
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
+import 'package:zc_desktop_flutter/core/network/failure.dart';
+import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/user_service.dart';
 
-class PeopleUserGroupViewModel extends BaseViewModel {
+class PeopleUserGroupViewModel extends BaseViewModel with Validator {
+  final _organizationService = locator<OrganizationService>();
+  final _userService = locator<UserService>();
+  final _log = getLogger("PeopleUserGroupViewModel");
   // _pageIndex is used to keep track of the current view.
   int _pageIndex = 0;
   int get pageIndex => _pageIndex;
 
+  //An error text to be displayed if the email verification failed.
+  String? _errorText;
+  get errorText => _errorText;
   //The boolean value is used to keep track of the view state
   // which initial value is set to false
   bool _isLoading = false;
@@ -15,114 +28,15 @@ class PeopleUserGroupViewModel extends BaseViewModel {
   // This list contains all the users in the workspace.
   // Querys are performed on this list so we don't have to be making api
   // calls each time user want to perform a search
-  List<SuggestionDummyModel> _dataList = [
-    SuggestionDummyModel(
-        bio: 'CEOing',
-        displayName: 'Mark',
-        isActive: true,
-        displayImage: 'assets/people/mark.png'),
-    SuggestionDummyModel(
-        displayName: 'Xylux',
-        isActive: true,
-        displayImage: 'assets/people/xyluz.png'),
-    SuggestionDummyModel(
-        displayName: 'Naza',
-        isActive: true,
-        displayImage: 'assets/people/naza.png'),
-    SuggestionDummyModel(
-        displayName: 'buka',
-        isActive: false,
-        displayImage: 'assets/people/buka.png'),
-    SuggestionDummyModel(
-        displayName: 'seunbayo',
-        isActive: false,
-        displayImage: 'assets/people/seunbayo.png'),
-    SuggestionDummyModel(
-        displayName: 'Ninyo',
-        isActive: false,
-        displayImage: 'assets/people/ninyo.png'),
-    SuggestionDummyModel(
-        bio: 'CEOing',
-        displayName: 'Mark',
-        isActive: true,
-        displayImage: 'assets/people/mark.png'),
-    SuggestionDummyModel(
-        displayName: 'Xylux',
-        isActive: true,
-        displayImage: 'assets/people/xyluz.png'),
-    SuggestionDummyModel(
-        displayName: 'Naza',
-        isActive: true,
-        displayImage: 'assets/people/naza.png'),
-    SuggestionDummyModel(
-        displayName: 'buka',
-        isActive: false,
-        displayImage: 'assets/people/buka.png'),
-    SuggestionDummyModel(
-        displayName: 'seunbayo',
-        isActive: false,
-        displayImage: 'assets/people/seunbayo.png'),
-    SuggestionDummyModel(
-        displayName: 'Ninyo',
-        isActive: false,
-        displayImage: 'assets/people/ninyo.png'),
-    SuggestionDummyModel(
-        bio: 'CEOing',
-        displayName: 'Mark',
-        isActive: true,
-        displayImage: 'assets/people/mark.png'),
-    SuggestionDummyModel(
-        displayName: 'Xylux',
-        isActive: true,
-        displayImage: 'assets/people/xyluz.png'),
-    SuggestionDummyModel(
-        displayName: 'Naza',
-        isActive: true,
-        displayImage: 'assets/people/naza.png'),
-    SuggestionDummyModel(
-        displayName: 'buka',
-        isActive: false,
-        displayImage: 'assets/people/buka.png'),
-    SuggestionDummyModel(
-        displayName: 'seunbayo',
-        isActive: false,
-        displayImage: 'assets/people/seunbayo.png'),
-    SuggestionDummyModel(
-        displayName: 'Ninyo',
-        isActive: false,
-        displayImage: 'assets/people/ninyo.png'),
-    SuggestionDummyModel(
-        bio: 'CEOing',
-        displayName: 'Mark',
-        isActive: true,
-        displayImage: 'assets/people/mark.png'),
-    SuggestionDummyModel(
-        displayName: 'Xylux',
-        isActive: true,
-        displayImage: 'assets/people/xyluz.png'),
-    SuggestionDummyModel(
-        displayName: 'Naza',
-        isActive: true,
-        displayImage: 'assets/people/naza.png'),
-    SuggestionDummyModel(
-        displayName: 'buka',
-        isActive: false,
-        displayImage: 'assets/people/buka.png'),
-    SuggestionDummyModel(
-        displayName: 'seunbayo',
-        isActive: false,
-        displayImage: 'assets/people/seunbayo.png'),
-    SuggestionDummyModel(
-        displayName: 'Ninyo',
-        isActive: false,
-        displayImage: 'assets/people/ninyo.png'),
-  ];
+  List<Users> _dataList = [];
 
-  //The function is used to fetch and set data from the api into the data list.
-  // TODO yet to be written
-  void fetchAndOrgUser() async {
+  //The function is used to fetch and set the list of organization members.
+  void fetchAndSetOrgMembers() async {
     setIsloading();
-    await Future.delayed(Duration(milliseconds: 1000));
+    final response = await _organizationService.fetchMemberListUsingOrgId(
+        _organizationService.getOrganizationId(), _userService.auth.user!.token);
+    _dataList = response;
+    _log.i(_dataList);
     setIsloading();
   }
 
@@ -133,11 +47,11 @@ class PeopleUserGroupViewModel extends BaseViewModel {
   }
 
   // A list to hold the suggestions
-  List<SuggestionDummyModel> _suggestionsList = [];
+  List<Users> _suggestionsList = [];
 
   //If _suggestionsList is empty
   //i.e the user did not search for any user yet then the data list should be returned
-  List<SuggestionDummyModel> get suggestionList =>
+  List<Users> get suggestionList =>
       _suggestionsList.isEmpty ? _dataList : _suggestionsList;
 
   // Change the page index based on what user selected.
@@ -152,7 +66,7 @@ class PeopleUserGroupViewModel extends BaseViewModel {
   void buildSuggestion(String query) {
     _suggestionsList = _dataList
         .where((data) =>
-            data.displayName.toLowerCase().contains(query.toLowerCase()))
+            data.display_name.toLowerCase().contains(query.toLowerCase()))
         .toList();
     notifyListeners();
   }
@@ -160,6 +74,30 @@ class PeopleUserGroupViewModel extends BaseViewModel {
   //The function set the list _dataList to an empty list when user leave the view to save memory.
   void setDataListTONull() {
     _dataList = [];
+    _suggestionsList = [];
     notifyListeners();
+  }
+
+  //This Function is used to add user to an organization using the org id and the user email
+  Future<void> addUserToOrg(String email) async {
+    try {
+      if (!emailValidator(email)) {
+        _errorText = EmailErrorText;
+        notifyListeners();
+        return;
+      }
+      await runBusyFuture(_organizationService.addMemberToOrganization(
+          _organizationService.getOrganizationId(),
+          email: email,
+          token: _userService.auth.user!.token));
+    } catch (e) {
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
+  void onFutureError(error, Object? key) {
+    print('Handle Error here');
+    super.onFutureError(error, key);
   }
 }

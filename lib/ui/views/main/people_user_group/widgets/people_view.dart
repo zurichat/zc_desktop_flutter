@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_suggestion_container.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/views/main/people_user_group/people_user_view_model.dart';
 
 class PeopleView extends StatelessWidget {
@@ -89,7 +90,7 @@ class PeopleView extends StatelessWidget {
                       padding: EdgeInsets.only(
                         right: 61,
                       ),
-                      child: GridView.builder(
+                      child: model.suggestionList.isNotEmpty ? GridView.builder(
                         addAutomaticKeepAlives: true,
                         controller: _controller,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -100,19 +101,18 @@ class PeopleView extends StatelessWidget {
                         itemCount: model.suggestionList.length,
                         itemBuilder: (context, index) =>
                             BuildSuggestionContainer(
-                          displayName: model.suggestionList[index].displayName,
+                          displayName: model.suggestionList[index].display_name,
                           displayPicture:
-                              model.suggestionList[index].displayImage,
+                              model.suggestionList[index].profileImage,
                           bio: model.suggestionList[index].bio,
-                          isActive: model.suggestionList[index].isActive,
                         ),
-                      ),
+                      ) : Center(child: ZcdeskText.caption(''),),
                     ),
                   )
                 ],
               );
       },
-      onModelReady: (model) => model.fetchAndOrgUser(),
+      onModelReady: (model) => model.fetchAndSetOrgMembers(),
       onDispose: (model) {
         _searchController.dispose();
         _controller.dispose();

@@ -62,7 +62,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.data);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -84,7 +84,7 @@ class ZuriApiService implements Api {
     } on DioError catch (error) {
       log.e(error.response!.statusCode);
       log.e(error.response!.data);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -105,7 +105,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -121,7 +121,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -144,7 +144,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.statusMessage);
+      throw HttpException(error.response!.data['message']);
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -439,4 +439,5 @@ class ZuriApiService implements Api {
   Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
     return await _get(dmUserProfile(orgId, memberId));
   }
+
 }
