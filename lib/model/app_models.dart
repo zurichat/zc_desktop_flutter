@@ -280,7 +280,9 @@ class DummyUser with _$DummyUser {
 
 @freezed
 class DM with _$DM {
-  factory DM({DummyUser? user, BaseChat? baseChat}) = _DM;
+  factory DM({
+    @Default('1') String userId,
+    required UserProfile userProfile}) = _DM;
   factory DM.fromJson(Map<String, dynamic> json) => _$DMFromJson(json);
 }
 
@@ -317,7 +319,7 @@ class ChannelResponse with _$ChannelResponse {
 @freezed
 class Channel with _$Channel {
   factory Channel({
-    @Default('') String id,
+    @Default('') @JsonKey(name:'_id') String id,
     @Default('') String name,
     @Default('') String owner,
     @Default('') String description,
@@ -411,4 +413,39 @@ class SuggestionDummyModel with _$SuggestionDummyModel{
   }) = _SuggestionDummyModel;
 
   factory SuggestionDummyModel.fromJson(Map<String, dynamic> json) => _$SuggestionDummyModelFromJson(json);
+}
+
+@freezed
+class DMRoomsResponse with _$DMRoomsResponse {
+  factory DMRoomsResponse({
+    @Default('') @JsonKey(name: '_id') String? id,
+    @Default(0) int status,
+    @Default(true) bool private,
+    @Default([]) List<String> bookmark,
+    @Default([]) List<String> starred,
+    @Default('') String created_at,
+    @Default('') @JsonKey(name: 'org_id') String orgId,
+    @Default([]) List<String> pinned,
+    @Default([]) @JsonKey(name: 'room_user_ids') List<String> roomUserIds,
+  }) = _DMRoomsResponse;
+
+  factory DMRoomsResponse.fromJson(Map<String, dynamic> json) =>
+      _$DMRoomsResponseFromJson(json);
+}
+
+@freezed
+class UserProfile with _$UserProfile {
+  factory UserProfile({
+    @JsonKey(name: 'first_name') required String firstName,
+    @JsonKey(name: 'last_name') required String lastName,
+    @JsonKey(name: 'display_name') required String displayName,
+    @JsonKey(name: 'image_url') required String imageUrl,
+    @JsonKey(name: 'user_name') required String userName,
+    required String phone,
+    required String pronouns,
+    required String bio,
+    required String status,
+  }) = _UserProfile;
+
+  factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
 }
