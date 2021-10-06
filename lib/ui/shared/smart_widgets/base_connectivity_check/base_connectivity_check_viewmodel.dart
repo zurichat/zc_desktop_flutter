@@ -7,26 +7,30 @@ import 'package:zc_desktop_flutter/services/connectivity_service.dart';
 class BaseConnectivityCheckViewModel extends ReactiveViewModel {
   final log = getLogger("BaseConnectivityCheckViewModel");
   final _connectivityService = locator<ConnectivityService>();
+  ReactiveValue<bool> isConnected = ReactiveValue<bool>(true);
 
-  Future<bool> connected() async {
-    // 5 seconds before checking
-    await Future.delayed(Duration(seconds: 5));
-    if (_connectivityService.hasNetworkConnection!.value !=
-        ConnectivityStatus.Offline) {
-      if (_connectivityService.hasInternetConnection!.value !=
-          InternetStatus.Disconnected) {
-        log.i("has Network and Internet - true");
-        return true;
-      }
-    }
-    // false if no internet
-    log.i("has Network and Internet - false");
-    return false;
+  void setup() async {
+    await _connectivityService.checkConnectivity();
+    runTask();
+  }
+
+  void runTask() {
+    _connectivityService.hasInternetConnection!.listen(
+      (result) {
+        if (result == InternetStatus.Disconnected) {
+          isConnected.value = false;
+        } else {
+          isConnected.value = true;
+        }
+      },
+    );
   }
 
   @override
   void dispose() async {
+    // cancels all network related checks
     await _connectivityService.cancelNetworkCheck();
+    await _connectivityService.cancelInternetCheck();
     super.dispose();
   }
 

@@ -15,7 +15,6 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/base_connectivity_check/base_connectvity_check.dart';
-import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
@@ -202,7 +201,10 @@ class OrganizationWrapper extends StatelessWidget {
                                             },
                                             itemChild: (index) {
                                               return DMItem(
-                                                userName: model!.dms.elementAt(index).userProfile.displayName,
+                                                userName: model!.dms
+                                                    .elementAt(index)
+                                                    .userProfile
+                                                    .displayName,
                                                 userIcon:
                                                     'assets/icons/users.svg',
                                                 selected: false,
@@ -221,9 +223,9 @@ class OrganizationWrapper extends StatelessWidget {
                         ),
                       ),
                       //TODO: Center Area
-                      // centerChild!,
+                      centerChild!,
                       //TODO: Reusable view for channel and dms
-                      ChannelDmView(channel: true, dm: false),
+                      // ChannelDmView(channel: true, dm: false),
                     ],
                   ),
                 ),
@@ -273,10 +275,9 @@ class DisplayMenu extends StatelessWidget {
             onTap: () {},
           ),
           ReusableMenuItem(
-            iconPath: 'assets/icons/plugins.svg',
-            text: 'People and User Groups',
-            onTap: model.goToUserPeopleGroup
-          ),
+              iconPath: 'assets/icons/plugins.svg',
+              text: 'People and User Groups',
+              onTap: model.goToUserPeopleGroup),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
             text: 'Plugins',

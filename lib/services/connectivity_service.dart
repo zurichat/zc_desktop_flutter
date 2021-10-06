@@ -15,10 +15,9 @@ import 'package:zc_desktop_flutter/constants/connectivity_status.dart';
 class ConnectivityService with ReactiveServiceMixin {
   final log = getLogger('ConnectivityService');
 
-  //
   static const int DEFAULT_PORT = 53;
-  static const Duration DEFAULT_TIMEOUT = Duration(seconds: 10);
-  static const Duration DEFAULT_INTERVAL = const Duration(seconds: 15);
+  static const Duration DEFAULT_TIMEOUT = Duration(seconds: 5);
+  static const Duration DEFAULT_INTERVAL = const Duration(minutes: 2);
 
   // Reactive values
   ReactiveValue<InternetStatus>? _hasInternetConnection;
@@ -50,14 +49,13 @@ class ConnectivityService with ReactiveServiceMixin {
         _hasInternetConnection,
       ],
     );
-
-    // then check connectivity
-    _checkConnectivity();
     log.i('connectivity service initialized');
   }
 
   /// Check Both Network and Internet Connectivity
-  void _checkConnectivity() {
+  Future<void> checkConnectivity() async {
+    // allow anything to load before listening starts
+    await Future.delayed(Duration(minutes: 1));
     // listen for changes for network mode first
     _networkSubscription =
         Connectivity().onConnectivityChanged.listen(_connectivityCallback);

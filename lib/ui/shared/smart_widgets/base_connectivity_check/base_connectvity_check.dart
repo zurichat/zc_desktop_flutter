@@ -11,11 +11,14 @@ class BaseConnectivityCheck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<BaseConnectivityCheckViewModel>.reactive(
+      onModelReady: (model) {
+        model.setup();
+      },
       builder: (context, model, child) {
-        if (model.connected() != false) {
-          return this.child;
+        if (model.isConnected.value == false) {
+          return ErrorView();
         }
-        return ErrorView();
+        return this.child;
       },
       viewModelBuilder: () => BaseConnectivityCheckViewModel(),
     );
