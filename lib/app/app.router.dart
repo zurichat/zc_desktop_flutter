@@ -5,7 +5,6 @@
 // **************************************************************************
 
 // ignore_for_file: public_member_api_docs
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -30,6 +29,7 @@ import '../ui/views/main/create_organization/create_workspace_stage3.dart';
 import '../ui/views/main/dm/all_dms/all_dms_view.dart';
 import '../ui/views/main/dm/dm_view.dart';
 import '../ui/views/main/organization/organization_view.dart';
+import '../ui/views/main/people_user_group/peopel_user_view.dart';
 import '../ui/views/main/saved_items/saved_items_view.dart';
 import '../ui/views/startup/startup_view.dart';
 
@@ -190,6 +190,7 @@ class OrganizationViewRoutes {
   static const String dmView = '/dm-view';
   static const String allDmsView = '/all-dms-view';
   static const String savedItemsView = '/saved-items-view';
+  static const String peopleUserGroupView = '/people-user-group-view';
   static const all = <String>{
     channelsView,
     channelDmView,
@@ -198,6 +199,7 @@ class OrganizationViewRoutes {
     dmView,
     allDmsView,
     savedItemsView,
+    peopleUserGroupView,
   };
 }
 
@@ -212,6 +214,8 @@ class OrganizationViewRouter extends RouterBase {
     RouteDef(OrganizationViewRoutes.dmView, page: DmView),
     RouteDef(OrganizationViewRoutes.allDmsView, page: AllDmsView),
     RouteDef(OrganizationViewRoutes.savedItemsView, page: SavedItemsView),
+    RouteDef(OrganizationViewRoutes.peopleUserGroupView,
+        page: PeopleUserGroupView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -269,6 +273,15 @@ class OrganizationViewRouter extends RouterBase {
         settings: data,
       );
     },
+    PeopleUserGroupView: (data) {
+      var args = data.getArgs<PeopleUserGroupViewArguments>(
+        orElse: () => PeopleUserGroupViewArguments(),
+      );
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => PeopleUserGroupView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -299,4 +312,10 @@ class ChannelDmViewArguments {
       this.trailing = const SizedBox(),
       this.channel,
       this.dm});
+}
+
+/// PeopleUserGroupView arguments holder class
+class PeopleUserGroupViewArguments {
+  final Key? key;
+  PeopleUserGroupViewArguments({this.key});
 }
