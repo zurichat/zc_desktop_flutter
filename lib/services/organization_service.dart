@@ -14,7 +14,7 @@ const organizationIdKey = 'organizationIdKey';
 /// Refactor class to store objects with a proper db
 
 class OrganizationService {
-  final log = getLogger("OrganizationService");
+  final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
   final _zuriApiService = locator<ZuriApiService>();
 

@@ -66,7 +66,7 @@ class ZcdeskReusableDropDownMenu extends StatelessWidget {
                 child: Container(
                   height: 12,
                   width: 12,
-                  child: SvgPicture.asset("assets/icons/add_drop_down.svg"),
+                  child: SvgPicture.asset('assets/icons/add_drop_down.svg'),
                 ),
               ),
             ],

@@ -10,9 +10,9 @@ import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 
 class DMService {
-  final log = getLogger("DMService");
+  final log = getLogger('DMService');
   final _zuriApiService = locator<ZuriApiService>();
-  Users _user = Users(name: "");
+  Users _user = Users(name: '');
   currentLoggedInUser.User? _currentLoggedInUser;
   final _localStorageService = locator<LocalStorageService>();
 
@@ -29,7 +29,7 @@ class DMService {
     var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
     if (userJson != null) {
       if (userJson is String) {
-        print(userJson);
+        log.i(userJson);
         _currentLoggedInUser = Auth.fromJson(json.decode(userJson)).user;
         return _currentLoggedInUser;
       }
@@ -39,9 +39,6 @@ class DMService {
 
   Future<SendMessageResponse> sendMessage(
       var roomId, var senderId, var message) async {
-    /*print(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-        .format(DateTime.now().toUtc())
-        .toString());*/
     final response = await _zuriApiService.sendMessageToDM(
         roomId: roomId, senderId: senderId, message: message);
     log.i(response);
@@ -50,8 +47,10 @@ class DMService {
 
   Future<String?> createRoom(
       currentLoggedInUser.User? currentUser, Users? user) async {
-    final response =
-        await _zuriApiService.createRoom(currentUser: currentUser, user: user,orgId: getCurrentLoggedInUser()!.id);
+    final response = await _zuriApiService.createRoom(
+        currentUser: currentUser,
+        user: user,
+        orgId: getCurrentLoggedInUser()!.id);
     log.i(response);
     return CreateRoomResponse.fromJson(response).roomId;
   }
@@ -60,6 +59,7 @@ class DMService {
     final response = await _zuriApiService.getRoomInfo(roomId: roomId);
     log.i(response);
     var res = RoomInfoResponse.fromJson(response).numberOfUsers;
+    log.i(res);
   }
 
   Future<List<DMRoomsResponse>> getDMs(var orgId) async {
@@ -67,7 +67,8 @@ class DMService {
         orgId: orgId, userId: getCurrentLoggedInUser()!.id);
     log.i('dm is back with: ');
     log.i(response);
-  return List<DMRoomsResponse>.from(response.map((model)=> DMRoomsResponse.fromJson(model)));
+    return List<DMRoomsResponse>.from(
+        response.map((model) => DMRoomsResponse.fromJson(model)));
   }
 
   Future<List<Results>> fetchRoomMessages(var roomId) async {
@@ -80,5 +81,6 @@ class DMService {
     final response = await _zuriApiService.markMessageAsRead(messageId);
     log.i(response);
     var res = MarkMessageAsReadResponse.fromJson(response).read;
+    log.i(res);
   }
 }

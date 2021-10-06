@@ -11,7 +11,7 @@ import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class OrganizationViewModel extends BaseViewModel {
-  final log = getLogger("OrganizationViewModel");
+  final log = getLogger('OrganizationViewModel');
   final _navigationService = locator<NavigationService>();
   final _organizationService = locator<OrganizationService>();
   final _channelService = locator<ChannelsService>();
@@ -53,7 +53,7 @@ class OrganizationViewModel extends BaseViewModel {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
     _organizationService.saveOrganizationId(_currentOrganization.id);
-    log.d(" current organization id ${_currentOrganization.id}");
+    log.d('current organization id ${_currentOrganization.id}');
     _windowTitleBarService.setHome(true);
     //notifyListeners();
     // log.i(_channels);
@@ -62,9 +62,9 @@ class OrganizationViewModel extends BaseViewModel {
   /// function fired when another workspace is tapped on.
   void reloadWithSelectedOrganization(int index) async {
     _channels = [];
-    log.i("###################### $_channels");
+    log.i('###################### $_channels');
     log.i(
-        "current selected organization ${getSelectedOrganizationIndex()! + 1} and to change to ${index + 1}");
+        'current selected organization ${getSelectedOrganizationIndex()! + 1} and to change to ${index + 1}');
     if (index != getSelectedOrganizationIndex()!) {
       await runBusyFuture(setupOrganization());
       // Save the newly selected org id in preferences when a new organization item is tapped
@@ -99,7 +99,7 @@ class OrganizationViewModel extends BaseViewModel {
     _channels = await _channelService.getChannels(
         organizationId: _currentOrganization.id);
     _channelService.setChannel(_channels[0]);
-    log.i("${_channels}");
+    log.i('${_channels}');
   }
 
   Future<void> getDMs() async {
@@ -111,7 +111,7 @@ class OrganizationViewModel extends BaseViewModel {
       DM dm = DM(userId: user_id.roomUserIds.last, userProfile: userProfile);
       _dms.add(dm);
     }
-    log.i("${_dms}");
+    log.i('${_dms}');
   }
 
   void openChannelsList() {
@@ -192,7 +192,7 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void setCurrentWorkspaceIndex(int index) {
-    log.i("$index from workspace");
+    log.i('$index from workspace');
     currentWorkspaceIndex = index;
     setupWorkspace();
     notifyListeners();

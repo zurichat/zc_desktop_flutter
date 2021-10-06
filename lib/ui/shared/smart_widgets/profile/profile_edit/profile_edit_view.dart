@@ -12,6 +12,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/profile_input_field.da
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'profile_edit_viewmodel.dart';
 
+// ignore: must_be_immutable
 class ProfileEditView extends StatelessWidget {
   ProfileEditView({
     Key? key,
@@ -26,12 +27,12 @@ class ProfileEditView extends StatelessWidget {
           .pickFiles(allowMultiple: false, type: FileType.image);
 
       if (result != null) {
+        // ignore: unused_local_variable
         File file = File(result.files.single.path!);
       } else {
         // User canceled the picker
       }
     } catch (e) {
-      print(e);
     }
   }
 
@@ -41,12 +42,12 @@ class ProfileEditView extends StatelessWidget {
           .pickFiles(allowMultiple: false, type: FileType.image);
 
       if (result != null) {
+        // ignore: unused_local_variable
         File file = File(result.files.single.path!);
       } else {
         // User canceled the picker
       }
     } catch (e) {
-      print(e);
     }
   }
 
@@ -68,7 +69,7 @@ class ProfileEditView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Edit Profile",
+                      'Edit Profile',
                       style: kHeading2TextStyle,
                     ),
                     IconButton(
@@ -110,7 +111,7 @@ class ProfileEditView extends StatelessWidget {
                                         label: 'Full Name',
                                         onChanged: (value) {},
                                         errorText:
-                                            "Unfortunately, you can’t leave this blank.",
+                                            'Unfortunately, you can’t leave this blank.',
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         hintPlaceHolder: 'Full Name',
@@ -120,19 +121,19 @@ class ProfileEditView extends StatelessWidget {
                                         label: 'Display Name',
                                         onChanged: (value) {},
                                         helperText:
-                                            "This could be your first name, or a nickname, however you’d like people to refer to you in Slack.",
+                                            'This could be your first name, or a nickname, however you’d like people to refer to you in Slack.',
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         hintPlaceHolder: 'Display Name',
                                       ),
                                       verticalSpaceMedium,
                                       Text(
-                                        "Custom rules for this workspace:",
+                                        'Custom rules for this workspace:',
                                         style: subtitle3b,
                                       ),
                                       verticalSpaceRegular,
                                       Text(
-                                        "Please use as ingle firstname or a permanent nickname. If someone uses your name, please change it",
+                                        'Please use as ingle firstname or a permanent nickname. If someone uses your name, please change it',
                                         style: subtitle3,
                                       ),
                                       verticalSpaceMedium,
@@ -140,7 +141,7 @@ class ProfileEditView extends StatelessWidget {
                                         label: 'What I do',
                                         onChanged: (value) {},
                                         helperText:
-                                            "Let pepole know what you do at Zuri x I4G.",
+                                            'Let pepole know what you do at Zuri x I4G.',
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         hintPlaceHolder: 'What I do',
@@ -150,7 +151,7 @@ class ProfileEditView extends StatelessWidget {
                                         label: 'Pronouns',
                                         onChanged: (value) {},
                                         helperText:
-                                            "Let pepole know which pronoun you are",
+                                            'Let pepole know which pronoun you are',
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         hintPlaceHolder: 'Ex. they/Them/theirs',
@@ -159,7 +160,7 @@ class ProfileEditView extends StatelessWidget {
                                       ProfileInputField(
                                         label: 'Phone Number',
                                         onChanged: (value) {},
-                                        helperText: "Enter a phone number.",
+                                        helperText: 'Enter a phone number.',
                                         keyboardType: TextInputType.phone,
                                         inputType: TextInputType.phone,
                                         hintPlaceHolder: '(123) 555-55555',
@@ -198,7 +199,7 @@ class ProfileEditView extends StatelessWidget {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Profile Photo",
+                                        'Profile Photo',
                                         style: headline8,
                                       ),
                                       verticalSpaceRegular,
@@ -232,9 +233,9 @@ class ProfileEditView extends StatelessWidget {
                                       Container(
                                         width: 200.w,
                                         height: 50.h,
-                                        child: OutlineButton(
-                                          borderSide: BorderSide(
-                                              color: createChannelHeaderColor),
+                                        child: OutlinedButton(
+                                          style: OutlinedButton.styleFrom(side: BorderSide(
+                                              color: createChannelHeaderColor)),
                                           onPressed: () {
                                             model.chooceFileToUpload(context);
                                           },
@@ -248,7 +249,7 @@ class ProfileEditView extends StatelessWidget {
                                       TextButton(
                                           onPressed: () {},
                                           child: Text(
-                                            "Remove photo",
+                                            'Remove photo',
                                             style: kSubHeadingTextStyle1,
                                           )),
                                     ],
@@ -276,11 +277,11 @@ class ProfileEditView extends StatelessWidget {
                     Container(
                       height: 50.h,
                       width: 80.w,
-                      child: OutlineButton(
-                        borderSide: BorderSide(color: createChannelHeaderColor),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(side: BorderSide(color: createChannelHeaderColor)),
                         onPressed: () {},
                         child: Text(
-                          "Cancel",
+                          'Cancel',
                           style: subtitle3,
                         ),
                       ),
@@ -290,7 +291,7 @@ class ProfileEditView extends StatelessWidget {
                       height: 50.h,
                       // width: 100.w,
                       child: AuthButton(
-                        label: "Save Changes",
+                        label: 'Save Changes',
                       ),
                     ),
                   ],

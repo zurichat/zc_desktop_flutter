@@ -11,7 +11,7 @@ import 'local_storage_service.dart';
 const localAuthResponseKey = 'localAuthResponse';
 
 class AuthService {
-  final log = getLogger("AuthService");
+  final log = getLogger('AuthService');
   final _zuriApiService = locator<ZuriApiService>();
   final _localStorageService = locator<LocalStorageService>();
 

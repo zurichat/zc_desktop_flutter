@@ -180,7 +180,7 @@ class LeftSideHome extends HookWidget {
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
-                hintText: "Search here",
+                hintText: 'Search here',
                 hintStyle: TextStyle(color: lightIconColor),
                 filled: true,
                 fillColor: bodyColor,

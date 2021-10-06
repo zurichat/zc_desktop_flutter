@@ -78,7 +78,6 @@ class PaidFeature extends StatelessWidget {
             width: 150,
             child: ZcDeskButton(
               onPressed: () {
-                print('note');
               },
               child: Text(
                 'See Upgrade Uptions',

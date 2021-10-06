@@ -6,10 +6,9 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
-import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class LoginViewModel extends BaseViewModel {
-  final log = getLogger("LoginViewModel");
+  final log = getLogger('LoginViewModel');
   final _navigationService = locator<NavigationService>();
   final _auth = locator<AuthService>();
 
@@ -53,7 +52,7 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   void onFutureError(error, Object? key) {
-    print('Handle Error here');
+    log.i('Handle Error here');
     super.onFutureError(error, key);
   }
 

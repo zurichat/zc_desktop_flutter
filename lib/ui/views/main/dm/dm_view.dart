@@ -96,7 +96,6 @@ class DmView extends StatelessWidget {
                                                       .elementAt(index)
                                                       .read &&
                                                   !model.showingNewMessageIn) {
-                                                print('popopopop');
                                                 model.toggleShowingNewMessageIn(
                                                     true);
                                                 return Column(

@@ -8,8 +8,8 @@ class StatusDialogMinTwoViewModel extends BaseViewModel{
   String _setAStatus = 'Set A Status';
   String _hintText = 'What is your status?';
   String _clearAfter = "Clear after: Don't clear";
-  String _saveBtnText = "Save";
-  String _cancelBtnText = "Cancel";
+  String _saveBtnText = 'Save';
+  String _cancelBtnText = 'Cancel';
 
 
 

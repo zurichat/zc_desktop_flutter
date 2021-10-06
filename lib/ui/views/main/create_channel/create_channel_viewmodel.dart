@@ -23,7 +23,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     return Auth.fromJson(jsonDecode(auth as String));
   }
 
-  final log = getLogger("CreateChannelViewModel");
+  final log = getLogger('CreateChannelViewModel');
   final _navigationService = locator<NavigationService>();
   final _channelsService = locator<ChannelsService>();
 
@@ -194,7 +194,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   /// Error should be handled here. It could be displaying a toast of something else
   @override
   void onFutureError(error, Object? key) {
-    print('Handle Error here');
+    log.i('Handle Error here');
     super.onFutureError(error, key);
   }
 }

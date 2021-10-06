@@ -6,6 +6,7 @@ mixin Validator {
   }
 
   bool passwordValidator(String password) {
+    // ignore: prefer_single_quotes
     return (password.length >=  8 && RegExp(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$").hasMatch(password));
   }
 

@@ -5,8 +5,8 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 class ProfileModalViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
-  final String profileImgUrl = "";
-  final String userName = "";
+  final String profileImgUrl = '';
+  final String userName = '';
 
   bool _fav = false;
   bool get fav => _fav;

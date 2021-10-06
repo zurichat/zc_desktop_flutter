@@ -209,7 +209,8 @@ abstract class Api {
   /// * body: {}
   ///
   /// parameters;
-  Future<Map<String, dynamic>> createRoom({User currentUser, Users user,String orgId});
+  Future<Map<String, dynamic>> createRoom(
+      {User currentUser, Users user, String orgId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, get a particular room info using room id.
   ///
@@ -223,7 +224,7 @@ abstract class Api {
   ///
   ///
   ///
-  Future<Map<String, dynamic>> getUserProfile({var orgId,var memberId});
+  Future<Map<String, dynamic>> getUserProfile({var orgId, var memberId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch user profile
   ///
@@ -233,8 +234,13 @@ abstract class Api {
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
   ///
   ///
+  Future<dynamic> removeUserFromChannel(
+      {required organizationId, required channelId, required memberId});
+
+  ///removes a user from channel;
   ///
-  Future<dynamic>fetchDMs({var orgId,var userId});
+  ///
+  Future<dynamic> fetchDMs({var orgId, var userId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, mark a message as read and reflect those changes
   /// in remote source.
