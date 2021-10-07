@@ -8,11 +8,11 @@ import 'auth_service.dart';
 import 'local_storage_service.dart';
 
 class UserService {
-  final log = getLogger("UserService");
+  final log = getLogger('UserService');
   final _localStorageService = locator<LocalStorageService>();
   /*Future<User> getUserDetails(String? id) async {
     final response =
-        await _apiService.get(Uri.parse("https://api.zuri.chat/users/$id}"));
+        await _apiService.get(Uri.parse('https://api.zuri.chat/users/$id}'));
     return User.fromJson(response);
   }*/
   Auth get auth {

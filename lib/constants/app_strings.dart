@@ -48,14 +48,14 @@ const String CreateAccount = 'Create an account';
 const String ChooseWorkspace = 'Choose a workspace';
 const String AddWorkspace =
     'we\'ll add the workspaces you choose to your desktop app';
-const String AppbarText = "# All direct messages";
-const String SearchBarText = "To: @somebody or @somebody@example.com";
-const String DayPlaceholder = "Today";
-const String TitlePlaceholder = "Beckylicious";
+const String AppbarText = '# All direct messages';
+const String SearchBarText = 'To: @somebody or @somebody@example.com';
+const String DayPlaceholder = 'Today';
+const String TitlePlaceholder = 'Beckylicious';
 const String SubtitlePlaceholder =
-    "Rebecca: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ";
-const String TimePlaceholder = "13:02";
-const String ImagePlaceholder = "B";
+    'Rebecca: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ';
+const String TimePlaceholder = '13:02';
+const String ImagePlaceholder = 'B';
 
 const String SavedItems = 'Saved Items';
 const String SearchModalHintText = 'Find in direct messages with rafiu';

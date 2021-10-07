@@ -91,7 +91,6 @@ class OrganizationWrapper extends StatelessWidget {
                                   return Container(
                                     child: GestureDetector(
                                       onTap: () {
-                                        print("Workspace $index tapped");
                                         model!.reloadWithSelectedOrganization(
                                             index);
                                       },
@@ -386,7 +385,7 @@ class ReusableDropDown extends StatelessWidget {
                           height: 12,
                           width: 12,
                           child: SvgPicture.asset(
-                              "assets/icons/add_dm_channel.svg"),
+                              'assets/icons/add_dm_channel.svg'),
                         ),
                       ),
                       horizontalSpaceSmall,
@@ -494,7 +493,7 @@ class OrganizationItem extends StatelessWidget {
                       width: 38.0,
                       height: 38.0,
                       child:
-                          SvgPicture.asset("assets/icons/zuri_logo_only.svg"),
+                          SvgPicture.asset('assets/icons/zuri_logo_only.svg'),
                     ),
                   ),
                 ),

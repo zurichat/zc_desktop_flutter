@@ -34,7 +34,7 @@ enum darkDramaticTheme {
 enum cleanThemes { aubergine, versatile, aubergine1, aubergine2 }
 
 class ThemeViewModel extends BaseViewModel {
-  final log = getLogger("ThemeViewModel");
+  final log = getLogger('ThemeViewModel');
 
   final _themeService = locator<ThemeService>();
 
@@ -198,7 +198,7 @@ class ThemeViewModel extends BaseViewModel {
   }
 
   String date() {
-    String datee = now.hour.toString() + ":" + now.minute.toString();
+    String datee = now.hour.toString() + ':' + now.minute.toString();
     return datee;
   }
 
@@ -210,31 +210,31 @@ class ThemeViewModel extends BaseViewModel {
   String _getTitleForIndex(int index) {
     switch (index) {
       case 0:
-        return "Light";
+        return 'Light';
       case 1:
-        return "Dark";
+        return 'Dark';
       case 2:
-        return "aubergine";
+        return 'aubergine';
       case 3:
         return 'versatile';
       case 4:
-        return "aubergine";
+        return 'aubergine';
       case 5:
-        return "aubergine";
+        return 'aubergine';
       case 6:
-        return "coast";
+        return 'coast';
       case 7:
-        return "triadic";
+        return 'triadic';
       case 8:
-        return "complimentary";
+        return 'complimentary';
       case 9:
-        return "automatic";
+        return 'automatic';
       case 10:
-        return "nocture";
+        return 'nocture';
       case 11:
-        return "expensive";
+        return 'expensive';
     }
-    return "No Theme for index";
+    return 'No Theme for index';
   }
 
   void setTheme(ThemeModel themeData) =>

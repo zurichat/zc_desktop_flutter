@@ -61,7 +61,7 @@ class ChannelsService with ReactiveServiceMixin {
 
   /// This is used to get the list of channels on the page
   Future<List<Channel>> getChannels({String? organizationId}) async {
-    log.i("getChannels called");
+    log.i('getChannels called');
     final response = await _zuriApiService.fetchChannelsListUsingOrgId(
         organizationId: organizationId, token: _auth.user!.token);
     log.i(response);
@@ -85,7 +85,7 @@ class ChannelsService with ReactiveServiceMixin {
     log.i(response);
     // Getting stored AuthResponse from local storage
     String insertedId = response['_id'];
-    print(insertedId);
+    log.i(insertedId);
     _localStorageService.saveToDisk(
       userChannelId,
       jsonEncode(insertedId),
@@ -125,7 +125,7 @@ class ChannelsService with ReactiveServiceMixin {
 
   Future<dynamic> sendMessage(
       {var channel_id, var senderId, var message, var org_id}) async {
-    print(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    log.i(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         .format(DateTime.now().toUtc())
         .toString());
     return await _zuriApiService.sendMessageToChannel(

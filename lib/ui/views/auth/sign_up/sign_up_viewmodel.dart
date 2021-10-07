@@ -9,7 +9,7 @@ import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 
 class SignUpViewModel extends BaseViewModel with Validator {
-  final log = getLogger("SignUpViewModel");
+  final log = getLogger('SignUpViewModel');
 
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthService>();
@@ -75,7 +75,7 @@ class SignUpViewModel extends BaseViewModel with Validator {
   /// Error should be handled here. It could be displaying a toast of something else
   @override
   void onFutureError(error, Object? key) {
-    print('Handle Error here');
+    log.i('Handle Error here');
     super.onFutureError(error, key);
   }
 }

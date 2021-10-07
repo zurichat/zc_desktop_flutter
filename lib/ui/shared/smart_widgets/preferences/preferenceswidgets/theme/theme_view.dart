@@ -10,7 +10,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/theme/theme_viewmodel.dart';
 
 class ThemeView extends StatelessWidget {
-  ScrollController _rightSideBarController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -501,7 +500,7 @@ class ClassicThemeWidgetDark extends StatelessWidget {
 }
 
 class ClassicThemeWidgetLight extends StatelessWidget {
-  ThemeViewModel model;
+  final ThemeViewModel model;
 
   ClassicThemeWidgetLight({required this.model});
 
@@ -586,11 +585,11 @@ class BottomContainerWidget extends StatelessWidget {
 }
 
 class BuildRadio extends StatelessWidget {
-  Object value;
-  Object groupValue;
-  void Function(Object? value)? onChanged;
-  String txt;
-  Color color;
+  final Object value;
+  final Object groupValue;
+  final void Function(Object? value)? onChanged;
+  final String txt;
+  final Color color;
 
   BuildRadio(
       {required this.value,

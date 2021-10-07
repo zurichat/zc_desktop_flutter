@@ -8,7 +8,7 @@ class StatusDialogMinViewModel extends BaseViewModel{
   String _setAStatus = 'Set A Status';
   String _hintText = 'What is your status?';
   String _clearAfter = "Clear after: Don't clear";
-  String _clearBtnText = "Clear Status";
+  String _clearBtnText = 'Clear Status';
 
 
   String get setAStatus => _setAStatus;
