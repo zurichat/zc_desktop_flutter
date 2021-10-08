@@ -26,7 +26,6 @@ class LinksPreview extends StatelessWidget {
           children: <Widget>[
             TextField(onChanged: (value) {
               model.setTUrl = value;
-              print(value);
             }),
             ElevatedButton(
                 onPressed: () {
@@ -40,7 +39,7 @@ class LinksPreview extends StatelessWidget {
                 width: 500,
                 child: AnyLinkPreview(
                   link: model.url1,
-                  displayDirection: UIDirection.UIDirectionVertical,
+                  // displayDirection: UIDirection.UIDirectionVertical,
                   bodyTextOverflow: TextOverflow.ellipsis,
                   cache: Duration(seconds: 1),
                   backgroundColor: Colors.white,
