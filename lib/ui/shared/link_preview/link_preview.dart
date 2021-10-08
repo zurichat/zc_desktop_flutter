@@ -17,12 +17,11 @@ class LinksPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: ViewModelBuilder<LinksPreviewViewModel>.reactive(
+    // if (model.url == null) {
+    //   return SizedBox();
+    // } else
+    return ViewModelBuilder<LinksPreviewViewModel>.reactive(
       builder: (context, model, child) {
-        // if (model.url == null) {
-        //   return SizedBox();
-        // } else
         return Column(
           children: <Widget>[
             TextField(onChanged: (value) {
@@ -63,9 +62,10 @@ class LinksPreview extends StatelessWidget {
         );
       },
       viewModelBuilder: () => LinksPreviewViewModel(),
-    ));
+    );
   }
 }
+
           
       
 
