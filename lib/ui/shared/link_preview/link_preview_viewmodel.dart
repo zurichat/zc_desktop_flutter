@@ -1,7 +1,7 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:html/parser.dart';
 // import 'package:http/http.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:stacked/stacked.dart';
 
 class LinksPreviewViewModel extends BaseViewModel {
@@ -17,10 +17,10 @@ class LinksPreviewViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  final String _url1 = "https://github.com";
+  final String _url1 = 'https://github.com';
   get url1 => _url1;
 
-  String? _errorImage = "https://i.ytimg.com/vi/z8wrRRR7_qU/maxresdefault.jpg";
+  String? _errorImage = 'https://i.ytimg.com/vi/z8wrRRR7_qU/maxresdefault.jpg';
   get errorImage => _errorImage;
 
   // Future fetch(String url) async {
@@ -41,7 +41,6 @@ class LinksPreviewViewModel extends BaseViewModel {
   String _validateUrl(String url) {
     if (url.startsWith('http://') == true ||
         url.startsWith('https://') == true) {
-      print(url);
       return url;
     } else {
       return 'http://$url';
