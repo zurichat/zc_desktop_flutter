@@ -10,8 +10,6 @@ import 'package:url_launcher/url_launcher.dart';
 class CheckEmailViewModel extends BaseViewModel {
   final _navigator = locator<NavigationService>();
   final _auth = locator<AuthService>();
-  final _resetTitle = 'Check your email for code';
-  final _confirmTitle = 'Next, confirm your email address';
   bool _isBusy = false;
   String _otp0 = '';
   String _otp1 = '';
@@ -36,8 +34,7 @@ class CheckEmailViewModel extends BaseViewModel {
   get isBusy => _isBusy;
   get errorMsg => _errorMsg;
 
-  get resetTitle => _resetTitle;
-  get confirmTitle => _confirmTitle;
+ 
   void _setIsBusy() {
     _isBusy = !_isBusy;
     notifyListeners();

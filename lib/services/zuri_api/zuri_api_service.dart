@@ -64,7 +64,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.data);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -86,7 +86,7 @@ class ZuriApiService implements Api {
     } on DioError catch (error) {
       log.e(error.response!.statusCode);
       log.e(error.response!.data);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -107,7 +107,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -123,7 +123,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -146,7 +146,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -197,9 +197,9 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> updateUserPassword({required String password}) async {
+  Future<void> updateUserPassword({required String password, required String code}) async {
     await _post(
-      verifyResetPasswordUri,
+      updatePasswordUri(code),
       body: {
         'password': password,
         'confirm_password': password,

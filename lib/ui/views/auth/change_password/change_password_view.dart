@@ -4,6 +4,8 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
@@ -11,7 +13,6 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.da
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
-
 import 'change_password_viewmodel.dart';
 
 class ChangePasswordView extends StatelessWidget {
@@ -19,8 +20,14 @@ class ChangePasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    final _passwordController = TextEditingController();
+    final _confirmPasswordController = TextEditingController();
     return ViewModelBuilder<ChangePasswordViewModel>.reactive(
       viewModelBuilder: () => ChangePasswordViewModel(),
+      onDispose: (_) {
+        _passwordController.dispose();
+        _confirmPasswordController.dispose();
+      },
       builder: (
         BuildContext context,
         ChangePasswordViewModel model,
@@ -30,21 +37,21 @@ class ChangePasswordView extends StatelessWidget {
           body: Column(
             children: [
               Container(
-                height: height - 40,
+                height: height - 9,
                 child: Row(
                   children: [
                     LeftSideContainer(),
                     Expanded(
                       flex: 2,
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 72.w),
+                        //margin: EdgeInsets.symmetric(horizontal: 72.w),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               verticalSpaceMedium,
-                              SvgPicture.asset(model.logoUrl),
+                              SvgPicture.asset(LogoUrl),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
@@ -53,69 +60,58 @@ class ChangePasswordView extends StatelessWidget {
                                 ),
                               ),
                               verticalSpaceMedium,
-                              Column(
-                                children: [
-                                  ZuriDeskInputField(
-                                    label: 'Password',
-                                    password: true,
-                                    isVisible: model.isPasswordVisible,
-                                    onVisibilityTap: model.setIsPasswordVisible,
-                                    errorText: model.passwordMsg,
-                                    onChanged: (value) {
-                                      model.setPassword(value);
-                                    },
-                                    hintPlaceHolder: 'Password',
-                                  ),
-                                  verticalSpaceSmall,
-                                  ZuriDeskInputField(
-                                    label: 'Confirm Password',
-                                    password: true,
-                                    isVisible: model.isPasswordVisible,
-                                    onVisibilityTap: model.setIsPasswordVisible,
-                                    errorText: model.confirmErrorMsg,
-                                    onChanged: (value) {
-                                      model.setConfirmPassword(value);
-                                    },
-                                    hintPlaceHolder: 'Confirm Password',
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 40.0.h),
-                              Text(
-                                model.errorMessage,
-                                style: headline6.copyWith(
-                                    color: Theme.of(context).errorColor),
-                              ),
-                              verticalSpaceSmall,
                               Container(
-                                  height: 58.h,
-                                  width: 440.w,
-                                  child: AuthButton(
-                                    label: 'Continue',
-                                    isBusy: model.isBusy,
-                                    onTap: () async {
-                                      await model.changePassword();
-                                      if (model.isShowDialog) {
-                                        showDialog(
-                                            context: context,
-                                            builder: (_) =>
-                                                BuildConfirmation());
-                                      }
-                                    },
-                                  )),
-                              SizedBox(
-                                height: 32.h,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 23.w),
-                                child: Row(
+                                margin: EdgeInsets.symmetric(horizontal: 72.w),
+                                child: Column(
                                   children: [
-                                    Text(
-                                        'Don\'t wish to change your password?  ',
-                                        style: headline6),
-                                    GotoLoginButton(),
+                                    ZuriDeskInputField(
+                                      label: 'Password',
+                                      password: true,
+                                      isVisible: model.isPasswordVisible,
+                                      onVisibilityTap:
+                                          model.setIsPasswordVisible,
+                                      errorText: model.passwordMsg,
+                                      controller: _passwordController,
+                                      hintPlaceHolder: 'Password',
+                                    ),
+                                    verticalSpaceSmall,
+                                    ZuriDeskInputField(
+                                      label: 'Confirm Password',
+                                      password: true,
+                                      isVisible: model.isPasswordVisible,
+                                      onVisibilityTap:
+                                          model.setIsPasswordVisible,
+                                      errorText: model.confirmErrorMsg,
+                                      controller: _confirmPasswordController,
+                                      hintPlaceHolder: 'Confirm Password',
+                                    ),
+                                    verticalSpaceRegular,
+                                    AuthButton(
+                                      label: 'Continue',
+                                      isBusy: model.isBusy,
+                                      onTap: () async {
+                                        await model.changePassword(
+                                            _passwordController.text,
+                                            _confirmPasswordController.text);
+                                        if (model.isShowDialog) {
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) =>
+                                                  BuildConfirmation());
+                                        }
+                                      },
+                                    )
                                   ],
                                 ),
+                              ),
+                              verticalSpaceRegular,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Don\'t wish to change your password?  ',
+                                      style: headline7),
+                                  GotoLoginButton(),
+                                ],
                               )
                             ],
                           ),
@@ -151,12 +147,9 @@ class BuildConfirmation extends StatelessWidget {
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  SvgPicture.asset(
-                      model.isError ? model.errorImage : model.successImage),
+                  SvgPicture.asset(model.isError ? ErrorImage : SuccessImage),
                   Center(
-                    child: SvgPicture.asset(model.isError
-                        ? 'assets/images/x.svg'
-                        : 'assets/images/mark.svg'),
+                    child: SvgPicture.asset(model.isError ? XSvg : MarkSvg),
                   ),
                 ],
               ),
@@ -164,7 +157,7 @@ class BuildConfirmation extends StatelessWidget {
                 height: 32.h,
               ),
               ZcdeskText.headingTwo(
-                model.isError ? model.errorTitle : model.successTitle,
+                model.isError ? ErrorTitle : SuccessTitle,
               ),
               SizedBox(
                 height: 24.h,
@@ -173,29 +166,17 @@ class BuildConfirmation extends StatelessWidget {
                   width: 454.w,
                   alignment: Alignment.center,
                   child: ZcdeskText.headingThree(
-                    model.isError
-                        ? model.errorSubtiltle
-                        : model.successSubtitle,
+                    model.isError ? ErrorSubtitle : SuccessSubtitle,
                   )),
               SizedBox(
                 height: 32.h,
               ),
-              GestureDetector(
-                onTap: model.gotoLogin,
-                child: Container(
-                  height: 48.h,
-                  width: 154.w,
-                  color: Color.fromRGBO(0, 184, 124, 1),
-                  child: Center(
-                    child: Text(
-                      'Continue to Login',
-                      style: headline6.copyWith(
-                        color: Color.fromRGBO(0, 184, 124, 1),
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              AuthButton(
+                  label: 'Continue to Login',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    model.gotoLogin();
+                  })
             ],
           ),
         ),

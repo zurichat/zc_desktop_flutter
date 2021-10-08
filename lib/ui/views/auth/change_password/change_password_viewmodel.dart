@@ -10,31 +10,9 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
   final _authService = locator<AuthService>();
   bool _isNotPasswordVisible = true;
   String? _confirmErrorMsg, _passwordMsg;
-  String _password = '';
   bool _isError = false;
   bool _isBusy = false;
   bool _isShowDialog = false;
-  String _errorMsg = '';
-  String _confirmPassword = '';
-  String _errorImage = 'assets/images/failed.svg';
-  String _successImage = 'assets/images/success.svg';
-  String _errorTitle = 'Password Reset failed';
-  String _errorSubtitle = 'Your password reset failed! Give it another shot!';
-  String _successTitle = 'Password Reset successful';
-  String _successSubtitle = 'Your password reset was successful! You can now proceed to Login!';
-
-
-  get errorImage => _errorImage;
-  get errorTitle => _errorTitle;
-  get errorSubtiltle => _errorSubtitle;
-  get successImage => _successImage;
-  get successTitle => _successTitle;
-  get successSubtitle => _successSubtitle;
-  get errorMessage => _errorMsg;
-
-  final _logoUrl = 'assets/images/zc_logo.svg';
-
-  get logoUrl => _logoUrl;
   get isPasswordVisible => _isNotPasswordVisible;
   get confirmErrorMsg => _confirmErrorMsg;
   get passwordMsg => _passwordMsg;
@@ -52,7 +30,7 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
     notifyListeners();
   }
 
-  _setIsShowDialog(bool value) {
+  _setIsShowDialog(bool value) async {
     _isShowDialog = value;
     notifyListeners();
   }
@@ -62,21 +40,12 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
     notifyListeners();
   }
 
-  setPassword(value) {
-    _password = value;
-    notifyListeners();
-  }
-  setConfirmPassword(value) {
-    _confirmPassword = value;
-    notifyListeners();
-  }
 
-
-  Future<void> changePassword() async {
+  Future<void> changePassword(String password, String confirmPassword) async {
     _setIsShowDialog(false);
-    bool passwordCheck = passwordValidator(_password);
+    bool passwordCheck = passwordValidator(password);
     bool confirmPasswordCheck =
-        confirmPasswordValidator(_password, _confirmPassword);
+        confirmPasswordValidator(password, confirmPassword);
     if(!passwordCheck || !confirmPasswordCheck) {
       if(!passwordCheck) {
         _passwordMsg = 
@@ -99,16 +68,13 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
     }
     try{
       _setIsBusy();
-      await _authService.updateUserPassword(_password);
+      await _authService.updateUserPassword(password);
       _setIsBusy();
-      _setIsShowDialog(true);
     } catch (e) {
-      _errorMsg = 'Something went wrong';
       _setIsBusy();
       _setIsError();
-      _setIsShowDialog(true);
     }
-    notifyListeners();
+    _setIsShowDialog(true);
   }
 
   gotoLogin(){

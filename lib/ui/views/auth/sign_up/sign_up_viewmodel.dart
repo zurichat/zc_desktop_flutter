@@ -58,10 +58,10 @@ class SignUpViewModel extends BaseViewModel with Validator {
       notifyListeners();
     }
     try {
-      await _authService.signup(email: email, password: password);
+      await _authService.signup(email: email.trim(), password: password);
     } catch (e) {
-      if(e.toString().contains('email')){
-        throw Failure(e.toString());
+      if(e.toString().contains('40')){
+        throw Failure(EmailAlreadyInUseError);
       }
       throw Failure(AuthErrorMessage);
     }

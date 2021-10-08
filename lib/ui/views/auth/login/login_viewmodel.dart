@@ -40,10 +40,10 @@ class LoginViewModel extends BaseViewModel {
 
   Future<void> performLogin(String email, String password) async {
     try {
-      await _auth.loginUser(email: email, password: password);
+      await _auth.loginUser(email: email.trim(), password: password);
     } catch (e) {
-      if (e.toString().contains('Invalid')) {
-        throw Failure(e.toString());
+      if (e.toString().contains('40')) {
+        throw Failure(InvalidErrorMessage);
       }
       throw Failure(AuthErrorMessage);
     }
@@ -54,16 +54,5 @@ class LoginViewModel extends BaseViewModel {
   void onFutureError(error, Object? key) {
     log.i('Handle Error here');
     super.onFutureError(error, key);
-  }
-
-  Future<void> checkLoginStatus() async {
-    // try {
-    //   await _auth.checkToken();
-    //   _goToHome();
-
-    // } catch (e) {
-    await Future.delayed(Duration(milliseconds: 1000));
-    _navigationService.navigateTo(Routes.loginView);
-    // }
   }
 }
