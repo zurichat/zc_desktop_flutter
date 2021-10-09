@@ -50,7 +50,7 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] password
-  Future<void> updateUserPassword({required String password});
+  Future<void> updateUserPassword({required String password, required String code});
 
   /* ORGANIZATION SERVICE */
 

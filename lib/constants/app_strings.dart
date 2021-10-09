@@ -89,4 +89,12 @@ const String EmailErrorText = 'Invalid email address';
 const String BackToLoginText = 'Back To Login';
 const String BackToWorkspaceText = 'Back To Workspace';
 const String EmptyWorkspaceText = 'Oh no 😭😭😭, Your workspace is empty. You can invite people with their email';
+const String ErrorTitle = 'Password Reset failed';
+const String ErrorSubtitle = 'Your password reset failed! Give it another shot!';
+const String SuccessTitle = 'Password Reset successful';
+const String SuccessSubtitle = 'Your password reset was successful! You can now proceed to Login!';
+const String ResetTitle = 'Check your email for code';
+const String ConfirmTitle = 'Next, confirm your email address';
+const String InvalidErrorMessage = 'Invalid Credential. Please Check you details and try again.';
+const String EmailAlreadyInUseError = 'Email address already in use. Use another email or try login.';
 
