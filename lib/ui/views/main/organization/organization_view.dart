@@ -14,7 +14,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
-import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/base_connectivity_check/base_connectvity_check.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
@@ -27,14 +27,16 @@ class OrganizationView extends StatelessWidget {
       onModelReady: (model) {
         model.setup();
       },
-      builder: (context, model, child) => Scaffold(
-        backgroundColor: whiteColor,
-        body: OrganizationWrapper(
-          model,
-          centerChild: Expanded(
-            child: ExtendedNavigator(
-              navigatorKey: StackedService.nestedNavigationKey(1),
-              router: OrganizationViewRouter(),
+      builder: (context, model, child) => BaseConnectivityCheck(
+        child: Scaffold(
+          backgroundColor: whiteColor,
+          body: OrganizationWrapper(
+            model,
+            centerChild: Expanded(
+              child: ExtendedNavigator(
+                navigatorKey: StackedService.nestedNavigationKey(1),
+                router: OrganizationViewRouter(),
+              ),
             ),
           ),
         ),
@@ -198,7 +200,10 @@ class OrganizationWrapper extends StatelessWidget {
                                             },
                                             itemChild: (index) {
                                               return DMItem(
-                                                userName: model!.dms.elementAt(index).userProfile.displayName,
+                                                userName: model!.dms
+                                                    .elementAt(index)
+                                                    .userProfile
+                                                    .displayName,
                                                 userIcon:
                                                     'assets/icons/users.svg',
                                                 selected: false,
@@ -217,9 +222,9 @@ class OrganizationWrapper extends StatelessWidget {
                         ),
                       ),
                       //TODO: Center Area
-                      // centerChild!,
+                      centerChild!,
                       //TODO: Reusable view for channel and dms
-                      ChannelDmView(channel: true, dm: false),
+                      // ChannelDmView(channel: true, dm: false),
                     ],
                   ),
                 ),
@@ -247,7 +252,9 @@ class DisplayMenu extends StatelessWidget {
           ReusableMenuItem(
             iconPath: 'assets/icons/alldms.svg',
             text: 'All DMs',
-            onTap: () {},
+            onTap: () {
+              model.goToAllDmView();
+            },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/drafts.svg',
@@ -257,7 +264,9 @@ class DisplayMenu extends StatelessWidget {
           ReusableMenuItem(
             iconPath: 'assets/icons/ribbon.svg',
             text: 'Saved Items',
-            onTap: model.goTOSavedItems,
+            onTap: () {
+              model.goToSavedItems();
+            },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/files.svg',
@@ -265,10 +274,9 @@ class DisplayMenu extends StatelessWidget {
             onTap: () {},
           ),
           ReusableMenuItem(
-            iconPath: 'assets/icons/plugins.svg',
-            text: 'People and User Groups',
-            onTap: model.goToUserPeopleGroup
-          ),
+              iconPath: 'assets/icons/plugins.svg',
+              text: 'People and User Groups',
+              onTap: model.goToUserPeopleGroup),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
             text: 'Plugins',

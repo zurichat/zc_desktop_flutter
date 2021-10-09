@@ -148,6 +148,7 @@ class DmView extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: SendMessageInputField(
+                        placeHolder: '',
                         sendMessage: (message) {
                           if (message.isNotEmpty) {
                             model.sendMessage(message);

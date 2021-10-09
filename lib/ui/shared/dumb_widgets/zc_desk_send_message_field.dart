@@ -9,10 +9,10 @@ class SendMessageInputField extends StatefulWidget {
   const SendMessageInputField({
     Key? key,
     required this.sendMessage,
-    this.placeHolder,
+    required this.placeHolder,
   }) : super(key: key);
   final Function(String message) sendMessage;
-  final String? placeHolder;
+  final String placeHolder;
 
   @override
   State<SendMessageInputField> createState() => _SendMessageInputFieldState();
@@ -73,7 +73,7 @@ class _SendMessageInputFieldState extends State<SendMessageInputField> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildMessageTextField(
-              placeholder: widget.placeHolder!,
+              placeholder: widget.placeHolder,
             ),
             _SendMessageFunctions(
               isActive: hasFocus,

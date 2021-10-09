@@ -141,7 +141,7 @@ class OrganizationViewModel extends BaseViewModel {
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
-  void goTOSavedItems() {
+  void goToSavedItems() {
     _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
   }
 
@@ -151,7 +151,7 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToDmView(int index) {
-    ///_dmService.setUser();
+    //_dmService.setUser();
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
@@ -182,8 +182,9 @@ class OrganizationViewModel extends BaseViewModel {
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+    _windowTitleBarService.setHome(false);
+    super.dispose();
   }
 }
 

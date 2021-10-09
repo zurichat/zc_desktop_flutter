@@ -74,16 +74,10 @@ class ChannelsViewModel extends BaseViewModel {
   Future<void> runTask() async {
     _currentChannel = _channelService.getChannel();
     _currentLoggedInUser = _channelService.getCurrentLoggedInUser()!;
-    _channelService.addUserToChannel(
-        id: _currentLoggedInUser.id,
-        role_id: '1',
-        is_admin: true,
-        prop1: 'prop1',
-        prop2: 'prop2',
-        prop3: 'prop3');
-    _messages = await _channelService.fetchChannelMessages();
-    getChannelSocketId();
-    listenToNewMessages();
+    //_channelService.addUserToChannel(id: _currentLoggedInUser.id,role_id: '1',is_admin: true,prop1: 'prop1',prop2: 'prop2',prop3: 'prop3');
+    //_messages = await _channelService.fetchChannelMessages();
+    //getChannelSocketId();
+    //listenToNewMessages();
   }
 
   void getChannelSocketId() async {
