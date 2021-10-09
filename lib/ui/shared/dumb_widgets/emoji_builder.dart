@@ -40,7 +40,6 @@ class _EmojiBuilderState extends State<EmojiBuilder> {
           bodyBuilder: (context) =>  EmojiWidget(
             onEmojiSelected: widget.onEmojiSelected,
           ),
-          onPop: () => print('Popover was popped!'),
           direction: PopoverDirection.bottom,
           arrowHeight: 0,
           arrowWidth: 0,
