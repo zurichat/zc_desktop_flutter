@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 
 class WorkSpaceTitle extends StatelessWidget {
   final String? channelTitle;
@@ -15,7 +14,7 @@ class WorkSpaceTitle extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            "# ${channelTitle!}",
+            '# ${channelTitle!}',
             style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 15.sp,

@@ -136,7 +136,6 @@ class ChannelsView extends StatelessWidget {
 Widget messageReplies(ChannelsViewModel model) {
   return InkWell(
     onTap: () {
-      print("Threads opened");
     },
     child: Container(
       child: Row(
@@ -168,7 +167,6 @@ Widget constructRepliesHighLightAvatars({
 }) {
   return InkWell(
     onTap: () {
-      print("Threads opened");
     },
     child: Container(
       child: Row(

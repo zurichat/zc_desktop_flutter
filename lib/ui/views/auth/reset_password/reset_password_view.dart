@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
@@ -10,12 +11,16 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/reset_password/reset_password_viewmodel.dart';
 
-class ResetPasswordView extends StatelessWidget {
-  const ResetPasswordView({Key? key}) : super(key: key);
+import 'reset_password_view.form.dart';
+
+@FormView(fields: [FormTextField(name: 'email')])
+class ResetPasswordView extends StatelessWidget with $ResetPasswordView {
+  ResetPasswordView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResetPasswordViewModel>.reactive(
+      onModelReady: (model) => listenToFormUpdated(model),
       viewModelBuilder: () => ResetPasswordViewModel(),
       builder: (
         BuildContext context,
@@ -44,9 +49,7 @@ class ResetPasswordView extends StatelessWidget {
                     width: 502.w,
                     child: ZuriDeskInputField(
                       label: 'Email',
-                      onChanged: (value) {
-                        model.setEmail(value);
-                      },
+                      controller: emailController,
                       errorText: model.errorText,
                       keyboardType: TextInputType.emailAddress,
                       hintPlaceHolder: 'someone@gmail.com',
@@ -59,9 +62,8 @@ class ResetPasswordView extends StatelessWidget {
                       child: AuthButton(
                         label: 'Get a reset link',
                         isBusy: model.isBusy,
-                        onTap: () async {
-                          await model.verfiyAndGotoCheckEmail();
-                        },
+                        onTap: () async =>
+                            await model.verfiyAndGotoCheckEmail(),
                       )),
                   SizedBox(
                     height: 32.h,

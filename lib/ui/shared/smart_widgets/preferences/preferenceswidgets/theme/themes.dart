@@ -18,100 +18,124 @@ List<ThemeData> getThemes() {
 }
 
 final ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
     backgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(0, 184, 124, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    accentColor: Color.fromRGBO(0, 184, 124, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(0, 184, 124, 1),
+      brightness: Brightness.light,
+    ));
 
 final ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
     backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.black87,
         iconTheme: IconThemeData(color: Colors.white)),
-    accentColor: Colors.black12);
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Colors.black12,
+      brightness: Brightness.dark,
+    ));
 
 final ThemeData versatiles = ThemeData(
-    brightness: Brightness.light,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(0, 184, 124, 1),
         iconTheme: IconThemeData(color: Colors.white)),
     backgroundColor: Colors.white,
-    accentColor: Color.fromRGBO(0, 184, 124, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(0, 184, 124, 1),
+      brightness: Brightness.light,
+    ));
 
 final ThemeData aubergineTheme = ThemeData(
-    brightness: Brightness.light,
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white)),
     backgroundColor: Colors.white,
-    accentColor: Color.fromRGBO(0, 184, 124, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(0, 184, 124, 1),
+      brightness: Brightness.light,
+    ));
 
 final ThemeData aubergineTheme2 = ThemeData(
-    brightness: Brightness.light,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(254, 161, 98, 1),
         iconTheme: IconThemeData(color: Colors.white)),
     backgroundColor: Colors.white,
-    accentColor: Color.fromRGBO(0, 184, 124, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(0, 184, 124, 1),
+      brightness: Brightness.light,
+    ));
 
 final ThemeData aubergineTheme3 = ThemeData(
-    brightness: Brightness.light,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(220, 26, 163, 1),
         iconTheme: IconThemeData(color: Colors.white)),
     backgroundColor: Colors.white,
-    accentColor: Color.fromRGBO(0, 184, 124, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(0, 184, 124, 1),
+      brightness: Brightness.light,
+    ));
 
 final ThemeData coast = ThemeData(
-    brightness: Brightness.dark,
     backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(37, 120, 93, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    accentColor: Color.fromRGBO(21, 74, 57, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(21, 74, 57, 1),
+      brightness: Brightness.dark,
+    ));
 
 final ThemeData triadic = ThemeData(
-    brightness: Brightness.dark,
     backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(153, 28, 116, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    accentColor: Color.fromRGBO(124, 19, 93, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(124, 19, 93, 1),
+      brightness: Brightness.dark,
+    ));
 
 final ThemeData complimentary = ThemeData(
-    brightness: Brightness.dark,
     backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(9, 12, 81, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    accentColor: Color.fromRGBO(6, 8, 58, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(6, 8, 58, 1),
+      brightness: Brightness.dark,
+    ));
 
 final ThemeData automatic = ThemeData(
-    brightness: Brightness.dark,
     backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(2, 156, 106, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    accentColor: Color.fromRGBO(0, 184, 124, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(0, 184, 124, 1),
+      brightness: Brightness.dark,
+    ));
 
 final ThemeData nocture = ThemeData(
-    brightness: Brightness.dark,
     backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(201, 196, 157, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    accentColor: Color.fromRGBO(6, 8, 58, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(6, 8, 58, 1),
+      brightness: Brightness.dark,
+    ));
 
 final ThemeData expensive = ThemeData(
-    brightness: Brightness.dark,
     backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(0, 42, 54, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    accentColor: Color.fromRGBO(7, 53, 66, 1));
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: Color.fromRGBO(7, 53, 66, 1),
+      brightness: Brightness.dark,
+    ));
 //rgba(21, 74, 57, 1) background: rgba(37, 120, 93, 1);
 //background: rgba(124, 19, 93, 1); background: rgba(153, 28, 116, 1);
 //background: rgba(6, 8, 58, 1); background: rgba(9, 12, 81, 1);

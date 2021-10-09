@@ -100,7 +100,7 @@ class LanguagePreference extends StatelessWidget {
                   txt: model.checkBoxText[1]),
 
               Text(
-                "AppLocalizations.of(context)!.language",
+                'AppLocalizations.of(context)!.language',
                 style: preferenceStyleNormal,
               )
             ],

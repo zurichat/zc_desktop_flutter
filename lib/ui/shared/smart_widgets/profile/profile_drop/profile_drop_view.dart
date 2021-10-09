@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_drop/
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_edit/profile_edit_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/status_dialog/status_dialog_min/status_dialog_min_view.dart';
 
+// ignore: must_be_immutable
 class ProfileDropdownView extends StatelessWidget {
   ProfileDropdownView({Key? key}) : super(key: key);
 
@@ -99,7 +100,7 @@ class DropDown extends StatelessWidget {
                       width: 250.w,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 5),
-                      child: OutlineButton(
+                      child: OutlinedButton(
                         onPressed: () {
                           onPress!();
                           showDialog(
@@ -115,13 +116,13 @@ class DropDown extends StatelessWidget {
                       ),
                     ),
                     DropDownItem(
-                      text: "Clear Status",
+                      text: 'Clear Status',
                     ),
                     DropDownItem(
-                      text: "Set yourself as Away",
+                      text: 'Set yourself as Away',
                     ),
                     DropDownItem(
-                      text: "Pause Notificatons",
+                      text: 'Pause Notificatons',
                     ),
                     Divider(),
                     DropDownItem(
@@ -131,13 +132,13 @@ class DropDown extends StatelessWidget {
                             context: context,
                             builder: (context) => ProfileEditView());
                       },
-                      text: "Edit Profile",
+                      text: 'Edit Profile',
                     ),
                     DropDownItem(
                       onTap: () {
                         onPress!();
                       },
-                      text: "View Profile",
+                      text: 'View Profile',
                     ),
                     DropDownItem(
                       onTap: () {
@@ -146,11 +147,11 @@ class DropDown extends StatelessWidget {
                             context: context,
                             builder: (context) => PreferenceView());
                       },
-                      text: "Preferences",
+                      text: 'Preferences',
                     ),
                     Divider(),
                     DropDownItem(
-                      text: "Sign out of Zuri",
+                      text: 'Sign out of Zuri',
                     ),
                   ],
                 ),
@@ -162,7 +163,7 @@ class DropDown extends StatelessWidget {
 class DropDownItem extends StatelessWidget {
   final String text;
   final IconData? iconData;
-  void Function()? onTap;
+  final void Function()? onTap;
 
   DropDownItem({
     Key? key,
@@ -203,7 +204,7 @@ class DropDownItem extends StatelessWidget {
 }
 
 class ProfilePicture extends StatelessWidget {
-  bool isActive = false;
+  final bool isActive = false;
 
   ProfilePicture({Key? key}) : super(key: key);
 
@@ -228,7 +229,7 @@ class ProfilePicture extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Bernice_Perp",
+                  'Bernice_Perp',
                   style: subtitle3b,
                 ),
                 verticalSpaceTiny,
@@ -246,7 +247,7 @@ class ProfilePicture extends StatelessWidget {
                     ),
                     horizontalSpaceTiny,
                     Text(
-                      "Away",
+                      'Away',
                       style: preferenceStyleNormal,
                     )
                   ],

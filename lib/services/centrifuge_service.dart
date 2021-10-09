@@ -10,18 +10,18 @@ class CentrifugeService with ReactiveServiceMixin {
   Subscription? _subscription;
   StreamController<String> messageStreamController =
       StreamController.broadcast();
-  final log = getLogger("CentrifugeService");
+  final log = getLogger('CentrifugeService');
   final websocketUrl = 'wss://realtime.zuri.chat/connection/websocket';
 
   Future connect() async {
-    _client = centrifuge.createClient("$websocketUrl?format=protobuf",
+    _client = centrifuge.createClient('$websocketUrl?format=protobuf',
         config: centrifuge.ClientConfig());
 
     // _client!.connectStream.listen((event) {
-    //   log.i("client connect stream $event");
+    //   log.i('client connect stream $event');
     // });
     // _client!.disconnectStream.listen((event) {
-    //   log.i("Client disconnect stream $event");
+    //   log.i('Client disconnect stream $event');
     // });
     _client!.connect();
   }
@@ -48,18 +48,18 @@ class CentrifugeService with ReactiveServiceMixin {
     _subscription!.unsubscribeStream.listen(_showLog);
 
     _subscription!.joinStream.listen((event) {
-      log.i("Subcribe join stream $event");
+      log.i('Subcribe join stream $event');
     });
 
     _subscription!.leaveStream.listen((event) {
-      log.i("Subcribe leave stream $event");
+      log.i('Subcribe leave stream $event');
     });
 
     _subscription!.publishStream.listen((event) {
-      log.i("WORK WORK RIGHT NOW ${json.decode(utf8.decode(event.data))}");
+      log.i('WORK WORK RIGHT NOW ${json.decode(utf8.decode(event.data))}');
 
-      messageStreamController.sink.add("Message Received");
-      Map user_message = json.decode(utf8.decode(event.data));
+      messageStreamController.sink.add('Message Received');
+      //Map user_message = json.decode(utf8.decode(event.data));
     });
 
     _subscription!.subscribe();

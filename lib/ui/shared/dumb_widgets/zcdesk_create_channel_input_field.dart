@@ -68,7 +68,7 @@ class CreateChannelInputField extends StatelessWidget {
               keyboardType: keyboardType,
               autofocus: isFocus,
               obscureText: isVisible,
-              cursorColor: Theme.of(context).accentColor,
+              cursorColor: Theme.of(context).colorScheme.secondary,
               textInputAction: TextInputAction.done,
               maxLines: maxLines ?? 1,
               style: TextStyle(

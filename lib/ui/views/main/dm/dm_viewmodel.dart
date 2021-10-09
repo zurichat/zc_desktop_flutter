@@ -7,9 +7,9 @@ import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {
-  final log = getLogger("DmViewModel");
+  final log = getLogger('DmViewModel');
   final _dmService = locator<DMService>();
-  Users _user = Users(name: "");
+  Users _user = Users(name: '');
   late LoggedInUser.User _currentLoggedInUser;
   String? _roomId = '';
   List<Results> _messages = [];
@@ -23,7 +23,7 @@ class DmViewModel extends BaseViewModel {
     _currentLoggedInUser = _dmService.getCurrentLoggedInUser()!;
     _roomId = await _dmService.createRoom(_currentLoggedInUser, _user);
     _dmService.getRoomInfo(_roomId);
-    _messages = (await _dmService.fetchRoomMessages(_roomId)) as List<Results>;
+    _messages = (await _dmService.fetchRoomMessages(_roomId));
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
     log.i(_user.name);
     notifyListeners();
@@ -118,7 +118,6 @@ class DmViewModel extends BaseViewModel {
   }
 
   LoggedInUser.User getUser(var senderId) {
-    print("player " + senderId);
     if (_currentLoggedInUser.id == senderId) {
       return _currentLoggedInUser;
     } else {
@@ -190,17 +189,14 @@ class DmViewModel extends BaseViewModel {
 
   String formatDate(String createdAt) {
     final dateToCheck = DateTime.parse(createdAt);
-    print(dateToCheck);
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = DateTime(now.year, now.month, now.day - 1);
-    final tomorrow = DateTime(now.year, now.month, now.day + 1);
+    //final tomorrow = DateTime(now.year, now.month, now.day + 1);
     final aDate = DateTime(
         int.parse(DateFormat('yyyy').format(dateToCheck)),
         int.parse(DateFormat('MM').format(dateToCheck)),
         int.parse(DateFormat('dd').format(dateToCheck)));
-    print(DateFormat('dd').format(dateToCheck));
-    print(aDate);
     if (aDate == today) {
       return 'Today ' +
           today.day.toString() +

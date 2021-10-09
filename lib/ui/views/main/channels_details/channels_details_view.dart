@@ -99,7 +99,7 @@ class ChannelDescriptionBox extends StatelessWidget {
 }
 
 class ChannelName extends StatelessWidget {
-  const ChannelName({Key? key, this.channelName = "team-zuri-desktop-client"})
+  const ChannelName({Key? key, this.channelName = 'team-zuri-desktop-client'})
       : super(key: key);
 
   final String channelName;
@@ -140,7 +140,6 @@ class DescriptionActions extends StatelessWidget {
             width: 300,
             child: ZcDeskButton(
               onPressed: () {
-                print('note');
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -169,7 +168,6 @@ class DescriptionActions extends StatelessWidget {
               filled: true,
               fillColor: Colors.grey[300],
               onPressed: () {
-                print('note');
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -212,16 +210,16 @@ class ChannelDetailsTab extends StatelessWidget {
       ),
       tabs: [
         Tab(
-          text: "About",
+          text: 'About',
         ),
         Tab(
-          text: "Members $membersCount",
+          text: 'Members $membersCount',
         ),
         Tab(
-          text: "Integrations",
+          text: 'Integrations',
         ),
         Tab(
-          text: "Settings",
+          text: 'Settings',
         )
       ],
     );
