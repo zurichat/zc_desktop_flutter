@@ -7,8 +7,9 @@ import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'sign_up_view.form.dart';
 
-class SignUpViewModel extends BaseViewModel with Validator {
+class SignUpViewModel extends FormViewModel with Validator {
   final log = getLogger('SignUpViewModel');
 
   final _navigationService = locator<NavigationService>();
@@ -43,11 +44,8 @@ class SignUpViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  Future<void> signUp({
-    required String email,
-    required String password,
-  }) async {
-    await runBusyFuture(performSignUp(email, password));
+  Future<void> signUp() async {
+    await runBusyFuture(performSignUp(emailValue!, passwordValue!));
   }
 
   Future<void> performSignUp(String email, String password) async {
@@ -78,4 +76,7 @@ class SignUpViewModel extends BaseViewModel with Validator {
     log.i('Handle Error here');
     super.onFutureError(error, key);
   }
+
+  @override
+  void setFormStatus() {}
 }

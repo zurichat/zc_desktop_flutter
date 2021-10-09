@@ -30,6 +30,8 @@ dependencies:
   logger: ^1.0.0
   getwidget: ^2.0.4
 
+  #For building otp field
+  otp_text_field: ^1.1.1
   # animation
   lottie: ^1.1.0
 

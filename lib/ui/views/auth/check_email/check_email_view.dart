@@ -3,6 +3,8 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/style.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -53,9 +55,17 @@ class CheckEmailView extends StatelessWidget {
                     ),
                     verticalSpaceSmall,
                     Container(
-                        width: 768.w,
-                        height: 100,
-                        child: buildOtp(model, _isResetPassword ?? false)),
+                        width: 798.w,
+                        height: 100.h,
+                        child: OTPTextField(
+                          length: 6,
+                          width: 768.w,
+                          fieldWidth: 100.w,
+                          style: subtitle2,
+                          textFieldAlignment: MainAxisAlignment.spaceAround,
+                          fieldStyle: FieldStyle.box,
+                          onCompleted: (pin) => model.performVarification(pin, _isResetPassword!),
+                        )),
                     verticalSpaceLarge,
                     GestureDetector(
                       onTap: model.openGmail,
@@ -100,96 +110,6 @@ class CheckEmailView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => CheckEmailViewModel(),
-      onDispose: (model) {
-        model.dispose();
-      },
-    );
-  }
-
-  buildInputTextFieldBox(
-      {FocusNode? focus, required void Function(String?) onChanged}) {
-    final inputDecoration = InputDecoration(
-      filled: true,
-      counterText: '',
-      fillColor: Colors.white,
-      focusColor: Colors.white,
-      hoverColor: Colors.white,
-      contentPadding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 45.w),
-      border: OutlineInputBorder(borderSide: BorderSide.none),
-      focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
-    );
-    return Container(
-      width: 118.w,
-      height: 129.h,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Color.fromRGBO(193, 193, 193, 1))),
-      child: TextField(
-          decoration: inputDecoration,
-          maxLength: 1,
-          style: TextStyle(
-              fontSize: 18.sp,
-              fontFamily: 'Lato',
-              fontWeight: FontWeight.w500,
-              color: Colors.black),
-          focusNode: focus,
-          keyboardType: TextInputType.number,
-          onChanged: onChanged),
-    );
-  }
-
-  buildOtp(CheckEmailViewModel model, bool isReset) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildInputTextFieldBox(
-            focus: model.focusNode0,
-            onChanged: (value) {
-              model.setOtp0(
-                value,
-              );
-            }),
-        buildInputTextFieldBox(
-            focus: model.focusNode1,
-            onChanged: (value) {
-              model.setOtp1(
-                value,
-              );
-            }),
-        buildInputTextFieldBox(
-            focus: model.focusNode2,
-            onChanged: (value) {
-              model.setOtp2(
-                value,
-              );
-            }),
-        SizedBox(width: 15),
-        Container(
-          height: 1.h,
-          width: 19.w,
-          color: Color.fromRGBO(0, 0, 0, 1),
-        ),
-        SizedBox(width: 15),
-        buildInputTextFieldBox(
-            focus: model.focusNode3,
-            onChanged: (value) {
-              model.setOtp3(
-                value,
-              );
-            }),
-        buildInputTextFieldBox(
-            focus: model.focusNode4,
-            onChanged: (value) {
-              model.setOtp4(
-                value,
-              );
-            }),
-        buildInputTextFieldBox(
-            focus: model.focusNode5,
-            onChanged: (value) {
-              model.setOtp5(value, isReset);
-            }),
-      ],
     );
   }
 }

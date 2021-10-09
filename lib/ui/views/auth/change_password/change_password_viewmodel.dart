@@ -4,8 +4,9 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'change_password_view.form.dart';
 
-class ChangePasswordViewModel extends BaseViewModel with Validator{
+class ChangePasswordViewModel extends FormViewModel with Validator {
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthService>();
   bool _isNotPasswordVisible = true;
@@ -25,7 +26,7 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
     notifyListeners();
   }
 
-  _setIsBusy(){
+  _setIsBusy() {
     _isBusy = !_isBusy;
     notifyListeners();
   }
@@ -40,25 +41,23 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
     notifyListeners();
   }
 
-
-  Future<void> changePassword(String password, String confirmPassword) async {
+  Future<void> changePassword() async {
     _setIsShowDialog(false);
-    bool passwordCheck = passwordValidator(password);
+    bool passwordCheck = passwordValidator(passwordValue!);
     bool confirmPasswordCheck =
-        confirmPasswordValidator(password, confirmPassword);
-    if(!passwordCheck || !confirmPasswordCheck) {
-      if(!passwordCheck) {
-        _passwordMsg = 
-        '''Invalid Password. Password should consist of atleast:
+        confirmPasswordValidator(passwordValue!, confirmPasswordValue!);
+    if (!passwordCheck || !confirmPasswordCheck) {
+      if (!passwordCheck) {
+        _passwordMsg = '''Invalid Password. Password should consist of atleast:
                        One Uppercase 
                        One Lowercase
                        One Character
                        And must be at least 8 characters long ''';
-      }else {
+      } else {
         _passwordMsg = null;
       }
 
-      if(!confirmPasswordCheck) {
+      if (!confirmPasswordCheck) {
         _confirmErrorMsg = 'Password does not match';
       } else {
         _confirmErrorMsg = null;
@@ -66,9 +65,9 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
       notifyListeners();
       return;
     }
-    try{
+    try {
       _setIsBusy();
-      await _authService.updateUserPassword(password);
+      await _authService.updateUserPassword(passwordValue!);
       _setIsBusy();
     } catch (e) {
       _setIsBusy();
@@ -77,7 +76,10 @@ class ChangePasswordViewModel extends BaseViewModel with Validator{
     _setIsShowDialog(true);
   }
 
-  gotoLogin(){
+  gotoLogin() {
     _navigationService.navigateTo(Routes.loginView);
   }
+
+  @override
+  void setFormStatus() {}
 }

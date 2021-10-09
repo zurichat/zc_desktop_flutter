@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -13,21 +14,23 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.da
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'change_password_view.form.dart';
 import 'change_password_viewmodel.dart';
 
-class ChangePasswordView extends StatelessWidget {
-  const ChangePasswordView({Key? key}) : super(key: key);
+@FormView(
+  fields: [
+    FormTextField(name: 'password'),
+    FormTextField(name: 'confirmPassword')
+  ]
+)
+class ChangePasswordView extends StatelessWidget with $ChangePasswordView {
+  ChangePasswordView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    final _passwordController = TextEditingController();
-    final _confirmPasswordController = TextEditingController();
     return ViewModelBuilder<ChangePasswordViewModel>.reactive(
+      onModelReady: (model) => listenToFormUpdated(model),
       viewModelBuilder: () => ChangePasswordViewModel(),
-      onDispose: (_) {
-        _passwordController.dispose();
-        _confirmPasswordController.dispose();
-      },
       builder: (
         BuildContext context,
         ChangePasswordViewModel model,
@@ -71,7 +74,7 @@ class ChangePasswordView extends StatelessWidget {
                                       onVisibilityTap:
                                           model.setIsPasswordVisible,
                                       errorText: model.passwordMsg,
-                                      controller: _passwordController,
+                                      controller: passwordController,
                                       hintPlaceHolder: 'Password',
                                     ),
                                     verticalSpaceSmall,
@@ -82,7 +85,7 @@ class ChangePasswordView extends StatelessWidget {
                                       onVisibilityTap:
                                           model.setIsPasswordVisible,
                                       errorText: model.confirmErrorMsg,
-                                      controller: _confirmPasswordController,
+                                      controller: confirmPasswordController,
                                       hintPlaceHolder: 'Confirm Password',
                                     ),
                                     verticalSpaceRegular,
@@ -90,9 +93,7 @@ class ChangePasswordView extends StatelessWidget {
                                       label: 'Continue',
                                       isBusy: model.isBusy,
                                       onTap: () async {
-                                        await model.changePassword(
-                                            _passwordController.text,
-                                            _confirmPasswordController.text);
+                                        await model.changePassword();
                                         if (model.isShowDialog) {
                                           showDialog(
                                               context: context,
