@@ -16,29 +16,46 @@ class AboutChannelTab extends HookWidget {
   Widget build(BuildContext context) {
     final _rightSideBarController = useScrollController();
 
-    return SingleChildScrollView(
-      controller: _rightSideBarController,
+    return NotificationListener<ScrollNotification>(
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
             color: Colors.grey[100],
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.0))),
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Column(
-          children: [
-            verticalSpaceRegular,
-            ChannelDescriptionEdit(
-              model: model,
-            ),
-            verticalSpaceRegular,
-            ChannelSentFiles(
-              key: key,
-              model: model,
-            ),
-            verticalSpaceRegular
-          ],
-        ),
+        child: CustomScrollView(
+            scrollBehavior: ScrollBehavior(),
+            controller: _rightSideBarController,
+            slivers: [
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  verticalSpaceRegular,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    child: ChannelDescriptionEdit(
+                      model: model,
+                    ),
+                  ),
+                  verticalSpaceRegular,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    child: ChannelSentFiles(
+                      key: key,
+                      model: model,
+                    ),
+                  ),
+                  verticalSpaceRegular
+                ]),
+              ),
+            ]),
       ),
+      onNotification: (notificationInfo) {
+        if (notificationInfo is ScrollStartNotification) {
+          // model.onScroll(true);
+        } else if (notificationInfo is ScrollEndNotification) {
+          // model.onScroll(false);
+        }
+        return true;
+      },
     );
   }
 }
@@ -107,7 +124,10 @@ class ChannelDescriptionEdit extends StatelessWidget {
 }
 
 class ChannelSentFiles extends StatelessWidget {
-  const ChannelSentFiles({Key? key, required this.model}) : super(key: key);
+  const ChannelSentFiles({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
   final ChannelsDetailsViewModel model;
   @override
   Widget build(BuildContext context) {
@@ -141,6 +161,7 @@ class ChannelSentFiles extends StatelessWidget {
                   return ChannelFilesItem(
                       itemIndex: index,
                       model: model,
+                      scrolling: model.scrolling,
                       title: 'bandicam 2021-13-05 09-98-98.jpg',
                       subtitle: 'B4EVA',
                       time: 'Yesterday at 4:20pm',
@@ -175,7 +196,7 @@ class ConfirmLeaveChannelDialog extends StatelessWidget {
         height: 150,
         padding: const EdgeInsets.all(15.0),
         child: Column(
-          crossAxisAlignment:CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

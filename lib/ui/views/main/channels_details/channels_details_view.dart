@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/close_botton.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_button.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_details/Tabs/about_channel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_details/Tabs/channel_integrations.dart';
@@ -70,15 +71,8 @@ class ChannelDescriptionBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ChannelName(),
-              Container(
-                height: 35.0,
-                width: 35.0,
-                child: IconButton(
-                  tooltip: 'close this dialog',
-                  onPressed: handleCloseDialog,
-                  icon: Icon(Icons.clear, size: 20),
-                  splashRadius: 35.0,
-                ),
+              CustomCloseButton(
+                onTap: handleCloseDialog,
               )
             ],
           ),
@@ -245,15 +239,12 @@ class ChannelDetailTabView extends StatelessWidget {
         child: TabBarView(physics: NeverScrollableScrollPhysics(), children: [
           AboutChannelTab(
             key: UniqueKey(),
-            model: model,
-          ),
+            model: model),
           ChannelMembersTab(
             model: model,
           ),
-          ChannelIntegrationTab(
-          ),
-          ChannelSettingTab(
-          ),
+          ChannelIntegrationTab(),
+          ChannelSettingTab(),
         ]),
       ),
     );

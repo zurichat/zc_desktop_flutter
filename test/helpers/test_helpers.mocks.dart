@@ -398,9 +398,10 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
-  _i2.Future<void> updateUserPassword({String? password}) =>
+  _i2.Future<void> updateUserPassword({String? password, String? code}) =>
       (super.noSuchMethod(
-          Invocation.method(#updateUserPassword, [], {#password: password}),
+          Invocation.method(
+              #updateUserPassword, [], {#password: password, #code: code}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override

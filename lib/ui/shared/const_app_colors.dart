@@ -7,6 +7,8 @@ const Color kcAccentColor = Color(0xffB8003C);
 const Color kcErrorColor = Color(0xffF40101);
 const Color kcSuccessColor = Color(0xff008B5E);
 const Color kcPrimaryLight = Color(0xffE1FDF4);
+const Color purple = Colors.purple;
+
 
 
 //Create and display Channel Color
@@ -28,8 +30,6 @@ const Color kcBackgroundColor2 = Color(0xffFFFFFF);
 const Color hoverColor = Color(0x113A3A3A);
 const Color hoverBackgroundColor = Color(0x22C4C4C4);
 const Color lightDarkColor = Color(0x993A3A3A);
-
-
 
 // Text Colors
 const Color headerColor = Color(0xff242424);
@@ -60,3 +60,11 @@ const Color clearStatusBtnBorderColor = Color(0xffa1a1a1);
 
 //Border colors
 const Color boxBorderColor = Color(0xFFE5E5E5);
+const List<Color> emojiHoverRandomColor = [
+  kcAccentColor,
+  kcPrimaryColor,
+  kcSecondaryColor,
+  kcCreateChannelColor,
+  purple
+
+];

@@ -29,6 +29,7 @@ dependencies:
   flutter_hooks: ^0.17.0
   logger: ^1.0.0
   getwidget: ^2.0.4
+  popover: ^0.2.6+2
 
   #For building otp field
   otp_text_field: ^1.1.1

@@ -129,14 +129,20 @@ class StackedRouter extends RouterBase {
       );
     },
     ResetPasswordView: (data) {
+      var args = data.getArgs<ResetPasswordViewArguments>(
+        orElse: () => ResetPasswordViewArguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const ResetPasswordView(),
+        builder: (context) => ResetPasswordView(key: args.key),
         settings: data,
       );
     },
     ChangePasswordView: (data) {
+      var args = data.getArgs<ChangePasswordViewArguments>(
+        orElse: () => ChangePasswordViewArguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const ChangePasswordView(),
+        builder: (context) => ChangePasswordView(key: args.key),
         settings: data,
       );
     },
@@ -288,6 +294,18 @@ class OrganizationViewRouter extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// ResetPasswordView arguments holder class
+class ResetPasswordViewArguments {
+  final Key? key;
+  ResetPasswordViewArguments({this.key});
+}
+
+/// ChangePasswordView arguments holder class
+class ChangePasswordViewArguments {
+  final Key? key;
+  ChangePasswordViewArguments({this.key});
+}
 
 /// CreateWorkspaceView arguments holder class
 class CreateWorkspaceViewArguments {
