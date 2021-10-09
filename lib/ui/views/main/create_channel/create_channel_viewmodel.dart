@@ -12,7 +12,7 @@ import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class CreateChannelViewModel extends BaseViewModel with Validator {
-  final _navigator = locator<NavigationService>();
+  // final _navigator = locator<NavigationService>();
 
   //Declare the services that are dependent upon
   final _localStorageService = locator<LocalStorageService>();
