@@ -5,7 +5,7 @@ import 'package:zc_desktop_flutter/constants/connectivity_status.dart';
 import 'package:zc_desktop_flutter/services/connectivity_service.dart';
 
 class BaseConnectivityCheckViewModel extends ReactiveViewModel {
-  final log = getLogger("BaseConnectivityCheckViewModel");
+  final log = getLogger('BaseConnectivityCheckViewModel');
   final _connectivityService = locator<ConnectivityService>();
   ReactiveValue<bool> isConnected = ReactiveValue<bool>(true);
 

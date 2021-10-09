@@ -52,6 +52,9 @@ dependencies:
   # http: ^0.12.1 
   any_link_preview: ^2.0.1-rc
 
+  whiteboard: ^0.0.1
+  animated_floating_buttons: ^0.0.2
+ 
   # Centrifuge 
   centrifuge: ^0.7.0
   # Url Launcher
