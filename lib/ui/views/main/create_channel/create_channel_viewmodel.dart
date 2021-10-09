@@ -23,7 +23,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     return Auth.fromJson(jsonDecode(auth as String));
   }
 
-  final log = getLogger("CreateChannelViewModel");
+  final log = getLogger('CreateChannelViewModel');
   final _navigationService = locator<NavigationService>();
   final _channelsService = locator<ChannelsService>();
 
