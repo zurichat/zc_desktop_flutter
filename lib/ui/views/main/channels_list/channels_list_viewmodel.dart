@@ -10,7 +10,7 @@ import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 class ChannelsListViewModel extends BaseViewModel {
-  final log = getLogger("ChannelsDisplayViewModel");
+  final log = getLogger('ChannelsDisplayViewModel');
   final _channelService = locator<ChannelsService>();
   final _organizationService = locator<OrganizationService>();
   final _localStorageService = locator<LocalStorageService>();
@@ -84,15 +84,16 @@ class ChannelsListViewModel extends BaseViewModel {
 
   Future<void> performGetChannel() async {
     // List<ChannelsDataModel> channelsList = await _channelService.getChannelsList();
+    // ignore: unused_local_variable
     List<Channel>? channelsList = await _channelService.getChannels(
         organizationId: _organizationService.getOrganizationId());
-    print(channelsList);
   }
 
   User? user;
   AuthResponse? userdata;
   Future<void> fetchAndSetUserData() async {
     final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
+    // ignore: unused_local_variable
     final resUser = AuthResponse.fromJson(jsonDecode(authResponse as String));
     notifyListeners();
   }

@@ -6,10 +6,10 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
-import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
+import 'login_view.form.dart';
 
-class LoginViewModel extends BaseViewModel {
-  final log = getLogger("LoginViewModel");
+class LoginViewModel extends FormViewModel {
+  final log = getLogger('LoginViewModel');
   final _navigationService = locator<NavigationService>();
   final _auth = locator<AuthService>();
 
@@ -32,19 +32,16 @@ class LoginViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.resetPasswordView);
   }
 
-  Future<void> login({
-    required String email,
-    required String password,
-  }) async {
-    await runBusyFuture(performLogin(email, password));
+  Future<void> login() async {
+    await runBusyFuture(performLogin(emailValue!, passwordValue!));
   }
 
   Future<void> performLogin(String email, String password) async {
     try {
-      await _auth.loginUser(email: email, password: password);
+      await _auth.loginUser(email: email.trim(), password: password);
     } catch (e) {
-      if (e.toString().contains('Invalid')) {
-        throw Failure(e.toString());
+      if (e.toString().contains('40')) {
+        throw Failure(InvalidErrorMessage);
       }
       throw Failure(AuthErrorMessage);
     }
@@ -53,18 +50,10 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   void onFutureError(error, Object? key) {
-    print('Handle Error here');
+    log.i('Handle Error here');
     super.onFutureError(error, key);
   }
 
-  Future<void> checkLoginStatus() async {
-    // try {
-    //   await _auth.checkToken();
-    //   _goToHome();
-
-    // } catch (e) {
-    await Future.delayed(Duration(milliseconds: 1000));
-    _navigationService.navigateTo(Routes.loginView);
-    // }
-  }
+  @override
+  void setFormStatus() {}
 }

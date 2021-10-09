@@ -4,6 +4,7 @@ import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
+import 'package:zc_desktop_flutter/services/connectivity_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/files_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
@@ -50,6 +51,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     MaterialRoute(page: CreateWorkspaceStage1),
     MaterialRoute(page: CreateWorkspaceStage2),
     MaterialRoute(page: CreateWorkspaceStage3),
+    MaterialRoute(page: SavedItemsView),
     MaterialRoute(
       page: OrganizationView,
       children: [
@@ -76,6 +78,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     LazySingleton(classType: OrganizationService),
     LazySingleton(classType: StartupService),
     LazySingleton(classType: CentrifugeService),
+    LazySingleton(classType: ConnectivityService),
     LazySingleton(classType: ZuriApiService),
     LazySingleton(classType: FilesService),
     LazySingleton(

@@ -84,11 +84,6 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   get channelName => _channelName;
   get channelDescription => _channelDescription;
 
-  void closeDialog() {
-    _navigator.popRepeated(1);
-    notifyListeners();
-  }
-
   void setchannelName(String value) {
     _channelName = value;
     notifyListeners();
@@ -194,7 +189,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   /// Error should be handled here. It could be displaying a toast of something else
   @override
   void onFutureError(error, Object? key) {
-    print('Handle Error here');
+    log.i('Handle Error here');
     super.onFutureError(error, key);
   }
 }

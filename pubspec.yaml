@@ -14,7 +14,7 @@ dependencies:
 
   # stacked
   stacked: ^2.2.5
-  stacked_services:
+  stacked_services: ^0.8.13
   stacked_themes: ^0.3.6
   stacked_hooks: ^0.2.1
 
@@ -30,6 +30,8 @@ dependencies:
   logger: ^1.0.0
   getwidget: ^2.0.4
 
+  #For building otp field
+  otp_text_field: ^1.1.1
   # animation
   lottie: ^1.1.0
 
@@ -42,6 +44,8 @@ dependencies:
   freezed_annotation:
   json_annotation:
   file_picker: ^4.1.1
+  internet_connection_checker: ^0.0.1+2
+  connectivity_plus: ^1.4.0
 
   # html: ^0.14.0+3
   # http: ^0.12.1 

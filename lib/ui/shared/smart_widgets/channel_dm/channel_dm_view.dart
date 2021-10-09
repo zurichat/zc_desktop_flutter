@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -87,7 +86,7 @@ class ChannelDmView extends StatelessWidget {
                                     width: 40.w,
                                   ),
                                   Text(
-                                    "${model.currentChannel.name}",
+                                    '${model.currentChannel.name}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20.sp,
@@ -387,7 +386,6 @@ class ChannelDmView extends StatelessWidget {
 Widget messageReplies(ChannelDmViewModel model) {
   return InkWell(
     onTap: () {
-      final log = getLogger("Threads opened");
     },
     child: Container(
       child: Row(
@@ -419,7 +417,6 @@ Widget constructRepliesHighLightAvatars({
 }) {
   return InkWell(
     onTap: () {
-      print("Threads opened");
     },
     child: Container(
       child: Row(

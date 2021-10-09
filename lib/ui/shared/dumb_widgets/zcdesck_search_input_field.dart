@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 
 class ChannelSearchInputField extends StatelessWidget {
   final String hintPlaceHolder;
@@ -56,7 +54,7 @@ class ChannelSearchInputField extends StatelessWidget {
         keyboardType: keyboardType,
         autofocus: isFocus,
         obscureText: isVisible,
-        cursorColor: Theme.of(context).accentColor,
+        cursorColor: Theme.of(context).colorScheme.secondary,
         textInputAction: TextInputAction.done,
         maxLines: maxLines ?? 1,
         style: TextStyle(
