@@ -15,7 +15,7 @@ void main() {
       test('Check if a user is saved to disk', () {
         final startupService = getAndRegisterStartupService(hasLoggedInUser: true);
         var model = _getModel();
-        model.runStartupLogic();
+        model.initialise();
         verify(startupService.hasLoggedInUser);
       });
     });
