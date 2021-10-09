@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/ui/shared/custom_color.dart';
 
 class WhiteBoardViewModel extends BaseViewModel {
   //  _point.clear(){}
