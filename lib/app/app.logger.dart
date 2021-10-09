@@ -63,7 +63,7 @@ class SimpleLogPrinter extends LogPrinter {
       var formattedStacktrace = _formatStackTrace(currentStack, 3);
 
       var realFirstLine = formattedStacktrace
-          ?.firstWhere((line) => line.contains(className), orElse: () =>'');
+          ?.firstWhere((line) => line.contains(className), orElse: () => "");
 
       var methodName = realFirstLine?.replaceAll('$className.', '');
       return methodName;
@@ -87,7 +87,7 @@ List<String>? _formatStackTrace(StackTrace stackTrace, int methodCount) {
       if (match.group(2)!.startsWith('package:logger')) {
         continue;
       }
-      var newLine = ('${match.group(1)}');
+      var newLine = ("${match.group(1)}");
       formatted.add(newLine.replaceAll('<anonymous closure>', '()'));
       if (++count == methodCount) {
         break;
@@ -114,7 +114,6 @@ class MultipleLoggerOutput extends LogOutput {
       try {
         logOutput.output(event);
       } catch (e) {
-        //// ignore: avoid_print
         print('Log output failed');
       }
     }

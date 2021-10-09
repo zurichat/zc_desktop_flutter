@@ -34,6 +34,7 @@ build/
 lib/generated_plugin_registrant.dart
 lib/model/app_models.g.dart
 lib/model/app_models.freezed.dart
+test/helpers/test_helpers.mocks.dart
 
 
 # Android related
