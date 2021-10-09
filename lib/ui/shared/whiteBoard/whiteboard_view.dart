@@ -73,7 +73,7 @@ class WhiteBoardView extends StatelessWidget {
       FloatingActionButton(
           heroTag: 'erase',
           child: Icon(Icons.clear),
-          tooltip: "Erase",
+          tooltip: 'Erase',
           onPressed: () {}),
 
       //FAB for picking red color
