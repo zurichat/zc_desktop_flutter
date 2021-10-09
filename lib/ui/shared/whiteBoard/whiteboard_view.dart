@@ -50,7 +50,7 @@ class WhiteBoardView extends StatelessWidget {
     return <Widget>[
       //FAB for choosing stroke
       FloatingActionButton(
-        heroTag: "paint_stroke",
+        heroTag: 'paint_stroke',
         child: Icon(Icons.brush),
         tooltip: 'Stroke',
         onPressed: () {
@@ -61,7 +61,7 @@ class WhiteBoardView extends StatelessWidget {
 
       //FAB for choosing opacity
       FloatingActionButton(
-        heroTag: "paint_opacity",
+        heroTag: 'paint_opacity',
         child: Icon(Icons.opacity),
         tooltip: 'Opacity',
         onPressed: () {
@@ -71,7 +71,7 @@ class WhiteBoardView extends StatelessWidget {
 
       //FAB for resetting screen
       FloatingActionButton(
-          heroTag: "erase",
+          heroTag: 'erase',
           child: Icon(Icons.clear),
           tooltip: "Erase",
           onPressed: () {}),
@@ -80,7 +80,7 @@ class WhiteBoardView extends StatelessWidget {
       FloatingActionButton(
         child: colorMenuItem(red),
         backgroundColor: Colors.white,
-        heroTag: "color_red",
+        heroTag: 'color_red',
         tooltip: 'Red',
         onPressed: () {},
       ),
@@ -89,7 +89,7 @@ class WhiteBoardView extends StatelessWidget {
       FloatingActionButton(
         child: colorMenuItem(green),
         backgroundColor: Colors.white,
-        heroTag: "color_green",
+        heroTag: 'color_green',
         tooltip: 'Green',
         onPressed: () {},
       ),
@@ -98,7 +98,7 @@ class WhiteBoardView extends StatelessWidget {
       FloatingActionButton(
         child: colorMenuItem(pink),
         backgroundColor: Colors.white,
-        heroTag: "color_pink",
+        heroTag: 'color_pink',
         tooltip: 'Pink',
         onPressed: () {},
       ),
@@ -107,7 +107,7 @@ class WhiteBoardView extends StatelessWidget {
       FloatingActionButton(
         child: colorMenuItem(blue),
         backgroundColor: Colors.white,
-        heroTag: "color_blue",
+        heroTag: 'color_blue',
         tooltip: 'Blue',
         onPressed: () {},
       ),
