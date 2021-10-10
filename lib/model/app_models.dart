@@ -283,8 +283,9 @@ class DummyUser with _$DummyUser {
 @freezed
 class DM with _$DM {
   factory DM({
-    @Default('1') String userId,
-    required UserProfile userProfile}) = _DM;
+    required DMRoomsResponse roomInfo,
+    required UserProfile currentUserProfile,
+    required UserProfile otherUserProfile}) = _DM;
   factory DM.fromJson(Map<String, dynamic> json) => _$DMFromJson(json);
 }
 
@@ -427,16 +428,30 @@ class DMRoomsResponse with _$DMRoomsResponse {
 @freezed
 class UserProfile with _$UserProfile {
   factory UserProfile({
-    @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'last_name') required String lastName,
-    @JsonKey(name: 'display_name') required String displayName,
-    @JsonKey(name: 'image_url') required String imageUrl,
-    @JsonKey(name: 'user_name') required String userName,
-    required String phone,
-    required String pronouns,
-    required String bio,
-    required String status,
+    @JsonKey(name: 'first_name') @Default('') String firstName,
+    @JsonKey(name: 'last_name') @Default('') String lastName,
+    @JsonKey(name: 'display_name') @Default('') String displayName,
+    @JsonKey(name: 'image_url') @Default('') String imageUrl,
+    @JsonKey(name: 'user_name') @Default('') String userName,
+    @Default('') String userId,
+    @Default('') String phone,
+    @Default('') String pronouns,
+    @Default('') String bio,
+    @Default('') String status,
   }) = _UserProfile;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
+}
+
+@freezed
+class ReactToMessage with _$ReactToMessage{
+factory ReactToMessage({
+  @Default('') String senderId,
+  @Default('') String data,
+  @Default('') String category,
+  @Default([]) List<String> aliases,
+  @Default(0) int count,
+})= _ReactToMessage;
+
+  factory ReactToMessage.fromJson(Map<String, dynamic> json) => _$ReactToMessageFromJson(json);
 }

@@ -12,12 +12,14 @@ Uri baseUri = Uri(scheme: scheme, host: host, path: '/');
 
 Uri signInUri = Uri(scheme: scheme, host: host, path: '/auth/login');
 Uri signupUri = Uri(scheme: scheme, host: host, path: '/users');
-Uri confirmEmailUri = Uri(scheme: scheme, host: host, path: '/account/verify-account');
+Uri confirmEmailUri =
+    Uri(scheme: scheme, host: host, path: '/account/verify-account');
 Uri verifyResetPasswordUri =
     Uri(scheme: scheme, host: host, path: '/account/verify-reset-password');
 Uri requestPasswordResetCodeUri = Uri(
     scheme: scheme, host: host, path: '/account/request-password-reset-code');
-Uri updatePasswordUri(String code) => Uri(scheme: scheme, host: host, path: '/account/update-password/$code');
+Uri updatePasswordUri(String code) =>
+    Uri(scheme: scheme, host: host, path: '/account/update-password/$code');
 
 // Organization Endpoints
 
@@ -71,26 +73,39 @@ Uri getRemoveChannelMemberUri(
 
 // DM Endpoints
 
-Uri dmCreateRoom(String orgId,String userId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/users/${userId}/room');
+Uri dmCreateRoom(String orgId, String userId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/users/${userId}/room');
 
-Uri dmSendMessage(String roomId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');
+Uri dmSendMessage(String roomId, String orgId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/rooms/${roomId}/messages');
 
 Uri get dmGetRoomInfo =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/room-info');
 
-Uri dmFetchRoomMessages(String roomId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/messages/${roomId}');
+Uri dmFetchRoomMessages(String roomId, String orgId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/rooms/${roomId}/messages');
 
 Uri dmMarkMessageAsRead(String messageId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/${messageId}/read/new/');
 
-Uri dmFetchDMs(String orgId,String userId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/users/${userId}/rooms');
+Uri dmFetchDMs(String orgId, String userId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/users/${userId}/rooms');
 
 Uri dmUserProfile(String orgId, String memberId) => Uri(
     scheme: scheme,
     host: dmHost,
     path: '/api/v1/org/$orgId/members/$memberId/profile');
+
+Uri dmReactToMessage(String orgId, String roomId, String messageId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/rooms/${roomId}/messages/${messageId}/reactions');
 //

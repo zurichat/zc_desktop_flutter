@@ -19,7 +19,7 @@ class OrganizationService {
   final _zuriApiService = locator<ZuriApiService>();
 
   /// This gets the currently logged in user respose
-  Auth get _auth {
+  Auth get auth {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
     return Auth.fromJson(jsonDecode(auth as String));
   }
@@ -58,7 +58,7 @@ class OrganizationService {
   Future<List<Organization>> getOrganizations() async {
     // Getting stored AuthResponse from local storage
     final response = await _zuriApiService.fetchOrganizationsListFromRemote(
-        email: _auth.user!.email, token: _auth.user!.token);
+        email: auth.user!.email, token: auth.user!.token);
     log.i(response);
     return OrganizationResponse.fromJson(response).data;
   }
@@ -68,8 +68,8 @@ class OrganizationService {
       {String? email, String? token}) async {
     await _zuriApiService.addLoggedInUserToOrganization(
         organizationId: organizationId,
-        email: email ?? _auth.user!.email,
-        token: token ?? _auth.user!.token);
+        email: email ?? auth.user!.email,
+        token: token ?? auth.user!.token);
   }
 
   ///This is used to get the list of users in an organization
@@ -85,7 +85,7 @@ class OrganizationService {
   Future<void> createOrganization(String email) async {
     // Getting stored AuthResponse from local storage
     final response = await _zuriApiService.createOrganizationUsingEmail(
-        email: email, token: _auth.user!.token);
+        email: email, token: auth.user!.token);
     log.i(response);
     addMemberToOrganization(response['data']['_id']);
     String insertedId = response['data']['InsertedID'];
@@ -124,7 +124,7 @@ class OrganizationService {
   /// This is used to get a single organization_service
   Future<Organization> _getOrganization(String organizationId) async {
     final response = await _zuriApiService.fetchOrganizationDetails(
-        organizationId: organizationId, token: _auth.user!.token);
+        organizationId: organizationId, token: auth.user!.token);
     log.i(response);
     return Organization.fromJson(response);
   }

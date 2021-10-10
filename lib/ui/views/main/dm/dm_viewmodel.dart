@@ -4,14 +4,17 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
+import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {
   final log = getLogger('DmViewModel');
   final _dmService = locator<DMService>();
+  final _centrifugeService = locator<CentrifugeService>();
   Users _user = Users(name: '');
   late LoggedInUser.User _currentLoggedInUser;
   String? _roomId = '';
+  DM? _dmRoomInfo;
   List<Results> _messages = [];
 
   void setup() {
@@ -21,24 +24,26 @@ class DmViewModel extends BaseViewModel {
   void runTask() async {
     _user = await runBusyFuture(_dmService.getUser());
     _currentLoggedInUser = _dmService.getCurrentLoggedInUser()!;
-    _roomId = await _dmService.createRoom(_currentLoggedInUser, _user);
-    _dmService.getRoomInfo(_roomId);
+    _dmRoomInfo = _dmService.getExistingRoomInfo;
+    if (_dmRoomInfo == null) {
+      //we dont have a conversation yet so create a new room
+      _roomId = await _dmService.createRoom(_currentLoggedInUser, _user);
+      _dmService.getRoomInfo(_roomId);
+    } else {
+      _roomId = _dmRoomInfo!.roomInfo.id;
+    }
     _messages = (await _dmService.fetchRoomMessages(_roomId));
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
     log.i(_user.name);
     notifyListeners();
-  }
 
-  String? getChatUserName() {
-    if (_user.name.isNotEmpty) {
-      return _user.name;
-    }
-
-    return 'No data';
+    getChannelSocketId();
+    listenToNewMessages();
   }
 
   Users get user => _user;
   String get roomId => _roomId!;
+  DM get dmRoomInfo => _dmRoomInfo!;
   LoggedInUser.User get currentLoggedInUser => _currentLoggedInUser;
   final DateTime currentMessageTime = DateTime.now();
 
@@ -117,22 +122,11 @@ class DmViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  LoggedInUser.User getUser(var senderId) {
-    if (_currentLoggedInUser.id == senderId) {
-      return _currentLoggedInUser;
+  UserProfile getUser(var senderId) {
+    if (_dmRoomInfo!.currentUserProfile.userId == senderId) {
+      return _dmRoomInfo!.currentUserProfile;
     } else {
-      return LoggedInUser.User(
-          id: _user.id.toString(),
-          firstName: 'firstName',
-          lastName: 'lastName',
-          displayName: _user.name,
-          email: 'email',
-          phone: 'phone',
-          status: 1,
-          timeZone: 'timeZone',
-          createdAt: 'createdAt',
-          updatedAt: 'updatedAt',
-          token: 'token'); //check this functionality
+      return _dmRoomInfo!.otherUserProfile;
     }
   }
 
@@ -185,6 +179,18 @@ class DmViewModel extends BaseViewModel {
               .isReacted;
     } */
     notifyListeners();
+  }
+
+  void newReactionToMessage(int messageIndex) {
+    var res = _dmService.reactToMessage(
+        roomId,
+        _messages.elementAt(messageIndex).id,
+        ReactToMessage(
+            senderId: _currentLoggedInUser.id,
+            data: '😃',
+            category: 'SMILEYS',
+            aliases: [],
+            count: 0));
   }
 
   String formatDate(String createdAt) {
@@ -260,5 +266,22 @@ class DmViewModel extends BaseViewModel {
 
   void toggleShowingNewMessageIn(bool showing) {
     _showingNewMessageIn = showing;
+  }
+
+  void getChannelSocketId() async {
+    String channelSockId = await _dmService.fetchChannelSocketId(_roomId);
+    websocketConnect(channelSockId);
+  }
+
+  void websocketConnect(String socketId) async {
+    await _centrifugeService.connect();
+    await _centrifugeService.subscribe(socketId);
+  }
+
+  void listenToNewMessages() {
+    _centrifugeService.messageStreamController.stream.listen((event) async {
+      // _messages = await _channelService.fetchChannelMessages();
+      notifyListeners();
+    });
   }
 }

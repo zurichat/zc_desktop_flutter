@@ -103,12 +103,28 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   Future<void> getDMs() async {
+    _dms = [];
+    Auth auth = _organizationService.auth;
     _currentOrganization = organization[getSelectedOrganizationIndex()!];
-    List<DMRoomsResponse> res = await _dmService.getDMs(_currentOrganization.id);
-    for (var user_id in res) {
+    List<DMRoomsResponse> res =
+        await _dmService.getDMs(_currentOrganization.id);
+    for (var room in res) {
       UserProfile userProfile = await _organizationService.getUserProfile(
-          _currentOrganization.id, user_id.roomUserIds.last);
-      DM dm = DM(userId: user_id.roomUserIds.last, userProfile: userProfile);
+          _currentOrganization.id, room.roomUserIds.last);
+      DM dm = DM(
+          otherUserProfile: userProfile,
+          roomInfo: room,
+          currentUserProfile: UserProfile(
+              firstName: auth.user!.firstName,
+              lastName: auth.user!.lastName,
+              displayName: auth.user!.displayName,
+              imageUrl: auth.user!.displayName,
+              userName: auth.user!.displayName,
+              userId: auth.user!.id,
+              phone: auth.user!.phone,
+              pronouns: auth.user!.displayName,
+              bio: auth.user!.displayName,
+              status: auth.user!.displayName));
       _dms.add(dm);
     }
     log.i('${_dms}');
@@ -151,7 +167,7 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToDmView(int index) {
-    //_dmService.setUser();
+    _dmService.setExistingRoomInfo(_dms[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 

@@ -7,12 +7,15 @@ import 'package:zc_desktop_flutter/model/app_models.dart'
     as currentLoggedInUser;
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
+import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 
 class DMService {
   final log = getLogger('DMService');
   final _zuriApiService = locator<ZuriApiService>();
+  final _organizationService = locator<OrganizationService>();
   Users _user = Users(name: '');
+  DM? _dmRoomInfo;
   currentLoggedInUser.User? _currentLoggedInUser;
   final _localStorageService = locator<LocalStorageService>();
 
@@ -37,10 +40,19 @@ class DMService {
     }
   }
 
+  void setExistingRoomInfo(DM dm) {
+    _dmRoomInfo = dm;
+  }
+
+  DM? get getExistingRoomInfo => _dmRoomInfo;
+
   Future<SendMessageResponse> sendMessage(
       var roomId, var senderId, var message) async {
     final response = await _zuriApiService.sendMessageToDM(
-        roomId: roomId, senderId: senderId, message: message);
+        roomId: roomId,
+        senderId: senderId,
+        message: message,
+        orgId: _organizationService.getOrganizationId());
     log.i(response);
     return SendMessageResponse.fromJson(response);
   }
@@ -55,7 +67,7 @@ class DMService {
     return CreateRoomResponse.fromJson(response).roomId;
   }
 
-  Future<void> getRoomInfo(var roomId) async {
+  Future<DM?> getRoomInfo(var roomId) async {
     final response = await _zuriApiService.getRoomInfo(roomId: roomId);
     log.i(response);
     var res = RoomInfoResponse.fromJson(response).numberOfUsers;
@@ -72,15 +84,32 @@ class DMService {
   }
 
   Future<List<Results>> fetchRoomMessages(var roomId) async {
-    final response = await _zuriApiService.fetchRoomMessages(roomId: roomId);
+    final response = await _zuriApiService.fetchRoomMessages(
+        roomId: roomId, orgId: _organizationService.getOrganizationId());
     log.i(response);
-    return MessagesResponse.fromJson(response).results;
+    return MessagesResponse.fromJson(response).results.reversed.toList();
   }
 
   Future<void> markMessageAsRead(var messageId) async {
     final response = await _zuriApiService.markMessageAsRead(messageId);
     log.i(response);
     var res = MarkMessageAsReadResponse.fromJson(response).read;
-    log.i(res);
+  }
+
+  Future<void> reactToMessage(
+      var roomId, var messageId, ReactToMessage reactToMessage) async {
+    final response = await _zuriApiService.reactToMessage(
+        orgId: _organizationService.getOrganizationId(),
+        roomId: roomId,
+        messageId: messageId,
+        reactToMessage: reactToMessage);
+    log.i(response);
+  }
+
+  Future<String> fetchChannelSocketId(var roomId) async {
+    return _zuriApiService.fetchChannelSocketId(
+        organizationId: _organizationService.getOrganizationId(),
+        channelId: roomId,
+        token: getCurrentLoggedInUser()!.token);
   }
 }
