@@ -15,6 +15,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widg
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels_details/channels_details_view.dart';
 
 class ChannelDmView extends StatelessWidget {
   const ChannelDmView({
@@ -103,9 +104,14 @@ class ChannelDmView extends StatelessWidget {
                               ),
                             ),
                       trailing: (channel == true)
-                          ? WorkSpaceMembers(
-                              color: whiteColor,
-                            )
+                          ? InkWell(
+                            onTap: () => showDialog(
+                                  context: context,
+                                  builder: (context) => ChannelsDetailsView()),
+                            child: WorkSpaceMembers(
+                                color: whiteColor,
+                              ),
+                          )
                           : SvgPicture.asset('assets/icons/Shape.svg'),
                     ),
                     Container(

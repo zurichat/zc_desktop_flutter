@@ -35,7 +35,15 @@ class OrganizationService {
 
   /// This gets the selected organization_service from the sidebar
   int get selectedOrganization {
-    return _localStorageService.getFromDisk(selectedOrganizationKey) as int;
+    int orId = 0;
+    try {
+      orId = _localStorageService.getFromDisk(selectedOrganizationKey) as int;
+      log.d('here: $orId');
+    } catch (e) {
+      log.e('get org error: $e');
+    }
+
+    return orId;
   }
 
   /// This is the function for changing the selected organization_service

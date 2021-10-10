@@ -15,9 +15,11 @@ import '../services/auth_service.dart';
 import '../services/centrifuge_service.dart';
 import '../services/channels_service.dart';
 import '../services/dm_service.dart';
+import '../services/files_service.dart';
 import '../services/local_storage_service.dart';
 import '../services/organization_service.dart';
 import '../services/startup_service.dart';
+import '../services/user_service.dart';
 import '../services/window_title_bar_service.dart';
 import '../services/zuri_api/zuri_api_service.dart';
 
@@ -41,7 +43,8 @@ Future setupLocator(
   locator.registerLazySingleton(() => StartupService());
   locator.registerLazySingleton(() => CentrifugeService());
   locator.registerLazySingleton(() => ZuriApiService());
-  locator.registerLazySingleton(() => StartupService());
+  locator.registerLazySingleton(() => FilesService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
   locator.registerLazySingleton(() => WindowTitleBarService());
+  locator.registerLazySingleton(() => UserService());
 }
