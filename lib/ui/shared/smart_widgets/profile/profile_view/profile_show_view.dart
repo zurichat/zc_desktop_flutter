@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,13 +29,14 @@ class ProfileShowView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Profile View',
+                      profileView,
                       style: kHeading3TextStyle,
                     ),
                     IconButton(
                       color: kcSuccessColor,
                       onPressed: () {
                         model.closeDialog();
+                        Navigator.pop(context);
                       },
                       icon: Icon(Icons.close),
                     ),
@@ -62,20 +65,19 @@ class ProfileShowView extends StatelessWidget {
                                 width: 200.w,
                                 decoration:
                                     BoxDecoration(shape: BoxShape.circle),
-                                child: Image.asset(
-                                    'assets/images/profile_placeholder.png'),
+                                child: Image.asset(profileImage),
                               ),
                               verticalSpaceRegular,
                               Text(
-                                'tobi',
+                                model.name,
                                 style: kHeading4TextStyle,
                               ),
                               Text(
-                                'Beginner Flutter Mobile Dev || UI/UX Designer',
+                                model.description,
                                 style: kSubHeadingTextStyle,
                               ),
                               Text(
-                                'Him/He',
+                                model.title,
                                 style: subtitle2,
                               ),
                               verticalSpaceMedium,
@@ -99,9 +101,7 @@ class ProfileShowView extends StatelessWidget {
                                         ),
                                       ),
                                       verticalSpaceSmall,
-                                      Text(
-                                        'Voice Call',
-                                      )
+                                      Text(voiceCall)
                                     ],
                                   ),
                                   horizontalSpaceRegular,
@@ -118,7 +118,7 @@ class ProfileShowView extends StatelessWidget {
                                       ),
                                       verticalSpaceSmall,
                                       Text(
-                                        'Video Call',
+                                        videoCall,
                                       )
                                     ],
                                   ),
@@ -141,7 +141,7 @@ class ProfileShowView extends StatelessWidget {
                                       ),
                                       verticalSpaceSmall,
                                       Text(
-                                        'More',
+                                        textMore,
                                       )
                                     ],
                                   ),
@@ -157,21 +157,21 @@ class ProfileShowView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Display Name'),
+                              Text(displayName),
                               verticalSpaceSmall,
-                              Text('tobi', style: kHeading4TextStyle),
+                              Text(model.name, style: kHeading4TextStyle),
                               verticalSpaceMedium,
                               Divider(),
                               verticalSpaceRegular,
-                              Text('Email Adress'),
+                              Text(emailAddress),
                               verticalSpaceSmall,
-                              Text('tobi@gmail.com', style: kHeading4TextStyle),
+                              Text(model.email, style: kHeading4TextStyle),
                               verticalSpaceMedium,
                               Divider(),
                               verticalSpaceRegular,
-                              Text('Phone Number'),
+                              Text(phoneNumeber),
                               verticalSpaceSmall,
-                              Text('+234 601 788 9991',
+                              Text(model.phoneNumber,
                                   style: kHeading4TextStyle),
                               verticalSpaceMedium,
                               Divider(),
@@ -185,7 +185,7 @@ class ProfileShowView extends StatelessWidget {
                                   ),
                                   horizontalSpaceSmall,
                                   Text(
-                                    'Edit Profile',
+                                    editprofile,
                                     style: kHeading4TextStyle,
                                   )
                                 ],
