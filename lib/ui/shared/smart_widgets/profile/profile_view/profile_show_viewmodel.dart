@@ -21,6 +21,9 @@ class ProfileShowViewModel extends BaseViewModel {
   String _phoneNumeber = '+234 601 788 9991';
   get phoneNumber => _phoneNumeber;
 
+  String _profilePic = 'assets/images/profile_placeholder.png';
+  get profilePic => _profilePic;
+
   void closeDialog() {
     _navigator.popRepeated(1);
     notifyListeners();
