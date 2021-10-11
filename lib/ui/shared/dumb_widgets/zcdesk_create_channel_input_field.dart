@@ -12,6 +12,7 @@ class CreateChannelInputField extends StatelessWidget {
   final ValueChanged<String?>? onSaved;
   final String? label;
   final int? maxLines;
+  final int? maxLegth;
   final Widget? trailing;
   final TextInputType? inputType;
   final bool password;
@@ -35,6 +36,7 @@ class CreateChannelInputField extends StatelessWidget {
     this.hintPlaceHolder = '',
     this.label,
     this.maxLines,
+    this.maxLegth,
     this.keyboardType,
     this.inputType,
     this.trailing,
@@ -68,6 +70,7 @@ class CreateChannelInputField extends StatelessWidget {
               keyboardType: keyboardType,
               autofocus: isFocus,
               obscureText: isVisible,
+              maxLength: maxLegth,
               cursorColor: Theme.of(context).accentColor,
               textInputAction: TextInputAction.done,
               maxLines: maxLines ?? 1,
@@ -113,8 +116,9 @@ class CreateChannelInputField extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                         onPressed: onVisibilityTap,
-                        icon: Icon(
-                            isVisible ? Icons.visibility : Icons.visibility_off))),
+                        icon: Icon(isVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off))),
               )
           ],
         ),

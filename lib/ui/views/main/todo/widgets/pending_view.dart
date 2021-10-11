@@ -2,25 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
 
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
+import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/views/main/people_user_group/people_user_view_model.dart';
+import 'package:zc_desktop_flutter/ui/views/main/todo/todo_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/todo/widgets/TodoListContainer.dart';
 
 class PendingView extends StatelessWidget {
   PendingView({Key? key}) : super(key: key);
   final _controller = ScrollController();
-  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return ViewModelBuilder<PeopleUserGroupViewModel>.reactive(
-      viewModelBuilder: () => PeopleUserGroupViewModel(),
+    return ViewModelBuilder<TodoViewModel>.reactive(
+      viewModelBuilder: () => TodoViewModel(),
       builder: (
         BuildContext context,
-        PeopleUserGroupViewModel model,
+        TodoViewModel model,
         Widget? child,
       ) {
         return model.isLoading
@@ -34,51 +37,7 @@ class PendingView extends StatelessWidget {
               )
             : Column(
                 children: [
-                  // Padding(
-                  //   padding: EdgeInsets.only(
-                  //     left: 26,
-                  //     right: 61,
-                  //   ),
-                  //   child: ZuriDeskInputField(
-                  //     hintPlaceHolder: SearchPeopleTextFieldHintText,
-                  //     controller: _searchController,
-                  //     onChanged: (_) =>
-                  //         model.buildSuggestion(_searchController.text),
-                  //     prefix: Icon(Icons.search),
-                  //   ),
-                  // ),
                   verticalSpaceMediumTwo,
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Expanded(
-                  //         child: Text(
-                  //       RecommendedSearchText,
-                  //       style: preferenceStyleNormal.copyWith(
-                  //           color: kcDisplayChannelColor),
-                  //     )),
-                  //     Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 58),
-                  //       child: Row(
-                  //         children: [
-                  //           SvgPicture.asset('assets/icons/group.svg'),
-                  //           Text(
-                  //             MostRecommendedSortText,
-                  //             style: preferenceStyleNormal.copyWith(
-                  //                 color: kcDisplayChannelColor),
-                  //           ),
-                  //           horizontalSpaceMedium,
-                  //           SvgPicture.asset('assets/icons/filter_2.svg'),
-                  //           Text(
-                  //             FilterText,
-                  //             style: preferenceStyleNormal.copyWith(
-                  //                 color: kcDisplayChannelColor),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
                   verticalSpaceSmallOne,
                   Scrollbar(
                     controller: _controller,
@@ -96,7 +55,7 @@ class PendingView extends StatelessWidget {
                             crossAxisSpacing: 40,
                             childAspectRatio: 1.8,
                             mainAxisSpacing: 20),
-                        itemCount: model.suggestionList.length,
+                        itemCount: 6,
                         itemBuilder: (context, index) => TodoContainer(
                           Members: '', TodoName: 'Create a Prototype',
                           TodoText1:
@@ -112,11 +71,6 @@ class PendingView extends StatelessWidget {
                   )
                 ],
               );
-      },
-      onDispose: (model) {
-        _searchController.dispose();
-        _controller.dispose();
-        model.setDataListTONull();
       },
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 //import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
@@ -15,6 +16,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.da
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/login/login_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/todo/Todo_view.dart';
 
 class LoginView extends HookWidget {
   final _formKey = GlobalKey<FormState>();
@@ -102,6 +104,11 @@ class LoginView extends HookWidget {
                                   await model.login(
                                     email: emailController.text.trim(),
                                     password: passwordController.text,
+                                  );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => TodoView()),
                                   );
                                 },
                               ),

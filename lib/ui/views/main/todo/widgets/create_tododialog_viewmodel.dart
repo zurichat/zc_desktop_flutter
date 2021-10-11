@@ -9,7 +9,7 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
-// import 'package:zc_desktop_flutter/services/channels_service.dart';
+
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class CreateTodoDialogModel extends BaseViewModel with Validator {
@@ -28,11 +28,19 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
   final _navigationService = locator<NavigationService>();
   // final _todosService = locator<TodosService>();
 
-  
-
   // DateTime now = DateTime.now();
   // String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-  String now = DateFormat("yyyy-MM-dd").format(DateTime.now());
+  String _selectedDate =
+      DateFormat('MMM dd, yyyy').format(DateTime.now()).toString();
+
+  /// The getter function returns the selected date which is default to the current  date
+  String get selectedDate => _selectedDate;
+
+  /// This function is used to update [_selectDate] on the view.
+  void setSelectedDate(DateTime date) {
+    _selectedDate = DateFormat('MMM dd, yyyy').format(date).toString();
+    notifyListeners();
+  }
 
   bool _isSwitched = false;
   String _errorMessage = '';
@@ -49,7 +57,6 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
 
   var _todoName = '';
   var _todoDescription = '';
-
 
   bool get isSwitched => _isSwitched;
   String get errorMessage => _errorMessage;
@@ -123,18 +130,18 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
         _todoNameError = null;
       }
       // if (!istodoDescriptionValid) {
-        _todoDescriptionError =
-            'Todo Description must be at least 5 characters long';
-      } else {
-        _todoDescriptionError = null;
-      }
-
-      notifyListeners();
-      return;
+      _todoDescriptionError =
+          'Todo Description must be at least 5 characters long';
+    } else {
+      _todoDescriptionError = null;
     }
 
-    // _setIsBusy();
-    // if()
+    notifyListeners();
+    return;
+  }
+
+  // _setIsBusy();
+  // if()
   //   await runBusyFuture(
   //       performCreatetodo(name, owner, description, private));
 

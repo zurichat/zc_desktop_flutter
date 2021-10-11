@@ -97,11 +97,11 @@ const String CreateTodo = 'Create a new todo';
 const String TodoTextOne =
     'Todo helps to keep track of tasks. They are best when created \nspecifically for a task with subsequent sub tasks';
 const String TodoTextTwo = 'Title';
-const String TodoTextThree = 'Description';
+const String TodoTextThree = 'e.g. Todo 01';
 const String TodoTextFour = 'Description';
 const String TodoTextFive = '(Optional)';
 const String TodoTextSix = 'Make this todo private';
-// const String TodoTextSeven = 'To-do-List';
+const String TodoTextSeven = 'Due date';
 // const String TodoTextEight = 'Pending';
 const String TodoTextNine = 'Create';
-// const String TodoTextTen = 'Todo created, You will be redirected shortly';
+const String TodoTextTen = 'Meeting with zuri partners...';

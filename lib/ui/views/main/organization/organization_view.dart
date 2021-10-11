@@ -199,7 +199,10 @@ class OrganizationWrapper extends StatelessWidget {
                                             },
                                             itemChild: (index) {
                                               return DMItem(
-                                                userName: model!.dms.elementAt(index).userProfile.displayName,
+                                                userName: model!.dms
+                                                    .elementAt(index)
+                                                    .userProfile
+                                                    .displayName,
                                                 userIcon:
                                                     'assets/icons/users.svg',
                                                 selected: false,
@@ -266,9 +269,13 @@ class DisplayMenu extends StatelessWidget {
             onTap: () {},
           ),
           ReusableMenuItem(
+              iconPath: 'assets/icons/plugins.svg',
+              text: 'People and User Groups',
+              onTap: model.goToUserPeopleGroup),
+          ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
-            text: 'People and User Groups',
-            onTap: model.goToUserPeopleGroup
+            text: 'Todo',
+            onTap: () {},
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',

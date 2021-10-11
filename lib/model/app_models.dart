@@ -438,3 +438,16 @@ class UserProfile with _$UserProfile {
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
 }
+
+@freezed
+class Todo with _$Todo {
+  factory Todo({
+    @JsonKey(name: 'user_id') int? userID,
+    @Default('') String type,
+    @Default('') String title,
+    @Default('') String status,
+    @Default('') String description,
+
+  }) = _Todo;
+  factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
+}

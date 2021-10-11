@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/center_tile.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
-import 'package:zc_desktop_flutter/ui/views/main/todo/widgets/goto_login_button.dart';
+import 'package:zc_desktop_flutter/ui/shared/custom_color.dart';
+import 'package:zc_desktop_flutter/ui/views/main/todo/widgets/todoButtons.dart';
 import 'package:zc_desktop_flutter/ui/views/main/todo/widgets/workspace_todo_member.dart';
-
 
 class TodoContainer extends StatelessWidget {
   final String TodoName;
@@ -32,40 +29,25 @@ class TodoContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(2),
           border: Border.all(color: kcDisplayChannelColor4)),
       child: SizedBox(
-        height: 10,
+        height: 5,
         child: Column(
           children: [
-            verticalSpaceTiny,
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     TodoName,
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
-                  horizontalSpaceTiny,
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40),
-                    child: Icon(
-                      Icons.add_circle_outline_rounded,
-                      color: Colors.black,
-                      size: 20.0,
+                  horizontalSpaceSmall,
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.more_vert_rounded,
+                      color: black,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    TodoText1,
-                    // "Create a Prototype Mobile for \nGet Notification on Slack",
-                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -73,6 +55,18 @@ class TodoContainer extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                horizontalSpaceSmall,
+                Text(
+                  TodoText1,
+                  // "Create a Prototype Mobile for \nGet Notification on Slack",
+                  style: TextStyle(fontSize: 15),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                verticalSpaceSmall,
                 horizontalSpaceSmall,
                 CreateDateButton(),
               ],

@@ -150,6 +150,12 @@ class OrganizationViewModel extends BaseViewModel {
         id: 1);
   }
 
+  //  void TodoView() {
+  //   _navigationService.navigateTo(OrganizationViewRoutes.toDoView,
+  //       id: 1);
+  // }
+
+
   void goToDmView(int index) {
     ///_dmService.setUser();
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
