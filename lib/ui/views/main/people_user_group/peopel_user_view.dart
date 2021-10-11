@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
-import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -30,11 +29,10 @@ class PeopleUserGroupView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 50,
+                  height: 40.h,
                   width: double.infinity,
                   color: kcPrimaryColor,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -42,10 +40,13 @@ class PeopleUserGroupView extends StatelessWidget {
                         '# $AddPeopleText',
                         style: headline7.copyWith(color: kcBackgroundColor2),
                       ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.close, color: Colors.white),
-                          padding: const EdgeInsets.only(bottom: 18)),
+                      Padding(
+                        padding: EdgeInsets.only(top: 6),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.close, color: Colors.white),
+                            padding: const EdgeInsets.only(bottom: 18)),
+                      ),
                     ],
                   ),
                 ),
@@ -58,13 +59,6 @@ class PeopleUserGroupView extends StatelessWidget {
                   ),
                 ),
                 verticalSpaceSmall,
-                if (model.hasError) ...[
-                  verticalSpaceMedium,
-                  Text(
-                    (model.modelError as Failure).message,
-                    style: boldCaptionStyle.copyWith(color: Colors.red),
-                  ),
-                ],
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Row(
@@ -74,19 +68,43 @@ class PeopleUserGroupView extends StatelessWidget {
                         child: ZuriDeskInputField(
                           hintPlaceHolder: InvitePeopleTextFieldHintText,
                           errorText: model.errorText,
+                          controller: _emailController,
                         ),
                       ),
                       horizontalSpaceRegular,
-                      Container(
-                        height: 45.h,
-                        width: 107.w,
-                        color: kcViewColor,
-                        child: GestureDetector(
-                          onTap: () =>
-                              model.addUserToOrg(_emailController.text),
-                          child: Center(
-                            child: Text(AddButtonText,
-                                style: preferenceStyleNormal),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: model.errorText != null ? 30.h : 0),
+                        child: Container(
+                          height: 45.h,
+                          width: 107.w,
+                          color: kcViewColor,
+                          child: GestureDetector(
+                            onTap: () => model
+                                .addUserToOrg(_emailController.text)
+                                .then((value) {
+                              if (model.errorText == null) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                    model.hasError
+                                        ? UserAdditionErrorMessage
+                                        : UserAdittionSuccessMessage,
+                                  ),
+                                  backgroundColor: model.hasError
+                                      ? Theme.of(context).errorColor
+                                      : kcPrimaryColor,
+                                ));
+                              }
+                            }),
+                            child: Center(
+                              child: model.isBusy
+                                  ? CircularProgressIndicator(
+                                      color: kcPrimaryColor,
+                                    )
+                                  : Text(AddButtonText,
+                                      style: preferenceStyleNormal),
+                            ),
                           ),
                         ),
                       )
@@ -95,7 +113,7 @@ class PeopleUserGroupView extends StatelessWidget {
                 ),
                 Divider(),
                 SizedBox(
-                  height: 50,
+                  height: 50.h,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16.0),
                     child: Row(children: [
@@ -108,14 +126,14 @@ class PeopleUserGroupView extends StatelessWidget {
                         ),
                       ),
                       horizontalSpaceLarge,
-                      GestureDetector(
-                        onTap: () => model.setPageIndex(1),
-                        child: Text(
-                          GroupText,
-                          style: preferenceStyleNormal.copyWith(
-                              color: kcPrimaryColor),
-                        ),
-                      )
+                      // GestureDetector(
+                      //   onTap: () => model.setPageIndex(1),
+                      //   child: Text(
+                      //     GroupText,
+                      //     style: preferenceStyleNormal.copyWith(
+                      //         color: kcPrimaryColor),
+                      //   ),
+                      // )
                     ]),
                   ),
                 ),
