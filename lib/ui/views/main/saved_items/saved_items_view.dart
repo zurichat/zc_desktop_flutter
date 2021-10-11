@@ -12,13 +12,9 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_viewmodel.dart';
 
-class SavedItemsView extends StatefulWidget {
+class SavedItemsView extends StatelessWidget {
   const SavedItemsView({Key? key}) : super(key: key);
-  @override
-  _SavedItemsViewState createState() => _SavedItemsViewState();
-}
 
-class _SavedItemsViewState extends State<SavedItemsView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SavedItemsViewModel>.reactive(

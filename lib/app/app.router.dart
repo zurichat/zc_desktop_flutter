@@ -284,7 +284,7 @@ class OrganizationViewRouter extends RouterBase {
     },
     SavedItemsView: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => SavedItemsView(),
+        builder: (context) => const SavedItemsView(),
         settings: data,
       );
     },
