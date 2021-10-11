@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -16,10 +17,9 @@ class ProfileDropdownView extends StatelessWidget {
   final GlobalKey actionKey = GlobalKey();
   late double height, width, xPosition, yPosition;
   late OverlayEntry _floatingDropdown;
-
   get floatingDrop => _floatingDropdown;
 
-  OverlayEntry _createFloatingDropdown() {
+  OverlayEntry _createFloatingDropdown(ProfileDropdownViewModel model) {
     return OverlayEntry(builder: (context) {
       return Positioned(
         right: 100.w,
@@ -30,11 +30,11 @@ class ProfileDropdownView extends StatelessWidget {
           child: Material(
             child: InkWell(
               onTap: () {
-                _toggleDropdown(context: context, close: true);
+                _toggleDropdown(context: context, close: true, model: model);
               },
               child: DropDown(
                 onPress: () {
-                  _toggleDropdown(close: true, context: context);
+                  _toggleDropdown(close: true, context: context, model: model);
                 },
               ),
             ),
@@ -50,7 +50,7 @@ class ProfileDropdownView extends StatelessWidget {
       builder: (context, model, child) => Material(
         child: InkWell(
           onTap: () {
-            _toggleDropdown(context: context);
+            _toggleDropdown(context: context, model: model);
           },
           child: Container(
             width: 40.w,
@@ -64,15 +64,14 @@ class ProfileDropdownView extends StatelessWidget {
   }
 
   void _toggleDropdown(
-      {bool close = false, required BuildContext context}) async {
-    final model = ProfileDropdownViewModel();
-    if (model.isDropped || close) {
+      {bool close = false, required BuildContext context, required ProfileDropdownViewModel model}) async {
+    if (model.isDropped) {
       this._floatingDropdown.remove();
-      model.setIsDropped(false);
+      model.setIsDropped();
     } else {
-      this._floatingDropdown = this._createFloatingDropdown();
+      this._floatingDropdown = this._createFloatingDropdown(model);
       Overlay.of(context)!.insert(this._floatingDropdown);
-      model.setIsDropped(true);
+      model.setIsDropped();
     }
   }
 }
@@ -95,7 +94,7 @@ class DropDown extends StatelessWidget {
                 color: kcBackgroundColor2,
                 child: Column(
                   children: <Widget>[
-                    ProfilePicture(),
+                    ProfilePicture(user: model.user,),
                     Container(
                       width: 250.w,
                       padding: const EdgeInsets.symmetric(
@@ -152,6 +151,10 @@ class DropDown extends StatelessWidget {
                     Divider(),
                     DropDownItem(
                       text: 'Sign out of Zuri',
+                      onTap: (){
+                        onPress!();
+                        model.signOut();
+                      },
                     ),
                   ],
                 ),
@@ -205,8 +208,8 @@ class DropDownItem extends StatelessWidget {
 
 class ProfilePicture extends StatelessWidget {
   final bool isActive = false;
-
-  ProfilePicture({Key? key}) : super(key: key);
+  final User user;
+  ProfilePicture({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -229,7 +232,7 @@ class ProfilePicture extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Bernice_Perp',
+                  '${user.displayName.isEmpty ? 'Anonymous' : user.displayName}',
                   style: subtitle3b,
                 ),
                 verticalSpaceTiny,
@@ -247,7 +250,7 @@ class ProfilePicture extends StatelessWidget {
                     ),
                     horizontalSpaceTiny,
                     Text(
-                      'Away',
+                      '${user.status == 0 ? 'Away' : 'Online'}',
                       style: preferenceStyleNormal,
                     )
                   ],

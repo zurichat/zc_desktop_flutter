@@ -442,4 +442,10 @@ class ZuriApiService implements Api {
     return await _get(dmUserProfile(orgId, memberId));
   }
 
+  @override
+  Future<void> signOut(String token) async{
+    final response = await _post(signOutUri, body: {}, headers: {'Authorization': 'Bearer $token'},);
+    log.i(response);
+  }
+
 }

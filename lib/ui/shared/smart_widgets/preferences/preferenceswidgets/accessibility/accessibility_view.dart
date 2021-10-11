@@ -18,6 +18,8 @@ class AccessibilityView extends StatelessWidget {
     final _rightSideBarController = ScrollController();
 
     return ViewModelBuilder<AccessibilityViewModel>.reactive(
+       onModelReady: (model)=>model.fetchAndSetSetting(),
+        onDispose: (model)=>model.saveSettings(),
         viewModelBuilder: () => AccessibilityViewModel(),
         builder: (context, model, _) {
           return Scrollbar(
