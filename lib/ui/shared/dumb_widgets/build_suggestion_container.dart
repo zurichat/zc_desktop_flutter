@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 
 import '../const_text_styles.dart';
@@ -30,23 +31,27 @@ class BuildSuggestionContainer extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
             child: Image.network(
-              displayPicture,
+              displayPicture.isEmpty ? DefaultProfilePictureUrl : displayPicture,
               width: double.infinity,
               fit: BoxFit.fill,
             ),
           ),
           verticalSpaceSmall,
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Row(
-              children: [
-                Text(
-                  displayName,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  displayName.isEmpty ? 'Anonymous' : displayName,
                   softWrap: true,
+                  textAlign: TextAlign.center,
                   style: subtitlec2.copyWith(color: kcDisplayChannelColor),
                 ),
-                horizontalSpaceSmall,
-                Container(
+              ),
+              horizontalSpaceTiny,
+              Padding(
+                padding: const EdgeInsets.only(right:10.0),
+                child: Container(
                   height: 12,
                   width: 12,
                   decoration: BoxDecoration(
@@ -54,9 +59,9 @@ class BuildSuggestionContainer extends StatelessWidget {
                     border: Border.all(color: isActive ? whiteColor :searchBarColor),
                     color: isActive ? kcPrimaryColor : kcBackgroundColor2,
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
           verticalSpaceTinyThree,
           Padding(

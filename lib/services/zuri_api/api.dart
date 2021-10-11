@@ -255,4 +255,9 @@ abstract class Api {
 
   /* CENTRIFUGE SERVICE */
 
+  //Fetch Todo List
+  Future<List<Todo>> fetchTodoList();
+
+  //Create Todo
+  Future<void> createTodo(Todo todo);
 }
