@@ -215,6 +215,16 @@ class ZuriApiService implements Api {
     );
   }
 
+  @override
+  Future<void> signOut(String token) async {
+    final response = await _post(
+      signOutUri,
+      body: {},
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    log.i(response);
+  }
+
   /* ORGANIZATION SERVICE */
 
   @override
@@ -267,6 +277,11 @@ class ZuriApiService implements Api {
   Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
     // TODO: implement fetchUserDetails
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
+    return await _get(dmUserProfile(orgId, memberId));
   }
 
   /* CHANNEL SERVICE */
@@ -435,17 +450,6 @@ class ZuriApiService implements Api {
   @override
   Future<dynamic> fetchDMs({orgId,userId}) async {
     return await _get(dmFetchDMs(orgId,userId));
-  }
-
-  @override
-  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
-    return await _get(dmUserProfile(orgId, memberId));
-  }
-
-  @override
-  Future<void> signOut(String token) async{
-    final response = await _post(signOutUri, body: {}, headers: {'Authorization': 'Bearer $token'},);
-    log.i(response);
   }
 
 }
