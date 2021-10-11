@@ -8,7 +8,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/build_suggestion_container.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/views/main/people_user_group/people_user_view_model.dart';
 
 class PeopleView extends StatelessWidget {
@@ -86,7 +85,7 @@ class PeopleView extends StatelessWidget {
                     controller: _controller,
                     isAlwaysShown: true,
                     child: Container(
-                      height: height < 1000 ? height * 0.5 : height * 0.63,
+                      height: height < 1000 ? (height * 0.45) : height * 0.55,
                       padding: EdgeInsets.only(
                         right: 61,
                       ),
@@ -95,7 +94,7 @@ class PeopleView extends StatelessWidget {
                         controller: _controller,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 5,
-                            crossAxisSpacing: 80,
+                            crossAxisSpacing: 40,
                             childAspectRatio: 0.8,
                             mainAxisSpacing: 50),
                         itemCount: model.suggestionList.length,
@@ -106,7 +105,22 @@ class PeopleView extends StatelessWidget {
                               model.suggestionList[index].profileImage,
                           bio: model.suggestionList[index].bio,
                         ),
-                      ) : Center(child: ZcdeskText.caption(''),),
+                      ) : Center(child: RichText(text: TextSpan(
+                        text: 'User ',
+                        style: headline6.copyWith(color: searchBarColor),
+                        children: [
+                          TextSpan(
+                            text: _searchController.text,
+                            style: headline6.copyWith(color: kcPrimaryColor),
+                            children: [
+                              TextSpan(
+                                text: ' is not a member of this organization.',
+                                style: headline6.copyWith(color: searchBarColor),
+                              )
+                            ]
+                          )
+                        ]
+                      ),),),
                     ),
                   )
                 ],

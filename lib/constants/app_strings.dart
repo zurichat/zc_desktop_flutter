@@ -97,4 +97,7 @@ const String ResetTitle = 'Check your email for code';
 const String ConfirmTitle = 'Next, confirm your email address';
 const String InvalidErrorMessage = 'Invalid Credential. Please Check you details and try again.';
 const String EmailAlreadyInUseError = 'Email address already in use. Use another email or try login.';
+const String DefaultProfilePictureUrl = 'https://i.stack.imgur.com/l60Hf.png';
+const String UserAdditionErrorMessage = 'User is already part of the workspace or user does not exit.';
+const String UserAdittionSuccessMessage = 'User added successfully';
 
