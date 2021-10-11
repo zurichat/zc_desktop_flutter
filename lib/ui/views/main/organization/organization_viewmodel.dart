@@ -19,6 +19,7 @@ class OrganizationViewModel extends BaseViewModel {
   final _windowTitleBarService = locator<WindowTitleBarService>();
 
   int selectedChannelIndex = 0;
+  String selectedTab = '';
 
   ScrollController controller = ScrollController();
 
@@ -142,16 +143,22 @@ class OrganizationViewModel extends BaseViewModel {
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
-  void goToSavedItems() {
+  void goToSavedItems(String tab) {
+    selectedTab = tab;
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
   }
 
-  void goToUserPeopleGroup() {
+  void goToUserPeopleGroup(String tab) {
+    selectedTab = tab;
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.peopleUserGroupView,
         id: 1);
   }
 
-  void goTodoView() {
+  void goTodoView(String tab) {
+    selectedTab = tab;
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.todoView, id: 1);
   }
 
@@ -167,7 +174,9 @@ class OrganizationViewModel extends BaseViewModel {
     return false;
   }
 
-  void goToAllDmView() {
+  void goToAllDmView(String tab) {
+    selectedTab = tab;
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
   }
 
@@ -180,6 +189,13 @@ class OrganizationViewModel extends BaseViewModel {
 
   bool selectedChannel(int index) {
     if (index == selectedChannelIndex) {
+      return true;
+    }
+    return false;
+  }
+
+  bool selectTab(String tab) {
+    if (tab == selectedTab) {
       return true;
     }
     return false;

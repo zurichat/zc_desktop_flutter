@@ -6,6 +6,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -246,47 +247,57 @@ class DisplayMenu extends StatelessWidget {
         children: [
           ReusableMenuItem(
             iconPath: 'assets/icons/threads.svg',
-            text: 'Threads',
+            text: threads,
+            selected: model.selectTab(threads),
             onTap: () {},
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/alldms.svg',
-            text: 'All DMs',
+            text: allDMs,
+            selected: model.selectTab(allDMs),
             onTap: () {
-              model.goToAllDmView();
+              model.goToAllDmView(allDMs);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/drafts.svg',
-            text: 'Draft',
+            text: draft,
+            selected: model.selectTab(draft),
             onTap: () {},
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/ribbon.svg',
-            text: 'Saved Items',
+            text: savedItems,
+            selected: model.selectTab(savedItems),
             onTap: () {
-              model.goToSavedItems();
+              model.goToSavedItems(savedItems);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/files.svg',
-            text: 'Files',
+            text: files,
+            selected: model.selectTab(files),
             onTap: () {},
           ),
           ReusableMenuItem(
               iconPath: 'assets/icons/pugroup.svg',
-              text: 'People and User Groups',
-              onTap: model.goToUserPeopleGroup),
+              text: people,
+              selected: model.selectTab(people),
+              onTap: () {
+                model.goToUserPeopleGroup(people);
+              }),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
-            text: 'Todo',
+            text: todo,
+            selected: model.selectTab(todo),
             onTap: () {
-              model.goTodoView();
+              model.goTodoView(todo);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
-            text: 'Plugins',
+            text: plugins,
+            selected: model.selectTab(plugins),
             onTap: () {},
           ),
         ],
@@ -420,6 +431,7 @@ class ReusableDropDown extends StatelessWidget {
 class ReusableMenuItem extends StatelessWidget {
   final String? iconPath;
   final String? text;
+  final bool selected;
   final GestureTapCallback? onTap;
 
   const ReusableMenuItem({
@@ -427,6 +439,7 @@ class ReusableMenuItem extends StatelessWidget {
     this.iconPath,
     this.text,
     this.onTap,
+    this.selected = false,
   }) : super(key: key);
 
   @override
@@ -448,7 +461,11 @@ class ReusableMenuItem extends StatelessWidget {
               ),
               SizedBox(width: 10),
               Container(
-                child: Text(text!, style: kLeftSideBarStyle),
+                child: Text(text!,
+                    style: kLeftSideBarStyle.copyWith(
+                        color: selected
+                            ? Theme.of(context).colorScheme.secondary
+                            : null)),
               ),
             ],
           ),
