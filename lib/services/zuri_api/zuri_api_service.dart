@@ -461,4 +461,22 @@ class ZuriApiService implements Api {
   Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
     return await _get(dmUserProfile(orgId, memberId));
   }
+
+  @override
+  Future<List<Todo>> fetchTodoList() async {
+    final response = await _get(getAllTodoUri);
+    log.i(response);
+    return List.from(response.map((value) => Todo.fromJson(value)));
+  }
+
+  @override
+  Future<void> createTodo(Todo todo) async {
+    final response = await _post(createTodoUri, body: todo.toJson());
+    log.i(response);
+  }
+  Future<void> signOut(String token) async{
+    final response = await _post(signOutUri, body: {}, headers: {'Authorization': 'Bearer $token'},);
+    log.i(response);
+  }
+
 }

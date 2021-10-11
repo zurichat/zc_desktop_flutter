@@ -53,6 +53,9 @@ abstract class Api {
   Future<void> updateUserPassword(
       {required String password, required String code});
 
+  /// Sign user out and distroy user token and distroy user token
+  Future<void> signOut(String token);
+
   /* ORGANIZATION SERVICE */
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch a list of organizations from remote source,
@@ -257,4 +260,9 @@ abstract class Api {
 
   /* CENTRIFUGE SERVICE */
 
+  //Fetch Todo List
+  Future<List<Todo>> fetchTodoList();
+
+  //Create Todo
+  Future<void> createTodo(Todo todo);
 }

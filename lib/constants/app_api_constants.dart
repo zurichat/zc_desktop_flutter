@@ -4,16 +4,21 @@ const String scheme = 'https';
 const String host = 'api.zuri.chat';
 const String dmHost = 'dm.zuri.chat';
 const String channelHost = 'channels.zuri.chat';
+const String todoHost = 'todo.zuri.chat';
 const int receiveTimeout = 3000;
 const int sendTimeout = 5000;
 Uri baseUri = Uri(scheme: scheme, host: host, path: '/');
+
+// Todo Endpoints
+Uri getAllTodoUri = Uri(scheme: scheme, host: todoHost, path: '/api/v1/all-todo');
+Uri createTodoUri = Uri(scheme: scheme, host: todoHost, path: '/api/v1/create-todo');
 
 // Auth Endpoints
 
 Uri signInUri = Uri(scheme: scheme, host: host, path: '/auth/login');
 Uri signupUri = Uri(scheme: scheme, host: host, path: '/users');
-Uri confirmEmailUri =
-    Uri(scheme: scheme, host: host, path: '/account/verify-account');
+Uri confirmEmailUri = Uri(scheme: scheme, host: host, path: '/account/verify-account');
+Uri signOutUri = Uri(scheme: scheme, host: host, path: '/auth/logout');
 Uri verifyResetPasswordUri =
     Uri(scheme: scheme, host: host, path: '/account/verify-reset-password');
 Uri requestPasswordResetCodeUri = Uri(

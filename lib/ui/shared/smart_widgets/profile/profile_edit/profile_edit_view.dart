@@ -74,7 +74,7 @@ class ProfileEditView extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        model.closeDialog();
+                        Navigator.of(context).pop();
                       },
                       icon: Icon(Icons.close),
                     ),

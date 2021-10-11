@@ -43,3 +43,5 @@ const String SuccessImage = 'assets/images/success.svg';
 const String LogoUrl = 'assets/images/zc_logo.svg';
 const String XSvg = 'assets/images/x.svg';
 const String MarkSvg = 'assets/images/mark.svg';
+
+const String profileImage = 'assets/images/wks_image.png';

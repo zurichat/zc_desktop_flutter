@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferences_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/accessibility/accessibility_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/advanced/advanced_view.dart';
@@ -23,9 +22,8 @@ class PreferenceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _rightSideBarController = ScrollController();
-
+    final _height = MediaQuery.of(context).size.height;
     //List of datas to be used to populate the leftside and the right side side of the preferences view
-    //TODO Update the widgets in map
 
     final List _data = [
       {
@@ -93,7 +91,7 @@ class PreferenceView extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               borderRadius: BorderRadius.circular(15)),
-          height: 750.h,
+          height: _height * 0.75,
           width: 827.w,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,10 +102,10 @@ class PreferenceView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ZcdeskText.headingTwo('Preferences'),
+                    Text('Preferences', style: headline6,),
                     IconButton(
                       onPressed: () {
-                        model.closeDialog();
+                        Navigator.of(context).pop();
                       },
                       icon: Icon(Icons.close),
                     ),
@@ -123,7 +121,7 @@ class PreferenceView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      height: 600.h,
+                      height: _height * 0.6,
                       width: 244.w,
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -131,7 +129,7 @@ class PreferenceView extends StatelessWidget {
                             clipBehavior: Clip.none,
                             itemCount: _data.length,
                             itemBuilder: (context, index) {
-                              return buildListItem(
+                              return BuildListItem(
                                   text: _data[index]['text'],
                                   assetName: _data[index]['assetName'],
                                   isSelected: model.currentPageIndex == index,
@@ -152,7 +150,7 @@ class PreferenceView extends StatelessWidget {
                     child: SingleChildScrollView(
                         controller: _rightSideBarController,
                         child: Container(
-                            height: 600.h,
+                            height: _height * 0.6,
                             width: (827 - 274).w,
                             child: _data[model.currentPageIndex]['widget'])),
                   )
@@ -167,19 +165,27 @@ class PreferenceView extends StatelessWidget {
   }
 }
 
-Widget buildListItem({
-  required String text,
-  required String assetName,
-  required isSelected,
-  VoidCallback? onClicked,
-}) {
-  final hoverColor = Colors.grey[200];
+class BuildListItem extends StatelessWidget {
+  final String text, assetName;
+  final bool isSelected;
+  final VoidCallback? onClicked;
+  const BuildListItem({ Key? key, required this.text,
+  required this.assetName,
+  required this.isSelected,
+  this.onClicked, }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final hoverColor = Colors.grey[200];
+    final color = isSelected ? Colors.white : null;
   return ListTile(
     tileColor: isSelected ? KStartupContainerColor : null,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
     minLeadingWidth: 5,
-    leading: SvgPicture.asset(assetName),
-    title: Text(text, style: preferenceStyleNormal),
+     leading: SvgPicture.asset(assetName, color: color,),
+    title: Text(text, style: leftSideBarPrefTextStyle.copyWith(color: color)),
     hoverColor: isSelected ? KStartupContainerColor : hoverColor,
     onTap: onClicked,
   );
+  }
 }
