@@ -204,9 +204,9 @@ abstract class Api {
   });
 
   // Future<void> updateUserDetails({String? organizationId, User user});
-  Future<Map<String, dynamic>> getUserDetails({required String userId, required String token});
+  Future<Map<String, dynamic>> getUserDetails({required String userId});
 
-  Future<User> fetchUserDetail({required String userId, required token});
+  Future<User> fetchUserDetail({required String userId});
 
 
   /* DIRECT MESSAGES SERVICE */

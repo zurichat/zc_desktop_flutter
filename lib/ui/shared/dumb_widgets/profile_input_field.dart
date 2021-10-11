@@ -51,8 +51,8 @@ class ProfileInputField extends StatefulWidget {
 }
 
 class _ProfileInputFieldState extends State<ProfileInputField> {
-  final GlobalKey actionKey = GlobalKey();
-  late FocusNode focusNode;
+  // final GlobalKey actionKey = GlobalKey();
+  // late FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +60,16 @@ class _ProfileInputFieldState extends State<ProfileInputField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // if label is empty, label text will not be visible
+
         Visibility(
           visible: widget.label == null ? false : true,
-          child: ZcdeskText.headline2(widget.label ?? ''),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ZcdeskText.subheading(widget.label ?? ''),
+              verticalSpaceSmall,
+            ],
+          ),
         ),
         verticalSpaceRegular,
         TextFormField(
@@ -81,7 +88,7 @@ class _ProfileInputFieldState extends State<ProfileInputField> {
           decoration: InputDecoration(
             fillColor: widget.filledColor,
             filled: false,
-            labelStyle: headline8,
+            // labelStyle: headline8,
             errorText: widget.errorText,
             errorStyle: kBodyTextStyle.copyWith(color: kcErrorColor),
             contentPadding:
@@ -89,11 +96,7 @@ class _ProfileInputFieldState extends State<ProfileInputField> {
             // helperStyle: subtitle2,
             helperText: widget.helperText,
             hintText: widget.hintPlaceHolder,
-            hintStyle: TextStyle(
-              color: Colors.grey,
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            ),
+            hintStyle: preferenceStyleNormal,
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.red,

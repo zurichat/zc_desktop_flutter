@@ -47,6 +47,36 @@ class Member with _$Member {
   factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
 }
 
+class UpdateUserParam {
+  late final String firstName;
+  late final String lastName;
+  late final String? displayName;
+  late final String? who;
+  late final String? pronoun;
+  late final String? phoneNumber;
+  final String? timeZone;
+
+  UpdateUserParam(
+    {required this.firstName,
+    required this.lastName,
+    this.displayName,
+    this.who,
+    this.pronoun,
+    this.phoneNumber,
+    this.timeZone}
+  );
+
+  Map<String, String> data = {
+      "first_name": '',
+      "last_name" : '',
+      "display_name": '',
+      "who": '',
+      "pronouns": '',
+      "phone": '',
+      "time_zone": ''  
+  };
+}
+
 @freezed
 class AuthResponse with _$AuthResponse {
   factory AuthResponse({
@@ -299,9 +329,8 @@ class DummyUser with _$DummyUser {
 
 @freezed
 class DM with _$DM {
-  factory DM({
-    @Default('1') String userId,
-    required UserProfile userProfile}) = _DM;
+  factory DM({@Default('1') String userId, required UserProfile userProfile}) =
+      _DM;
   factory DM.fromJson(Map<String, dynamic> json) => _$DMFromJson(json);
 }
 
@@ -338,7 +367,7 @@ class ChannelResponse with _$ChannelResponse {
 @freezed
 class Channel with _$Channel {
   factory Channel({
-    @Default('') @JsonKey(name:'_id') String id,
+    @Default('') @JsonKey(name: '_id') String id,
     @Default('') String name,
     @Default('') String owner,
     @Default('') String description,
@@ -422,7 +451,6 @@ class Files with _$Files {
   factory Files.fromJson(Map<String, dynamic> json) => _$FilesFromJson(json);
 }
 
-
 @freezed
 class DMRoomsResponse with _$DMRoomsResponse {
   factory DMRoomsResponse({
@@ -455,5 +483,6 @@ class UserProfile with _$UserProfile {
     required String status,
   }) = _UserProfile;
 
-  factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
+  factory UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileFromJson(json);
 }

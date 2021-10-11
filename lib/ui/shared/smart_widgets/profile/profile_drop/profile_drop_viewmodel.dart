@@ -46,18 +46,16 @@ class ProfileDropdownViewModel extends BaseViewModel {
   }
 
   getUserDetail() async {
-    var user = await _api.fetchUserDetail(userId: '', token: '');
+    var user = await _api.fetchUserDetail(userId: userIdKey);
     email = user.email;
     notifyListeners();
   }
 
   getUserDetails() async {
-    var user = await _userService.getUser('');
+    var user = await _userService.getUser(userIdKey);
     email = user.email;
     notifyListeners();
   }
-
-
 
   // getUserDisplayName() async {
   //   var memberId = await _userService.getMemeberId();

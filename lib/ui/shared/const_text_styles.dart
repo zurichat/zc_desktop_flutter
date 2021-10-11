@@ -152,13 +152,13 @@ final headline3 = TextStyle(
 );
 
 final subtitle2 = TextStyle(
-  fontSize: 18.sp,
+  fontSize: 16.sp,
   // fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
 
 final subtitlec2 = TextStyle(
-  fontSize: 18.sp,
+  fontSize: 16.sp,
   color: kcBackgroundColor2,
   // fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
@@ -179,9 +179,9 @@ final subtitle3 = TextStyle(
 );
 
 final subtitle3b = TextStyle(
-  fontSize: 20.sp,
+  fontSize: 16.sp,
   color: createChannelHeaderColor,
-  fontWeight: FontWeight.w500,
+  // fontWeight: FontWeight.w500,
   fontFamily: 'Lato',
 );
 
@@ -202,7 +202,7 @@ final bodyText1 = TextStyle(
 final preferenceStyleNormal = TextStyle(
   fontSize: 16.sp,
   fontFamily: 'Lato',
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w400,
 );
 
 final preferenceStyleBold = TextStyle(

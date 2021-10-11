@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 const selectedOrganizationKey = 'selectedOrganizationKey';
 const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
 const organizationIdKey = 'organizationIdKey';
+const memberIdKey = 'memberIdKey';
 
 /// Refactor class to store objects with a proper db
 
@@ -29,13 +30,29 @@ class OrganizationService {
     _localStorageService.saveToDisk(organizationIdKey, orgId);
   }
 
+  void saveMemberId(String memId) {
+    log.i('saved orgId ${memId}');
+    _localStorageService.saveToDisk(memberIdKey, memId);
+  }
+
   String getOrganizationId() {
     return _localStorageService.getFromDisk(organizationIdKey) as String;
   }
 
+  String getMemberId() {
+    return _localStorageService.getFromDisk(memberIdKey) as String;
+  }
+
   /// This gets the selected organization_service from the sidebar
   int get selectedOrganization {
-    return _localStorageService.getFromDisk(selectedOrganizationKey) as int;
+    int orId = 0;
+    try {
+      orId = _localStorageService.getFromDisk(selectedOrganizationKey) as int;
+      log.d('here: $orId');
+    } catch (e) {
+      log.e('get org etrror: $e');
+    }
+    return orId;
   }
 
   /// This is the function for changing the selected organization_service
