@@ -108,7 +108,7 @@ class MembersListItem extends StatelessWidget {
             model.onFileTileHovered(event, itemIndex);
           },
           child: Container(
-            height: 65.5,
+            height: 70.5,
             width: fullWidth(context),
             padding:
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
@@ -185,7 +185,7 @@ class AddPeopleIcon extends StatelessWidget {
         height: 10,
         width: 10,
         fit: BoxFit.scaleDown,
-        ),
+      ),
     );
   }
 }
