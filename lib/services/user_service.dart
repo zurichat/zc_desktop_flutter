@@ -11,7 +11,7 @@ import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 const userIdKey = 'userIdKey';
 
 class UserService {
-  final log = getLogger("UserService");
+  final log = getLogger('UserService');
   final _localStorageService = locator<LocalStorageService>();
   final _api = locator<ZuriApiService>();
   final _organizationService = locator<OrganizationService>();
@@ -74,7 +74,7 @@ class UserService {
     _localStorageService.saveToDisk(organizationIdKey, orgId);
     /*Future<User> getUserDetails(String? id) async {
     final response =
-        await _apiService.get(Uri.parse("https://api.zuri.chat/users/$id}"));
+        await _apiService.get(Uri.parse('https://api.zuri.chat/users/$id}'));
     return User.fromJson(response);
   }*/
   }

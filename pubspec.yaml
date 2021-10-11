@@ -9,7 +9,6 @@ environment:
 dependencies:
   analyzer: ^2.4.0
   bitsdojo_window: ^0.1.1+1
-  centrifuge: ^0.7.0
   cupertino_icons: ^1.0.2
   desktop_window: ^0.4.0
   dio: ^4.0.0
@@ -20,6 +19,14 @@ dependencies:
   flutter_hooks: ^0.17.0
   flutter_localizations:
     sdk: flutter
+
+  # stacked
+  stacked: ^2.2.5
+  stacked_services: ^0.8.13
+  stacked_themes: ^0.3.6
+  stacked_hooks: ^0.2.1
+
+  # utilities
   flutter_screenutil: ^5.0.0+2
   flutter_svg: ^0.22.0
   freezed_annotation: null
@@ -28,12 +35,28 @@ dependencies:
   intl: ^0.17.0
   json_annotation: null
   logger: ^1.0.0
+  popover: ^0.2.6+2
+
+  #For building otp field
+  otp_text_field: ^1.1.1
+  # animation
   lottie: ^1.1.0
   shared_preferences: ^2.0.7
-  stacked: ^2.2.5
-  stacked_hooks: ^0.2.1
-  stacked_services: null
-  stacked_themes: ^0.3.6
+
+  # Network calls
+  internet_connection_checker: ^0.0.1+2
+  connectivity_plus: ^1.4.0
+
+  # html: ^0.14.0+3
+  # http: ^0.12.1 
+  any_link_preview: ^2.0.1-rc
+
+  whiteboard: ^0.0.1
+  animated_floating_buttons: ^0.0.2
+ 
+  # Centrifuge 
+  centrifuge: ^0.7.0
+  # Url Launcher
   url_launcher: ^6.0.12
 
 dev_dependencies:

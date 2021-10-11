@@ -27,7 +27,7 @@ class ProfileShowView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Profile View",
+                      'Profile View',
                       style: kHeading3TextStyle,
                     ),
                     IconButton(
@@ -67,11 +67,11 @@ class ProfileShowView extends StatelessWidget {
                               ),
                               verticalSpaceRegular,
                               Text(
-                                "tobi",
+                                'tobi',
                                 style: kHeading4TextStyle,
                               ),
                               Text(
-                                "Beginner Flutter Mobile Dev || UI/UX Designer",
+                                'Beginner Flutter Mobile Dev || UI/UX Designer',
                                 style: kSubHeadingTextStyle,
                               ),
                               Text(
@@ -157,21 +157,21 @@ class ProfileShowView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Display Name"),
+                              Text('Display Name'),
                               verticalSpaceSmall,
-                              Text("tobi", style: kHeading4TextStyle),
+                              Text('tobi', style: kHeading4TextStyle),
                               verticalSpaceMedium,
                               Divider(),
                               verticalSpaceRegular,
-                              Text("Email Adress"),
+                              Text('Email Adress'),
                               verticalSpaceSmall,
-                              Text("tobi@gmail.com", style: kHeading4TextStyle),
+                              Text('tobi@gmail.com', style: kHeading4TextStyle),
                               verticalSpaceMedium,
                               Divider(),
                               verticalSpaceRegular,
-                              Text("Phone Number"),
+                              Text('Phone Number'),
                               verticalSpaceSmall,
-                              Text("+234 601 788 9991",
+                              Text('+234 601 788 9991',
                                   style: kHeading4TextStyle),
                               verticalSpaceMedium,
                               Divider(),

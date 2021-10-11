@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/profile_input_field.da
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'profile_edit_viewmodel.dart';
 
+// ignore: must_be_immutable
 class ProfileEditView extends StatelessWidget {
   final _fullNameFormKey = GlobalKey<FormFieldState>();
 
