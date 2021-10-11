@@ -57,14 +57,14 @@ class DMService {
     return SendMessageResponse.fromJson(response);
   }
 
-  Future<String?> createRoom(
+  Future<void> createRoom(
       currentLoggedInUser.User? currentUser, Users? user) async {
     final response = await _zuriApiService.createRoom(
         currentUser: currentUser,
         user: user,
-        orgId: getCurrentLoggedInUser()!.id);
+        orgId: _organizationService.getOrganizationId());
     log.i(response);
-    return CreateRoomResponse.fromJson(response).roomId;
+     ///CreateRoomResponse.fromJson(response).roomId;
   }
 
   Future<DM?> getRoomInfo(var roomId) async {
@@ -111,5 +111,10 @@ class DMService {
         organizationId: _organizationService.getOrganizationId(),
         channelId: roomId,
         token: getCurrentLoggedInUser()!.token);
+  }
+
+  Future<List<Users>> fetchAllUsersForDm(){
+    return _zuriApiService.fetchMemberListUsingOrgId(
+        organizationId: _organizationService.getOrganizationId(),token: getCurrentLoggedInUser()!.token);
   }
 }

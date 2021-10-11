@@ -22,23 +22,26 @@ class DmViewModel extends BaseViewModel {
   }
 
   void runTask() async {
-    _user = await runBusyFuture(_dmService.getUser());
+    setBusy(true);
+    _user = await _dmService.getUser();
     _currentLoggedInUser = _dmService.getCurrentLoggedInUser()!;
     _dmRoomInfo = _dmService.getExistingRoomInfo;
     if (_dmRoomInfo == null) {
       //we dont have a conversation yet so create a new room
-      _roomId = await _dmService.createRoom(_currentLoggedInUser, _user);
-      _dmService.getRoomInfo(_roomId);
+      await _dmService.createRoom(_currentLoggedInUser, _user);
+
+      ///_dmService.getRoomInfo(_roomId);
     } else {
       _roomId = _dmRoomInfo!.roomInfo.id;
     }
     _messages = (await _dmService.fetchRoomMessages(_roomId));
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
+    setBusy(false);
     log.i(_user.name);
     notifyListeners();
 
-    getChannelSocketId();
-    listenToNewMessages();
+    //getChannelSocketId();
+    //listenToNewMessages();
   }
 
   Users get user => _user;
@@ -214,7 +217,7 @@ class DmViewModel extends BaseViewModel {
           ' ' +
           DateFormat('MMMM').format(dateToCheck).toString();
     } else {
-      return DateFormat('MM').format(dateToCheck) +
+      return DateFormat('EEE ').format(dateToCheck)+DateFormat('MMMM ').format(dateToCheck) +
           DateFormat('dd').format(dateToCheck);
     }
   }

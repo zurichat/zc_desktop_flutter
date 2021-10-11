@@ -159,15 +159,15 @@ class OrganizationService {
     return UserProfile.fromJson(response); */
 
     return UserProfile(
-        firstName: 'Lucy',
-        lastName: 'CocoMelon',
-        displayName: 'sweetcoco',
+        firstName: 'Borris Mejja',
+        lastName: 'Coco Melon',
+        displayName: 'Sweet Coco',
         imageUrl:
             'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg',
-        userName: 'sweetcoco',
+        userName: 'Sweet Chocolate',
         phone: 'phone',
         pronouns: 'pronouns',
-        bio: 'bio',
+        bio: 'Welcome to Zuri',
         status: 'status');
   }
 }

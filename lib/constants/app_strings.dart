@@ -58,6 +58,7 @@ const String TimePlaceholder = '13:02';
 const String ImagePlaceholder = 'B';
 
 const String SavedItems = 'Saved Items';
+const String AllDms = 'All DMs';
 const String SearchModalHintText = 'Find in direct messages with rafiu';
 const String LookingForWidget = 'I’m looking for...';
 const String ButtonText = 'Messages';
@@ -77,7 +78,8 @@ const String SearchModal1 = 'Search in Messages';
 const String SearchModal2 = 'Search in Files';
 const String SearchModal3 = 'Search anyone in workspace';
 const String AddPeopleText = 'Add People';
-const String AddPeopleUserGroupHeader = 'To see Zuri Chat in action, you’ll need a few more people here. Try inviting some of the teammates you talk with most.';
+const String AddPeopleUserGroupHeader =
+    'To see Zuri Chat in action, you’ll need a few more people here. Try inviting some of the teammates you talk with most.';
 const String InvitePeopleTextFieldHintText = 'Ex. ellis@gmail.com';
 const String AddButtonText = 'Add';
 const String GroupText = 'User Groups';
@@ -88,13 +90,17 @@ const String FilterText = 'Filter';
 const String EmailErrorText = 'Invalid email address';
 const String BackToLoginText = 'Back To Login';
 const String BackToWorkspaceText = 'Back To Workspace';
-const String EmptyWorkspaceText = 'Oh no 😭😭😭, Your workspace is empty. You can invite people with their email';
+const String EmptyWorkspaceText =
+    'Oh no 😭😭😭, Your workspace is empty. You can invite people with their email';
 const String ErrorTitle = 'Password Reset failed';
-const String ErrorSubtitle = 'Your password reset failed! Give it another shot!';
+const String ErrorSubtitle =
+    'Your password reset failed! Give it another shot!';
 const String SuccessTitle = 'Password Reset successful';
-const String SuccessSubtitle = 'Your password reset was successful! You can now proceed to Login!';
+const String SuccessSubtitle =
+    'Your password reset was successful! You can now proceed to Login!';
 const String ResetTitle = 'Check your email for code';
 const String ConfirmTitle = 'Next, confirm your email address';
-const String InvalidErrorMessage = 'Invalid Credential. Please Check you details and try again.';
-const String EmailAlreadyInUseError = 'Email address already in use. Use another email or try login.';
-
+const String InvalidErrorMessage =
+    'Invalid Credential. Please Check you details and try again.';
+const String EmailAlreadyInUseError =
+    'Email address already in use. Use another email or try login.';

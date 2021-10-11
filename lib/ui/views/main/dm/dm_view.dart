@@ -111,21 +111,14 @@ class DmView extends StatelessWidget {
                                                     ),
                                                   ],
                                                 );
-                                              } else if ((!model
-                                                      .isSameDate(index)) ||
-                                                  index == 0) {
+                                              } else if (index == 0) {
                                                 return Column(
                                                   children: [
                                                     DateWidget(
                                                         date: model.formatDate(
                                                             model
                                                                 .messages
-                                                                .elementAt(
-                                                                    index ==
-                                                                            0
-                                                                        ? index
-                                                                        : index +
-                                                                            1)
+                                                                .elementAt(index)
                                                                 .created_at)),
                                                     MessageTile(
                                                       model: model,
@@ -133,6 +126,25 @@ class DmView extends StatelessWidget {
                                                       message: model.messages
                                                           .elementAt(index),
                                                     ),
+                                                  ],
+                                                );
+                                              }else if ((!model
+                                                      .isSameDate(index))) {
+                                                return Column(
+                                                  children: [
+                                                    MessageTile(
+                                                      model: model,
+                                                      messageIndex: index,
+                                                      message: model.messages
+                                                          .elementAt(index),
+                                                    ),
+                                                    DateWidget(
+                                                        date: model.formatDate(
+                                                            model
+                                                                .messages
+                                                                .elementAt(index +
+                                                                            1)
+                                                                .created_at)),
                                                   ],
                                                 );
                                               }

@@ -197,7 +197,8 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> updateUserPassword({required String password, required String code}) async {
+  Future<void> updateUserPassword(
+      {required String password, required String code}) async {
     await _post(
       updatePasswordUri(code),
       body: {
@@ -366,8 +367,8 @@ class ZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> sendMessageToDM(
-      {roomId, senderId, message,orgId}) async {
-    return await _post(dmSendMessage(roomId,orgId), body: {
+      {roomId, senderId, message, orgId}) async {
+    return await _post(dmSendMessage(roomId, orgId), body: {
       'sender_id': senderId,
       'room_id': roomId,
       'message': message,
@@ -394,39 +395,40 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> fetchRoomMessages({roomId,orgId}) async {
-    return await _get(dmFetchRoomMessages(roomId,orgId));
+  Future<Map<String, dynamic>> fetchRoomMessages({roomId, orgId}) async {
+    var res = await _get(dmFetchRoomMessages(roomId, orgId));
+    return res;
   }
 
   @override
   Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, Users? user,String? orgId}) async {
+      {User? currentUser, Users? user, String? orgId}) async {
     return await _post(
-      dmCreateRoom(orgId!,currentUser!.id),
+      dmCreateRoom(orgId!, currentUser!.id),
       body: {
         'org_id': orgId,
-        'room_user_ids': [currentUser.id, user!.id],
-        'bookmarks': ['0'],
-        'pinned': ['0']
+        'room_member_ids': [currentUser.id, user!.id],
+        'room_name': user.name,
       },
     );
   }
 
   @override
-  Future<Map<String, dynamic>> reactToMessage({orgId,roomId,messageId, required reactToMessage}) async {
+  Future<Map<String, dynamic>> reactToMessage(
+      {orgId, roomId, messageId, required reactToMessage}) async {
     return await _post(
-      dmReactToMessage(orgId,roomId,messageId),
+      dmReactToMessage(orgId, roomId, messageId),
       body: {
-  'message_id': messageId,
-  'sender_id': reactToMessage.senderId,
-  'data': reactToMessage.data,
-  'category': reactToMessage.category,
-  'aliases': reactToMessage.aliases,
-  'count': reactToMessage.count,
-  'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
-          .format(DateTime.now())
-          .toString()
-},
+        'message_id': messageId,
+        'sender_id': reactToMessage.senderId,
+        'data': reactToMessage.data,
+        'category': reactToMessage.category,
+        'aliases': reactToMessage.aliases,
+        'count': reactToMessage.count,
+        'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+            .format(DateTime.now())
+            .toString()
+      },
     );
   }
 
@@ -451,13 +453,12 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<dynamic> fetchDMs({orgId,userId}) async {
-    return await _get(dmFetchDMs(orgId,userId));
+  Future<dynamic> fetchDMs({orgId, userId}) async {
+    return await _get(dmFetchDMs(orgId, userId));
   }
 
   @override
   Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
     return await _get(dmUserProfile(orgId, memberId));
   }
-
 }

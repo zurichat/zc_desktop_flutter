@@ -387,9 +387,9 @@ class Users with _$Users {
   factory Users({
     @Default('') @JsonKey(name: '_id') String? id,
     @Default('') @JsonKey(name: 'image_url') String profileImage,
-    @Default('') String display_name,
-    @Default('') String name,
-    @Default('') String bio,
+    @Default('Abodhanga') String display_name,
+    @Default('Abodhanga') String name,
+    @Default('Welcome to zuri') String bio,
   }) = _Users;
 
   factory Users.fromJson(Map<String, dynamic> json) => _$UsersFromJson(json);
@@ -433,7 +433,7 @@ class UserProfile with _$UserProfile {
     @JsonKey(name: 'display_name') @Default('') String displayName,
     @JsonKey(name: 'image_url') @Default('') String imageUrl,
     @JsonKey(name: 'user_name') @Default('') String userName,
-    @Default('') String userId,
+    @Default('') @JsonKey(name:'_id') String userId,
     @Default('') String phone,
     @Default('') String pronouns,
     @Default('') String bio,
@@ -454,4 +454,15 @@ factory ReactToMessage({
 })= _ReactToMessage;
 
   factory ReactToMessage.fromJson(Map<String, dynamic> json) => _$ReactToMessageFromJson(json);
+}
+
+@freezed
+class AllMembersResponse with _$AllMembersResponse{
+  factory AllMembersResponse({
+@Default(0) int status,
+  @Default('') String message,
+  @Default([]) List<UserProfile> data,
+  })= _AllMembersResponse;
+
+  factory AllMembersResponse.fromJson(Map<String, dynamic> json) => _$AllMembersResponseFromJson(json);
 }
