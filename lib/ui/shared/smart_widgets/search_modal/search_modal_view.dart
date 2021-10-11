@@ -100,7 +100,7 @@ recentSearchListTile(String? text, {VoidCallback? function}) {
       child: Material(
         child: ListTile(
           hoverColor: kcSecondaryColor,
-          tileColor: whiteColor,
+          //tileColor: whiteColor,
           onTap: function,
           leading: SvgPicture.asset(Clock, width: 18.w, height: 18.h),
           title: Text(text!, style: searchModal1),
@@ -202,6 +202,7 @@ class ScrollableView extends HookViewModelWidget<SearchViewModel> {
   @override
   Widget buildViewModelWidget(BuildContext context, SearchViewModel model) {
     var scrollController = useScrollController();
+
     return Container(
       height: model.isClicked ? 285.h : 406.5.h,
       width: 1008.w,
@@ -358,12 +359,14 @@ class ScrollableView extends HookViewModelWidget<SearchViewModel> {
                   text: model.isClicked
                       ? 'Recent Searches in ${model.text}'
                       : RecentSearch),
-              /*Container(
-                       height: 150.h,
-                       width: 350.w,
-                       child: ListView.builder(itemCount:model.historyLenth ,itemBuilder:
-                       (context, index) => recentSearchListTile(model.searchHistory[index])) ,
-                     )*/
+              Container(
+                height: 362.h,
+                width: 350.w,
+                child: ListView.builder(
+                    itemCount: model.historyLenth,
+                    itemBuilder: (context, index) =>
+                        recentSearchListTile(model.searchHistory[index])),
+              )
             ],
           ),
         ),
@@ -437,7 +440,7 @@ class SearchWidget extends HookViewModelWidget<SearchViewModel> {
                   textAlign: TextAlign.left,
                   maxLines: 1,
                   style: searchModal4,
-                  onChanged: model.onChange,
+                  onChanged: (_) => model.onChange(text.text),
                   decoration: InputDecoration(
                     hintText:
                         model.isClicked ? model.hintText : SearchModalHintText1,

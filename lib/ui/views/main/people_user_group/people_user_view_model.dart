@@ -11,7 +11,7 @@ import 'package:zc_desktop_flutter/services/user_service.dart';
 class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   final _organizationService = locator<OrganizationService>();
   final _userService = locator<UserService>();
-  final _log = getLogger("PeopleUserGroupViewModel");
+  final _log = getLogger('PeopleUserGroupViewModel');
   // _pageIndex is used to keep track of the current view.
   int _pageIndex = 0;
   int get pageIndex => _pageIndex;
@@ -97,7 +97,6 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
 
   @override
   void onFutureError(error, Object? key) {
-    print('Handle Error here');
     super.onFutureError(error, key);
   }
 }

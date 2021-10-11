@@ -12,7 +12,7 @@ import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class CreateChannelViewModel extends BaseViewModel with Validator {
-  final _navigator = locator<NavigationService>();
+  //final _navigator = locator<NavigationService>();
 
   //Declare the services that are dependent upon
   final _localStorageService = locator<LocalStorageService>();
@@ -23,7 +23,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     return Auth.fromJson(jsonDecode(auth as String));
   }
 
-  final log = getLogger("CreateChannelViewModel");
+  final log = getLogger('CreateChannelViewModel');
   final _navigationService = locator<NavigationService>();
   final _channelsService = locator<ChannelsService>();
 
@@ -83,11 +83,6 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
 
   get channelName => _channelName;
   get channelDescription => _channelDescription;
-
-  void closeDialog() {
-    _navigator.popRepeated(1);
-    notifyListeners();
-  }
 
   void setchannelName(String value) {
     _channelName = value;
@@ -194,7 +189,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   /// Error should be handled here. It could be displaying a toast of something else
   @override
   void onFutureError(error, Object? key) {
-    print('Handle Error here');
+    log.i('Handle Error here');
     super.onFutureError(error, key);
   }
 }

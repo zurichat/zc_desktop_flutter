@@ -44,14 +44,18 @@ class CreateChannelView extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ZcdeskText.headingCreateChannel(model.createChannel),
-                    IconButton(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 8.0.h, horizontal: 8.0.w),
-                      iconSize: 22.0,
-                      onPressed: () {
-                        model.closeDialog();
+                    Builder(
+                      builder: (context) {
+                        return IconButton(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 8.0.h, horizontal: 8.0.w),
+                          iconSize: 22.0,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: Icon(Icons.close),
+                        );
                       },
-                      icon: Icon(Icons.close),
                     ),
                   ],
                 ),

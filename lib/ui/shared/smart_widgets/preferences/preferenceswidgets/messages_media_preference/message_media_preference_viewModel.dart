@@ -1,21 +1,15 @@
-import 'dart:convert';
-
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
-
 import 'message_media_preferenceview.dart';
 
 class MessageMediaPreferenceViewModel extends BaseViewModel {
-  final _mmpStorageKey = 'mmpKey';
   final _sharedPref = locator<LocalStorageService>();
   var _msgmediapref = MessagesAndMedia();
   PrefTheme _themePref = PrefTheme.Clean;
   PrefTheme _namePref = PrefTheme.JustDisplayNames;
-
   get themepref => _themePref;
-
   get namepref => _namePref;
 
   List<String> _messagespreferencetitles = [
@@ -53,11 +47,9 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
     'assets/images/raisedhandblack4.svg',
     'assets/images/raisedhandblack5.svg',
   ];
-
   List<String> get emojiSkin => _emojiSkin;
 
   int _selectedSkin = 0;
-
   int get selectedSkin => _selectedSkin;
 
   set setEmojiSkin(int index) {
@@ -88,13 +80,9 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
   bool? _showTextpreview = false;
 
   bool? get displaycolorSwatches => _displayColorSwatches;
-
   bool? get timeWith => _timeWith;
-
   bool? get displayCurrentTyping => _displayCurrentTyping;
-
   bool? get displayEmojiAsText => _displayEmojiAsText;
-
   bool? get showJumbomji => _showJumbomji;
 
   set setShowJumbomji(bool? val) {
@@ -123,11 +111,8 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
 
   //------
   bool? get imageFileUploadZuri => _imageFileUploadZuri;
-
   bool? get imageFileLinkedWebsite => _imageFileLinkedWebsite;
-
   bool? get evenLarger2Mb => _evenLarger2Mb;
-
   bool? get showTextpreview => _showTextpreview;
 
   set setimageFileUploadZuri(bool? val) {
@@ -164,16 +149,14 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
     'You can upload any important email to Slack by forwarding it to a unique email address. Slackbot will deliver the email and you can keep it private or share it with your team.',
     'Choose the default skin tone that will be used whenever you use certain emojis in reactions and messages.'
   ];
-
   List<String> get longText => _longText;
 
   void saveToDisk() {
-    _sharedPref.saveToDisk(_mmpStorageKey, jsonEncode(_msgmediapref));
+    _sharedPref.setMessagesAndMedia(_msgmediapref);
   }
 
-  Future<void> fetchAndSetMsgSetting() async {
-    final result = await _sharedPref.getFromDisk(_mmpStorageKey);
-    _msgmediapref = MessagesAndMedia.fromJson(jsonDecode(result.toString()));
+  void fetchAndSetMsgSetting() async {
+    final _msgmediapref = await _sharedPref.messagesAndMedia as MessagesAndMedia;
     _themePref = _msgmediapref.theme;
     _namePref = _msgmediapref.name;
     _displayEmojiAsText = _msgmediapref.displayEmojiAsPlain;
@@ -186,7 +169,8 @@ class MessageMediaPreferenceViewModel extends BaseViewModel {
     _displayCurrentTyping = _msgmediapref.displayInfo;
     _showJumbomji = _msgmediapref.showJumbomoji;
     _evenLarger2Mb = _msgmediapref.largerThan2;
-
+    
     notifyListeners();
+    
   }
 }

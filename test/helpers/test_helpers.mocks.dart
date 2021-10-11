@@ -100,8 +100,9 @@ class MockAuthService extends _i1.Mock implements _i6.AuthService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
-  void logOut() => super.noSuchMethod(Invocation.method(#logOut, []),
-      returnValueForMissingStub: null);
+  void logOut(String? token) =>
+      super.noSuchMethod(Invocation.method(#logOut, [token]),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }
@@ -403,9 +404,10 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
-  _i2.Future<void> updateUserPassword({String? password}) =>
+  _i2.Future<void> updateUserPassword({String? password, String? code}) =>
       (super.noSuchMethod(
-          Invocation.method(#updateUserPassword, [], {#password: password}),
+          Invocation.method(
+              #updateUserPassword, [], {#password: password, #code: code}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
@@ -633,21 +635,16 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
                   Future<Map<String, dynamic>>.value(<String, dynamic>{}))
           as _i2.Future<Map<String, dynamic>>);
   @override
-  _i2.Future<_i5.User> fetchUserDetail({String? userId, dynamic token}) =>
-      (super.noSuchMethod(
-              Invocation.method(
-                  #fetchUserDetail, [], {#userId: userId, #token: token}),
-              returnValue: Future<_i5.User>.value(_FakeUser_4()))
-          as _i2.Future<_i5.User>);
+  _i2.Future<_i5.User> fetchUserDetail({String? userId}) => (super.noSuchMethod(
+          Invocation.method(#fetchUserDetail, [], {#userId: userId}),
+          returnValue: Future<_i5.User>.value(_FakeUser_4()))
+      as _i2.Future<_i5.User>);
   @override
-  _i2.Future<Map<String, dynamic>> getUserDetails(
-          {String? userId, String? token}) =>
-      (super.noSuchMethod(
-              Invocation.method(
-                  #getUserDetails, [], {#userId: userId, #token: token}),
-              returnValue:
-                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
-          as _i2.Future<Map<String, dynamic>>);
+  _i2.Future<Map<String, dynamic>> getUserDetails({String? userId}) => (super
+      .noSuchMethod(Invocation.method(#getUserDetails, [], {#userId: userId}),
+          returnValue:
+              Future<Map<String, dynamic>>.value(<String, dynamic>{})) as _i2
+      .Future<Map<String, dynamic>>);
   @override
   _i2.Future<void> updateUserDetails(
           {required String organizationId,
@@ -672,6 +669,11 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
               }),
               returnValue: Future<_i5.Member>.value(_FakeMember_3()))
           as _i2.Future<_i5.Member>);
+  @override
+  _i2.Future<void> signOut(String? token) =>
+      (super.noSuchMethod(Invocation.method(#signOut, [token]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
   String toString() => super.toString();
 }
@@ -867,9 +869,17 @@ class MockOrganizationService extends _i1.Mock
       super.noSuchMethod(Invocation.method(#saveOrganizationId, [orgId]),
           returnValueForMissingStub: null);
   @override
+  void saveMemberId(String? memId) =>
+      super.noSuchMethod(Invocation.method(#saveMemberId, [memId]),
+          returnValueForMissingStub: null);
+  @override
   String getOrganizationId() =>
       (super.noSuchMethod(Invocation.method(#getOrganizationId, []),
           returnValue: '') as String);
+  @override
+  String getMemberId() =>
+      (super.noSuchMethod(Invocation.method(#getMemberId, []), returnValue: '')
+          as String);
   @override
   void changeSelectedOrganization(int? index) => super.noSuchMethod(
       Invocation.method(#changeSelectedOrganization, [index]),
@@ -960,15 +970,18 @@ class MockUserService extends _i1.Mock implements _i18.UserService {
       (super.noSuchMethod(Invocation.method(#getUserId, []), returnValue: '')
           as String);
   @override
+  _i2.Future<void> updateUser({_i5.UpdateUserParam? params}) =>
+      (super.noSuchMethod(Invocation.method(#updateUser, [], {#params: params}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
+  @override
   _i2.Future<_i5.User> getUser(String? userId) =>
       (super.noSuchMethod(Invocation.method(#getUser, [userId]),
               returnValue: Future<_i5.User>.value(_FakeUser_4()))
           as _i2.Future<_i5.User>);
   @override
-  _i2.Future<void> getUserInfo(
-          String? memberId, dynamic parameter, dynamic token) =>
-      (super.noSuchMethod(
-          Invocation.method(#getUserInfo, [memberId, parameter, token]),
+  _i2.Future<void> postMemberInfo(String? memberId, String? parameter) => (super
+      .noSuchMethod(Invocation.method(#postMemberInfo, [memberId, parameter]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override

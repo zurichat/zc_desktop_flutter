@@ -32,7 +32,6 @@ class ReactionWidget extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                print("reaction incremented");
                 model.increaseReactionNumber();
                 //increment reaction
               },

@@ -9,14 +9,13 @@ import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 
 class ChannelDmViewModel extends BaseViewModel {
-  final log = getLogger("MessageViewModel");
+  final log = getLogger('MessageViewModel');
   final _channelService = locator<ChannelsService>();
   final _centrifugeService = locator<CentrifugeService>();
 
   late LoggedInUser.User _currentLoggedInUser;
   int currentSelectedChannel = 0;
   String? _channelId = '0';
-  String? _orgId = '0';
   String? channelId = '0';
   List<ChannelMessage> _messages = [];
 
@@ -74,7 +73,7 @@ class ChannelDmViewModel extends BaseViewModel {
   void runTask() async {
     _currentChannel = _channelService.getChannel();
     _currentLoggedInUser = _channelService.getCurrentLoggedInUser()!;
-    _channelService.addUserToChannel(
+    /*_channelService.addUserToChannel(
         id: _currentLoggedInUser.id,
         role_id: '1',
         is_admin: true,
@@ -83,7 +82,7 @@ class ChannelDmViewModel extends BaseViewModel {
         prop3: 'prop3');
     _messages = await _channelService.fetchChannelMessages();
     getChannelSocketId();
-    listenToNewMessages();
+    listenToNewMessages();*/
   }
 
   void getChannelSocketId() async {
@@ -127,11 +126,10 @@ class ChannelDmViewModel extends BaseViewModel {
 
   String formatDate(String createdAt) {
     final dateToCheck = DateTime.parse(createdAt);
-    print(dateToCheck);
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = DateTime(now.year, now.month, now.day - 1);
-    final tomorrow = DateTime(now.year, now.month, now.day + 1);
+    //final tomorrow = DateTime(now.year, now.month, now.day + 1);
     final aDate = DateTime(
         int.parse(DateFormat('yyyy').format(dateToCheck)),
         int.parse(DateFormat('MM').format(dateToCheck)),
@@ -172,11 +170,11 @@ class ChannelDmViewModel extends BaseViewModel {
     _messages.add(mess);
     notifyListeners();
     //u can get index by getting list length and minus 1
-    var res = await _channelService.sendMessage(
+    /* var res = await _channelService.sendMessage(
         channel_id: _channelId,
         senderId: _currentLoggedInUser.id,
         message: message,
-        org_id: _orgId);
+        org_id: _orgId); */
     /* var index = _messages.indexWhere((Results) {
       return Results.message == res.data.message;
     });
@@ -194,7 +192,6 @@ class ChannelDmViewModel extends BaseViewModel {
   }
 
   LoggedInUser.User getUser(var senderId) {
-    print("player " + senderId);
     if (_currentLoggedInUser.id == senderId) {
       return _currentLoggedInUser;
     } else {
