@@ -12,6 +12,7 @@ import 'package:get/get.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i8;
 import 'package:zc_desktop_flutter/model/app_models.dart' as _i5;
+import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart' as _i6;
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart' as _i7;
 import 'package:zc_desktop_flutter/services/channels_service.dart' as _i13;
@@ -646,14 +647,14 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
       .Future<Map<String, dynamic>>);
   @override
   _i2.Future<void> updateUserDetails(
-          {String? organizationId,
-          String? memberId,
-          _i5.UpdateUserParam? params}) =>
+          {required String organizationId,
+          required String memberId,
+          UpdateUserParam? params}) =>
       (super.noSuchMethod(
           Invocation.method(#updateUserDetails, [], {
             #organizationId: organizationId,
             #memberId: memberId,
-            #params: params
+            #parameter: params,
           }),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
@@ -838,43 +839,6 @@ class MockDMService extends _i1.Mock implements _i14.DMService {
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalStorageService extends _i1.Mock
     implements _i15.LocalStorageService {
-  @override
-  void setAuthResponse(_i5.AuthResponse? authResponseToSave) => super
-      .noSuchMethod(Invocation.method(#setAuthResponse, [authResponseToSave]),
-          returnValueForMissingStub: null);
-  @override
-  void removeAuthResponse() =>
-      super.noSuchMethod(Invocation.method(#removeAuthResponse, []),
-          returnValueForMissingStub: null);
-  @override
-  void setAccessibility(_i5.Accessibility? accessibilityResponseToSave) =>
-      super.noSuchMethod(
-          Invocation.method(#setAccessibility, [accessibilityResponseToSave]),
-          returnValueForMissingStub: null);
-  @override
-  void setAdvanced(_i5.Advanced? advanced) =>
-      super.noSuchMethod(Invocation.method(#setAdvanced, [advanced]),
-          returnValueForMissingStub: null);
-  @override
-  void setAudioAndVideo(_i5.AudioAndVideo? audioAndVideo) =>
-      super.noSuchMethod(Invocation.method(#setAudioAndVideo, [audioAndVideo]),
-          returnValueForMissingStub: null);
-  @override
-  void setMessagesAndMedia(_i5.MessagesAndMedia? media) =>
-      super.noSuchMethod(Invocation.method(#setMessagesAndMedia, [media]),
-          returnValueForMissingStub: null);
-  @override
-  void setNotification(_i5.Notifications? notification) =>
-      super.noSuchMethod(Invocation.method(#setNotification, [notification]),
-          returnValueForMissingStub: null);
-  @override
-  void setSideBar(_i5.SideBar? sideBar) =>
-      super.noSuchMethod(Invocation.method(#setSideBar, [sideBar]),
-          returnValueForMissingStub: null);
-  @override
-  void setThemes(_i5.Themes? themes) =>
-      super.noSuchMethod(Invocation.method(#setThemes, [themes]),
-          returnValueForMissingStub: null);
   @override
   _i2.Future<void> saveToDisk<T>(String? key, T? content) =>
       (super.noSuchMethod(Invocation.method(#saveToDisk, [key, content]),

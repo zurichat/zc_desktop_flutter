@@ -50,9 +50,8 @@ class OrganizationService {
       orId = _localStorageService.getFromDisk(selectedOrganizationKey) as int;
       log.d('here: $orId');
     } catch (e) {
-      log.e('get org error: $e');
+      log.e('get org etrror: $e');
     }
-
     return orId;
   }
 
