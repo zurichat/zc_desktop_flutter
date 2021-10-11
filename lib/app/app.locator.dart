@@ -14,6 +14,7 @@ import 'package:stacked_themes/stacked_themes.dart';
 import '../services/auth_service.dart';
 import '../services/centrifuge_service.dart';
 import '../services/channels_service.dart';
+import '../services/connectivity_service.dart';
 import '../services/dm_service.dart';
 import '../services/files_service.dart';
 import '../services/local_storage_service.dart';
@@ -42,6 +43,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => OrganizationService());
   locator.registerLazySingleton(() => StartupService());
   locator.registerLazySingleton(() => CentrifugeService());
+  locator.registerLazySingleton(() => ConnectivityService());
   locator.registerLazySingleton(() => ZuriApiService());
   locator.registerLazySingleton(() => FilesService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
