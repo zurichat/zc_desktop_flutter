@@ -13,6 +13,7 @@ Uri baseUri = Uri(scheme: scheme, host: host, path: '/');
 Uri signInUri = Uri(scheme: scheme, host: host, path: '/auth/login');
 Uri signupUri = Uri(scheme: scheme, host: host, path: '/users');
 Uri confirmEmailUri = Uri(scheme: scheme, host: host, path: '/account/verify-account');
+Uri signOutUri = Uri(scheme: scheme, host: host, path: '/auth/logout');
 Uri verifyResetPasswordUri =
     Uri(scheme: scheme, host: host, path: '/account/verify-reset-password');
 Uri requestPasswordResetCodeUri = Uri(

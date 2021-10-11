@@ -6,7 +6,6 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
-import 'login_view.form.dart';
 
 class LoginViewModel extends FormViewModel {
   final log = getLogger('LoginViewModel');
@@ -32,8 +31,8 @@ class LoginViewModel extends FormViewModel {
     _navigationService.navigateTo(Routes.resetPasswordView);
   }
 
-  Future<void> login() async {
-    await runBusyFuture(performLogin(emailValue!, passwordValue!));
+  Future<void> login(String email, String password) async {
+    await runBusyFuture(performLogin(email, password));
   }
 
   Future<void> performLogin(String email, String password) async {

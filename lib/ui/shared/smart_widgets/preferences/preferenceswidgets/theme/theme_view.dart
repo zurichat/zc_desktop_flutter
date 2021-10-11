@@ -10,7 +10,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/theme/theme_viewmodel.dart';
 
 class ThemeView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final ScrollController _controller = ScrollController();
@@ -444,6 +443,8 @@ class ThemeView extends StatelessWidget {
       viewModelBuilder: () {
         return ThemeViewModel();
       },
+          onModelReady: (model) => model.fetchAndSetSetting(),
+      onDispose: (model) => model.saveSettings(),
     );
   }
 }
