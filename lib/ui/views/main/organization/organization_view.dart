@@ -279,6 +279,13 @@ class DisplayMenu extends StatelessWidget {
               onTap: model.goToUserPeopleGroup),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
+            text: 'Todo',
+            onTap: () {
+              model.goTodoView();
+            },
+          ),
+          ReusableMenuItem(
+            iconPath: 'assets/icons/plugins.svg',
             text: 'Plugins',
             onTap: () {},
           ),

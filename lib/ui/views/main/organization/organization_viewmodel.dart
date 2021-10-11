@@ -104,7 +104,8 @@ class OrganizationViewModel extends BaseViewModel {
 
   Future<void> getDMs() async {
     _currentOrganization = organization[getSelectedOrganizationIndex()!];
-    List<DMRoomsResponse> res = await _dmService.getDMs(_currentOrganization.id);
+    List<DMRoomsResponse> res =
+        await _dmService.getDMs(_currentOrganization.id);
     for (var user_id in res) {
       UserProfile userProfile = await _organizationService.getUserProfile(
           _currentOrganization.id, user_id.roomUserIds.last);
@@ -148,6 +149,10 @@ class OrganizationViewModel extends BaseViewModel {
   void goToUserPeopleGroup() {
     _navigationService.navigateTo(OrganizationViewRoutes.peopleUserGroupView,
         id: 1);
+  }
+
+  void goTodoView() {
+    _navigationService.navigateTo(OrganizationViewRoutes.todoView, id: 1);
   }
 
   void goToDmView(int index) {

@@ -15,12 +15,12 @@ class ZcdeskText extends StatelessWidget {
   ZcdeskText.searchChannelHeaderGreenStyle(this.text)
       : style = searchChannelHeaderGreenStyle;
   ZcdeskText.headingSmallCreateChannel(this.text)
-      : style = createChannelSmallHeaderStyle;
+      : style = kHeading2TextStyle;
   ZcdeskText.displayChannelSmallHeaderBlackStyle(this.text)
       : style = displayChannelSmallHeaderBlackStyle;
   ZcdeskText.textCreateChannel(this.text) : style = createChannelTextStyle;
   ZcdeskText.displayChannelSmallHeaderStyle(this.text)
-      : style = displayChannelSmallHeaderStyle;
+      : style = boldCaptionStyle;
   ZcdeskText.headline(this.text) : style = kHeadlineTextStyle;
   ZcdeskText.headline2(this.text) : style = headline8;
   ZcdeskText.bodyText(this.text) : style = kBodyTextStyle;

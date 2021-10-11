@@ -89,6 +89,22 @@ const String FilterText = 'Filter';
 const String EmailErrorText = 'Invalid email address';
 const String BackToLoginText = 'Back To Login';
 const String BackToWorkspaceText = 'Back To Workspace';
+
+const String TodoList = 'To-do-List';
+const String PendingText = 'Pending';
+const String ArchiveText = 'Archive';
+const String TrashText = 'Trash';
+const String CreateTodo = 'Create a new todo';
+const String TodoTextOne =
+    'Todo helps to keep track of tasks. They are best when created \nspecifically for a task with subsequent sub tasks';
+const String TodoTextTwo = 'Title';
+const String TodoTextThree = 'e.g. Todo 01';
+const String TodoTextFour = 'Description';
+const String TodoTextFive = '(Optional)';
+const String TodoTextSix = 'Make this todo private';
+const String TodoTextSeven = 'Due date';
+const String TodoTextNine = 'Create';
+const String TodoTextTen = 'Meeting with zuri partners...';
 const String EmptyWorkspaceText =
     'Oh no 😭😭😭, Your workspace is empty. You can invite people with their email';
 const String ErrorTitle = 'Password Reset failed';
