@@ -41,7 +41,7 @@ class ChannelFilesItem extends StatelessWidget {
         child: Container(
           height: 65.5,
           width: fullWidth(context),
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           foregroundDecoration: BoxDecoration(
               color: model.onFileTileHover &&
                       model.onFileTileHoveredIndex == itemIndex
