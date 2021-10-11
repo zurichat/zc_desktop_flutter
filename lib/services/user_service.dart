@@ -11,7 +11,7 @@ import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 const userIdKey = 'userIdKey';
 
 class UserService {
-  final log = getLogger("UserService");
+  final log = getLogger('UserService');
   final _localStorageService = locator<LocalStorageService>();
   final _api = locator<ZuriApiService>();
   final _organizationService = locator<OrganizationService>();
@@ -26,29 +26,28 @@ class UserService {
     return _localStorageService.getFromDisk(userIdKey) as String;
   }
 
-  // Future<User?> fetchUserDetails(String) async {
-  //   final authResponse = Auth.fromJson(json.decode(
-  //       _localStorageService.getFromDisk(localAuthResponseKey).toString()));
+  Future<void> updateUser({UpdateUserParam? params}) async {
+    final orgId = _organizationService.getOrganizationId();
+    final memId = _organizationService.getMemberId();
+    final response =
+        await _api.updateUserDetails(organizationId: orgId, memberId: memId);
 
-  //   return authResponse.user;
-  // }
+    return response;
+  }
 
   /// This is used to get a single user_service
   Future<User> getUser(String userId) async {
-    final response = await _api.getUserDetails(
-        userId: auth.user!.id, token: auth.user!.token);
+    final response = await _api.getUserDetails(userId: auth.user!.id);
     log.i(response);
     return User.fromJson(response);
   }
 
-  Future<void> getUserInfo(String memberId, parameter, token) async {
+  Future<void> postMemberInfo(String memberId, String parameter) async {
     final orgId = _organizationService.getOrganizationId();
     final response = await _api.updateUserDetails(
-        organizationId: orgId,
-        memberId: memberId,
-        parameter: parameter,
-        token: token);
-
+      organizationId: orgId,
+      memberId: memberId,
+    );
     return response;
   }
 
@@ -75,7 +74,7 @@ class UserService {
     _localStorageService.saveToDisk(organizationIdKey, orgId);
     /*Future<User> getUserDetails(String? id) async {
     final response =
-        await _apiService.get(Uri.parse("https://api.zuri.chat/users/$id}"));
+        await _apiService.get(Uri.parse('https://api.zuri.chat/users/$id}'));
     return User.fromJson(response);
   }*/
   }

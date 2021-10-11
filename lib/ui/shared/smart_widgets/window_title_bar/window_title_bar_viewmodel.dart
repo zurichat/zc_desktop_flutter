@@ -12,7 +12,7 @@ class WindowTitleBarModel extends BaseViewModel {
     });
   }
 
-  bool _isHomeView = false;
+  bool _isHomeView = true;
 
   bool get isHomeView => _isHomeView;
 }

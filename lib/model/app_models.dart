@@ -1,10 +1,14 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zc_desktop_flutter/core/enums/flash_windows.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_bar.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_sidebar.dart';
 import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/accessibility/accessibility_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/advanced/advanced_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/messages_media_preference/message_media_preferenceview.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/theme/theme_viewmodel.dart';
 
 part 'app_models.freezed.dart';
 part 'app_models.g.dart';
@@ -45,6 +49,36 @@ class Member with _$Member {
   }) = _Member;
 
   factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
+}
+
+class UpdateUserParam {
+  late final String firstName;
+  late final String lastName;
+  late final String? displayName;
+  late final String? who;
+  late final String? pronoun;
+  late final String? phoneNumber;
+  final String? timeZone;
+
+  UpdateUserParam(
+    {required this.firstName,
+    required this.lastName,
+    this.displayName,
+    this.who,
+    this.pronoun,
+    this.phoneNumber,
+    this.timeZone}
+  );
+
+  Map<String, String> data = {
+      "first_name": '',
+      "last_name" : '',
+      "display_name": '',
+      "who": '',
+      "pronouns": '',
+      "phone": '',
+      "time_zone": ''  
+  };
 }
 
 @freezed
@@ -161,15 +195,21 @@ class RoomInfoResponse with _$RoomInfoResponse {
       _$RoomInfoResponseFromJson(json);
 }
 
-@freezed
+ @freezed
 class Themes with _$Themes {
   const factory Themes({
     @Default(false) bool syncWithOS,
     @Default('Light') String themes,
     @Default('Aubergine') String colors,
+    @Default(false) bool isChecked,
+    @Default(themeAccross.directMessage) themeAccross allWorkSpace,
+    @Default(toggleBtwTheme.LightTheme) toggleBtwTheme switchLightDark,
+    @Default(darkDramaticTheme.Null) darkDramaticTheme darkDramaTheme,
+    @Default(cleanThemes.aubergine) cleanThemes cleanTheme,
   }) = _Themes;
 
   factory Themes.fromJson(Map<String, dynamic> json) => _$ThemesFromJson(json);
+
 }
 
 @freezed
@@ -204,8 +244,8 @@ class SideBar with _$SideBar {
 }
 
 @freezed
-class Notification with _$Notification {
-  const factory Notification({
+class Notifications with _$Notifications {
+  const factory Notifications({
     @Default(PrefMessageNotification.DirectMessages)
         PrefMessageNotification notifyMe,
     @Default(false) bool differentSettingsForMobile,
@@ -217,15 +257,17 @@ class Notification with _$Notification {
     @Default('To') String to,
     @Default(true) bool includePreview,
     @Default(false) bool muteAll,
+     @Default(false) isEmail,
+    @Default('as soon as I\'m inactive') String notificationValue,
     @Default('Pick sound') String messageSound,
     @Default('Pick sound') String loungeSound,
     @Default(FlashWindows.WhenIdle) FlashWindows flashOnNotification,
     @Default('Pick sound') String deliverSound,
     @Default('When I am online') String notActiveOnDesktop,
-  }) = _Notification;
+  }) = _Notifications;
 
-  factory Notification.fromJson(Map<String, dynamic> json) =>
-      _$NotificationFromJson(json);
+  factory Notifications.fromJson(Map<String, dynamic> json) =>
+      _$NotificationsFromJson(json);
 }
 
 @freezed
@@ -299,9 +341,8 @@ class DummyUser with _$DummyUser {
 
 @freezed
 class DM with _$DM {
-  factory DM({
-    @Default('1') String userId,
-    required UserProfile userProfile}) = _DM;
+  factory DM({@Default('1') String userId, required UserProfile userProfile}) =
+      _DM;
   factory DM.fromJson(Map<String, dynamic> json) => _$DMFromJson(json);
 }
 
@@ -338,7 +379,7 @@ class ChannelResponse with _$ChannelResponse {
 @freezed
 class Channel with _$Channel {
   factory Channel({
-    @Default('') @JsonKey(name:'_id') String id,
+    @Default('') @JsonKey(name: '_id') String id,
     @Default('') String name,
     @Default('') String owner,
     @Default('') String description,
@@ -422,7 +463,6 @@ class Files with _$Files {
   factory Files.fromJson(Map<String, dynamic> json) => _$FilesFromJson(json);
 }
 
-
 @freezed
 class DMRoomsResponse with _$DMRoomsResponse {
   factory DMRoomsResponse({
@@ -455,5 +495,24 @@ class UserProfile with _$UserProfile {
     required String status,
   }) = _UserProfile;
 
-  factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
+  factory UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileFromJson(json);
+}
+
+@freezed
+class Accessibility with _$Accessibility {
+  factory Accessibility({
+    @Default(false) bool animateValue,
+    @Default(false) bool msgSound,
+    @Default(false) bool sentMsgSound,
+    @Default(false) bool receiveSound,
+    @Default(false) bool readIncoming,
+    @Default(UpButtonsChoice.option1) UpButtonsChoice upButtonsChoice
+
+//   factory Accessibility.fromJson(Map<String, dynamic> json) => _$Accessibility(json);
+//   Map<String, dynamic> toJson() => _$Accessibility(this);
+// }
+  }) = _Accessibility;
+
+  factory Accessibility.fromJson(Map<String, dynamic> json) => _$AccessibilityFromJson(json);
 }

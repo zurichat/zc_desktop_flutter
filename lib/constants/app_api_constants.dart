@@ -14,10 +14,12 @@ Uri signInUri = Uri(scheme: scheme, host: host, path: '/auth/login');
 Uri signupUri = Uri(scheme: scheme, host: host, path: '/users');
 Uri loginUri(String userId) => Uri(scheme: scheme, host: host, path: '/users/$userId');
 Uri confirmEmailUri = Uri(scheme: scheme, host: host, path: '/verify-account');
+Uri signOutUri = Uri(scheme: scheme, host: host, path: '/auth/logout');
 Uri verifyResetPasswordUri =
     Uri(scheme: scheme, host: host, path: '/account/verify-reset-password');
 Uri requestPasswordResetCodeUri = Uri(
     scheme: scheme, host: host, path: '/account/request-password-reset-code');
+Uri updatePasswordUri(String code) => Uri(scheme: scheme, host: host, path: '/account/update-password/$code');
 
 // Organization Endpoints
 

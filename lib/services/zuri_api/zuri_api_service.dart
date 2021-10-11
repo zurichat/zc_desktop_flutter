@@ -1,3 +1,7 @@
+// ignore_for_file: unused_element
+
+import 'dart:core';
+
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:intl/intl.dart';
@@ -62,7 +66,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.data);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -84,7 +88,7 @@ class ZuriApiService implements Api {
     } on DioError catch (error) {
       log.e(error.response!.statusCode);
       log.e(error.response!.data);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -105,7 +109,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -121,7 +125,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -144,7 +148,7 @@ class ZuriApiService implements Api {
       return response.data;
     } on DioError catch (error) {
       log.e(error.message);
-      throw HttpException(error.response!.data['message']);
+      throw HttpException(error.response!.statusCode.toString());
     } catch (error) {
       log.e(error.toString());
       throw HttpException(error.toString());
@@ -158,7 +162,7 @@ class ZuriApiService implements Api {
     await _post(
       confirmEmailUri,
       body: {
-        "code": otpCode,
+        'code': otpCode,
       },
     );
   }
@@ -169,8 +173,8 @@ class ZuriApiService implements Api {
     return await _post(
       signInUri,
       body: {
-        "email": email,
-        "password": password,
+        'email': email,
+        'password': password,
       },
     );
   }
@@ -179,7 +183,7 @@ class ZuriApiService implements Api {
   Future<void> requestPasswordResetCode({required String email}) async {
     await _post(
       requestPasswordResetCodeUri,
-      body: {"email": email},
+      body: {'email': email},
     );
   }
 
@@ -195,12 +199,12 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> updateUserPassword({required String password}) async {
+  Future<void> updateUserPassword({required String password, required String code}) async {
     await _post(
-      verifyResetPasswordUri,
+      updatePasswordUri(code),
       body: {
-        "password": password,
-        "confirm_password": password,
+        'password': password,
+        'confirm_password': password,
       },
     );
   }
@@ -209,7 +213,7 @@ class ZuriApiService implements Api {
   Future<void> verifyPasswordResetCode({required String resetCode}) async {
     await _post(
       verifyResetPasswordUri,
-      body: {"code": resetCode},
+      body: {'code': resetCode},
     );
   }
 
@@ -233,7 +237,7 @@ class ZuriApiService implements Api {
     return await _post(
       createOrganizationUri,
       body: {
-        "creator_email": email,
+        'creator_email': email,
       },
       headers: {'Authorization': 'Bearer ${token}'},
     );
@@ -255,7 +259,7 @@ class ZuriApiService implements Api {
       {required String email, required token}) async {
     return await _get(
       getOrganizationsUri(email),
-      headers: {'Authorization': "Bearer ${token}"},
+      headers: {'Authorization': 'Bearer ${token}'},
     );
   }
 
@@ -273,10 +277,10 @@ class ZuriApiService implements Api {
   Future sendMessageToChannel(
       {channel_id, senderId, message, organization_id}) async {
     return await _post(channelSendMessage(channel_id, organization_id), body: {
-      "user_id": senderId,
-      "content": message,
-      "files": [],
-      "event": {}
+      'user_id': senderId,
+      'content': message,
+      'files': [],
+      'event': {}
     });
   }
 
@@ -314,13 +318,13 @@ class ZuriApiService implements Api {
     return await _post(
       getUserChannelUri(organizationId, channelId),
       body: {
-        "_id": id,
-        "role_id": role_id,
-        "is_admin": is_admin,
-        "notifications": {
-          "additionalProp1": prop1,
-          "additionalProp2": prop2,
-          "additionalProp3": prop3
+        '_id': id,
+        'role_id': role_id,
+        'is_admin': is_admin,
+        'notifications': {
+          'additionalProp1': prop1,
+          'additionalProp2': prop2,
+          'additionalProp3': prop3
         },
       },
     );
@@ -345,10 +349,10 @@ class ZuriApiService implements Api {
     return await _post(
       getCreateChannelUri(insertedOrganization),
       body: {
-        "name": name,
-        "owner": owner,
-        "description": description,
-        "private": private,
+        'name': name,
+        'owner': owner,
+        'description': description,
+        'private': private,
       },
       headers: {'Authorization': 'Bearer ${sessionId}'},
     );
@@ -366,16 +370,16 @@ class ZuriApiService implements Api {
   Future<Map<String, dynamic>> sendMessageToDM(
       {roomId, senderId, message}) async {
     return await _post(dmSendMessage(roomId), body: {
-      "sender_id": senderId,
-      "room_id": roomId,
-      "message": message,
-      "media": [],
-      "read": false,
-      "pinned": false,
-      "saved_by": [],
-      "threads": [],
-      "reactions": [],
-      "created_at": DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+      'sender_id': senderId,
+      'room_id': roomId,
+      'message': message,
+      'media': [],
+      'read': false,
+      'pinned': false,
+      'saved_by': [],
+      'threads': [],
+      'reactions': [],
+      'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
           .format(DateTime.now())
           .toString(),
     });
@@ -398,14 +402,14 @@ class ZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, Users? user,String? orgId}) async {
+      {User? currentUser, Users? user, String? orgId}) async {
     return await _post(
-      dmCreateRoom(orgId!,currentUser!.id),
+      dmCreateRoom(orgId!, currentUser!.id),
       body: {
-        "org_id": "1",
-        "room_user_ids": [currentUser.id, user!.id],
-        "bookmarks": ["0"],
-        "pinned": ["0"]
+        'org_id': '1',
+        'room_user_ids': [currentUser.id, user!.id],
+        'bookmarks': ['0'],
+        'pinned': ['0']
       },
     );
   }
@@ -431,8 +435,8 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<dynamic> fetchDMs({orgId,userId}) async {
-    return await _get(dmFetchDMs(orgId,userId));
+  Future<dynamic> fetchDMs({orgId, userId}) async {
+    return await _get(dmFetchDMs(orgId, userId));
   }
 
   @override
@@ -468,38 +472,42 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<User> fetchUserDetail({required String userId, required token}) async {
-    final uri = loginUri(userId);
-    final response =
-        await _get(uri, headers: {'Authorization': "Bearer{$token}"});
+  Future<User> fetchUserDetail({String? userId}) async {
+    final uri = loginUri(userId!);
+    final response = await _get(uri);
     return User.fromJson(response['data']);
   }
 
   @override
-  Future<Map<String, dynamic>> getUserDetails(
-      {required String userId, required String token}) async {
+  Future<Map<String, dynamic>> getUserDetails({
+    required String userId,
+  }) async {
     final uri = loginUri(userId);
-    final response =
-        await _get(uri, headers: {'Authorization': "Bearer{$token}"});
+    final response = await _get(uri);
     return response;
   }
 
-  Future<void> updateUserDetails(
-      {required String organizationId,
-      required String memberId,
-      UpdateUserParam? parameter,
-      required String token}) async {
+  
+
+  Future<void> updateUserDetails({
+    required String organizationId,
+    required String memberId,
+    UpdateUserParam? params,
+
+  }) async {
     final uri = updateUserProfile(organizationId, memberId);
     final response = await _put(
       uri,
-      body: parameter!.toMap(),
+      body: params!.data,
       headers: {
-        "Authorization": "Bearer ${token}",
+        "Content-Type": "application/json",
+        "accept": "application/json",
       },
     );
-    return response;
+    print(response.statusCode);
+    print(response.body);
+    // response;
   }
-
 
   @override
   Future<Member> patchProfilePicture(
@@ -510,35 +518,9 @@ class ZuriApiService implements Api {
     // final response = await
     throw UnimplementedError();
   }
-}
-
-class UpdateUserParam {
-  final String firstNName;
-  final String lastName;
-  final String displayName;
-  final String phoneNumber;
-  final String pronoun;
-  final String bio;
-  final String timeZone;
-
-  UpdateUserParam(
-      {required this.firstNName,
-      required this.lastName,
-      required this.displayName,
-      required this.phoneNumber,
-      required this.pronoun,
-      required this.bio,
-      required this.timeZone});
-
-  Map<String, dynamic> toMap() {
-    return {
-      "bio": bio,
-      "display_name": displayName,
-      "first_name": firstNName,
-      "last_name": lastName,
-      "phone": phoneNumber,
-      "pronouns": pronoun,
-      "time_zone": timeZone
-    };
+  Future<void> signOut(String token) async{
+    final response = await _post(signOutUri, body: {}, headers: {'Authorization': 'Bearer $token'},);
+    log.i(response);
   }
+
 }
