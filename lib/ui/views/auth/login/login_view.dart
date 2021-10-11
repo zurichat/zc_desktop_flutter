@@ -3,9 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
-//import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -18,16 +17,23 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dar
 import 'package:zc_desktop_flutter/ui/views/auth/login/login_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/todo/Todo_view.dart';
 
-class LoginView extends HookWidget {
+import 'login_view.form.dart';
+
+@FormView(
+  fields: [
+    FormTextField(name: 'email'),
+    FormTextField(name: 'password')
+  ]
+)
+class LoginView extends HookWidget with $LoginView {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
     final _appLocalization = AppLocalizations.of(context)!;
 
     return ViewModelBuilder<LoginViewModel>.reactive(
+      onModelReady: (model) => listenToFormUpdated(model),
       builder: (context, model, child) => Scaffold(
         backgroundColor: Colors.white,
         body: Container(
@@ -101,15 +107,7 @@ class LoginView extends HookWidget {
                                 onTap: () async {
                                   if (!_formKey.currentState!.validate())
                                     return;
-                                  await model.login(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text,
-                                  );
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => TodoView()),
-                                  );
+                                  await model.login(emailController.text, passwordController.text);
                                 },
                               ),
                               verticalSpaceMediumTwo,

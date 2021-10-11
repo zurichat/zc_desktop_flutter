@@ -63,13 +63,16 @@ class TodoContainer extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                verticalSpaceSmall,
-                horizontalSpaceSmall,
-                CreateDateButton(),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // verticalSpaceMedium,
+                  // horizontalSpaceSmall,
+                  CreateDateButton(),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),

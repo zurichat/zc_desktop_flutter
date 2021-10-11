@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
@@ -12,8 +14,8 @@ class ChannelsDetailsViewModel extends BaseViewModel {
 
   bool _onTileHover = false;
   bool get onTileHover => _onTileHover;
-  int _onTileHoveredIndex = 0;
-  int get onTileHoveredIndex => _onTileHoveredIndex;
+  int? _onTileHoveredIndex;
+  int? get onTileHoveredIndex => _onTileHoveredIndex;
 
   void onTileHovered(bool hover, int index) {
     _onTileHover = hover;
@@ -23,8 +25,8 @@ class ChannelsDetailsViewModel extends BaseViewModel {
 
   bool _onFileTileHover = false;
   bool get onFileTileHover => _onFileTileHover;
-  int _onFileTileHoveredIndex = 0;
-  int get onFileTileHoveredIndex => _onFileTileHoveredIndex;
+  int? _onFileTileHoveredIndex;
+  int? get onFileTileHoveredIndex => _onFileTileHoveredIndex;
 
   void onFileTileHovered(bool hover, int index) {
     _onFileTileHover = hover;
@@ -55,6 +57,14 @@ class ChannelsDetailsViewModel extends BaseViewModel {
     _onHoverActionsHovered = hover;
     _hoverAction = action;
     _hoverWidth = width;
+    notifyListeners();
+  }
+
+  bool _scrolling = false;
+  bool get scrolling => _scrolling;
+  void onScroll(bool scrolling) {
+    _scrolling = scrolling;
+    log(scrolling.toString());
     notifyListeners();
   }
 }

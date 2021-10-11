@@ -117,6 +117,7 @@ class ChannelsView extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: SendMessageInputField(
+                      placeHolder: '',
                       sendMessage: (message) {
                         if (message.isNotEmpty) {
                           model.sendMessage(message);
@@ -136,7 +137,6 @@ class ChannelsView extends StatelessWidget {
 Widget messageReplies(ChannelsViewModel model) {
   return InkWell(
     onTap: () {
-      print("Threads opened");
     },
     child: Container(
       child: Row(
@@ -168,7 +168,6 @@ Widget constructRepliesHighLightAvatars({
 }) {
   return InkWell(
     onTap: () {
-      print("Threads opened");
     },
     child: Container(
       child: Row(

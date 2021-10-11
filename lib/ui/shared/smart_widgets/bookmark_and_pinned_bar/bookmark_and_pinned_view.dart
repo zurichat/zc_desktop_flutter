@@ -338,7 +338,6 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                             Dialog(child: AddBookmarkDialog()));
                     model.onPinnedMessage(false);
                     // view.toggleDropdownForAddBookmarkForAddBookmarkForAddBookmarkForAddBookmark(context: context, close: true);
-                    print('AddBookMark Clicked');
                   },
                   child: Container(
                       color:
@@ -962,10 +961,8 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                           userDisplayImageUrl: 'assets/images/profile.png',
                           userDisplayName: 'DanOdin',
                           onPressed: () {
-                            print(index);
                           },
                           onPinnedItemClose: () {
-                            print(index);
                             showDialog(
                                 context: context,
                                 builder: (context) => Dialog(

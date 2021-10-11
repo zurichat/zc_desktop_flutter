@@ -50,7 +50,10 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] password
-  Future<void> updateUserPassword({required String password});
+  Future<void> updateUserPassword({required String password, required String code});
+
+  /// Sign user out and distroy user token and distroy user token
+  Future<void> signOut(String token);
 
   /* ORGANIZATION SERVICE */
 
@@ -233,6 +236,11 @@ abstract class Api {
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
   ///
+  ///
+  Future<dynamic> removeUserFromChannel(
+      {required organizationId, required channelId, required memberId});
+
+  ///removes a user from channel;
   ///
   ///
   Future<dynamic> fetchDMs({var orgId, var userId});

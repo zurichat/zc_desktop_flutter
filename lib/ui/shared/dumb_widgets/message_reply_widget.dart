@@ -16,7 +16,6 @@ class MessageReplyWidget extends StatelessWidget {
       hoverColor: Colors.grey[400],
       onHover: (v) {},
       onTap: () {
-        print("Threads opened");
       },
       child: Container(
         margin: const EdgeInsets.all(5.0),

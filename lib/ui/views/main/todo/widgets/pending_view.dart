@@ -45,16 +45,16 @@ class PendingView extends StatelessWidget {
                     child: Container(
                       height: height < 1000 ? height * 0.6 : height * 0.7,
                       padding: EdgeInsets.only(
-                        right: 20,
+                        right: 30,
                       ),
                       child: GridView.builder(
                         addAutomaticKeepAlives: true,
                         controller: _controller,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            crossAxisSpacing: 40,
-                            childAspectRatio: 1.8,
-                            mainAxisSpacing: 20),
+                            crossAxisSpacing: 60,
+                            childAspectRatio: 1.2,
+                            mainAxisSpacing: 70),
                         itemCount: 6,
                         itemBuilder: (context, index) => TodoContainer(
                           Members: '', TodoName: 'Create a Prototype',

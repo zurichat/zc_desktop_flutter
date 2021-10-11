@@ -1,7 +1,5 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_details/channels_details_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/hover_actions_view.dart';
 

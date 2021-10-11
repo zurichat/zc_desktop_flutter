@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -16,6 +15,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widg
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/channels_details/channels_details_view.dart';
 
 class ChannelDmView extends StatelessWidget {
   const ChannelDmView({
@@ -87,7 +87,7 @@ class ChannelDmView extends StatelessWidget {
                                     width: 40.w,
                                   ),
                                   Text(
-                                    "${model.currentChannel.name}",
+                                    '${model.currentChannel.name}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20.sp,
@@ -104,9 +104,14 @@ class ChannelDmView extends StatelessWidget {
                               ),
                             ),
                       trailing: (channel == true)
-                          ? WorkSpaceMembers(
-                              color: whiteColor,
-                            )
+                          ? InkWell(
+                            onTap: () => showDialog(
+                                  context: context,
+                                  builder: (context) => ChannelsDetailsView()),
+                            child: WorkSpaceMembers(
+                                color: whiteColor,
+                              ),
+                          )
                           : SvgPicture.asset('assets/icons/Shape.svg'),
                     ),
                     Container(
@@ -387,7 +392,6 @@ class ChannelDmView extends StatelessWidget {
 Widget messageReplies(ChannelDmViewModel model) {
   return InkWell(
     onTap: () {
-      final log = getLogger("Threads opened");
     },
     child: Container(
       child: Row(
@@ -419,7 +423,6 @@ Widget constructRepliesHighLightAvatars({
 }) {
   return InkWell(
     onTap: () {
-      print("Threads opened");
     },
     child: Container(
       child: Row(

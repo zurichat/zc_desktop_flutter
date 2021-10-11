@@ -34,11 +34,11 @@ class TodoView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 50,
+                height: 40,
                 width: double.infinity,
                 color: kcPrimaryColor,
                 padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Row(
                   children: [
                     Text(
@@ -98,7 +98,7 @@ class TodoView extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 750),
+                          padding: const EdgeInsets.only(left: 480),
                           child: GestureDetector(
                             onTap: () {},
                             child: ElevatedButton(

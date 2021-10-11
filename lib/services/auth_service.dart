@@ -11,10 +11,10 @@ import 'local_storage_service.dart';
 const localAuthResponseKey = 'localAuthResponse';
 
 class AuthService {
-  final log = getLogger("AuthService");
+  final log = getLogger('AuthService');
   final _zuriApiService = locator<ZuriApiService>();
   final _localStorageService = locator<LocalStorageService>();
-
+  String _resetCode = '';
   Auth? auth;
 
   Future<void> loginUser(
@@ -39,14 +39,16 @@ class AuthService {
   }
 
   Future<void> verifyPasswordResetCode(String resetCode) async {
+    _resetCode = resetCode;
     await _zuriApiService.verifyPasswordResetCode(resetCode: resetCode);
   }
 
   Future<void> updateUserPassword(String password) async {
-    await _zuriApiService.updateUserPassword(password: password);
+    await _zuriApiService.updateUserPassword(password: password, code: _resetCode);
   }
 
-  void logOut() {
+  void logOut(String token) async{
+    _zuriApiService.signOut(token);
     _localStorageService.removeFromDisk(localAuthResponseKey);
   }
 }

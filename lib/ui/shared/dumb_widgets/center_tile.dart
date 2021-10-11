@@ -6,7 +6,7 @@ Container centerTitleCard(BuildContext context) {
     alignment: Alignment.topCenter,
     width: 1136,
     height: 80,
-    child: Card(elevation: 5, child: centerListTile(context, "designers")),
+    child: Card(elevation: 5, child: centerListTile(context, 'designers')),
   );
 }
 
@@ -51,8 +51,7 @@ ListTile centerListTile(BuildContext context, String channelName) {
               height: 38,
               width: 98,
               child: Stack(
-                textDirection: TextDirection.rtl,
-                overflow: Overflow.visible,
+                clipBehavior: Clip.none, textDirection: TextDirection.rtl,
                 children: positioned(context)!,
               ),
             ),

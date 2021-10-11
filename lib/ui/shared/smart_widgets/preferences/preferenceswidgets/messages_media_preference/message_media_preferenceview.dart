@@ -202,7 +202,6 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
               (index) => GestureDetector(
                     onTap: () {
                       model.setEmojiSkin = index;
-                      print(index);
                     },
                     child: Container(
                       height: 36.h,
@@ -313,7 +312,6 @@ Widget nameSection(MessageMediaPreferenceViewModel model) {
         verticalSpaceSmall,
         GestureDetector(
           onTap: () {
-            print('Your profile');
           },
           child: RichText(
               softWrap: true,
