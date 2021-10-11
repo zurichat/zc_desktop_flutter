@@ -24,7 +24,7 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
     return Auth.fromJson(jsonDecode(auth as String));
   }
 
-  final log = getLogger("CreateTodoViewModel");
+  final log = getLogger('CreateTodoViewModel');
   final _navigationService = locator<NavigationService>();
   // final _todosService = locator<TodosService>();
 
@@ -50,7 +50,7 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
   String? _todoNameError;
   String? _todoDescriptionError;
 
-  bool _isBusy = false;
+  // bool _isBusy = false;
   bool _isPrivate = false;
   // bool _isCreateTodoSuccessful = false;
   bool _isCreateTodoNotSuccessful = false;
@@ -94,10 +94,10 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  void _setIsBusy() {
-    _isBusy = !_isBusy;
-    notifyListeners();
-  }
+  // void _setIsBusy() {
+  //   _isBusy = !_isBusy;
+  //   notifyListeners();
+  // }
 
   void setIsSwitched(bool val) {
     _isSwitched = val;
@@ -174,7 +174,6 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
   /// Error should be handled here. It could be displaying a toast of something else
   @override
   void onFutureError(error, Object? key) {
-    print('Handle Error here');
-    super.onFutureError(error, key);
+        super.onFutureError(error, key);
   }
 }

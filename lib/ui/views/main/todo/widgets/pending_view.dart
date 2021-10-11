@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
-import 'package:zc_desktop_flutter/app/app.locator.dart';
-
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
-
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/views/main/people_user_group/people_user_view_model.dart';
 import 'package:zc_desktop_flutter/ui/views/main/todo/todo_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/todo/widgets/TodoListContainer.dart';
 
