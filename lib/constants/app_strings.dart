@@ -48,14 +48,14 @@ const String CreateAccount = 'Create an account';
 const String ChooseWorkspace = 'Choose a workspace';
 const String AddWorkspace =
     'we\'ll add the workspaces you choose to your desktop app';
-const String AppbarText = "# All direct messages";
-const String SearchBarText = "To: @somebody or @somebody@example.com";
-const String DayPlaceholder = "Today";
-const String TitlePlaceholder = "Beckylicious";
+const String AppbarText = '# All direct messages';
+const String SearchBarText = 'To: @somebody or @somebody@example.com';
+const String DayPlaceholder = 'Today';
+const String TitlePlaceholder = 'Beckylicious';
 const String SubtitlePlaceholder =
-    "Rebecca: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ";
-const String TimePlaceholder = "13:02";
-const String ImagePlaceholder = "B";
+    'Rebecca: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ';
+const String TimePlaceholder = '13:02';
+const String ImagePlaceholder = 'B';
 
 const String SavedItems = 'Saved Items';
 const String SearchModalHintText = 'Find in direct messages with rafiu';
@@ -89,4 +89,12 @@ const String EmailErrorText = 'Invalid email address';
 const String BackToLoginText = 'Back To Login';
 const String BackToWorkspaceText = 'Back To Workspace';
 const String EmptyWorkspaceText = 'Oh no 😭😭😭, Your workspace is empty. You can invite people with their email';
+const String ErrorTitle = 'Password Reset failed';
+const String ErrorSubtitle = 'Your password reset failed! Give it another shot!';
+const String SuccessTitle = 'Password Reset successful';
+const String SuccessSubtitle = 'Your password reset was successful! You can now proceed to Login!';
+const String ResetTitle = 'Check your email for code';
+const String ConfirmTitle = 'Next, confirm your email address';
+const String InvalidErrorMessage = 'Invalid Credential. Please Check you details and try again.';
+const String EmailAlreadyInUseError = 'Email address already in use. Use another email or try login.';
 

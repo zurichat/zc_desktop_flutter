@@ -77,7 +77,7 @@ class _ProfileInputFieldState extends State<ProfileInputField> {
           onChanged: widget.onChanged,
           keyboardType: widget.keyboardType,
           autofocus: false,
-          cursorColor: Theme.of(context).accentColor,
+          cursorColor: Theme.of(context).colorScheme.secondary,
           textInputAction: TextInputAction.done,
           maxLines: widget.maxLines ?? 1,
           style: TextStyle(

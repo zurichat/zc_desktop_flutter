@@ -4,14 +4,14 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'reset_password_view.form.dart';
 
-class ResetPasswordViewModel extends BaseViewModel with Validator {
+class ResetPasswordViewModel extends FormViewModel with Validator {
   final _navigator = locator<NavigationService>();
   final _title = 'Reset your password';
   final _subTitle =
       'To reset your password, enter the email address you use to sign in to your workspace';
   String? _errorText;
-  String _email = '';
   String _errorMesage = '';
   bool _isBusy = false;
   final _authService = locator<AuthService>();
@@ -27,13 +27,8 @@ class ResetPasswordViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  setEmail(value) {
-    _email = value;
-    notifyListeners();
-  }
-
   verfiyAndGotoCheckEmail() async {
-    if (!emailValidator(_email)) {
+    if (!emailValidator(emailValue!)) {
       _errorText = 'Invalid Email Address';
       notifyListeners();
       return;
@@ -41,13 +36,16 @@ class ResetPasswordViewModel extends BaseViewModel with Validator {
     _setIsBusy();
 
     try {
-      await _authService.requestPasswordResetCode(_email);
+      await _authService.requestPasswordResetCode(emailValue!);
       _setIsBusy();
       _navigator.navigateTo(Routes.checkEmailView,
-          arguments: {'email': _email, 'isReset': true});
+          arguments: {'email': emailValue!, 'isReset': true});
     } catch (e) {
       _errorMesage = 'Something went wrong please try again';
       _setIsBusy();
     }
   }
+
+  @override
+  void setFormStatus() {}
 }

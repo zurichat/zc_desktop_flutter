@@ -4,6 +4,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 const testLocalKey = 'TESTKEY';
 
@@ -34,9 +36,11 @@ enum darkDramaticTheme {
 enum cleanThemes { aubergine, versatile, aubergine1, aubergine2 }
 
 class ThemeViewModel extends BaseViewModel {
-  final log = getLogger("ThemeViewModel");
+  final log = getLogger('ThemeViewModel');
 
   final _themeService = locator<ThemeService>();
+   final _localStorage = locator<LocalStorageService>();
+  var _themes = Themes();
 
   themeAccross _allWorkSpace = themeAccross.directMessage;
   toggleBtwTheme _switchLightDark = toggleBtwTheme.LightTheme;
@@ -122,16 +126,19 @@ class ThemeViewModel extends BaseViewModel {
 
   void setChecked(bool? newValue) {
     _isChecked = newValue!;
+    _themes = _themes.copyWith(isChecked: _isChecked);
     notifyListeners();
   }
 
   void setChecked2(themeAccross? newValue) {
     _allWorkSpace = newValue!;
+      _themes = _themes.copyWith(allWorkSpace: _allWorkSpace);
     notifyListeners();
   }
 
   void switchBtwLightDark(Object? newValue) {
     _switchLightDark = (newValue) as toggleBtwTheme;
+    _themes = _themes.copyWith(switchLightDark: _switchLightDark);
     switch (_switchLightDark) {
       case toggleBtwTheme.LightTheme:
         setTheme(themes[0]);
@@ -146,6 +153,7 @@ class ThemeViewModel extends BaseViewModel {
 
   void switchCleanTheme(Object? value) {
     _cleanTheme = (value) as cleanThemes;
+    _themes = _themes.copyWith(cleanTheme: _cleanTheme);
     switch (_cleanTheme) {
       case cleanThemes.aubergine:
         setTheme(themes[2]);
@@ -167,6 +175,7 @@ class ThemeViewModel extends BaseViewModel {
 
   void switchDramaticTheme(Object? value) {
     _darkDramaTheme = (value) as darkDramaticTheme;
+     _themes = _themes.copyWith(darkDramaTheme: _darkDramaTheme);
     switch (_darkDramaTheme) {
       case darkDramaticTheme.coast:
         setTheme(themes[6]);
@@ -198,7 +207,7 @@ class ThemeViewModel extends BaseViewModel {
   }
 
   String date() {
-    String datee = now.hour.toString() + ":" + now.minute.toString();
+    String datee = now.hour.toString() + ':' + now.minute.toString();
     return datee;
   }
 
@@ -210,33 +219,47 @@ class ThemeViewModel extends BaseViewModel {
   String _getTitleForIndex(int index) {
     switch (index) {
       case 0:
-        return "Light";
+        return 'Light';
       case 1:
-        return "Dark";
+        return 'Dark';
       case 2:
-        return "aubergine";
+        return 'aubergine';
       case 3:
         return 'versatile';
       case 4:
-        return "aubergine";
+        return 'aubergine';
       case 5:
-        return "aubergine";
+        return 'aubergine';
       case 6:
-        return "coast";
+        return 'coast';
       case 7:
-        return "triadic";
+        return 'triadic';
       case 8:
-        return "complimentary";
+        return 'complimentary';
       case 9:
-        return "automatic";
+        return 'automatic';
       case 10:
-        return "nocture";
+        return 'nocture';
       case 11:
-        return "expensive";
+        return 'expensive';
     }
-    return "No Theme for index";
+    return 'No Theme for index';
   }
 
   void setTheme(ThemeModel themeData) =>
       _themeService.selectThemeAtIndex(themeData.index);
+
+  void saveSettings() =>
+      _localStorage.setThemes(_themes);
+
+  void fetchAndSetSetting() async {
+    _themes = await _localStorage.themes as Themes;
+    _isChecked = _themes.isChecked;
+    _allWorkSpace =  _themes.allWorkSpace;
+    _switchLightDark = _themes.switchLightDark;
+    _darkDramaTheme = _themes.darkDramaTheme;
+    _cleanTheme = _themes.cleanTheme;
+
+    notifyListeners();
+  }
 }

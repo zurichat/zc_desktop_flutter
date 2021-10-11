@@ -15,7 +15,7 @@ const memberIdKey = 'memberIdKey';
 /// Refactor class to store objects with a proper db
 
 class OrganizationService {
-  final log = getLogger("OrganizationService");
+  final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
   final _zuriApiService = locator<ZuriApiService>();
 
@@ -50,8 +50,9 @@ class OrganizationService {
       orId = _localStorageService.getFromDisk(selectedOrganizationKey) as int;
       log.d('here: $orId');
     } catch (e) {
-      log.e('get org etrror: $e');
+      log.e('get org error: $e');
     }
+
     return orId;
   }
 

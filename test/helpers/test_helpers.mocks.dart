@@ -12,7 +12,6 @@ import 'package:get/get.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i8;
 import 'package:zc_desktop_flutter/model/app_models.dart' as _i5;
-import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart' as _i6;
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart' as _i7;
 import 'package:zc_desktop_flutter/services/channels_service.dart' as _i13;
@@ -100,8 +99,9 @@ class MockAuthService extends _i1.Mock implements _i6.AuthService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
-  void logOut() => super.noSuchMethod(Invocation.method(#logOut, []),
-      returnValueForMissingStub: null);
+  void logOut(String? token) =>
+      super.noSuchMethod(Invocation.method(#logOut, [token]),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }
@@ -403,9 +403,10 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
-  _i2.Future<void> updateUserPassword({String? password}) =>
+  _i2.Future<void> updateUserPassword({String? password, String? code}) =>
       (super.noSuchMethod(
-          Invocation.method(#updateUserPassword, [], {#password: password}),
+          Invocation.method(
+              #updateUserPassword, [], {#password: password, #code: code}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
@@ -633,31 +634,26 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
                   Future<Map<String, dynamic>>.value(<String, dynamic>{}))
           as _i2.Future<Map<String, dynamic>>);
   @override
-  _i2.Future<_i5.User> fetchUserDetail({String? userId, dynamic token}) =>
-      (super.noSuchMethod(
-              Invocation.method(
-                  #fetchUserDetail, [], {#userId: userId, #token: token}),
-              returnValue: Future<_i5.User>.value(_FakeUser_4()))
-          as _i2.Future<_i5.User>);
+  _i2.Future<_i5.User> fetchUserDetail({String? userId}) => (super.noSuchMethod(
+          Invocation.method(#fetchUserDetail, [], {#userId: userId}),
+          returnValue: Future<_i5.User>.value(_FakeUser_4()))
+      as _i2.Future<_i5.User>);
   @override
-  _i2.Future<Map<String, dynamic>> getUserDetails(
-          {String? userId, String? token}) =>
-      (super.noSuchMethod(
-              Invocation.method(
-                  #getUserDetails, [], {#userId: userId, #token: token}),
-              returnValue:
-                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
-          as _i2.Future<Map<String, dynamic>>);
+  _i2.Future<Map<String, dynamic>> getUserDetails({String? userId}) => (super
+      .noSuchMethod(Invocation.method(#getUserDetails, [], {#userId: userId}),
+          returnValue:
+              Future<Map<String, dynamic>>.value(<String, dynamic>{})) as _i2
+      .Future<Map<String, dynamic>>);
   @override
   _i2.Future<void> updateUserDetails(
-          {required String organizationId,
-          required String memberId,
-          UpdateUserParam? params}) =>
+          {String? organizationId,
+          String? memberId,
+          _i5.UpdateUserParam? params}) =>
       (super.noSuchMethod(
           Invocation.method(#updateUserDetails, [], {
             #organizationId: organizationId,
             #memberId: memberId,
-            #parameter: params,
+            #params: params
           }),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
@@ -672,6 +668,11 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
               }),
               returnValue: Future<_i5.Member>.value(_FakeMember_3()))
           as _i2.Future<_i5.Member>);
+  @override
+  _i2.Future<void> signOut(String? token) =>
+      (super.noSuchMethod(Invocation.method(#signOut, [token]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
   String toString() => super.toString();
 }
@@ -838,6 +839,43 @@ class MockDMService extends _i1.Mock implements _i14.DMService {
 class MockLocalStorageService extends _i1.Mock
     implements _i15.LocalStorageService {
   @override
+  void setAuthResponse(_i5.AuthResponse? authResponseToSave) => super
+      .noSuchMethod(Invocation.method(#setAuthResponse, [authResponseToSave]),
+          returnValueForMissingStub: null);
+  @override
+  void removeAuthResponse() =>
+      super.noSuchMethod(Invocation.method(#removeAuthResponse, []),
+          returnValueForMissingStub: null);
+  @override
+  void setAccessibility(_i5.Accessibility? accessibilityResponseToSave) =>
+      super.noSuchMethod(
+          Invocation.method(#setAccessibility, [accessibilityResponseToSave]),
+          returnValueForMissingStub: null);
+  @override
+  void setAdvanced(_i5.Advanced? advanced) =>
+      super.noSuchMethod(Invocation.method(#setAdvanced, [advanced]),
+          returnValueForMissingStub: null);
+  @override
+  void setAudioAndVideo(_i5.AudioAndVideo? audioAndVideo) =>
+      super.noSuchMethod(Invocation.method(#setAudioAndVideo, [audioAndVideo]),
+          returnValueForMissingStub: null);
+  @override
+  void setMessagesAndMedia(_i5.MessagesAndMedia? media) =>
+      super.noSuchMethod(Invocation.method(#setMessagesAndMedia, [media]),
+          returnValueForMissingStub: null);
+  @override
+  void setNotification(_i5.Notifications? notification) =>
+      super.noSuchMethod(Invocation.method(#setNotification, [notification]),
+          returnValueForMissingStub: null);
+  @override
+  void setSideBar(_i5.SideBar? sideBar) =>
+      super.noSuchMethod(Invocation.method(#setSideBar, [sideBar]),
+          returnValueForMissingStub: null);
+  @override
+  void setThemes(_i5.Themes? themes) =>
+      super.noSuchMethod(Invocation.method(#setThemes, [themes]),
+          returnValueForMissingStub: null);
+  @override
   _i2.Future<void> saveToDisk<T>(String? key, T? content) =>
       (super.noSuchMethod(Invocation.method(#saveToDisk, [key, content]),
           returnValue: Future<void>.value(),
@@ -867,9 +905,17 @@ class MockOrganizationService extends _i1.Mock
       super.noSuchMethod(Invocation.method(#saveOrganizationId, [orgId]),
           returnValueForMissingStub: null);
   @override
+  void saveMemberId(String? memId) =>
+      super.noSuchMethod(Invocation.method(#saveMemberId, [memId]),
+          returnValueForMissingStub: null);
+  @override
   String getOrganizationId() =>
       (super.noSuchMethod(Invocation.method(#getOrganizationId, []),
           returnValue: '') as String);
+  @override
+  String getMemberId() =>
+      (super.noSuchMethod(Invocation.method(#getMemberId, []), returnValue: '')
+          as String);
   @override
   void changeSelectedOrganization(int? index) => super.noSuchMethod(
       Invocation.method(#changeSelectedOrganization, [index]),
@@ -960,15 +1006,18 @@ class MockUserService extends _i1.Mock implements _i18.UserService {
       (super.noSuchMethod(Invocation.method(#getUserId, []), returnValue: '')
           as String);
   @override
+  _i2.Future<void> updateUser({_i5.UpdateUserParam? params}) =>
+      (super.noSuchMethod(Invocation.method(#updateUser, [], {#params: params}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
+  @override
   _i2.Future<_i5.User> getUser(String? userId) =>
       (super.noSuchMethod(Invocation.method(#getUser, [userId]),
               returnValue: Future<_i5.User>.value(_FakeUser_4()))
           as _i2.Future<_i5.User>);
   @override
-  _i2.Future<void> getUserInfo(
-          String? memberId, dynamic parameter, dynamic token) =>
-      (super.noSuchMethod(
-          Invocation.method(#getUserInfo, [memberId, parameter, token]),
+  _i2.Future<void> postMemberInfo(String? memberId, String? parameter) => (super
+      .noSuchMethod(Invocation.method(#postMemberInfo, [memberId, parameter]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override

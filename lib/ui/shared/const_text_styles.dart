@@ -371,3 +371,11 @@ TextStyle allDmsDayStyle = TextStyle(
     color: Color(0xff242424),
     fontWeight: FontWeight.w400,
     fontFamily: 'Lato');
+
+final leftSideBarPrefTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w600);
+
+final prefHeaderTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w700);
+
+final prefBodyTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600);
+
+final prefSubTitleTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600, color: bodyColor);

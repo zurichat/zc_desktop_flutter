@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -47,6 +48,7 @@ class Routes {
   static const String createWorkspaceStage1 = '/create-workspace-stage1';
   static const String createWorkspaceStage2 = '/create-workspace-stage2';
   static const String createWorkspaceStage3 = '/create-workspace-stage3';
+  static const String savedItemsView = '/saved-items-view';
   static const String organizationView = '/organization-view';
   static const all = <String>{
     startUpView,
@@ -62,6 +64,7 @@ class Routes {
     createWorkspaceStage1,
     createWorkspaceStage2,
     createWorkspaceStage3,
+    savedItemsView,
     organizationView,
   };
 }
@@ -83,6 +86,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.createWorkspaceStage1, page: CreateWorkspaceStage1),
     RouteDef(Routes.createWorkspaceStage2, page: CreateWorkspaceStage2),
     RouteDef(Routes.createWorkspaceStage3, page: CreateWorkspaceStage3),
+    RouteDef(Routes.savedItemsView, page: SavedItemsView),
     RouteDef(
       Routes.organizationView,
       page: OrganizationView,
@@ -129,14 +133,20 @@ class StackedRouter extends RouterBase {
       );
     },
     ResetPasswordView: (data) {
+      var args = data.getArgs<ResetPasswordViewArguments>(
+        orElse: () => ResetPasswordViewArguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const ResetPasswordView(),
+        builder: (context) => ResetPasswordView(key: args.key),
         settings: data,
       );
     },
     ChangePasswordView: (data) {
+      var args = data.getArgs<ChangePasswordViewArguments>(
+        orElse: () => ChangePasswordViewArguments(),
+      );
       return MaterialPageRoute<MaterialRoute<dynamic>>(
-        builder: (context) => const ChangePasswordView(),
+        builder: (context) => ChangePasswordView(key: args.key),
         settings: data,
       );
     },
@@ -170,6 +180,12 @@ class StackedRouter extends RouterBase {
     CreateWorkspaceStage3: (data) {
       return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const CreateWorkspaceStage3(),
+        settings: data,
+      );
+    },
+    SavedItemsView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const SavedItemsView(),
         settings: data,
       );
     },
@@ -288,6 +304,18 @@ class OrganizationViewRouter extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// ResetPasswordView arguments holder class
+class ResetPasswordViewArguments {
+  final Key? key;
+  ResetPasswordViewArguments({this.key});
+}
+
+/// ChangePasswordView arguments holder class
+class ChangePasswordViewArguments {
+  final Key? key;
+  ChangePasswordViewArguments({this.key});
+}
 
 /// CreateWorkspaceView arguments holder class
 class CreateWorkspaceViewArguments {

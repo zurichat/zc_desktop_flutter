@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/views/main/profile/profile_upload_image/profile_upload_viewmodel.dart';
 
+// ignore: must_be_immutable
 class ProfileUploadView extends StatelessWidget {
   ProfileUploadView({
     Key? key,
@@ -54,7 +55,7 @@ class ProfileUploadView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Crop your picture",
+                    'Crop your picture',
                     style: kHeading2TextStyle,
                   ),
                   IconButton(
@@ -110,12 +111,12 @@ class ProfileUploadView extends StatelessWidget {
                   OutlinedButton(
                     onPressed: () {},
                     child: Text(
-                      "Cancel",
+                      'Cancel',
                       style: authBtnStyle,
                     ),
                   ),
                   horizontalSpaceSmall,
-                  AuthButton(label: "Save")
+                  AuthButton(label: 'Save')
                 ],
               ),
             ),
