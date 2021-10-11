@@ -106,7 +106,7 @@ class LoginView extends HookWidget with $LoginView {
                                 onTap: () async {
                                   if (!_formKey.currentState!.validate())
                                     return;
-                                  await model.login();
+                                  await model.login(emailController.text, passwordController.text);
                                 },
                               ),
                               verticalSpaceMediumTwo,

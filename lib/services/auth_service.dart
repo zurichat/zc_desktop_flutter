@@ -47,7 +47,8 @@ class AuthService {
     await _zuriApiService.updateUserPassword(password: password, code: _resetCode);
   }
 
-  void logOut() {
+  void logOut(String token) async{
+    _zuriApiService.signOut(token);
     _localStorageService.removeFromDisk(localAuthResponseKey);
   }
 }
