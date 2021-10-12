@@ -215,16 +215,6 @@ class ZuriApiService implements Api {
     );
   }
 
-  @override
-  Future<void> signOut(String token) async {
-    final response = await _post(
-      signOutUri,
-      body: {},
-      headers: {'Authorization': 'Bearer $token'},
-    );
-    log.i(response);
-  }
-
   /* ORGANIZATION SERVICE */
 
   @override
@@ -277,11 +267,6 @@ class ZuriApiService implements Api {
   Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
     // TODO: implement fetchUserDetails
     throw UnimplementedError();
-  }
-
-  @override
-  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
-    return await _get(dmUserProfile(orgId, memberId));
   }
 
   /* CHANNEL SERVICE */
@@ -415,9 +400,9 @@ class ZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, Users? user,String? orgId}) async {
+      {User? currentUser, Users? user, String? orgId}) async {
     return await _post(
-      dmCreateRoom(orgId!,currentUser!.id),
+      dmCreateRoom(orgId!, currentUser!.id),
       body: {
         'org_id': '1',
         'room_user_ids': [currentUser.id, user!.id],
@@ -448,8 +433,30 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<dynamic> fetchDMs({orgId,userId}) async {
-    return await _get(dmFetchDMs(orgId,userId));
+  Future<dynamic> fetchDMs({orgId, userId}) async {
+    return await _get(dmFetchDMs(orgId, userId));
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
+    return await _get(dmUserProfile(orgId, memberId));
+  }
+
+  @override
+  Future<List<Todo>> fetchTodoList() async {
+    final response = await _get(getAllTodoUri);
+    log.i(response);
+    return List.from(response.map((value) => Todo.fromJson(value)));
+  }
+
+  @override
+  Future<void> createTodo(Todo todo) async {
+    final response = await _post(createTodoUri, body: todo.toJson());
+    log.i(response);
+  }
+  Future<void> signOut(String token) async{
+    final response = await _post(signOutUri, body: {}, headers: {'Authorization': 'Bearer $token'},);
+    log.i(response);
   }
 
 }

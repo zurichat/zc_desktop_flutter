@@ -36,6 +36,7 @@ import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/people_user_group/peopel_user_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/todo/Todo_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
 const useFakeApiService = true;
@@ -66,9 +67,9 @@ const useFakeApiService = true;
         MaterialRoute(page: DmView),
         MaterialRoute(page: AllDmsView),
         MaterialRoute(page: SavedItemsView),
-        MaterialRoute(page: PeopleUserGroupView,)
-      ],
-    ),
+        MaterialRoute(page: PeopleUserGroupView,),
+        MaterialRoute(page: TodoView,),
+    ],) 
   ],
   dependencies: [
     Presolve(

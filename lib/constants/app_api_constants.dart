@@ -4,9 +4,14 @@ const String scheme = 'https';
 const String host = 'api.zuri.chat';
 const String dmHost = 'dm.zuri.chat';
 const String channelHost = 'channels.zuri.chat';
+const String todoHost = 'todo.zuri.chat';
 const int receiveTimeout = 3000;
 const int sendTimeout = 5000;
 Uri baseUri = Uri(scheme: scheme, host: host, path: '/');
+
+// Todo Endpoints
+Uri getAllTodoUri = Uri(scheme: scheme, host: todoHost, path: '/api/v1/all-todo');
+Uri createTodoUri = Uri(scheme: scheme, host: todoHost, path: '/api/v1/create-todo');
 
 // Auth Endpoints
 
@@ -72,8 +77,10 @@ Uri getRemoveChannelMemberUri(
 
 // DM Endpoints
 
-Uri dmCreateRoom(String orgId,String userId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/users/${userId}/room');
+Uri dmCreateRoom(String orgId, String userId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/users/${userId}/room');
 
 Uri dmSendMessage(String roomId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');
@@ -87,8 +94,10 @@ Uri dmFetchRoomMessages(String roomId) =>
 Uri dmMarkMessageAsRead(String messageId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/${messageId}/read/new/');
 
-Uri dmFetchDMs(String orgId,String userId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/org/${orgId}/users/${userId}/rooms');
+Uri dmFetchDMs(String orgId, String userId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/users/${userId}/rooms');
 
 Uri dmUserProfile(String orgId, String memberId) => Uri(
     scheme: scheme,

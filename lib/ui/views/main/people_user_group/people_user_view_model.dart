@@ -16,6 +16,15 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   int _pageIndex = 0;
   int get pageIndex => _pageIndex;
 
+  // This varible is used to know if user has start searching through the list of users
+  bool _isSearchStarted =  false;
+
+  //This function update the value of [_isSearched] and update listeners
+  void _updateIsSearchStarted(bool value) {
+    _isSearchStarted = value;
+    notifyListeners();
+  }
+
   //An error text to be displayed if the email verification failed.
   String? _errorText;
   get errorText => _errorText;
@@ -52,7 +61,7 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   //If _suggestionsList is empty
   //i.e the user did not search for any user yet then the data list should be returned
   List<Users> get suggestionList =>
-      _suggestionsList.isEmpty ? _dataList : _suggestionsList;
+      !_isSearchStarted ? _dataList : _suggestionsList;
 
   // Change the page index based on what user selected.
   // Assign the parameter value to _pageIndex
@@ -64,6 +73,11 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   /// The function perform a search on the _dataList and save the result of the search
   /// to _suggestionsList.
   void buildSuggestion(String query) {
+    if(query.isEmpty) {
+      _updateIsSearchStarted(false);
+    } else {
+      _updateIsSearchStarted(true);
+    }
     _suggestionsList = _dataList
         .where((data) =>
             data.display_name.toLowerCase().contains(query.toLowerCase()))
@@ -79,20 +93,31 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   }
 
   //This Function is used to add user to an organization using the org id and the user email
-  Future<void> addUserToOrg(String email) async {
+  Future<void> peformAddUserToOrg(String email) async {
     try {
       if (!emailValidator(email)) {
         _errorText = EmailErrorText;
         notifyListeners();
         return;
       }
-      await runBusyFuture(_organizationService.addMemberToOrganization(
+      _errorText = null;
+      notifyListeners();
+      await _organizationService.addMemberToOrganization(
           _organizationService.getOrganizationId(),
           email: email,
-          token: _userService.auth.user!.token));
+          token: _userService.auth.user!.token);
+          fetchAndSetOrgMembers();
     } catch (e) {
-      throw Failure(e.toString());
+      if(e.toString() == '400') {
+        throw Failure(UserAdditionErrorMessage);
+      }
+      throw Failure(AuthErrorMessage);
     }
+  }
+
+  ///This function is get called from the view to peform the add user to organization logic
+  Future<void> addUserToOrg(String email) async {
+    await runBusyFuture(peformAddUserToOrg(email));
   }
 
   @override
