@@ -6,11 +6,11 @@ import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
-import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 class FilesService {
   final log = getLogger('FilesService');
-  final _zuriApiService = locator<ZuriApiService>();
+  final _zuriApiService = locator<Api>();
   final _localStorageService = locator<LocalStorageService>();
   final _organizationService = locator<OrganizationService>();
 
