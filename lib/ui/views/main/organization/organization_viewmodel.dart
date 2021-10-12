@@ -87,8 +87,9 @@ class OrganizationViewModel extends BaseViewModel {
 
   Future<void> setupOrganization() async {
     await getOrganizations();
-    await getChannels();
     await getDMs();
+    await getChannels();
+    
   }
 
   Future<void> getOrganizations() async {

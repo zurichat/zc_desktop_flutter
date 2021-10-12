@@ -10,14 +10,17 @@ const int sendTimeout = 5000;
 Uri baseUri = Uri(scheme: scheme, host: host, path: '/');
 
 // Todo Endpoints
-Uri getAllTodoUri = Uri(scheme: scheme, host: todoHost, path: '/api/v1/all-todo');
-Uri createTodoUri = Uri(scheme: scheme, host: todoHost, path: '/api/v1/create-todo');
+Uri getAllTodoUri =
+    Uri(scheme: scheme, host: todoHost, path: '/api/v1/all-todo');
+Uri createTodoUri =
+    Uri(scheme: scheme, host: todoHost, path: '/api/v1/create-todo');
 
 // Auth Endpoints
 
 Uri signInUri = Uri(scheme: scheme, host: host, path: '/auth/login');
 Uri signupUri = Uri(scheme: scheme, host: host, path: '/users');
-Uri confirmEmailUri = Uri(scheme: scheme, host: host, path: '/account/verify-account');
+Uri confirmEmailUri =
+    Uri(scheme: scheme, host: host, path: '/account/verify-account');
 Uri signOutUri = Uri(scheme: scheme, host: host, path: '/auth/logout');
 Uri verifyResetPasswordUri =
     Uri(scheme: scheme, host: host, path: '/account/verify-reset-password');
@@ -25,6 +28,9 @@ Uri requestPasswordResetCodeUri = Uri(
     scheme: scheme, host: host, path: '/account/request-password-reset-code');
 Uri updatePasswordUri(String code) =>
     Uri(scheme: scheme, host: host, path: '/account/update-password/$code');
+
+Uri getUserProfileUri(String userId) =>
+    Uri(scheme: scheme, host: host, path: '/users/$userId}');
 
 // Organization Endpoints
 
@@ -112,5 +118,6 @@ Uri dmUserProfile(String orgId, String memberId) => Uri(
 Uri dmReactToMessage(String orgId, String roomId, String messageId) => Uri(
     scheme: scheme,
     host: dmHost,
-    path: '/api/v1/org/${orgId}/rooms/${roomId}/messages/${messageId}/reactions');
+    path:
+        '/api/v1/org/${orgId}/rooms/${roomId}/messages/${messageId}/reactions');
 //

@@ -194,7 +194,7 @@ class OrganizationWrapper extends StatelessWidget {
                                               model!.openDMsDropDownMenu();
                                             },
                                             showChannelListDisplay: () {
-                                              model!.goToAllDmView();
+                                              model!.goToAllDmView(allDMs);
                                             },
                                             addTap: () {
                                             },

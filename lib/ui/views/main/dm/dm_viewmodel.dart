@@ -40,8 +40,8 @@ class DmViewModel extends BaseViewModel {
     log.i(_user.name);
     notifyListeners();
 
-    //getChannelSocketId();
-    //listenToNewMessages();
+    websocketConnect();
+    listenToNewMessages();
   }
 
   Users get user => _user;
@@ -217,7 +217,8 @@ class DmViewModel extends BaseViewModel {
           ' ' +
           DateFormat('MMMM').format(dateToCheck).toString();
     } else {
-      return DateFormat('EEE ').format(dateToCheck)+DateFormat('MMMM ').format(dateToCheck) +
+      return DateFormat('EEE ').format(dateToCheck) +
+          DateFormat('MMMM ').format(dateToCheck) +
           DateFormat('dd').format(dateToCheck);
     }
   }
@@ -271,14 +272,9 @@ class DmViewModel extends BaseViewModel {
     _showingNewMessageIn = showing;
   }
 
-  void getChannelSocketId() async {
-    String channelSockId = await _dmService.fetchChannelSocketId(_roomId);
-    websocketConnect(channelSockId);
-  }
-
-  void websocketConnect(String socketId) async {
+  void websocketConnect() async {
     await _centrifugeService.connect();
-    await _centrifugeService.subscribe(socketId);
+    await _centrifugeService.subscribe(roomId);
   }
 
   void listenToNewMessages() {

@@ -154,9 +154,12 @@ class OrganizationService {
   /// This is used to get a single user profile
   Future<UserProfile> getUserProfile(
       String organizationId, String memberId) async {
-    /* final response = await _zuriApiService.getUserProfile(orgId: organizationId,memberId: memberId);
+     final response = await _zuriApiService.getUserProfile(orgId: organizationId,memberId: memberId);
     log.i(response);
-    return UserProfile.fromJson(response); */
+    //return UserProfile.fromJson(response);
+
+    /* final response = await _zuriApiService.fetchUserDetails(userId: memberId,token:  auth.user!.token);
+    var user = User.fromJson(response); */
 
     return UserProfile(
         firstName: 'Borris Mejja',

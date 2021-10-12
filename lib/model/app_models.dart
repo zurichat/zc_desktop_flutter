@@ -476,6 +476,8 @@ class AllMembersResponse with _$AllMembersResponse{
 
   factory AllMembersResponse.fromJson(Map<String, dynamic> json) => _$AllMembersResponseFromJson(json);
 }
+
+@freezed
 class Todo with _$Todo {
   factory Todo({
     @JsonKey(name: 'user_id') int? userID,

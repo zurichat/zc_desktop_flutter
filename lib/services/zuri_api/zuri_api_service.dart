@@ -265,9 +265,9 @@ class ZuriApiService implements Api {
   /* USER SERVICE */
 
   @override
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
-    // TODO: implement fetchUserDetails
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> fetchUserDetails({String? userId,String? token}) async {
+    return await _get(getUserProfileUri(userId!),
+    headers: {'Authorization': 'Bearer ${token}'},);
   }
 
   /* CHANNEL SERVICE */
