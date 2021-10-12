@@ -152,12 +152,6 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> fetchRoomMessages({roomId}) {
-    // TODO: implement fetchRoomMessages
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
     // TODO: implement fetchUserDetails
     throw UnimplementedError();
@@ -207,12 +201,6 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> sendMessageToDM({roomId, senderId, message}) {
-    // TODO: implement sendMessageToDM
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> signOut(String token) {
     // TODO: implement signOut
     throw UnimplementedError();
@@ -246,6 +234,24 @@ class FakeZuriApiService implements Api {
   @override
   Future<List<Todo>> fetchTodoList() {
     // TODO: implement fetchTodoList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> fetchRoomMessages({roomId, orgId}) {
+    // TODO: implement fetchRoomMessages
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> reactToMessage({orgId, roomId, messageId, required ReactToMessage reactToMessage}) {
+    // TODO: implement reactToMessage
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendMessageToDM({roomId, senderId, message, orgId}) {
+    // TODO: implement sendMessageToDM
     throw UnimplementedError();
   }
 }
