@@ -5,7 +5,7 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
-import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 const selectedOrganizationKey = 'selectedOrganizationKey';
 const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
@@ -16,7 +16,7 @@ const organizationIdKey = 'organizationIdKey';
 class OrganizationService {
   final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
-  final _zuriApiService = locator<ZuriApiService>();
+  final _zuriApiService = locator<Api>();
 
   /// This gets the currently logged in user respose
   Auth get auth {
