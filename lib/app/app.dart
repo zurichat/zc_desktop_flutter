@@ -13,6 +13,7 @@ import 'package:zc_desktop_flutter/services/startup_service.dart';
 import 'package:zc_desktop_flutter/services/user_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/fake_zuri_api_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
@@ -36,6 +37,8 @@ import 'package:zc_desktop_flutter/ui/views/main/organization/organization_view.
 import 'package:zc_desktop_flutter/ui/views/main/people_user_group/peopel_user_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
+
+const useFakeApiService = true;
 
 @StackedApp(
   routes: [
@@ -80,7 +83,9 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
     LazySingleton(classType: StartupService),
     LazySingleton(classType: CentrifugeService),
     LazySingleton(classType: ConnectivityService),
-    LazySingleton(classType: ZuriApiService, asType: Api),
+    LazySingleton(
+        classType: useFakeApiService ? FakeZuriApiService : ZuriApiService,
+        asType: Api),
     LazySingleton(classType: FilesService),
     LazySingleton(
       classType: ThemeService,
