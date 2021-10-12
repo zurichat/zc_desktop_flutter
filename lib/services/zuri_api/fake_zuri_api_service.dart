@@ -236,4 +236,16 @@ class FakeZuriApiService implements Api {
     // TODO: implement verifyPasswordResetCode
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> createTodo(Todo todo) {
+    // TODO: implement createTodo
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Todo>> fetchTodoList() {
+    // TODO: implement fetchTodoList
+    throw UnimplementedError();
+  }
 }
