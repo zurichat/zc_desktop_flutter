@@ -11,6 +11,7 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_edit/
 import 'package:zc_desktop_flutter/ui/views/main/status_dialog/status_dialog_min/status_dialog_min_view.dart';
 
 
+// ignore: must_be_immutable
 class ProfileDropdownView extends StatelessWidget {
   ProfileDropdownView({Key? key}) : super(key: key);
 
@@ -18,11 +19,9 @@ class ProfileDropdownView extends StatelessWidget {
   late double height, width, xPosition, yPosition;
   late OverlayEntry _floatingDropdown;
 
-  late OverlayEntry _floatingDrop;
 
   get floatingDropDown => floatingDrop;
 
-  bool _isDropped = false;
 
   get floatingDrop => _floatingDropdown;
 

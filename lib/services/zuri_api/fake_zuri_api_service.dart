@@ -1,4 +1,4 @@
-import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
@@ -158,11 +158,11 @@ class FakeZuriApiService implements Api {
     throw UnimplementedError();
   }
 
-  @override
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
-    // TODO: implement fetchUserDetails
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
+  //   // TODO: implement fetchUserDetails
+  //   throw UnimplementedError();
+  // }
 
   @override
   Future<Map<String, dynamic>> getRoomInfo({roomId}) {
@@ -232,15 +232,82 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> createTodo(Todo todo) {
-    // TODO: implement createTodo
-    throw UnimplementedError();
+  Future<void> createTodo(Todo todo, String token) async {
+    await Future.delayed(Duration(seconds: 2));
   }
 
   @override
-  Future<List<Todo>> fetchTodoList() {
-    // TODO: implement fetchTodoList
-    throw UnimplementedError();
+  Future<List<Todo>> fetchTodoList() async {
+    await Future.delayed(Duration(seconds: 2));
+    List<Todo> todoList = [
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+      Todo(
+          userID: '48477b48y7bhn',
+          type: 'text',
+          title: TodoTitle,
+          status: '',
+          description: TodoTitle2),
+    ];
+    return todoList;
   }
 
   @override

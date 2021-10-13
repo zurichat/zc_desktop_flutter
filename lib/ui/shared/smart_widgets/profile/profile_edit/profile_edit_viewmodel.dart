@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
@@ -12,7 +11,6 @@ import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/user_service.dart';
 
 class ProfileEditViewModel extends FormViewModel {
-  final _navigator = locator<NavigationService>();
   final _userService = locator<UserService>();
   final log = getLogger('ProfileEditViewModel');
   final _organizationService = locator<OrganizationService>();
