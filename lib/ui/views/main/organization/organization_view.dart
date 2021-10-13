@@ -247,58 +247,70 @@ class DisplayMenu extends StatelessWidget {
         children: [
           ReusableMenuItem(
             iconPath: 'assets/icons/threads.svg',
-            text: threads,
-            selected: model.selectTab(threads),
-            onTap: () {},
+            text: 'Threads',
+            isSelected: model.selectedMenuIndex == 0,
+            onTap: () {
+              model.updateSelectedMenuIndex(0);
+              
+            },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/alldms.svg',
-            text: allDMs,
-            selected: model.selectTab(allDMs),
+            text: 'All DMs',
+            isSelected: model.selectedMenuIndex == 1,
             onTap: () {
-              model.goToAllDmView(allDMs);
+              model.goToAllDmView();
+              model.updateSelectedMenuIndex(1);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/drafts.svg',
-            text: draft,
-            selected: model.selectTab(draft),
-            onTap: () {},
+            text: 'Draft',
+            isSelected: model.selectedMenuIndex == 2,
+            onTap: () {
+              model.updateSelectedMenuIndex(2);
+            },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/ribbon.svg',
-            text: savedItems,
-            selected: model.selectTab(savedItems),
+            text: 'Saved Items',
+            isSelected: model.selectedMenuIndex == 3,
             onTap: () {
-              model.goToSavedItems(savedItems);
+              model.goToSavedItems();
+              model.updateSelectedMenuIndex(3);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/files.svg',
-            text: files,
-            selected: model.selectTab(files),
-            onTap: () {},
+            isSelected: model.selectedMenuIndex == 4,
+            text: 'Files',
+            onTap: () {
+              model.updateSelectedMenuIndex(4);
+            },
           ),
           ReusableMenuItem(
               iconPath: 'assets/icons/pugroup.svg',
-              text: people,
-              selected: model.selectTab(people),
-              onTap: () {
-                model.goToUserPeopleGroup(people);
-              }),
+              isSelected: model.selectedMenuIndex == 5,
+              text: 'People and User Groups',
+              onTap: (){ 
+                model.goToUserPeopleGroup();
+              model.updateSelectedMenuIndex(5);}),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
-            text: todo,
-            selected: model.selectTab(todo),
+            text: 'Todo',
+            isSelected: model.selectedMenuIndex == 6,
             onTap: () {
-              model.goTodoView(todo);
+              model.goTodoView();
+              model.updateSelectedMenuIndex(6);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
-            text: plugins,
-            selected: model.selectTab(plugins),
-            onTap: () {},
+            text: 'Plugins',
+            isSelected: model.selectedMenuIndex == 7,
+            onTap: () {
+              model.updateSelectedMenuIndex(7);
+            },
           ),
         ],
       ),
@@ -431,15 +443,15 @@ class ReusableDropDown extends StatelessWidget {
 class ReusableMenuItem extends StatelessWidget {
   final String? iconPath;
   final String? text;
-  final bool selected;
   final GestureTapCallback? onTap;
+  final bool isSelected;
 
   const ReusableMenuItem({
     Key? key,
     this.iconPath,
     this.text,
     this.onTap,
-    this.selected = false,
+    this.isSelected = false,
   }) : super(key: key);
 
   @override
@@ -456,16 +468,12 @@ class ReusableMenuItem extends StatelessWidget {
                 child: Container(
                   width: 15.0,
                   height: 15.0,
-                  child: SvgPicture.asset(iconPath!),
+                  child: SvgPicture.asset(iconPath!, color: isSelected ? kcPrimaryColor : headerColor) 
                 ),
               ),
               SizedBox(width: 10),
               Container(
-                child: Text(text!,
-                    style: kLeftSideBarStyle.copyWith(
-                        color: selected
-                            ? Theme.of(context).colorScheme.secondary
-                            : null)),
+                child: Text(text!, style: kLeftSideBarStyle.copyWith(color: isSelected ? kcPrimaryColor : headerColor)),
               ),
             ],
           ),

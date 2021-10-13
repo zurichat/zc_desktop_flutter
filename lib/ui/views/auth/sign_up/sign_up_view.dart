@@ -22,7 +22,8 @@ import 'sign_up_viewmodel.dart';
   fields : [
     FormTextField(name: 'email'),
     FormTextField(name: 'password'),
-    FormTextField(name: 'confirmPassword')
+    FormTextField(name: 'confirmPassword'),
+    FormTextField(name: 'fullName')
   ]
 )
 
@@ -72,6 +73,13 @@ class SignUpView extends HookWidget with $SignUpView {
                                   key: _formKey,
                                   child: Column(
                                     children: [
+                                      ZuriDeskInputField(
+                                        label: 'Full Name',
+                                        controller: fullNameController,
+                                        hintPlaceHolder: FullNameHintText,
+                                        validator: context.validatePassword,
+                                      ),
+                                      verticalSpaceMedium,
                                       ZuriDeskInputField(
                                         label: 'Email',
                                         controller: emailController,
