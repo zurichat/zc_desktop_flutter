@@ -12,11 +12,13 @@ class TodoContainer extends StatelessWidget {
   final String Members;
   final bool isActive;
   final String bio;
+  final VoidCallback? onTap;
   const TodoContainer(
       {Key? key,
       required this.TodoName,
       required this.TodoText1,
       required this.Members,
+      this.onTap,
       this.bio = '',
       this.isActive = false})
       : super(key: key);
@@ -43,15 +45,16 @@ class TodoContainer extends StatelessWidget {
                   ),
                   horizontalSpaceSmall,
                   IconButton(
-                    onPressed: () {},
+                    onPressed: onTap,
                     icon: Icon(
-                      Icons.more_vert_rounded,
-                      color: black,
+                      Icons.delete,
+                      color: red,
                     ),
                   ),
                 ],
               ),
             ),
+           
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
