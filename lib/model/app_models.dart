@@ -455,7 +455,7 @@ class UserProfile with _$UserProfile {
 @freezed
 class Todo with _$Todo {
   factory Todo({
-    @JsonKey(name: 'user_id') int? userID,
+    @JsonKey(name: 'user_id') String? userID,
     @Default('') String type,
     @Default('') String title,
     @Default('') String status,

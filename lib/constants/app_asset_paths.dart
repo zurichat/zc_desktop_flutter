@@ -43,5 +43,9 @@ const String SuccessImage = 'assets/images/success.svg';
 const String LogoUrl = 'assets/images/zc_logo.svg';
 const String XSvg = 'assets/images/x.svg';
 const String MarkSvg = 'assets/images/mark.svg';
-
+const String Call = 'assets/icons/call.svg';
+const String MoreHorizontal = 'assets/icons/more_horizontal.svg';
+const String Video = 'assets/icons/video.svg';
+const String EditProfile = 'assets/icons/edit_profile.svg';
 const String profileImage = 'assets/images/wks_image.png';
+const String profileAvatar = 'assets/images/profile_avatar.png';
