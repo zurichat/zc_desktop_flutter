@@ -13,7 +13,6 @@ import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class CreateChannelViewModel extends BaseViewModel with Validator {
-  //final _navigator = locator<NavigationService>();
 
   //Declare the services that are dependent upon
   final _localStorageService = locator<LocalStorageService>();
@@ -27,7 +26,21 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   final log = getLogger('CreateChannelViewModel');
   final _navigationService = locator<NavigationService>();
   final _channelsService = locator<ChannelsService>();
+  
+  int selectedChannelIndex = 0;
 
+  List<Channel> _channels = [];
+
+  List<Channel> _newChannel = [
+    Channel(
+          id: '1',
+          name: 'team-zuri',
+          private: false,
+          description: 'All about Zuri Main Channel',
+          owner: ''),
+  ];
+  
+  List<Channel> get channels => _channels;
 
   bool _isSwitched = false;
   String _errorMessage = '';
@@ -106,6 +119,14 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     return _auth.user!.email;
   }
 
+  void goToChannelsView({int index = 0}) {
+    selectedChannelIndex = index;
+    notifyListeners();
+    // _channelsService.setChannel(_channels[index]);
+    _channelsService.setChannel(_newChannel[index]);
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
+  }
+
   Future<void> createchannels(
     String name,
     String owner,
@@ -140,7 +161,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     await runBusyFuture(
         performCreateChannel(name, owner, description, private, topic, defaultChannel));
 
-    if (_showError == false) {
+    if (_showError == true) {
       setErrorMessage('An unexpected error occured!');
       _setIsBusy();
       _setIsCreateChannelNotSuccessful();
@@ -150,6 +171,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
       Duration(milliseconds: 1500),
       );
       Navigator.of(context).pop();
+      goToChannelsView();
     // _navigationService.pushNamedAndRemoveUntil(Routes.organizationView);
     }
 

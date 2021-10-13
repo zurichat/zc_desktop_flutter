@@ -22,7 +22,8 @@ import '../services/organization_service.dart';
 import '../services/startup_service.dart';
 import '../services/user_service.dart';
 import '../services/window_title_bar_service.dart';
-import '../services/zuri_api/zuri_api_service.dart';
+import '../services/zuri_api/api.dart';
+import '../services/zuri_api/fake_zuri_api_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -44,7 +45,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => StartupService());
   locator.registerLazySingleton(() => CentrifugeService());
   locator.registerLazySingleton(() => ConnectivityService());
-  locator.registerLazySingleton(() => ZuriApiService());
+  locator.registerLazySingleton<Api>(() => FakeZuriApiService());
   locator.registerLazySingleton(() => FilesService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
   locator.registerLazySingleton(() => WindowTitleBarService());

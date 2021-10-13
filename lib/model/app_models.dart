@@ -336,6 +336,7 @@ class Channel with _$Channel {
     @Default('') String owner,
     @Default('') String description,
     @Default(false) bool private,
+    
   }) = _Channel;
   factory Channel.fromJson(Map<String, dynamic> json) =>
       _$ChannelFromJson(json);

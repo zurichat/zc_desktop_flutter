@@ -34,7 +34,9 @@ class FakeZuriApiService implements Api {
       String? name,
       String? owner,
       String? description,
-      bool? private}) {
+      bool? private,
+      String? topic,
+      bool? defaultChannel}) {
     // TODO: implement createChannelsUsingOrgId
     throw UnimplementedError();
   }
@@ -74,7 +76,7 @@ class FakeZuriApiService implements Api {
       {required String organizationId, required token}) async {
     await Future.delayed(Duration(seconds: 2));
 
-    return [
+    List<Map<String, dynamic>> channelList = [
       Channel(
           id: '1',
           name: 'team-falcons',
@@ -101,7 +103,9 @@ class FakeZuriApiService implements Api {
           owner: ''),
       Channel(
           id: '5', name: 'general', private: false, description: '', owner: ''),
-    ];
+    ].map((e) => e.toJson()).toList();
+
+     return channelList;
   }
 
   @override
