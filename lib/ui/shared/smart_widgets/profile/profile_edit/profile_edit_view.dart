@@ -98,7 +98,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ProfileInputField(
                                           controller: _firstNameController,
                                           label: 'First Name',
-                                          hintPlaceHolder: 'Last Name',
+                                          hintPlaceHolder: 'First Name',
                                           errorText:
                                               'Unfortunately, you can’t leave this blank.',
                                           keyboardType:
