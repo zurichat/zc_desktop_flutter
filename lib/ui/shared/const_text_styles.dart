@@ -298,6 +298,17 @@ TextStyle newToZuriChatTextstyle = TextStyle(
     color: createAccountColor,
     fontWeight: FontWeight.w500,
     fontFamily: 'Lato');
+    TextStyle voiceCallTextstyle = TextStyle(
+    fontSize: 13.sp,
+    color: kcDisplayChannelColor,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Lato');
+
+     TextStyle viewProfileTextstyle = TextStyle(
+    fontSize: 15.sp,
+    color: headerColor,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'Lato');
 
 TextStyle ZuriTextstyle = TextStyle(
     fontSize: 38.71.sp,
