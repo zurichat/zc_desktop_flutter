@@ -43,7 +43,7 @@ Uri getAddUserToOrganizationUri(orgID) =>
 Uri updateUserProfile(orgID, String memberId) => Uri(
     scheme: scheme,
     host: host,
-    path: '/organizations/$orgID/members/$memberId/profile');
+    path: 'organizations/$orgID/members/$memberId/profile');
 
 Uri updateUserProfilePicture(String organizationId, String memberId) => Uri(
     scheme: scheme,

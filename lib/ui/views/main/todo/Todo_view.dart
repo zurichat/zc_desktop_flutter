@@ -13,11 +13,8 @@ import 'package:zc_desktop_flutter/ui/views/main/todo/widgets/trash.dart';
 
 class TodoView extends StatelessWidget {
   TodoView({Key? key}) : super(key: key);
-  final List<Widget> widgetsToShow = [
-    PendingView(),
-    ArchiveView(),
-    TrashView()
-  ];
+  List<Widget> widgetsToShow(model) =>
+      [PendingView(model: model), ArchiveView(), TrashView()];
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -63,7 +60,7 @@ class TodoView extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Row(children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
                           onTap: () => model.setPageIndex(0),
@@ -98,24 +95,24 @@ class TodoView extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 480),
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: ElevatedButton(
-                              onPressed: () =>
-                                  // Respond to button press
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) =>
-                                          CreateTodoDialogView()),
-                              child: Text('Create a new Todo'),
-                              style: ElevatedButton.styleFrom(
-                                primary: KStartupContainerColor,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 20),
-                                textStyle: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.w600),
+                          padding:  EdgeInsets.only(left: 430),
+                          child: ElevatedButton(
+                            onPressed: () =>
+                                // Respond to button press
+                                showDialog(
+                              context: context,
+                              builder: (context) => CreateTodoDialogView(
+                                model,
+                                //createToDo: (String title, String description) {  }, isBusy: true,
                               ),
+                            ),
+                            child: Text(CreateTodo),
+                            style: ElevatedButton.styleFrom(
+                              primary: KStartupContainerColor,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 20),
+                              textStyle: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
@@ -150,11 +147,12 @@ class TodoView extends StatelessWidget {
               ),
               Padding(
                   padding: const EdgeInsets.only(left: 16.0),
-                  child: widgetsToShow[model.pageIndex])
+                  child: widgetsToShow(model)[model.pageIndex])
             ],
           ),
         );
       },
+      onModelReady: (model) => model.fetchAndSetTodos(),
     );
   }
 }

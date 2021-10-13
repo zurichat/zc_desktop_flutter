@@ -36,7 +36,7 @@ class User with _$User {
 @freezed
 class Member with _$Member {
   factory Member({
-    @Default('') String id,
+    @Default('') @JsonKey(name:'_id') String id,
     @Default('') String orgId,
     @JsonKey(name: 'name') @Default('') String fullName,
     @JsonKey(name: 'display_name') @Default('') String displayName,
