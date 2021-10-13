@@ -85,7 +85,7 @@ class OrganizationService {
   /// This is used to add user to an organization_service
   Future<void> invitePeopleToOrganization(
       String organizationId, List<String> email) async {
-    await _zuriApiService.invitePeopleToOrganization(
+    await _apiService.invitePeopleToOrganization(
         organizationId: organizationId, email: email, token: _auth.user!.token);
   }
 

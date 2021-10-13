@@ -9,9 +9,12 @@ class FakeZuriApiService implements Api {
     // TODO: implement addLoggedInUserToOrganization
     throw UnimplementedError();
   }
-  
+
   @override
-  Future<void> invitePeopleToOrganization({required String organizationId, required List<String> email, required token}) {
+  Future<void> invitePeopleToOrganization(
+      {required String organizationId,
+      required List<String> email,
+      required token}) {
     // TODO: implement invitePeopleToOrganization
     throw UnimplementedError();
   }
@@ -185,6 +188,26 @@ class FakeZuriApiService implements Api {
   @override
   Future login({required String email, required String password}) async {
     await Future.delayed(Duration(seconds: 3));
+    return {
+      'code': 200,
+      'data': {
+        'session_id' : 'string',
+        'user': User(
+            id: '79hdhuisksj',
+            firstName: 'John',
+            lastName: 'Doe',
+            displayName: 'Protector',
+            email: email,
+            phone: '',
+            status: 0,
+            timeZone: '',
+            createdAt: '',
+            updatedAt: '',
+            token: 'hkjsliy07oihslkhor7sihlks7')
+        .toJson()
+      },
+      'message': 'string'
+    };
   }
 
   @override
@@ -219,7 +242,11 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> signup({required String password, required String email,required String fName, required String lName}) {
+  Future<void> signup(
+      {required String password,
+      required String email,
+      required String fName,
+      required String lName}) {
     // TODO: implement signup
     throw UnimplementedError();
   }
@@ -356,10 +383,11 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future removeUserFromChannel(
-      {required organizationId,
-      required channelId,
-      required memberId,}) {
+  Future removeUserFromChannel({
+    required organizationId,
+    required channelId,
+    required memberId,
+  }) {
     // TODO: implement removeUserFromChannel
     throw UnimplementedError();
   }
@@ -380,5 +408,4 @@ class FakeZuriApiService implements Api {
     // TODO: implement UpdateUserDetails
     throw UnimplementedError();
   }
-
 }
