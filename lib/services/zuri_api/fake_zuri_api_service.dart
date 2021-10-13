@@ -75,7 +75,7 @@ class FakeZuriApiService implements Api {
       {required String organizationId, required token}) async {
     await Future.delayed(Duration(seconds: 2));
 
-    return [
+    List<Channel> channelsList = [
       Channel(
           id: '1',
           name: 'team-falcons',
@@ -103,10 +103,14 @@ class FakeZuriApiService implements Api {
       Channel(
           id: '5', name: 'general', private: false, description: '', owner: ''),
     ];
+
+    return channelsList;
   }
 
   @override
-  Future fetchDMs({orgId, userId}) {
+  Future fetchDMs({orgId, userId}) async {
+    await Future.delayed(Duration(seconds: 2));
+
     // TODO: implement fetchDMs
     throw UnimplementedError();
   }
@@ -119,9 +123,47 @@ class FakeZuriApiService implements Api {
 
   @override
   Future<List<Users>> fetchMemberListUsingOrgId(
-      {required String organizationId, required token}) {
-    // TODO: implement fetchMemberListUsingOrgId
-    throw UnimplementedError();
+      {required String organizationId, required token}) async {
+    await Future.delayed(Duration(seconds: 2));
+
+    List<Users> userList = [
+      Users(
+        id: '1',
+        profileImage: '',
+        display_name: 'Eternity',
+        name: 'Issac',
+        bio: 'Mentor',
+      ),
+      Users(
+        id: '2',
+        profileImage: '',
+        display_name: 'Kat',
+        name: 'Katherine',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '3',
+        profileImage: '',
+        display_name: 'Bernice',
+        name: 'Bernice',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '4',
+        profileImage: '',
+        display_name: 'Demmss',
+        name: 'Ademola',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '5',
+        profileImage: '',
+        display_name: 'protector',
+        name: 'Damilare',
+        bio: 'Intern',
+      ),
+    ];
+    return userList;
   }
 
   @override
@@ -158,11 +200,11 @@ class FakeZuriApiService implements Api {
     throw UnimplementedError();
   }
 
-  @override
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
-    // TODO: implement fetchUserDetails
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
+  //   // TODO: implement fetchUserDetails
+  //   throw UnimplementedError();
+  // }
 
   @override
   Future<Map<String, dynamic>> getRoomInfo({roomId}) {
@@ -184,13 +226,6 @@ class FakeZuriApiService implements Api {
   @override
   Future<Map<String, dynamic>> markMessageAsRead(messageId) {
     // TODO: implement markMessageAsRead
-    throw UnimplementedError();
-  }
-
-  @override
-  Future removeUserFromChannel(
-      {required organizationId, required channelId, required memberId}) {
-    // TODO: implement removeUserFromChannel
     throw UnimplementedError();
   }
 
@@ -315,5 +350,70 @@ class FakeZuriApiService implements Api {
           description: TodoTitle2),
     ];
     return todoList;
+  }
+
+  @override
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement fetchMemberDetail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<User> fetchUserDetail({required String userId}) {
+    // TODO: implement fetchUserDetail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getMemberDetails(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement getMemberDetails
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserDetails({required String userId}) {
+    // TODO: implement getUserDetails
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Member> patchProfilePicture(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement patchProfilePicture
+    throw UnimplementedError();
+  }
+
+  @override
+  Future removeUserFromChannel(
+      {required organizationId,
+      required channelId,
+      required memberId,}) {
+    // TODO: implement removeUserFromChannel
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> UpdateUserDetails({
+    required organizationId,
+    required memberId,
+    required token,
+    String? bio,
+    String? displayName,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? pronoun,
+    String? timeZone,
+  }) {
+    // TODO: implement UpdateUserDetails
+    throw UnimplementedError();
   }
 }
