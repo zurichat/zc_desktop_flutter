@@ -31,6 +31,7 @@ Uri updatePasswordUri(String code) =>
 
 Uri getUserProfileUri(String userId) =>
     Uri(scheme: scheme, host: host, path: '/users/$userId}');
+Uri loginUri(String userId) => Uri(scheme: scheme, host: host, path: '/users/$userId');
 
 // Organization Endpoints
 
@@ -44,6 +45,24 @@ Uri getOrganisationUri(String organisationId) =>
 
 Uri getAddUserToOrganizationUri(orgID) =>
     Uri(scheme: scheme, host: host, path: '/organizations/$orgID/members');
+
+Uri getInvitePeopleToOrganization(orgID) =>
+    Uri(scheme: scheme, host: host, path: 'organizations/$orgID/send-invite');
+
+Uri updateUserProfile(orgID, String memberId) => Uri(
+    scheme: scheme,
+    host: host,
+    path: 'organizations/$orgID/members/$memberId/profile');
+
+Uri updateUserProfilePicture(String organizationId, String memberId) => Uri(
+    scheme: scheme,
+    host: host,
+    path: '/organizations​/$organizationId}/members​/$memberId​/photo');
+
+Uri getMemberIdUri(String organizationId, String memberId) => Uri(
+    scheme: scheme,
+    host: host,
+    path: '/organizations/$organizationId/members/$memberId');
 
 // Channel Endpoints
 

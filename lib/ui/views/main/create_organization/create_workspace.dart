@@ -49,14 +49,13 @@ class CreateWorkspaceView extends HookWidget {
                           style: kLeftSideBarStyle.copyWith(color: Colors.black),
                         ),
                         verticalSpaceRegular,
-                            if (model.hasError)
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'An error occured',
-                                  style: headline6.copyWith(color: Colors.red),
+                            if (model.hasError) ...[
+                                verticalSpaceMedium,
+                                Text(
+                                  (model.modelError).message,
+                                  style: boldCaptionStyle.copyWith(color: Colors.red),
                                 ),
-                              ),
+                              ],
                         Form(
                           key: _formKey,
                           child: ZuriDeskInputField(

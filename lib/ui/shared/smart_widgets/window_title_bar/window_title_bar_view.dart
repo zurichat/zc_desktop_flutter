@@ -14,6 +14,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_drop/profile_drop_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/search_modal/search_modal_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/window_title_bar/window_title_bar_viewmodel.dart';
+import 'package:zc_desktop_flutter/ui/views/main/status_dialog/status_dialog_min/status_dialog_min_view.dart';
 
 class WindowTitleBar extends StatelessWidget {
   final Widget body;
@@ -123,9 +124,13 @@ class LeftSideHome extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final searchTextFieldController = useTextEditingController();
+    final width = screenWidth(context);
+    final iconSize = 20.0;
     return Row(
       children: [
         SvgPicture.asset(AppSvgPath),
+       if( width > 1440)
+        horizontalSpaceLarge ,
         horizontalSpaceLarge,
         Row(
           children: [
@@ -133,7 +138,7 @@ class LeftSideHome extends HookWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.arrow_back_sharp,
-                size: 20.w,
+                size: iconSize,
                 color: lightIconColor,
               ),
             ),
@@ -142,7 +147,7 @@ class LeftSideHome extends HookWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.arrow_forward_sharp,
-                size: 20.w,
+                size: iconSize,
                 color: lightIconColor,
               ),
             ),
@@ -157,7 +162,7 @@ class LeftSideHome extends HookWidget {
               },
               icon: Icon(
                 Icons.watch_later_outlined,
-                size: 20.w,
+                size: iconSize,
                 color: lightIconColor,
               ),
             ),
@@ -198,26 +203,38 @@ class LeftSideHome extends HookWidget {
           ),
         ),
         Expanded(child: MoveWindow()),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => StatusDialogMinView());
+              },
+              // child: Text(
+              //   // statusTag,
+              //   ''
+              // )
+              child: Icon(
+                Icons.star_rate,
+                size: 20,
+                color: kcStatusIcon,
+              ),
+              ),
+        ),
+        horizontalSpaceVeryTiny,
         Stack(
           clipBehavior: Clip.none,
           children: [
-            Container(
-              height: 28.w,
-              width: 28.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: Colors.grey,
-              ),
-              child: ProfileDropdownView(),
-            ),
+            ProfileDropdownView(),
             Positioned(
-              top: 16,
-              left: 20,
+              top: 23,
+              left: 26,
               child: Container(
-                height: 14.w,
-                width: 14.w,
+                height: 14,
+                width: 14,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(30),
                   color: Colors.green,
                 ),
               ),

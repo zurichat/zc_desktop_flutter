@@ -22,7 +22,7 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   int get pageIndex => _pageIndex;
 
   // This varible is used to know if user has start searching through the list of users
-  bool _isSearchStarted =  false;
+  bool _isSearchStarted = false;
 
   //This function update the value of [_isSearched] and update listeners
   void _updateIsSearchStarted(bool value) {
@@ -48,7 +48,8 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   void fetchAndSetOrgMembers() async {
     setIsloading();
     final response = await _organizationService.fetchMemberListUsingOrgId(
-        _organizationService.getOrganizationId(), _userService.auth.user!.token);
+        _organizationService.getOrganizationId(),
+        _userService.auth.user!.token);
     _dataList = response;
     _log.i(_dataList);
     setIsloading();
@@ -78,7 +79,7 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   /// The function perform a search on the _dataList and save the result of the search
   /// to _suggestionsList.
   void buildSuggestion(String query) {
-    if(query.isEmpty) {
+    if (query.isEmpty) {
       _updateIsSearchStarted(false);
     } else {
       _updateIsSearchStarted(true);
@@ -98,31 +99,77 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   }
 
   //This Function is used to add user to an organization using the org id and the user email
-  Future<void> peformAddUserToOrg(String email) async {
-    try {
-      if (!emailValidator(email)) {
-        _errorText = EmailErrorText;
-        notifyListeners();
-        return;
+  Future<void> peformInviteUsersToOrg(String email) async {
+    List<String> emails = [];
+    final length = email.length;
+    bool allEmailValid = false;
+    if (RegExp(r'[a-zA-Z]').hasMatch(email[length - 1])) {
+      if (email.contains(',')) {
+        emails = email.trim().split(',');
+        emails.forEach((element) {
+          allEmailValid = emailValidator(element.trim());
+        });
+        if (!allEmailValid) {
+          _errorText = '$EmailErrorText';
+          notifyListeners();
+          return;
+        } else {
+          _errorText = null;
+          notifyListeners();
+        }
+      } else {
+        allEmailValid = emailValidator(email.trim());
+        emails.add(email.trim());
+        if (!allEmailValid) {
+          _errorText = EmailErrorText;
+          notifyListeners();
+          return;
+        }else {
+          _errorText = null;
+          notifyListeners();
+        }
       }
-      _errorText = null;
+      try {
+        await _organizationService.invitePeopleToOrganization(
+        _organizationService.getOrganizationId(),
+        emails,
+      );
+      //fetchAndSetOrgMembers();
+      } catch(e) {
+        if(e.toString() == '400') {
+         throw Failure(UserAdditionErrorMessage);
+      }
+       throw Failure(AuthErrorMessage);
+      }
+    } else {
+      _errorText = EmailErrorText;
       notifyListeners();
-      await _organizationService.addMemberToOrganization(
-          _organizationService.getOrganizationId(),
-          email: email,
-          token: _userService.auth.user!.token);
-          fetchAndSetOrgMembers();
-    } catch (e) {
-      if(e.toString() == '400') {
-        throw Failure(UserAdditionErrorMessage);
-      }
-      throw Failure(AuthErrorMessage);
+      return;
     }
+    // try {
+    //   if (!emailValidator(email)) {
+    //     _errorText = EmailErrorText;
+    //     notifyListeners();
+    //     return;
+    //   }
+    //   _errorText = null;
+    //   notifyListeners();
+    //   await _organizationService.addMemberToOrganization(
+    //       _organizationService.getOrganizationId(),
+    //       email: email,
+    //       token: _userService.auth.user!.token);
+    //       fetchAndSetOrgMembers();
+    // } catch (e) {
+    //   if(e.toString() == '400') {
+    //     throw Failure(UserAdditionErrorMessage);
+    //   }
+    //   throw Failure(AuthErrorMessage);
+    // }
   }
 
   ///This function is get called from the view to peform the add user to organization logic
-  Future<void> addUserToOrg(String email) async {
-    await runBusyFuture(peformAddUserToOrg(email));
+  Future<void> inviteUsersToOrg(String email) async {
+    await runBusyFuture(peformInviteUsersToOrg(email));
   }
 
   void goToDmView(int index) {

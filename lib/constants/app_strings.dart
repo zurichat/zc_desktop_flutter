@@ -1,6 +1,7 @@
 const String AppNameText = 'Zuri Chat';
 const String CreateAccountText = 'Create Account';
 const String EmailHintText = 'someone@gmail.com';
+const String FullNameHintText = 'John Doe';
 const String PasswordHintText = 'password';
 const String PolicyText =
     'By signing up, you agree that you have accepted our User Notice and Privacy Policy';
@@ -96,6 +97,8 @@ const String PendingText = 'Pending';
 const String ArchiveText = 'Archive';
 const String TrashText = 'Trash';
 const String CreateTodo = 'Create a new todo';
+const String TodoTitle = 'Create a prototype';
+const String TodoTitle2 = 'Create a Prototype Mobile for \nGet Notification on Slack';
 const String TodoTextOne =
     'Todo helps to keep track of tasks. They are best when created \nspecifically for a task with subsequent sub tasks';
 const String TodoTextTwo = 'Title';
