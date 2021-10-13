@@ -174,11 +174,11 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
   /// Error should be handled here. It could be displaying a toast of something else
   @override
   void onFutureError(error, Object? key) {
-        super.onFutureError(error, key);
+    super.onFutureError(error, key);
   }
 
-  @override
-  void setFormStatus() {
-    // TODO: implement setFormStatus
-  }
+  // @override
+  // void setFormStatus() {
+  //   // TODO: implement setFormStatus
+  // }
 }
