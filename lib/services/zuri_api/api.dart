@@ -263,17 +263,18 @@ abstract class Api {
   });
 
   Future<Map<String, dynamic>> UpdateUserDetails({
-    required organizationId,
-    required memberId,
-    required token,
+    required String organizationId,
+    required String memberId,
+    required String token,
     String? bio,
     String? displayName,
-    String? firstName,
     String? lastName,
+    String? firstName,
     String? phoneNumber,
     String? pronoun,
     String? timeZone,
   });
+  
 
   /// returns [Future]<[Map]<[String],>>, fetch user profile
   ///

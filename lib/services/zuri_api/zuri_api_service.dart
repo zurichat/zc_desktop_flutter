@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element
+
 
 import 'dart:core';
 import 'dart:io';
@@ -117,6 +117,7 @@ class ZuriApiService implements Api {
     }
   }
 
+  // ignore: unused_element
   Future<dynamic> _delete(Uri uri) async {
     log.i('Making request to $uri');
     try {
