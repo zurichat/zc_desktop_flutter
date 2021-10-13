@@ -490,12 +490,12 @@ class FakeZuriApiService implements Api {
     };
   }
 
-  @override
-  Future<Member> patchProfilePicture(
-      {required String organizationId,
-      required String memberId,
-      required String token}) {
+//  @override
+  //Future<Member> patchProfilePicture(
+    //  {required String organizationId,
+      //required String memberId,
+      //required String token}) {
     // TODO: implement patchProfilePicture
-    throw UnimplementedError();
-  }
+    //throw UnimplementedError();
+ // }
 }
