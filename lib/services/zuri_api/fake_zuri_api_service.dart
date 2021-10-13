@@ -11,6 +11,27 @@ class FakeZuriApiService implements Api {
   }
 
   @override
+  Future invitePeopleToOrganization(
+      {required String organizationId,
+      required List<String> email,
+      required token}) async {
+    await Future.delayed(Duration(seconds: 3));
+    return {
+      'status': 200,
+      'message': 'Organization invite operation result',
+      'data': {
+        'InvalidEmails': null,
+        'InviteIDs': [
+          null,
+          null,
+          '6167068467dc381fc3b4db88',
+          '6167068667dc381fc3b4db89'
+        ]
+      }
+    };
+  }
+
+  @override
   Future<void> addUserToChannel(organizationId, channelId,
       {String? id,
       String? role_id,
@@ -221,6 +242,26 @@ class FakeZuriApiService implements Api {
   @override
   Future login({required String email, required String password}) async {
     await Future.delayed(Duration(seconds: 3));
+    return {
+      'code': 200,
+      'data': {
+        'session_id': 'string',
+        'user': User(
+                id: '79hdhuisksj',
+                firstName: 'John',
+                lastName: 'Doe',
+                displayName: 'Protector',
+                email: email,
+                phone: '',
+                status: 0,
+                timeZone: '',
+                createdAt: '',
+                updatedAt: '',
+                token: 'hkjsliy07oihslkhor7sihlks7')
+            .toJson()
+      },
+      'message': 'string'
+    };
   }
 
   @override
@@ -255,7 +296,11 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> signup({required String email, required String password}) {
+  Future<void> signup(
+      {required String password,
+      required String email,
+      required String fName,
+      required String lName}) {
     // TODO: implement signup
     throw UnimplementedError();
   }
@@ -392,10 +437,11 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future removeUserFromChannel(
-      {required organizationId,
-      required channelId,
-      required memberId,}) {
+  Future removeUserFromChannel({
+    required organizationId,
+    required channelId,
+    required memberId,
+  }) {
     // TODO: implement removeUserFromChannel
     throw UnimplementedError();
   }
