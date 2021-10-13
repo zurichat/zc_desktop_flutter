@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:zc_desktop_flutter/model/app_models.dart';
 
 /// Describes the methods and properties required to create an HttpProvider that the application can use
@@ -262,18 +264,26 @@ abstract class Api {
   ///
   ///
 
-  Future<void> UpdateUserDetails({
+  Future<Map<String, dynamic>> UpdateUserPicture({
     required organizationId,
     required memberId,
     required token,
+    File? img,
+  });
+
+  Future<Map<String, dynamic>> UpdateUserDetails({
+    required String organizationId,
+    required String memberId,
+    required String token,
     String? bio,
     String? displayName,
-    String? firstName,
     String? lastName,
+    String? firstName,
     String? phoneNumber,
     String? pronoun,
     String? timeZone,
   });
+  
 
   /// returns [Future]<[Map]<[String],>>, fetch user profile
   ///
@@ -284,10 +294,11 @@ abstract class Api {
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
   ///
   ///
-  Future<dynamic> removeUserFromChannel(
-      {required organizationId,
-      required channelId,
-      required memberId,});
+  Future<dynamic> removeUserFromChannel({
+    required organizationId,
+    required channelId,
+    required memberId,
+  });
 
   ///removes a user from channel;
   ///
@@ -308,5 +319,5 @@ abstract class Api {
   Future<List<Todo>> fetchTodoList();
 
   //Create Todo
-  Future<void> createTodo(Todo todo,  String token);
+  Future<void> createTodo(Todo todo, String token);
 }

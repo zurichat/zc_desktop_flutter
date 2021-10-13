@@ -12,7 +12,8 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_edit/
 import 'profile_edit_view.form.dart';
 
 @FormView(fields: [
-  FormTextField(name: 'fullName'),
+  FormTextField(name: 'firstName'),
+  FormTextField(name: 'lastName'),
   FormTextField(name: 'displayName'),
   FormTextField(name: 'who'),
   FormTextField(name: 'pronoun'),
@@ -29,7 +30,8 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
   @override
   Widget build(BuildContext context) {
     final scrollcontroller = ScrollController();
-    final _fullNameController = TextEditingController();
+    final _firstNameController = TextEditingController();
+    final _lastNameController = TextEditingController();
     final _displayNameController = TextEditingController();
     final _whoController = TextEditingController();
     final _pronounController = TextEditingController();
@@ -94,26 +96,40 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                       children: [
                                         verticalSpaceRegular,
                                         ProfileInputField(
-                                          controller: _fullNameController,
-                                          label: 'Full Name',
-                                          hintPlaceHolder: 'Full Name',
+                                          controller: _firstNameController,
+                                          label: 'First Name',
+                                          hintPlaceHolder: 'First Name',
                                           errorText:
                                               'Unfortunately, you can’t leave this blank.',
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           onSaved: (value) {
-                                            value;
-                                            // String fullName =
-                                            //     _fullNameController.text;
-                                            // var names = fullName.split('');
-                                            // var i = fullName.length;
-                                            // String firstName;
-                                            // String lastName;
-                                            // if (i > 0) {
-                                            //   firstName = names[0];
-                                            //   lastName =
-                                            //       (names.length - 1) as String;
-                                            // }
+                                            value!;
+                                          },
+                                          onChanged: (value) {
+                                            // model.onValidate();
+                                          },
+                                          validator: (value) {
+                                            if (value!.isEmpty ||
+                                                !RegExp(r'^[a-z A-Z] +$')
+                                                    .hasMatch(value)) {
+                                              return 'Enter correct name format';
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        ),
+                                        verticalSpaceRegular,
+                                        ProfileInputField(
+                                          controller: _lastNameController,
+                                          label: 'Last Name',
+                                          hintPlaceHolder: 'Last Name',
+                                          errorText:
+                                              'Unfortunately, you can’t leave this blank.',
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                          onSaved: (value) {
+                                            value!;
                                           },
                                           onChanged: (value) {
                                             // model.onValidate();
@@ -355,13 +371,15 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                         onTap: () async {
                           // model.isSubmit;
                           await model.postDetails(
-                              fullNameController.text,
-                              displayNameController.text,
-                              whoController.text,
-                              pronounController.text,
-                              phoneNumberController.text,
-                              timeZoneController.text,
-                              fullNameController.text);
+                            whoController.text,
+                            displayNameController.text,
+                            firstNameController.text,
+                            lastNameController.text,
+                            phoneNumberController.text,
+                            pronounController.text,
+                            timeZoneController.text,
+                          );
+                          // await model.postPicture(model.choosenImage);
                           Navigator.of(context).pop();
                         },
                         label: 'Save Changes',

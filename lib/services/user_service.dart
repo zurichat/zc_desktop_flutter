@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
@@ -26,6 +27,21 @@ class UserService {
     return _localStorageService.getFromDisk(userIdKey) as String;
   }
 
+  Future<void> updateUserImage({
+    String? token,
+    File? img,
+  }) async {
+    final orgId = _organizationService.getOrganizationId();
+    final memId = _organizationService.getMemberId();
+    final response = await _api.UpdateUserPicture(
+      organizationId: orgId,
+      memberId: memId,
+      token: token,
+      img: img,
+    );
+    log.i(response);
+  }
+
   Future<void> updateUser({
     String? token,
     String? bio,
@@ -50,7 +66,8 @@ class UserService {
       pronoun: pronoun,
       timeZone: timeZone,
     );
-    return response;
+    log.i(response);
+    // return response;
   }
 
   /// This is used to get a single user_service

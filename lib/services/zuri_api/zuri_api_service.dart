@@ -1,6 +1,7 @@
-// ignore_for_file: unused_element
+
 
 import 'dart:core';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
@@ -116,6 +117,7 @@ class ZuriApiService implements Api {
     }
   }
 
+  // ignore: unused_element
   Future<dynamic> _delete(Uri uri) async {
     log.i('Making request to $uri');
     try {
@@ -528,16 +530,6 @@ class ZuriApiService implements Api {
     );
   }
 
-  @override
-  Future<Member> patchProfilePicture(
-      {required String organizationId,
-      required String memberId,
-      required String token}) async {
-    
-    // final response = await
-    throw UnimplementedError();
-  }
-
   Future<List<Todo>> fetchTodoList() async {
     final response = await _get(getAllTodoUri);
     log.i(response);
@@ -545,7 +537,7 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> createTodo(Todo todo,  String token) async {
+  Future<void> createTodo(Todo todo, String token) async {
     final response = await _post(createTodoUri, body: todo.toJson());
     log.i(response);
   }
@@ -559,38 +551,34 @@ class ZuriApiService implements Api {
     log.i(response);
   }
 
-  // @override
-  // Future removeUserFromChannel(
-  //     {required organizationId,
-  //     required channelId,
-  //     required memberId,
-  //     required token}) {
-  //   // TODO: implement removeUserFromChannel
-  //   throw UnimplementedError();
-  // }
-  
   @override
-  Future<void> UpdateUserDetails({
-    required organizationId,
-    required memberId,
-    required token,
-    String? bio,
-    String? displayName,
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    String? pronoun,
-    String? timeZone,
-  }) async{
+  Future removeUserFromChannel(
+      {required organizationId, required channelId, required memberId}) {
+    // TODO: implement removeUserFromChannel
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> UpdateUserDetails(
+      {required organizationId,
+      required memberId,
+      required token,
+      String? bio,
+      String? displayName,
+      String? firstName,
+      String? lastName,
+      String? phoneNumber,
+      String? pronoun,
+      String? timeZone}) async {
     final uri = updateUserProfile(organizationId, memberId);
     Map<String, dynamic> data = {
-      'bio': '',
-      'display_name': '',
-      'first_name': '',
-      'last_name': '',
-      'phone': '',
-      'pronouns': '',
-      'time_zone': ''
+      'bio': bio,
+      'display_name': displayName,
+      'first_name': firstName,
+      'last_name': lastName,
+      'phone': phoneNumber,
+      'pronouns': pronoun,
+      'time_zone': timeZone,
     };
     await _patch(
       uri,
@@ -603,11 +591,40 @@ class ZuriApiService implements Api {
         'Authorization': 'Bearer ${token}',
       },
     );
+    throw UnimplementedError();
   }
 
   @override
-  Future removeUserFromChannel({required organizationId, required channelId, required memberId}) {
-    // TODO: implement removeUserFromChannel
+  Future<Map<String, dynamic>> UpdateUserPicture({
+    required organizationId,
+    required memberId,
+    required token,
+    File? img,
+  }) async {
+    final uri = updateUserProfilePicture(organizationId, memberId);
+    Map<String, dynamic> data = {
+      'image_url': img,
+    };
+    await _patch(
+      uri,
+      body: data,
+      
+      headers: {
+        // ignore: prefer_single_quotes
+        "Content-Type": "application/json",
+
+        'Authorization': 'Bearer ${token}',
+      },
+    );
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Member> patchProfilePicture(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement patchProfilePicture
     throw UnimplementedError();
   }
 }

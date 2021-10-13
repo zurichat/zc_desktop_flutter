@@ -9,7 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-const String FullNameValueKey = 'fullName';
+const String FirstNameValueKey = 'firstName';
+const String LastNameValueKey = 'lastName';
 const String DisplayNameValueKey = 'displayName';
 const String WhoValueKey = 'who';
 const String PronounValueKey = 'pronoun';
@@ -17,13 +18,15 @@ const String PhoneNumberValueKey = 'phoneNumber';
 const String TimeZoneValueKey = 'timeZone';
 
 mixin $ProfileEditView on StatelessWidget {
-  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController whoController = TextEditingController();
   final TextEditingController pronounController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController timeZoneController = TextEditingController();
-  final FocusNode fullNameFocusNode = FocusNode();
+  final FocusNode firstNameFocusNode = FocusNode();
+  final FocusNode lastNameFocusNode = FocusNode();
   final FocusNode displayNameFocusNode = FocusNode();
   final FocusNode whoFocusNode = FocusNode();
   final FocusNode pronounFocusNode = FocusNode();
@@ -33,7 +36,8 @@ mixin $ProfileEditView on StatelessWidget {
   /// Registers a listener on every generated controller that calls [model.setData()]
   /// with the latest textController values
   void listenToFormUpdated(FormViewModel model) {
-    fullNameController.addListener(() => _updateFormData(model));
+    firstNameController.addListener(() => _updateFormData(model));
+    lastNameController.addListener(() => _updateFormData(model));
     displayNameController.addListener(() => _updateFormData(model));
     whoController.addListener(() => _updateFormData(model));
     pronounController.addListener(() => _updateFormData(model));
@@ -45,7 +49,8 @@ mixin $ProfileEditView on StatelessWidget {
   void _updateFormData(FormViewModel model) => model.setData(
         model.formValueMap
           ..addAll({
-            FullNameValueKey: fullNameController.text,
+            FirstNameValueKey: firstNameController.text,
+            LastNameValueKey: lastNameController.text,
             DisplayNameValueKey: displayNameController.text,
             WhoValueKey: whoController.text,
             PronounValueKey: pronounController.text,
@@ -58,8 +63,10 @@ mixin $ProfileEditView on StatelessWidget {
   void disposeForm() {
     // The dispose function for a TextEditingController sets all listeners to null
 
-    fullNameController.dispose();
-    fullNameFocusNode.dispose();
+    firstNameController.dispose();
+    firstNameFocusNode.dispose();
+    lastNameController.dispose();
+    lastNameFocusNode.dispose();
     displayNameController.dispose();
     displayNameFocusNode.dispose();
     whoController.dispose();
@@ -74,14 +81,16 @@ mixin $ProfileEditView on StatelessWidget {
 }
 
 extension ValueProperties on FormViewModel {
-  String? get fullNameValue => this.formValueMap[FullNameValueKey];
+  String? get firstNameValue => this.formValueMap[FirstNameValueKey];
+  String? get lastNameValue => this.formValueMap[LastNameValueKey];
   String? get displayNameValue => this.formValueMap[DisplayNameValueKey];
   String? get whoValue => this.formValueMap[WhoValueKey];
   String? get pronounValue => this.formValueMap[PronounValueKey];
   String? get phoneNumberValue => this.formValueMap[PhoneNumberValueKey];
   String? get timeZoneValue => this.formValueMap[TimeZoneValueKey];
 
-  bool get hasFullName => this.formValueMap.containsKey(FullNameValueKey);
+  bool get hasFirstName => this.formValueMap.containsKey(FirstNameValueKey);
+  bool get hasLastName => this.formValueMap.containsKey(LastNameValueKey);
   bool get hasDisplayName => this.formValueMap.containsKey(DisplayNameValueKey);
   bool get hasWho => this.formValueMap.containsKey(WhoValueKey);
   bool get hasPronoun => this.formValueMap.containsKey(PronounValueKey);
