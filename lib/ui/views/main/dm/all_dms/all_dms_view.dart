@@ -17,16 +17,22 @@ class AllDmsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<AllDmsViewModel>.reactive(
         viewModelBuilder: () => AllDmsViewModel(),
-        builder: (context, model, child) => Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(
+        builder: (context, model, child) => Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left:2.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(left: 5),
+                    height: 40.h,
+                      width: double.infinity,
+                      color: kcPrimaryColor,
+                   child: Text(
               AppbarText,
               style: allDmsAppbarStyle,
             ),
-          ),
-            body: Column(
-              children: [
+                  ),
+                ),
                Container(
                  width: 1172.w,
                  height: 41.h,
@@ -102,6 +108,6 @@ class AllDmsView extends StatelessWidget {
                       }),
                 ),
               ],
-            )));
+            ));
   }
 }
