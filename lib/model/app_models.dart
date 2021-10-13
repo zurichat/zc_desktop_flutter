@@ -397,9 +397,16 @@ class Users with _$Users {
   factory Users({
     @Default('') @JsonKey(name: '_id') String? id,
     @Default('') @JsonKey(name: 'image_url') String profileImage,
-    @Default('Abodhanga') String display_name,
+    @Default('Abodhanga') @JsonKey(name: 'display_name') String displayName,
+    @Default('') @JsonKey(name: 'first_name') String firstName,
+    @Default('') @JsonKey(name: 'user_name') String userName,
+    @Default('') @JsonKey(name: 'last_name') String lastName,
     @Default('Abodhanga') String name,
     @Default('Welcome to zuri') String bio,
+    @Default('') String pronouns,
+    @Default('') String status,
+    @Default('') String phone,
+    @Default('') String email,
   }) = _Users;
 
   factory Users.fromJson(Map<String, dynamic> json) => _$UsersFromJson(json);

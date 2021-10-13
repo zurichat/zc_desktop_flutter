@@ -156,21 +156,10 @@ class OrganizationService {
       String organizationId, String memberId) async {
      final response = await _zuriApiService.getUserProfile(orgId: organizationId,memberId: memberId);
     log.i(response);
-    //return UserProfile.fromJson(response);
+    return UserProfile.fromJson(response);
 
     /* final response = await _zuriApiService.fetchUserDetails(userId: memberId,token:  auth.user!.token);
     var user = User.fromJson(response); */
 
-    return UserProfile(
-        firstName: 'Borris Mejja',
-        lastName: 'Coco Melon',
-        displayName: 'Sweet Coco',
-        imageUrl:
-            'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg',
-        userName: 'Sweet Chocolate',
-        phone: 'phone',
-        pronouns: 'pronouns',
-        bio: 'Welcome to Zuri',
-        status: 'status');
   }
 }

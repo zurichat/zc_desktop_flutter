@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
@@ -48,9 +49,9 @@ class FakeZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, Users? user, String? orgId}) {
-    // TODO: implement createRoom
-    throw UnimplementedError();
+      {User? currentUser, Users? user, String? orgId}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {'room_id': '6165848888888294bffc7a0d'};
   }
 
   @override
@@ -105,9 +106,36 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future fetchDMs({orgId, userId}) {
-    // TODO: implement fetchDMs
-    throw UnimplementedError();
+  Future fetchDMs({orgId, userId}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return [
+      {
+    '_id':'6165848888888294bffc7a0d',
+    'status':0,
+    'private':true,
+    'bookmark':[],
+    'starred':[],
+    'created_at':DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+    'org_id':'6165856e40029bb67e90deec',
+   'pinned':[],
+    'room_user_ids':['616584e9f214f294bffc7a0d','6165856e40029bb67e90deed']
+      },
+      {
+    '_id':'6165899559598294bffc7a0d',
+    'status':0,
+    'private':true,
+    'bookmark':[],
+    'starred':[],
+    'created_at':DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+    'org_id':'6165856e40029bb67e90deec',
+   'pinned':[],
+    'room_user_ids':['616584e9f214f294bffc7a0d','6165856e40029bb67e90deed']
+      },
+    ];
   }
 
   @override
@@ -164,9 +192,20 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) {
-    // TODO: implement getUserProfile
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
+    await Future.delayed(Duration(seconds: 4));
+    return {
+      'first_name': 'Borris Mejja',
+      'last_name': 'Coco Melon',
+      'display_name': 'Sweet Coco',
+      'image_url':
+          'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg',
+      'user_name': 'Sweet Chocolate',
+      'phone': 'phone',
+      'pronouns': 'pronouns',
+      'bio': 'Welcome to Zuri',
+      'status': 'status'
+    };
   }
 
   @override
@@ -238,19 +277,57 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> fetchRoomMessages({roomId, orgId}) {
-    // TODO: implement fetchRoomMessages
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> fetchRoomMessages({roomId, orgId}) async {
+    await Future.delayed(Duration(seconds: 4));
+    return {
+      'count': 3,
+      'next': '0',
+      'previous': '0',
+      'results': [
+        {
+          'id': 'j3nj35590n35n0009nu5',
+          'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+          'media': [],
+          'message': 'Hey Good Morning',
+          'pinned': false,
+          'reactions': [],
+          'read': false,
+          'room_id': '6165848888888294bffc7a0d',
+          'saved_by': [],
+          'sender_id': '616584e9f214f294bffc7a0d',
+          'threads': []
+        },
+        {
+          'id': 'j3nj359885j35n0009nu5',
+          'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+          'media': [],
+          'message': 'We have a meeting today',
+          'pinned': false,
+          'reactions': [],
+          'read': false,
+          'room_id': '6165848888888294bffc7a0d',
+          'saved_by': [],
+          'sender_id': '616584e9f214f294bffc7a0d',
+          'threads': []
+        },
+      ]
+    };
   }
 
   @override
-  Future<Map<String, dynamic>> reactToMessage({orgId, roomId, messageId, required ReactToMessage reactToMessage}) {
+  Future<Map<String, dynamic>> reactToMessage(
+      {orgId, roomId, messageId, required ReactToMessage reactToMessage}) {
     // TODO: implement reactToMessage
     throw UnimplementedError();
   }
 
   @override
-  Future<Map<String, dynamic>> sendMessageToDM({roomId, senderId, message, orgId}) {
+  Future<Map<String, dynamic>> sendMessageToDM(
+      {roomId, senderId, message, orgId}) {
     // TODO: implement sendMessageToDM
     throw UnimplementedError();
   }

@@ -8,11 +8,11 @@ import 'package:zc_desktop_flutter/model/app_models.dart'
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
-import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 class DMService {
   final log = getLogger('DMService');
-  final _zuriApiService = locator<ZuriApiService>();
+  final _zuriApiService = locator<Api>();
   final _organizationService = locator<OrganizationService>();
   Users _user = Users(name: '');
   DM? _dmRoomInfo;
@@ -44,6 +44,40 @@ class DMService {
     _dmRoomInfo = dm;
   }
 
+  Future<void> setNewRoomInfo(Users user) async {
+    User? currentUser=getCurrentLoggedInUser();
+    var roomId=await createRoom(currentUser, user);
+    _dmRoomInfo= DM(
+          otherUserProfile: UserProfile(
+            firstName: user.firstName,
+              lastName: user.lastName,
+              displayName:user.displayName,
+              imageUrl: user.profileImage,
+              userName: user.userName,
+              userId: user.id!,
+              phone: user.phone,
+              pronouns: user.pronouns,
+              bio:user.bio,
+              status: user.bio
+          ),
+          roomInfo: DMRoomsResponse(
+            id: roomId,
+            orgId: _organizationService.getOrganizationId(),
+            roomUserIds: [currentUser!.id,user.id!]
+          ),
+          currentUserProfile: UserProfile(
+              firstName: currentUser.firstName,
+              lastName: currentUser.lastName,
+              displayName: currentUser.displayName,
+              imageUrl: currentUser.displayName,
+              userName: currentUser.displayName,
+              userId: currentUser.id,
+              phone: currentUser.phone,
+              pronouns: currentUser.displayName,
+              bio: currentUser.displayName,
+              status: currentUser.displayName));
+  }
+
   DM? get getExistingRoomInfo => _dmRoomInfo;
 
   Future<SendMessageResponse> sendMessage(
@@ -57,14 +91,15 @@ class DMService {
     return SendMessageResponse.fromJson(response);
   }
 
-  Future<void> createRoom(
+  Future<String> createRoom(
       currentLoggedInUser.User? currentUser, Users? user) async {
     final response = await _zuriApiService.createRoom(
-        currentUser: currentUser,
-        user: user,
+        currentUser: currentUser!,
+        user: user!,
         orgId: _organizationService.getOrganizationId());
     log.i(response);
-     ///CreateRoomResponse.fromJson(response).roomId;
+
+    return CreateRoomResponse.fromJson(response).roomId;
   }
 
   Future<DM?> getRoomInfo(var roomId) async {
@@ -113,8 +148,9 @@ class DMService {
         token: getCurrentLoggedInUser()!.token);
   }
 
-  Future<List<Users>> fetchAllUsersForDm(){
+  Future<List<Users>> fetchAllUsersForDm() {
     return _zuriApiService.fetchMemberListUsingOrgId(
-        organizationId: _organizationService.getOrganizationId(),token: getCurrentLoggedInUser()!.token);
+        organizationId: _organizationService.getOrganizationId(),
+        token: getCurrentLoggedInUser()!.token);
   }
 }
