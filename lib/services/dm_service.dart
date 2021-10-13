@@ -7,11 +7,11 @@ import 'package:zc_desktop_flutter/model/app_models.dart'
     as currentLoggedInUser;
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
-import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 class DMService {
   final log = getLogger('DMService');
-  final _zuriApiService = locator<ZuriApiService>();
+  final _zuriApiService = locator<Api>();
   Users _user = Users(name: '');
   currentLoggedInUser.User? _currentLoggedInUser;
   final _localStorageService = locator<LocalStorageService>();
@@ -48,8 +48,8 @@ class DMService {
   Future<String?> createRoom(
       currentLoggedInUser.User? currentUser, Users? user) async {
     final response = await _zuriApiService.createRoom(
-        currentUser: currentUser,
-        user: user,
+        currentUser: currentUser!,
+        user: user!,
         orgId: getCurrentLoggedInUser()!.id);
     log.i(response);
     return CreateRoomResponse.fromJson(response).roomId;
