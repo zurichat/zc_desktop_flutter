@@ -176,4 +176,9 @@ class CreateTodoDialogModel extends BaseViewModel with Validator {
   void onFutureError(error, Object? key) {
         super.onFutureError(error, key);
   }
+
+  @override
+  void setFormStatus() {
+    // TODO: implement setFormStatus
+  }
 }
