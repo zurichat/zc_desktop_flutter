@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 const selectedOrganizationKey = 'selectedOrganizationKey';
 const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
 const organizationIdKey = 'organizationIdKey';
+const memberIdKey = 'memberIdKey';
 
 /// Refactor class to store objects with a proper db
 
@@ -17,6 +18,8 @@ class OrganizationService {
   final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
   final _zuriApiService = locator<Api>();
+  Users _user = Users(name: '');
+  User? _currentLoggedInUser;
 
   /// This gets the currently logged in user respose
   Auth get _auth {
@@ -29,8 +32,17 @@ class OrganizationService {
     _localStorageService.saveToDisk(organizationIdKey, orgId);
   }
 
+  void saveMemberId(String memId) {
+    log.i('saved membId ${memId}');
+    _localStorageService.saveToDisk(memberIdKey, memId);
+  }
+
   String getOrganizationId() {
     return _localStorageService.getFromDisk(organizationIdKey) as String;
+  }
+
+  String getMemberId() {
+    return _localStorageService.getFromDisk(memberIdKey) as String;
   }
 
   /// This gets the selected organization_service from the sidebar

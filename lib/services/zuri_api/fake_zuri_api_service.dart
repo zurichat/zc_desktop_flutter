@@ -1,3 +1,4 @@
+import 'package:zc_desktop_flutter/constants/app_api_constants.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
@@ -187,13 +188,6 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future removeUserFromChannel(
-      {required organizationId, required channelId, required memberId}) {
-    // TODO: implement removeUserFromChannel
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> requestPasswordResetCode({required String email}) {
     // TODO: implement requestPasswordResetCode
     throw UnimplementedError();
@@ -246,6 +240,72 @@ class FakeZuriApiService implements Api {
   @override
   Future<List<Todo>> fetchTodoList() {
     // TODO: implement fetchTodoList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement fetchMemberDetail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<User> fetchUserDetail({required String userId}) {
+    // TODO: implement fetchUserDetail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getMemberDetails(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement getMemberDetails
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserDetails({required String userId}) {
+    // TODO: implement getUserDetails
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Member> patchProfilePicture(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement patchProfilePicture
+    throw UnimplementedError();
+  }
+
+  @override
+  Future removeUserFromChannel(
+      {required organizationId,
+      required channelId,
+      required memberId,
+      required token}) {
+    // TODO: implement removeUserFromChannel
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> UpdateUserDetails({
+    required organizationId,
+    required memberId,
+    required token,
+    String? bio,
+    String? displayName,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? pronoun,
+    String? timeZone,
+  }) {
+    // TODO: implement UpdateUserDetails
     throw UnimplementedError();
   }
 }

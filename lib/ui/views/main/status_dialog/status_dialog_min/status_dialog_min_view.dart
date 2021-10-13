@@ -6,6 +6,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/window_title_bar/window_title_bar_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/status_dialog/status_dialog_min/status_dialog_min_viewmodel.dart';
 
 class StatusDialogMinView extends StatelessWidget {
@@ -16,11 +17,13 @@ class StatusDialogMinView extends StatelessWidget {
     return ViewModelBuilder<StatusDialogMinViewModel>.reactive(
         viewModelBuilder: () => StatusDialogMinViewModel(),
         builder: (context, model, child) => Dialog(
-              child: dialogContainer(model),
+              child: dialogContainer(context, model),
             ));
   }
 
-  dialogContainer(StatusDialogMinViewModel model) {
+  dialogContainer(BuildContext context, StatusDialogMinViewModel model) {
+    final statusController = TextEditingController();
+
     return Container(
       width: 547.w,
       height: 268.h,
@@ -33,17 +36,24 @@ class StatusDialogMinView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ZcdeskText.headingThree(model.setAStatus),
-                IconButton(
-                    onPressed: model.popDialog,
-                    icon: Icon(
-                      Icons.close,
-                      size: 28.sp,
-                    ))
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Icon(
+                    Icons.close,
+                    size: 28.sp,
+                  ),
+                )
               ],
             ),
             Container(
               height: 61.h,
               child: TextField(
+                onChanged: (value) {
+                  model.setStatusTag(value);
+                },
+                controller: statusController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(),
                   hintText: model.hintText,
@@ -75,7 +85,11 @@ class StatusDialogMinView extends StatelessWidget {
           //child: Padding(
           //padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                model.setStatusTag;
+                Navigator.pop(context,);
+                // Navigator.pop(context, model.statusTag);
+              },
               style: ElevatedButton.styleFrom(
                   fixedSize: Size(117.w, 48.h),
                   textStyle: clearStatusTextStyle,
