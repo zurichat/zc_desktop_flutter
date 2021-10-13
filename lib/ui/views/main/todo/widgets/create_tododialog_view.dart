@@ -10,11 +10,13 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_create_channel_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/views/main/todo/todo_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/todo/widgets/create_tododialog_viewmodel.dart';
 
 class CreateTodoDialogView extends HookWidget {
   final GlobalKey<FormState> _formKey = GlobalKey();
-
+  final TodoViewModel todoModel;
+  CreateTodoDialogView(this.todoModel);
   @override
   Widget build(BuildContext context) {
     final nameController = useTextEditingController();
@@ -80,9 +82,9 @@ class CreateTodoDialogView extends HookWidget {
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
                       CreateChannelInputField(
-                        onChanged: (value) {
-                          model.settodoName(value);
-                        },
+                        // onChanged: (value) {
+                        //   model.settodoName(value);
+                        // },
                         borderColor: model.todoName == ''
                             ? lightIconColor
                             : kcPrimaryColor,
@@ -110,9 +112,9 @@ class CreateTodoDialogView extends HookWidget {
                         ],
                       ),
                       CreateChannelInputField(
-                        onChanged: (value) {
-                          model.settodoDescription(value);
-                        },
+                        // onChanged: (value) {
+                        //   model.settodoDescription(value);
+                        // },
                         borderColor: model.todoDescription == ''
                             ? lightIconColor
                             : kcPrimaryColor,
@@ -208,21 +210,7 @@ class CreateTodoDialogView extends HookWidget {
                     ),
                   ],
                 ),
-                // verticalSpaceSmall,
-                // ZcdeskText.textCreateChannel(
-                //   TodoTextSeven,
-                // ),
-                
-                // ZcdeskText.textCreateChannel(
-                //   TodoTextEight,
-                // ),
-                // Center(
-                //   child: Text(
-                //     DateFormat("yyyy-MM-dd").format(
-                //       DateTime.now(),
-                //     ),
-                //   ),
-                // ),
+
                 verticalSpaceSmall,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -240,10 +228,11 @@ class CreateTodoDialogView extends HookWidget {
                                   : kcPrimaryColor,
                             )),
                         onPressed: () async {
-                          // await model.validateAndCreateChannel();
-
                           if (!_formKey.currentState!.validate()) return;
-
+                          await model.runBusyFuture(todoModel.createTodo(
+                              title: nameController.text,
+                              description: descriptionController.text));
+                          Navigator.of(context).pop();
                           // await model.createtodos(
                           //   nameController.text,
                           //   model.userEmail(),

@@ -95,6 +95,8 @@ const String PendingText = 'Pending';
 const String ArchiveText = 'Archive';
 const String TrashText = 'Trash';
 const String CreateTodo = 'Create a new todo';
+const String TodoTitle = 'Create a prototype';
+const String TodoTitle2 = 'Create a Prototype Mobile for \nGet Notification on Slack';
 const String TodoTextOne =
     'Todo helps to keep track of tasks. They are best when created \nspecifically for a task with subsequent sub tasks';
 const String TodoTextTwo = 'Title';
