@@ -28,10 +28,10 @@ _client!.disconnectStream.listen((event) {
   void disconnect() async {
     _client!.disconnect();
   }
-
+/* 
   void _showError(dynamic _error) {
     log.e(_error);
-  }
+  } */
 
   void _showLog(dynamic _message) {
     log.i(_message);

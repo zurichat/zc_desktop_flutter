@@ -128,7 +128,7 @@ class DMService {
   Future<void> markMessageAsRead(var messageId) async {
     final response = await _zuriApiService.markMessageAsRead(messageId);
     log.i(response);
-    var res = MarkMessageAsReadResponse.fromJson(response).read;
+    //var res = MarkMessageAsReadResponse.fromJson(response).read;
   }
 
   Future<void> reactToMessage(

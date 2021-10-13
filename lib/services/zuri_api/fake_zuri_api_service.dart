@@ -285,12 +285,12 @@ class FakeZuriApiService implements Api {
       'previous': '0',
       'results': [
         {
-          'id': 'j3nj35590n35n0009nu5',
+          'id': 'j3nj359885j35n0009nu5',
           'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
               .format(DateTime.now())
               .toString(),
           'media': [],
-          'message': 'Hey Good Morning',
+          'message': 'We have a meeting today',
           'pinned': false,
           'reactions': [],
           'read': false,
@@ -300,12 +300,12 @@ class FakeZuriApiService implements Api {
           'threads': []
         },
         {
-          'id': 'j3nj359885j35n0009nu5',
+          'id': 'j3nj35590n35n0009nu5',
           'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
               .format(DateTime.now())
               .toString(),
           'media': [],
-          'message': 'We have a meeting today',
+          'message': 'Hey Good Morning',
           'pinned': false,
           'reactions': [],
           'read': false,

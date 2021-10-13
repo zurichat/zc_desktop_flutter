@@ -396,7 +396,7 @@ class ChannelMessage with _$ChannelMessage {
 class Users with _$Users {
   factory Users({
     @Default('') @JsonKey(name: '_id') String? id,
-    @Default('') @JsonKey(name: 'image_url') String profileImage,
+    @Default('https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg') @JsonKey(name: 'image_url') String profileImage,
     @Default('Abodhanga') @JsonKey(name: 'display_name') String displayName,
     @Default('') @JsonKey(name: 'first_name') String firstName,
     @Default('') @JsonKey(name: 'user_name') String userName,
@@ -448,7 +448,7 @@ class UserProfile with _$UserProfile {
     @JsonKey(name: 'first_name') @Default('') String firstName,
     @JsonKey(name: 'last_name') @Default('') String lastName,
     @JsonKey(name: 'display_name') @Default('') String displayName,
-    @JsonKey(name: 'image_url') @Default('') String imageUrl,
+    @JsonKey(name: 'image_url') @Default('https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg') String imageUrl,
     @JsonKey(name: 'user_name') @Default('') String userName,
     @Default('') @JsonKey(name:'_id') String userId,
     @Default('') String phone,

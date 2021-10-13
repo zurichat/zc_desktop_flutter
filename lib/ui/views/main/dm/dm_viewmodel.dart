@@ -185,7 +185,7 @@ class DmViewModel extends BaseViewModel {
   }
 
   void newReactionToMessage(int messageIndex) {
-    var res = _dmService.reactToMessage(
+     _dmService.reactToMessage(
         roomId,
         _messages.elementAt(messageIndex).id,
         ReactToMessage(
