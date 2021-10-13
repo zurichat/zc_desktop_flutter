@@ -32,6 +32,26 @@ class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
+
+@freezed
+class Member with _$Member {
+  factory Member({
+    @Default('') @JsonKey(name:'_id') String id,
+    @Default('') String orgId,
+    @JsonKey(name: 'name') @Default('') String fullName,
+    @JsonKey(name: 'display_name') @Default('') String displayName,
+    @Default('') String phone,
+    @Default('') String status,
+    @Default('')  String pronouns,
+    @JsonKey(name: 'time_zone') @Default('') String timeZone,
+    @JsonKey(name: 'created_at') @Default('') String createdAt,
+    @JsonKey(name: 'updated_at') @Default('') String updatedAt,
+  }) = _Member;
+
+  factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
+}
+
+
 @freezed
 class AuthResponse with _$AuthResponse {
   factory AuthResponse({
@@ -454,7 +474,7 @@ class UserProfile with _$UserProfile {
 @freezed
 class Todo with _$Todo {
   factory Todo({
-    @JsonKey(name: 'user_id') int? userID,
+    @JsonKey(name: 'user_id') String? userID,
     @Default('') String type,
     @Default('') String title,
     @Default('') String status,

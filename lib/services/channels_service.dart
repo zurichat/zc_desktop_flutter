@@ -120,7 +120,7 @@ class ChannelsService with ReactiveServiceMixin {
     await _zuriApiService.removeUserFromChannel(
         organizationId: org_id,
         channelId: channel_id,
-        memberId: member_id);
+        memberId: member_id,);
   }
 
   Future<dynamic> sendMessage(
