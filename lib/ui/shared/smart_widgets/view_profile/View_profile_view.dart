@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_edit/profile_edit_view.dart';
@@ -62,33 +63,33 @@ class ViewProfileView extends StatelessWidget {
                                 children: [
                                   CallIconWidget(
                                     assetPath: Call,
-                                    text: 'Voice Call',
+                                    text: voiceCall,
                                   ),
                                   CallIconWidget(
                                     assetPath: Video,
-                                    text: 'Video Call',
+                                    text: videoCall,
                                   ),
                                   CallIconWidget(
                                     assetPath: MoreHorizontal,
-                                    text: 'More',
+                                    text: textMore,
                                   ),
                                 ],
                               ),
                             ),
                             displayNameWidget(
-                              labelText: 'Display Name',
+                              labelText: displayName,
                               text: model.user.displayName == ''
                                   ? 'My Name'
                                   : model.user.displayName,
                             ),
                             displayNameWidget(
-                              labelText: 'Email',
+                              labelText: displayemail,
                               text: model.user.email == ''
                                   ? 'myName@gmail.com'
                                   : model.user.email,
                             ),
                             displayNameWidget(
-                              labelText: 'Phone Number',
+                              labelText: phoneNumber,
                               text: model.user.phone == ''
                                   ? '+234 666 123 9991'
                                   : model.user.phone,
@@ -104,7 +105,7 @@ class ViewProfileView extends StatelessWidget {
                                   },
                                   icon: SvgPicture.asset(EditProfile),
                                   label: Text(
-                                    'Edit Profile',
+                                    editProfile,
                                     style: viewProfileTextstyle,
                                   )),
                             )
