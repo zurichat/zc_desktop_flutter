@@ -18,7 +18,7 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] email and [String] password
-  Future<void> signup({required String email, required String password});
+  Future<void> signup({required String password, required String email, required String fName, required String lName});
 
   /// returns [Future]<[void]>, confirm user email.
   ///
@@ -89,6 +89,15 @@ abstract class Api {
   /// function parameters; [String] organizationId, [String] email, token
   Future<void> addLoggedInUserToOrganization(
       {required String organizationId, required String email, required token});
+  
+  /// returns [Future]<[void]>, invite people to organization.
+  ///
+  /// post request;
+  /// * body: {List<String> emails, headers: logged in user token}.
+  ///
+  /// function parameters; [String] organizationId, [String] email, token
+  Future<void> invitePeopleToOrganization(
+      {required String organizationId, required List<String> email, required token});
 
   /// returns [Future]<[Map]<[String]>>, dynamic>>, create an organization using email.
   ///

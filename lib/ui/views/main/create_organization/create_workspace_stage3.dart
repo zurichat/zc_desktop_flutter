@@ -13,6 +13,7 @@ class CreateWorkspaceStage3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = (MediaQuery.of(context).size.height - 40);
     return ViewModelBuilder<CreateWorkspaceViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: Column(
@@ -22,7 +23,7 @@ class CreateWorkspaceStage3 extends StatelessWidget {
             children: [
               Container(
                   color: Colors.white,
-                  height: 890.h,
+                  height: height,
                   width: 269.w,
                   child: Column(
                     children: [
@@ -40,7 +41,7 @@ class CreateWorkspaceStage3 extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: Container(
-                  height: 890.h,
+                  height: height,
                   width: 731.w,
                   color: Colors.grey[200],
                   // margin: EdgeInsets.symmetric(horizontal: 72.w),
@@ -53,8 +54,8 @@ class CreateWorkspaceStage3 extends StatelessWidget {
                         //     child: buildAppBar(context,
                         //         isSignIn: true, text: 'Forget Password | Zuri')),
                         verticalSpaceLarge,
-                        verticalSpaceLarge,
-                        verticalSpaceMedium,
+                        // verticalSpaceLarge,
+                        // verticalSpaceMedium,
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,

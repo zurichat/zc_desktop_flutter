@@ -123,9 +123,13 @@ class LeftSideHome extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final searchTextFieldController = useTextEditingController();
+    final width = screenWidth(context);
+    final iconSize = 20.0;
     return Row(
       children: [
         SvgPicture.asset(AppSvgPath),
+       if( width > 1440)
+        horizontalSpaceLarge ,
         horizontalSpaceLarge,
         Row(
           children: [
@@ -133,7 +137,7 @@ class LeftSideHome extends HookWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.arrow_back_sharp,
-                size: 20.w,
+                size: iconSize,
                 color: lightIconColor,
               ),
             ),
@@ -142,7 +146,7 @@ class LeftSideHome extends HookWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.arrow_forward_sharp,
-                size: 20.w,
+                size: iconSize,
                 color: lightIconColor,
               ),
             ),
@@ -157,7 +161,7 @@ class LeftSideHome extends HookWidget {
               },
               icon: Icon(
                 Icons.watch_later_outlined,
-                size: 20.w,
+                size: iconSize,
                 color: lightIconColor,
               ),
             ),
@@ -202,10 +206,10 @@ class LeftSideHome extends HookWidget {
           clipBehavior: Clip.none,
           children: [
             Container(
-              height: 28.w,
-              width: 28.w,
+              height: 28,
+              width: 28,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(6),
                 color: Colors.grey,
               ),
               child: ProfileDropdownView(),
@@ -214,8 +218,8 @@ class LeftSideHome extends HookWidget {
               top: 16,
               left: 20,
               child: Container(
-                height: 14.w,
-                width: 14.w,
+                height: 14,
+                width: 14,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: Colors.green,

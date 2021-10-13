@@ -8,6 +8,12 @@ class FakeZuriApiService implements Api {
     // TODO: implement addLoggedInUserToOrganization
     throw UnimplementedError();
   }
+  
+  @override
+  Future<void> invitePeopleToOrganization({required String organizationId, required List<String> email, required token}) {
+    // TODO: implement invitePeopleToOrganization
+    throw UnimplementedError();
+  }
 
   @override
   Future<void> addUserToChannel(organizationId, channelId,
@@ -219,7 +225,7 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> signup({required String email, required String password}) {
+  Future<void> signup({required String password, required String email,required String fName, required String lName}) {
     // TODO: implement signup
     throw UnimplementedError();
   }
@@ -248,4 +254,5 @@ class FakeZuriApiService implements Api {
     // TODO: implement fetchTodoList
     throw UnimplementedError();
   }
+
 }

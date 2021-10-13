@@ -186,18 +186,21 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> signup({required String email, required String password}) async {
+  Future<void> signup({required String password, required String email, required String fName, required String lName}) async {
     await _post(
       signupUri,
       body: {
         'email': email,
         'password': password,
+        'last_name': lName,
+        'first_name': fName
       },
     );
   }
 
   @override
-  Future<void> updateUserPassword({required String password, required String code}) async {
+  Future<void> updateUserPassword(
+      {required String password, required String code}) async {
     await _post(
       updatePasswordUri(code),
       body: {
@@ -225,6 +228,18 @@ class ZuriApiService implements Api {
     await _post(
       getAddUserToOrganizationUri(organizationId),
       body: {'user_email': email},
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
+  }
+
+  @override
+  Future<void> invitePeopleToOrganization(
+      {required String organizationId,
+      required List<String> email,
+      required token}) async {
+    await _post(
+      getInvitePeopleToOrganization(organizationId),
+      body: {'emails': email},
       headers: {'Authorization': 'Bearer ${token}'},
     );
   }
@@ -454,9 +469,13 @@ class ZuriApiService implements Api {
     final response = await _post(createTodoUri, body: todo.toJson());
     log.i(response);
   }
-  Future<void> signOut(String token) async{
-    final response = await _post(signOutUri, body: {}, headers: {'Authorization': 'Bearer $token'},);
+
+  Future<void> signOut(String token) async {
+    final response = await _post(
+      signOutUri,
+      body: {},
+      headers: {'Authorization': 'Bearer $token'},
+    );
     log.i(response);
   }
-
 }

@@ -28,26 +28,29 @@ class PeopleUserGroupView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: 40.h,
-                  width: double.infinity,
-                  color: kcPrimaryColor,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '# $AddPeopleText',
-                        style: headline7.copyWith(color: kcBackgroundColor2),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 6),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.close, color: Colors.white),
-                            padding: const EdgeInsets.only(bottom: 18)),
-                      ),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.only(left:2.0),
+                  child: Container(
+                    height: 40.h,
+                    width: double.infinity,
+                    color: kcPrimaryColor,
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '# $AddPeopleText',
+                          style: headline7.copyWith(color: kcBackgroundColor2),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 6),
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.close, color: Colors.white),
+                              padding: const EdgeInsets.only(bottom: 18)),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 verticalSpaceSmall,

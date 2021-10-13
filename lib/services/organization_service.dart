@@ -72,6 +72,13 @@ class OrganizationService {
         token: token ?? _auth.user!.token);
   }
 
+  /// This is used to add user to an organization_service
+  Future<void> invitePeopleToOrganization(
+      String organizationId, List<String> email) async {
+    await _zuriApiService.invitePeopleToOrganization(
+        organizationId: organizationId, email: email, token: _auth.user!.token);
+  }
+
   ///This is used to get the list of users in an organization
   Future<List<Users>> fetchMemberListUsingOrgId(
       String organizationId, String token) async {
@@ -87,8 +94,8 @@ class OrganizationService {
     final response = await _zuriApiService.createOrganizationUsingEmail(
         email: email, token: _auth.user!.token);
     log.i(response);
-    addMemberToOrganization(response['data']['_id']);
-    String insertedId = response['data']['InsertedID'];
+    //addMemberToOrganization(response['data']['_id']);
+    String insertedId = response['data']['organization_id'];
     Organization insertedOrganisation = await _getOrganization(insertedId);
     _addOrgToOrganizationsList(insertedOrganisation);
   }

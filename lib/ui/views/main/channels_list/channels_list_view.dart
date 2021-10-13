@@ -211,7 +211,7 @@ class ChannelsDisplayList extends StatelessWidget {
         onTap: () {},
         child: Container(
           width: _size.width * .7,
-          height: _size.height * .095,
+          height: (_size.height * .1).h,
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(

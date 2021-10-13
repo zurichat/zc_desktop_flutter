@@ -45,10 +45,10 @@ class SignUpViewModel extends FormViewModel with Validator {
   }
 
   Future<void> signUp() async {
-    await runBusyFuture(performSignUp(emailValue!, passwordValue!));
+    await runBusyFuture(performSignUp(emailValue!, passwordValue!, fullNameValue!));
   }
 
-  Future<void> performSignUp(String email, String password) async {
+  Future<void> performSignUp(String email, String password, String fullName) async {
     if (!isPolicyChecked) {
       throw Failure('Please accept our policy before you continue');
     } else {
@@ -56,7 +56,16 @@ class SignUpViewModel extends FormViewModel with Validator {
       notifyListeners();
     }
     try {
-      await _authService.signup(email: email.trim(), password: password);
+      String fName = '';
+      String lName = '';
+      if(fullName.contains(' ')) {
+        final names = fullName.split(' ');
+        fName = names[0];
+        lName = names[1];
+      } else {
+
+      }
+      await _authService.signup(email: email.trim(), password: password, fName: fName, lName: lName);
     } catch (e) {
       if(e.toString().contains('40')){
         throw Failure(EmailAlreadyInUseError);
