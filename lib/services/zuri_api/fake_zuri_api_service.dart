@@ -75,7 +75,7 @@ class FakeZuriApiService implements Api {
       {required String organizationId, required token}) async {
     await Future.delayed(Duration(seconds: 2));
 
-    return [
+    List<Channel> channelsList = [
       Channel(
           id: '1',
           name: 'team-falcons',
@@ -103,10 +103,14 @@ class FakeZuriApiService implements Api {
       Channel(
           id: '5', name: 'general', private: false, description: '', owner: ''),
     ];
+
+    return channelsList;
   }
 
   @override
-  Future fetchDMs({orgId, userId}) {
+  Future fetchDMs({orgId, userId}) async {
+    await Future.delayed(Duration(seconds: 2));
+
     // TODO: implement fetchDMs
     throw UnimplementedError();
   }
@@ -119,9 +123,47 @@ class FakeZuriApiService implements Api {
 
   @override
   Future<List<Users>> fetchMemberListUsingOrgId(
-      {required String organizationId, required token}) {
-    // TODO: implement fetchMemberListUsingOrgId
-    throw UnimplementedError();
+      {required String organizationId, required token}) async {
+    await Future.delayed(Duration(seconds: 2));
+
+    List<Users> userList = [
+      Users(
+        id: '1',
+        profileImage: '',
+        display_name: 'Eternity',
+        name: 'Issac',
+        bio: 'Mentor',
+      ),
+      Users(
+        id: '2',
+        profileImage: '',
+        display_name: 'Kat',
+        name: 'Katherine',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '3',
+        profileImage: '',
+        display_name: 'Bernice',
+        name: 'Bernice',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '4',
+        profileImage: '',
+        display_name: 'Demmss',
+        name: 'Ademola',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '5',
+        profileImage: '',
+        display_name: 'protector',
+        name: 'Damilare',
+        bio: 'Intern',
+      ),
+    ];
+    return userList;
   }
 
   @override
