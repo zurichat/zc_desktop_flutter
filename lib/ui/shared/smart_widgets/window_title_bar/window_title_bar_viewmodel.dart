@@ -15,4 +15,7 @@ class WindowTitleBarModel extends BaseViewModel {
   bool _isHomeView = false;
 
   bool get isHomeView => _isHomeView;
+
+  String _statusTag = '';
+  String get statusTag => _statusTag;
 }

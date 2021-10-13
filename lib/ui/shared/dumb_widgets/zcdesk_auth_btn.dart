@@ -47,6 +47,45 @@ class AuthButton extends StatelessWidget {
   }
 }
 
+
+class ProfileButton extends StatelessWidget {
+  final String label;
+  final VoidCallback? onTap;
+  final bool isBusy;
+  final double? height;
+  final double? width;
+
+  ProfileButton(
+      {required this.label,
+      this.onTap,
+      this.isBusy = false,
+      this.height,
+      this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height ?? 48.h,
+      // width: width ?? 440.w,
+      child: TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            Color.fromRGBO(0, 184, 124, 1),
+          ),
+        ),
+        onPressed: onTap,
+        child: !isBusy
+            ? Text(label, style: profileBtnStyle)
+            : Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+      ),
+    );
+  }
+}
+
 class PreferenceButton extends StatelessWidget {
   late final String label;
   late final VoidCallback? onTap;
