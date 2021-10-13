@@ -84,7 +84,7 @@ class PeopleUserGroupView extends StatelessWidget {
                           color: kcViewColor,
                           child: GestureDetector(
                             onTap: () => model
-                                .addUserToOrg(_emailController.text)
+                                .inviteUsersToOrg(_emailController.text)
                                 .then((value) {
                               if (model.errorText == null) {
                                 ScaffoldMessenger.of(context)

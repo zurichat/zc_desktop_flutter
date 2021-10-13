@@ -83,10 +83,11 @@ class OrganizationService {
   }
 
   /// This is used to add user to an organization_service
-  Future<void> invitePeopleToOrganization(
+  Future<dynamic> invitePeopleToOrganization(
       String organizationId, List<String> email) async {
-    await _apiService.invitePeopleToOrganization(
+    final response = await _apiService.invitePeopleToOrganization(
         organizationId: organizationId, email: email, token: _auth.user!.token);
+    log.i(response);
   }
 
   ///This is used to get the list of users in an organization

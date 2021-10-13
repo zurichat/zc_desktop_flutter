@@ -97,7 +97,7 @@ abstract class Api {
   /// * body: {List<String> emails, headers: logged in user token}.
   ///
   /// function parameters; [String] organizationId, [String] email, token
-  Future<void> invitePeopleToOrganization(
+  Future<dynamic> invitePeopleToOrganization(
       {required String organizationId, required List<String> email, required token});
 
   /// returns [Future]<[Map]<[String]>>, dynamic>>, create an organization using email.

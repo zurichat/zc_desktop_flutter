@@ -235,11 +235,11 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> invitePeopleToOrganization(
+  Future<dynamic> invitePeopleToOrganization(
       {required String organizationId,
       required List<String> email,
       required token}) async {
-    await _post(
+    return await _post(
       getInvitePeopleToOrganization(organizationId),
       body: {'emails': email},
       headers: {'Authorization': 'Bearer ${token}'},

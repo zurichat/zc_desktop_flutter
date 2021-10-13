@@ -11,12 +11,24 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> invitePeopleToOrganization(
+  Future invitePeopleToOrganization(
       {required String organizationId,
       required List<String> email,
-      required token}) {
-    // TODO: implement invitePeopleToOrganization
-    throw UnimplementedError();
+      required token}) async {
+    await Future.delayed(Duration(seconds: 3));
+    return {
+      'status': 200,
+      'message': 'Organization invite operation result',
+      'data': {
+        'InvalidEmails': null,
+        'InviteIDs': [
+          null,
+          null,
+          '6167068467dc381fc3b4db88',
+          '6167068667dc381fc3b4db89'
+        ]
+      }
+    };
   }
 
   @override
@@ -191,20 +203,20 @@ class FakeZuriApiService implements Api {
     return {
       'code': 200,
       'data': {
-        'session_id' : 'string',
+        'session_id': 'string',
         'user': User(
-            id: '79hdhuisksj',
-            firstName: 'John',
-            lastName: 'Doe',
-            displayName: 'Protector',
-            email: email,
-            phone: '',
-            status: 0,
-            timeZone: '',
-            createdAt: '',
-            updatedAt: '',
-            token: 'hkjsliy07oihslkhor7sihlks7')
-        .toJson()
+                id: '79hdhuisksj',
+                firstName: 'John',
+                lastName: 'Doe',
+                displayName: 'Protector',
+                email: email,
+                phone: '',
+                status: 0,
+                timeZone: '',
+                createdAt: '',
+                updatedAt: '',
+                token: 'hkjsliy07oihslkhor7sihlks7')
+            .toJson()
       },
       'message': 'string'
     };
