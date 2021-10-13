@@ -440,7 +440,7 @@ class SearchWidget extends HookViewModelWidget<SearchViewModel> {
                   textAlign: TextAlign.left,
                   maxLines: 1,
                   style: searchModal4,
-                  onChanged: (_) => model.onChange(text.text),
+                  onChanged: model.onChange,
                   decoration: InputDecoration(
                     hintText:
                         model.isClicked ? model.hintText : SearchModalHintText1,
@@ -476,6 +476,7 @@ class SearchWidget extends HookViewModelWidget<SearchViewModel> {
                           model.searchList.isNotEmpty) {
                         return recentSearchListTile(
                             model.searchList[index].name, function: () {
+                          Navigator.pop(context, true);
                           model.toggleTextFieldActivated();
                           text.clear();
                           model.goToChannelsView();

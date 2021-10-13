@@ -190,12 +190,14 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> signup({required String email, required String password}) async {
+  Future<void> signup({required String password, required String email, required String fName, required String lName}) async {
     await _post(
       signupUri,
       body: {
         'email': email,
         'password': password,
+        'last_name': lName,
+        'first_name': fName
       },
     );
   }
@@ -230,6 +232,18 @@ class ZuriApiService implements Api {
     await _post(
       getAddUserToOrganizationUri(organizationId),
       body: {'user_email': email},
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
+  }
+
+  @override
+  Future<dynamic> invitePeopleToOrganization(
+      {required String organizationId,
+      required List<String> email,
+      required token}) async {
+    return await _post(
+      getInvitePeopleToOrganization(organizationId),
+      body: {'emails': email},
       headers: {'Authorization': 'Bearer ${token}'},
     );
   }

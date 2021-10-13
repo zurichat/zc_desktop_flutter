@@ -59,8 +59,8 @@ class ProfileDropdownView extends StatelessWidget {
             _toggleDropdown(context: context, model: model);
           },
           child: Container(
-            width: 30.w,
-            height: 30.h,
+            width: 30,
+            height: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),

@@ -25,8 +25,8 @@ class AuthService {
     _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
   }
 
-  Future<void> signup({required String password, required String email}) async {
-    await _zuriApiService.signup(email: email, password: password);
+  Future<void> signup({required String password, required String email, String? fName, String? lName}) async {
+    await _zuriApiService.signup(email: email, password: password, fName: fName ?? '', lName: lName ?? '');
   }
 
   Future<void> confirmEmail(String otpCode) async {
