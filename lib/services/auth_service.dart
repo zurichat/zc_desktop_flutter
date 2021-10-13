@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
-
+import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 import 'local_storage_service.dart';
 
@@ -12,7 +11,7 @@ const localAuthResponseKey = 'localAuthResponse';
 
 class AuthService {
   final log = getLogger('AuthService');
-  final _zuriApiService = locator<ZuriApiService>();
+  final _zuriApiService = locator<Api>();
   final _localStorageService = locator<LocalStorageService>();
   String _resetCode = '';
   Auth? auth;

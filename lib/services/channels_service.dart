@@ -11,7 +11,7 @@ import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
-import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
+import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 const insertedOrganisationId = 'insertedId';
 const userChannelId = 'userChannelId';
@@ -23,7 +23,7 @@ class ChannelsService with ReactiveServiceMixin {
   //Declare the services that are dependent upon
   final _localStorageService = locator<LocalStorageService>();
   final _organizationService = locator<OrganizationService>();
-  final _zuriApiService = locator<ZuriApiService>();
+  final _zuriApiService = locator<Api>();
 
   currentLoggedInUser.User? getCurrentLoggedInUser() {
     var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
@@ -63,7 +63,7 @@ class ChannelsService with ReactiveServiceMixin {
   Future<List<Channel>> getChannels({String? organizationId}) async {
     log.i('getChannels called');
     final response = await _zuriApiService.fetchChannelsListUsingOrgId(
-        organizationId: organizationId, token: _auth.user!.token);
+        organizationId: organizationId!, token: _auth.user!.token);
     log.i(response);
     return List.from(response.map((value) => Channel.fromJson(value)));
   }
@@ -110,9 +110,9 @@ class ChannelsService with ReactiveServiceMixin {
         id: id,
         role_id: role_id,
         is_admin: is_admin,
-        prop1: prop1,
-        prop2: prop2,
-        prop3: prop3);
+        prop1: prop1!,
+        prop2: prop2!,
+        prop3: prop3!);
   }
 
   ///[handleRemoveUserFromChannel] takes current channel id and [member_id] or user_id
