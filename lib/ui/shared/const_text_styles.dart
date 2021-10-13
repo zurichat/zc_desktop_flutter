@@ -64,6 +64,13 @@ final kCaptionTextStyle = TextStyle(
   fontFamily: 'Lato',
 );
 
+final kSubHeadingTextStyle2 = TextStyle(
+  fontSize: 18.sp,
+  color: kcPrimaryColor,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
 final kExtraSmallTextStyle = TextStyle(
   overflow: TextOverflow.fade,
   fontSize: 11.sp,
@@ -75,6 +82,13 @@ final authBtnStyle = TextStyle(
   fontSize: 20.sp,
   color: whiteColor,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Lato',
+);
+
+final profileBtnStyle = TextStyle(
+  fontSize: 18.sp,
+  color: whiteColor,
+  // fontWeight: FontWeight.bold,
   fontFamily: 'Lato',
 );
 
@@ -181,6 +195,13 @@ final preferenceStyleBold = TextStyle(
   fontSize: 16.sp,
   fontFamily: 'Lato',
   fontWeight: FontWeight.w700,
+);
+
+final subtitle3bb = TextStyle(
+  fontSize: 16.sp,
+  color: createChannelHeaderColor,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Lato',
 );
 
 final searchModal = TextStyle(
@@ -297,6 +318,17 @@ TextStyle newToZuriChatTextstyle = TextStyle(
     fontSize: 13.sp,
     color: createAccountColor,
     fontWeight: FontWeight.w500,
+    fontFamily: 'Lato');
+    TextStyle voiceCallTextstyle = TextStyle(
+    fontSize: 13.sp,
+    color: kcDisplayChannelColor,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Lato');
+
+     TextStyle viewProfileTextstyle = TextStyle(
+    fontSize: 15.sp,
+    color: headerColor,
+    fontWeight: FontWeight.w700,
     fontFamily: 'Lato');
 
 TextStyle ZuriTextstyle = TextStyle(

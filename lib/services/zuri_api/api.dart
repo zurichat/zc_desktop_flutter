@@ -50,7 +50,8 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] password
-  Future<void> updateUserPassword({required String password, required String code});
+  Future<void> updateUserPassword(
+      {required String password, required String code});
 
   /// Sign user out and distroy user token and distroy user token
   Future<void> signOut(String token);
@@ -190,7 +191,26 @@ abstract class Api {
   /// get request;
   ///
   /// function parameters; none.
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId});
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+  Future<Map<String, dynamic>> getMemberDetails(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+  Future<Member> patchProfilePicture({
+    required String organizationId,
+    required String memberId,
+    required String token,
+  });
+
+  // Future<void> updateUserDetails({String? organizationId, User user});
+  Future<Map<String, dynamic>> getUserDetails({required String userId});
+
+  Future<User> fetchUserDetail({required String userId});
 
   /* DIRECT MESSAGES SERVICE */
 
@@ -232,13 +252,33 @@ abstract class Api {
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch user profile
   ///
   ///
+
+  Future<void> UpdateUserDetails({
+    required organizationId,
+    required memberId,
+    required token,
+    String? bio,
+    String? displayName,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? pronoun,
+    String? timeZone,
+  });
+
+  /// returns [Future]<[Map]<[String],>>, fetch user profile
+  ///
+  ///
+
   Future<Map<String, dynamic>> fetchRoomMessages({var roomId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
   ///
   ///
   Future<dynamic> removeUserFromChannel(
-      {required organizationId, required channelId, required memberId});
+      {required organizationId,
+      required channelId,
+      required memberId,});
 
   ///removes a user from channel;
   ///
@@ -259,5 +299,5 @@ abstract class Api {
   Future<List<Todo>> fetchTodoList();
 
   //Create Todo
-  Future<void> createTodo(Todo todo);
+  Future<void> createTodo(Todo todo,  String token);
 }

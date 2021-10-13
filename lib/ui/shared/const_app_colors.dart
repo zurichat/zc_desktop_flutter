@@ -8,6 +8,7 @@ const Color kcErrorColor = Color(0xffF40101);
 const Color kcSuccessColor = Color(0xff008B5E);
 const Color kcPrimaryLight = Color(0xffE1FDF4);
 const Color purple = Colors.purple;
+const Color kcStatusIcon = Colors.yellow;
 
 
 

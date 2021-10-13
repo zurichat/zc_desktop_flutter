@@ -5,7 +5,7 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 class StatusDialogMinViewModel extends BaseViewModel{
   final _navigationService = locator<NavigationService>();
 
-  String _setAStatus = 'Set A Status';
+  String _setAStatus = 'Set a Status';
   String _hintText = 'What is your status?';
   String _clearAfter = "Clear after: Don't clear";
   String _clearBtnText = 'Clear Status';
@@ -19,4 +19,14 @@ class StatusDialogMinViewModel extends BaseViewModel{
   void popDialog(){
     _navigationService.popRepeated(0);
   }
+
+  String _statusTag = '';
+  String get statusTag => _statusTag;
+  void setStatusTag(String value) {
+    _statusTag = value.toString();
+    notifyListeners();
+  }
+
+  
+  
 }
