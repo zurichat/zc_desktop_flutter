@@ -1,3 +1,6 @@
+
+import 'dart:io';
+
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
@@ -341,25 +344,17 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Member> patchProfilePicture(
-      {required String organizationId,
-      required String memberId,
-      required String token}) {
-    // TODO: implement patchProfilePicture
-    throw UnimplementedError();
-  }
-
-  @override
-  Future removeUserFromChannel(
-      {required organizationId,
-      required channelId,
-      required memberId,}) {
+  Future removeUserFromChannel({
+    required organizationId,
+    required channelId,
+    required memberId,
+  }) {
     // TODO: implement removeUserFromChannel
     throw UnimplementedError();
   }
 
   @override
-  Future<void> UpdateUserDetails({
+  Future<Map<String, dynamic>> UpdateUserDetails({
     required organizationId,
     required memberId,
     required token,
@@ -370,8 +365,41 @@ class FakeZuriApiService implements Api {
     String? phoneNumber,
     String? pronoun,
     String? timeZone,
-  }) {
-    // TODO: implement UpdateUserDetails
+  }) async {
+    return {
+      'status': 200,
+      'message': 'user updated successfully',
+      'bio': '',
+      'display_name': '',
+      'first_name': '',
+      'last_name': '',
+      'phone': '',
+      'pronouns': '',
+      'time_zone': ''
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> UpdateUserPicture({
+    required organizationId,
+    required memberId,
+    required token,
+    File? img,
+  }) async {
+    return {
+      'status': 200,
+      'message': 'user updated successfully',
+      'image_url': img,
+      
+    };
+  }
+
+  @override
+  Future<Member> patchProfilePicture(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement patchProfilePicture
     throw UnimplementedError();
   }
 }

@@ -85,6 +85,28 @@ class ProfileEditViewModel extends FormViewModel {
     // Do something after save
   }
 
+  Future<void> postPicture(
+    File img,
+    
+  ) async {
+    await runBusyFuture(performPicturePost(img));
+  }
+
+  Future<void> performPicturePost(
+    File img,
+    
+  ) async {
+    try {
+      await _userService.updateUserImage(
+        img: img,
+        
+      );
+    } catch (e) {
+      throw Failure(e.toString());
+    }
+    // Do something after save
+  }
+
   void setup() async {
     await runBusyFuture(setupOrganization());
     _organizationService.saveMemberId(_currentMember.id);
@@ -93,19 +115,6 @@ class ProfileEditViewModel extends FormViewModel {
 
   Future<void> setupOrganization() async {}
 
-  // getUserDetail() async {
-  //   final orgId = _organizationService.getOrganizationId();
-  //   var response = await _api.updateUserDetails(
-  //     organizationId: orgId,
-  //     memberId: '',
-  //     token: '', parameter: [],
-  //   );
-  //   notifyListeners();
-  // }
-
-  // Future<void> getOrganizations() async {
-  //   _organization = await _organizationService.getOrganizations();
-  // }
 
   removeImage() {
     _choosenImage = null;
