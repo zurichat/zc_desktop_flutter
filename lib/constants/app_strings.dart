@@ -131,3 +131,29 @@ const String displayName = 'Display Name';
 const String displayemail = 'Email Address';
 const String phoneNumber = 'Phone Number';
 const String editProfile = 'Edit Profile';
+
+const String createChannel = 'Create a channel';
+const String channelTextOne =
+    'Channels are where your team communicates. They’re best ';
+const String channelTextTwo =
+    'when organized around a topic - #marketing, for example.';
+const String channelTextThree = 'Name';
+const String channelTextFour = 'Description ';
+const String channelTextFive = '(optional)';
+const String channelTextSix = 'Make this channel private';
+const String channelTextSeven = 'When a channel is set to private,';
+const String channelTextEight = 'it can be viewed or joined by invitation.';
+const String channelTextNine = 'Create';
+const String channelTextTen = 'Channel created, You will be redirected shortly';
+
+const String channelText1 = 'Channel browser';
+const String channelText2 = 'Search Channel';
+const String channelText3 = 'recommended results';
+const String channelText4 = 'Sort';
+const String channelText5 = 'Filter';
+const String channelText6 = 'channelName';
+const String channelText7 = ' Joined ';
+const String channelText8 = '34';
+const String channelText9 = ' members  ';
+const String channelText10 = 'View';
+const String channelText11 = 'Join';

@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -26,8 +27,8 @@ class CreateChannelView extends HookWidget {
           height: (model.isCreateChannelNotSuccessful == true ||
                   model.isCreateChannelSuccessful == true ||
                   model.channelNameError != null)
-              ? 725.h
-              : 680.h,
+              ? 585.h
+              : 520.h,
           width: 410.w,
           child: Padding(
             padding: EdgeInsets.only(
@@ -43,7 +44,11 @@ class CreateChannelView extends HookWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ZcdeskText.headingCreateChannel(model.createChannel),
+                    // ZcdeskText.headingCreateChannel(model.createChannel),
+                    Text(
+                      CreateAccountText,
+                      style: createChannelHeaderStyle,
+                    ),
                     Builder(
                       builder: (context) {
                         return IconButton(
@@ -59,15 +64,20 @@ class CreateChannelView extends HookWidget {
                     ),
                   ],
                 ),
-                verticalSpaceRegularOne,
-                ZcdeskText.textCreateChannel(
-                  model.channelTextOne,
+                Text(
+                  channelTextOne,
+                  style: createChannelTextStyle,
                 ),
                 verticalSpaceTinyThree,
-                ZcdeskText.textCreateChannel(model.channelTextTwo),
-                verticalSpaceMedium,
+                Text(
+                  channelTextTwo,
+                  style: createChannelTextStyle,
+                ),
+                // ZcdeskText.textCreateChannel(channelTextTwo),
+                verticalSpaceSmall,
+                verticalSpaceSmall,
                 if (model.isCreateChannelSuccessful)
-                  Text(model.channelTextTen,
+                  Text(channelTextTen,
                       style: headline7.copyWith(color: kcSuccessColor)),
                 if (model.isCreateChannelNotSuccessful)
                   Text(model.errorMessage,
@@ -78,8 +88,9 @@ class CreateChannelView extends HookWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ZcdeskText.headingSmallCreateChannel(
-                        model.channelTextThree,
+                      Text(
+                        channelTextThree,
+                        style: createChannelSmallHeaderStyle,
                       ),
                       CreateChannelInputField(
                         onChanged: (value) {
@@ -96,14 +107,16 @@ class CreateChannelView extends HookWidget {
                         keyboardType: TextInputType.name,
                         hintPlaceHolder: '',
                       ),
-                      verticalSpaceMedium,
+                      verticalSpaceRegular,
                       Row(
                         children: [
-                          ZcdeskText.headingSmallCreateChannel(
-                            model.channelTextFour,
+                          Text(
+                            channelTextFour,
+                            style: createChannelSmallHeaderStyle,
                           ),
-                          ZcdeskText.textCreateChannel(
-                            model.channelTextFive,
+                          Text(
+                            channelTextFive,
+                            style: createChannelTextStyle,
                           ),
                         ],
                       ),
@@ -129,8 +142,9 @@ class CreateChannelView extends HookWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ZcdeskText.headingSmallCreateChannel(
-                      model.channelTextSix,
+                    Text(
+                      channelTextSix,
+                      style: createChannelSmallHeaderStyle,
                     ),
                     Switch(
                       value: model.isSwitched,
@@ -144,20 +158,22 @@ class CreateChannelView extends HookWidget {
                   ],
                 ),
                 verticalSpaceSmall,
-                ZcdeskText.textCreateChannel(
-                  model.channelTextSeven,
+                Text(
+                  channelTextSeven,
+                  style: createChannelTextStyle,
                 ),
                 verticalSpaceTinyTwo,
-                ZcdeskText.textCreateChannel(
-                  model.channelTextEight,
+                Text(
+                  channelTextEight,
+                  style: createChannelTextStyle,
                 ),
                 verticalSpaceLarge,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      height: 55.0.h,
-                      width: 155.0.w,
+                      height: 48.0.h,
+                      width: 152.0.w,
                       child: TextButton(
                         style: ButtonStyle(
                             mouseCursor: MaterialStateMouseCursor.clickable,
@@ -177,17 +193,21 @@ class CreateChannelView extends HookWidget {
                             model.userEmail(),
                             descriptionController.text,
                             model.isPrivate,
+                            nameController.text,
+                            model.isPrivate,
+                            context
                           );
                         },
                         child: !model.isBusy
                             ? Padding(
                                 padding: EdgeInsets.only(bottom: 3.0.h),
                                 child: Text(
-                                  model.channelTextNine,
+                                  channelTextNine,
                                   style: authBtnChannelStyle,
                                 ),
                               )
                             : CircularProgressIndicator(
+                              strokeWidth: 4.0,
                                 color: whiteColor,
                               ),
                       ),

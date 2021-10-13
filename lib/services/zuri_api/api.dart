@@ -135,7 +135,9 @@ abstract class Api {
       String? name,
       String? owner,
       String? description,
-      bool? private});
+      bool? private,
+      String? topic,
+      bool? defaultChannel});
 
   /// returns [Future]<[void]>, adds a user to channel using current organization id and current channel id.
   ///

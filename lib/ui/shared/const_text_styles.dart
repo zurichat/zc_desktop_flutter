@@ -126,8 +126,8 @@ final headline8 = TextStyle(
 );
 
 final headline7 = TextStyle(
-  fontSize: 18.sp,
-  fontWeight: FontWeight.w400,
+  fontSize: 15.sp,
+  fontWeight: FontWeight.w600,
   fontFamily: 'Lato',
 );
 
@@ -258,9 +258,9 @@ TextStyle leftSideBarStyle = TextStyle(
     fontWeight: FontWeight.normal,
     fontFamily: 'Lato');
 TextStyle searchChannelHeaderStyle = TextStyle(
-    fontSize: 16.sp,
+    fontSize: 15.sp,
     color: kcDisplayChannelColor4,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
     fontFamily: 'Lato');
 TextStyle searchChannelHeaderGreenStyle = TextStyle(
     fontSize: 16.sp,
@@ -268,17 +268,17 @@ TextStyle searchChannelHeaderGreenStyle = TextStyle(
     fontWeight: FontWeight.w600,
     fontFamily: 'Lato');
 TextStyle createChannelHeaderStyle = TextStyle(
-    fontSize: 29.sp,
+    fontSize: 26.sp,
     color: createChannelHeaderColor,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w700,
     fontFamily: 'Lato');
 TextStyle createChannelSmallHeaderStyle = TextStyle(
-    fontSize: 17.sp,
+    fontSize: 16.sp,
     color: createChannelHeaderColor,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
     fontFamily: 'Lato');
 TextStyle createChannelTextStyle = TextStyle(
-    fontSize: 15.sp,
+    fontSize: 13.sp,
     color: createChannelTextColor,
     fontWeight: FontWeight.w500,
     fontFamily: 'Lato');
@@ -288,7 +288,7 @@ TextStyle displayChannelSmallHeaderStyle = TextStyle(
     fontWeight: FontWeight.w600,
     fontFamily: 'Lato');
 TextStyle displayChannelSmallHeaderBlackStyle = TextStyle(
-    fontSize: 20.5.sp,
+    fontSize: 17.sp,
     color: createChannelHeaderColor,
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');

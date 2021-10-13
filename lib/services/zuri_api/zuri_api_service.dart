@@ -343,7 +343,9 @@ class ZuriApiService implements Api {
       String? name,
       String? owner,
       String? description,
-      bool? private}) async {
+      bool? private,
+      String? topic,
+      bool? defaultChannel}) async {
     return await _post(
       getCreateChannelUri(insertedOrganization),
       body: {
@@ -351,6 +353,8 @@ class ZuriApiService implements Api {
         'owner': owner,
         'description': description,
         'private': private,
+        'topic': topic,
+        'default': defaultChannel
       },
       headers: {'Authorization': 'Bearer ${sessionId}'},
     );

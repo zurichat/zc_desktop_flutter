@@ -74,14 +74,18 @@ class ChannelsService with ReactiveServiceMixin {
     String? owner,
     String? description,
     required bool private,
+    String? topic,
+    bool? defaultChannel,
   }) async {
     final response = await _zuriApiService.createChannelsUsingOrgId(
         sessionId: _auth.sessionID,
-        insertedOrganization: insertedOrganisationId,
+        insertedOrganization: _organizationService.getOrganizationId(),
         name: name,
         owner: owner,
         description: description,
-        private: private);
+        private: private,
+        topic: topic,
+        defaultChannel: defaultChannel);
     log.i(response);
     // Getting stored AuthResponse from local storage
     String insertedId = response['_id'];

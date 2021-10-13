@@ -606,6 +606,16 @@ class MockZuriApiService extends _i1.Mock implements _i11.ZuriApiService {
                   Future<Map<String, dynamic>>.value(<String, dynamic>{}))
           as _i2.Future<Map<String, dynamic>>);
   @override
+  _i2.Future<List<_i5.Todo>> fetchTodoList() =>
+      (super.noSuchMethod(Invocation.method(#fetchTodoList, []),
+              returnValue: Future<List<_i5.Todo>>.value(<_i5.Todo>[]))
+          as _i2.Future<List<_i5.Todo>>);
+  @override
+  _i2.Future<void> createTodo(_i5.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#createTodo, [todo]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
+  @override
   _i2.Future<void> signOut(String? token) =>
       (super.noSuchMethod(Invocation.method(#signOut, [token]),
           returnValue: Future<void>.value(),
