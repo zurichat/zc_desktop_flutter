@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
-import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -104,17 +103,17 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                               TextInputType.emailAddress,
                                           onSaved: (value) {
                                             value;
-                                            String fullName =
-                                                _fullNameController.text;
-                                            var names = fullName.split('');
-                                            var i = fullName.length;
-                                            String firstName;
-                                            String lastName;
-                                            if (i > 0) {
-                                              firstName = names[0];
-                                              lastName =
-                                                  (names.length - 1) as String;
-                                            }
+                                            // String fullName =
+                                            //     _fullNameController.text;
+                                            // var names = fullName.split('');
+                                            // var i = fullName.length;
+                                            // String firstName;
+                                            // String lastName;
+                                            // if (i > 0) {
+                                            //   firstName = names[0];
+                                            //   lastName =
+                                            //       (names.length - 1) as String;
+                                            // }
                                           },
                                           onChanged: (value) {
                                             // model.onValidate();
@@ -297,9 +296,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                       Container(
                                         width: 180.w,
                                         height: 40.h,
-                                        child: OutlineButton(
-                                          borderSide: BorderSide(
-                                              color: createChannelHeaderColor),
+                                        child: OutlinedButton(
                                           onPressed: () {
                                             model.chooceFileToUpload(context);
                                           },
@@ -342,8 +339,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                     Container(
                       height: 45.h,
                       // width: 80.w,
-                      child: OutlineButton(
-                        borderSide: BorderSide(color: createChannelHeaderColor),
+                      child: OutlinedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

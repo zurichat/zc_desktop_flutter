@@ -278,8 +278,7 @@ abstract class Api {
   Future<dynamic> removeUserFromChannel(
       {required organizationId,
       required channelId,
-      required memberId,
-      required token});
+      required memberId,});
 
   ///removes a user from channel;
   ///
@@ -300,5 +299,5 @@ abstract class Api {
   Future<List<Todo>> fetchTodoList();
 
   //Create Todo
-  Future<void> createTodo(Todo todo);
+  Future<void> createTodo(Todo todo,  String token);
 }

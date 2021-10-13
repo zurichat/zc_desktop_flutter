@@ -7,7 +7,6 @@ import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
-import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
 
 const userIdKey = 'userIdKey';
 
@@ -15,7 +14,6 @@ class UserService {
   final log = getLogger('UserService');
   final _localStorageService = locator<LocalStorageService>();
   final _api = locator<Api>();
-  final _zuriApi = locator<ZuriApiService>();
   final _organizationService = locator<OrganizationService>();
 
   // This gets the currently logged in user respose

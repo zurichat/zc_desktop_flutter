@@ -266,7 +266,6 @@ class ZuriApiService implements Api {
 
   /* USER SERVICE */
 
-  @override
   Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
     // TODO: implement fetchUserDetails
     throw UnimplementedError();
@@ -520,7 +519,7 @@ class ZuriApiService implements Api {
       {required String organizationId,
       required String memberId,
       required String token}) async {
-    final uri = updateUserProfilePicture(organizationId, memberId);
+    
     // final response = await
     throw UnimplementedError();
   }
@@ -532,7 +531,7 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> createTodo(Todo todo) async {
+  Future<void> createTodo(Todo todo,  String token) async {
     final response = await _post(createTodoUri, body: todo.toJson());
     log.i(response);
   }
@@ -546,15 +545,15 @@ class ZuriApiService implements Api {
     log.i(response);
   }
 
-  @override
-  Future removeUserFromChannel(
-      {required organizationId,
-      required channelId,
-      required memberId,
-      required token}) {
-    // TODO: implement removeUserFromChannel
-    throw UnimplementedError();
-  }
+  // @override
+  // Future removeUserFromChannel(
+  //     {required organizationId,
+  //     required channelId,
+  //     required memberId,
+  //     required token}) {
+  //   // TODO: implement removeUserFromChannel
+  //   throw UnimplementedError();
+  // }
   
   @override
   Future<void> UpdateUserDetails({
@@ -590,5 +589,11 @@ class ZuriApiService implements Api {
         'Authorization': 'Bearer ${token}',
       },
     );
+  }
+
+  @override
+  Future removeUserFromChannel({required organizationId, required channelId, required memberId}) {
+    // TODO: implement removeUserFromChannel
+    throw UnimplementedError();
   }
 }

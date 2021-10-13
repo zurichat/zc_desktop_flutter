@@ -17,9 +17,7 @@ const memberIdKey = 'memberIdKey';
 class OrganizationService {
   final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
-  final _zuriApiService = locator<Api>();
-  Users _user = Users(name: '');
-  User? _currentLoggedInUser;
+  final _apiService = locator<Api>();
 
   /// This gets the currently logged in user respose
   Auth get _auth {
@@ -69,7 +67,7 @@ class OrganizationService {
   /// ... the actual home view (organization_service view)
   Future<List<Organization>> getOrganizations() async {
     // Getting stored AuthResponse from local storage
-    final response = await _zuriApiService.fetchOrganizationsListFromRemote(
+    final response = await _apiService.fetchOrganizationsListFromRemote(
         email: _auth.user!.email, token: _auth.user!.token);
     log.i(response);
     return OrganizationResponse.fromJson(response).data;
@@ -78,7 +76,7 @@ class OrganizationService {
   /// This is used to add user to an organization_service
   Future<void> addMemberToOrganization(String organizationId,
       {String? email, String? token}) async {
-    await _zuriApiService.addLoggedInUserToOrganization(
+    await _apiService.addLoggedInUserToOrganization(
         organizationId: organizationId,
         email: email ?? _auth.user!.email,
         token: token ?? _auth.user!.token);
@@ -87,7 +85,7 @@ class OrganizationService {
   ///This is used to get the list of users in an organization
   Future<List<Users>> fetchMemberListUsingOrgId(
       String organizationId, String token) async {
-    final response = await _zuriApiService.fetchMemberListUsingOrgId(
+    final response = await _apiService.fetchMemberListUsingOrgId(
         organizationId: organizationId, token: token);
     log.i(response);
     return response;
@@ -96,7 +94,7 @@ class OrganizationService {
   /// This is used the create an organization_service
   Future<void> createOrganization(String email) async {
     // Getting stored AuthResponse from local storage
-    final response = await _zuriApiService.createOrganizationUsingEmail(
+    final response = await _apiService.createOrganizationUsingEmail(
         email: email, token: _auth.user!.token);
     log.i(response);
     addMemberToOrganization(response['data']['_id']);
@@ -135,7 +133,7 @@ class OrganizationService {
 
   /// This is used to get a single organization_service
   Future<Organization> _getOrganization(String organizationId) async {
-    final response = await _zuriApiService.fetchOrganizationDetails(
+    final response = await _apiService.fetchOrganizationDetails(
         organizationId: organizationId, token: _auth.user!.token);
     log.i(response);
     return Organization.fromJson(response);
