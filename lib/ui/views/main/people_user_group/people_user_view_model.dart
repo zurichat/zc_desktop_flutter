@@ -1,16 +1,21 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/user_service.dart';
 
 class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   final _organizationService = locator<OrganizationService>();
   final _userService = locator<UserService>();
+    final _dmService = locator<DMService>();
+  final _navigationService = locator<NavigationService>();
   final _log = getLogger('PeopleUserGroupViewModel');
   // _pageIndex is used to keep track of the current view.
   int _pageIndex = 0;
@@ -81,7 +86,7 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
     }
     _suggestionsList = _dataList
         .where((data) =>
-            data.display_name.toLowerCase().contains(query.toLowerCase()))
+            data.displayName.toLowerCase().contains(query.toLowerCase()))
         .toList();
     notifyListeners();
   }
@@ -165,6 +170,11 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   ///This function is get called from the view to peform the add user to organization logic
   Future<void> inviteUsersToOrg(String email) async {
     await runBusyFuture(peformInviteUsersToOrg(email));
+  }
+
+  void goToDmView(int index) {
+    _dmService.setNewRoomInfo(!_isSearchStarted ? _dataList[index] : _suggestionsList[index]);
+    _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
   @override
