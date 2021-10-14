@@ -23,6 +23,7 @@ class ChannelsListView extends StatelessWidget {
     final _scrollController = ScrollController();
 
     return ViewModelBuilder<ChannelsListViewModel>.reactive(
+      onModelReady: (model) => model.performGetChannel(),
       builder: (context, model, child) => Container(
         color: whiteColor,
         child: model.isBusy
@@ -84,7 +85,7 @@ class ChannelsListView extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           // Text('${model.channels.length == 0 ? '0' : model.channels.length} ${channelText3}', style: searchChannelHeaderStyle,),
-                          Text('5 ${channelText3}', style: searchChannelHeaderStyle,),
+                          Text('${model.channels.length} ${channelText3}', style: searchChannelHeaderStyle,),
                           Spacer(),
                           Row(children: <Widget>[
                             InkWell(
@@ -123,13 +124,13 @@ class ChannelsListView extends StatelessWidget {
                       Expanded(
                         child: ListView.builder(
                             controller: _scrollController,
-                            itemCount: model.sidebarItems.length,
+                            itemCount: model.channels.length,
                             // itemCount: model.channelsList!.length,
                             itemBuilder: (context, index) {
                               return ChannelsDisplayList(
-                                  viewPressed: () async {
-                                    // await model.validateAndCreateChannel();
-                                    await model.performGetChannel();
+                                  index: index,
+                                  viewPressed: (index) {
+                                    model.goToChannelsView(index: index);
                                   },
                                   // visibleJoined:
                                   //     model.sidebarItems.keys.toList()[index] ==
@@ -140,13 +141,11 @@ class ChannelsListView extends StatelessWidget {
                                   paddingBottom2: 6.0.h,
                                   paddingall: 7.0,
                                   paddingBottom3: 2.5.h,
-                                  // channelText6:
-                                  //     'model.channelsList![index].name',
-                                  channelText6: model.sidebarItems.keys.toList()[index],
+
+                                  channelText6: model.channels[index].name,
                                   channelText7: channelText7,
-                                  // channelText8:
-                                  //     'model.channelsList![index].owner',
-                                  channelText8: model.sidebarItems.values.toList()[index],
+
+                                  channelText8: model.channels[index].name,
                                   channelText9: channelText9,
                                   channelText10: channelText10,
                                   channelText11: channelText11,
@@ -196,7 +195,8 @@ class ChannelsDisplayList extends StatelessWidget {
   final Color isChannelHover;
   final bool visibleButton;
   final Function(bool) hoverFunction;
-  final void Function()? viewPressed;
+  final int index;
+  final void Function(int index)? viewPressed;
   final bool visibleJoined;
 
   ChannelsDisplayList({
@@ -213,6 +213,7 @@ class ChannelsDisplayList extends StatelessWidget {
     required this.isChannelHover,
     required this.hoverFunction,
     required this.visibleButton,
+    required this.index,
     required this.visibleJoined,
     required this.viewPressed,
   });
@@ -228,7 +229,7 @@ class ChannelsDisplayList extends StatelessWidget {
         onTap: () {},
         child: Container(
           width: _size.width * .7,
-          height: _size.height * .095,
+          height: (_size.height * .1).h,
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
@@ -327,7 +328,7 @@ class ChannelsDisplayList extends StatelessWidget {
                               backgroundColor: MaterialStateProperty.all(
                                 kcBackgroundColor1,
                               )),
-                          onPressed: viewPressed,
+                          onPressed: () => viewPressed!(index),
                           // child: !model.isBusy
                           //     ? Text(
                           //        'Join',

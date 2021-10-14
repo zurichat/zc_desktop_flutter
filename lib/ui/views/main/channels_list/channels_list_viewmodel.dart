@@ -1,20 +1,23 @@
-import 'dart:convert';
-
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
-import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 class ChannelsListViewModel extends BaseViewModel {
   final log = getLogger('ChannelsDisplayViewModel');
+
   final _channelService = locator<ChannelsService>();
   final _organizationService = locator<OrganizationService>();
-  final _localStorageService = locator<LocalStorageService>();
 
+  List<Channel> _channels = [];
+  int selectedChannelIndex = 0;
+
+  List<Channel> get channels => _channels;
+  final _navigationService = locator<NavigationService>();
 
 
   bool _isChannelHover = false;
@@ -46,36 +49,19 @@ class ChannelsListViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Map<String, String> _sidebarItems = {
-    'team-falcons': '34',
-    'team-desktop': '500',
-    'team-test': '45',
-    'annoucements': '105',
-    'general': '72',
-    'team-zuri': '87'
-  };
+  void performGetChannel() async {
 
-  Map<String, String> get sidebarItems => _sidebarItems;
-
-  Future<void> getchannels() async {
-    await runBusyFuture(performGetChannel());
-
-    notifyListeners();
-  }
-
-  Future<void> performGetChannel() async {
-    // List<ChannelsDataModel> channelsList = await _channelService.getChannelsList();
-    // ignore: unused_local_variable
-    List<Channel>? channelsList = await _channelService.getChannels(
+    _channels = await _channelService.getChannels(
         organizationId: _organizationService.getOrganizationId());
+
+    log.d('List of channels ${_channels}');
   }
 
-  User? user;
-  AuthResponse? userdata;
-  Future<void> fetchAndSetUserData() async {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    // ignore: unused_local_variable
-    final resUser = AuthResponse.fromJson(jsonDecode(authResponse as String));
+  void goToChannelsView({int index = 0}) {
+    selectedChannelIndex = index;
     notifyListeners();
+    _channelService.setChannel(_channels[index]);
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
+
 }

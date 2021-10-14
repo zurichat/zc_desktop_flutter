@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 
@@ -138,16 +139,21 @@ class CreateWorkspaceViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.organizationView);
   }
 
-  Future<void> performCreateOrganization(String email) async {
-    await runBusyFuture(_organizationService.createOrganization(email));
+  Future<void> createOrganization(String email) async {
+    await runBusyFuture(performCreateOrganization(email));
   }
 
-  Future<void> createOrganization(String email) async {
+  Future<void> performCreateOrganization(String email) async {
     try {
-      await performCreateOrganization(email);
+      await _organizationService.createOrganization(email);
+      //if(!hasError) {
+        goToStage1();
+     // }
     } catch (e) {
-      throw Failure(e.toString());
+      if(e.toString().contains('40')) {
+        throw Failure('user with this email does not exist');
+      }
+      throw Failure(AuthErrorMessage);
     }
-    goToStage1();
   }
 }

@@ -25,7 +25,8 @@ class CreateChannelView extends HookWidget {
         child: Container(
           height: (model.isCreateChannelNotSuccessful == true ||
                   model.isCreateChannelSuccessful == true ||
-                  model.channelNameError != null)
+                  model.channelNameError != null ||
+                  model.channelDescriptionError != null)
               ? 585.h
               : 520.h,
           width: 410.w,
@@ -189,7 +190,7 @@ class CreateChannelView extends HookWidget {
 
                           await model.createchannels(
                             nameController.text,
-                            model.userEmail(),
+                            model.userDisplayName(),
                             descriptionController.text,
                             model.isPrivate,
                             nameController.text,

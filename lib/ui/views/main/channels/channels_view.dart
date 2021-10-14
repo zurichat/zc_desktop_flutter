@@ -12,6 +12,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widg
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/bookmark_and_pinned_bar/bookmark_and_pinned_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/add_user_channel/add_user_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels/channels_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_details/channels_details_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
@@ -44,15 +45,77 @@ class ChannelsView extends StatelessWidget {
                       channelTitle: model.currentChannel.name,
                     ),
                     trailing: InkWell(
-                      onTap: ()=> showDialog(
+                        onTap: () => showDialog(
                             context: context,
                             builder: (context) => ChannelsDetailsView()),
-                      child: WorkSpaceMembers()),
+                        child: WorkSpaceMembers()),
                   ),
                   Align(
                       alignment: Alignment.topCenter,
                       child:
                           BookmarkAndPinnedMessagesView() /*TopRowActions()*/),
+                  Container(
+                    height: 110.h,
+                    decoration: BoxDecoration(
+                      color: whiteColor,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8.0, left: 38.0),
+                      child: Column(
+                        children: <Widget>[
+                          verticalSpaceTiny,
+                          Row(
+                            children: [
+                              Text(
+                                'This is the very beginning of the ',
+                                style: messageTimeStyleNormal,
+                              ),
+                              Text(
+                                '${model.currentChannel.name}',
+                                style: messageTimeStyleNormal,
+                              ),
+                              Text(
+                                ' channel',
+                                style: messageTimeStyleNormal,
+                              ),
+                            ],
+                          ),
+                          verticalSpaceTinyTwo,
+                          Row(
+                            children: [
+                              Text(
+                                '${model.currentChannel.name}',
+                                style: messageTimeStyleNormal,
+                              ),
+                              Text(
+                                ' created this channel on Aug 30th.',
+                                style: messageTimeStyleNormal,
+                              ),
+                            ],
+                          ),
+                          verticalSpaceSmallOne,
+                          Row(
+                            children: <Widget>[
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => AddUserView(),
+                                  );
+                                },
+                                child: SvgPicture.asset(
+                                    'assets/icons/add_member.svg'),
+                              ),
+                              Text(
+                                ' Add members',
+                                style: messageTimeStyleNormal,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   Flexible(
                       fit: FlexFit.tight,
                       child: Align(
@@ -136,8 +199,7 @@ class ChannelsView extends StatelessWidget {
 
 Widget messageReplies(ChannelsViewModel model) {
   return InkWell(
-    onTap: () {
-    },
+    onTap: () {},
     child: Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -167,8 +229,7 @@ Widget constructRepliesHighLightAvatars({
   int? numberOfReplies,
 }) {
   return InkWell(
-    onTap: () {
-    },
+    onTap: () {},
     child: Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -262,8 +323,7 @@ class MessageTile extends StatelessWidget {
                                         .isEmpty
                                     ? 'Zuri Me'
                                     : model
-                                        .getUser(message.user_id)
-                                        .displayName,
+                                        .userName(),
                                 style: kHeading1TextStyle.copyWith(
                                     fontSize: 15.sp),
                               ),

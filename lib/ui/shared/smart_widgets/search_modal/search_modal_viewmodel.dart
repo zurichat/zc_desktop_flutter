@@ -75,9 +75,6 @@ class SearchViewModel extends BaseViewModel {
     _searchHistory = json.decode(search.toString()) ?? ['No recent search'];
     _log.i(_searchHistory);
     _historyLength = _searchHistory.length > 4 ? 4 : _searchHistory.length;
-    // get channels using the current organization id and store the list in _searchList
-    _searchList = await _channelsService.getChannels(
-        organizationId: _organizationService.getOrganizationId());
     notifyListeners();
   }
 
@@ -174,6 +171,8 @@ class SearchViewModel extends BaseViewModel {
   }
 
   void getSuggestionsForChannels(String query) async {
+    _searchList = await _channelsService.getChannels(
+        organizationId: _organizationService.getOrganizationId());
     var filteredList = List.of(_searchList).where((e) {
       final channelNameToLower = e.name.toLowerCase();
       final queryLower = query.toLowerCase();
@@ -222,6 +221,7 @@ class SearchViewModel extends BaseViewModel {
   }
 
   void searchChannels(Channel channel) {
+    _channelsService.setChannel(channel);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView);
   }
 

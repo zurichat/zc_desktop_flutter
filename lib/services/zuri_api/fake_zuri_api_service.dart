@@ -1,3 +1,6 @@
+
+import 'dart:io';
+
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
@@ -8,6 +11,27 @@ class FakeZuriApiService implements Api {
       {required String organizationId, required String email, required token}) {
     // TODO: implement addLoggedInUserToOrganization
     throw UnimplementedError();
+  }
+
+  @override
+  Future invitePeopleToOrganization(
+      {required String organizationId,
+      required List<String> email,
+      required token}) async {
+    await Future.delayed(Duration(seconds: 3));
+    return {
+      'status': 200,
+      'message': 'Organization invite operation result',
+      'data': {
+        'InvalidEmails': null,
+        'InviteIDs': [
+          null,
+          null,
+          '6167068467dc381fc3b4db88',
+          '6167068667dc381fc3b4db89'
+        ]
+      }
+    };
   }
 
   @override
@@ -29,7 +53,7 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future createChannelsUsingOrgId(
+  Future createChannelsUsingOrgId (
       {required sessionId,
       required insertedOrganization,
       String? name,
@@ -37,9 +61,38 @@ class FakeZuriApiService implements Api {
       String? description,
       bool? private,
       String? topic,
-      bool? defaultChannel}) {
+      bool? defaultChannel}) async{
     // TODO: implement createChannelsUsingOrgId
-    throw UnimplementedError();
+     await Future.delayed(Duration(seconds: 2));
+     return Channel(
+       name: 'zuri main channel',
+       owner: 'CalebJ',
+       description: 'zuri main description',
+       private: false,
+       memberinput: true,
+       member: 10,
+     ).toJson();
+
+      // {
+      //   'name': 'sample channel',
+      //   'slug': 'sample-channel',
+      //   'owner': 'string',
+      //   'description': 'test',
+      //   'topic': 'string',
+      //   'private': false,
+      //   'archived': false,
+      //   'default': false,
+      //   'users': {
+      //     'string': {
+      //       '_id': 'string',
+      //       'is_admin': true
+      //     }
+      //   },
+      //   'created_on': '2021-10-13T22:56:40.225305+00:00',
+      //   'allow_members_input': true,
+      //   '_id': '6167a1fd4cd3cc2a7af3dba4',
+      //   'members': 1
+      // };    
   }
 
   @override
@@ -77,40 +130,51 @@ class FakeZuriApiService implements Api {
       {required String organizationId, required token}) async {
     await Future.delayed(Duration(seconds: 2));
 
-    List<Map<String, dynamic>> channelList = [
+    List<Channel> channelList = [
       Channel(
           id: '1',
           name: 'team-falcons',
           private: false,
           description: '',
-          owner: ''),
+          owner: '',
+          memberinput: true,
+          member: 10),
       Channel(
           id: '2',
           name: 'team-desktop',
           private: false,
           description: '',
-          owner: ''),
+          owner: '',
+          memberinput: true,
+          member: 43),
       Channel(
           id: '3',
           name: 'test-test',
           private: false,
           description: '',
-          owner: ''),
+          owner: '',
+          memberinput: true,
+          member: 75),
       Channel(
           id: '4',
           name: 'announcements',
           private: false,
           description: '',
-          owner: ''),
+          owner: '',
+          memberinput: true,
+          member: 101),
       Channel(
-          id: '5', name: 'general', private: false, description: '', owner: ''),
-    ].map((e) => e.toJson()).toList();
+          id: '5', name: 'general', private: false, description: '', owner: '', memberinput: true,
+          member: 99),
+    ];
 
      return channelList;
   }
 
   @override
-  Future fetchDMs({orgId, userId}) {
+  Future fetchDMs({orgId, userId}) async {
+    await Future.delayed(Duration(seconds: 2));
+
     // TODO: implement fetchDMs
     throw UnimplementedError();
   }
@@ -123,9 +187,47 @@ class FakeZuriApiService implements Api {
 
   @override
   Future<List<Users>> fetchMemberListUsingOrgId(
-      {required String organizationId, required token}) {
-    // TODO: implement fetchMemberListUsingOrgId
-    throw UnimplementedError();
+      {required String organizationId, required token}) async {
+    await Future.delayed(Duration(seconds: 2));
+
+    List<Users> userList = [
+      Users(
+        id: '1',
+        profileImage: '',
+        display_name: 'Eternity',
+        name: 'Issac',
+        bio: 'Mentor',
+      ),
+      Users(
+        id: '2',
+        profileImage: '',
+        display_name: 'Kat',
+        name: 'Katherine',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '3',
+        profileImage: '',
+        display_name: 'Bernice',
+        name: 'Bernice',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '4',
+        profileImage: '',
+        display_name: 'Demmss',
+        name: 'Ademola',
+        bio: 'Intern',
+      ),
+      Users(
+        id: '5',
+        profileImage: '',
+        display_name: 'protector',
+        name: 'Damilare',
+        bio: 'Intern',
+      ),
+    ];
+    return userList;
   }
 
   @override
@@ -162,11 +264,11 @@ class FakeZuriApiService implements Api {
     throw UnimplementedError();
   }
 
-  @override
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
-    // TODO: implement fetchUserDetails
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
+  //   // TODO: implement fetchUserDetails
+  //   throw UnimplementedError();
+  // }
 
   @override
   Future<Map<String, dynamic>> getRoomInfo({roomId}) {
@@ -183,18 +285,31 @@ class FakeZuriApiService implements Api {
   @override
   Future login({required String email, required String password}) async {
     await Future.delayed(Duration(seconds: 3));
+    return {
+      'code': 200,
+      'data': {
+        'session_id': 'string',
+        'user': User(
+                id: '79hdhuisksj',
+                firstName: 'John',
+                lastName: 'Doe',
+                displayName: 'Protector',
+                email: email,
+                phone: '',
+                status: 0,
+                timeZone: '',
+                createdAt: '',
+                updatedAt: '',
+                token: 'hkjsliy07oihslkhor7sihlks7')
+            .toJson()
+      },
+      'message': 'string'
+    };
   }
 
   @override
   Future<Map<String, dynamic>> markMessageAsRead(messageId) {
     // TODO: implement markMessageAsRead
-    throw UnimplementedError();
-  }
-
-  @override
-  Future removeUserFromChannel(
-      {required organizationId, required channelId, required memberId}) {
-    // TODO: implement removeUserFromChannel
     throw UnimplementedError();
   }
 
@@ -224,7 +339,11 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> signup({required String email, required String password}) {
+  Future<void> signup(
+      {required String password,
+      required String email,
+      required String fName,
+      required String lName}) {
     // TODO: implement signup
     throw UnimplementedError();
   }
@@ -320,4 +439,103 @@ class FakeZuriApiService implements Api {
     ];
     return todoList;
   }
+
+  @override
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement fetchMemberDetail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<User> fetchUserDetail({required String userId}) {
+    // TODO: implement fetchUserDetail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getMemberDetails(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement getMemberDetails
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserDetails({required String userId}) {
+    // TODO: implement getUserDetails
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Member> patchProfilePicture(
+      {required String organizationId,
+      required String memberId,
+      required String token}) {
+    // TODO: implement patchProfilePicture
+    throw UnimplementedError();
+  }
+
+  @override
+  Future removeUserFromChannel({
+    required organizationId,
+    required channelId,
+    required memberId,
+  }) {
+    // TODO: implement removeUserFromChannel
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> UpdateUserDetails({
+    required organizationId,
+    required memberId,
+    required token,
+    String? bio,
+    String? displayName,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? pronoun,
+    String? timeZone,
+  }) async {
+    return {
+      'status': 200,
+      'message': 'user updated successfully',
+      'bio': '',
+      'display_name': '',
+      'first_name': '',
+      'last_name': '',
+      'phone': '',
+      'pronouns': '',
+      'time_zone': ''
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> UpdateUserPicture({
+    required organizationId,
+    required memberId,
+    required token,
+    File? img,
+  }) async {
+    return {
+      'status': 200,
+      'message': 'user updated successfully',
+      'image_url': img,
+      
+    };
+  }
+
+//  @override
+  //Future<Member> patchProfilePicture(
+    //  {required String organizationId,
+      //required String memberId,
+      //required String token}) {
+    // TODO: implement patchProfilePicture
+    //throw UnimplementedError();
+ // }
 }

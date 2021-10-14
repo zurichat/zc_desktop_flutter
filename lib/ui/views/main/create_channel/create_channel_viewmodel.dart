@@ -115,15 +115,17 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  String userEmail() {
-    return _auth.user!.email;
+  String userDisplayName() {
+    return _auth.user!.displayName;
   }
 
   void goToChannelsView({int index = 0}) {
     selectedChannelIndex = index;
     notifyListeners();
     // _channelsService.setChannel(_channels[index]);
-    _channelsService.setChannel(_newChannel[index]);
+    _channelsService.createChannels();
+    _channelsService.setChannel(_channels[index]);
+    
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
@@ -161,7 +163,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     await runBusyFuture(
         performCreateChannel(name, owner, description, private, topic, defaultChannel));
 
-    if (_showError == true) {
+    if (_showError == false) {
       setErrorMessage('An unexpected error occured!');
       _setIsBusy();
       _setIsCreateChannelNotSuccessful();

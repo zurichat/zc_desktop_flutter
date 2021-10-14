@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:zc_desktop_flutter/model/app_models.dart';
 
 /// Describes the methods and properties required to create an HttpProvider that the application can use
@@ -18,7 +20,7 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] email and [String] password
-  Future<void> signup({required String email, required String password});
+  Future<void> signup({required String password, required String email, required String fName, required String lName});
 
   /// returns [Future]<[void]>, confirm user email.
   ///
@@ -50,7 +52,8 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] password
-  Future<void> updateUserPassword({required String password, required String code});
+  Future<void> updateUserPassword(
+      {required String password, required String code});
 
   /// Sign user out and distroy user token and distroy user token
   Future<void> signOut(String token);
@@ -89,6 +92,15 @@ abstract class Api {
   /// function parameters; [String] organizationId, [String] email, token
   Future<void> addLoggedInUserToOrganization(
       {required String organizationId, required String email, required token});
+  
+  /// returns [Future]<[void]>, invite people to organization.
+  ///
+  /// post request;
+  /// * body: {List<String> emails, headers: logged in user token}.
+  ///
+  /// function parameters; [String] organizationId, [String] email, token
+  Future<dynamic> invitePeopleToOrganization(
+      {required String organizationId, required List<String> email, required token});
 
   /// returns [Future]<[Map]<[String]>>, dynamic>>, create an organization using email.
   ///
@@ -192,7 +204,26 @@ abstract class Api {
   /// get request;
   ///
   /// function parameters; none.
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId});
+  Future<Member> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+  Future<Map<String, dynamic>> getMemberDetails(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+  Future<Member> patchProfilePicture({
+    required String organizationId,
+    required String memberId,
+    required String token,
+  });
+
+  // Future<void> updateUserDetails({String? organizationId, User user});
+  Future<Map<String, dynamic>> getUserDetails({required String userId});
+
+  Future<User> fetchUserDetail({required String userId});
 
   /* DIRECT MESSAGES SERVICE */
 
@@ -234,13 +265,42 @@ abstract class Api {
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch user profile
   ///
   ///
+
+  Future<Map<String, dynamic>> UpdateUserPicture({
+    required organizationId,
+    required memberId,
+    required token,
+    File? img,
+  });
+
+  Future<Map<String, dynamic>> UpdateUserDetails({
+    required String organizationId,
+    required String memberId,
+    required String token,
+    String? bio,
+    String? displayName,
+    String? lastName,
+    String? firstName,
+    String? phoneNumber,
+    String? pronoun,
+    String? timeZone,
+  });
+  
+
+  /// returns [Future]<[Map]<[String],>>, fetch user profile
+  ///
+  ///
+
   Future<Map<String, dynamic>> fetchRoomMessages({var roomId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
   ///
   ///
-  Future<dynamic> removeUserFromChannel(
-      {required organizationId, required channelId, required memberId});
+  Future<dynamic> removeUserFromChannel({
+    required organizationId,
+    required channelId,
+    required memberId,
+  });
 
   ///removes a user from channel;
   ///
@@ -261,5 +321,5 @@ abstract class Api {
   Future<List<Todo>> fetchTodoList();
 
   //Create Todo
-  Future<void> createTodo(Todo todo,  String token);
+  Future<void> createTodo(Todo todo, String token);
 }

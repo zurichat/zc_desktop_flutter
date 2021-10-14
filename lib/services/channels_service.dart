@@ -63,17 +63,19 @@ class ChannelsService with ReactiveServiceMixin {
   Future<List<Channel>> getChannels({String? organizationId}) async {
     log.i('getChannels called');
     final response = await _zuriApiService.fetchChannelsListUsingOrgId(
-        organizationId: organizationId!, token: _auth.user!.token);
+        organizationId: _organizationService.getOrganizationId(), token: _auth.user!.token);
     log.i(response);
-    return List.from(response.map((value) => Channel.fromJson(value)));
+    return response;
+    // return List.of(response.toMap((channel) => Channel.fromJson(channel)));
+    //return List.from(response.map((value) => Channel.fromJson(value)));
   }
 
   /// This is used to create a channel on the page
-  Future<void> createChannels({
+  Future<Channel> createChannels({
     String? name,
     String? owner,
     String? description,
-    required bool private,
+    bool? private,
     String? topic,
     bool? defaultChannel,
   }) async {
@@ -94,6 +96,7 @@ class ChannelsService with ReactiveServiceMixin {
       userChannelId,
       jsonEncode(insertedId),
     );
+    return response;
   }
 
   /// This is used to create a channel on the page
@@ -122,9 +125,7 @@ class ChannelsService with ReactiveServiceMixin {
   }) async {
     final org_id = await _organizationService.getOrganizationId();
     await _zuriApiService.removeUserFromChannel(
-        organizationId: org_id,
-        channelId: channel_id,
-        memberId: member_id);
+        organizationId: org_id, channelId: channel_id, memberId: member_id);
   }
 
   Future<dynamic> sendMessage(
@@ -144,8 +145,8 @@ class ChannelsService with ReactiveServiceMixin {
         channelId: _currentChannel.id,
         organizationId: _organizationService.getOrganizationId());
     log.i(response);
-return List<ChannelMessage>.from(response.map((model)=> ChannelMessage.fromJson(model)));
-   
+    return List<ChannelMessage>.from(
+        response.map((model) => ChannelMessage.fromJson(model)));
   }
 
   Future<String> fetchChannelSocketId() async {

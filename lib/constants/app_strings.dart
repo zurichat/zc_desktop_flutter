@@ -1,6 +1,7 @@
 const String AppNameText = 'Zuri Chat';
 const String CreateAccountText = 'Create Account';
 const String EmailHintText = 'someone@gmail.com';
+const String FullNameHintText = 'John Doe';
 const String PasswordHintText = 'password';
 const String PolicyText =
     'By signing up, you agree that you have accepted our User Notice and Privacy Policy';
