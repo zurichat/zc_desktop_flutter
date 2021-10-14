@@ -203,11 +203,6 @@ abstract class Api {
       required String memberId,
       required String token});
 
-  Future<Member> patchProfilePicture({
-    required String organizationId,
-    required String memberId,
-    required String token,
-  });
 
   // Future<void> updateUserDetails({String? organizationId, User user});
   Future<Map<String, dynamic>> getUserDetails({required String userId});
@@ -262,7 +257,7 @@ abstract class Api {
     File? img,
   });
 
-  Future<Map<String, dynamic>> UpdateUserDetails({
+  Future<Map<String, dynamic>> updateUserDetail({
     required String organizationId,
     required String memberId,
     required String token,

@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/user_service.dart';
+import 'profile_edit_view.form.dart';
 
 class ProfileEditViewModel extends FormViewModel {
   final _userService = locator<UserService>();
@@ -22,12 +23,6 @@ class ProfileEditViewModel extends FormViewModel {
   }
 
   bool _isSaveButtonEnabled = false;
-
-  User? user;
-  String? userId;
-  String? token;
-
-  String profileImage = '';
 
   File? _choosenImage;
 
@@ -69,42 +64,33 @@ class ProfileEditViewModel extends FormViewModel {
     String pronoun,
     String timeZone,
   ) async {
-    try {
-      await _userService.updateUser(
-        bio: '',
-        displayName: '',
-        firstName: firstName,
-        lastName: lastName,
-        phoneNumber: '',
-        pronoun: '',
-        timeZone: '',
-      );
-    } catch (e) {
-      throw Failure(e.toString());
-    }
+    final response = await _userService.updateUser(
+      bio: whoValue,
+      displayName: displayNameValue,
+      firstName: firstNameValue,
+      lastName: lastNameValue,
+      phoneNumber: phoneNumberValue,
+      pronoun: pronounValue,
+      timeZone: timeZoneValue,
+    );
     // Do something after save
+    return response;
   }
 
   Future<void> postPicture(
     File img,
-    
   ) async {
     await runBusyFuture(performPicturePost(img));
   }
 
   Future<void> performPicturePost(
     File img,
-    
   ) async {
-    try {
-      await _userService.updateUserImage(
-        img: img,
-        
-      );
-    } catch (e) {
-      throw Failure(e.toString());
-    }
+    final response = await _userService.updateUserImage(
+      img: _choosenImage,
+    );
     // Do something after save
+    return response;
   }
 
   void setup() async {
@@ -114,7 +100,6 @@ class ProfileEditViewModel extends FormViewModel {
   }
 
   Future<void> setupOrganization() async {}
-
 
   removeImage() {
     _choosenImage = null;

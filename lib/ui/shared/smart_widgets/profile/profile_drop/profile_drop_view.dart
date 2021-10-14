@@ -250,15 +250,6 @@ class ProfilePicture extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-        // Container(
-        //   height: 60.h,
-        //   width: 50.w,
-        //   decoration: BoxDecoration(
-        //     shape: BoxShape.rectangle,
-        //     borderRadius: BorderRadius.circular(5),
-        //     color: kcSuccessColor,
-        //   ),
-        // ),
         horizontalSpaceRegular,
         Container(
           width: 100.w,

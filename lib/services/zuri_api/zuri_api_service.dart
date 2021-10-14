@@ -1,5 +1,3 @@
-
-
 import 'dart:core';
 import 'dart:io';
 
@@ -545,7 +543,7 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserDetails(
+  Future<Map<String, dynamic>> updateUserDetail(
       {required organizationId,
       required memberId,
       required token,
@@ -566,7 +564,7 @@ class ZuriApiService implements Api {
       'pronouns': pronoun,
       'time_zone': timeZone,
     };
-    await _patch(
+    final response = await _patch(
       uri,
       body: data,
       headers: {
@@ -577,7 +575,7 @@ class ZuriApiService implements Api {
         'Authorization': 'Bearer ${token}',
       },
     );
-    throw UnimplementedError();
+    return response;
   }
 
   @override
@@ -591,10 +589,9 @@ class ZuriApiService implements Api {
     Map<String, dynamic> data = {
       'image_url': img,
     };
-    await _patch(
+    final response = await _patch(
       uri,
       body: data,
-      
       headers: {
         // ignore: prefer_single_quotes
         "Content-Type": "application/json",
@@ -602,7 +599,7 @@ class ZuriApiService implements Api {
         'Authorization': 'Bearer ${token}',
       },
     );
-    throw UnimplementedError();
+    return response;
   }
 
   @override

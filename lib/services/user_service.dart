@@ -32,7 +32,7 @@ class UserService {
     File? img,
   }) async {
     final orgId = _organizationService.getOrganizationId();
-    final memId = _organizationService.getMemberId();
+    final memId = auth.user!.id;
     final response = await _api.UpdateUserPicture(
       organizationId: orgId,
       memberId: memId,
@@ -53,8 +53,8 @@ class UserService {
     String? timeZone,
   }) async {
     final orgId = _organizationService.getOrganizationId();
-    final memId = _organizationService.getMemberId();
-    final response = await _api.UpdateUserDetails(
+    final memId = auth.user!.id;
+    final response = await _api.updateUserDetail(
       organizationId: orgId,
       memberId: memId,
       token: token ?? auth.user!.token,
@@ -71,41 +71,14 @@ class UserService {
   }
 
   /// This is used to get a single user_service
-  Future<User> getUser(String userId) async {
-    final response = await _api.getUserDetails(userId: auth.user!.id);
+  Future<Member> getmember() async {
+    final orgId = _organizationService.getOrganizationId();
+    final memId = auth.user!.id;
+    final response = await _api.getMemberDetails(
+        organizationId: orgId, memberId: memId, token: auth.user!.token);
     log.i(response);
-    return User.fromJson(response);
+    return Member.fromJson(response);
   }
-
-  // Future<void> postMemberInfo(String memberId, String parameter) async {
-  //   final orgId = _organizationService.getOrganizationId();
-  //   final response = await _api.updateUserDetails(
-  //     organizationId: orgId,
-  //     memberId: memberId,
-  //     firstName: '',
-  //     lastName: '',
-  //     token: null,
-  //   );
-  //   return response;
-  // }
-
-  // Future<String> getMemeberId() async {
-  //   final orgId = _organizationService.getOrganizationId();
-  //   var response = await _api.addLoggedInUserToOrganization(
-  //     organizationId: orgId,
-  //     email: _authResponse.user!.email,
-  //     token: _authResponse.user!.token,
-  //   );
-  //   return response(['']);
-  // }
-
-  // Future<Member> getMember(String memberId) async {
-  //   final orgId = _organizationService.getOrganizationId();
-  //   return await _api.fetchUserDetail(
-  //       organizationId: orgId,
-  //       memberId: memberId,
-  //       token: _authResponse.user!.token);
-  // }
 
   void saveOrganizationId(String orgId) {
     log.i('saved orgId ${orgId}');

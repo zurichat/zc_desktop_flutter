@@ -34,7 +34,10 @@ class ProfileDropdownViewModel extends BaseViewModel {
 
   bool _isDropped = false;
   bool _isHover = false;
-  
+
+  Member _currentMember = Member();
+
+  Member get currentMember => _currentMember;
 
   String get emaill => email;
   bool get isDropped => _isDropped;
@@ -51,29 +54,14 @@ class ProfileDropdownViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  // getUserDetail() async {
-  //   var user = await _api.fetchUserDetail(userId: userIdKey);
-  //   email = user.email;
-  //   notifyListeners();
-  // }
+  Future<void> getOrganizations() async {
+    _currentMember = await _userService.getmember();
+  }
 
-  // getUserDisplayName() async {
-  //   var memberId = await _userService.getMemeberId();
-  //   // var member = await _userService.getMember(memberId);
-  //   _displayName = member.email;
-  //   notifyListeners();
-
-  //   print(member);
-  //   // _userService.fetchUserDetails().then((value) {
-  //   //   _displayName = value.displayName;
-  //   //   notifyListeners();
-  //   // });
-  // }
   void signOut() async {
     _windowTitleBarService.setHome(false);
     Future.delayed(Duration(milliseconds: 10));
     _authService.logOut(_userService.auth.user!.token.toString());
     _navigationService.pushNamedAndRemoveUntil(Routes.loginView);
-
   }
 }

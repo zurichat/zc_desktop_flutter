@@ -30,13 +30,6 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
   @override
   Widget build(BuildContext context) {
     final scrollcontroller = ScrollController();
-    final _firstNameController = TextEditingController();
-    final _lastNameController = TextEditingController();
-    final _displayNameController = TextEditingController();
-    final _whoController = TextEditingController();
-    final _pronounController = TextEditingController();
-    final _phoneNumberController = TextEditingController();
-    final _timeZoneController = TextEditingController();
 
     return ViewModelBuilder<ProfileEditViewModel>.reactive(
       onModelReady: (model) => listenToFormUpdated(model),
@@ -96,7 +89,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                       children: [
                                         verticalSpaceRegular,
                                         ProfileInputField(
-                                          controller: _firstNameController,
+                                          controller: firstNameController,
                                           label: 'First Name',
                                           hintPlaceHolder: 'First Name',
                                           errorText:
@@ -121,7 +114,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ),
                                         verticalSpaceRegular,
                                         ProfileInputField(
-                                          controller: _lastNameController,
+                                          controller: lastNameController,
                                           label: 'Last Name',
                                           hintPlaceHolder: 'Last Name',
                                           errorText:
@@ -146,7 +139,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ),
                                         verticalSpaceRegular,
                                         ProfileInputField(
-                                          controller: _displayNameController,
+                                          controller: displayNameController,
                                           label: 'Display Name',
                                           helperText:
                                               'This could be your first name, or a nickname, however you’d like people to refer to you in Slack.',
@@ -177,7 +170,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(
-                                          controller: _whoController,
+                                          controller: whoController,
                                           label: 'What I do',
                                           hintPlaceHolder: 'What I do',
                                           helperText:
@@ -198,7 +191,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(
-                                          controller: _pronounController,
+                                          controller: pronounController,
                                           label: 'Pronouns',
                                           hintPlaceHolder:
                                               'Ex. they/Them/theirs',
@@ -220,7 +213,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(
-                                          controller: _phoneNumberController,
+                                          controller: phoneNumberController,
                                           label: 'Phone Number',
                                           hintPlaceHolder: '(123) 555-55555',
                                           helperText: 'Enter a phone number.',
@@ -242,7 +235,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         InkWell(
                                           onTap: () {},
                                           child: ProfileInputField(
-                                            controller: _timeZoneController,
+                                            controller: timeZoneController,
                                             label: 'Time Zone',
                                             hintPlaceHolder:
                                                 'Please Select an option',
@@ -379,7 +372,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                             pronounController.text,
                             timeZoneController.text,
                           );
-                          // await model.postPicture(model.choosenImage);
+                          // await model.postPicture(model.choosenImage!);
                           Navigator.of(context).pop();
                         },
                         label: 'Save Changes',

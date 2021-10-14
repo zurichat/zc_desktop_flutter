@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
@@ -329,15 +328,6 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> getMemberDetails(
-      {required String organizationId,
-      required String memberId,
-      required String token}) {
-    // TODO: implement getMemberDetails
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Map<String, dynamic>> getUserDetails({required String userId}) {
     // TODO: implement getUserDetails
     throw UnimplementedError();
@@ -354,7 +344,7 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserDetails({
+  Future<Map<String, dynamic>> updateUserDetail({
     required organizationId,
     required memberId,
     required token,
@@ -390,16 +380,30 @@ class FakeZuriApiService implements Api {
       'status': 200,
       'message': 'user updated successfully',
       'image_url': img,
-      
     };
   }
 
   @override
-  Future<Member> patchProfilePicture(
+  Future<Map<String, dynamic>> getMemberDetails(
       {required String organizationId,
       required String memberId,
-      required String token}) {
-    // TODO: implement patchProfilePicture
-    throw UnimplementedError();
+      required String token}) async {
+    Map<String, dynamic> userDetail = {
+      'code': 200,
+      'message': 'user details fetched successfully',
+      'data': {
+        '_id': 1,
+        'orgId': 1,
+        'name': 'Bernice Quarshie',
+        'display_name': 'perp',
+        'bio': 'Mobile developer (Flutter)',
+        'pronouns': 'her/she',
+        'phone': 0264445649,
+        'time_zone': 'UTC+ 00',
+      }
+    };
+    return userDetail;
   }
 }
+
+
