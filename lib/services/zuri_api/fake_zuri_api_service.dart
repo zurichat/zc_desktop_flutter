@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'dart:io';
 
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
@@ -72,9 +74,9 @@ class FakeZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> createRoom(
-      {User? currentUser, Users? user, String? orgId}) {
-    // TODO: implement createRoom
-    throw UnimplementedError();
+      {User? currentUser, Users? user, String? orgId}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {'room_id': '6165848888888294bffc7a0d'};
   }
 
   @override
@@ -133,9 +135,34 @@ class FakeZuriApiService implements Api {
   @override
   Future fetchDMs({orgId, userId}) async {
     await Future.delayed(Duration(seconds: 2));
-
-    // TODO: implement fetchDMs
-    throw UnimplementedError();
+    return [
+      {
+    '_id':'6165848888888294bffc7a0d',
+    'status':0,
+    'private':true,
+    'bookmark':[],
+    'starred':[],
+    'created_at':DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+    'org_id':'6165856e40029bb67e90deec',
+   'pinned':[],
+    'room_user_ids':['616584e9f214f294bffc7a0d','6165856e40029bb67e90deed']
+      },
+      {
+    '_id':'6165899559598294bffc7a0d',
+    'status':0,
+    'private':true,
+    'bookmark':[],
+    'starred':[],
+    'created_at':DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+    'org_id':'6165856e40029bb67e90deec',
+   'pinned':[],
+    'room_user_ids':['616584e9f214f294bffc7a0d','6165856e40029bb67e90deed']
+      },
+    ];
   }
 
   @override
@@ -153,36 +180,36 @@ class FakeZuriApiService implements Api {
       Users(
         id: '1',
         profileImage: '',
-        display_name: 'Eternity',
+        displayName: 'Eternity',
         name: 'Issac',
         bio: 'Mentor',
       ),
       Users(
         id: '2',
         profileImage: '',
-        display_name: 'Kat',
+        displayName: 'Kat',
         name: 'Katherine',
         bio: 'Intern',
       ),
       Users(
         id: '3',
         profileImage: '',
-        display_name: 'Bernice',
+        displayName: 'Bernice',
         name: 'Bernice',
         bio: 'Intern',
       ),
       Users(
         id: '4',
         profileImage: '',
-        display_name: 'Demmss',
+        displayName: 'Demmss',
         name: 'Ademola',
         bio: 'Intern',
       ),
       Users(
         id: '5',
         profileImage: '',
-        display_name: 'protector',
-        name: 'Toby',
+        displayName: 'protector',
+        name: 'Damilare',
         bio: 'Intern',
       ),
     ];
@@ -217,11 +244,6 @@ class FakeZuriApiService implements Api {
     return orgList;
   }
 
-  @override
-  Future<Map<String, dynamic>> fetchRoomMessages({roomId}) {
-    // TODO: implement fetchRoomMessages
-    throw UnimplementedError();
-  }
 
   // @override
   // Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
@@ -236,9 +258,20 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) {
-    // TODO: implement getUserProfile
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> getUserProfile({orgId, memberId}) async {
+    await Future.delayed(Duration(seconds: 4));
+    return {
+      'first_name': 'Borris Mejja',
+      'last_name': 'Coco Melon',
+      'display_name': 'Sweet Coco',
+      'image_url':
+          'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg',
+      'user_name': 'Sweet Chocolate',
+      'phone': 'phone',
+      'pronouns': 'pronouns',
+      'bio': 'Welcome to Zuri',
+      'status': 'status'
+    };
   }
 
   @override
@@ -290,15 +323,9 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> sendMessageToDM({roomId, senderId, message}) {
-    // TODO: implement sendMessageToDM
+  Future<void> signOut(String token) {
+    // TODO: implement signOut
     throw UnimplementedError();
-  }
-
-  @override
-  Future signOut(String token) async {
-    await Future.delayed(Duration(seconds: 2));
-    return {'code': '200', 'message': 'Logged out successfully'};
   }
 
   @override
@@ -468,61 +495,76 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future removeUserFromChannel({
-    required organizationId,
-    required channelId,
-    required memberId,
-  }) {
-    // TODO: implement removeUserFromChannel
+  Future<Map<String, dynamic>> fetchRoomMessages({roomId, orgId}) async {
+    await Future.delayed(Duration(seconds: 4));
+    return {
+      'count': 3,
+      'next': '0',
+      'previous': '0',
+      'results': [
+        {
+          'id': 'j3nj359885j35n0009nu5',
+          'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+          'media': [],
+          'message': 'We have a meeting today',
+          'pinned': false,
+          'reactions': [],
+          'read': false,
+          'room_id': '6165848888888294bffc7a0d',
+          'saved_by': [],
+          'sender_id': '616584e9f214f294bffc7a0d',
+          'threads': []
+        },
+        {
+          'id': 'j3nj35590n35n0009nu5',
+          'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+          'media': [],
+          'message': 'Hey Good Morning',
+          'pinned': false,
+          'reactions': [],
+          'read': false,
+          'room_id': '6165848888888294bffc7a0d',
+          'saved_by': [],
+          'sender_id': '616584e9f214f294bffc7a0d',
+          'threads': []
+        },
+      ]
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> reactToMessage(
+      {orgId, roomId, messageId, required ReactToMessage reactToMessage}) {
+    // TODO: implement reactToMessage
     throw UnimplementedError();
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserDetails({
-    required organizationId,
-    required memberId,
-    required token,
-    String? bio,
-    String? displayName,
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    String? pronoun,
-    String? timeZone,
-  }) async {
-    return {
-      'status': 200,
-      'message': 'user updated successfully',
-      'bio': '',
-      'display_name': '',
-      'first_name': '',
-      'last_name': '',
-      'phone': '',
-      'pronouns': '',
-      'time_zone': ''
-    };
+  Future<Map<String, dynamic>> sendMessageToDM(
+      {roomId, senderId, message, orgId}) {
+    // TODO: implement sendMessageToDM
+    throw UnimplementedError();
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserPicture({
-    required organizationId,
-    required memberId,
-    required token,
-    File? img,
-  }) async {
-    return {
-      'status': 200,
-      'message': 'user updated successfully',
-      'image_url': img,
-    };
+  Future<Map<String, dynamic>> UpdateUserDetails({required String organizationId, required String memberId, required String token, String? bio, String? displayName, String? lastName, String? firstName, String? phoneNumber, String? pronoun, String? timeZone}) {
+    // TODO: implement UpdateUserDetails
+    throw UnimplementedError();
   }
 
-//  @override
-  //Future<Member> patchProfilePicture(
-  //  {required String organizationId,
-  //required String memberId,
-  //required String token}) {
-  // TODO: implement patchProfilePicture
-  //throw UnimplementedError();
-  // }
+  @override
+  Future<Map<String, dynamic>> UpdateUserPicture({required organizationId, required memberId, required token, File? img}) {
+    // TODO: implement UpdateUserPicture
+    throw UnimplementedError();
+  }
+
+  @override
+  Future removeUserFromChannel({required organizationId, required channelId, required memberId}) {
+    // TODO: implement removeUserFromChannel
+    throw UnimplementedError();
+  }
 }
