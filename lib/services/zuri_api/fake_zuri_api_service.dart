@@ -132,6 +132,7 @@ class FakeZuriApiService implements Api {
     return channelsList;
   }
 
+
   @override
   Future fetchDMs({orgId, userId}) async {
     await Future.delayed(Duration(seconds: 2));
