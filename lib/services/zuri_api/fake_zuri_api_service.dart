@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
@@ -47,9 +46,9 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> confirmEmail({required String otpCode}) {
-    // TODO: implement confirmEmail
-    throw UnimplementedError();
+  Future confirmEmail({required String otpCode}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {'code': '200', 'message': ''};
   }
 
   @override
@@ -183,7 +182,7 @@ class FakeZuriApiService implements Api {
         id: '5',
         profileImage: '',
         display_name: 'protector',
-        name: 'Damilare',
+        name: 'Toby',
         bio: 'Intern',
       ),
     ];
@@ -274,9 +273,13 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> requestPasswordResetCode({required String email}) {
-    // TODO: implement requestPasswordResetCode
-    throw UnimplementedError();
+  Future requestPasswordResetCode({required String email}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'status': '200',
+      'message': 'Password reset code sent',
+      'data': null
+    };
   }
 
   @override
@@ -293,32 +296,57 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> signOut(String token) {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future signOut(String token) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {'code': '200', 'message': 'Logged out successfully'};
   }
 
   @override
-  Future<void> signup(
+  Future signup(
       {required String password,
       required String email,
       required String fName,
-      required String lName}) {
-    // TODO: implement signup
-    throw UnimplementedError();
+      required String lName}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'created_at': '2021-09-07 11:22:06.932180',
+      'deleted_at': '0001-01-01 00:00:00',
+      'email': '$email',
+      'email_verification': {
+        'expired_at': '0001-01-01 00:00:00',
+        'id': '61374b5e7ccea12370c5adec',
+        'token': null,
+        'verified': false
+      },
+      'first_name': '$fName',
+      'id': '61374b5e7ccea12370c5adec',
+      'last_name': '$lName',
+      'password': '$password',
+      'password_resets': null,
+      'phone': '0123456789',
+      'settings': null,
+      'time_zone': '',
+      'updated_at': '0001-01-01 00:00:00',
+      'workspace_profiles': null,
+      'workspaces': null
+    };
   }
 
   @override
-  Future<void> updateUserPassword(
-      {required String password, required String code}) {
-    // TODO: implement updateUserPassword
-    throw UnimplementedError();
+  Future updateUserPassword(
+      {required String password, required String code}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'code': '200',
+      'data': null,
+      'message': 'password confirm successful'
+    };
   }
 
   @override
-  Future<void> verifyPasswordResetCode({required String resetCode}) {
-    // TODO: implement verifyPasswordResetCode
-    throw UnimplementedError();
+  Future verifyPasswordResetCode({required String resetCode}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {'code': '200', 'message': 'Password confirm successful'};
   }
 
   @override
@@ -486,16 +514,15 @@ class FakeZuriApiService implements Api {
       'status': 200,
       'message': 'user updated successfully',
       'image_url': img,
-      
     };
   }
 
 //  @override
   //Future<Member> patchProfilePicture(
-    //  {required String organizationId,
-      //required String memberId,
-      //required String token}) {
-    // TODO: implement patchProfilePicture
-    //throw UnimplementedError();
- // }
+  //  {required String organizationId,
+  //required String memberId,
+  //required String token}) {
+  // TODO: implement patchProfilePicture
+  //throw UnimplementedError();
+  // }
 }
