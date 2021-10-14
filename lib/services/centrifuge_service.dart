@@ -16,23 +16,22 @@ class CentrifugeService with ReactiveServiceMixin {
   Future connect() async {
     _client = centrifuge.createClient('$websocketUrl?format=protobuf',
         config: centrifuge.ClientConfig());
-
-    // _client!.connectStream.listen((event) {
-    //   log.i('client connect stream $event');
-    // });
-    // _client!.disconnectStream.listen((event) {
-    //   log.i('Client disconnect stream $event');
-    // });
+      _client!.connectStream.listen((event) {
+      log.i('connected to client $event');
+    });
+_client!.disconnectStream.listen((event) {
+      log.e('disconnect from client $event');
+    });
     _client!.connect();
   }
 
   void disconnect() async {
     _client!.disconnect();
   }
-
+/* 
   void _showError(dynamic _error) {
     log.e(_error);
-  }
+  } */
 
   void _showLog(dynamic _message) {
     log.i(_message);
@@ -43,16 +42,22 @@ class CentrifugeService with ReactiveServiceMixin {
 
     _showLog(_subscription!.channel);
 
-    _subscription!.subscribeErrorStream.listen(_showError);
-    _subscription!.subscribeSuccessStream.listen(_showLog);
-    _subscription!.unsubscribeStream.listen(_showLog);
+    _subscription!.subscribeErrorStream.listen((event) {
+      log.e('Subcribe has error $event');
+    });
+    _subscription!.subscribeSuccessStream.listen((event) {
+      log.i('Subcribe is success $event');
+    });
+    _subscription!.unsubscribeStream.listen((event) {
+      log.e('unsubscribed from stream $event');
+    });
 
     _subscription!.joinStream.listen((event) {
       log.i('Subcribe join stream $event');
     });
 
     _subscription!.leaveStream.listen((event) {
-      log.i('Subcribe leave stream $event');
+      log.e('Subcribe leave stream $event');
     });
 
     _subscription!.publishStream.listen((event) {

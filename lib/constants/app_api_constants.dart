@@ -29,6 +29,8 @@ Uri requestPasswordResetCodeUri = Uri(
 Uri updatePasswordUri(String code) =>
     Uri(scheme: scheme, host: host, path: '/account/update-password/$code');
 
+Uri getUserProfileUri(String userId) =>
+    Uri(scheme: scheme, host: host, path: '/users/$userId}');
 Uri loginUri(String userId) => Uri(scheme: scheme, host: host, path: '/users/$userId');
 
 // Organization Endpoints
@@ -106,14 +108,18 @@ Uri dmCreateRoom(String orgId, String userId) => Uri(
     host: dmHost,
     path: '/api/v1/org/${orgId}/users/${userId}/room');
 
-Uri dmSendMessage(String roomId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/rooms/${roomId}/message');
+Uri dmSendMessage(String roomId, String orgId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/rooms/${roomId}/messages');
 
 Uri get dmGetRoomInfo =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/room-info');
 
-Uri dmFetchRoomMessages(String roomId) =>
-    Uri(scheme: scheme, host: dmHost, path: '/api/v1/messages/${roomId}');
+Uri dmFetchRoomMessages(String roomId, String orgId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path: '/api/v1/org/${orgId}/rooms/${roomId}/messages');
 
 Uri dmMarkMessageAsRead(String messageId) =>
     Uri(scheme: scheme, host: dmHost, path: '/api/v1/${messageId}/read/new/');
@@ -127,4 +133,10 @@ Uri dmUserProfile(String orgId, String memberId) => Uri(
     scheme: scheme,
     host: dmHost,
     path: '/api/v1/org/$orgId/members/$memberId/profile');
+
+Uri dmReactToMessage(String orgId, String roomId, String messageId) => Uri(
+    scheme: scheme,
+    host: dmHost,
+    path:
+        '/api/v1/org/${orgId}/rooms/${roomId}/messages/${messageId}/reactions');
 //
