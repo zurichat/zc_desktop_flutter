@@ -282,8 +282,6 @@ class ZuriApiService implements Api {
     );
   }
 
-
-
   /* CHANNEL SERVICE */
 
   @override
@@ -644,6 +642,21 @@ class ZuriApiService implements Api {
       required String memberId,
       required String token}) {
     // TODO: implement patchProfilePicture
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> deleteOrganization(
+      {required String organizationId, required token}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateOrganizationDetails(
+      {required String organizationId,
+      required token,
+      String? url,
+      String? name}) {
     throw UnimplementedError();
   }
 }

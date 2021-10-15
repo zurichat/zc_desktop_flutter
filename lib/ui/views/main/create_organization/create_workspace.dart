@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -46,16 +48,17 @@ class CreateWorkspaceView extends HookWidget {
                         verticalSpaceSmall,
                         Text(
                           model.signInText2,
-                          style: kLeftSideBarStyle.copyWith(color: Colors.black),
+                          style:
+                              kLeftSideBarStyle.copyWith(color: Colors.black),
                         ),
                         verticalSpaceRegular,
-                            if (model.hasError) ...[
-                                verticalSpaceMedium,
-                                Text(
-                                  (model.modelError).message,
-                                  style: boldCaptionStyle.copyWith(color: Colors.red),
-                                ),
-                              ],
+                        if (model.hasError) ...[
+                          verticalSpaceMedium,
+                          Text(
+                            (model.modelError).message,
+                            style: boldCaptionStyle.copyWith(color: Colors.red),
+                          ),
+                        ],
                         Form(
                           key: _formKey,
                           child: ZuriDeskInputField(
@@ -74,7 +77,8 @@ class CreateWorkspaceView extends HookWidget {
                             isBusy: model.isBusy,
                             onTap: () {
                               if (!_formKey.currentState!.validate()) return;
-                              model.createOrganization(emailController.text.trim());
+                              model.goToStage1();
+                              // model.createOrganization(emailController.text.trim());
                             },
                           ),
                         ),
@@ -103,37 +107,18 @@ class CreateWorkspaceView extends HookWidget {
                         )
                       ],
                     ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            model.privacy,
-                            style: subtitle2.copyWith(color: leftNavBarColor),
-                          ),
-                          Text(
-                            model.contactUs,
-                            style: subtitle2.copyWith(color: leftNavBarColor),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: SvgPicture.asset(model.worldLogoUrl),
-                              ),
-                              Text(
-                                model.changeRegion,
-                                style: subtitle2.copyWith(color: leftNavBarColor),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: SvgPicture.asset(model.arrowDown),
-                              ),
-                            ],
-                          )
-                        ]),
                     verticalSpaceMedium,
-                    GotoLoginButton(isHome: true,)
+                    WorkSpaceFooter(
+                      arrowDown: ArrowDown,
+                      changeRegion: ChangeRegion,
+                      contactUs: ContactUs,
+                      privacy: PrivacyText,
+                      worldLogoUrl: () {},
+                    ),
+                    verticalSpaceMedium,
+                    GotoLoginButton(
+                      isHome: true,
+                    )
                   ],
                 ),
               ),
@@ -142,6 +127,56 @@ class CreateWorkspaceView extends HookWidget {
         ),
       ),
       viewModelBuilder: () => CreateWorkspaceViewModel(),
+    );
+  }
+}
+
+class WorkSpaceFooter extends StatelessWidget {
+  final String privacy;
+  final String contactUs;
+  final String changeRegion;
+  final String arrowDown;
+  final GestureTapCallback worldLogoUrl;
+
+  const WorkSpaceFooter({
+    Key? key,
+    required this.privacy,
+    required this.contactUs,
+    required this.changeRegion,
+    required this.arrowDown,
+    required this.worldLogoUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        Text(
+          privacy,
+          style: subtitle2.copyWith(color: leftNavBarColor),
+        ),
+        Text(
+          contactUs,
+          style: subtitle2.copyWith(color: leftNavBarColor),
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset('assets/images/world.svg'),
+            ),
+            Text(
+              changeRegion,
+              style: subtitle2.copyWith(color: leftNavBarColor),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset(arrowDown),
+            ),
+          ],
+        )
+      ]),
     );
   }
 }
