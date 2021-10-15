@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:popover/popover.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
@@ -12,6 +13,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/bookmark_and_pinned_bar/bookmark_and_pinned_view.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/emoji_selector/emoji_widget.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/hover_actions_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/new_dm_view.dart';
@@ -79,7 +81,7 @@ class DmView extends StatelessWidget {
                                       controller: _rightSideBarController,
                                       children: [
                                         NewDmView(
-                                          userName: model.user.name,
+                                          model: model,
                                         ),
                                         ListView.builder(
                                             itemCount: model.messages.length,
@@ -109,21 +111,14 @@ class DmView extends StatelessWidget {
                                                     ),
                                                   ],
                                                 );
-                                              } else if ((!model
-                                                      .isSameDate(index)) ||
-                                                  index == 0) {
+                                              } else if (index == 0) {
                                                 return Column(
                                                   children: [
                                                     DateWidget(
                                                         date: model.formatDate(
                                                             model
                                                                 .messages
-                                                                .elementAt(
-                                                                    index ==
-                                                                            0
-                                                                        ? index
-                                                                        : index +
-                                                                            1)
+                                                                .elementAt(index)
                                                                 .created_at)),
                                                     MessageTile(
                                                       model: model,
@@ -131,6 +126,25 @@ class DmView extends StatelessWidget {
                                                       message: model.messages
                                                           .elementAt(index),
                                                     ),
+                                                  ],
+                                                );
+                                              }else if ((!model
+                                                      .isSameDate(index))) {
+                                                return Column(
+                                                  children: [
+                                                    MessageTile(
+                                                      model: model,
+                                                      messageIndex: index,
+                                                      message: model.messages
+                                                          .elementAt(index),
+                                                    ),
+                                                    DateWidget(
+                                                        date: model.formatDate(
+                                                            model
+                                                                .messages
+                                                                .elementAt(index +
+                                                                            1)
+                                                                .created_at)),
                                                   ],
                                                 );
                                               }
@@ -227,7 +241,7 @@ class MessageTile extends StatelessWidget {
                                 image: NetworkImage(
                                     model
                                         .getUser(message.sender_id)
-                                        .displayName,
+                                        .imageUrl,
                                     scale: 5),
                               )),
                         ),
@@ -251,7 +265,7 @@ class MessageTile extends StatelessWidget {
                                               .getUser(message.sender_id)
                                               .displayName
                                               .isEmpty
-                                          ? 'Zuri Me'
+                                          ? 'Abohdanga'
                                           : model
                                               .getUser(message.sender_id)
                                               .displayName,
@@ -264,7 +278,7 @@ class MessageTile extends StatelessWidget {
                                     Text(
                                       model.formatTime(message.created_at),
                                       style:
-                                          subtitle2.copyWith(color: timeColor),
+                                          messageTimeStyleNormal.copyWith(color: timeColor),
                                     )
                                   ],
                                 ),
@@ -273,6 +287,8 @@ class MessageTile extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(0, 0, 30, 0),
                                   child: Text(message.message),
                                 ),
+
+                                
                                 Padding(
                                   padding: EdgeInsets.all(4),
                                   child: GridView.builder(
@@ -287,24 +303,32 @@ class MessageTile extends StatelessWidget {
                                       physics: NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
                                         if (index == message.reactions.length) {
-                                          return Container(
-                                            padding: EdgeInsets.all(2),
-                                            decoration: BoxDecoration(
-                                                color: reactionBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(25.r),
-                                                border: Border.all(
-                                                    color: reactionBackground)),
-                                            child: Center(
-                                                child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                SvgPicture.asset(
-                                                    SVGAssetPaths.fluentEmoji),
-                                                Text('+')
-                                              ],
-                                            )),
+                                          return GestureDetector(
+                                            onTap: () {
+                                              model.newReactionToMessage(
+                                                  messageIndex);
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(2),
+                                              decoration: BoxDecoration(
+                                                  color: reactionBackground,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          25.r),
+                                                  border: Border.all(
+                                                      color:
+                                                          reactionBackground)),
+                                              child: Center(
+                                                  child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  SvgPicture.asset(SVGAssetPaths
+                                                      .fluentEmoji),
+                                                  Text('+')
+                                                ],
+                                              )),
+                                            ),
                                           );
                                         } else {
                                           return EmojiReaction(
@@ -474,7 +498,7 @@ class OnHoverWidget extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          height: 50.h,
+          height: 40.h,
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
             color: kcBackgroundColor2,
@@ -492,7 +516,20 @@ class OnHoverWidget extends StatelessWidget {
                     model.onHoverActionsHovered(
                         true, SVGAssetPaths.add_reaction_container, -45);
                   },
-                  onTap: () {}),
+                  onTap: () {
+                    showPopover(
+                      key: UniqueKey(),
+                      context: context,
+                      barrierColor: Colors.transparent,
+                      transitionDuration: const Duration(milliseconds: 150),
+                      bodyBuilder: (BuildContext context) => EmojiWidget(
+                        onEmojiSelected: (emoji) {},
+                      ),
+                      direction: PopoverDirection.bottom,
+                      arrowHeight: 0,
+                      arrowWidth: 0,
+                    );
+                  }),
               SizedBox(
                 width: 10.w,
               ),
@@ -591,8 +628,8 @@ class HoverItem extends StatelessWidget {
             foregroundDecoration: BoxDecoration(color: Colors.transparent),
             child: SvgPicture.asset(
               icon,
-              height: 30.h,
-              width: 30.w,
+              height: 20.h,
+              width: 20.w,
               fit: BoxFit.fill,
             )),
       ),
@@ -613,6 +650,7 @@ class DmScreenLeading extends StatelessWidget {
       },
       child: Row(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
@@ -623,9 +661,7 @@ class DmScreenLeading extends StatelessWidget {
               borderRadius: BorderRadius.circular(4.r),
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage(
-                  'assets/images/profile.png',
-                ),
+                image: NetworkImage(model!.dmRoomInfo.otherUserProfile.imageUrl),
               ),
             ),
           ),
@@ -633,7 +669,7 @@ class DmScreenLeading extends StatelessWidget {
             width: 5.h,
           ),
           Text(
-            model!.getChatUserName()!,
+            model!.dmRoomInfo.otherUserProfile.displayName,
             style: TextStyle(color: Colors.black),
           ),
           SizedBox(
@@ -722,16 +758,16 @@ class SameSenderMessageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+      padding: const EdgeInsets.fromLTRB(3, 0, 30, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           model.onMessageTileHover &&
                   model.onMessageHoveredIndex == messageIndex
               ? Text(
                   model.formatTime(message.created_at),
-                  style: subtitle2.copyWith(color: timeColor),
+                  style: messageTimeStyleNormal.copyWith(color: timeColor),
                 )
               : SizedBox(
                   width: 60.w,

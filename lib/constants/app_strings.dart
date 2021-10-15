@@ -59,6 +59,7 @@ const String TimePlaceholder = '13:02';
 const String ImagePlaceholder = 'B';
 
 const String SavedItems = 'Saved Items';
+const String AllDms = 'All DMs';
 const String SearchModalHintText = 'Find in direct messages with rafiu';
 const String LookingForWidget = 'I’m looking for...';
 const String ButtonText = 'Messages';
@@ -119,12 +120,14 @@ const String SuccessSubtitle =
 const String ResetTitle = 'Check your email for code';
 const String ConfirmTitle = 'Next, confirm your email address';
 
-const String InvalidErrorMessage = 'Invalid Credential. Please Check you details and try again.';
-const String EmailAlreadyInUseError = 'Email address already in use. Use another email or try login.';
+const String InvalidErrorMessage =
+    'Invalid Credential. Please Check you details and try again.';
+const String EmailAlreadyInUseError =
+    'Email address already in use. Use another email or try login.';
 const String DefaultProfilePictureUrl = 'https://i.stack.imgur.com/l60Hf.png';
-const String UserAdditionErrorMessage = 'User is already part of the workspace or user does not exit.';
+const String UserAdditionErrorMessage =
+    'User is already part of the workspace or user does not exit.';
 const String UserAdittionSuccessMessage = 'User added successfully';
-
 
 const String profileView = 'Profile View';
 const String voiceCall = 'Voice call';
@@ -160,3 +163,12 @@ const String channelText8 = '34';
 const String channelText9 = ' members  ';
 const String channelText10 = 'View';
 const String channelText11 = 'Join';
+//Display Menu
+const String threads = 'Threads';
+const String allDMs = 'All DMs';
+const String draft = 'Draft';
+const String savedItems = 'Saved Items';
+const String files = 'Files';
+const String people = 'People and User Groups';
+const String todo = 'Todo';
+const String plugins = 'Plugins';

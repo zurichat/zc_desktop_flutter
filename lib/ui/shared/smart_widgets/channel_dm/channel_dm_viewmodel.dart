@@ -98,7 +98,7 @@ class ChannelDmViewModel extends BaseViewModel {
 
   void listenToNewMessages() {
     _centrifugeService.messageStreamController.stream.listen((event) async {
-      _messages = await _channelService.fetchChannelMessages();
+      _messages = await _channelService.fetchChannelMessages('1');
       notifyListeners();
     });
   }

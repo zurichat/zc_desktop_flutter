@@ -192,8 +192,11 @@ class OrganizationWrapper extends StatelessWidget {
                                             toggleTap: () {
                                               model!.openDMsDropDownMenu();
                                             },
-                                            showChannelListDisplay: () {},
-                                            addTap: () {},
+                                            showChannelListDisplay: () {
+                                              model!.goToAllDmView();
+                                            },
+                                            addTap: () {
+                                            },
                                             listItemCount: model!.dms.length,
                                             onListItemTapped: (index) {
                                               model!.goToDmView(index);
@@ -202,7 +205,7 @@ class OrganizationWrapper extends StatelessWidget {
                                               return DMItem(
                                                 userName: model!.dms
                                                     .elementAt(index)
-                                                    .userProfile
+                                                    .otherUserProfile
                                                     .displayName,
                                                 userIcon:
                                                     'assets/icons/users.svg',

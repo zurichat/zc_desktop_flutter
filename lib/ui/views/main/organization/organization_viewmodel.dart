@@ -96,8 +96,9 @@ class OrganizationViewModel extends BaseViewModel {
 
   Future<void> setupOrganization() async {
     await getOrganizations();
-    await getChannels();
     await getDMs();
+    await getChannels();
+    
   }
 
   Future<void> getOrganizations() async {
@@ -113,13 +114,28 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   Future<void> getDMs() async {
+    _dms = [];
+    Auth auth = _organizationService.auth;
     _currentOrganization = organization[getSelectedOrganizationIndex()!];
     List<DMRoomsResponse> res =
         await _dmService.getDMs(_currentOrganization.id);
-    for (var user_id in res) {
+    for (var room in res) {
       UserProfile userProfile = await _organizationService.getUserProfile(
-          _currentOrganization.id, user_id.roomUserIds.last);
-      DM dm = DM(userId: user_id.roomUserIds.last, userProfile: userProfile);
+          _currentOrganization.id, room.roomUserIds.last);
+      DM dm = DM(
+          otherUserProfile: userProfile,
+          roomInfo: room,
+          currentUserProfile: UserProfile(
+              firstName: auth.user!.firstName,
+              lastName: auth.user!.lastName,
+              displayName: auth.user!.displayName,
+              imageUrl: auth.user!.displayName,
+              userName: auth.user!.displayName,
+              userId: auth.user!.id,
+              phone: auth.user!.phone,
+              pronouns: auth.user!.displayName,
+              bio: auth.user!.displayName,
+              status: auth.user!.displayName));
       _dms.add(dm);
     }
     log.i('${_dms}');
@@ -153,20 +169,23 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToSavedItems() {
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
   }
 
   void goToUserPeopleGroup() {
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.peopleUserGroupView,
         id: 1);
   }
 
   void goTodoView() {
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.todoView, id: 1);
   }
 
   void goToDmView(int index) {
-    //_dmService.setUser();
+    _dmService.setExistingRoomInfo(_dms[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
@@ -178,6 +197,7 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToAllDmView() {
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
   }
 
@@ -194,6 +214,7 @@ class OrganizationViewModel extends BaseViewModel {
     }
     return false;
   }
+
 
   @override
   void dispose() {

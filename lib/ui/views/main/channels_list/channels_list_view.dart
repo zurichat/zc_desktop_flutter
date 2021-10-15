@@ -53,28 +53,7 @@ class ChannelsListView extends StatelessWidget {
                   channelTitle: 'Channel Browser',
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 12.0.h,
-                  bottom: 18.0.h,
-                ),
-                child: Container(
-                  child: ChannelSearchInputField(
-                    onChanged: (value) {
-                      // model.setchannelName(value);
-                    },
-                    borderColor:
-                        model.searchChannel == '' ? bodyColor : kcPrimaryColor,
-                    borderFocusColor: model.searchChannel == ''
-                        ? leftNavBarColor
-                        : kcPrimaryColor,
-                    // errorText: model.searchChannel,
-                    keyboardType: TextInputType.name,
-                    hintPlaceHolder: channelText2,
-                  ),
-                ),
-              ),
-              verticalSpaceSmall,
+              verticalSpaceRegular,
               Expanded(
                 flex: 14,
                 child: SizedBox(
@@ -145,7 +124,7 @@ class ChannelsListView extends StatelessWidget {
                                   channelText6: model.channels[index].name,
                                   channelText7: channelText7,
 
-                                  channelText8: model.channels[index].name,
+                                  channelText8: model.channels[index].member,
                                   channelText9: channelText9,
                                   channelText10: channelText10,
                                   channelText11: channelText11,
@@ -186,7 +165,7 @@ class ChannelsDisplayList extends StatelessWidget {
   final double paddingBottom3;
   final String channelText6;
   final String channelText7;
-  final String channelText8;
+  final int channelText8;
   final String channelText9;
   final String channelText10;
   final String channelText11;
@@ -289,7 +268,7 @@ class ChannelsDisplayList extends StatelessWidget {
                               ),
                             ),
                             // ZcdeskText.searchChannelHeaderStyle(channelText8),
-                            Text(channelText8, style: searchChannelHeaderStyle,),
+                            Text('${channelText8}', style: searchChannelHeaderStyle,),
                             // ZcdeskText.searchChannelHeaderStyle(channelText9),
                             Text(channelText9, style: searchChannelHeaderStyle,),
                           ],

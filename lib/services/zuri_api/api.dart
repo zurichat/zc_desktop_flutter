@@ -237,7 +237,7 @@ abstract class Api {
   ///
   /// function parameters;
   Future<Map<String, dynamic>> sendMessageToDM(
-      {var roomId, var senderId, var message});
+      {var roomId, var senderId, var message, var orgId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, create a room using organization id.
   ///
@@ -265,6 +265,7 @@ abstract class Api {
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch user profile
   ///
   ///
+  Future<Map<String, dynamic>> fetchRoomMessages({var roomId, var orgId});
 
   Future<Map<String, dynamic>> UpdateUserPicture({
     required organizationId,
@@ -287,12 +288,6 @@ abstract class Api {
   });
   
 
-  /// returns [Future]<[Map]<[String],>>, fetch user profile
-  ///
-  ///
-
-  Future<Map<String, dynamic>> fetchRoomMessages({var roomId});
-
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
   ///
   ///
@@ -314,6 +309,10 @@ abstract class Api {
   ///
   /// parameters;
   Future<Map<String, dynamic>> markMessageAsRead(var messageId);
+
+  //React to a message
+  Future<Map<String, dynamic>> reactToMessage(
+      {var orgId, var roomId, var messageId,required ReactToMessage reactToMessage});
 
   /* CENTRIFUGE SERVICE */
 

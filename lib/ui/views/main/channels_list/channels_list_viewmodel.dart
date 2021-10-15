@@ -49,12 +49,13 @@ class ChannelsListViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void performGetChannel() async {
+  Future<void> performGetChannel() async {
 
     _channels = await _channelService.getChannels(
         organizationId: _organizationService.getOrganizationId());
 
     log.d('List of channels ${_channels}');
+    notifyListeners();
   }
 
   void goToChannelsView({int index = 0}) {

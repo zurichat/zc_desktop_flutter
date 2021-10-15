@@ -1,5 +1,3 @@
-
-
 import 'dart:core';
 import 'dart:io';
 
@@ -190,7 +188,11 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> signup({required String password, required String email, required String fName, required String lName}) async {
+  Future<void> signup(
+      {required String password,
+      required String email,
+      required String fName,
+      required String lName}) async {
     await _post(
       signupUri,
       body: {
@@ -280,12 +282,7 @@ class ZuriApiService implements Api {
     );
   }
 
-  /* USER SERVICE */
 
-  Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
-    // TODO: implement fetchUserDetails
-    throw UnimplementedError();
-  }
 
   /* CHANNEL SERVICE */
 
@@ -380,8 +377,8 @@ class ZuriApiService implements Api {
 
   @override
   Future<Map<String, dynamic>> sendMessageToDM(
-      {roomId, senderId, message}) async {
-    return await _post(dmSendMessage(roomId), body: {
+      {roomId, senderId, message, orgId}) async {
+    return await _post(dmSendMessage(roomId, orgId), body: {
       'sender_id': senderId,
       'room_id': roomId,
       'message': message,
@@ -408,8 +405,9 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> fetchRoomMessages({roomId}) async {
-    return await _get(dmFetchRoomMessages(roomId));
+  Future<Map<String, dynamic>> fetchRoomMessages({roomId, orgId}) async {
+    var res = await _get(dmFetchRoomMessages(roomId, orgId));
+    return res;
   }
 
   @override
@@ -418,10 +416,28 @@ class ZuriApiService implements Api {
     return await _post(
       dmCreateRoom(orgId!, currentUser!.id),
       body: {
-        'org_id': '1',
-        'room_user_ids': [currentUser.id, user!.id],
-        'bookmarks': ['0'],
-        'pinned': ['0']
+        'org_id': orgId,
+        'room_member_ids': [currentUser.id, user!.id],
+        'room_name': user.name,
+      },
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> reactToMessage(
+      {orgId, roomId, messageId, required reactToMessage}) async {
+    return await _post(
+      dmReactToMessage(orgId, roomId, messageId),
+      body: {
+        'message_id': messageId,
+        'sender_id': reactToMessage.senderId,
+        'data': reactToMessage.data,
+        'category': reactToMessage.category,
+        'aliases': reactToMessage.aliases,
+        'count': reactToMessage.count,
+        'created_at': DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+            .format(DateTime.now())
+            .toString()
       },
     );
   }
@@ -612,7 +628,6 @@ class ZuriApiService implements Api {
     await _patch(
       uri,
       body: data,
-      
       headers: {
         // ignore: prefer_single_quotes
         "Content-Type": "application/json",
