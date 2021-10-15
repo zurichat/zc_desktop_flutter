@@ -24,8 +24,7 @@ class SearchViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
   final _channelsService = locator<ChannelsService>();
   final _localStorageService = locator<LocalStorageService>();
-  final _filesService = locator<FilesService>();
-  final _userService = locator<UserService>();
+
 
   String? _text;
   String? _hintText;
