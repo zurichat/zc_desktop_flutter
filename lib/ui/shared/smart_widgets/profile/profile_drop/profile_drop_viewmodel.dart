@@ -29,17 +29,37 @@ class ProfileDropdownViewModel extends BaseViewModel {
     updatedAt: '',
     token: '',
   );
+  
+  Member _currentMember = Member(
+    id: '',
+    orgId: '',
+    firstName: '',
+    lastName: '',
+    displayName: 'perpKate',
+    bio: '',
+    phone: '',
+    pronouns: '',
+    timeZone: '',
+    createdAt: '',
+    updatedAt: '',
+  );
+
+  
 
   User get currentUser => _currentUser;
+  Member get currentMember => _currentMember;
 
   bool _isDropped = false;
   bool _isHover = false;
+
   
 
   String get emaill => email;
   bool get isDropped => _isDropped;
   bool get isHover => _isHover;
   User get user => _userService.auth.user!;
+  Member get member => _userService.organization!.member!;
+
 
   setIsDropped() {
     _isDropped = !_isDropped;
@@ -51,28 +71,11 @@ class ProfileDropdownViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  // getUserDetail() async {
-  //   var user = await _api.fetchUserDetail(userId: userIdKey);
-  //   email = user.email;
-  //   notifyListeners();
-  // }
-
-  // getUserDisplayName() async {
-  //   var memberId = await _userService.getMemeberId();
-  //   // var member = await _userService.getMember(memberId);
-  //   _displayName = member.email;
-  //   notifyListeners();
-
-  //   print(member);
-  //   // _userService.fetchUserDetails().then((value) {
-  //   //   _displayName = value.displayName;
-  //   //   notifyListeners();
-  //   // });
-  // }
+  // void signOut() async {
+  
   void signOut() {
     _windowTitleBarService.setHome(false);
     _authService.logOut(_userService.auth.user!.token.toString());
     _navigationService.pushNamedAndRemoveUntil(Routes.loginView);
-
   }
 }

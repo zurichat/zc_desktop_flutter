@@ -469,37 +469,41 @@ class FakeZuriApiService implements Api {
     throw UnimplementedError();
   }
 
-  @override
-  Future<User> fetchUserDetail({required String userId}) {
-    // TODO: implement fetchUserDetail
-    throw UnimplementedError();
-  }
+
+  
 
   @override
-  Future<Map<String, dynamic>> getMemberDetails(
-      {required String organizationId,
-      required String memberId,
-      required String token}) {
-    // TODO: implement getMemberDetails
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> updateUserDetail({
+    required organizationId,
+    required memberId,
+    required token,
+    String? bio,
+    String? displayName,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? pronoun,
+    String? timeZone,
+  }) async {
+      return{
+          'code': 200,
+          'data': Member(
+            id: 'ttwyrwetufdutef',
+            orgId: 'efgyuefuyety',
+            bio: 'Mobile Developer(Flutter/Kotlin) /n Data Analyst /n Artist',
+            displayName: 'Perpety',
+            firstName: 'Perpetua',
+            lastName: 'Quarshie',
+            phone: '+233 264445649',
+            pronouns: 'Her/She',
+            timeZone: 'UTC +01:00',
+            createdAt: '',
+            updatedAt: '',
+            
+          ).toJson()
+      };
   }
 
-  @override
-  Future<Map<String, dynamic>> getUserDetails({required String userId}) {
-    // TODO: implement getUserDetails
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Member> patchProfilePicture(
-      {required String organizationId,
-      required String memberId,
-      required String token}) {
-    // TODO: implement patchProfilePicture
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Map<String, dynamic>> fetchRoomMessages({roomId, orgId}) async {
     await Future.delayed(Duration(seconds: 4));
     return {
@@ -542,46 +546,36 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> reactToMessage(
-      {orgId, roomId, messageId, required ReactToMessage reactToMessage}) {
+  Future<Map<String, dynamic>> UpdateUserPicture({
+    required organizationId,
+    required memberId,
+    required token,
+    File? img,
+  }) async {
+    return {
+      'status': 200,
+      'message': 'user updated successfully',
+      'image_url': img,
+    };
+  }
+
+
+
+  @override
+  Future<Map<String, dynamic>> reactToMessage({orgId, roomId, messageId, required ReactToMessage reactToMessage}) {
     // TODO: implement reactToMessage
     throw UnimplementedError();
   }
 
   @override
-  Future<Map<String, dynamic>> sendMessageToDM(
-      {roomId, senderId, message, orgId}) {
-    // TODO: implement sendMessageToDM
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Map<String, dynamic>> UpdateUserDetails(
-      {required String organizationId,
-      required String memberId,
-      required String token,
-      String? bio,
-      String? displayName,
-      String? lastName,
-      String? firstName,
-      String? phoneNumber,
-      String? pronoun,
-      String? timeZone}) {
-    // TODO: implement UpdateUserDetails
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Map<String, dynamic>> UpdateUserPicture(
-      {required organizationId, required memberId, required token, File? img}) {
-    // TODO: implement UpdateUserPicture
-    throw UnimplementedError();
-  }
-
-  @override
-  Future removeUserFromChannel(
-      {required organizationId, required channelId, required memberId}) {
+  Future removeUserFromChannel({required organizationId, required channelId, required memberId}) {
     // TODO: implement removeUserFromChannel
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendMessageToDM({roomId, senderId, message, orgId}) {
+    // TODO: implement sendMessageToDM
     throw UnimplementedError();
   }
 

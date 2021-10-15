@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 const selectedOrganizationKey = 'selectedOrganizationKey';
 const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
 const organizationIdKey = 'organizationIdKey';
+const localOrganizationResponseKey = 'localOrganizationResponse';
 const memberIdKey = 'memberIdKey';
 
 /// Refactor class to store objects with a proper db
@@ -18,6 +19,7 @@ class OrganizationService {
   final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
   final _apiService = locator<Api>();
+  Organization? organization;
   List<DM> _dms = [];
 
   /// This gets the currently logged in user respose
@@ -25,6 +27,7 @@ class OrganizationService {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
     return Auth.fromJson(jsonDecode(auth as String));
   }
+  
 
   void setDms(List<DM> dm) {
     _dms = dm;
@@ -97,6 +100,8 @@ class OrganizationService {
     final response = await _apiService.invitePeopleToOrganization(
         organizationId: organizationId, email: email, token: auth.user!.token);
     log.i(response);
+    organization = OrganizationResponse.fromJson(response).data as Organization?;
+    _localStorageService.saveToDisk(localOrganizationResponseKey, jsonEncode(organization));
   }
 
   ///This is used to get the list of users in an organization
