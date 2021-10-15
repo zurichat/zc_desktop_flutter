@@ -192,8 +192,11 @@ class OrganizationWrapper extends StatelessWidget {
                                             toggleTap: () {
                                               model!.openDMsDropDownMenu();
                                             },
-                                            showChannelListDisplay: () {},
-                                            addTap: () {},
+                                            showChannelListDisplay: () {
+                                              model!.goToAllDmView();
+                                            },
+                                            addTap: () {
+                                            },
                                             listItemCount: model!.dms.length,
                                             onListItemTapped: (index) {
                                               model!.goToDmView(index);
@@ -202,7 +205,7 @@ class OrganizationWrapper extends StatelessWidget {
                                               return DMItem(
                                                 userName: model!.dms
                                                     .elementAt(index)
-                                                    .userProfile
+                                                    .otherUserProfile
                                                     .displayName,
                                                 userIcon:
                                                     'assets/icons/users.svg',
@@ -247,47 +250,69 @@ class DisplayMenu extends StatelessWidget {
           ReusableMenuItem(
             iconPath: 'assets/icons/threads.svg',
             text: 'Threads',
-            onTap: () {},
+            isSelected: model.selectedMenuIndex == 0,
+            onTap: () {
+              model.updateSelectedMenuIndex(0);
+              
+            },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/alldms.svg',
             text: 'All DMs',
+            isSelected: model.selectedMenuIndex == 1,
             onTap: () {
               model.goToAllDmView();
+              model.updateSelectedMenuIndex(1);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/drafts.svg',
             text: 'Draft',
-            onTap: () {},
+            isSelected: model.selectedMenuIndex == 2,
+            onTap: () {
+              model.updateSelectedMenuIndex(2);
+            },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/ribbon.svg',
             text: 'Saved Items',
+            isSelected: model.selectedMenuIndex == 3,
             onTap: () {
               model.goToSavedItems();
+              model.updateSelectedMenuIndex(3);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/files.svg',
+            isSelected: model.selectedMenuIndex == 4,
             text: 'Files',
-            onTap: () {},
+            onTap: () {
+              model.updateSelectedMenuIndex(4);
+            },
           ),
           ReusableMenuItem(
               iconPath: 'assets/icons/pugroup.svg',
+              isSelected: model.selectedMenuIndex == 5,
               text: 'People and User Groups',
-              onTap: model.goToUserPeopleGroup),
+              onTap: (){ 
+                model.goToUserPeopleGroup();
+              model.updateSelectedMenuIndex(5);}),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
             text: 'Todo',
+            isSelected: model.selectedMenuIndex == 6,
             onTap: () {
               model.goTodoView();
+              model.updateSelectedMenuIndex(6);
             },
           ),
           ReusableMenuItem(
             iconPath: 'assets/icons/plugins.svg',
             text: 'Plugins',
-            onTap: () {},
+            isSelected: model.selectedMenuIndex == 7,
+            onTap: () {
+              model.updateSelectedMenuIndex(7);
+            },
           ),
         ],
       ),
@@ -421,12 +446,14 @@ class ReusableMenuItem extends StatelessWidget {
   final String? iconPath;
   final String? text;
   final GestureTapCallback? onTap;
+  final bool isSelected;
 
   const ReusableMenuItem({
     Key? key,
     this.iconPath,
     this.text,
     this.onTap,
+    this.isSelected = false,
   }) : super(key: key);
 
   @override
@@ -443,12 +470,12 @@ class ReusableMenuItem extends StatelessWidget {
                 child: Container(
                   width: 15.0,
                   height: 15.0,
-                  child: SvgPicture.asset(iconPath!),
+                  child: SvgPicture.asset(iconPath!, color: isSelected ? kcPrimaryColor : headerColor) 
                 ),
               ),
               SizedBox(width: 10),
               Container(
-                child: Text(text!, style: kLeftSideBarStyle),
+                child: Text(text!, style: kLeftSideBarStyle.copyWith(color: isSelected ? kcPrimaryColor : headerColor)),
               ),
             ],
           ),

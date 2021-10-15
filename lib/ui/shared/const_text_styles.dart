@@ -383,10 +383,18 @@ TextStyle allDmsDayStyle = TextStyle(
     fontWeight: FontWeight.w400,
     fontFamily: 'Lato');
 
-final leftSideBarPrefTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w600);
+final addPeopleChannelStyle = TextStyle(
+  fontSize: 25,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.bold,
+);
+
+final leftSideBarPrefTextStyle =
+    subtitle2.copyWith(fontWeight: FontWeight.w600);
 
 final prefHeaderTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w700);
 
 final prefBodyTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600);
 
-final prefSubTitleTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600, color: bodyColor);
+final prefSubTitleTextStyle =
+    kBodyTextStyle.copyWith(fontWeight: FontWeight.w600, color: bodyColor);
