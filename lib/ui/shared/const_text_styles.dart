@@ -298,13 +298,13 @@ TextStyle newToZuriChatTextstyle = TextStyle(
     color: createAccountColor,
     fontWeight: FontWeight.w500,
     fontFamily: 'Lato');
-    TextStyle voiceCallTextstyle = TextStyle(
+TextStyle voiceCallTextstyle = TextStyle(
     fontSize: 13.sp,
     color: kcDisplayChannelColor,
     fontWeight: FontWeight.w400,
     fontFamily: 'Lato');
 
-     TextStyle viewProfileTextstyle = TextStyle(
+TextStyle viewProfileTextstyle = TextStyle(
     fontSize: 15.sp,
     color: headerColor,
     fontWeight: FontWeight.w700,
@@ -355,10 +355,32 @@ TextStyle allDmsDayStyle = TextStyle(
     fontWeight: FontWeight.w400,
     fontFamily: 'Lato');
 
-final leftSideBarPrefTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w600);
+final changeRegionStyle = TextStyle(
+  color: createAccountColor,
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+final regionStyle = TextStyle(
+  color: leftNavBarColor,
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+ final bottomTextStyle = TextStyle(
+        fontFamily: 'Lato',
+        fontSize: 18.sp,
+        color: Color.fromRGBO(153, 153, 153, 1),
+        fontWeight: FontWeight.w400);
+  
+
+final leftSideBarPrefTextStyle =
+    subtitle2.copyWith(fontWeight: FontWeight.w600);
 
 final prefHeaderTextStyle = subtitle2.copyWith(fontWeight: FontWeight.w700);
 
 final prefBodyTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600);
 
-final prefSubTitleTextStyle = kBodyTextStyle.copyWith(fontWeight: FontWeight.w600, color: bodyColor);
+final prefSubTitleTextStyle =
+    kBodyTextStyle.copyWith(fontWeight: FontWeight.w600, color: bodyColor);
