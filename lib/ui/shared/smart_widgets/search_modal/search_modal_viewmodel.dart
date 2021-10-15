@@ -10,10 +10,8 @@ import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
-import 'package:zc_desktop_flutter/services/files_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
-import 'package:zc_desktop_flutter/services/user_service.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/search_modal/users_local_data.dart';
 
 class SearchViewModel extends BaseViewModel {
