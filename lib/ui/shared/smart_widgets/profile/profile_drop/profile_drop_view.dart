@@ -10,7 +10,6 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_drop/
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_edit/profile_edit_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/status_dialog/status_dialog_min/status_dialog_min_view.dart';
 
-
 // ignore: must_be_immutable
 class ProfileDropdownView extends StatelessWidget {
   ProfileDropdownView({Key? key}) : super(key: key);
@@ -19,9 +18,7 @@ class ProfileDropdownView extends StatelessWidget {
   late double height, width, xPosition, yPosition;
   late OverlayEntry _floatingDropdown;
 
-
   get floatingDropDown => floatingDrop;
-
 
   get floatingDrop => _floatingDropdown;
 
@@ -59,8 +56,8 @@ class ProfileDropdownView extends StatelessWidget {
             _toggleDropdown(context: context, model: model);
           },
           child: Container(
-            width: 30.w,
-            height: 30.h,
+            width: 30,
+            height: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -115,6 +112,7 @@ class DropDown extends StatelessWidget {
           child: Column(children: <Widget>[
             ProfilePicture(
               user: model.user,
+              member: model.member,
             ),
             Container(
               width: 250.w,
@@ -228,7 +226,12 @@ class DropDownItem extends StatelessWidget {
 class ProfilePicture extends StatelessWidget {
   final bool isActive = false;
   final User user;
-  ProfilePicture({Key? key, required this.user}) : super(key: key);
+  final Member member;
+  ProfilePicture({
+    Key? key,
+    required this.user,
+    required this.member,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -257,7 +260,7 @@ class ProfilePicture extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${user.displayName.isEmpty ? 'Anonymous' : user.displayName}',
+                '${user.displayName.isEmpty ? 'Anonymous' : member.displayName}',
                 style: subtitle3b,
               ),
               verticalSpaceTiny,

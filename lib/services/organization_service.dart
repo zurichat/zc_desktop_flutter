@@ -18,9 +18,10 @@ class OrganizationService {
   final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
   final _apiService = locator<Api>();
+  
 
   /// This gets the currently logged in user respose
-  Auth get _auth {
+  Auth get auth {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
     return Auth.fromJson(jsonDecode(auth as String));
   }
@@ -68,7 +69,7 @@ class OrganizationService {
   Future<List<Organization>> getOrganizations() async {
     // Getting stored AuthResponse from local storage
     final response = await _apiService.fetchOrganizationsListFromRemote(
-        email: _auth.user!.email, token: _auth.user!.token);
+        email: auth.user!.email, token: auth.user!.token);
     log.i(response);
     return OrganizationResponse.fromJson(response).data;
   }
@@ -78,8 +79,16 @@ class OrganizationService {
       {String? email, String? token}) async {
     await _apiService.addLoggedInUserToOrganization(
         organizationId: organizationId,
-        email: email ?? _auth.user!.email,
-        token: token ?? _auth.user!.token);
+        email: email ?? auth.user!.email,
+        token: token ?? auth.user!.token);
+  }
+
+  /// This is used to add user to an organization_service
+  Future<dynamic> invitePeopleToOrganization(
+      String organizationId, List<String> email) async {
+    final response = await _apiService.invitePeopleToOrganization(
+        organizationId: organizationId, email: email, token: auth.user!.token);
+    log.i(response);
   }
 
   ///This is used to get the list of users in an organization
@@ -95,10 +104,10 @@ class OrganizationService {
   Future<void> createOrganization(String email) async {
     // Getting stored AuthResponse from local storage
     final response = await _apiService.createOrganizationUsingEmail(
-        email: email, token: _auth.user!.token);
+        email: email, token: auth.user!.token);
     log.i(response);
-    addMemberToOrganization(response['data']['_id']);
-    String insertedId = response['data']['InsertedID'];
+    //addMemberToOrganization(response['data']['_id']);
+    String insertedId = response['data']['organization_id'];
     Organization insertedOrganisation = await _getOrganization(insertedId);
     _addOrgToOrganizationsList(insertedOrganisation);
   }
@@ -134,7 +143,7 @@ class OrganizationService {
   /// This is used to get a single organization_service
   Future<Organization> _getOrganization(String organizationId) async {
     final response = await _apiService.fetchOrganizationDetails(
-        organizationId: organizationId, token: _auth.user!.token);
+        organizationId: organizationId, token: auth.user!.token);
     log.i(response);
     return Organization.fromJson(response);
   }
@@ -164,20 +173,12 @@ class OrganizationService {
   /// This is used to get a single user profile
   Future<UserProfile> getUserProfile(
       String organizationId, String memberId) async {
-    /* final response = await _zuriApiService.getUserProfile(orgId: organizationId,memberId: memberId);
+    final response = await _apiService.getUserProfile(
+        orgId: organizationId, memberId: memberId);
     log.i(response);
-    return UserProfile.fromJson(response); */
+    return UserProfile.fromJson(response);
 
-    return UserProfile(
-        firstName: 'Lucy',
-        lastName: 'CocoMelon',
-        displayName: 'sweetcoco',
-        imageUrl:
-            'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg',
-        userName: 'sweetcoco',
-        phone: 'phone',
-        pronouns: 'pronouns',
-        bio: 'bio',
-        status: 'status');
+    /* final response = await _zuriApiService.fetchUserDetails(userId: memberId,token:  auth.user!.token);
+    var user = User.fromJson(response); */
   }
 }

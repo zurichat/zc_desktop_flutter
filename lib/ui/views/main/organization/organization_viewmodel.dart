@@ -19,6 +19,7 @@ class OrganizationViewModel extends BaseViewModel {
   final _windowTitleBarService = locator<WindowTitleBarService>();
 
   int selectedChannelIndex = 0;
+  int _selectedMenuIndex = 7;
 
   ScrollController controller = ScrollController();
 
@@ -48,15 +49,24 @@ class OrganizationViewModel extends BaseViewModel {
 
   bool get showChannels => _showChannels;
 
+  int get selectedMenuIndex => _selectedMenuIndex;
+
   /// This is the first function that is fired when the viewmodel is activated
   void setup() async {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
     _organizationService.saveOrganizationId(_currentOrganization.id);
+    _organizationService.saveMemberId(_currentOrganization.memberId);
     log.d('current organization id ${_currentOrganization.id}');
+    log.d('current organization id ${_currentOrganization.memberId}');
     _windowTitleBarService.setHome(true);
     //notifyListeners();
     // log.i(_channels);
+  }
+
+  void updateSelectedMenuIndex(int index) {
+    _selectedMenuIndex = index;
+    notifyListeners();
   }
 
   /// function fired when another workspace is tapped on.
@@ -69,6 +79,7 @@ class OrganizationViewModel extends BaseViewModel {
       await runBusyFuture(setupOrganization());
       // Save the newly selected org id in preferences when a new organization item is tapped
       _organizationService.saveOrganizationId(_currentOrganization.id);
+      _organizationService.saveMemberId(_currentOrganization.memberId);
       setSelectedOrganization(index);
       _currentOrganization = organization[getSelectedOrganizationIndex()!];
     }
@@ -86,8 +97,8 @@ class OrganizationViewModel extends BaseViewModel {
 
   Future<void> setupOrganization() async {
     await getOrganizations();
-    await getChannels();
     await getDMs();
+    await getChannels();
   }
 
   Future<void> getOrganizations() async {
@@ -103,13 +114,28 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   Future<void> getDMs() async {
+    _dms = [];
+    Auth auth = _organizationService.auth;
     _currentOrganization = organization[getSelectedOrganizationIndex()!];
     List<DMRoomsResponse> res =
         await _dmService.getDMs(_currentOrganization.id);
-    for (var user_id in res) {
+    for (var room in res) {
       UserProfile userProfile = await _organizationService.getUserProfile(
-          _currentOrganization.id, user_id.roomUserIds.last);
-      DM dm = DM(userId: user_id.roomUserIds.last, userProfile: userProfile);
+          _currentOrganization.id, room.roomUserIds.last);
+      DM dm = DM(
+          otherUserProfile: userProfile,
+          roomInfo: room,
+          currentUserProfile: UserProfile(
+              firstName: auth.user!.firstName,
+              lastName: auth.user!.lastName,
+              displayName: auth.user!.displayName,
+              imageUrl: auth.user!.displayName,
+              userName: auth.user!.displayName,
+              userId: auth.user!.id,
+              phone: auth.user!.phone,
+              pronouns: auth.user!.displayName,
+              bio: auth.user!.displayName,
+              status: auth.user!.displayName));
       _dms.add(dm);
     }
     log.i('${_dms}');
@@ -143,20 +169,23 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToSavedItems() {
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
   }
 
   void goToUserPeopleGroup() {
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.peopleUserGroupView,
         id: 1);
   }
 
   void goTodoView() {
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.todoView, id: 1);
   }
 
   void goToDmView(int index) {
-    //_dmService.setUser();
+    _dmService.setExistingRoomInfo(_dms[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
@@ -168,6 +197,7 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToAllDmView() {
+    notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
   }
 

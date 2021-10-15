@@ -29,20 +29,36 @@ class ProfileDropdownViewModel extends BaseViewModel {
     updatedAt: '',
     token: '',
   );
+  
+  Member _currentMember = Member(
+    id: '',
+    orgId: '',
+    firstName: '',
+    lastName: '',
+    displayName: '',
+    bio: '',
+    phone: '',
+    pronouns: '',
+    timeZone: '',
+    createdAt: '',
+    updatedAt: '',
+  );
+
+  
 
   User get currentUser => _currentUser;
 
   bool _isDropped = false;
   bool _isHover = false;
 
-  Member _currentMember = Member();
-
-  Member get currentMember => _currentMember;
+  
 
   String get emaill => email;
   bool get isDropped => _isDropped;
   bool get isHover => _isHover;
   User get user => _userService.auth.user!;
+  Member get member => _userService.organization!.member!;
+
 
   setIsDropped() {
     _isDropped = !_isDropped;
@@ -52,10 +68,6 @@ class ProfileDropdownViewModel extends BaseViewModel {
   onEntered(bool isHover) {
     _isHover = isHover;
     notifyListeners();
-  }
-
-  Future<void> getOrganizations() async {
-    _currentMember = await _userService.getmember();
   }
 
   void signOut() async {

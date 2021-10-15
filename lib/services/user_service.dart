@@ -10,12 +10,14 @@ import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 
 const userIdKey = 'userIdKey';
+const orgResponseKey = 'localOrganizationResponse';
 
 class UserService {
   final log = getLogger('UserService');
   final _localStorageService = locator<LocalStorageService>();
   final _api = locator<Api>();
   final _organizationService = locator<OrganizationService>();
+  Organization? organization;
 
   // This gets the currently logged in user respose
   Auth get auth {
@@ -32,7 +34,7 @@ class UserService {
     File? img,
   }) async {
     final orgId = _organizationService.getOrganizationId();
-    final memId = auth.user!.id;
+    final memId = _organizationService.getOrganizationId();
     final response = await _api.UpdateUserPicture(
       organizationId: orgId,
       memberId: memId,
@@ -43,7 +45,6 @@ class UserService {
   }
 
   Future<void> updateUser({
-    String? token,
     String? bio,
     String? displayName,
     String? firstName,
@@ -53,11 +54,11 @@ class UserService {
     String? timeZone,
   }) async {
     final orgId = _organizationService.getOrganizationId();
-    final memId = auth.user!.id;
+    final memId = _organizationService.getOrganizationId();
     final response = await _api.updateUserDetail(
       organizationId: orgId,
       memberId: memId,
-      token: token ?? auth.user!.token,
+      token: auth.user!.token,
       bio: bio,
       displayName: displayName,
       firstName: firstName,
@@ -67,26 +68,16 @@ class UserService {
       timeZone: timeZone,
     );
     log.i(response);
-    // return response;
+    organization= OrganizationResponse.fromJson(response).data as Organization?;
+    _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
   }
 
   /// This is used to get a single user_service
-  Future<Member> getmember() async {
+  Future<void> getmember() async {
     final orgId = _organizationService.getOrganizationId();
-    final memId = auth.user!.id;
-    final response = await _api.getMemberDetails(
+    final memId = _organizationService.getMemberId();
+    final response = await _api.fetchMemberDetail(
         organizationId: orgId, memberId: memId, token: auth.user!.token);
-    log.i(response);
-    return Member.fromJson(response);
-  }
-
-  void saveOrganizationId(String orgId) {
-    log.i('saved orgId ${orgId}');
-    _localStorageService.saveToDisk(organizationIdKey, orgId);
-    /*Future<User> getUserDetails(String? id) async {
-    final response =
-        await _apiService.get(Uri.parse('https://api.zuri.chat/users/$id}'));
-    return User.fromJson(response);
-  }*/
+    return response;
   }
 }

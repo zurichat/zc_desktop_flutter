@@ -15,32 +15,44 @@ class ProfileEditViewModel extends FormViewModel {
   final _userService = locator<UserService>();
   final log = getLogger('ProfileEditViewModel');
   final _organizationService = locator<OrganizationService>();
-  final GlobalKey<FormFieldState> _fullNameFormKey =
-      GlobalKey<FormFieldState>();
 
-  bool _isFormValid() {
-    return (_fullNameFormKey.currentState!.isValid);
-  }
+
+  // bool _isFormValid() {
+  //   return (_fullNameFormKey.currentState!.isValid);
+  // }
+
+  Member _currentMember = Member(
+    id: '',
+    orgId: '',
+    firstName: '',
+    lastName: '',
+    displayName: '',
+    bio: '',
+    phone: '',
+    pronouns: '',
+    timeZone: '',
+    createdAt: '',
+    updatedAt: '',
+  );
+
+  Member get currentMember => _currentMember;
 
   bool _isSaveButtonEnabled = false;
 
   File? _choosenImage;
 
-  Member _currentMember = Member();
-
-  Member get currentMember => _currentMember;
 
   File? get choosenImage => _choosenImage;
 
-  get isFormValid => _isFormValid();
+  // get isFormValid => _isFormValid();
 
-  get isSubmit => _isSaveButtonEnabled;
+  // get isSubmit => _isSaveButtonEnabled;
 
-  void onValidate() {
-    _isSaveButtonEnabled = _isFormValid();
-    _fullNameFormKey.currentState!.validate();
-    notifyListeners();
-  }
+  // void onValidate() {
+  //   _isSaveButtonEnabled = _isFormValid();
+  //   _fullNameFormKey.currentState!.validate();
+  //   notifyListeners();
+  // }
 
   Future<void> postDetails(
     String bio,
@@ -64,7 +76,8 @@ class ProfileEditViewModel extends FormViewModel {
     String pronoun,
     String timeZone,
   ) async {
-    final response = await _userService.updateUser(
+    try {
+    await _userService.updateUser(
       bio: whoValue,
       displayName: displayNameValue,
       firstName: firstNameValue,
@@ -73,8 +86,14 @@ class ProfileEditViewModel extends FormViewModel {
       pronoun: pronounValue,
       timeZone: timeZoneValue,
     );
+    } catch(e) {
+      if (e.toString().contains('40')) {
+        throw Failure('');
+      }
+      throw Failure('');
+    }
     // Do something after save
-    return response;
+    
   }
 
   Future<void> postPicture(
