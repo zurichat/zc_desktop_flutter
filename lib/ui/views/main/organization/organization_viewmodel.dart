@@ -139,6 +139,7 @@ class OrganizationViewModel extends BaseViewModel {
       _dms.add(dm);
     }
     log.i('${_dms}');
+    _organizationService.setDms(_dms);
   }
 
   void openChannelsList() {

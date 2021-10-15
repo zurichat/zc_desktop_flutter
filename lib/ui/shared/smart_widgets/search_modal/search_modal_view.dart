@@ -479,7 +479,13 @@ class SearchWidget extends HookViewModelWidget<SearchViewModel> {
                           Navigator.pop(context, true);
                           model.toggleTextFieldActivated();
                           text.clear();
-                          model.goToChannelsView();
+                          if (model.searchList.elementAt(index).object ==
+                              'dm') {
+                            model.goToDmView();
+                          } else if (model.searchList.elementAt(index).object ==
+                              'channel') {
+                            model.goToChannelsView();
+                          }
                           model.searchNavigate(model.searchList[index]);
                         });
                       } else {

@@ -20,6 +20,7 @@ class OrganizationService {
   final _localStorageService = locator<LocalStorageService>();
   final _apiService = locator<Api>();
   Organization? organization;
+  List<DM> _dms = [];
 
   /// This gets the currently logged in user respose
   Auth get auth {
@@ -27,6 +28,14 @@ class OrganizationService {
     return Auth.fromJson(jsonDecode(auth as String));
   }
   
+
+  void setDms(List<DM> dm) {
+    _dms = dm;
+  }
+
+  List<DM> get dm {
+    return _dms;
+  }
 
   void saveOrganizationId(String orgId) {
     log.i('saved orgId ${orgId}');
