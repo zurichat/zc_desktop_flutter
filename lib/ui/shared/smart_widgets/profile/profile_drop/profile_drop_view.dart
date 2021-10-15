@@ -113,7 +113,9 @@ class DropDown extends StatelessWidget {
             color: kcBackgroundColor2,
             child: Column(children: <Widget>[
               ProfilePicture(
-                user: model.user,
+                user: model.user, 
+                // member: model.member,
+                displayName: model.currentMember.displayName,
               ),
               Container(
                 padding:
@@ -234,8 +236,14 @@ class DropDownItem extends StatelessWidget {
 
 class ProfilePicture extends StatelessWidget {
   final bool isActive = false;
+  final String? displayName;
   final User user;
-  ProfilePicture({Key? key, required this.user}) : super(key: key);
+  // final Member member;
+  ProfilePicture({
+    Key? key, this.displayName,
+    required this.user,
+    // required this.member,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -257,15 +265,6 @@ class ProfilePicture extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-        // Container(
-        //   height: 60.h,
-        //   width: 50.w,
-        //   decoration: BoxDecoration(
-        //     shape: BoxShape.rectangle,
-        //     borderRadius: BorderRadius.circular(5),
-        //     color: kcSuccessColor,
-        //   ),
-        // ),
         horizontalSpaceRegular,
         Container(
           width: 100.w,
@@ -273,7 +272,7 @@ class ProfilePicture extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${user.displayName.isEmpty ? 'Anonymous' : user.displayName}',
+                '${displayName!.isEmpty ? 'Anonymous' : displayName}',
                 style: subtitle3b,
               ),
               verticalSpaceTiny,

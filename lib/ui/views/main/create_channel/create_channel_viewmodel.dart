@@ -31,14 +31,14 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
 
   List<Channel> _channels = [];
 
-  List<Channel> _newChannel = [
-    Channel(
-          id: '1',
-          name: 'team-zuri',
-          private: false,
-          description: 'All about Zuri Main Channel',
-          owner: ''),
-  ];
+  // List<Channel> _newChannel = [
+  //   Channel(
+  //         id: '1',
+  //         name: 'team-zuri',
+  //         private: false,
+  //         description: 'All about Zuri Main Channel',
+  //         owner: ''),
+  // ];
   
   List<Channel> get channels => _channels;
 

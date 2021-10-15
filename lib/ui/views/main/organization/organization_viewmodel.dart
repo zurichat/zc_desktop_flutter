@@ -21,8 +21,6 @@ class OrganizationViewModel extends BaseViewModel {
   int selectedChannelIndex = 0;
   int _selectedMenuIndex = 7;
 
-  
-
   ScrollController controller = ScrollController();
 
   Organization _currentOrganization = Organization();
@@ -58,7 +56,9 @@ class OrganizationViewModel extends BaseViewModel {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
     _organizationService.saveOrganizationId(_currentOrganization.id);
+    _organizationService.saveMemberId(_currentOrganization.memberId);
     log.d('current organization id ${_currentOrganization.id}');
+    log.d('current organization id ${_currentOrganization.memberId}');
     _windowTitleBarService.setHome(true);
     //notifyListeners();
     // log.i(_channels);
@@ -79,6 +79,7 @@ class OrganizationViewModel extends BaseViewModel {
       await runBusyFuture(setupOrganization());
       // Save the newly selected org id in preferences when a new organization item is tapped
       _organizationService.saveOrganizationId(_currentOrganization.id);
+      _organizationService.saveMemberId(_currentOrganization.memberId);
       setSelectedOrganization(index);
       _currentOrganization = organization[getSelectedOrganizationIndex()!];
     }
@@ -98,7 +99,6 @@ class OrganizationViewModel extends BaseViewModel {
     await getOrganizations();
     await getDMs();
     await getChannels();
-    
   }
 
   Future<void> getOrganizations() async {
@@ -139,6 +139,7 @@ class OrganizationViewModel extends BaseViewModel {
       _dms.add(dm);
     }
     log.i('${_dms}');
+    _organizationService.setDms(_dms);
   }
 
   void openChannelsList() {
@@ -214,7 +215,6 @@ class OrganizationViewModel extends BaseViewModel {
     }
     return false;
   }
-
 
   @override
   void dispose() {

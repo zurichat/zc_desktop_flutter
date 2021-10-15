@@ -10,10 +10,8 @@ import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
-import 'package:zc_desktop_flutter/services/files_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
-import 'package:zc_desktop_flutter/services/user_service.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/search_modal/users_local_data.dart';
 
 class SearchViewModel extends BaseViewModel {
@@ -24,8 +22,7 @@ class SearchViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
   final _channelsService = locator<ChannelsService>();
   final _localStorageService = locator<LocalStorageService>();
-  final _filesService = locator<FilesService>();
-  final _userService = locator<UserService>();
+
 
   String? _text;
   String? _hintText;
@@ -44,8 +41,8 @@ class SearchViewModel extends BaseViewModel {
   String get text => _text!;
   String get hintText => _hintText!;
   String get textFieldText => _textFieldText!;
-  List<dynamic> _searchList = [];
-  List<dynamic> get searchList => [..._searchList];
+  List<SearchObject> _searchList = [];
+  List<SearchObject> get searchList => [..._searchList];
   List<DummyUser> _userNames = [];
   List<DummyUser> get userDatas => [..._userNames];
   String? selectedTerm;
@@ -55,6 +52,7 @@ class SearchViewModel extends BaseViewModel {
 
   List _searchHistory = [];
   List get searchHistory => _searchHistory;
+  List<Channel> channel = [];
 
   void saveSearch() {
     if (_searchHistory.length < 4) {
@@ -63,11 +61,9 @@ class SearchViewModel extends BaseViewModel {
       _searchHistory.removeAt(3);
       _searchHistory.insert(0, searchQuery);
     }
-    // _searchHistory.add(searchQuery);
 
     _localStorageService.saveToDisk(
         savedSearchKey, json.encode(_searchHistory));
-    //notifyListeners();
   }
 
   void fetchAndSetSearchHistory() async {
@@ -131,10 +127,14 @@ class SearchViewModel extends BaseViewModel {
   }
 
   void getSuggestionsForDM(String query) async {
-    _searchList = await _organizationService.fetchMemberListUsingOrgId(
-        _organizationService.getOrganizationId(),
-        _userService.auth.user!.token);
-    var userList = List.of(_searchList).where((e) {
+    List<DM> dm = _organizationService.dm;
+    for (var item in dm) {
+      _searchList.add(SearchObject(
+          id: item.otherUserProfile.userId,
+          name: item.otherUserProfile.displayName,
+          object: 'dm'));
+    }
+      var userList = List.of(_searchList).where((e) {
       final userLower = e.name.toLowerCase();
       final queryLower = query.toLowerCase();
       return userLower.startsWith(queryLower);
@@ -154,14 +154,14 @@ class SearchViewModel extends BaseViewModel {
           getSuggestionsForChannels(value);
         }
         break;
-      case ButtonType.PEOPLE:
+      case ButtonType.MESSAGE:
         {
           getSuggestionsForDM(value);
         }
         break;
       case ButtonType.FILE:
         {
-          getSuggestionsForFiles(value);
+          //  getSuggestionsForFiles(value);
         }
         break;
 
@@ -171,8 +171,12 @@ class SearchViewModel extends BaseViewModel {
   }
 
   void getSuggestionsForChannels(String query) async {
-    _searchList = await _channelsService.getChannels(
+    channel = await _channelsService.getChannels(
         organizationId: _organizationService.getOrganizationId());
+    for (int x = 0; x < channel.length; x++) {
+      _searchList
+          .add(SearchObject(id: x.toString(), name: channel[x].name, object: 'channel'));
+    }
     var filteredList = List.of(_searchList).where((e) {
       final channelNameToLower = e.name.toLowerCase();
       final queryLower = query.toLowerCase();
@@ -184,7 +188,7 @@ class SearchViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void getSuggestionsForFiles(String query) async {
+  /* void getSuggestionsForFiles(String query) async {
     final response = await _filesService.fetchFileListUsingOrgId();
     _searchList.addAll(response.channelfiles);
     _searchList.addAll(response.threadfiles);
@@ -197,22 +201,27 @@ class SearchViewModel extends BaseViewModel {
     availableListLength = filteredList.length;
     _searchList = filteredList;
     notifyListeners();
-  }
+  }*/
 
   void goToChannelsView() {
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
+  }
+
+  void goToDmView() {
+    _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
   }
 
   void searchNavigate(dynamic data) {
     switch (buttonType) {
       case ButtonType.CHANNELS:
         {
-          searchChannels(data as Channel);
+
+          searchChannels(channel[int.parse(data.id)]);
         }
         break;
-      case ButtonType.PEOPLE:
+      case ButtonType.MESSAGE:
         {
-          searchUser(data as Users);
+          searchDms(data as Users);
         }
         break;
 
@@ -225,8 +234,16 @@ class SearchViewModel extends BaseViewModel {
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView);
   }
 
-  void searchUser(Users user) {
+  void searchDms(Users user) {
     _dmService.setUser(user);
     _navigationService.navigateTo(OrganizationViewRoutes.dmView);
   }
+}
+
+class SearchObject {
+  String id;
+  String name;
+  String object;
+
+  SearchObject({required this.id, required this.name, required this.object});
 }
