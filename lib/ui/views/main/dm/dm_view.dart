@@ -287,6 +287,8 @@ class MessageTile extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(0, 0, 30, 0),
                                   child: Text(message.message),
                                 ),
+
+                                
                                 Padding(
                                   padding: EdgeInsets.all(4),
                                   child: GridView.builder(

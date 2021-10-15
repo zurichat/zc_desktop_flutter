@@ -54,15 +54,27 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future createChannelsUsingOrgId(
+  Future createChannelsUsingOrgId (
       {required sessionId,
       required insertedOrganization,
       String? name,
       String? owner,
       String? description,
-      bool? private}) {
+      bool? private,
+      String? topic,
+      bool? defaultChannel}) async {
     // TODO: implement createChannelsUsingOrgId
-    throw UnimplementedError();
+    //  await Future.delayed(Duration(seconds: 2));
+     return Channel(
+       name: 'zuri main channel',
+       owner: 'CalebJ',
+       description: 'zuri main description',
+       private: false,
+       memberinput: true,
+       member: 10,
+     ).toJson();
+      // throw UnimplementedError();
+      
   }
 
   @override
@@ -81,9 +93,57 @@ class FakeZuriApiService implements Api {
 
   @override
   Future fetchChannelMessages(
-      {required String channelId, required String organizationId}) {
+      {required String channelId, required String organizationId}) async{
     // TODO: implement fetchChannelMessages
-    throw UnimplementedError();
+    await Future.delayed(Duration(seconds: 4));
+    // List<ChannelMessage> channelMessage = [
+      
+    //   '_id': "string",
+    //   'user_id': "string",
+    //   "channel_id": "string",
+    //   "can_reply": true,
+    //   "type": "message",
+    //   "edited": true,
+    //   "files": [
+    //     "string"
+    //   ],
+    //   "timestamp": "2021-10-12T07:25:47.597Z",
+    //   "replies": 0,
+    //   "has_files": true,
+    //   "pinned": true,
+    //   "content": "string",
+    //   "emojis": [
+    //     "string"
+    //   ],
+    //   "event": {
+    //     "additionalProp1": "string",
+    //     "additionalProp2": "string",
+    //     "additionalProp3": "string"
+    //   }
+    //   ];
+
+    // return channelMessage;
+    List<ChannelMessage> channelMessage = [
+
+      ChannelMessage(
+          id: '1',
+          content: 'Hello Ademola',
+          channel_id: '12',
+          timestamp: DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+          user_id: '012'),
+      ChannelMessage(
+          id: '2',
+          content: 'Hello Dedan',
+          channel_id: '23',
+          timestamp: DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+          user_id: '023'),
+    ];
+
+     return channelMessage;
   }
 
   @override
@@ -100,36 +160,45 @@ class FakeZuriApiService implements Api {
       {required String organizationId, required token}) async {
     await Future.delayed(Duration(seconds: 2));
 
-    List<Channel> channelsList = [
+    List<Channel> channelList = [
       Channel(
           id: '1',
           name: 'team-falcons',
           private: false,
           description: '',
-          owner: ''),
+          owner: '',
+          memberinput: true,
+          member: 10),
       Channel(
           id: '2',
           name: 'team-desktop',
           private: false,
           description: '',
-          owner: ''),
+          owner: '',
+          memberinput: true,
+          member: 43),
       Channel(
           id: '3',
           name: 'test-test',
           private: false,
           description: '',
-          owner: ''),
+          owner: '',
+          memberinput: true,
+          member: 75),
       Channel(
           id: '4',
           name: 'announcements',
           private: false,
           description: '',
-          owner: ''),
+          owner: '',
+          memberinput: true,
+          member: 101),
       Channel(
-          id: '5', name: 'general', private: false, description: '', owner: ''),
+          id: '5', name: 'general', private: false, description: '', owner: '', memberinput: true,
+          member: 99),
     ];
 
-    return channelsList;
+     return channelList;
   }
 
   @override
@@ -322,9 +391,17 @@ class FakeZuriApiService implements Api {
 
   @override
   Future sendMessageToChannel(
-      {channel_id, senderId, message, organization_id}) {
+      {channel_id, senderId, message, organization_id}) async{
     // TODO: implement sendMessageToChannel
-    throw UnimplementedError();
+    await Future.delayed(Duration(seconds: 2));
+     return ChannelMessage(
+          id: '15',
+          content: 'I am fine',
+          channel_id: '15',
+          timestamp: DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+              .format(DateTime.now())
+              .toString(),
+          user_id: '015').toJson();
   }
 
   @override
