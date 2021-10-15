@@ -43,7 +43,7 @@ dependencies:
   dio: ^4.0.0
   dio_cache_interceptor: ^3.0.2
   freezed_annotation:
-  json_annotation:
+  json_annotation: ^4.3.0
   file_picker: ^4.1.1
   internet_connection_checker: ^0.0.1+2
   connectivity_plus: ^1.4.0

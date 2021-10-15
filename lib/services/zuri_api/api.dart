@@ -351,4 +351,8 @@ abstract class Api {
 
   //Create Todo
   Future<void> createTodo(Todo todo, String token);
+
+  Future<Map<String, dynamic>> pinMessage(var messageId, var orgId);
+
+  Future<Map<String, dynamic>> fetchPinnedMessgaes(var roomId, var orgId);
 }
