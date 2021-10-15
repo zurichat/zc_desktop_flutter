@@ -31,7 +31,8 @@ Uri updatePasswordUri(String code) =>
 
 Uri getUserProfileUri(String userId) =>
     Uri(scheme: scheme, host: host, path: '/users/$userId}');
-Uri loginUri(String userId) => Uri(scheme: scheme, host: host, path: '/users/$userId');
+Uri loginUri(String userId) =>
+    Uri(scheme: scheme, host: host, path: '/users/$userId');
 
 // Organization Endpoints
 
@@ -139,4 +140,18 @@ Uri dmReactToMessage(String orgId, String roomId, String messageId) => Uri(
     host: dmHost,
     path:
         '/api/v1/org/${orgId}/rooms/${roomId}/messages/${messageId}/reactions');
+
+Uri pinMessageUrl(String orgId, String messageId) => Uri(
+      scheme: scheme,
+      host: dmHost,
+      path: '/api/v1/org/${orgId}/messages/${messageId}/pin ',
+    );
+
+Uri fetchPinnedMessagesUrl(String roomId, String orgId) => Uri(
+      scheme: scheme,
+      host: dmHost,
+      path: '/api/v1/org/${orgId}/rooms/${roomId}/links',
+    );
+
+
 //
