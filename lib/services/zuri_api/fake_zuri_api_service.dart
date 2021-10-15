@@ -132,7 +132,6 @@ class FakeZuriApiService implements Api {
     return channelsList;
   }
 
-
   @override
   Future fetchDMs({orgId, userId}) async {
     await Future.delayed(Duration(seconds: 2));
@@ -592,6 +591,16 @@ class FakeZuriApiService implements Api {
   }
 
   @override
+  Future<Map<String, dynamic>> pinMessage(messageId, orgId) async {
+    await Future.delayed(Duration(seconds: 1));
+    return {
+      'message_id': messageId,
+      'pinned': [messageId],
+      'Event': 'pin_message'
+    };
+  }
+
+  @override
   Future<Map<String, dynamic>> updateOrganizationDetails({
     required String organizationId,
     required token,
@@ -603,6 +612,15 @@ class FakeZuriApiService implements Api {
     return {
       'code': 200,
       'message': 'no data',
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> fetchPinnedMessgaes(roomId, orgId) async {
+    await Future.delayed(Duration(seconds: 1));
+    return {
+      'links': ['6165848888888294bffc7a0d', '6165899559598294bffc7a0d'],
+      'room_id': roomId
     };
   }
 }
