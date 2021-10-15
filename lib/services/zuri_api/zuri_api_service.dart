@@ -568,13 +568,17 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Member> patchProfilePicture(
-      {required String organizationId,
-      required String memberId,
-      required String token}) {
-    // TODO: implement patchProfilePicture
+  Future<Map<String, dynamic>> deleteOrganization(
+      {required String organizationId, required token}) {
     throw UnimplementedError();
   }
 
- 
+  @override
+  Future<Map<String, dynamic>> updateOrganizationDetails(
+      {required String organizationId,
+      required token,
+      String? url,
+      String? name}) {
+    throw UnimplementedError();
+  }
 }

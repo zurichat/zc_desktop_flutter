@@ -47,6 +47,7 @@ class ProfileDropdownViewModel extends BaseViewModel {
   
 
   User get currentUser => _currentUser;
+  Member get currentMember => _currentMember;
 
   bool _isDropped = false;
   bool _isHover = false;
@@ -70,9 +71,10 @@ class ProfileDropdownViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void signOut() async {
+  // void signOut() async {
+  
+  void signOut() {
     _windowTitleBarService.setHome(false);
-    Future.delayed(Duration(milliseconds: 10));
     _authService.logOut(_userService.auth.user!.token.toString());
     _navigationService.pushNamedAndRemoveUntil(Routes.loginView);
   }

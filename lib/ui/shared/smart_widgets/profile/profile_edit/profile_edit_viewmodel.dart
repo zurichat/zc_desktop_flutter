@@ -37,7 +37,7 @@ class ProfileEditViewModel extends FormViewModel {
 
   Member get currentMember => _currentMember;
 
-  bool _isSaveButtonEnabled = false;
+  
 
   File? _choosenImage;
 

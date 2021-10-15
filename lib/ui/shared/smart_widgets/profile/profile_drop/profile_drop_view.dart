@@ -26,8 +26,8 @@ class ProfileDropdownView extends StatelessWidget {
     return OverlayEntry(builder: (context) {
       return Positioned(
         right: 100,
-        width: 250.w,
-        height: 350.h,
+        // width: 250.w,
+        // height: 400.h,
         top: 60.h,
         child: Container(
           child: Material(
@@ -107,73 +107,79 @@ class DropDown extends StatelessWidget {
       viewModelBuilder: () => ProfileDropdownViewModel(),
       builder: (context, model, child) => Material(
         elevation: 20,
-        child: Container(
-          color: kcBackgroundColor2,
-          child: Column(children: <Widget>[
-            ProfilePicture(
-              user: model.user,
-              member: model.member,
-            ),
-            Container(
-              width: 250.w,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: OutlinedButton(
-                onPressed: () {
-                  onPress!();
-                  showDialog(
-                      context: context,
-                      builder: (context) => StatusDialogMinView());
-                },
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Icon(
-                    Icons.edit_outlined,
-                    color: headerColor,
+        child: Expanded(
+          child: Container(
+            width: 300.w,
+            color: kcBackgroundColor2,
+            child: Column(children: <Widget>[
+              ProfilePicture(
+                user: model.user, member: model.member,
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                child: OutlinedButton(
+                  onPressed: () {
+                    onPress!();
+                    showDialog(
+                        context: context,
+                        builder: (context) => StatusDialogMinView());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(
+                        Icons.edit_outlined,
+                        color: headerColor,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            DropDownItem(
-              text: 'Clear Status',
-            ),
-            DropDownItem(
-              text: 'Set yourself as Away',
-            ),
-            DropDownItem(
-              text: 'Pause Notificatons',
-            ),
-            Divider(),
-            DropDownItem(
-              onTap: () {
-                onPress!();
-                showDialog(
-                    context: context, builder: (context) => ProfileEditView());
-              },
-              text: 'Edit Profile',
-            ),
-            DropDownItem(
-              onTap: () {
-                onPress!();
-              },
-              text: 'View Profile',
-            ),
-            DropDownItem(
-              onTap: () {
-                onPress!();
-                showDialog(
-                    context: context, builder: (context) => PreferenceView());
-              },
-              text: 'Preferences',
-            ),
-            Divider(),
-            DropDownItem(
-              text: 'Sign out of Zuri',
-              onTap: () {
-                onPress!();
-                model.signOut();
-              },
-            )
-          ]),
+              DropDownItem(
+                text: 'Clear Status',
+              ),
+              DropDownItem(
+                text: 'Set yourself as Away',
+              ),
+              DropDownItem(
+                text: 'Pause Notificatons',
+              ),
+              Divider(),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                  showDialog(
+                      context: context,
+                      builder: (context) => ProfileEditView());
+                },
+                text: 'Edit Profile',
+              ),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                },
+                text: 'View Profile',
+              ),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                  showDialog(
+                      context: context, builder: (context) => PreferenceView());
+                },
+                text: 'Preferences',
+              ),
+              Divider(),
+              DropDownItem(
+                text: 'Sign out of Zuri',
+                onTap: () {
+                  onPress!();
+                  model.signOut();
+                },
+              )
+            ]),
+          ),
         ),
       ),
     );
@@ -204,18 +210,21 @@ class DropDownItem extends StatelessWidget {
                 child: Container(
                   color: model.isHover ? kcPrimaryColor : kcBackgroundColor2,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        text,
-                        style: model.isHover ? subtitlec2 : subtitle2,
-                      ),
-                      Spacer(),
-                      Icon(
-                        iconData,
-                        color: model.isHover ? kcBackgroundColor2 : headerColor,
-                      ),
-                    ],
+                  child: Expanded(
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          text,
+                          style: model.isHover ? subtitlec2 : subtitle2,
+                        ),
+                        Spacer(),
+                        Icon(
+                          iconData,
+                          color:
+                              model.isHover ? kcBackgroundColor2 : headerColor,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
