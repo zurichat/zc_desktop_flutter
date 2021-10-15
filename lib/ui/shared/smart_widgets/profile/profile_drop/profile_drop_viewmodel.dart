@@ -35,7 +35,7 @@ class ProfileDropdownViewModel extends BaseViewModel {
     orgId: '',
     firstName: '',
     lastName: '',
-    displayName: '',
+    displayName: 'perpKate',
     bio: '',
     phone: '',
     pronouns: '',

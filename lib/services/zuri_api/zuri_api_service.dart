@@ -227,7 +227,7 @@ class ZuriApiService implements Api {
   /* ORGANIZATION SERVICE */
 
   @override
-  Future<void> addLoggedInUserToOrganization(
+  Future<Map<String, dynamic>> addLoggedInUserToOrganization(
       {required String organizationId,
       required String email,
       required token}) async {
@@ -236,6 +236,7 @@ class ZuriApiService implements Api {
       body: {'user_email': email},
       headers: {'Authorization': 'Bearer ${token}'},
     );
+    throw UnimplementedError();
   }
 
   @override
@@ -466,7 +467,6 @@ class ZuriApiService implements Api {
     return await _get(dmUserProfile(orgId, memberId));
   }
 
-
   Future<List<Todo>> fetchTodoList() async {
     final response = await _get(getAllTodoUri);
     log.i(response);
@@ -496,15 +496,15 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void>fetchMemberDetail(
+  Future<void> fetchMemberDetail(
       {required String organizationId,
       required String memberId,
       required String token}) async {
     final uri = getMemberIdUri(organizationId, memberId);
     final response =
         await _get(uri, headers: {'Authorization': 'Bearer $token'});
-    
-      Member.fromJson(response['data']);
+
+    Member.fromJson(response['data']);
   }
 
   @override

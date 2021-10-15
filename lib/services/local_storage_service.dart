@@ -14,7 +14,7 @@ class LocalStorageService {
   static const String prefNotificationKey = 'notificationSetting';
   static const String prefSideBarKey = 'sideBarSetting';
   static const String prefThemesKey = 'themesSetting';
-  static const String orgResponseKey = 'localOrganizationResponse';
+  static const String organizationResponseKey = 'localOrganizationResponse';
 
   //AuthResponse getter
   AuthResponse? get authResponse {
@@ -179,7 +179,7 @@ class LocalStorageService {
   }
 
   OrganizationResponse? get organizationResponse {
-    var organizationResponseJson = getFromDisk(orgResponseKey);
+    var organizationResponseJson = getFromDisk(organizationResponseKey);
     if (organizationResponseJson == null) {
       return null;
     }
@@ -188,6 +188,6 @@ class LocalStorageService {
 
   //OrgResponse setter
   void setOrganizationResponse(OrganizationResponse? organizationResponseToSave) =>
-      saveToDisk(orgResponseKey, jsonEncode(organizationResponseToSave.toString()));
+      saveToDisk(organizationResponseKey, jsonEncode(organizationResponseToSave.toString()));
     
 }

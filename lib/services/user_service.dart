@@ -19,11 +19,17 @@ class UserService {
   final _organizationService = locator<OrganizationService>();
   Organization? organization;
 
+
   // This gets the currently logged in user respose
   Auth get auth {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
     return Auth.fromJson(jsonDecode(auth as String));
   }
+
+  // Organization get organization {
+  //   final organisation = _localStorageService.getFromDisk(localOrganizationResponseKey);
+  //   return Organization.fromJson(jsonDecode(organisation as String));
+  // }
 
   String getUserId() {
     return _localStorageService.getFromDisk(userIdKey) as String;
@@ -68,8 +74,8 @@ class UserService {
       timeZone: timeZone,
     );
     log.i(response);
-    organization= OrganizationResponse.fromJson(response).data as Organization?;
-    _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
+    organization = OrganizationResponse.fromJson(response).data as Organization?;
+    _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(organization));
   }
 
   /// This is used to get a single user_service
