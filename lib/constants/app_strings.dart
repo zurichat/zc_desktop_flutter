@@ -1,6 +1,7 @@
 const String AppNameText = 'Zuri Chat';
 const String CreateAccountText = 'Create Account';
 const String EmailHintText = 'someone@gmail.com';
+const String FullNameHintText = 'John Doe';
 const String PasswordHintText = 'password';
 const String PolicyText =
     'By signing up, you agree that you have accepted our User Notice and Privacy Policy';
@@ -58,6 +59,7 @@ const String TimePlaceholder = '13:02';
 const String ImagePlaceholder = 'B';
 
 const String SavedItems = 'Saved Items';
+const String AllDms = 'All DMs';
 const String SearchModalHintText = 'Find in direct messages with rafiu';
 const String LookingForWidget = 'I’m looking for...';
 const String ButtonText = 'Messages';
@@ -95,6 +97,8 @@ const String PendingText = 'Pending';
 const String ArchiveText = 'Archive';
 const String TrashText = 'Trash';
 const String CreateTodo = 'Create a new todo';
+const String TodoTitle = 'Create a prototype';
+const String TodoTitle2 = 'Create a Prototype Mobile for \nGet Notification on Slack';
 const String TodoTextOne =
     'Todo helps to keep track of tasks. They are best when created \nspecifically for a task with subsequent sub tasks';
 const String TodoTextTwo = 'Title';
@@ -116,12 +120,14 @@ const String SuccessSubtitle =
 const String ResetTitle = 'Check your email for code';
 const String ConfirmTitle = 'Next, confirm your email address';
 
-const String InvalidErrorMessage = 'Invalid Credential. Please Check you details and try again.';
-const String EmailAlreadyInUseError = 'Email address already in use. Use another email or try login.';
+const String InvalidErrorMessage =
+    'Invalid Credential. Please Check you details and try again.';
+const String EmailAlreadyInUseError =
+    'Email address already in use. Use another email or try login.';
 const String DefaultProfilePictureUrl = 'https://i.stack.imgur.com/l60Hf.png';
-const String UserAdditionErrorMessage = 'User is already part of the workspace or user does not exit.';
+const String UserAdditionErrorMessage =
+    'User is already part of the workspace or user does not exit.';
 const String UserAdittionSuccessMessage = 'User added successfully';
-
 
 const String profileView = 'Profile View';
 const String voiceCall = 'Voice call';
@@ -148,3 +154,12 @@ const String editProfile = 'Edit Profile';
  const String IndiaText = 'India (English)';
  const String UAEText = 'UAE (Arabic)';
  
+//Display Menu
+const String threads = 'Threads';
+const String allDMs = 'All DMs';
+const String draft = 'Draft';
+const String savedItems = 'Saved Items';
+const String files = 'Files';
+const String people = 'People and User Groups';
+const String todo = 'Todo';
+const String plugins = 'Plugins';

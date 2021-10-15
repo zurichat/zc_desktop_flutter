@@ -64,6 +64,13 @@ final kCaptionTextStyle = TextStyle(
   fontFamily: 'Lato',
 );
 
+final kSubHeadingTextStyle2 = TextStyle(
+  fontSize: 18.sp,
+  color: kcPrimaryColor,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+
 final kExtraSmallTextStyle = TextStyle(
   overflow: TextOverflow.fade,
   fontSize: 11.sp,
@@ -75,6 +82,13 @@ final authBtnStyle = TextStyle(
   fontSize: 20.sp,
   color: whiteColor,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Lato',
+);
+
+final profileBtnStyle = TextStyle(
+  fontSize: 18.sp,
+  color: whiteColor,
+  // fontWeight: FontWeight.bold,
   fontFamily: 'Lato',
 );
 
@@ -181,6 +195,13 @@ final preferenceStyleBold = TextStyle(
   fontSize: 16.sp,
   fontFamily: 'Lato',
   fontWeight: FontWeight.w700,
+);
+
+final subtitle3bb = TextStyle(
+  fontSize: 16.sp,
+  color: createChannelHeaderColor,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Lato',
 );
 
 final searchModal = TextStyle(
@@ -374,6 +395,12 @@ final regionStyle = TextStyle(
         color: Color.fromRGBO(153, 153, 153, 1),
         fontWeight: FontWeight.w400);
   
+
+final addPeopleChannelStyle = TextStyle(
+  fontSize: 25,
+  fontFamily: 'Lato',
+  fontWeight: FontWeight.bold,
+);
 
 final leftSideBarPrefTextStyle =
     subtitle2.copyWith(fontWeight: FontWeight.w600);
