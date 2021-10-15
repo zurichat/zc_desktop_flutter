@@ -321,9 +321,9 @@ class DmViewModel extends BaseViewModel {
   onPinnedMessage(bool isMessagePinned) {
     _isMessagePinned = isMessagePinned;
 
-    if (_pinnedItems.length <= 1) {
-      _isMessagePinned = false;
-    }
+    // if (_pinnedItems.length <= 1) {
+    //   _isMessagePinned = false;
+    // }
     notifyListeners();
   }
 
