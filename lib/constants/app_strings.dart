@@ -38,7 +38,7 @@ const String HotelsNg = 'Hotels.ng';
 const String MemberText = 'Members';
 const String WorkspaceText = 'Workspace for';
 const String OpenText = 'Open';
-const String SelectText = ' None Selected';
+const String SelectText = 'Selected';
 const String SignIntoNewWorkspace = 'or sign into a new workspace here';
 const String PrivacyText = 'Privacy & Terms';
 const String ContactUs = 'Contact Us';
@@ -131,3 +131,20 @@ const String displayName = 'Display Name';
 const String displayemail = 'Email Address';
 const String phoneNumber = 'Phone Number';
 const String editProfile = 'Edit Profile';
+
+ const String SelectingRegion =
+     'Selecting a different region will change the language and content of Zuri Chat.';
+ const String EuropeText = 'Europe';
+ const String AmericaText = 'America';
+ const String AsiaText = 'Asia Pacific';
+ const String MiddleEastText = 'Middle East';
+ const String DeutschText = 'Deutschland (Deutsch)';
+ const String EspanaText = 'Espana (Espanol)';
+ const String FranceText = 'France (Francais)';
+ const String UkText = 'United Kingdon (English)';
+ const String LatinoText = 'Latinoamerica (Espanol)';
+ const String BrasilText = 'Brasil (Portuguese)';
+ const String USText = 'United States (English)';
+ const String IndiaText = 'India (English)';
+ const String UAEText = 'UAE (Arabic)';
+ 
