@@ -21,8 +21,6 @@ class OrganizationViewModel extends BaseViewModel {
   int selectedChannelIndex = 0;
   int _selectedMenuIndex = 7;
 
-  
-
   ScrollController controller = ScrollController();
 
   Organization _currentOrganization = Organization();
@@ -98,7 +96,6 @@ class OrganizationViewModel extends BaseViewModel {
     await getOrganizations();
     await getDMs();
     await getChannels();
-    
   }
 
   Future<void> getOrganizations() async {
@@ -139,6 +136,7 @@ class OrganizationViewModel extends BaseViewModel {
       _dms.add(dm);
     }
     log.i('${_dms}');
+    _organizationService.setDms(_dms);
   }
 
   void openChannelsList() {
@@ -214,7 +212,6 @@ class OrganizationViewModel extends BaseViewModel {
     }
     return false;
   }
-
 
   @override
   void dispose() {
