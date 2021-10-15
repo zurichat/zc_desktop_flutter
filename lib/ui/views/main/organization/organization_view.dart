@@ -11,6 +11,7 @@ import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
+import 'package:zc_desktop_flutter/ui/shared/custom_color.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
@@ -78,7 +79,7 @@ class OrganizationWrapper extends StatelessWidget {
                       //TODO: organization side bar
                       Container(
                         color: whiteColor,
-                        width: 60.w,
+                        width: 50.w,
                         height: double.infinity,
                         child: SingleChildScrollView(
                           physics: ScrollPhysics(),
@@ -132,11 +133,16 @@ class OrganizationWrapper extends StatelessWidget {
                         height: double.infinity,
                         child: Column(
                           children: [
-                            DetailedCustomAppBar(
-                              leading: WorkSpaceSetting(
-                                workspaceTitle: model!.currentOrganization.name,
+                            Flexible(
+                              child: DetailedCustomAppBar(
+                                leading: WorkSpaceSetting(
+                                  workspaceTitle:
+                                      model!.currentOrganization.name,
+                                ),
+                                trailing: Flexible(
+                                  child: NewMessageBtn(),
+                                ),
                               ),
-                              trailing: Flexible(child: NewMessageBtn()),
                             ),
                             Expanded(
                               child: SingleChildScrollView(
@@ -253,7 +259,6 @@ class DisplayMenu extends StatelessWidget {
             isSelected: model.selectedMenuIndex == 0,
             onTap: () {
               model.updateSelectedMenuIndex(0);
-              
             },
           ),
           ReusableMenuItem(
@@ -294,11 +299,12 @@ class DisplayMenu extends StatelessWidget {
               iconPath: 'assets/icons/pugroup.svg',
               isSelected: model.selectedMenuIndex == 5,
               text: 'People and User Groups',
-              onTap: (){ 
+              onTap: () {
                 model.goToUserPeopleGroup();
-              model.updateSelectedMenuIndex(5);}),
+                model.updateSelectedMenuIndex(5);
+              }),
           ReusableMenuItem(
-            iconPath: 'assets/icons/plugins.svg',
+            iconPath: 'assets/icons/drafts.svg',
             text: 'Todo',
             isSelected: model.selectedMenuIndex == 6,
             onTap: () {
@@ -405,7 +411,7 @@ class ReusableDropDown extends StatelessWidget {
                       return MouseRegion(
                         child: Padding(
                           padding: const EdgeInsets.only(
-                            bottom: 16.0,
+                            bottom: 20.0,
                           ),
                           child: InkWell(
                             onTap: () => onListItemTapped!(index),
@@ -462,20 +468,22 @@ class ReusableMenuItem extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: SizedBox(
-          height: 30,
+          height: 40,
           child: Row(
             children: [
               Container(
                 height: 30,
                 child: Container(
-                  width: 15.0,
-                  height: 15.0,
-                  child: SvgPicture.asset(iconPath!, color: isSelected ? kcPrimaryColor : headerColor) 
-                ),
+                    width: 18.0,
+                    height: 18.0,
+                    child: SvgPicture.asset(iconPath!,
+                        color: isSelected ? kcPrimaryColor : headerColor)),
               ),
               SizedBox(width: 10),
               Container(
-                child: Text(text!, style: kLeftSideBarStyle.copyWith(color: isSelected ? kcPrimaryColor : headerColor)),
+                child: Text(text!,
+                    style: kLeftSideBarStyle.copyWith(
+                        color: isSelected ? kcPrimaryColor : headerColor)),
               ),
             ],
           ),
@@ -521,7 +529,7 @@ class OrganizationItem extends StatelessWidget {
                   padding: const EdgeInsets.all(3),
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(5),
                     border: Border.all(
                       color: selected!
                           ? Theme.of(context).colorScheme.secondary
@@ -567,12 +575,12 @@ class ChannelItem extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                   )
                 : SvgPicture.asset(SVGAssetPaths.channelsListIcon,
-                    color: Colors.black),
+                    color: black),
           ),
           horizontalSpaceSmall,
           Text(
             channelName!,
-            style: dropDownBodyTextStyle.copyWith(
+            style: messageStyleNormal.copyWith(
               color: selected!
                   ? Theme.of(context).colorScheme.secondary
                   : Colors.black,

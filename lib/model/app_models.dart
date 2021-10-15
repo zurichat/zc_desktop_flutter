@@ -45,6 +45,7 @@ class Member with _$Member {
     @Default('') String status,
     @Default('')  String pronouns,
     @Default('')  String bio,
+    @Default([])  List socials,
     @JsonKey(name: 'time_zone') @Default('') String timeZone,
     @JsonKey(name: 'created_at') @Default('') String createdAt,
     @JsonKey(name: 'updated_at') @Default('') String updatedAt,

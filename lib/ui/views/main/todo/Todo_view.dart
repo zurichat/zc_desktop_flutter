@@ -30,95 +30,97 @@ class TodoView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 40,
-                width: double.infinity,
-                color: kcPrimaryColor,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Row(
-                  children: [
-                    Text(
-                      '# $TodoList',
-                      style: headline7.copyWith(color: kcBackgroundColor2),
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_sharp,
-                          color: whiteColor,
-                        ),
-                        padding: const EdgeInsets.only(bottom: 18)),
-                  ],
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: Container(
+                  height: 40,
+                  width: double.infinity,
+                  color: kcPrimaryColor,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        '# $TodoList',
+                        style: headline7.copyWith(color: kcBackgroundColor2),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_sharp,
+                            color: whiteColor,
+                          ),
+                          padding: const EdgeInsets.only(bottom: 18)),
+                    ],
+                  ),
                 ),
               ),
               verticalSpaceSmall,
               Divider(),
-              SizedBox(
-                height: 50,
+              Flexible(
+                fit: FlexFit.loose,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: Row(children: [
-                    Row(
+                  padding: EdgeInsets.only(left: 20.0, right: 30.0),
+                  child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
-                          onTap: () => model.setPageIndex(0),
-                          child: Text(
-                            PendingText,
-                            style: preferenceStyleNormal.copyWith(
-                                color: model.pageIndex == 0
-                                    ? kcPrimaryColor
-                                    : Colors.grey),
-                          ),
-                        ),
-                        horizontalSpaceLarge,
-                        GestureDetector(
-                          onTap: () => model.setPageIndex(1),
-                          child: Text(
-                            ArchiveText,
-                            style: preferenceStyleNormal.copyWith(
-                                color: model.pageIndex != 1
-                                    ? Colors.grey
-                                    : kcPrimaryColor),
-                          ),
-                        ),
-                        horizontalSpaceLarge,
-                        GestureDetector(
-                          onTap: () => model.setPageIndex(2),
-                          child: Text(
-                            TrashText,
-                            style: preferenceStyleNormal.copyWith(
-                                color: model.pageIndex != 2
-                                    ? Colors.grey
-                                    : kcPrimaryColor),
-                          ),
-                        ),
-                        Padding(
-                          padding:  EdgeInsets.only(left: 430),
-                          child: ElevatedButton(
-                            onPressed: () =>
-                                // Respond to button press
-                                showDialog(
-                              context: context,
-                              builder: (context) => CreateTodoDialogView(
-                                model,
-                                //createToDo: (String title, String description) {  }, isBusy: true,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () => model.setPageIndex(0),
+                              child: Text(
+                                PendingText,
+                                style: preferenceStyleNormal.copyWith(
+                                    color: model.pageIndex == 0
+                                        ? kcPrimaryColor
+                                        : Colors.grey),
                               ),
                             ),
-                            child: Text(CreateTodo),
-                            style: ElevatedButton.styleFrom(
-                              primary: KStartupContainerColor,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 20),
-                              textStyle: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                            horizontalSpaceLarge,
+                            GestureDetector(
+                              onTap: () => model.setPageIndex(1),
+                              child: Text(
+                                ArchiveText,
+                                style: preferenceStyleNormal.copyWith(
+                                    color: model.pageIndex != 1
+                                        ? Colors.grey
+                                        : kcPrimaryColor),
+                              ),
+                            ),
+                            horizontalSpaceLarge,
+                            GestureDetector(
+                              onTap: () => model.setPageIndex(2),
+                              child: Text(
+                                TrashText,
+                                style: preferenceStyleNormal.copyWith(
+                                    color: model.pageIndex != 2
+                                        ? Colors.grey
+                                        : kcPrimaryColor),
+                              ),
+                            ),
+                          ],
+                        ),
+                        ElevatedButton(
+                          onPressed: () =>
+                              // Respond to button press
+                              showDialog(
+                            context: context,
+                            builder: (context) => CreateTodoDialogView(
+                              model,
+                              //createToDo: (String title, String description) {  }, isBusy: true,
                             ),
                           ),
+                          child: Text(CreateTodo),
+                          style: ElevatedButton.styleFrom(
+                            primary: KStartupContainerColor,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 20),
+                            textStyle: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w600),
+                          ),
                         ),
-                      ],
-                    ),
-                  ]),
+                      ]),
                 ),
               ),
               Stack(
@@ -128,18 +130,18 @@ class TodoView extends StatelessWidget {
                     padding: EdgeInsets.only(
                         left: !(width >= 1240)
                             ? (model.pageIndex == 0
-                                ? 26.w
+                                ? 28.w
                                 : model.pageIndex == 1
                                     ? 150.w
                                     : 258.w)
                             : (model.pageIndex == 0
-                                ? 26.w
+                                ? 28.w
                                 : model.pageIndex == 1
-                                    ? 130.w
+                                    ? 150.w
                                     : 228.w)),
                     child: Container(
-                      height: 4.h,
-                      width: 36.w,
+                      height: 3.h,
+                      width: 38.w,
                       color: kcPrimaryColor,
                     ),
                   )

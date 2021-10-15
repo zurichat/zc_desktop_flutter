@@ -36,7 +36,7 @@ class WindowTitleBar extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4.w),
+                  padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 15.h),
                   child: WindowTitleBarBox(
                     child: Row(
                       children: [
@@ -101,7 +101,7 @@ class LeftSideAuth extends StatelessWidget {
     return Row(
       children: [
         Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+            padding: EdgeInsets.symmetric(horizontal: 50.0),
             child: Icon(
               Icons.menu,
               color: lightIconColor,
@@ -129,8 +129,7 @@ class LeftSideHome extends HookWidget {
     return Row(
       children: [
         SvgPicture.asset(AppSvgPath),
-       if( width > 1440)
-        horizontalSpaceLarge ,
+        if (width > 1440) horizontalSpaceLarge,
         horizontalSpaceLarge,
         Row(
           children: [
@@ -206,21 +205,21 @@ class LeftSideHome extends HookWidget {
         Align(
           alignment: Alignment.bottomRight,
           child: GestureDetector(
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => StatusDialogMinView());
-              },
-              // child: Text(
-              //   // statusTag,
-              //   ''
-              // )
-              child: Icon(
-                Icons.star_rate,
-                size: 20,
-                color: kcStatusIcon,
-              ),
-              ),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => StatusDialogMinView());
+            },
+            // child: Text(
+            //   // statusTag,
+            //   ''
+            // )
+            child: Icon(
+              Icons.star_rate,
+              size: 20,
+              color: kcStatusIcon,
+            ),
+          ),
         ),
         horizontalSpaceVeryTiny,
         Stack(

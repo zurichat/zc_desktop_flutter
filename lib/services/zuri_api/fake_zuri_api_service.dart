@@ -48,9 +48,9 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> confirmEmail({required String otpCode}) {
-    // TODO: implement confirmEmail
-    throw UnimplementedError();
+  Future confirmEmail({required String otpCode}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {'code': '200', 'message': ''};
   }
 
   @override
@@ -131,6 +131,7 @@ class FakeZuriApiService implements Api {
 
     return channelsList;
   }
+
 
   @override
   Future fetchDMs({orgId, userId}) async {
@@ -311,9 +312,13 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> requestPasswordResetCode({required String email}) {
-    // TODO: implement requestPasswordResetCode
-    throw UnimplementedError();
+  Future requestPasswordResetCode({required String email}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'status': '200',
+      'message': 'Password reset code sent',
+      'data': null
+    };
   }
 
   @override
@@ -330,26 +335,51 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> signup(
+  Future signup(
       {required String password,
       required String email,
       required String fName,
-      required String lName}) {
-    // TODO: implement signup
-    throw UnimplementedError();
+      required String lName}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'created_at': '2021-09-07 11:22:06.932180',
+      'deleted_at': '0001-01-01 00:00:00',
+      'email': '$email',
+      'email_verification': {
+        'expired_at': '0001-01-01 00:00:00',
+        'id': '61374b5e7ccea12370c5adec',
+        'token': null,
+        'verified': false
+      },
+      'first_name': '$fName',
+      'id': '61374b5e7ccea12370c5adec',
+      'last_name': '$lName',
+      'password': '$password',
+      'password_resets': null,
+      'phone': '0123456789',
+      'settings': null,
+      'time_zone': '',
+      'updated_at': '0001-01-01 00:00:00',
+      'workspace_profiles': null,
+      'workspaces': null
+    };
   }
 
   @override
-  Future<void> updateUserPassword(
-      {required String password, required String code}) {
-    // TODO: implement updateUserPassword
-    throw UnimplementedError();
+  Future updateUserPassword(
+      {required String password, required String code}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'code': '200',
+      'data': null,
+      'message': 'password confirm successful'
+    };
   }
 
   @override
-  Future<void> verifyPasswordResetCode({required String resetCode}) {
-    // TODO: implement verifyPasswordResetCode
-    throw UnimplementedError();
+  Future verifyPasswordResetCode({required String resetCode}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {'code': '200', 'message': 'Password confirm successful'};
   }
 
   @override
@@ -440,28 +470,7 @@ class FakeZuriApiService implements Api {
     throw UnimplementedError();
   }
 
-  @override
-  Future<User> fetchUserDetail({required String userId}) {
-    // TODO: implement fetchUserDetail
-    throw UnimplementedError();
-  }
 
-  @override
-  Future<Map<String, dynamic>> getUserDetails({required String userId}) {
-    // TODO: implement getUserDetails
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Member> patchProfilePicture(
-      {required String organizationId,
-      required String memberId,
-      required String token}) {
-    // TODO: implement patchProfilePicture
-    throw UnimplementedError();
-  }
-
-  
   
 
   @override
@@ -551,27 +560,7 @@ class FakeZuriApiService implements Api {
     };
   }
 
-  @override
-  Future<Map<String, dynamic>> getMemberDetails(
-      {required String organizationId,
-      required String memberId,
-      required String token}) async {
-    Map<String, dynamic> userDetail = {
-      'code': 200,
-      'message': 'user details fetched successfully',
-      'data': {
-        '_id': 1,
-        'orgId': 1,
-        'name': 'Bernice Quarshie',
-        'display_name': 'perp',
-        'bio': 'Mobile developer (Flutter)',
-        'pronouns': 'her/she',
-        'phone': 0264445649,
-        'time_zone': 'UTC+ 00',
-      }
-    };
-    return userDetail;
-  }
+
 
   @override
   Future<Map<String, dynamic>> reactToMessage({orgId, roomId, messageId, required ReactToMessage reactToMessage}) {
@@ -589,5 +578,31 @@ class FakeZuriApiService implements Api {
   Future<Map<String, dynamic>> sendMessageToDM({roomId, senderId, message, orgId}) {
     // TODO: implement sendMessageToDM
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> deleteOrganization(
+      {required String organizationId, required token}) async {
+    await Future.delayed(Duration(seconds: 4));
+
+    return {
+      'code': 200,
+      'message': 'no data',
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateOrganizationDetails({
+    required String organizationId,
+    required token,
+    String? url,
+    String? name,
+  }) async {
+    await Future.delayed(Duration(seconds: 4));
+
+    return {
+      'code': 200,
+      'message': 'no data',
+    };
   }
 }
