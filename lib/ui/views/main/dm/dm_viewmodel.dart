@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
@@ -16,6 +17,7 @@ class DmViewModel extends BaseViewModel {
   String? _roomId = '';
   DM? _dmRoomInfo;
   List<Results> _messages = [];
+  List<PinnedMessageContent> _pinnedItems = [];
 
   void setup() {
     runTask();
@@ -35,6 +37,7 @@ class DmViewModel extends BaseViewModel {
       _roomId = _dmRoomInfo!.roomInfo.id;
     }
     _messages = (await _dmService.fetchRoomMessages(_roomId));
+    fetchPinnedMessages();
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
     setBusy(false);
     log.i(_user.name);
@@ -185,7 +188,7 @@ class DmViewModel extends BaseViewModel {
   }
 
   void newReactionToMessage(int messageIndex) {
-     _dmService.reactToMessage(
+    _dmService.reactToMessage(
         roomId,
         _messages.elementAt(messageIndex).id,
         ReactToMessage(
@@ -282,5 +285,120 @@ class DmViewModel extends BaseViewModel {
       // _messages = await _channelService.fetchChannelMessages();
       notifyListeners();
     });
+  }
+
+  //Pinned and bookmarks
+  final String urlLink = '';
+
+  bool _isDropped = false;
+  bool _isHover = false;
+  bool _isMessagePinned = false;
+  bool _isBookmarkDecoyVisible = false;
+  bool _isOriginalBookmarkVisible = true;
+  bool _isDecoyForPinnedMessageVisible = false;
+
+  final String profileImageUrl = '';
+  final String userName = '';
+
+  //---
+  bool get isDecoyForPinnedMessageVisible => _isDecoyForPinnedMessageVisible;
+  bool get isOriginalBookmarkVisible => _isOriginalBookmarkVisible;
+  bool get isBookmarkDecoyVisible => _isBookmarkDecoyVisible;
+  bool get isMessagePinned => _isMessagePinned;
+  bool get isDropped => _isDropped;
+  bool get isHover => _isHover;
+  List<PinnedMessageContent> get pinnedMessages => _pinnedItems;
+  setIsDropped(bool value) {
+    _isDropped = value;
+    notifyListeners();
+  }
+
+  onEntered(bool isHover) {
+    _isHover = isHover;
+    notifyListeners();
+  }
+
+  onPinnedMessage(bool isMessagePinned) {
+    _isMessagePinned = isMessagePinned;
+
+    // if (_pinnedItems.length <= 1) {
+    //   _isMessagePinned = false;
+    // }
+    notifyListeners();
+  }
+
+  displayDecoyForPinnedMessage(bool isDecoyForPinnedMessageVisible) {
+    _isDecoyForPinnedMessageVisible = isDecoyForPinnedMessageVisible;
+    notifyListeners();
+  }
+
+  displayOriginalBookmark(bool isOriginalBookmarkVisible) {
+    _isOriginalBookmarkVisible = isOriginalBookmarkVisible;
+    notifyListeners();
+  }
+
+  displayDecoyForAddBookmark(bool isBookmarkDecoyVisible) {
+    _isBookmarkDecoyVisible = isBookmarkDecoyVisible;
+    notifyListeners();
+  }
+
+  void launchBookmarkedUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      throw 'Could not launch the $url';
+    }
+  }
+
+  void getUserPinnedMessage() {
+    // _dmService.
+  }
+
+  void pinMessage(String messageId) {
+    _dmService.pinMessage(messageId);
+    for (var message in messages) {
+      if (message.id == messageId) {
+        _pinnedItems.add(PinnedMessageContent(
+          displayName:
+              message.sender_id == _dmRoomInfo!.currentUserProfile.userId
+                  ? _dmRoomInfo!.currentUserProfile.displayName
+                  : _dmRoomInfo!.otherUserProfile.displayName,
+          displayImage:
+              message.sender_id == _dmRoomInfo!.currentUserProfile.userId
+                  ? _dmRoomInfo!.currentUserProfile.imageUrl
+                  : _dmRoomInfo!.otherUserProfile.imageUrl,
+          message: message.message,
+          createdAt: formatTime(message.created_at),
+        ));
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> fetchPinnedMessages() async {
+    var pinned = await _dmService.fetchPinnedMessages(_roomId!);
+    for (var message in messages) {
+      for (var pin in pinned) {
+        if (message.id == pin) {
+          _pinnedItems.add(PinnedMessageContent(
+            displayName:
+                message.sender_id == _dmRoomInfo!.currentUserProfile.userId
+                    ? _dmRoomInfo!.currentUserProfile.displayName
+                    : _dmRoomInfo!.otherUserProfile.displayName,
+            displayImage:
+                message.sender_id == _dmRoomInfo!.currentUserProfile.userId
+                    ? _dmRoomInfo!.currentUserProfile.imageUrl
+                    : _dmRoomInfo!.otherUserProfile.imageUrl,
+            message: message.message,
+            createdAt: formatTime(message.created_at),
+          ));
+        }
+      }
+    }
+    notifyListeners();
   }
 }

@@ -27,7 +27,7 @@ class CreateChannelView extends HookWidget {
                   model.isCreateChannelSuccessful == true ||
                   model.channelNameError != null ||
                   model.channelDescriptionError != null)
-              ? 585.h
+              ? 565.h
               : 520.h,
           width: 410.w,
           child: Padding(
@@ -184,7 +184,6 @@ class CreateChannelView extends HookWidget {
                                   : kcPrimaryColor,
                             )),
                         onPressed: () async {
-                          // await model.validateAndCreateChannel();
 
                           if (!_formKey.currentState!.validate()) return;
 

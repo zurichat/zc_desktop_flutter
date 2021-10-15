@@ -1,8 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:popover/popover.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -13,13 +11,11 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
-import 'package:zc_desktop_flutter/ui/shared/smart_widgets/bookmark_and_pinned_bar/bookmark_and_pinned_view.dart';
-import 'package:zc_desktop_flutter/ui/shared/smart_widgets/emoji_selector/emoji_widget.dart';
+
 import 'package:zc_desktop_flutter/ui/views/main/add_user_channel/add_user_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels/channels_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_details/channels_details_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart';
-import 'package:zc_desktop_flutter/ui/views/main/dm/hover_actions_view.dart';
 
 class ChannelsView extends StatelessWidget {
   @override
@@ -54,10 +50,7 @@ class ChannelsView extends StatelessWidget {
                             builder: (context) => ChannelsDetailsView()),
                         child: WorkSpaceMembers()),
                   ),
-                  Align(
-                      alignment: Alignment.topCenter,
-                      child:
-                          BookmarkAndPinnedMessagesView() /*TopRowActions()*/),
+                  Align(alignment: Alignment.topCenter, child: TopRowActions()),
                   Container(
                     height: 110.h,
                     decoration: BoxDecoration(
@@ -327,7 +320,8 @@ class MessageTile extends StatelessWidget {
                                         .isEmpty
                                     ? 'Zuri Me'
                                     : model
-                                        .userName(),
+                                        .getUser(message.user_id)
+                                        .displayName,
                                 style: kHeading1TextStyle.copyWith(
                                     fontSize: 15.sp),
                               ),
@@ -344,175 +338,13 @@ class MessageTile extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
                             child: Text(message.content),
                           ),
-
-                          
                         ]),
                   )
                 ],
               ),
             ),
-           model.onMessageTileHover &&
-                    model.onMessageHoveredIndex == messageIndex
-                ? Positioned(
-                    top: -10,
-                    right: 10,
-                    child: OnHoverWidget(
-                      model: model,
-                    ),
-                  )
-                : SizedBox()
           ],
         ),
-      ),
-    );
-  }
-}
-
-class OnHoverWidget extends StatelessWidget {
-  final ChannelsViewModel model;
-
-  OnHoverWidget({required this.model});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          height: 40.h,
-          padding: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: kcBackgroundColor2,
-            shape: BoxShape.rectangle,
-            border: Border.all(color: timeColor),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              HoverItem(
-                  model: model,
-                  icon: SVGAssetPaths.fluentEmoji,
-                  onHover: (event) {
-                    model.onHoverActionsHovered(
-                        true, SVGAssetPaths.add_reaction_container, -45);
-                  },
-                  onTap: () {
-                    showPopover(
-                      key: UniqueKey(),
-                      context: context,
-                      barrierColor: Colors.transparent,
-                      transitionDuration: const Duration(milliseconds: 150),
-                      bodyBuilder: (BuildContext context) => EmojiWidget(
-                        onEmojiSelected: (emoji) {},
-                      ),
-                      direction: PopoverDirection.bottom,
-                      arrowHeight: 0,
-                      arrowWidth: 0,
-                    );
-                  }),
-              SizedBox(
-                width: 10.w,
-              ),
-              HoverItem(
-                  model: model,
-                  icon: SVGAssetPaths.thread,
-                  onHover: (event) {
-                    model.onHoverActionsHovered(
-                        true, SVGAssetPaths.reply_thread_container, -15);
-                  },
-                  onTap: () {}),
-              SizedBox(
-                width: 10.w,
-              ),
-              HoverItem(
-                  model: model,
-                  icon: SVGAssetPaths.shareIcon,
-                  onHover: (event) {
-                    model.onHoverActionsHovered(
-                        true, SVGAssetPaths.share_message_container, 15);
-                  },
-                  onTap: () {}),
-              SizedBox(
-                width: 10.w,
-              ),
-              HoverItem(
-                  model: model,
-                  icon: SVGAssetPaths.bookmarkIcon,
-                  onHover: (event) {
-                    model.onHoverActionsHovered(
-                        true, SVGAssetPaths.add_saved_container, 45);
-                  },
-                  onTap: () {}),
-              SizedBox(
-                width: 10.w,
-              ),
-              HoverItem(
-                  model: model,
-                  icon: SVGAssetPaths.actionsIcon,
-                  onHover: (event) {
-                    model.onHoverActionsHovered(
-                        true, SVGAssetPaths.more_actions_container, 50);
-                  },
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        useSafeArea: false,
-                        builder: (context) {
-                          return AlertDialog(
-                            content: MoreActions(),
-                            contentPadding: EdgeInsets.all(20),
-                            scrollable: true,
-                            insetPadding: EdgeInsets.all(0),
-                          );
-                        });
-                  }),
-            ],
-          ),
-        ),
-        model.onHoverActionsHover
-            ? Positioned(
-                top: -40,
-                left: model.hoverWidth,
-                child: HoverInfo(
-                    action: model.hoverAction, width: model.hoverWidth))
-            : SizedBox()
-      ],
-    );
-  }
-}
-
-class HoverItem extends StatelessWidget {
-  final Function() onTap;
-  final Function(PointerHoverEvent event) onHover;
-  final String icon;
-  final ChannelsViewModel model;
-
-  HoverItem(
-      {required this.icon,
-      required this.onHover,
-      required this.model,
-      required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      opaque: false,
-      key: UniqueKey(),
-      onHover: onHover,
-      onExit: (event) {
-        model.onHoverActionsHovered(false, '', 0);
-      },
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-            foregroundDecoration: BoxDecoration(color: Colors.transparent),
-            child: SvgPicture.asset(
-              icon,
-              height: 20.h,
-              width: 20.w,
-              fit: BoxFit.fill,
-            )),
       ),
     );
   }

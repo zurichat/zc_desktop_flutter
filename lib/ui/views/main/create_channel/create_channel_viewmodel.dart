@@ -123,10 +123,21 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     selectedChannelIndex = index;
     notifyListeners();
     // _channelsService.setChannel(_channels[index]);
-    _channelsService.createChannels();
+    // _channelsService.createChannels();
     _channelsService.setChannel(_channels[index]);
     
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
+  }
+
+  
+  Future<void> performCreateChannel(
+      String name, String owner, String description, bool private, String topic, bool defaultChannel) async {
+
+    await _channelsService.createChannels(
+        name: name, owner: owner, description: description, private: private, topic: topic, defaultChannel: defaultChannel);
+
+    _showError = true;
+    notifyListeners();
   }
 
   Future<void> createchannels(
@@ -163,7 +174,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     await runBusyFuture(
         performCreateChannel(name, owner, description, private, topic, defaultChannel));
 
-    if (_showError == false) {
+    if (_showError == true) {
       setErrorMessage('An unexpected error occured!');
       _setIsBusy();
       _setIsCreateChannelNotSuccessful();
@@ -173,23 +184,13 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
       Duration(milliseconds: 1500),
       );
       Navigator.of(context).pop();
-      goToChannelsView();
+      // goToChannelsView();
     // _navigationService.pushNamedAndRemoveUntil(Routes.organizationView);
     }
 
     notifyListeners();
   }
 
-  Future<void> performCreateChannel(
-      String name, String owner, String description, bool private, String topic, bool defaultChannel) async {
-    // await _auth.createChannels(
-    //     name, owner, description, private);
-    await _channelsService.createChannels(
-        name: name, owner: owner, description: description, private: private, topic: topic, defaultChannel: defaultChannel);
-
-    _showError = true;
-    notifyListeners();
-  }
 
   /// Error should be handled here. It could be displaying a toast of something else
   @override

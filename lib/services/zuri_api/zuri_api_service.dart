@@ -659,4 +659,21 @@ class ZuriApiService implements Api {
       String? name}) {
     throw UnimplementedError();
   }
+
+  @override
+  Future<Map<String, dynamic>> pinMessage(messageId, orgId) async {
+    final uri = pinMessageUrl(messageId, orgId);
+
+    return await _put(
+      uri,
+      body: {},
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> fetchPinnedMessgaes(roomId, orgId) async {
+    final uri = fetchPinnedMessagesUrl(roomId, orgId);
+
+    return await _get(uri);
+  }
 }

@@ -803,6 +803,21 @@ class MockZuriApiService extends _i1.Mock implements _i11.ZuriApiService {
                   Future<Map<String, dynamic>>.value(<String, dynamic>{}))
           as _i2.Future<Map<String, dynamic>>);
   @override
+  _i2.Future<Map<String, dynamic>> pinMessage(
+          dynamic messageId, dynamic orgId) =>
+      (super.noSuchMethod(Invocation.method(#pinMessage, [messageId, orgId]),
+              returnValue:
+                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
+          as _i2.Future<Map<String, dynamic>>);
+  @override
+  _i2.Future<Map<String, dynamic>> fetchPinnedMessgaes(
+          dynamic roomId, dynamic orgId) =>
+      (super.noSuchMethod(
+              Invocation.method(#fetchPinnedMessgaes, [roomId, orgId]),
+              returnValue:
+                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
+          as _i2.Future<Map<String, dynamic>>);
+  @override
   String toString() => super.toString();
 }
 
@@ -1008,6 +1023,16 @@ class MockDMService extends _i1.Mock implements _i14.DMService {
       (super.noSuchMethod(Invocation.method(#fetchAllUsersForDm, []),
               returnValue: Future<List<_i5.Users>>.value(<_i5.Users>[]))
           as _i2.Future<List<_i5.Users>>);
+  @override
+  _i2.Future<void> pinMessage(String? messageId) =>
+      (super.noSuchMethod(Invocation.method(#pinMessage, [messageId]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
+  @override
+  _i2.Future<List<String>> fetchPinnedMessages(String? roomId) =>
+      (super.noSuchMethod(Invocation.method(#fetchPinnedMessages, [roomId]),
+              returnValue: Future<List<String>>.value(<String>[]))
+          as _i2.Future<List<String>>);
   @override
   String toString() => super.toString();
 }

@@ -62,9 +62,9 @@ class FakeZuriApiService implements Api {
       String? description,
       bool? private,
       String? topic,
-      bool? defaultChannel}) async{
+      bool? defaultChannel}) async {
     // TODO: implement createChannelsUsingOrgId
-     await Future.delayed(Duration(seconds: 2));
+    //  await Future.delayed(Duration(seconds: 2));
      return Channel(
        name: 'zuri main channel',
        owner: 'CalebJ',
@@ -73,27 +73,8 @@ class FakeZuriApiService implements Api {
        memberinput: true,
        member: 10,
      ).toJson();
-
-      // {
-      //   'name': 'sample channel',
-      //   'slug': 'sample-channel',
-      //   'owner': 'string',
-      //   'description': 'test',
-      //   'topic': 'string',
-      //   'private': false,
-      //   'archived': false,
-      //   'default': false,
-      //   'users': {
-      //     'string': {
-      //       '_id': 'string',
-      //       'is_admin': true
-      //     }
-      //   },
-      //   'created_on': '2021-10-13T22:56:40.225305+00:00',
-      //   'allow_members_input': true,
-      //   '_id': '6167a1fd4cd3cc2a7af3dba4',
-      //   'members': 1
-      // };    
+      // throw UnimplementedError();
+      
   }
 
   @override
@@ -219,7 +200,6 @@ class FakeZuriApiService implements Api {
 
      return channelList;
   }
-
 
   @override
   Future fetchDMs({orgId, userId}) async {
@@ -694,6 +674,16 @@ class FakeZuriApiService implements Api {
   }
 
   @override
+  Future<Map<String, dynamic>> pinMessage(messageId, orgId) async {
+    await Future.delayed(Duration(seconds: 1));
+    return {
+      'message_id': messageId,
+      'pinned': [messageId],
+      'Event': 'pin_message'
+    };
+  }
+
+  @override
   Future<Map<String, dynamic>> updateOrganizationDetails({
     required String organizationId,
     required token,
@@ -705,6 +695,15 @@ class FakeZuriApiService implements Api {
     return {
       'code': 200,
       'message': 'no data',
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> fetchPinnedMessgaes(roomId, orgId) async {
+    await Future.delayed(Duration(seconds: 1));
+    return {
+      'links': ['6165848888888294bffc7a0d', '6165899559598294bffc7a0d'],
+      'room_id': roomId
     };
   }
 }

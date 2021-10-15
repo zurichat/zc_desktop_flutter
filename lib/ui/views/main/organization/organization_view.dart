@@ -145,6 +145,7 @@ class OrganizationWrapper extends StatelessWidget {
                               ),
                             ),
                             Expanded(
+                              flex: 6,
                               child: SingleChildScrollView(
                                 controller: model!.controller,
                                 physics: ScrollPhysics(),
@@ -157,7 +158,7 @@ class OrganizationWrapper extends StatelessWidget {
                                         shrinkWrap: true,
                                         children: [
                                           DisplayMenu(model!),
-                                          verticalSpaceRegular,
+                                          verticalSpaceSmall,
                                           ReusableDropDown(
                                             title: 'Channels',
                                             addButtonTitle: 'Add channels',
