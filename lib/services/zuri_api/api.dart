@@ -20,7 +20,11 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] email and [String] password
-  Future<void> signup({required String password, required String email, required String fName, required String lName});
+  Future<void> signup(
+      {required String password,
+      required String email,
+      required String fName,
+      required String lName});
 
   /// returns [Future]<[void]>, confirm user email.
   ///
@@ -92,7 +96,7 @@ abstract class Api {
   /// function parameters; [String] organizationId, [String] email, token
   Future<void> addLoggedInUserToOrganization(
       {required String organizationId, required String email, required token});
-  
+
   /// returns [Future]<[void]>, invite people to organization.
   ///
   /// post request;
@@ -100,7 +104,9 @@ abstract class Api {
   ///
   /// function parameters; [String] organizationId, [String] email, token
   Future<dynamic> invitePeopleToOrganization(
-      {required String organizationId, required List<String> email, required token});
+      {required String organizationId,
+      required List<String> email,
+      required token});
 
   /// returns [Future]<[Map]<[String]>>, dynamic>>, create an organization using email.
   ///
@@ -110,6 +116,30 @@ abstract class Api {
   /// function parameters; [String] email, token.
   Future<Map<String, dynamic>> createOrganizationUsingEmail(
       {required String email, required token});
+
+  /// returns [Future]<[Map]<[String], [dynamic]>>, private function to update
+  /// a single organization details from remote source using organization id.
+  ///
+  /// post request;
+  /// * headers: {"Authorization": logged in user token}
+  ///
+  /// function parameters; [String] organizationId, token, url, name
+  Future<Map<String, dynamic>> updateOrganizationDetails({
+    required String organizationId,
+    required token,
+    String? url,
+    String? name,
+  });
+
+  /// returns [Future]<[Map]<[String], [dynamic]>>, private function to delete
+  /// a single organization from remote source using organization id.
+  ///
+  /// post request;
+  /// * headers: {"Authorization": logged in user token}
+  ///
+  /// function parameters; [String] organizationId, token
+  Future<Map<String, dynamic>> deleteOrganization(
+      {required String organizationId, required token});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, private function to get a single organization
   /// details from remote source using organization id.
@@ -284,7 +314,6 @@ abstract class Api {
     String? pronoun,
     String? timeZone,
   });
-  
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
   ///
@@ -310,7 +339,10 @@ abstract class Api {
 
   //React to a message
   Future<Map<String, dynamic>> reactToMessage(
-      {var orgId, var roomId, var messageId,required ReactToMessage reactToMessage});
+      {var orgId,
+      var roomId,
+      var messageId,
+      required ReactToMessage reactToMessage});
 
   /* CENTRIFUGE SERVICE */
 

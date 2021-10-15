@@ -41,11 +41,14 @@ class BuildSuggestionContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: Text(
-                  displayName.isEmpty ? 'Anonymous' : displayName,
-                  softWrap: true,
-                  textAlign: TextAlign.center,
-                  style: subtitlec2.copyWith(color: kcDisplayChannelColor),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    displayName.isEmpty ? 'Anonymous' : displayName,
+                    softWrap: true,
+                    textAlign: TextAlign.left,
+                    style: subtitlec2.copyWith(color: kcDisplayChannelColor),
+                  ),
                 ),
               ),
               horizontalSpaceTiny,
