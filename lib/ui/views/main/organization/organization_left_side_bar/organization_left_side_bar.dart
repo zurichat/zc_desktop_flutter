@@ -11,6 +11,8 @@ import 'package:zc_desktop_flutter/ui/shared/custom_color.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
@@ -32,7 +34,13 @@ class OrganizationLeftSideBar extends ViewModelWidget<OrganizationViewModel> {
               workspaceTitle: model.currentOrganization.name,
             ),
             trailing: Flexible(
-              child: NewMessageBtn(),
+              child: GestureDetector(
+                  onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => EditDialogContainer(
+                            model: model,
+                          )),
+                  child: NewMessageBtn()),
             ),
           ),
           Expanded(
@@ -437,6 +445,59 @@ class DisplayMenu extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class EditDialogContainer extends StatelessWidget {
+  final OrganizationViewModel model;
+  EditDialogContainer({Key? key, required this.model}) : super(key: key);
+  final nameController = TextEditingController();
+  final urlController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Container(
+        height: 450.h,
+        width: 450.w,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Edit Organization',
+                style: headline6,
+              ),
+              verticalSpaceSmall,
+              ZuriDeskInputField(
+                label: 'Organization Name',
+                controller: nameController,
+                hintPlaceHolder: model.currentOrganization.name,
+              ),
+              verticalSpaceSmall,
+              ZuriDeskInputField(
+                label: 'Orgnization Url',
+                controller: urlController,
+                hintPlaceHolder: model.currentOrganization.workspaceUrl,
+              ),
+              verticalSpaceSmall,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: AuthButton(
+                  label: 'Save Changes',
+                  isBusy: model.isBusy,
+                  onTap: () => model
+                      .updateOrganizationDetails(
+                          url: urlController.text, name: nameController.text)
+                      .then((value) => Navigator.of(context).pop()),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

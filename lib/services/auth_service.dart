@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 import 'local_storage_service.dart';
 
 const localAuthResponseKey = 'localAuthResponse';
+const selectedOrgKey = 'SelectedOrgKey';
 
 class AuthService {
   final log = getLogger('AuthService');
@@ -49,5 +50,6 @@ class AuthService {
   void logOut(String token) async{
     _zuriApiService.signOut(token);
     _localStorageService.removeFromDisk(localAuthResponseKey);
+    _localStorageService.removeFromDisk(selectedOrgKey);
   }
 }

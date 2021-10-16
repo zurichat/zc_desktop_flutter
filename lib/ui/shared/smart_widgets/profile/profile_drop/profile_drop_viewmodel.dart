@@ -6,14 +6,12 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/user_service.dart';
-import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class ProfileDropdownViewModel extends BaseViewModel {
   final _userService = locator<UserService>();
   final _organizationService = locator<OrganizationService>();
   final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
-  final _windowTitleBarService = locator<WindowTitleBarService>();
   // final _organizationId = locator<OrganizationService>();
 
   String email = '';
@@ -83,7 +81,6 @@ class ProfileDropdownViewModel extends BaseViewModel {
   // }
 
   void signOut() {
-    _windowTitleBarService.setHome(false);
     _authService.logOut(_userService.auth.user!.token.toString());
     _navigationService.pushNamedAndRemoveUntil(Routes.loginView);
   }

@@ -9,6 +9,7 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/user_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class ChooseWorkspaceViewmodel extends BaseViewModel {
   final log = getLogger('ChooseWorkspaceViewmodel');
@@ -29,10 +30,16 @@ class ChooseWorkspaceViewmodel extends BaseViewModel {
   //int _counter = 0;
   int get counter => _selectedListOfOrg.length;
 
+  final _windowsTitleBarService = locator<WindowTitleBarService>();
+  
+
   Future<void> init() async {
     await fetchOrganizationList();
     await check();
     await getSelectedOrg();
+    await Future.delayed(Duration(milliseconds: 1));
+    _windowsTitleBarService.setHome(false);
+    _windowsTitleBarService.setTitle('Zuri | Select WorkSpace');
   }
 
   Future<List<bool>> check() async {

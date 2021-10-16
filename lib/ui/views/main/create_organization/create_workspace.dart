@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
-import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -23,6 +21,7 @@ class CreateWorkspaceView extends HookWidget {
     // bool check = false;
     final emailController = useTextEditingController();
     return ViewModelBuilder<CreateWorkspaceViewModel>.reactive(
+      onModelReady: (model) => model.init(),
       builder: (context, model, child) => Scaffold(
         body: Center(
           child: Column(
@@ -108,13 +107,13 @@ class CreateWorkspaceView extends HookWidget {
                       ],
                     ),
                     verticalSpaceMedium,
-                    WorkSpaceFooter(
-                      arrowDown: ArrowDown,
-                      changeRegion: ChangeRegion,
-                      contactUs: ContactUs,
-                      privacy: PrivacyText,
-                      worldLogoUrl: () {},
-                    ),
+                    // WorkSpaceFooter(
+                    //   arrowDown: ArrowDown,
+                    //   changeRegion: ChangeRegion,
+                    //   contactUs: ContactUs,
+                    //   privacy: PrivacyText,
+                    //   worldLogoUrl: () {},
+                    // ),
                     verticalSpaceMedium,
                     GotoLoginButton(
                       isHome: true,
