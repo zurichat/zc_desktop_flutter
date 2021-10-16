@@ -620,4 +620,5 @@ class ZuriApiService implements Api {
 
     return await _get(uri);
   }
+  
 }
