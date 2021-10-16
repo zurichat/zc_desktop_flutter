@@ -339,7 +339,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                         isBusy: model.isBusy,
                         onTap: () async {
                           // model.isSubmit;
-                          if (_fullNameFormKey.currentState!.validate()) {
+                          if (!_fullNameFormKey.currentState!.validate()) {
                             _fullNameFormKey.currentState!.save();
                           }
                           await model.postDetails(

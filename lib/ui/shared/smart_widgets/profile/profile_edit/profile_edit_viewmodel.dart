@@ -37,19 +37,10 @@ class ProfileEditViewModel extends FormViewModel {
 
   Member get currentMember => _currentMember;
 
-  File? _choosenImage;
+  File? _choosenImage = null;
 
   File? get choosenImage => _choosenImage;
 
-  // get isFormValid => _isFormValid();
-
-  // get isSubmit => _isSaveButtonEnabled;
-
-  // void onValidate() {
-  //   _isSaveButtonEnabled = _isFormValid();
-  //   _fullNameFormKey.currentState!.validate();
-  //   notifyListeners();
-  // }
 
   Future<void> postDetails(
     String bio,
@@ -92,7 +83,7 @@ class ProfileEditViewModel extends FormViewModel {
   Future<void> postPicture(
     File url,
   ) async {
-    await runBusyFuture(performPicturePost(url));
+    await runBusyFuture(performPicturePost(_choosenImage!));
   }
 
   Future<void> performPicturePost(
