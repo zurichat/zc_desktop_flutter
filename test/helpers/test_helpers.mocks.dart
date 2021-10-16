@@ -778,6 +778,43 @@ class MockZuriApiService extends _i1.Mock implements _i12.ZuriApiService {
               returnValue: Future<_i5.Member>.value(_FakeMember_3()))
           as _i2.Future<_i5.Member>);
   @override
+  _i2.Future<Map<String, dynamic>> deleteOrganization(
+          {String? organizationId, dynamic token}) =>
+      (super.noSuchMethod(
+              Invocation.method(#deleteOrganization, [],
+                  {#organizationId: organizationId, #token: token}),
+              returnValue:
+                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
+          as _i2.Future<Map<String, dynamic>>);
+  @override
+  _i2.Future<Map<String, dynamic>> updateOrganizationDetails(
+          {String? organizationId, dynamic token, String? url, String? name}) =>
+      (super.noSuchMethod(
+              Invocation.method(#updateOrganizationDetails, [], {
+                #organizationId: organizationId,
+                #token: token,
+                #url: url,
+                #name: name
+              }),
+              returnValue:
+                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
+          as _i2.Future<Map<String, dynamic>>);
+  @override
+  _i2.Future<Map<String, dynamic>> pinMessage(
+          dynamic messageId, dynamic orgId) =>
+      (super.noSuchMethod(Invocation.method(#pinMessage, [messageId, orgId]),
+              returnValue:
+                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
+          as _i2.Future<Map<String, dynamic>>);
+  @override
+  _i2.Future<Map<String, dynamic>> fetchPinnedMessgaes(
+          dynamic roomId, dynamic orgId) =>
+      (super.noSuchMethod(
+              Invocation.method(#fetchPinnedMessgaes, [roomId, orgId]),
+              returnValue:
+                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
+          as _i2.Future<Map<String, dynamic>>);
+  @override
   String toString() => super.toString();
 }
 
@@ -958,6 +995,16 @@ class MockDMService extends _i1.Mock implements _i15.DMService {
       (super.noSuchMethod(Invocation.method(#fetchAllUsersForDm, []),
               returnValue: Future<List<_i5.Users>>.value(<_i5.Users>[]))
           as _i2.Future<List<_i5.Users>>);
+  @override
+  _i2.Future<void> pinMessage(String? messageId) =>
+      (super.noSuchMethod(Invocation.method(#pinMessage, [messageId]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
+  @override
+  _i2.Future<List<String>> fetchPinnedMessages(String? roomId) =>
+      (super.noSuchMethod(Invocation.method(#fetchPinnedMessages, [roomId]),
+              returnValue: Future<List<String>>.value(<String>[]))
+          as _i2.Future<List<String>>);
   @override
   String toString() => super.toString();
 }
