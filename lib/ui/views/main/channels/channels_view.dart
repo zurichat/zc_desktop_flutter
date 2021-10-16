@@ -50,7 +50,7 @@ class ChannelsView extends StatelessWidget {
                             builder: (context) => ChannelsDetailsView()),
                         child: WorkSpaceMembers()),
                   ),
-                  Align(alignment: Alignment.topCenter, child: TopRowActions()),
+                  // Align(alignment: Alignment.topCenter, child: TopRowActions()),
                   Container(
                     height: 110.h,
                     decoration: BoxDecoration(

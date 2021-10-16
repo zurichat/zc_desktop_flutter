@@ -15,6 +15,7 @@ class ChannelsListViewModel extends BaseViewModel {
 
   List<Channel> _channels = [];
   int selectedChannelIndex = 0;
+  
 
   List<Channel> get channels => _channels;
   final _navigationService = locator<NavigationService>();
@@ -49,13 +50,9 @@ class ChannelsListViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> performGetChannel() async {
-
-    _channels = await _channelService.getChannels(
-        organizationId: _organizationService.getOrganizationId());
-
-    log.d('List of channels ${_channels}');
-    notifyListeners();
+  void performGetChannel() {
+    _channels = _channelService.getChannelList();
+    log.d('list of channels ${_channels}');
   }
 
   void goToChannelsView({int index = 0}) {
