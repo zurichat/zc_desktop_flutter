@@ -598,6 +598,27 @@ class MockZuriApiService extends _i1.Mock implements _i11.ZuriApiService {
                   Future<Map<String, dynamic>>.value(<String, dynamic>{}))
           as _i2.Future<Map<String, dynamic>>);
   @override
+  _i2.Future<Map<String, dynamic>> updateOrganizationName(
+          {String? name, String? organizationId, String? token}) =>
+      (super.noSuchMethod(
+              Invocation.method(#updateOrganizationName, [], {
+                #name: name,
+                #organizationId: organizationId,
+                #token: token
+              }),
+              returnValue:
+                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
+          as _i2.Future<Map<String, dynamic>>);
+  @override
+  _i2.Future<Map<String, dynamic>> updateOrganizationUrl(
+          {String? url, String? organizationId, String? token}) =>
+      (super.noSuchMethod(
+              Invocation.method(#updateOrganizationUrl, [],
+                  {#url: url, #organizationId: organizationId, #token: token}),
+              returnValue:
+                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
+          as _i2.Future<Map<String, dynamic>>);
+  @override
   _i2.Future<Map<String, dynamic>> reactToMessage(
           {dynamic orgId,
           dynamic roomId,
@@ -1081,6 +1102,20 @@ class MockOrganizationService extends _i1.Mock
   void saveMemberId(String? memId) =>
       super.noSuchMethod(Invocation.method(#saveMemberId, [memId]),
           returnValueForMissingStub: null);
+  @override
+  _i2.Future<void> updateOrganizationUrl({String? url, String? token}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #updateOrganizationUrl, [], {#url: url, #token: token}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
+  @override
+  _i2.Future<void> updateOrganizationName({String? name, String? token}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #updateOrganizationName, [], {#name: name, #token: token}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i2.Future<void>);
   @override
   String getOrganizationId() =>
       (super.noSuchMethod(Invocation.method(#getOrganizationId, []),
