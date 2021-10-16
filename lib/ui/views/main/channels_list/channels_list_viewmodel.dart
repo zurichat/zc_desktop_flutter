@@ -5,7 +5,6 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
-import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 class ChannelsListViewModel extends BaseViewModel {
   final log = getLogger('ChannelsDisplayViewModel');
