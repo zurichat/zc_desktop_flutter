@@ -19,12 +19,16 @@ class OrganizationService {
   final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
   final _apiService = locator<Api>();
-  Organization? organization;
 
   /// This gets the currently logged in user respose
   Auth get auth {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
     return Auth.fromJson(jsonDecode(auth as String));
+  }
+
+  Organization get organization {
+    final organization = _localStorageService.getFromDisk(localOrganizationResponseKey);
+    return Organization.fromJson(jsonDecode(organization as String));
   }
   
 
@@ -91,8 +95,8 @@ class OrganizationService {
     final response = await _apiService.invitePeopleToOrganization(
         organizationId: organizationId, email: email, token: auth.user!.token);
     log.i(response);
-    organization = OrganizationResponse.fromJson(response).data as Organization?;
-    _localStorageService.saveToDisk(localOrganizationResponseKey, jsonEncode(organization));
+    // organization = OrganizationResponse.fromJson(response).data as Organization?;
+    // _localStorageService.saveToDisk(localOrganizationResponseKey, jsonEncode(organization));
   }
 
   ///This is used to get the list of users in an organization

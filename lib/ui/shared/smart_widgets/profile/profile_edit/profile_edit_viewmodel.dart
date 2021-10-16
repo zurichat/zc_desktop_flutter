@@ -16,10 +16,12 @@ class ProfileEditViewModel extends FormViewModel {
   final log = getLogger('ProfileEditViewModel');
   final _organizationService = locator<OrganizationService>();
 
-
   // bool _isFormValid() {
   //   return (_fullNameFormKey.currentState!.isValid);
   // }
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
 
   Member _currentMember = Member(
     id: '',
@@ -29,6 +31,7 @@ class ProfileEditViewModel extends FormViewModel {
     displayName: '',
     bio: '',
     phone: '',
+    img: '',
     pronouns: '',
     timeZone: '',
     createdAt: '',
@@ -37,10 +40,7 @@ class ProfileEditViewModel extends FormViewModel {
 
   Member get currentMember => _currentMember;
 
-  
-
   File? _choosenImage;
-
 
   File? get choosenImage => _choosenImage;
 
@@ -77,48 +77,45 @@ class ProfileEditViewModel extends FormViewModel {
     String timeZone,
   ) async {
     try {
-    await _userService.updateUser(
-      bio: whoValue,
-      displayName: displayNameValue,
-      firstName: firstNameValue,
-      lastName: lastNameValue,
-      phoneNumber: phoneNumberValue,
-      pronoun: pronounValue,
-      timeZone: timeZoneValue,
-    );
-    } catch(e) {
+      await _userService.updateUser(
+        bio: whoValue,
+        displayName: displayNameValue,
+        firstName: firstNameValue,
+        lastName: lastNameValue,
+        phoneNumber: phoneNumberValue,
+        pronoun: pronounValue,
+        timeZone: timeZoneValue,
+      );
+    } catch (e) {
       if (e.toString().contains('40')) {
         throw Failure('');
       }
       throw Failure('');
     }
     // Do something after save
-    
   }
 
   Future<void> postPicture(
-    File img,
+    String url,
   ) async {
-    await runBusyFuture(performPicturePost(img));
+    await runBusyFuture(performPicturePost(url));
   }
 
   Future<void> performPicturePost(
-    File img,
+    String url,
   ) async {
-    final response = await _userService.updateUserImage(
-      img: _choosenImage,
-    );
+    try {
+      await _userService.updateUserImage(
+        url: _choosenImage!.path,
+      );
+    } catch (e) {
+      if (e.toString().contains('40')) {
+        throw Failure('');
+      }
+      throw Failure('');
+    }
     // Do something after save
-    return response;
   }
-
-  void setup() async {
-    await runBusyFuture(setupOrganization());
-    _organizationService.saveMemberId(_currentMember.id);
-    log.d('current member id ${_currentMember.id}');
-  }
-
-  Future<void> setupOrganization() async {}
 
   removeImage() {
     _choosenImage = null;

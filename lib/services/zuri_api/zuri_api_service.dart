@@ -544,23 +544,21 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserPicture({
+  Future<Map<String, dynamic>> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    File? img,
+    required String url,
   }) async {
     final uri = updateUserProfilePicture(organizationId, memberId);
     Map<String, dynamic> data = {
-      'image_url': img,
+      'image_url': url,
     };
     final response = await _patch(
       uri,
       body: data,
       headers: {
-        // ignore: prefer_single_quotes
-        "Content-Type": "application/json",
-
+        'Content-Type': 'image' ,
         'Authorization': 'Bearer ${token}',
       },
     );

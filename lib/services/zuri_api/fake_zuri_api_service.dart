@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 
-import 'dart:io';
 
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
@@ -473,7 +472,7 @@ class FakeZuriApiService implements Api {
   
 
   @override
-  Future<Map<String, dynamic>> updateUserDetail({
+  Future updateUserDetail({
     required organizationId,
     required memberId,
     required token,
@@ -546,16 +545,16 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserPicture({
+  Future<Map<String, dynamic>> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    File? img,
+    String? url,
   }) async {
     return {
       'status': 200,
       'message': 'user updated successfully',
-      'image_url': img,
+      'image_url': url,
     };
   }
 

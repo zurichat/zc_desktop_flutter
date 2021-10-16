@@ -1,5 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'dart:io';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zc_desktop_flutter/core/enums/flash_windows.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_bar.dart';
@@ -42,9 +44,10 @@ class Member with _$Member {
     @JsonKey(name: 'display_name') @Default('') String displayName,
     @Default('') String phone,
     @Default('') String status,
-    @Default('')  String pronouns,
-    @Default('')  String bio,
-    @Default([])  List socials,
+    @Default('') String pronouns,
+    @Default('') String bio,
+    @Default([]) List socials,
+    @Default('') String img,
     @JsonKey(name: 'time_zone') @Default('') String timeZone,
     @JsonKey(name: 'created_at') @Default('') String createdAt,
     @JsonKey(name: 'updated_at') @Default('') String updatedAt,

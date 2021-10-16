@@ -26,28 +26,26 @@ class UserService {
     return Auth.fromJson(jsonDecode(auth as String));
   }
 
-  // Organization get organization {
-  //   final organisation = _localStorageService.getFromDisk(localOrganizationResponseKey);
-  //   return Organization.fromJson(jsonDecode(organisation as String));
-  // }
-
   String getUserId() {
     return _localStorageService.getFromDisk(userIdKey) as String;
   }
 
   Future<void> updateUserImage({
     String? token,
-    File? img,
+    required String url,
   }) async {
     final orgId = _organizationService.getOrganizationId();
     final memId = _organizationService.getOrganizationId();
-    final response = await _api.UpdateUserPicture(
+    final response = await _api.updateUserPicture(
       organizationId: orgId,
       memberId: memId,
-      token: token,
-      img: img,
+      token: token, 
+      url: url,
+      
     );
     log.i(response);
+    organization = OrganizationResponse.fromJson(response).data as Organization?;
+    _localStorageService.saveToDisk(localOrganizationResponseKey, jsonEncode(organization));
   }
 
   Future<void> updateUser({
@@ -75,7 +73,7 @@ class UserService {
     );
     log.i(response);
     organization = OrganizationResponse.fromJson(response).data as Organization?;
-    _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(organization));
+    _localStorageService.saveToDisk(localOrganizationResponseKey, jsonEncode(organization));
   }
 
   /// This is used to get a single user_service

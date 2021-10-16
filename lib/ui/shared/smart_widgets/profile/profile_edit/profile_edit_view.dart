@@ -372,7 +372,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                             pronounController.text,
                             timeZoneController.text,
                           );
-                          // await model.postPicture(model.choosenImage!);
+                          await model.postPicture(model.choosenImage!.path);
                           Navigator.of(context).pop();
                         },
                         label: 'Save Changes',
