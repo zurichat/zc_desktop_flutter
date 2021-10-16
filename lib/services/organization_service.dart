@@ -21,13 +21,13 @@ class OrganizationService {
   final _apiService = locator<Api>();
   Organization? organization;
   List<DM> _dms = [];
+ 
 
   /// This gets the currently logged in user respose
   Auth get auth {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
     return Auth.fromJson(jsonDecode(auth as String));
   }
-  
 
   void setDms(List<DM> dm) {
     _dms = dm;
@@ -99,8 +99,10 @@ class OrganizationService {
     final response = await _apiService.invitePeopleToOrganization(
         organizationId: organizationId, email: email, token: auth.user!.token);
     log.i(response);
-    organization = OrganizationResponse.fromJson(response).data as Organization?;
-    _localStorageService.saveToDisk(localOrganizationResponseKey, jsonEncode(organization));
+    organization =
+        OrganizationResponse.fromJson(response).data as Organization?;
+    _localStorageService.saveToDisk(
+        localOrganizationResponseKey, jsonEncode(organization));
   }
 
   ///This is used to get the list of users in an organization
@@ -193,4 +195,6 @@ class OrganizationService {
     /* final response = await _zuriApiService.fetchUserDetails(userId: memberId,token:  auth.user!.token);
     var user = User.fromJson(response); */
   }
+
+  
 }

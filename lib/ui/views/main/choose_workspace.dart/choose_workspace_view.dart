@@ -6,6 +6,8 @@ import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/change_region/change_region_view.dart';
 
 import 'choose_workspace_viewmodel.dart';
 
@@ -16,65 +18,60 @@ class ChooseWorkspaceView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ChooseWorkspaceViewmodel>.reactive(
       viewModelBuilder: () => ChooseWorkspaceViewmodel(),
+      onModelReady: (model) async => await model.init(),
+      //   onDispose: (model) {
+      //  // debugPrint('Anything ----saving Data');
+      //   //  model.saveSelectedOrg();
+      //   },
       builder: (context, model, _) => Scaffold(
-        body: Container(
-          height: 1024.h,
-          width: 1440.w,
-          color: whiteColor,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ZuriLogoAndText(model),
-              largeWorkspaceText(),
-              promiseText(),
-              openButtonWidget(),
-              WorkspaceBox(
-                model,
-                height: 182.h,
-                innerContainerHeight: 130.h,
-                listTileItemCount: 2,
-                workspaceOwner: EmailHintText,
-                //TODO delete the parameters passed below
-                imageAsset: ZuriI4gLogo,
-                workspaceName: HngText,
+        body: model.isBusy
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: kcPrimaryColor,
+                ),
+              )
+            : Container(
+                height: 1024.h,
+                width: 1440.w,
+                color: whiteColor,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ZuriLogoAndText(model),
+                    largeWorkspaceText(),
+                    promiseText(),
+                    openButtonWidget(model),
+                    WorkspaceBox(
+                      model,
+                      listTileItemCount: 2,
+                      workspaceOwner: model.user.email == ''
+                          ? EmailHintText
+                          : model.user.email,
+                    ),
+                    signIntoNewWorkspace(model),
+                    AuthFooter(),
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
-              WorkspaceBox(
-                model,
-                height: 122.h,
-                innerContainerHeight: 70.h,
-                listTileItemCount: 1,
-                workspaceOwner: EmailHintText2,
-                //TODO delete the parameters passed below
-                imageAsset: Hotels_ng,
-                workspaceName: HotelsNg,
-              ),
-              signIntoNewWorkspace(model),
-              BottomTexts()
-            ],
-          ),
-        ),
       ),
     );
   }
 
   InkWell signIntoNewWorkspace(ChooseWorkspaceViewmodel model) {
     return InkWell(
-              onTap: model.goToCreateWorkSpace,
-              child: Container(
-                margin: EdgeInsets.only(
-                    left: 530.w, right: 530.w, top: 17.h, bottom: 20.h),
-                child: Text(
-                  SignIntoNewWorkspace,
-                  style: newToZuriChatTextstyle.copyWith(
-                    color: kcPrimaryColor,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            );
+      onTap: model.goToCreateWorkSpace,
+      child: Container(
+        margin:
+            EdgeInsets.only(left: 530.w, right: 530.w, top: 10.h, bottom: 10.h),
+        child: Text(
+          SignIntoNewWorkspace,
+          style: newToZuriChatTextstyle.copyWith(
+            color: kcPrimaryColor,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    );
   }
 
   promiseText() {
@@ -90,7 +87,7 @@ class ChooseWorkspaceView extends StatelessWidget {
     );
   }
 
-  Container openButtonWidget() {
+  Container openButtonWidget(ChooseWorkspaceViewmodel model) {
     return Container(
       height: 36.h,
       width: 676.w,
@@ -100,7 +97,7 @@ class ChooseWorkspaceView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            SelectText,
+            '${model.counter == 0 ? 'None' : model.counter} $SelectText',
             style: newToZuriChatTextstyle.copyWith(
               fontSize: 15.sp,
               fontWeight: FontWeight.w700,
@@ -108,7 +105,10 @@ class ChooseWorkspaceView extends StatelessWidget {
           ),
           Container(
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                model.saveSelectedOrg();
+                model.goToOrganizationView();
+              },
               label: SvgPicture.asset(LeftArrow),
               icon: Text(OpenText),
               style: ButtonStyle(
@@ -132,14 +132,10 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
-
- 
-
-
- 
 }
+
 class ZuriLogoAndText extends StatelessWidget {
-  const ZuriLogoAndText(this.model,{ Key? key }) : super(key: key);
+  const ZuriLogoAndText(this.model, {Key? key}) : super(key: key);
 
   final ChooseWorkspaceViewmodel model;
 
@@ -171,7 +167,7 @@ class ZuriLogoAndText extends StatelessWidget {
     );
   }
 
-   Container newToZuriText() {
+  Container newToZuriText() {
     return Container(
       height: 72.h,
       width: 110.w,
@@ -238,7 +234,10 @@ class BottomTexts extends StatelessWidget {
                 SizedBox(
                   width: 10.w,
                 ),
-                SvgPicture.asset(ArrowDown),
+                GestureDetector(
+                    onTap: () => showDialog(
+                        context: context, builder: (_) => ChangeRegionView()),
+                    child: SvgPicture.asset(ArrowDown)),
               ],
             ),
           )
@@ -251,27 +250,19 @@ class BottomTexts extends StatelessWidget {
 class WorkspaceBox extends StatelessWidget {
   const WorkspaceBox(
     this.model, {
-    this.height,
-    this.innerContainerHeight,
     this.listTileItemCount,
     this.workspaceOwner,
-    this.imageAsset,
-    this.workspaceName,
     Key? key,
   }) : super(key: key);
 
   final ChooseWorkspaceViewmodel model;
-  final double? height;
-  final double? innerContainerHeight;
   final int? listTileItemCount;
   final String? workspaceOwner;
-  final String? imageAsset;
-  final String? workspaceName;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,
+      height: 300.h,
       width: 676.w,
       margin: EdgeInsets.only(left: 382.w, right: 382.w, top: 5.h),
       decoration: BoxDecoration(
@@ -302,70 +293,75 @@ class WorkspaceBox extends StatelessWidget {
             height: 0.5,
           ),
           Container(
-            height: innerContainerHeight,
+            height: 230.h,
             width: 676.w,
             child: ListView.separated(
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 24.w, vertical: 5.h),
-                    leading: Container(
+                  final boolValue = model.isChecked![index];
+                  return CheckboxListTile(
+                    value: boolValue,
+                    onChanged: (boolValue) {
+                      model.onChange(boolValue!, index);
+
+                      // model.getCounter(index);
+                    },
+                    activeColor: kcPrimaryColor,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Container(
                       height: 60.h,
-                      width: 100.w,
-                      child: Row(
-                        children: [
-                          Transform.scale(
-                            scale: 0.5,
-                            child: Checkbox(
-                                value: model.value, onChanged: model.onChange),
-                          ),
-                          Container(
-                            height: 40.h,
-                            width: 40.w,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(imageAsset!),
-                                  fit: BoxFit.cover),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          workspaceName!,
-                          style: createChannelTextStyle.copyWith(
-                            color: headerColor,
-                            fontWeight: FontWeight.w700,
+                      width: 676.w,
+                      padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                      child: Row(children: [
+                        Container(
+                          height: 40.h,
+                          width: 40.w,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(ZuriI4gLogo),
+                                //NetworkImage(model.orgList[index].logoUrl),
+                                fit: BoxFit.cover),
                           ),
                         ),
                         SizedBox(
-                          height: 2.h,
+                          width: 10.h,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          mainAxisSize: MainAxisSize.min,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            imageContainer(),
-                            imageContainer(),
-                            imageContainer(),
-                            imageContainer(),
-                            imageContainer(),
-                            imageContainer(),
-                            SizedBox(
-                              width: 8.w,
-                            ),
                             Text(
-                              '3, 194 $MemberText',
-                              style: kExtraSmallTextStyle.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: leftNavBarColor),
+                              model.orgList[index].name,
+                              style: createChannelTextStyle.copyWith(
+                                color: headerColor,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                imageContainer(),
+                                imageContainer(),
+                                imageContainer(),
+                                imageContainer(),
+                                imageContainer(),
+                                imageContainer(),
+                                SizedBox(
+                                  width: 8.w,
+                                ),
+                                Text(
+                                  '3, 496 $MemberText',
+                                  style: kExtraSmallTextStyle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: leftNavBarColor),
+                                )
+                              ],
                             )
                           ],
-                        )
-                      ],
+                        ),
+                      ]),
                     ),
                   );
                 },
@@ -375,7 +371,7 @@ class WorkspaceBox extends StatelessWidget {
                     child: Divider(height: 0.5.w),
                   );
                 },
-                itemCount: listTileItemCount!),
+                itemCount: model.orgLength),
           )
         ],
       ),
