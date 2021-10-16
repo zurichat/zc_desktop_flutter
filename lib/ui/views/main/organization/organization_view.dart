@@ -111,7 +111,7 @@ class OrganizationWrapper extends StatelessWidget {
                                 padding: EdgeInsets.all(8.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    model!.goToCreateWorkspace();
+                                    model!.goToChooseWorkspace();
                                   },
                                   child: Icon(
                                     Icons.add,
@@ -145,6 +145,7 @@ class OrganizationWrapper extends StatelessWidget {
                               ),
                             ),
                             Expanded(
+                              flex: 6,
                               child: SingleChildScrollView(
                                 controller: model!.controller,
                                 physics: ScrollPhysics(),
@@ -157,7 +158,7 @@ class OrganizationWrapper extends StatelessWidget {
                                         shrinkWrap: true,
                                         children: [
                                           DisplayMenu(model!),
-                                          verticalSpaceRegular,
+                                          verticalSpaceSmall,
                                           ReusableDropDown(
                                             title: 'Channels',
                                             addButtonTitle: 'Add channels',

@@ -17,6 +17,9 @@ class ProfileDropdownViewModel extends BaseViewModel {
   // final _organizationId = locator<OrganizationService>();
 
   String email = '';
+  Organization _currentOrganization = Organization();
+
+  Organization get currentOrganization => _currentOrganization;
 
   User _currentUser = User(
     id: '',
@@ -57,7 +60,7 @@ class ProfileDropdownViewModel extends BaseViewModel {
   bool get isDropped => _isDropped;
   bool get isHover => _isHover;
   User get user => _userService.auth.user!;
-  Member get member => _organizationService.organization.member!;
+  Member get member => _organizationService.organization!.member!;
 
   setIsDropped() {
     _isDropped = !_isDropped;
@@ -69,7 +72,11 @@ class ProfileDropdownViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  // void signOut() async {
+  Future<void> getdetails() async {
+    await _userService.fetchMemberDetails(
+      member.displayName,
+    );
+  }
 
   void signOut() {
     _windowTitleBarService.setHome(false);

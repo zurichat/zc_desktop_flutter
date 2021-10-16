@@ -44,7 +44,7 @@ class LoginViewModel extends FormViewModel {
       }
       throw Failure(AuthErrorMessage);
     }
-    _navigationService.navigateTo(Routes.organizationView);
+    _navigationService.navigateTo(Routes.chooseWorkspaceView);
   }
 
   @override

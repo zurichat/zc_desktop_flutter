@@ -44,7 +44,7 @@ class Member with _$Member {
     @JsonKey(name: 'display_name') @Default('') String displayName,
     @Default('') String phone,
     @Default('') String status,
-    @Default('') String pronouns,
+    @JsonKey(name: 'image_url') @Default('') String pronouns,
     @Default('') String bio,
     @Default([]) List socials,
     @Default('') String img,
@@ -360,6 +360,8 @@ class Channel with _$Channel {
     @Default('') String owner,
     @Default('') String description,
     @Default(false) bool private,
+    @Default(true) @JsonKey(name:'allow_members_input') bool memberinput,
+    @Default(0) int member,
   }) = _Channel;
   factory Channel.fromJson(Map<String, dynamic> json) =>
       _$ChannelFromJson(json);

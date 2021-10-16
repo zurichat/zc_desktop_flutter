@@ -177,7 +177,9 @@ abstract class Api {
       String? name,
       String? owner,
       String? description,
-      bool? private});
+      bool? private,
+      String? topic,
+      bool? defaultChannel});
 
   /// returns [Future]<[void]>, adds a user to channel using current organization id and current channel id.
   ///
@@ -282,12 +284,13 @@ abstract class Api {
       required String memberId,
       required String token});
 
+ 
 
-  Future<Map<String, dynamic>> updateUserPicture({
+  Future<dynamic> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    required String url,
+    required File url,
   });
 
   Future<dynamic> updateUserDetail({
@@ -300,7 +303,6 @@ abstract class Api {
     String? firstName,
     String? phoneNumber,
     String? pronoun,
-    String? timeZone,
   });
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.

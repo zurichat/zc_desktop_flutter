@@ -8,11 +8,8 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
-import 'package:zc_desktop_flutter/services/user_service.dart';
-import 'profile_edit_view.form.dart';
 
 class ProfileEditViewModel extends FormViewModel {
-  final _userService = locator<UserService>();
   final log = getLogger('ProfileEditViewModel');
   final _organizationService = locator<OrganizationService>();
 
@@ -61,10 +58,9 @@ class ProfileEditViewModel extends FormViewModel {
     String lastName,
     String phoneNumber,
     String pronoun,
-    String timeZone,
   ) async {
     await runBusyFuture(performProfilePost(
-        firstName, lastName, displayName, bio, pronoun, phoneNumber, timeZone));
+        firstName, lastName, displayName, bio, pronoun, phoneNumber,));
   }
 
   Future<void> performProfilePost(
@@ -74,17 +70,15 @@ class ProfileEditViewModel extends FormViewModel {
     String lastName,
     String phoneNumber,
     String pronoun,
-    String timeZone,
   ) async {
     try {
-      await _userService.updateUser(
-        bio: whoValue,
-        displayName: displayNameValue,
-        firstName: firstNameValue,
-        lastName: lastNameValue,
-        phoneNumber: phoneNumberValue,
-        pronoun: pronounValue,
-        timeZone: timeZoneValue,
+      await _organizationService.updateUser(
+        bio: bio,
+        displayName: displayName.trim(),
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        phoneNumber: phoneNumber,
+        pronoun: pronoun.trim(),
       );
     } catch (e) {
       if (e.toString().contains('40')) {
@@ -96,17 +90,17 @@ class ProfileEditViewModel extends FormViewModel {
   }
 
   Future<void> postPicture(
-    String url,
+    File url,
   ) async {
     await runBusyFuture(performPicturePost(url));
   }
 
   Future<void> performPicturePost(
-    String url,
+    File url,
   ) async {
     try {
-      await _userService.updateUserImage(
-        url: _choosenImage!.path,
+      await _organizationService.updateUserImage(
+        url: url,
       );
     } catch (e) {
       if (e.toString().contains('40')) {
@@ -132,6 +126,7 @@ class ProfileEditViewModel extends FormViewModel {
       if (result != null) {
         File file = File(result.files.single.path!);
         _choosenImage = File(file.path);
+        postPicture(_choosenImage!);
         notifyListeners();
       } else {
         // User canceled the picker
