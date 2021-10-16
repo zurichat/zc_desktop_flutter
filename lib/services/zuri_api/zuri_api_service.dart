@@ -423,6 +423,24 @@ class ZuriApiService implements Api {
   }
 
   @override
+  Future<Map<String, dynamic>> updateOrganizationName({required String name, required String organizationId, required String token}) async {
+    final response = await _patch( updateOrganizationNameUrl(organizationId),body: {
+      'organization_name': name
+    }, headers: {'Authorization': 'Bearer ${token}'},);
+    log.i(response);
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateOrganizationUrl({ required String url, required String organizationId, required String token}) async {
+    final response = await _patch( getUpdateOrganizationUrl(organizationId),body: {
+      'ur': url
+    }, headers: {'Authorization': 'Bearer ${token}'},);
+    log.i(response);
+    return response;
+  }
+
+  @override
   Future<Map<String, dynamic>> reactToMessage(
       {orgId, roomId, messageId, required reactToMessage}) async {
     return await _post(
@@ -457,7 +475,7 @@ class ZuriApiService implements Api {
       getMemberUri(organizationId),
       headers: {'Authorization': 'Bearer ${token}'},
     );
-    log.i(response);
+    log.i('$response --------------------');
     return List.from(response['data'].map((value) => Users.fromJson(value)));
   }
 

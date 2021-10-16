@@ -90,9 +90,9 @@ class ChannelsService with ReactiveServiceMixin {
     final response = await _zuriApiService.fetchChannelsListUsingOrgId(
         organizationId: _organizationService.getOrganizationId(), token: _auth.user!.token);
     log.i(response);
-    return response;
-    // return List.of(response.toMap((channel) => Channel.fromJson(channel)));
-    //return List.from(response.map((value) => Channel.fromJson(value)));
+    //return response;
+    //return List.of(response.toMap((channel) => Channel.fromJson(channel)));
+    return List.from(response.map((value) => Channel.fromJson(value)));
   }
 
   /// This is used to create a channel on the page

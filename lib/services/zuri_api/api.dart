@@ -131,6 +131,10 @@ abstract class Api {
     String? name,
   });
 
+  Future<Map<String, dynamic>> updateOrganizationName({ required String name, required String organizationId, required String token});
+
+  Future<Map<String, dynamic>> updateOrganizationUrl({ required String url, required String organizationId, required String token});
+
   /// returns [Future]<[Map]<[String], [dynamic]>>, private function to delete
   /// a single organization from remote source using organization id.
   ///
