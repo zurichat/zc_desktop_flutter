@@ -621,12 +621,4 @@ class ZuriApiService implements Api {
     return await _get(uri);
   }
   
-  @override
-  Future<Map<String, dynamic>> updateOrganizationName({ required String name, required String organizationId, required String token}) async {
-    await Future.delayed(Duration(seconds: 2));
-    return {
-      'status' : 200,
-      'message' : 'Url update successfully'
-    };
-  }
 }
