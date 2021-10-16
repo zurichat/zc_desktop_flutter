@@ -550,7 +550,7 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> updateUserDetail({
+  Future updateUserDetail({
     required organizationId,
     required memberId,
     required token,
@@ -622,16 +622,16 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserPicture({
+  Future<dynamic> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    File? img,
+    File? url,
   }) async {
     return {
       'status': 200,
       'message': 'user updated successfully',
-      'image_url': img,
+      'image_url': url,
     };
   }
 

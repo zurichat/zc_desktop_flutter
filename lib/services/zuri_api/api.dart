@@ -284,15 +284,16 @@ abstract class Api {
       required String memberId,
       required String token});
 
+ 
 
-  Future<Map<String, dynamic>> UpdateUserPicture({
+  Future<dynamic> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    File? img,
+    required File url,
   });
 
-  Future<Map<String, dynamic>> updateUserDetail({
+  Future<dynamic> updateUserDetail({
     required String organizationId,
     required String memberId,
     required String token,
@@ -302,7 +303,6 @@ abstract class Api {
     String? firstName,
     String? phoneNumber,
     String? pronoun,
-    String? timeZone,
   });
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.

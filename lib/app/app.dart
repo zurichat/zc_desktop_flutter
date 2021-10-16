@@ -44,33 +44,38 @@ const useFakeApiService = false;
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: StartUpView, initial: true),
-    MaterialRoute(page: ChooseWorkspaceView),
-    MaterialRoute(page: LoginView),
-    MaterialRoute(page: SignUpView),
-    MaterialRoute(page: ForgotPasswordView),
-    MaterialRoute(page: CheckEmailView),
-    MaterialRoute(page: ResetPasswordView),
-    MaterialRoute(page: ChangePasswordView),
-    MaterialRoute(page: SuccessView),
-    MaterialRoute(page: CreateWorkspaceView),
-    MaterialRoute(page: CreateWorkspaceStage1),
-    MaterialRoute(page: CreateWorkspaceStage2),
-    MaterialRoute(page: CreateWorkspaceStage3),
-    MaterialRoute(page: SavedItemsView),
-    MaterialRoute(
+    CustomRoute(page: StartUpView, initial: true),
+    CustomRoute(page: ChooseWorkspaceView),
+    CustomRoute(page: LoginView),
+    CustomRoute(page: SignUpView),
+    CustomRoute(page: ForgotPasswordView),
+    CustomRoute(page: CheckEmailView),
+    CustomRoute(page: ResetPasswordView),
+    CustomRoute(page: ChangePasswordView),
+    CustomRoute(page: SuccessView),
+    CustomRoute(page: CreateWorkspaceView),
+    CustomRoute(page: CreateWorkspaceStage1),
+    CustomRoute(page: CreateWorkspaceStage2),
+    CustomRoute(page: CreateWorkspaceStage3),
+    CustomRoute(page: SavedItemsView),
+    CustomRoute(
       page: OrganizationView,
       children: [
-        MaterialRoute(page: ChannelsView, initial: true),
-        MaterialRoute(page: ChannelDmView),
-        MaterialRoute(page: ChannelsListView),
-        MaterialRoute(page: CreateChannelView),
-        MaterialRoute(page: DmView),
-        MaterialRoute(page: AllDmsView),
-        MaterialRoute(page: SavedItemsView),
-        MaterialRoute(page: PeopleUserGroupView,),
-        MaterialRoute(page: TodoView,),
-    ],) 
+        CustomRoute(page: ChannelsView, initial: true),
+        CustomRoute(page: ChannelDmView),
+        CustomRoute(page: ChannelsListView),
+        CustomRoute(page: CreateChannelView),
+        CustomRoute(page: DmView),
+        CustomRoute(page: AllDmsView),
+        CustomRoute(page: SavedItemsView),
+        CustomRoute(
+          page: PeopleUserGroupView,
+        ),
+        CustomRoute(
+          page: TodoView,
+        ),
+      ],
+    )
   ],
   dependencies: [
     Presolve(

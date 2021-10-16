@@ -8,18 +8,17 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
-import 'package:zc_desktop_flutter/services/user_service.dart';
-import 'profile_edit_view.form.dart';
 
 class ProfileEditViewModel extends FormViewModel {
-  final _userService = locator<UserService>();
   final log = getLogger('ProfileEditViewModel');
   final _organizationService = locator<OrganizationService>();
-
 
   // bool _isFormValid() {
   //   return (_fullNameFormKey.currentState!.isValid);
   // }
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
 
   Member _currentMember = Member(
     id: '',
@@ -29,6 +28,7 @@ class ProfileEditViewModel extends FormViewModel {
     displayName: '',
     bio: '',
     phone: '',
+    img: '',
     pronouns: '',
     timeZone: '',
     createdAt: '',
@@ -37,22 +37,10 @@ class ProfileEditViewModel extends FormViewModel {
 
   Member get currentMember => _currentMember;
 
-  
-
-  File? _choosenImage;
-
+  File? _choosenImage = null;
 
   File? get choosenImage => _choosenImage;
 
-  // get isFormValid => _isFormValid();
-
-  // get isSubmit => _isSaveButtonEnabled;
-
-  // void onValidate() {
-  //   _isSaveButtonEnabled = _isFormValid();
-  //   _fullNameFormKey.currentState!.validate();
-  //   notifyListeners();
-  // }
 
   Future<void> postDetails(
     String bio,
@@ -61,10 +49,9 @@ class ProfileEditViewModel extends FormViewModel {
     String lastName,
     String phoneNumber,
     String pronoun,
-    String timeZone,
   ) async {
     await runBusyFuture(performProfilePost(
-        firstName, lastName, displayName, bio, pronoun, phoneNumber, timeZone));
+        firstName, lastName, displayName, bio, pronoun, phoneNumber,));
   }
 
   Future<void> performProfilePost(
@@ -74,51 +61,46 @@ class ProfileEditViewModel extends FormViewModel {
     String lastName,
     String phoneNumber,
     String pronoun,
-    String timeZone,
   ) async {
     try {
-    await _userService.updateUser(
-      bio: whoValue,
-      displayName: displayNameValue,
-      firstName: firstNameValue,
-      lastName: lastNameValue,
-      phoneNumber: phoneNumberValue,
-      pronoun: pronounValue,
-      timeZone: timeZoneValue,
-    );
-    } catch(e) {
+      await _organizationService.updateUser(
+        bio: bio,
+        displayName: displayName.trim(),
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        phoneNumber: phoneNumber,
+        pronoun: pronoun.trim(),
+      );
+    } catch (e) {
       if (e.toString().contains('40')) {
         throw Failure('');
       }
       throw Failure('');
     }
     // Do something after save
-    
   }
 
   Future<void> postPicture(
-    File img,
+    File url,
   ) async {
-    await runBusyFuture(performPicturePost(img));
+    await runBusyFuture(performPicturePost(_choosenImage!));
   }
 
   Future<void> performPicturePost(
-    File img,
+    File url,
   ) async {
-    final response = await _userService.updateUserImage(
-      img: _choosenImage,
-    );
+    try {
+      await _organizationService.updateUserImage(
+        url: url,
+      );
+    } catch (e) {
+      if (e.toString().contains('40')) {
+        throw Failure('');
+      }
+      throw Failure('');
+    }
     // Do something after save
-    return response;
   }
-
-  void setup() async {
-    await runBusyFuture(setupOrganization());
-    _organizationService.saveMemberId(_currentMember.id);
-    log.d('current member id ${_currentMember.id}');
-  }
-
-  Future<void> setupOrganization() async {}
 
   removeImage() {
     _choosenImage = null;
@@ -135,6 +117,7 @@ class ProfileEditViewModel extends FormViewModel {
       if (result != null) {
         File file = File(result.files.single.path!);
         _choosenImage = File(file.path);
+        postPicture(_choosenImage!);
         notifyListeners();
       } else {
         // User canceled the picker

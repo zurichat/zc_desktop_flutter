@@ -134,7 +134,7 @@ class ZuriApiService implements Api {
 
   Future<dynamic> _patch(
     Uri uri, {
-    required Map<String, dynamic> body,
+    required body,
     Map<String, String>? headers,
   }) async {
     log.i('Making request to $uri');
@@ -154,6 +154,7 @@ class ZuriApiService implements Api {
       throw HttpException(error.toString());
     }
   }
+
 
   /* AUTH SERVICE */
 
@@ -508,7 +509,8 @@ class ZuriApiService implements Api {
     final response =
         await _get(uri, headers: {'Authorization': 'Bearer $token'});
 
-    Member.fromJson(response['data']);
+    Member member = Member.fromJson(response['data']);
+    log.i(member);
   }
 
   @override
@@ -521,8 +523,7 @@ class ZuriApiService implements Api {
       String? firstName,
       String? lastName,
       String? phoneNumber,
-      String? pronoun,
-      String? timeZone}) async {
+      String? pronoun}) async {
     final uri = updateUserProfile(organizationId, memberId);
     Map<String, dynamic> data = {
       'bio': bio,
@@ -531,7 +532,6 @@ class ZuriApiService implements Api {
       'last_name': lastName,
       'phone': phoneNumber,
       'pronouns': pronoun,
-      'time_zone': timeZone,
     };
     final response = await _patch(
       uri,
@@ -548,27 +548,24 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserPicture({
+  Future<void> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    File? img,
+    required File url,
   }) async {
     final uri = updateUserProfilePicture(organizationId, memberId);
-    Map<String, dynamic> data = {
-      'image_url': img,
-    };
+    // String fileName = url.path.split('/').last;
+    FormData formData = FormData.fromMap({'file': await MultipartFile.fromFile(url.path)});
     final response = await _patch(
       uri,
-      body: data,
+      body: formData,
       headers: {
-        // ignore: prefer_single_quotes
-        "Content-Type": "application/json",
-
+        'Content-Type': 'image',
         'Authorization': 'Bearer ${token}',
       },
     );
-    return response;
+    return response.data['id'];
   }
 
   @override
