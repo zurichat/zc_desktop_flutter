@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -7,11 +9,14 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class OrganizationViewModel extends BaseViewModel {
   final log = getLogger('OrganizationViewModel');
+  final String _selectedOrgKey = 'SelectedOrgKey';
+  final _localStorageService = locator<LocalStorageService>();
   final _navigationService = locator<NavigationService>();
   final _organizationService = locator<OrganizationService>();
   final _channelService = locator<ChannelsService>();
@@ -20,8 +25,6 @@ class OrganizationViewModel extends BaseViewModel {
 
   int selectedChannelIndex = 0;
   int _selectedMenuIndex = 7;
-
-  
 
   ScrollController controller = ScrollController();
 
@@ -58,7 +61,9 @@ class OrganizationViewModel extends BaseViewModel {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
     _organizationService.saveOrganizationId(_currentOrganization.id);
+    _organizationService.saveMemberId(_currentOrganization.memberId);
     log.d('current organization id ${_currentOrganization.id}');
+    log.d('current organization id ${_currentOrganization.memberId}');
     _windowTitleBarService.setHome(true);
     //notifyListeners();
     // log.i(_channels);
@@ -79,6 +84,7 @@ class OrganizationViewModel extends BaseViewModel {
       await runBusyFuture(setupOrganization());
       // Save the newly selected org id in preferences when a new organization item is tapped
       _organizationService.saveOrganizationId(_currentOrganization.id);
+      _organizationService.saveMemberId(_currentOrganization.memberId);
       setSelectedOrganization(index);
       _currentOrganization = organization[getSelectedOrganizationIndex()!];
     }
@@ -98,11 +104,21 @@ class OrganizationViewModel extends BaseViewModel {
     await getOrganizations();
     await getDMs();
     await getChannels();
-    
   }
 
   Future<void> getOrganizations() async {
-    _organization = await _organizationService.getOrganizations();
+    // _organization = await _organizationService.getOrganizations();
+    _organization = [];
+    try {
+      final result = await json.decode(
+          _localStorageService.getFromDisk(_selectedOrgKey).toString()) as List;
+      log.i('************* $result');
+      result.forEach((element) {
+        _organization.add(Organization.fromJson(element));
+      });
+    } catch (e) {
+      log.i(e);
+    }
   }
 
   Future<void> getChannels() async {
@@ -139,6 +155,7 @@ class OrganizationViewModel extends BaseViewModel {
       _dms.add(dm);
     }
     log.i('${_dms}');
+    _organizationService.setDms(_dms);
   }
 
   void openChannelsList() {
@@ -157,8 +174,8 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   // TODO: go to workspace creation page
-  void goToCreateWorkspace() {
-    _navigationService.navigateTo(Routes.createWorkspaceView);
+  void goToChooseWorkspace() {
+    _navigationService.navigateTo(Routes.chooseWorkspaceView);
   }
 
   void goToChannelsView({int index = 0}) {
@@ -214,7 +231,6 @@ class OrganizationViewModel extends BaseViewModel {
     }
     return false;
   }
-
 
   @override
   void dispose() {

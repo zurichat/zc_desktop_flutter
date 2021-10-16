@@ -227,7 +227,7 @@ class ZuriApiService implements Api {
   /* ORGANIZATION SERVICE */
 
   @override
-  Future<void> addLoggedInUserToOrganization(
+  Future<Map<String, dynamic>> addLoggedInUserToOrganization(
       {required String organizationId,
       required String email,
       required token}) async {
@@ -236,6 +236,7 @@ class ZuriApiService implements Api {
       body: {'user_email': email},
       headers: {'Authorization': 'Bearer ${token}'},
     );
+    throw UnimplementedError();
   }
 
   @override
@@ -348,7 +349,9 @@ class ZuriApiService implements Api {
       String? name,
       String? owner,
       String? description,
-      bool? private}) async {
+      bool? private,
+      String? topic,
+      bool? defaultChannel}) async {
     return await _post(
       getCreateChannelUri(insertedOrganization),
       body: {
@@ -356,6 +359,8 @@ class ZuriApiService implements Api {
         'owner': owner,
         'description': description,
         'private': private,
+        'topic': topic,
+        'default': defaultChannel
       },
       headers: {'Authorization': 'Bearer ${sessionId}'},
     );
@@ -466,84 +471,6 @@ class ZuriApiService implements Api {
     return await _get(dmUserProfile(orgId, memberId));
   }
 
-  @override
-  Future<Member> fetchMemberDetail(
-      {required String organizationId,
-      required String memberId,
-      required String token}) async {
-    final uri = getMemberIdUri(organizationId, memberId);
-    final response =
-        await _get(uri, headers: {'Authorization': 'Bearer $token'});
-    if (response.statusCode == 200) {
-      return Member.fromJson(response['data']);
-    } else {
-      throw Exception('Failed to load user');
-    }
-  }
-
-  @override
-  Future<Map<String, dynamic>> getMemberDetails({
-    required String organizationId,
-    required String memberId,
-    required String token,
-  }) async {
-    final uri = getMemberIdUri(organizationId, memberId);
-    final response =
-        await _get(uri, headers: {'Authorization': 'Bearer $token'});
-    return response;
-  }
-
-  @override
-  Future<User> fetchUserDetail({String? userId}) async {
-    final uri = loginUri(userId!);
-    final response = await _get(uri);
-    return User.fromJson(response['data']);
-  }
-
-  @override
-  Future<Map<String, dynamic>> getUserDetails({
-    required String userId,
-  }) async {
-    final uri = loginUri(userId);
-    final response = await _get(uri);
-    return response;
-  }
-
-  Future<void> updateUserDetails({
-    required String organizationId,
-    required String memberId,
-    required token,
-    String? bio,
-    String? displayName,
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    String? pronoun,
-    String? timeZone,
-  }) async {
-    final uri = updateUserProfile(organizationId, memberId);
-    Map<String, dynamic> data = {
-      'bio': '',
-      'display_name': '',
-      'first_name': '',
-      'last_name': '',
-      'phone': '',
-      'pronouns': '',
-      'time_zone': ''
-    };
-    await _patch(
-      uri,
-      body: data,
-      headers: {
-        // ignore: prefer_single_quotes
-        "Content-Type": "application/json",
-        // ignore: prefer_single_quotes
-        "Accept": "application/json",
-        'Authorization': 'Bearer ${token}',
-      },
-    );
-  }
-
   Future<List<Todo>> fetchTodoList() async {
     final response = await _get(getAllTodoUri);
     log.i(response);
@@ -573,7 +500,19 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserDetails(
+  Future<void> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token}) async {
+    final uri = getMemberIdUri(organizationId, memberId);
+    final response =
+        await _get(uri, headers: {'Authorization': 'Bearer $token'});
+
+    Member.fromJson(response['data']);
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateUserDetail(
       {required organizationId,
       required memberId,
       required token,
@@ -594,7 +533,7 @@ class ZuriApiService implements Api {
       'pronouns': pronoun,
       'time_zone': timeZone,
     };
-    await _patch(
+    final response = await _patch(
       uri,
       body: data,
       headers: {
@@ -605,7 +544,7 @@ class ZuriApiService implements Api {
         'Authorization': 'Bearer ${token}',
       },
     );
-    throw UnimplementedError();
+    return response;
   }
 
   @override
@@ -619,7 +558,7 @@ class ZuriApiService implements Api {
     Map<String, dynamic> data = {
       'image_url': img,
     };
-    await _patch(
+    final response = await _patch(
       uri,
       body: data,
       headers: {
@@ -629,16 +568,7 @@ class ZuriApiService implements Api {
         'Authorization': 'Bearer ${token}',
       },
     );
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Member> patchProfilePicture(
-      {required String organizationId,
-      required String memberId,
-      required String token}) {
-    // TODO: implement patchProfilePicture
-    throw UnimplementedError();
+    return response;
   }
 
   @override

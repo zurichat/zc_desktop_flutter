@@ -177,7 +177,9 @@ abstract class Api {
       String? name,
       String? owner,
       String? description,
-      bool? private});
+      bool? private,
+      String? topic,
+      bool? defaultChannel});
 
   /// returns [Future]<[void]>, adds a user to channel using current organization id and current channel id.
   ///
@@ -232,26 +234,8 @@ abstract class Api {
   /// get request;
   ///
   /// function parameters; none.
-  Future<Member> fetchMemberDetail(
-      {required String organizationId,
-      required String memberId,
-      required String token});
+  
 
-  Future<Map<String, dynamic>> getMemberDetails(
-      {required String organizationId,
-      required String memberId,
-      required String token});
-
-  Future<Member> patchProfilePicture({
-    required String organizationId,
-    required String memberId,
-    required String token,
-  });
-
-  // Future<void> updateUserDetails({String? organizationId, User user});
-  Future<Map<String, dynamic>> getUserDetails({required String userId});
-
-  Future<User> fetchUserDetail({required String userId});
 
   /* DIRECT MESSAGES SERVICE */
 
@@ -295,6 +279,12 @@ abstract class Api {
   ///
   Future<Map<String, dynamic>> fetchRoomMessages({var roomId, var orgId});
 
+  Future<void> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+
   Future<Map<String, dynamic>> UpdateUserPicture({
     required organizationId,
     required memberId,
@@ -302,7 +292,7 @@ abstract class Api {
     File? img,
   });
 
-  Future<Map<String, dynamic>> UpdateUserDetails({
+  Future<Map<String, dynamic>> updateUserDetail({
     required String organizationId,
     required String memberId,
     required String token,

@@ -10,6 +10,7 @@ import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 const selectedOrganizationKey = 'selectedOrganizationKey';
 const userSelectedOrganizationsKey = 'userSelectedOrganizationsKey';
 const organizationIdKey = 'organizationIdKey';
+const localOrganizationResponseKey = 'localOrganizationResponse';
 const memberIdKey = 'memberIdKey';
 
 /// Refactor class to store objects with a proper db
@@ -18,11 +19,22 @@ class OrganizationService {
   final log = getLogger('OrganizationService');
   final _localStorageService = locator<LocalStorageService>();
   final _apiService = locator<Api>();
+  Organization? organization;
+  List<DM> _dms = [];
+ 
 
   /// This gets the currently logged in user respose
   Auth get auth {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
     return Auth.fromJson(jsonDecode(auth as String));
+  }
+
+  void setDms(List<DM> dm) {
+    _dms = dm;
+  }
+
+  List<DM> get dm {
+    return _dms;
   }
 
   void saveOrganizationId(String orgId) {
@@ -88,6 +100,10 @@ class OrganizationService {
     final response = await _apiService.invitePeopleToOrganization(
         organizationId: organizationId, email: email, token: auth.user!.token);
     log.i(response);
+    organization =
+        OrganizationResponse.fromJson(response).data as Organization?;
+    _localStorageService.saveToDisk(
+        localOrganizationResponseKey, jsonEncode(organization));
   }
 
   ///This is used to get the list of users in an organization
@@ -172,12 +188,14 @@ class OrganizationService {
   /// This is used to get a single user profile
   Future<UserProfile> getUserProfile(
       String organizationId, String memberId) async {
-     final response = await _apiService.getUserProfile(orgId: organizationId,memberId: memberId);
+    final response = await _apiService.getUserProfile(
+        orgId: organizationId, memberId: memberId);
     log.i(response);
     return UserProfile.fromJson(response);
 
     /* final response = await _zuriApiService.fetchUserDetails(userId: memberId,token:  auth.user!.token);
     var user = User.fromJson(response); */
-
   }
+
+  
 }

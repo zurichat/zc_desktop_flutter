@@ -35,13 +35,16 @@ class User with _$User {
 @freezed
 class Member with _$Member {
   factory Member({
-    @Default('') @JsonKey(name: '_id') String id,
-    @Default('') String orgId,
-    @JsonKey(name: 'name') @Default('') String fullName,
+    @JsonKey(name:'_id') required String id,
+    @JsonKey(name:'_orgid') required String orgId,
+    @JsonKey(name: 'first_name') required String firstName,
+    @JsonKey(name: 'last_name') required String lastName,
     @JsonKey(name: 'display_name') @Default('') String displayName,
     @Default('') String phone,
     @Default('') String status,
-    @Default('') String pronouns,
+    @Default('')  String pronouns,
+    @Default('')  String bio,
+    @Default([])  List socials,
     @JsonKey(name: 'time_zone') @Default('') String timeZone,
     @JsonKey(name: 'created_at') @Default('') String createdAt,
     @JsonKey(name: 'updated_at') @Default('') String updatedAt,
@@ -354,6 +357,8 @@ class Channel with _$Channel {
     @Default('') String owner,
     @Default('') String description,
     @Default(false) bool private,
+    @Default(true) @JsonKey(name:'allow_members_input') bool memberinput,
+    @Default(0) int member,
   }) = _Channel;
   factory Channel.fromJson(Map<String, dynamic> json) =>
       _$ChannelFromJson(json);
@@ -371,13 +376,19 @@ class OrganizationResponse with _$OrganizationResponse {
       _$OrganizationResponseFromJson(json);
 }
 
+
 @freezed
 class Organization with _$Organization {
   factory Organization({
     @Default('') String id,
     @Default('') String logoUrl,
     @Default('') String name,
+    @Default('') String memberId,
+    @Default(false) bool isOwner,
+    @Default(0) int noOfMembers,
+    @Default([]) List imgs,
     @Default('') String workspaceUrl,
+    Member? member,
   }) = _Organization;
 
   factory Organization.fromJson(Map<String, dynamic> json) =>
