@@ -43,7 +43,7 @@ class WindowTitleBar extends StatelessWidget {
                         if (Platform.isMacOS || Platform.isLinux) RightSide(),
                         model.isHomeView
                             ? Expanded(child: LeftSideHome(model: model))
-                            : Expanded(child: LeftSideAuth()),
+                            : Expanded(child: LeftSideAuth(model: model)),
                         if (Platform.isWindows) RightSide()
                       ],
                     ),
@@ -94,8 +94,8 @@ class RightSide extends StatelessWidget {
 }
 
 class LeftSideAuth extends StatelessWidget {
-  const LeftSideAuth({Key? key}) : super(key: key);
-
+  const LeftSideAuth({Key? key, required this.model}) : super(key: key);
+  final WindowTitleBarModel model;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -108,7 +108,7 @@ class LeftSideAuth extends StatelessWidget {
               size: 20,
             )),
         horizontalSpaceMedium,
-        Text('Sign in | Zuri',
+        Text(model.title,
             style: preferenceStyleBold.copyWith(color: lightIconColor)),
         Expanded(child: MoveWindow()),
       ],

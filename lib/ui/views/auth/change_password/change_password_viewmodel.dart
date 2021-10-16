@@ -4,6 +4,7 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'change_password_view.form.dart';
 
 class ChangePasswordViewModel extends FormViewModel with Validator {
@@ -20,6 +21,13 @@ class ChangePasswordViewModel extends FormViewModel with Validator {
   get isError => _isError;
   get isShowDialog => _isShowDialog;
   get isBusy => _isBusy;
+
+  final _windowsTitleBarService = locator<WindowTitleBarService>();
+
+  void init() async {
+    await Future.delayed(Duration(milliseconds: 1));
+    _windowsTitleBarService.setTitle('Zuri | Change Password');
+  }
 
   _setIsError() {
     _isError = !_isError;

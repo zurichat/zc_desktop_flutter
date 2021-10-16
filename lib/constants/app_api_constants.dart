@@ -65,6 +65,18 @@ Uri getMemberIdUri(String organizationId, String memberId) => Uri(
     host: host,
     path: '/organizations/$organizationId/members/$memberId');
 
+Uri getUpdateOrganizationUrl(String organizationId) => Uri(
+  scheme: scheme,
+  host: host,
+  path: '/organizations/$organizationId/url'
+);
+
+Uri updateOrganizationNameUrl(String organizationId) => Uri(
+  scheme: scheme,
+  host: host,
+  path: '/organizations/$organizationId/name'
+);
+
 // Channel Endpoints
 
 Uri getCreateChannelUri(String organisationId) => Uri(

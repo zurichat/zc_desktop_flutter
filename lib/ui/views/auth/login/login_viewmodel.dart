@@ -6,13 +6,19 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class LoginViewModel extends FormViewModel {
   final log = getLogger('LoginViewModel');
   final _navigationService = locator<NavigationService>();
   final _auth = locator<AuthService>();
+  final _windowsTitleBarService = locator<WindowTitleBarService>();
 
-  // final _fakeApiService = locator<FakeApi>();
+  void init() async {
+    await Future.delayed(Duration(milliseconds: 1));
+    _windowsTitleBarService.setHome(false);
+    _windowsTitleBarService.setTitle('Zuri | SignIn');
+  }
 
   bool _passwordVisibility = true;
 
