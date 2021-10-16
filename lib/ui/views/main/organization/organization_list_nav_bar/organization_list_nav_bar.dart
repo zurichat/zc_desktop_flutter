@@ -47,7 +47,7 @@ class OrganizationListNavBar extends ViewModelWidget<OrganizationViewModel> {
               padding: EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  //model.goToCreateWorkspace();
+                  model.goToChooseWorkspace();
                 },
                 child: Icon(
                   Icons.add,

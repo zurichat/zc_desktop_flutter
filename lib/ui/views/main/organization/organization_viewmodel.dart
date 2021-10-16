@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -11,6 +10,7 @@ import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/user_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class OrganizationViewModel extends BaseViewModel {
@@ -21,6 +21,7 @@ class OrganizationViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
   final _channelService = locator<ChannelsService>();
   final _dmService = locator<DMService>();
+  final _userService = locator<UserService>();
   final _windowTitleBarService = locator<WindowTitleBarService>();
 
   int _selectedChannelIndex = 0;
@@ -112,10 +113,11 @@ class OrganizationViewModel extends BaseViewModel {
     try {
       final result = await json.decode(
           _localStorageService.getFromDisk(_selectedOrgKey).toString()) as List;
-      log.i('************* $result');
       result.forEach((element) {
         _organization.add(Organization.fromJson(element));
+        
       });
+      log.i('************* $_organization');
     } catch (e) {
       log.i(e);
     }
@@ -257,6 +259,23 @@ class OrganizationViewModel extends BaseViewModel {
     controller.dispose();
     _windowTitleBarService.setHome(false);
     super.dispose();
+  }
+
+  Future<void> updateOrganizationDetails({String? url, String? name}) async {
+    if(url!.isNotEmpty) {
+      await 
+      _organizationService.updateOrganizationUrl(url: url, token: _userService.auth.user!.token);
+      //organization[_selectedMenuIndex] = organization[_selectedMenuIndex].copyWith(url: url);
+    }
+    if(name!.isNotEmpty){
+      await _organizationService.updateOrganizationName(name: name, token:_userService.auth.user!.token);
+      _currentOrganization = _currentOrganization.copyWith(name: name);
+      final indexToUpdate = _organization.indexOf(_currentOrganization);
+      _organization.insert(indexToUpdate, _currentOrganization);
+    }
+    _localStorageService.saveToDisk(
+        _selectedOrgKey, json.encode(_organization));
+    notifyListeners();
   }
 }
 

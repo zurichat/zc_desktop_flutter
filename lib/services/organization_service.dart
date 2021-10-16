@@ -48,6 +48,14 @@ class OrganizationService {
     _localStorageService.saveToDisk(memberIdKey, memId);
   }
 
+  Future<void> updateOrganizationUrl({required String url, required String token} ) async{
+    await _apiService.updateOrganizationUrl(url: url, organizationId: getOrganizationId(), token: token);
+  }
+
+  Future<void> updateOrganizationName({required String name, required String token}) async{
+    await _apiService.updateOrganizationName(name: name, organizationId: getOrganizationId(), token: token);
+  }
+
   String getOrganizationId() {
     return _localStorageService.getFromDisk(organizationIdKey) as String;
   }
