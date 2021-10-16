@@ -1,5 +1,7 @@
 
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
+import 'package:zc_desktop_flutter/app/app.locator.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel{
   String _logoUrl ='assets/images/zc_logo2.png';
@@ -27,6 +29,13 @@ class ForgotPasswordViewModel extends BaseViewModel{
   String get btnText => _btnText;
 
   String get resetBtnText => _resetBtnText;
+
+   final _windowsTitleBarService = locator<WindowTitleBarService>();
+
+  void init() async {
+    await Future.delayed(Duration(milliseconds: 1));
+    _windowsTitleBarService.setTitle('Zuri | Forget Password');
+  }
 
   void goToCheckEmailView() {
     
