@@ -11,7 +11,7 @@ class ChannelsListViewModel extends BaseViewModel {
   final log = getLogger('ChannelsDisplayViewModel');
 
   final _channelService = locator<ChannelsService>();
-  final _organizationService = locator<OrganizationService>();
+  //final _organizationService = locator<OrganizationService>();
 
   List<Channel> _channels = [];
   int selectedChannelIndex = 0;
