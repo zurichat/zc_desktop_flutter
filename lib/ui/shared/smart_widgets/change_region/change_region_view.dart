@@ -113,7 +113,7 @@ class LanguageRegion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = Localizations.localeOf(context);
+    //final locale = Localizations.localeOf(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -137,7 +137,7 @@ class LanguageRegion extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            if(region2! != ''){
+            if (region2! != '') {
               L10n.getTranslation(region2!);
             }
           },

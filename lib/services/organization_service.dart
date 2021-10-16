@@ -17,13 +17,11 @@ const memberIdKey = 'memberIdKey';
 
 class OrganizationService {
   final log = getLogger('OrganizationService');
-  final String _selectedOrgKey = 'SelectedOrgKey';
   final _localStorageService = locator<LocalStorageService>();
   final _apiService = locator<Api>();
   Organization? organization;
   List<DM> _dms = [];
-  // List<Organization> _selectedOrg = [];
-  // List<Organization> get selectedOrg => [..._selectedOrg];
+ 
 
   /// This gets the currently logged in user respose
   Auth get auth {
@@ -199,16 +197,5 @@ class OrganizationService {
     var user = User.fromJson(response); */
   }
 
-  // Future<List<Organization>?> getSelectedOrganization() async {
-  //   try {
-  //     final result = await json.decode(
-  //         _localStorageService.getFromDisk(_selectedOrgKey).toString()) as List;
-  //     log.i('************* $result');
-  //     result.forEach((element) {
-  //       _selectedOrg.add(Organization.fromJson(element));
-  //     });
-  //   } catch (e) {
-  //     log.i(e);
-  //   }
- // }
+  
 }
