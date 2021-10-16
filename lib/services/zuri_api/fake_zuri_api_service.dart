@@ -303,7 +303,7 @@ class FakeZuriApiService implements Api {
   @override
   Future<Map<String, dynamic>> fetchOrganizationsListFromRemote(
       {required String email, required token}) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     Map<String, dynamic> orgList = {
       'status': 200,
