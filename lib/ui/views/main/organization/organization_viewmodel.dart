@@ -23,8 +23,9 @@ class OrganizationViewModel extends BaseViewModel {
   final _dmService = locator<DMService>();
   final _windowTitleBarService = locator<WindowTitleBarService>();
 
-  int selectedChannelIndex = 0;
-  int _selectedMenuIndex = 7;
+  int _selectedChannelIndex = 0;
+  int _selectedMenuIndex = -1;
+  int _selectedDMIndex = -1;
 
   ScrollController controller = ScrollController();
 
@@ -56,6 +57,10 @@ class OrganizationViewModel extends BaseViewModel {
 
   int get selectedMenuIndex => _selectedMenuIndex;
 
+  int get selectedChannelIndex => _selectedChannelIndex;
+
+  int get selectedDMIndex => _selectedDMIndex;
+
   /// This is the first function that is fired when the viewmodel is activated
   void setup() async {
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
@@ -67,11 +72,6 @@ class OrganizationViewModel extends BaseViewModel {
     _windowTitleBarService.setHome(true);
     //notifyListeners();
     // log.i(_channels);
-  }
-
-  void updateSelectedMenuIndex(int index) {
-    _selectedMenuIndex = index;
-    notifyListeners();
   }
 
   /// function fired when another workspace is tapped on.
@@ -179,7 +179,9 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToChannelsView({int index = 0}) {
-    selectedChannelIndex = index;
+    _selectedChannelIndex = index;
+    _selectedMenuIndex = -1;
+    _selectedDMIndex = -1;
     notifyListeners();
     _channelService.setChannel(_channels[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
@@ -202,6 +204,10 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   void goToDmView(int index) {
+    _selectedDMIndex = index;
+    _selectedChannelIndex = -1;
+    _selectedMenuIndex = -1;
+    notifyListeners();
     _dmService.setExistingRoomInfo(_dms[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
@@ -218,6 +224,13 @@ class OrganizationViewModel extends BaseViewModel {
     _navigationService.navigateTo(OrganizationViewRoutes.allDmsView, id: 1);
   }
 
+  void updateSelectedMenuIndex(int index) {
+    _selectedMenuIndex = index;
+    _selectedChannelIndex = -1;
+    _selectedDMIndex = -1;
+    notifyListeners();
+  }
+
   bool showSelectedOrg(int index) {
     if (index == getSelectedOrganizationIndex()!) {
       return true;
@@ -226,7 +239,14 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   bool selectedChannel(int index) {
-    if (index == selectedChannelIndex) {
+    if (index == _selectedChannelIndex) {
+      return true;
+    }
+    return false;
+  }
+
+  bool selectedDM(int index) {
+    if (index == _selectedDMIndex) {
       return true;
     }
     return false;

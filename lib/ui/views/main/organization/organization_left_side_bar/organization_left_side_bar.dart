@@ -99,7 +99,7 @@ class OrganizationLeftSideBar extends ViewModelWidget<OrganizationViewModel> {
                                   .otherUserProfile
                                   .displayName,
                               userIcon: 'assets/icons/users.svg',
-                              selected: false,
+                              selected: model.selectedDM(index),
                             );
                           },
                         ),
