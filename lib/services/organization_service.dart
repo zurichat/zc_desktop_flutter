@@ -64,7 +64,6 @@ class OrganizationService {
     } catch (e) {
       log.e('get org error: $e');
     }
-
     return orId;
   }
 
