@@ -97,8 +97,8 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                             value!;
                                           },
                                           validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[a-z A-Z] +$')
+                                            if (value == null || value.isEmpty ||
+                                                !RegExp(r'^[a-z A-Z]+$')
                                                     .hasMatch(value)) {
                                               return 'Unfortunately, you can’t leave this blank.';
                                             } else {
@@ -117,8 +117,8 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                             value!;
                                           },
                                           validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[a-z A-Z] +$')
+                                            if (value == null || value.isEmpty ||
+                                                !RegExp(r'^[a-z A-Z]+$')
                                                     .hasMatch(value)) {
                                               return 'Unfortunately, you can’t leave this blank.';
                                             } else {
@@ -139,10 +139,8 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                             value;
                                           },
                                           validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[a-z A-Z 1-0] +$')
-                                                    .hasMatch(value)) {
-                                              return 'Enter currect displayname';
+                                            if (value!.isEmpty) {
+                                              return 'Enter displayname';
                                             } else {
                                               return null;
                                             }
@@ -170,14 +168,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                           onSaved: (value) {
                                             value;
                                           },
-                                          validator: (value) {
-                                            if (!RegExp(r'^[a-z A-Z] +$')
-                                                .hasMatch(value!)) {
-                                              return 'Enter currect what you do';
-                                            } else {
-                                              return null;
-                                            }
-                                          },
+                                          
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(
@@ -192,14 +183,6 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                           onSaved: (value) {
                                             value;
                                           },
-                                          validator: (value) {
-                                            if (!RegExp(r'^[a-z A-Z] +$')
-                                                .hasMatch(value!)) {
-                                              return 'Enter currect pronoun format';
-                                            } else {
-                                              return null;
-                                            }
-                                          },
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(
@@ -213,10 +196,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                             value!;
                                           },
                                           validator: (value) {
-                                            value;
-                                            if (value!.length < 9 ||
-                                                !RegExp(r'^(?:[+0]9)?[0-9]{10,12}$')
-                                                    .hasMatch(value)) {
+                                            if (value!.length < 9) {
                                               return 'Enter currect phone number';
                                             } else {
                                               return null;
@@ -338,10 +318,8 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                       child: ProfileButton(
                         isBusy: model.isBusy,
                         onTap: () async {
-                          // model.isSubmit;
-                          if (!_fullNameFormKey.currentState!.validate()) {
-                            _fullNameFormKey.currentState!.save();
-                          }
+                          if (!_fullNameFormKey.currentState!.validate())
+                            return;
                           await model.postDetails(
                             whoController.text,
                             displayNameController.text,
@@ -350,7 +328,11 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                             phoneNumberController.text,
                             pronounController.text,
                           );
-                          // await model.postPicture(model.choosenImage!);
+
+                          if (model.choosenImage != null) {
+                            await model.postPicture(model.choosenImage!);
+                          }
+
                           Navigator.of(context).pop();
                         },
                         label: 'Save Changes',

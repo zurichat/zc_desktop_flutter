@@ -116,7 +116,7 @@ class DropDown extends StatelessWidget {
                 user: model.user,
                 member: model.currentMember,
                 // member: model.member,
-                displayName: model.currentMember.displayName,
+                // displayName: model.currentMember.displayName,
               ),
               Container(
                 padding:
@@ -162,6 +162,7 @@ class DropDown extends StatelessWidget {
               DropDownItem(
                 onTap: () {
                   onPress!();
+                  // model.goToViewProfile();
                 },
                 text: 'View Profile',
               ),
