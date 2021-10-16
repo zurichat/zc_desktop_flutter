@@ -5,7 +5,6 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
-import 'reset_password_view.form.dart';
 
 class ResetPasswordViewModel extends FormViewModel with Validator {
   final _navigator = locator<NavigationService>();

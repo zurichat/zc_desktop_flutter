@@ -25,7 +25,6 @@ class ChangePasswordView extends StatelessWidget with $ChangePasswordView {
   ChangePasswordView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var height = screenHeight(context);
     return ViewModelBuilder<ChangePasswordViewModel>.reactive(
       onModelReady: (model) {
         listenToFormUpdated(model);
