@@ -111,7 +111,7 @@ class OrganizationWrapper extends StatelessWidget {
                                 padding: EdgeInsets.all(8.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    model!.goToCreateWorkspace();
+                                    model!.goToChooseWorkspace();
                                   },
                                   child: Icon(
                                     Icons.add,
