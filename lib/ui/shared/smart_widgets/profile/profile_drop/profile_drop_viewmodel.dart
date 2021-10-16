@@ -76,6 +76,10 @@ class ProfileDropdownViewModel extends BaseViewModel {
     );
   }
 
+  // void goToViewProfile() {
+  //   _navigationService.navigateTo(OrganizationViewRoutes.profileShowView, id:0);
+  // }
+
   void signOut() {
     _authService.logOut(_userService.auth.user!.token.toString());
     _navigationService.pushNamedAndRemoveUntil(Routes.loginView);
