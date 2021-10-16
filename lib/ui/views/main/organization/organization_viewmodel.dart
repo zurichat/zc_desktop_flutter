@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -7,11 +9,14 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class OrganizationViewModel extends BaseViewModel {
   final log = getLogger('OrganizationViewModel');
+  final String _selectedOrgKey = 'SelectedOrgKey';
+  final _localStorageService = locator<LocalStorageService>();
   final _navigationService = locator<NavigationService>();
   final _organizationService = locator<OrganizationService>();
   final _channelService = locator<ChannelsService>();
@@ -102,7 +107,18 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   Future<void> getOrganizations() async {
-    _organization = await _organizationService.getOrganizations();
+    // _organization = await _organizationService.getOrganizations();
+    _organization = [];
+    try {
+      final result = await json.decode(
+          _localStorageService.getFromDisk(_selectedOrgKey).toString()) as List;
+      log.i('************* $result');
+      result.forEach((element) {
+        _organization.add(Organization.fromJson(element));
+      });
+    } catch (e) {
+      log.i(e);
+    }
   }
 
   Future<void> getChannels() async {
@@ -158,8 +174,8 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   // TODO: go to workspace creation page
-  void goToCreateWorkspace() {
-    _navigationService.navigateTo(Routes.createWorkspaceView);
+  void goToChooseWorkspace() {
+    _navigationService.navigateTo(Routes.chooseWorkspaceView);
   }
 
   void goToChannelsView({int index = 0}) {

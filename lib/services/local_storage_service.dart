@@ -16,6 +16,7 @@ class LocalStorageService {
   static const String prefThemesKey = 'themesSetting';
   static const String organizationResponseKey = 'localOrganizationResponse';
 
+
   //AuthResponse getter
   AuthResponse? get authResponse {
     var authResponseJson = getFromDisk(authResponseKey);
