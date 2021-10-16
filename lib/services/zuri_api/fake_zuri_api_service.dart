@@ -90,6 +90,23 @@ class FakeZuriApiService implements Api {
   }
 
   @override
+  Future<Map<String, dynamic>> updateOrganizationName({ required String name, required String organizationId, required String token}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'status' : 200,
+      'message' : 'Url update successfully'
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateOrganizationUrl({ required String url, required String organizationId, required String token}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'status' : 200,
+      'message' : 'Url update successfully'
+    };
+  }
+  @override
   Future fetchChannelMessages(
       {required String channelId, required String organizationId}) async {
     // TODO: implement fetchChannelMessages
