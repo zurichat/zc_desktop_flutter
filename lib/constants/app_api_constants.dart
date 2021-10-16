@@ -55,6 +55,18 @@ Uri updateUserProfile(orgID, String memberId) => Uri(
     host: host,
     path: 'organizations/$orgID/members/$memberId/profile');
 
+Uri getUpdateOrganizationUrl(String organizationId) => Uri(
+  scheme: scheme,
+  host: host,
+  path: '/organizations/$organizationId/url'
+);
+
+Uri updateOrganizationNameUrl(String organizationId) => Uri(
+  scheme: scheme,
+  host: host,
+  path: '/organizations/$organizationId/name'
+);
+
 Uri updateUserProfilePicture(String organizationId, String memberId) => Uri(
     scheme: scheme,
     host: host,
