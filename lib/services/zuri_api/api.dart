@@ -283,14 +283,14 @@ abstract class Api {
       required String token});
 
 
-  Future<Map<String, dynamic>> UpdateUserPicture({
+  Future<Map<String, dynamic>> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    File? img,
+    required String url,
   });
 
-  Future<Map<String, dynamic>> updateUserDetail({
+  Future<dynamic> updateUserDetail({
     required String organizationId,
     required String memberId,
     required String token,
