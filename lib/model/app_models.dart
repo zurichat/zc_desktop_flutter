@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zc_desktop_flutter/core/enums/flash_windows.dart';
