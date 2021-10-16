@@ -9,7 +9,6 @@ import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_list/channels_list_viewmodel.dart';
@@ -65,37 +64,38 @@ class ChannelsListView extends StatelessWidget {
                           // Text('${model.channels.length == 0 ? '0' : model.channels.length} ${channelText3}', style: searchChannelHeaderStyle,),
                           Text('${model.channels.length} ${channelText3}', style: searchChannelHeaderStyle,),
                           Spacer(),
-                          Row(children: <Widget>[
-                            InkWell(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    SVGAssetPaths.sortIcon,
-                                    color: kcDisplayChannelColor,
-                                  ),
-                                  horizontalSpaceSmall,
-                                  Text(channelText4, style: searchChannelHeaderStyle,),
-                                ],
-                              ),
-                            ),
-                            horizontalSpaceMedium,
-                            InkWell(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    SVGAssetPaths.filterDown,
-                                    color: kcDisplayChannelColor,
-                                  ),
-                                  horizontalSpaceSmall,
-                                  // ZcdeskText.searchChannelHeaderStyle(
-                                  //     channelText5),
-                                  Text(channelText5, style: searchChannelHeaderStyle,)
-                                ],
-                              ),
-                            ),
-                          ]),
+                          Text(''),
+                          // Row(children: <Widget>[
+                          //   InkWell(
+                          //     onTap: () {},
+                          //     child: Row(
+                          //       children: [
+                          //         SvgPicture.asset(
+                          //           SVGAssetPaths.sortIcon,
+                          //           color: kcDisplayChannelColor,
+                          //         ),
+                          //         horizontalSpaceSmall,
+                          //         Text(channelText4, style: searchChannelHeaderStyle,),
+                          //       ],
+                          //     ),
+                          //   ),
+                          //   horizontalSpaceMedium,
+                          //   InkWell(
+                          //     onTap: () {},
+                          //     child: Row(
+                          //       children: [
+                          //         SvgPicture.asset(
+                          //           SVGAssetPaths.filterDown,
+                          //           color: kcDisplayChannelColor,
+                          //         ),
+                          //         horizontalSpaceSmall,
+                          //         // ZcdeskText.searchChannelHeaderStyle(
+                          //         //     channelText5),
+                          //         Text(channelText5, style: searchChannelHeaderStyle,)
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ]),
                         ],
                       ),
                       verticalSpaceSmall,
@@ -327,36 +327,36 @@ class ChannelsDisplayList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    horizontalSpaceRegular,
-                    Container(
-                      height: 35.h,
-                      width: 65.w,
-                      child: TextButton(
-                        style: ButtonStyle(
-                            mouseCursor: MaterialStateMouseCursor.clickable,
-                            backgroundColor: MaterialStateProperty.all(
-                              kcPrimaryColor,
-                            )),
-                        onPressed: () async {
-                          // await model.validateAndCreateChannel();
-                        },
-                        // child: !model.isBusy
-                        //     ? Text(
-                        //        'Join',
-                        //         style: authBtnChannelStyle,
-                        //       )
-                        //     : CircularProgressIndicator(
-                        //         color: whiteColor,
-                        //       ),
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 3.0.h),
-                          child: Text(
-                            channelText11,
-                            style: authBtnChannelDisplayStyle,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // horizontalSpaceRegular,
+                    // Container(
+                    //   height: 35.h,
+                    //   width: 65.w,
+                    //   child: TextButton(
+                    //     style: ButtonStyle(
+                    //         mouseCursor: MaterialStateMouseCursor.clickable,
+                    //         backgroundColor: MaterialStateProperty.all(
+                    //           kcPrimaryColor,
+                    //         )),
+                    //     onPressed: () async {
+                    //       // await model.validateAndCreateChannel();
+                    //     },
+                    //     // child: !model.isBusy
+                    //     //     ? Text(
+                    //     //        'Join',
+                    //     //         style: authBtnChannelStyle,
+                    //     //       )
+                    //     //     : CircularProgressIndicator(
+                    //     //         color: whiteColor,
+                    //     //       ),
+                    //     child: Padding(
+                    //       padding: EdgeInsets.only(bottom: 3.0.h),
+                    //       child: Text(
+                    //         channelText11,
+                    //         style: authBtnChannelDisplayStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     horizontalSpaceTiny,
                   ]),
                 ),

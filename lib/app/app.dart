@@ -40,7 +40,7 @@ import 'package:zc_desktop_flutter/ui/views/main/todo/Todo_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 
 /// Use this to switch to mock data or live data
-const useFakeApiService = true;
+const useFakeApiService = false;
 
 @StackedApp(
   routes: [
