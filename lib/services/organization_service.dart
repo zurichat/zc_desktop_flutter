@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
@@ -47,6 +48,14 @@ class OrganizationService {
     _localStorageService.saveToDisk(memberIdKey, memId);
   }
 
+  Future<void> updateOrganizationUrl({required String url, required String token} ) async{
+    await _apiService.updateOrganizationUrl(url: url, organizationId: getOrganizationId(), token: token);
+  }
+
+  Future<void> updateOrganizationName({required String name, required String token}) async{
+    await _apiService.updateOrganizationName(name: name, organizationId: getOrganizationId(), token: token);
+  }
+
   String getOrganizationId() {
     return _localStorageService.getFromDisk(organizationIdKey) as String;
   }
@@ -64,7 +73,6 @@ class OrganizationService {
     } catch (e) {
       log.e('get org error: $e');
     }
-
     return orId;
   }
 
@@ -195,6 +203,51 @@ class OrganizationService {
 
     /* final response = await _zuriApiService.fetchUserDetails(userId: memberId,token:  auth.user!.token);
     var user = User.fromJson(response); */
+  }
+
+  Future<void> updateUser({
+    String? bio,
+    String? displayName,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? pronoun,
+  }) async {
+    final orgId = getOrganizationId();
+    final memId = getOrganizationId();
+    final response = await _apiService.updateUserDetail(
+      organizationId: orgId,
+      memberId: memId,
+      token: auth.user!.token,
+      bio: bio,
+      displayName: displayName,
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+      pronoun: pronoun,
+    );
+    log.i(response);
+    organization = OrganizationResponse.fromJson(response).data as Organization?;
+    _localStorageService.saveToDisk(localOrganizationResponseKey, jsonEncode(organization));
+  }
+
+  Future<void> updateUserImage({
+    String? token,
+    required File url,
+  }) async {
+    final orgId = getOrganizationId();
+    final memId = getOrganizationId();
+    final response = await _apiService.updateUserPicture(
+      organizationId: orgId,
+      memberId: memId,
+      token: token,
+      url: url,
+    );
+    log.i(response);
+    organization =
+        OrganizationResponse.fromJson(response).data as Organization?;
+    _localStorageService.saveToDisk(
+        localOrganizationResponseKey, jsonEncode(organization));
   }
 
   

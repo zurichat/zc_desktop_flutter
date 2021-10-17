@@ -7,6 +7,7 @@ import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'sign_up_view.form.dart';
 
 class SignUpViewModel extends FormViewModel with Validator {
@@ -23,6 +24,12 @@ class SignUpViewModel extends FormViewModel with Validator {
 
   bool _isPolicyChecked = false;
   bool get isPolicyChecked => _isPolicyChecked;
+  final _windowsTitleBarService = locator<WindowTitleBarService>();
+
+  void init() async {
+    await Future.delayed(Duration(milliseconds: 1));
+    _windowsTitleBarService.setTitle('Zuri | SignUp');
+  }
 
   void setPasswordVisibility() {
     _passwordVisibility = !_passwordVisibility;

@@ -296,7 +296,7 @@ TextStyle searchChannelHeaderGreenStyle = TextStyle(
     fontWeight: FontWeight.w600,
     fontFamily: 'Lato');
 TextStyle createChannelHeaderStyle = TextStyle(
-    fontSize: 29.sp,
+    fontSize: 28.sp,
     color: createChannelHeaderColor,
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
@@ -306,7 +306,7 @@ TextStyle createChannelSmallHeaderStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
 TextStyle createChannelTextStyle = TextStyle(
-    fontSize: 15.sp,
+    fontSize: 13.5.sp,
     color: createChannelTextColor,
     fontWeight: FontWeight.w500,
     fontFamily: 'Lato');

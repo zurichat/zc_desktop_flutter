@@ -90,6 +90,23 @@ class FakeZuriApiService implements Api {
   }
 
   @override
+  Future<Map<String, dynamic>> updateOrganizationName({ required String name, required String organizationId, required String token}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'status' : 200,
+      'message' : 'Url update successfully'
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateOrganizationUrl({ required String url, required String organizationId, required String token}) async {
+    await Future.delayed(Duration(seconds: 2));
+    return {
+      'status' : 200,
+      'message' : 'Url update successfully'
+    };
+  }
+  @override
   Future fetchChannelMessages(
       {required String channelId, required String organizationId}) async {
     // TODO: implement fetchChannelMessages
@@ -303,7 +320,7 @@ class FakeZuriApiService implements Api {
   @override
   Future<Map<String, dynamic>> fetchOrganizationsListFromRemote(
       {required String email, required token}) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     Map<String, dynamic> orgList = {
       'status': 200,
@@ -550,7 +567,7 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> updateUserDetail({
+  Future updateUserDetail({
     required organizationId,
     required memberId,
     required token,
@@ -622,16 +639,16 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> UpdateUserPicture({
+  Future<dynamic> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    File? img,
+    File? url,
   }) async {
     return {
       'status': 200,
       'message': 'user updated successfully',
-      'image_url': img,
+      'image_url': url,
     };
   }
 

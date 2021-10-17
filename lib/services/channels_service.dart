@@ -47,6 +47,16 @@ class ChannelsService with ReactiveServiceMixin {
     return _localStorageService.getFromDisk(userChannelId) as String;
   }
 
+    List<Channel> _channels = [];
+
+  void saveChannelList(List<Channel> channels){
+    _channels = channels;
+  }
+
+  List<Channel> getChannelList() {
+    return _channels;
+  }
+
   currentLoggedInUser.User? getCurrentLoggedInUser() {
     var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
     if (userJson != null) {
@@ -87,12 +97,13 @@ class ChannelsService with ReactiveServiceMixin {
   /// This is used to get the list of channels on the page
   Future<List<Channel>> getChannels({String? organizationId}) async {
     log.i('getChannels called');
+    final orgId = _organizationService.getOrganizationId();
     final response = await _zuriApiService.fetchChannelsListUsingOrgId(
-        organizationId: _organizationService.getOrganizationId(), token: _auth.user!.token);
+        organizationId: orgId, token: _auth.user!.token);
     log.i(response);
-    return response;
-    // return List.of(response.toMap((channel) => Channel.fromJson(channel)));
-    //return List.from(response.map((value) => Channel.fromJson(value)));
+    //return response;
+    //return List.of(response.toMap((channel) => Channel.fromJson(channel)));
+    return List.from(response.map((value) => Channel.fromJson(value)));
   }
 
   /// This is used to create a channel on the page
@@ -124,6 +135,8 @@ class ChannelsService with ReactiveServiceMixin {
 
     return response;
   }
+
+
 
   /// This is used to create a channel on the page
   Future<void> addUserToChannel({

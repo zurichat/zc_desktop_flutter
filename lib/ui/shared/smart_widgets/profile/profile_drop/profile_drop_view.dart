@@ -113,9 +113,10 @@ class DropDown extends StatelessWidget {
             color: kcBackgroundColor2,
             child: Column(children: <Widget>[
               ProfilePicture(
-                user: model.user, 
+                user: model.user,
+                member: model.currentMember,
                 // member: model.member,
-                displayName: model.currentMember.displayName,
+                // displayName: model.currentMember.displayName,
               ),
               Container(
                 padding:
@@ -161,6 +162,7 @@ class DropDown extends StatelessWidget {
               DropDownItem(
                 onTap: () {
                   onPress!();
+                  // model.goToViewProfile();
                 },
                 text: 'View Profile',
               ),
@@ -237,12 +239,15 @@ class DropDownItem extends StatelessWidget {
 class ProfilePicture extends StatelessWidget {
   final bool isActive = false;
   final String? displayName;
+  final String? img;
   final User user;
-  // final Member member;
+  final Member member;
   ProfilePicture({
-    Key? key, this.displayName,
+    Key? key,
+    this.displayName,
+    this.img,
     required this.user,
-    // required this.member,
+    required this.member,
   }) : super(key: key);
 
   @override
@@ -262,6 +267,7 @@ class ProfilePicture extends StatelessWidget {
           ),
           child: Image.asset(
             'assets/images/profile_placeholder.png',
+            // '${img!.isEmpty ? 'assets/images/profile_placeholder.png' : img}',
             fit: BoxFit.fill,
           ),
         ),
@@ -273,6 +279,7 @@ class ProfilePicture extends StatelessWidget {
             children: [
               Text(
                 '${displayName!.isEmpty ? 'Anonymous' : displayName}',
+                // '${member.displayName.isEmpty ? 'Anonymous' : member.displayName}',
                 style: subtitle3b,
               ),
               verticalSpaceTiny,

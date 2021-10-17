@@ -5,6 +5,7 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class CheckEmailViewModel extends BaseViewModel {
   final _navigator = locator<NavigationService>();
@@ -13,6 +14,13 @@ class CheckEmailViewModel extends BaseViewModel {
   String _errorMsg = '';
   get isBusy => _isBusy;
   get errorMsg => _errorMsg;
+  final _windowsTitleBarService = locator<WindowTitleBarService>();
+
+  void init() async {
+    await Future.delayed(Duration(milliseconds: 1));
+    _windowsTitleBarService.setHome(false);
+    _windowsTitleBarService.setTitle('Zuri | Check Email');
+  }
 
  /// This function set the busy state of the view. 
   void _setIsBusy() {

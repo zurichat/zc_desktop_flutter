@@ -57,7 +57,7 @@ class BuildContainerWidget extends StatelessWidget {
           BuildSearchWidget(
             model: model,
           ),
-          bottomText(),
+         // bottomText(),
         ],
       ),
     );
@@ -294,13 +294,13 @@ class ScrollableView extends HookViewModelWidget<SearchViewModel> {
                               buttonType: ButtonType.MESSAGE,
                               model: model,
                             ),
-                            SizedBox(width: 19.w),
-                            searchButtons(
-                              assetPath: Layers,
-                              buttonText: ButtonText2,
-                              buttonType: ButtonType.FILE,
-                              model: model,
-                            ),
+                            // SizedBox(width: 19.w),
+                            // searchButtons(
+                            //   assetPath: Layers,
+                            //   buttonText: ButtonText2,
+                            //   buttonType: ButtonType.FILE,
+                            //   model: model,
+                            // ),
                             SizedBox(width: 19.w),
                             searchButtons(
                               assetPath: Hash,
@@ -308,12 +308,12 @@ class ScrollableView extends HookViewModelWidget<SearchViewModel> {
                               buttonType: ButtonType.CHANNELS,
                               model: model,
                             ),
-                            SizedBox(width: 19.w),
-                            searchButtons(
-                                assetPath: Users,
-                                buttonText: ButtonText3,
-                                buttonType: ButtonType.PEOPLE,
-                                model: model),
+                            // SizedBox(width: 19.w),
+                            // searchButtons(
+                            //     assetPath: Users,
+                            //     buttonText: ButtonText3,
+                            //     buttonType: ButtonType.PEOPLE,
+                            //     model: model),
                           ],
                         ),
                       ),
@@ -332,13 +332,13 @@ class ScrollableView extends HookViewModelWidget<SearchViewModel> {
                             buttonType: ButtonType.MESSAGE,
                             model: model,
                           ),
-                          SizedBox(width: 19.w),
-                          searchButtons(
-                            assetPath: Layers,
-                            buttonText: ButtonText2,
-                            buttonType: ButtonType.FILE,
-                            model: model,
-                          ),
+                          // SizedBox(width: 19.w),
+                          // searchButtons(
+                          //   assetPath: Layers,
+                          //   buttonText: ButtonText2,
+                          //   buttonType: ButtonType.FILE,
+                          //   model: model,
+                          // ),
                           SizedBox(width: 19.w),
                           searchButtons(
                             assetPath: Hash,
@@ -346,12 +346,12 @@ class ScrollableView extends HookViewModelWidget<SearchViewModel> {
                             buttonType: ButtonType.CHANNELS,
                             model: model,
                           ),
-                          SizedBox(width: 19.w),
-                          searchButtons(
-                              assetPath: Users,
-                              buttonText: ButtonText3,
-                              buttonType: ButtonType.PEOPLE,
-                              model: model),
+                          // SizedBox(width: 19.w),
+                          // searchButtons(
+                          //     assetPath: Users,
+                          //     buttonText: ButtonText3,
+                          //     buttonType: ButtonType.PEOPLE,
+                          //     model: model),
                         ],
                       ),
                     ),
