@@ -757,43 +757,6 @@ class MockZuriApiService extends _i1.Mock implements _i11.ZuriApiService {
                   Future<Map<String, dynamic>>.value(<String, dynamic>{}))
           as _i2.Future<Map<String, dynamic>>);
   @override
-  _i2.Future<Map<String, dynamic>> deleteOrganization(
-          {String? organizationId, dynamic token}) =>
-      (super.noSuchMethod(
-              Invocation.method(#deleteOrganization, [],
-                  {#organizationId: organizationId, #token: token}),
-              returnValue:
-                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
-          as _i2.Future<Map<String, dynamic>>);
-  @override
-  _i2.Future<Map<String, dynamic>> updateOrganizationDetails(
-          {String? organizationId, dynamic token, String? url, String? name}) =>
-      (super.noSuchMethod(
-              Invocation.method(#updateOrganizationDetails, [], {
-                #organizationId: organizationId,
-                #token: token,
-                #url: url,
-                #name: name
-              }),
-              returnValue:
-                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
-          as _i2.Future<Map<String, dynamic>>);
-  @override
-  _i2.Future<Map<String, dynamic>> pinMessage(
-          dynamic messageId, dynamic orgId) =>
-      (super.noSuchMethod(Invocation.method(#pinMessage, [messageId, orgId]),
-              returnValue:
-                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
-          as _i2.Future<Map<String, dynamic>>);
-  @override
-  _i2.Future<Map<String, dynamic>> fetchPinnedMessgaes(
-          dynamic roomId, dynamic orgId) =>
-      (super.noSuchMethod(
-              Invocation.method(#fetchPinnedMessgaes, [roomId, orgId]),
-              returnValue:
-                  Future<Map<String, dynamic>>.value(<String, dynamic>{}))
-          as _i2.Future<Map<String, dynamic>>);
-  @override
   String toString() => super.toString();
 }
 
