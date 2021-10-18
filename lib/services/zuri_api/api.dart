@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:zc_desktop_flutter/model/app_models.dart';
 
 /// Describes the methods and properties required to create an HttpProvider that the application can use
@@ -18,7 +20,11 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] email and [String] password
-  Future<void> signup({required String email, required String password});
+  Future<void> signup(
+      {required String password,
+      required String email,
+      required String fName,
+      required String lName});
 
   /// returns [Future]<[void]>, confirm user email.
   ///
@@ -91,6 +97,17 @@ abstract class Api {
   Future<void> addLoggedInUserToOrganization(
       {required String organizationId, required String email, required token});
 
+  /// returns [Future]<[void]>, invite people to organization.
+  ///
+  /// post request;
+  /// * body: {List<String> emails, headers: logged in user token}.
+  ///
+  /// function parameters; [String] organizationId, [String] email, token
+  Future<dynamic> invitePeopleToOrganization(
+      {required String organizationId,
+      required List<String> email,
+      required token});
+
   /// returns [Future]<[Map]<[String]>>, dynamic>>, create an organization using email.
   ///
   /// post request;
@@ -99,6 +116,34 @@ abstract class Api {
   /// function parameters; [String] email, token.
   Future<Map<String, dynamic>> createOrganizationUsingEmail(
       {required String email, required token});
+
+  /// returns [Future]<[Map]<[String], [dynamic]>>, private function to update
+  /// a single organization details from remote source using organization id.
+  ///
+  /// post request;
+  /// * headers: {"Authorization": logged in user token}
+  ///
+  /// function parameters; [String] organizationId, token, url, name
+  Future<Map<String, dynamic>> updateOrganizationDetails({
+    required String organizationId,
+    required token,
+    String? url,
+    String? name,
+  });
+
+  Future<Map<String, dynamic>> updateOrganizationName({ required String name, required String organizationId, required String token});
+
+  Future<Map<String, dynamic>> updateOrganizationUrl({ required String url, required String organizationId, required String token});
+
+  /// returns [Future]<[Map]<[String], [dynamic]>>, private function to delete
+  /// a single organization from remote source using organization id.
+  ///
+  /// post request;
+  /// * headers: {"Authorization": logged in user token}
+  ///
+  /// function parameters; [String] organizationId, token
+  Future<Map<String, dynamic>> deleteOrganization(
+      {required String organizationId, required token});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, private function to get a single organization
   /// details from remote source using organization id.
@@ -136,7 +181,9 @@ abstract class Api {
       String? name,
       String? owner,
       String? description,
-      bool? private});
+      bool? private,
+      String? topic,
+      bool? defaultChannel});
 
   /// returns [Future]<[void]>, adds a user to channel using current organization id and current channel id.
   ///
@@ -191,26 +238,8 @@ abstract class Api {
   /// get request;
   ///
   /// function parameters; none.
-  Future<Member> fetchMemberDetail(
-      {required String organizationId,
-      required String memberId,
-      required String token});
+  
 
-  Future<Map<String, dynamic>> getMemberDetails(
-      {required String organizationId,
-      required String memberId,
-      required String token});
-
-  Future<Member> patchProfilePicture({
-    required String organizationId,
-    required String memberId,
-    required String token,
-  });
-
-  // Future<void> updateUserDetails({String? organizationId, User user});
-  Future<Map<String, dynamic>> getUserDetails({required String userId});
-
-  Future<User> fetchUserDetail({required String userId});
 
   /* DIRECT MESSAGES SERVICE */
 
@@ -224,7 +253,7 @@ abstract class Api {
   ///
   /// function parameters;
   Future<Map<String, dynamic>> sendMessageToDM(
-      {var roomId, var senderId, var message});
+      {var roomId, var senderId, var message, var orgId});
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, create a room using organization id.
   ///
@@ -252,33 +281,42 @@ abstract class Api {
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch user profile
   ///
   ///
+  Future<Map<String, dynamic>> fetchRoomMessages({var roomId, var orgId});
 
-  Future<void> UpdateUserDetails({
+  Future<void> fetchMemberDetail(
+      {required String organizationId,
+      required String memberId,
+      required String token});
+
+ 
+
+  Future<dynamic> updateUserPicture({
     required organizationId,
     required memberId,
     required token,
-    String? bio,
-    String? displayName,
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    String? pronoun,
-    String? timeZone,
+    required File url,
   });
 
-  /// returns [Future]<[Map]<[String],>>, fetch user profile
-  ///
-  ///
-
-  Future<Map<String, dynamic>> fetchRoomMessages({var roomId});
+  Future<dynamic> updateUserDetail({
+    required String organizationId,
+    required String memberId,
+    required String token,
+    String? bio,
+    String? displayName,
+    String? lastName,
+    String? firstName,
+    String? phoneNumber,
+    String? pronoun,
+  });
 
   /// returns [Future]<[Map]<[String], [dynamic]>>, fetch dms of a user in organization from remote source using org id.
   ///
   ///
-  Future<dynamic> removeUserFromChannel(
-      {required organizationId,
-      required channelId,
-      required memberId,});
+  Future<dynamic> removeUserFromChannel({
+    required organizationId,
+    required channelId,
+    required memberId,
+  });
 
   ///removes a user from channel;
   ///
@@ -293,11 +331,22 @@ abstract class Api {
   /// parameters;
   Future<Map<String, dynamic>> markMessageAsRead(var messageId);
 
+  //React to a message
+  Future<Map<String, dynamic>> reactToMessage(
+      {var orgId,
+      var roomId,
+      var messageId,
+      required ReactToMessage reactToMessage});
+
   /* CENTRIFUGE SERVICE */
 
   //Fetch Todo List
   Future<List<Todo>> fetchTodoList();
 
   //Create Todo
-  Future<void> createTodo(Todo todo,  String token);
+  Future<void> createTodo(Todo todo, String token);
+
+  Future<Map<String, dynamic>> pinMessage(var messageId, var orgId);
+
+  Future<Map<String, dynamic>> fetchPinnedMessgaes(var roomId, var orgId);
 }

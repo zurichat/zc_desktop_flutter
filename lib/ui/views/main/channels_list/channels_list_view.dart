@@ -5,12 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/const_widgets.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesck_search_input_field.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom_appbar.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_list/channels_list_viewmodel.dart';
 
 class ChannelsListView extends StatelessWidget {
@@ -21,10 +21,23 @@ class ChannelsListView extends StatelessWidget {
     final _scrollController = ScrollController();
 
     return ViewModelBuilder<ChannelsListViewModel>.reactive(
-      // onModelReady: (model) async => await model.fetchAndSetUserData(),
+      onModelReady: (model) => model.performGetChannel(),
       builder: (context, model, child) => Container(
         color: whiteColor,
-        child: Padding(
+        child: model.isBusy
+          ? Expanded(
+              child: Center(
+                child: Container(
+                  width: 24.0,
+                  height: 24.0,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.0.r,
+                    valueColor: AlwaysStoppedAnimation(Colors.grey),
+                  ),
+                ),
+              ),
+            )
+          : Padding(
           padding: EdgeInsets.only(
             left: 15.0.w,
           ),
@@ -32,35 +45,13 @@ class ChannelsListView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // DetailedCustomAppBar(
-              //   margin: EdgeInsets.only(left: 2.0.w),
-              //   leading: WorkSpaceTitle(
-              //     channelTitle: "Announcements",
-              //   ),
-              // ),
-              /////////////////////////////////////////
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 12.0.h,
-                  bottom: 18.0.h,
-                ),
-                child: Container(
-                  child: ChannelSearchInputField(
-                    onChanged: (value) {
-                      // model.setchannelName(value);
-                    },
-                    borderColor:
-                        model.searchChannel == '' ? bodyColor : kcPrimaryColor,
-                    borderFocusColor: model.searchChannel == ''
-                        ? leftNavBarColor
-                        : kcPrimaryColor,
-                    // errorText: model.searchChannel,
-                    keyboardType: TextInputType.name,
-                    hintPlaceHolder: model.channelText2,
-                  ),
+              DetailedCustomAppBar(
+                // margin: EdgeInsets.only(left: 1.0.w),
+                leading: WorkSpaceTitle(
+                  channelTitle: 'Channel Browser',
                 ),
               ),
-              verticalSpaceSmall,
+              verticalSpaceRegular,
               Expanded(
                 flex: 14,
                 child: SizedBox(
@@ -70,69 +61,72 @@ class ChannelsListView extends StatelessWidget {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          ZcdeskText.searchChannelHeaderStyle(
-                              model.channelText3),
+                          // Text('${model.channels.length == 0 ? '0' : model.channels.length} ${channelText3}', style: searchChannelHeaderStyle,),
+                          Text('${model.channels.length} ${channelText3}', style: searchChannelHeaderStyle,),
                           Spacer(),
-                          Row(children: <Widget>[
-                            InkWell(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    SVGAssetPaths.sortIcon,
-                                    color: kcDisplayChannelColor,
-                                  ),
-                                  horizontalSpaceSmall,
-                                  ZcdeskText.searchChannelHeaderStyle(
-                                      model.channelText4),
-                                ],
-                              ),
-                            ),
-                            horizontalSpaceMedium,
-                            InkWell(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    SVGAssetPaths.filterDown,
-                                    color: kcDisplayChannelColor,
-                                  ),
-                                  horizontalSpaceSmall,
-                                  ZcdeskText.searchChannelHeaderStyle(
-                                      model.channelText5),
-                                ],
-                              ),
-                            ),
-                          ]),
+                          Text(''),
+                          // Row(children: <Widget>[
+                          //   InkWell(
+                          //     onTap: () {},
+                          //     child: Row(
+                          //       children: [
+                          //         SvgPicture.asset(
+                          //           SVGAssetPaths.sortIcon,
+                          //           color: kcDisplayChannelColor,
+                          //         ),
+                          //         horizontalSpaceSmall,
+                          //         Text(channelText4, style: searchChannelHeaderStyle,),
+                          //       ],
+                          //     ),
+                          //   ),
+                          //   horizontalSpaceMedium,
+                          //   InkWell(
+                          //     onTap: () {},
+                          //     child: Row(
+                          //       children: [
+                          //         SvgPicture.asset(
+                          //           SVGAssetPaths.filterDown,
+                          //           color: kcDisplayChannelColor,
+                          //         ),
+                          //         horizontalSpaceSmall,
+                          //         // ZcdeskText.searchChannelHeaderStyle(
+                          //         //     channelText5),
+                          //         Text(channelText5, style: searchChannelHeaderStyle,)
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ]),
                         ],
                       ),
                       verticalSpaceSmall,
                       Expanded(
                         child: ListView.builder(
                             controller: _scrollController,
-                            itemCount: model.sidebarItems.length,
+                            itemCount: model.channels.length,
+                            // itemCount: model.channelsList!.length,
                             itemBuilder: (context, index) {
                               return ChannelsDisplayList(
-                                  viewPressed: () async {
-                                    // await model.validateAndCreateChannel();
-                                    await model.performGetChannel();
+                                  index: index,
+                                  viewPressed: (index) {
+                                    model.goToChannelsView(index: index);
                                   },
-                                  visibleJoined:
-                                      model.sidebarItems.keys.toList()[index] ==
-                                              'Annoucements'
-                                          ? false
-                                          : true,
-                                  paddingBottom2: 8.0.h,
-                                  paddingall: 10.0,
+                                  // visibleJoined:
+                                  //     model.sidebarItems.keys.toList()[index] ==
+                                  //             'Annoucements'
+                                  //         ? false
+                                  //         : true,
+                                  visibleJoined: false,
+                                  paddingBottom2: 6.0.h,
+                                  paddingall: 7.0,
                                   paddingBottom3: 2.5.h,
-                                  channelText6:
-                                      model.sidebarItems.keys.toList()[index],
-                                  channelText7: model.channelText7,
-                                  channelText8:
-                                      model.sidebarItems.values.toList()[index],
-                                  channelText9: model.channelText9,
-                                  channelText10: model.channelText10,
-                                  channelText11: model.channelText11,
+
+                                  channelText6: model.channels[index].name,
+                                  channelText7: channelText7,
+
+                                  channelText8: model.channels[index].member,
+                                  channelText9: channelText9,
+                                  channelText10: channelText10,
+                                  channelText11: channelText11,
                                   paddingBottom4: 3.0.h,
                                   isChannelHover:
                                       (model.isChannelHover == false ||
@@ -170,7 +164,7 @@ class ChannelsDisplayList extends StatelessWidget {
   final double paddingBottom3;
   final String channelText6;
   final String channelText7;
-  final String channelText8;
+  final int channelText8;
   final String channelText9;
   final String channelText10;
   final String channelText11;
@@ -179,7 +173,8 @@ class ChannelsDisplayList extends StatelessWidget {
   final Color isChannelHover;
   final bool visibleButton;
   final Function(bool) hoverFunction;
-  final void Function()? viewPressed;
+  final int index;
+  final void Function(int index)? viewPressed;
   final bool visibleJoined;
 
   ChannelsDisplayList({
@@ -196,6 +191,7 @@ class ChannelsDisplayList extends StatelessWidget {
     required this.isChannelHover,
     required this.hoverFunction,
     required this.visibleButton,
+    required this.index,
     required this.visibleJoined,
     required this.viewPressed,
   });
@@ -211,7 +207,7 @@ class ChannelsDisplayList extends StatelessWidget {
         onTap: () {},
         child: Container(
           width: _size.width * .7,
-          height: _size.height * .095,
+          height: (_size.height * .1).h,
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
@@ -241,13 +237,13 @@ class ChannelsDisplayList extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: paddingBottom3),
-                          child: ZcdeskText.displayChannelSmallHeaderBlackStyle(
-                            channelText6,
-                          ),
+                          // child: ZcdeskText.displayChannelSmallHeaderBlackStyle(
+                          //   channelText6,
+                          child: Text(channelText6, style: displayChannelSmallHeaderBlackStyle,),
                         ),
                       ],
                     ),
-                    verticalSpaceTiny,
+                    verticalSpaceTinyThree,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
@@ -263,14 +259,17 @@ class ChannelsDisplayList extends StatelessWidget {
                                     ActiveSvg,
                                     color: kcPrimaryColor,
                                   ),
-                                  ZcdeskText.searchChannelHeaderGreenStyle(
-                                      channelText7),
+                                  // ZcdeskText.searchChannelHeaderGreenStyle(
+                                  //     channelText7),
+                                  Text(channelText7, style: searchChannelHeaderGreenStyle,),
                                   horizontalSpaceSmall,
                                 ],
                               ),
                             ),
-                            ZcdeskText.searchChannelHeaderStyle(channelText8),
-                            ZcdeskText.searchChannelHeaderStyle(channelText9),
+                            // ZcdeskText.searchChannelHeaderStyle(channelText8),
+                            Text('${channelText8}', style: searchChannelHeaderStyle,),
+                            // ZcdeskText.searchChannelHeaderStyle(channelText9),
+                            Text(channelText9, style: searchChannelHeaderStyle,),
                           ],
                         ),
                       ],
@@ -281,8 +280,8 @@ class ChannelsDisplayList extends StatelessWidget {
                   visible: visibleButton,
                   child: Row(children: <Widget>[
                     Container(
-                      height: 40.h,
-                      width: 70.w,
+                      height: 35.h,
+                      width: 65.w,
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border(
@@ -307,7 +306,7 @@ class ChannelsDisplayList extends StatelessWidget {
                               backgroundColor: MaterialStateProperty.all(
                                 kcBackgroundColor1,
                               )),
-                          onPressed: viewPressed,
+                          onPressed: () => viewPressed!(index),
                           // child: !model.isBusy
                           //     ? Text(
                           //        'Join',
@@ -328,36 +327,37 @@ class ChannelsDisplayList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    horizontalSpaceRegular,
-                    Container(
-                      height: 40.h,
-                      width: 70.w,
-                      child: TextButton(
-                        style: ButtonStyle(
-                            mouseCursor: MaterialStateMouseCursor.clickable,
-                            backgroundColor: MaterialStateProperty.all(
-                              kcPrimaryColor,
-                            )),
-                        onPressed: () async {
-                          // await model.validateAndCreateChannel();
-                        },
-                        // child: !model.isBusy
-                        //     ? Text(
-                        //        'Join',
-                        //         style: authBtnChannelStyle,
-                        //       )
-                        //     : CircularProgressIndicator(
-                        //         color: whiteColor,
-                        //       ),
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 3.0.h),
-                          child: Text(
-                            channelText11,
-                            style: authBtnChannelDisplayStyle,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // horizontalSpaceRegular,
+                    // Container(
+                    //   height: 35.h,
+                    //   width: 65.w,
+                    //   child: TextButton(
+                    //     style: ButtonStyle(
+                    //         mouseCursor: MaterialStateMouseCursor.clickable,
+                    //         backgroundColor: MaterialStateProperty.all(
+                    //           kcPrimaryColor,
+                    //         )),
+                    //     onPressed: () async {
+                    //       // await model.validateAndCreateChannel();
+                    //     },
+                    //     // child: !model.isBusy
+                    //     //     ? Text(
+                    //     //        'Join',
+                    //     //         style: authBtnChannelStyle,
+                    //     //       )
+                    //     //     : CircularProgressIndicator(
+                    //     //         color: whiteColor,
+                    //     //       ),
+                    //     child: Padding(
+                    //       padding: EdgeInsets.only(bottom: 3.0.h),
+                    //       child: Text(
+                    //         channelText11,
+                    //         style: authBtnChannelDisplayStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    horizontalSpaceTiny,
                   ]),
                 ),
               ],

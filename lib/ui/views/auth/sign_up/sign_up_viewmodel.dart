@@ -7,6 +7,7 @@ import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'sign_up_view.form.dart';
 
 class SignUpViewModel extends FormViewModel with Validator {
@@ -23,6 +24,12 @@ class SignUpViewModel extends FormViewModel with Validator {
 
   bool _isPolicyChecked = false;
   bool get isPolicyChecked => _isPolicyChecked;
+  final _windowsTitleBarService = locator<WindowTitleBarService>();
+
+  void init() async {
+    await Future.delayed(Duration(milliseconds: 1));
+    _windowsTitleBarService.setTitle('Zuri | SignUp');
+  }
 
   void setPasswordVisibility() {
     _passwordVisibility = !_passwordVisibility;
@@ -45,10 +52,10 @@ class SignUpViewModel extends FormViewModel with Validator {
   }
 
   Future<void> signUp() async {
-    await runBusyFuture(performSignUp(emailValue!, passwordValue!));
+    await runBusyFuture(performSignUp(emailValue!, passwordValue!, fullNameValue!));
   }
 
-  Future<void> performSignUp(String email, String password) async {
+  Future<void> performSignUp(String email, String password, String fullName) async {
     if (!isPolicyChecked) {
       throw Failure('Please accept our policy before you continue');
     } else {
@@ -56,7 +63,16 @@ class SignUpViewModel extends FormViewModel with Validator {
       notifyListeners();
     }
     try {
-      await _authService.signup(email: email.trim(), password: password);
+      String fName = '';
+      String lName = '';
+      if(fullName.contains(' ')) {
+        final names = fullName.split(' ');
+        fName = names[0];
+        lName = names[1];
+      } else {
+
+      }
+      await _authService.signup(email: email.trim(), password: password, fName: fName, lName: lName);
     } catch (e) {
       if(e.toString().contains('40')){
         throw Failure(EmailAlreadyInUseError);

@@ -17,19 +17,19 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
 import 'change_password_view.form.dart';
 import 'change_password_viewmodel.dart';
 
-@FormView(
-  fields: [
-    FormTextField(name: 'password'),
-    FormTextField(name: 'confirmPassword')
-  ]
-)
+@FormView(fields: [
+  FormTextField(name: 'password'),
+  FormTextField(name: 'confirmPassword')
+])
 class ChangePasswordView extends StatelessWidget with $ChangePasswordView {
   ChangePasswordView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     return ViewModelBuilder<ChangePasswordViewModel>.reactive(
-      onModelReady: (model) => listenToFormUpdated(model),
+      onModelReady: (model) {
+        listenToFormUpdated(model);
+        model.init();
+      },
       viewModelBuilder: () => ChangePasswordViewModel(),
       builder: (
         BuildContext context,
@@ -37,92 +37,88 @@ class ChangePasswordView extends StatelessWidget with $ChangePasswordView {
         Widget? child,
       ) {
         return Scaffold(
-          body: Column(
-            children: [
-              Container(
-                height: height - 9,
-                child: Row(
-                  children: [
-                    LeftSideContainer(),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        //margin: EdgeInsets.symmetric(horizontal: 72.w),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              verticalSpaceMedium,
-                              SvgPicture.asset(LogoUrl),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Reset Password',
-                                  style: headline3,
-                                ),
-                              ),
-                              verticalSpaceMedium,
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 72.w),
-                                child: Column(
-                                  children: [
-                                    ZuriDeskInputField(
-                                      label: 'Password',
-                                      password: true,
-                                      isVisible: model.isPasswordVisible,
-                                      onVisibilityTap:
-                                          model.setIsPasswordVisible,
-                                      errorText: model.passwordMsg,
-                                      controller: passwordController,
-                                      hintPlaceHolder: 'Password',
-                                    ),
-                                    verticalSpaceSmall,
-                                    ZuriDeskInputField(
-                                      label: 'Confirm Password',
-                                      password: true,
-                                      isVisible: model.isPasswordVisible,
-                                      onVisibilityTap:
-                                          model.setIsPasswordVisible,
-                                      errorText: model.confirmErrorMsg,
-                                      controller: confirmPasswordController,
-                                      hintPlaceHolder: 'Confirm Password',
-                                    ),
-                                    verticalSpaceRegular,
-                                    AuthButton(
-                                      label: 'Continue',
-                                      isBusy: model.isBusy,
-                                      onTap: () async {
-                                        await model.changePassword();
-                                        if (model.isShowDialog) {
-                                          showDialog(
-                                              context: context,
-                                              builder: (_) =>
-                                                  BuildConfirmation());
-                                        }
-                                      },
-                                    )
-                                  ],
-                                ),
-                              ),
-                              verticalSpaceRegular,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Don\'t wish to change your password?  ',
-                                      style: headline7),
-                                  GotoLoginButton(),
-                                ],
-                              )
-                            ],
+          body: Container(
+            //height: (height - kToolbarHeight).h,
+            child: Row(
+              children: [
+                LeftSideContainer(),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    //margin: EdgeInsets.symmetric(horizontal: 72.w),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          verticalSpaceMedium,
+                          SvgPicture.asset(LogoUrl),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Reset Password',
+                              style: headline3,
+                            ),
                           ),
-                        ),
+                          verticalSpaceMedium,
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 72.w),
+                            child: Column(
+                              children: [
+                                ZuriDeskInputField(
+                                  label: 'Password',
+                                  password: true,
+                                  isVisible: model.isPasswordVisible,
+                                  onVisibilityTap:
+                                      model.setIsPasswordVisible,
+                                  errorText: model.passwordMsg,
+                                  controller: passwordController,
+                                  hintPlaceHolder: 'Password',
+                                ),
+                                verticalSpaceSmall,
+                                ZuriDeskInputField(
+                                  label: 'Confirm Password',
+                                  password: true,
+                                  isVisible: model.isPasswordVisible,
+                                  onVisibilityTap:
+                                      model.setIsPasswordVisible,
+                                  errorText: model.confirmErrorMsg,
+                                  controller: confirmPasswordController,
+                                  hintPlaceHolder: 'Confirm Password',
+                                ),
+                                verticalSpaceRegular,
+                                AuthButton(
+                                  label: 'Continue',
+                                  isBusy: model.isBusy,
+                                  onTap: () async {
+                                    await model.changePassword();
+                                    if (model.isShowDialog) {
+                                      showDialog(
+                                          context: context,
+                                          builder: (_) =>
+                                              BuildConfirmation());
+                                    }
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                          verticalSpaceRegular,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Don\'t wish to change your password?  ',
+                                  style: headline7),
+                              GotoLoginButton(),
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

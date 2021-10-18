@@ -11,7 +11,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/detailed_screen_custom
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_members_widget.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/workspace_title.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zc_desk_send_message_field.dart';
-import 'package:zc_desktop_flutter/ui/shared/smart_widgets/bookmark_and_pinned_bar/bookmark_and_pinned_view.dart';
+
 import 'package:zc_desktop_flutter/ui/views/main/add_user_channel/add_user_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels/channels_viewmodel.dart';
 import 'package:zc_desktop_flutter/ui/views/main/channels_details/channels_details_view.dart';
@@ -50,10 +50,7 @@ class ChannelsView extends StatelessWidget {
                             builder: (context) => ChannelsDetailsView()),
                         child: WorkSpaceMembers()),
                   ),
-                  Align(
-                      alignment: Alignment.topCenter,
-                      child:
-                          BookmarkAndPinnedMessagesView() /*TopRowActions()*/),
+                  // Align(alignment: Alignment.topCenter, child: TopRowActions()),
                   Container(
                     height: 110.h,
                     decoration: BoxDecoration(

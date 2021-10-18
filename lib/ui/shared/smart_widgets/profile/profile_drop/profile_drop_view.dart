@@ -10,7 +10,6 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_drop/
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_edit/profile_edit_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/status_dialog/status_dialog_min/status_dialog_min_view.dart';
 
-
 // ignore: must_be_immutable
 class ProfileDropdownView extends StatelessWidget {
   ProfileDropdownView({Key? key}) : super(key: key);
@@ -19,9 +18,7 @@ class ProfileDropdownView extends StatelessWidget {
   late double height, width, xPosition, yPosition;
   late OverlayEntry _floatingDropdown;
 
-
   get floatingDropDown => floatingDrop;
-
 
   get floatingDrop => _floatingDropdown;
 
@@ -29,8 +26,8 @@ class ProfileDropdownView extends StatelessWidget {
     return OverlayEntry(builder: (context) {
       return Positioned(
         right: 100,
-        width: 250.w,
-        height: 350.h,
+        // width: 250.w,
+        // height: 400.h,
         top: 60.h,
         child: Container(
           child: Material(
@@ -59,8 +56,8 @@ class ProfileDropdownView extends StatelessWidget {
             _toggleDropdown(context: context, model: model);
           },
           child: Container(
-            width: 30.w,
-            height: 30.h,
+            width: 30,
+            height: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -110,72 +107,83 @@ class DropDown extends StatelessWidget {
       viewModelBuilder: () => ProfileDropdownViewModel(),
       builder: (context, model, child) => Material(
         elevation: 20,
-        child: Container(
-          color: kcBackgroundColor2,
-          child: Column(children: <Widget>[
-            ProfilePicture(
-              user: model.user,
-            ),
-            Container(
-              width: 250.w,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: OutlinedButton(
-                onPressed: () {
-                  onPress!();
-                  showDialog(
-                      context: context,
-                      builder: (context) => StatusDialogMinView());
-                },
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Icon(
-                    Icons.edit_outlined,
-                    color: headerColor,
+        child: Expanded(
+          child: Container(
+            width: 300.w,
+            color: kcBackgroundColor2,
+            child: Column(children: <Widget>[
+              ProfilePicture(
+                user: model.user,
+                member: model.currentMember,
+                // member: model.member,
+                // displayName: model.currentMember.displayName,
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                child: OutlinedButton(
+                  onPressed: () {
+                    onPress!();
+                    showDialog(
+                        context: context,
+                        builder: (context) => StatusDialogMinView());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(
+                        Icons.edit_outlined,
+                        color: headerColor,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            DropDownItem(
-              text: 'Clear Status',
-            ),
-            DropDownItem(
-              text: 'Set yourself as Away',
-            ),
-            DropDownItem(
-              text: 'Pause Notificatons',
-            ),
-            Divider(),
-            DropDownItem(
-              onTap: () {
-                onPress!();
-                showDialog(
-                    context: context, builder: (context) => ProfileEditView());
-              },
-              text: 'Edit Profile',
-            ),
-            DropDownItem(
-              onTap: () {
-                onPress!();
-              },
-              text: 'View Profile',
-            ),
-            DropDownItem(
-              onTap: () {
-                onPress!();
-                showDialog(
-                    context: context, builder: (context) => PreferenceView());
-              },
-              text: 'Preferences',
-            ),
-            Divider(),
-            DropDownItem(
-              text: 'Sign out of Zuri',
-              onTap: () {
-                onPress!();
-                model.signOut();
-              },
-            )
-          ]),
+              DropDownItem(
+                text: 'Clear Status',
+              ),
+              DropDownItem(
+                text: 'Set yourself as Away',
+              ),
+              DropDownItem(
+                text: 'Pause Notificatons',
+              ),
+              Divider(),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                  showDialog(
+                      context: context,
+                      builder: (context) => ProfileEditView());
+                },
+                text: 'Edit Profile',
+              ),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                  // model.goToViewProfile();
+                },
+                text: 'View Profile',
+              ),
+              DropDownItem(
+                onTap: () {
+                  onPress!();
+                  showDialog(
+                      context: context, builder: (context) => PreferenceView());
+                },
+                text: 'Preferences',
+              ),
+              Divider(),
+              DropDownItem(
+                text: 'Sign out of Zuri',
+                onTap: () {
+                  onPress!();
+                  model.signOut();
+                },
+              )
+            ]),
+          ),
         ),
       ),
     );
@@ -206,18 +214,21 @@ class DropDownItem extends StatelessWidget {
                 child: Container(
                   color: model.isHover ? kcPrimaryColor : kcBackgroundColor2,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        text,
-                        style: model.isHover ? subtitlec2 : subtitle2,
-                      ),
-                      Spacer(),
-                      Icon(
-                        iconData,
-                        color: model.isHover ? kcBackgroundColor2 : headerColor,
-                      ),
-                    ],
+                  child: Expanded(
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          text,
+                          style: model.isHover ? subtitlec2 : subtitle2,
+                        ),
+                        Spacer(),
+                        Icon(
+                          iconData,
+                          color:
+                              model.isHover ? kcBackgroundColor2 : headerColor,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -227,8 +238,17 @@ class DropDownItem extends StatelessWidget {
 
 class ProfilePicture extends StatelessWidget {
   final bool isActive = false;
+  final String? displayName;
+  final String? img;
   final User user;
-  ProfilePicture({Key? key, required this.user}) : super(key: key);
+  final Member member;
+  ProfilePicture({
+    Key? key,
+    this.displayName,
+    this.img,
+    required this.user,
+    required this.member,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -247,18 +267,10 @@ class ProfilePicture extends StatelessWidget {
           ),
           child: Image.asset(
             'assets/images/profile_placeholder.png',
+            // '${img!.isEmpty ? 'assets/images/profile_placeholder.png' : img}',
             fit: BoxFit.fill,
           ),
         ),
-        // Container(
-        //   height: 60.h,
-        //   width: 50.w,
-        //   decoration: BoxDecoration(
-        //     shape: BoxShape.rectangle,
-        //     borderRadius: BorderRadius.circular(5),
-        //     color: kcSuccessColor,
-        //   ),
-        // ),
         horizontalSpaceRegular,
         Container(
           width: 100.w,
@@ -266,7 +278,8 @@ class ProfilePicture extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${user.displayName.isEmpty ? 'Anonymous' : user.displayName}',
+                '${displayName!.isEmpty ? 'Anonymous' : displayName}',
+                // '${member.displayName.isEmpty ? 'Anonymous' : member.displayName}',
                 style: subtitle3b,
               ),
               verticalSpaceTiny,

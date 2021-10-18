@@ -1,23 +1,28 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/dm_service.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
 import 'package:zc_desktop_flutter/services/user_service.dart';
 
 class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   final _organizationService = locator<OrganizationService>();
   final _userService = locator<UserService>();
+    final _dmService = locator<DMService>();
+  final _navigationService = locator<NavigationService>();
   final _log = getLogger('PeopleUserGroupViewModel');
   // _pageIndex is used to keep track of the current view.
   int _pageIndex = 0;
   int get pageIndex => _pageIndex;
 
   // This varible is used to know if user has start searching through the list of users
-  bool _isSearchStarted =  false;
+  bool _isSearchStarted = false;
 
   //This function update the value of [_isSearched] and update listeners
   void _updateIsSearchStarted(bool value) {
@@ -43,7 +48,8 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   void fetchAndSetOrgMembers() async {
     setIsloading();
     final response = await _organizationService.fetchMemberListUsingOrgId(
-        _organizationService.getOrganizationId(), _userService.auth.user!.token);
+        _organizationService.getOrganizationId(),
+        _userService.auth.user!.token);
     _dataList = response;
     _log.i(_dataList);
     setIsloading();
@@ -73,14 +79,14 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   /// The function perform a search on the _dataList and save the result of the search
   /// to _suggestionsList.
   void buildSuggestion(String query) {
-    if(query.isEmpty) {
+    if (query.isEmpty) {
       _updateIsSearchStarted(false);
     } else {
       _updateIsSearchStarted(true);
     }
     _suggestionsList = _dataList
         .where((data) =>
-            data.display_name.toLowerCase().contains(query.toLowerCase()))
+            data.displayName.toLowerCase().contains(query.toLowerCase()))
         .toList();
     notifyListeners();
   }
@@ -93,31 +99,82 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   }
 
   //This Function is used to add user to an organization using the org id and the user email
-  Future<void> peformAddUserToOrg(String email) async {
-    try {
-      if (!emailValidator(email)) {
-        _errorText = EmailErrorText;
-        notifyListeners();
-        return;
+  Future<void> peformInviteUsersToOrg(String email) async {
+    List<String> emails = [];
+    final length = email.length;
+    bool allEmailValid = false;
+    if (RegExp(r'[a-zA-Z]').hasMatch(email[length - 1])) {
+      if (email.contains(',')) {
+        emails = email.trim().split(',');
+        emails.forEach((element) {
+          allEmailValid = emailValidator(element.trim());
+        });
+        if (!allEmailValid) {
+          _errorText = '$EmailErrorText';
+          notifyListeners();
+          return;
+        } else {
+          _errorText = null;
+          notifyListeners();
+        }
+      } else {
+        allEmailValid = emailValidator(email.trim());
+        emails.add(email.trim());
+        if (!allEmailValid) {
+          _errorText = EmailErrorText;
+          notifyListeners();
+          return;
+        }else {
+          _errorText = null;
+          notifyListeners();
+        }
       }
-      _errorText = null;
+      try {
+        await _organizationService.invitePeopleToOrganization(
+        _organizationService.getOrganizationId(),
+        emails,
+      );
+      //fetchAndSetOrgMembers();
+      } catch(e) {
+        if(e.toString() == '400') {
+         throw Failure(UserAdditionErrorMessage);
+      }
+       throw Failure(AuthErrorMessage);
+      }
+    } else {
+      _errorText = EmailErrorText;
       notifyListeners();
-      await _organizationService.addMemberToOrganization(
-          _organizationService.getOrganizationId(),
-          email: email,
-          token: _userService.auth.user!.token);
-          fetchAndSetOrgMembers();
-    } catch (e) {
-      if(e.toString() == '400') {
-        throw Failure(UserAdditionErrorMessage);
-      }
-      throw Failure(AuthErrorMessage);
+      return;
     }
+    // try {
+    //   if (!emailValidator(email)) {
+    //     _errorText = EmailErrorText;
+    //     notifyListeners();
+    //     return;
+    //   }
+    //   _errorText = null;
+    //   notifyListeners();
+    //   await _organizationService.addMemberToOrganization(
+    //       _organizationService.getOrganizationId(),
+    //       email: email,
+    //       token: _userService.auth.user!.token);
+    //       fetchAndSetOrgMembers();
+    // } catch (e) {
+    //   if(e.toString() == '400') {
+    //     throw Failure(UserAdditionErrorMessage);
+    //   }
+    //   throw Failure(AuthErrorMessage);
+    // }
   }
 
   ///This function is get called from the view to peform the add user to organization logic
-  Future<void> addUserToOrg(String email) async {
-    await runBusyFuture(peformAddUserToOrg(email));
+  Future<void> inviteUsersToOrg(String email) async {
+    await runBusyFuture(peformInviteUsersToOrg(email));
+  }
+
+  void goToDmView(int index) {
+    _dmService.setNewRoomInfo(!_isSearchStarted ? _dataList[index] : _suggestionsList[index]);
+    _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 
   @override

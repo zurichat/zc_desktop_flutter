@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
@@ -5,13 +7,29 @@ import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
 import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
+import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class ChannelsViewModel extends BaseViewModel {
   final log = getLogger('MessageViewModel');
   final _channelService = locator<ChannelsService>();
   final _centrifugeService = locator<CentrifugeService>();
+
+  Users _user = Users(name: '');
+  String? _roomId = '';
+  Channel? _channelInfo;
+
+    //Declare the services that are dependent upon
+  final _localStorageService = locator<LocalStorageService>();
+
+  /// This gets the currently logged in user respose
+  Auth get _auth {
+    final auth = _localStorageService.getFromDisk(localAuthResponseKey);
+    return Auth.fromJson(jsonDecode(auth as String));
+  }
+
 
   late LoggedInUser.User _currentLoggedInUser;
   int currentSelectedChannel = 0;
@@ -48,6 +66,11 @@ class ChannelsViewModel extends BaseViewModel {
   bool get onHoverActionsHover => _onHoverActionsHovered;
   int _onMessageHoveredIndex = 0;
 
+  
+  String userName() {
+    return _auth.user!.displayName;
+  }
+
   int get onMessageHoveredIndex => _onMessageHoveredIndex;
   void onMessageHovered(bool hover, int index) {
     _onMessageTileHover = hover;
@@ -80,20 +103,65 @@ class ChannelsViewModel extends BaseViewModel {
     //listenToNewMessages();
   }
 
-  void getChannelSocketId() async {
-    String channelSockId = await _channelService.fetchChannelSocketId();
+    void runTasks() async {
+    setBusy(true);
+    _currentChannel = _channelService.getChannel();
+    _user = await _channelService.getUser();
+    _currentLoggedInUser = _channelService.getCurrentLoggedInUser()!;
+    _channelInfo = _channelService.getChannel();
+    // if (_channelInfo == null) {
+    //   //we dont have a conversation yet so create a new room
+    //   await _channelService.createChannels();
 
-    websocketConnect(channelSockId);
+    //   ///_dmService.getRoomInfo(_roomId);
+    // } else {
+    //   _roomId = _channelInfo!.id;
+    // }
+    _roomId = _channelInfo!.id;
+    _messages = (await _channelService.fetchChannelMessages(_roomId));
+    //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
+    setBusy(false);
+    log.i(_user.name);
+    notifyListeners();
+
+    websocketConnect();
+    listenToNewMessages();
   }
 
-  void websocketConnect(String socketId) async {
-    await _centrifugeService.connect();
-    await _centrifugeService.subscribe(socketId);
+  Users get user => _user;
+  String get roomId => _roomId!;
+  Channel get channelInfo => _channelInfo!;
+  LoggedInUser.User get currentLoggedInUser => _currentLoggedInUser;
+
+  // void getChannelSocketId() async {
+  //   String channelSockId = await _channelService.fetchChannelSocketId();
+
+  //   websocketConnect(channelSockId);
+  // }
+
+    void getChannelSocketId() async {
+    // String channelSockId = await _channelService.fetchChannelSocketId();
+
+    websocketConnect();
+  }
+
+  // void websocketConnect(String socketId) async {
+  //   await _centrifugeService.connect();
+  //   await _centrifugeService.subscribe(socketId);
+  // }
+
+    void websocketConnect() async {
+      String channelSockId = await _channelService.fetchChannelSocketId();
+      
+      await _centrifugeService.connect();
+      await _centrifugeService.subscribe(channelSockId);
   }
 
   void listenToNewMessages() {
+     _channelInfo = _channelService.getChannel();
+    _roomId = _channelInfo!.id;
     _centrifugeService.messageStreamController.stream.listen((event) async {
-      _messages = await _channelService.fetchChannelMessages();
+      _messages = await _channelService.fetchChannelMessages(_roomId);
       notifyListeners();
     });
   }
@@ -193,16 +261,16 @@ class ChannelsViewModel extends BaseViewModel {
     } else {
       return LoggedInUser.User(
           id: senderId,
-          firstName: 'Zuri Partner',
-          lastName: 'Zuri Partner',
-          displayName: 'Zuri Partner',
-          email: 'email',
-          phone: 'phone',
+          firstName: _auth.user!.firstName,
+          lastName: _auth.user!.lastName,
+          displayName: _auth.user!.displayName,
+          email: _auth.user!.displayName,
+          phone: _auth.user!.phone,
           status: 1,
           timeZone: 'timeZone',
           createdAt: 'createdAt',
           updatedAt: 'updatedAt',
-          token: 'token'); //check this functionality
+          token: _auth.user!.token); //check this functionality
     }
   }
 }

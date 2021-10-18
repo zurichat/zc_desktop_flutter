@@ -25,15 +25,50 @@ class ChannelsService with ReactiveServiceMixin {
   final _organizationService = locator<OrganizationService>();
   final _zuriApiService = locator<Api>();
 
+  Users _user = Users(name: '');
+  Channel? _dmChannelInfo;
+  currentLoggedInUser.User? _currentLoggedInUser;
+
+  void setUser(Users user) {
+    this._user = user;
+  }
+
+  Future<Users> getUser() async {
+    await Future.delayed(Duration(seconds: 2));
+    return this._user;
+  }
+
+  void saveChannelId(String channelId) {
+    log.i('userChannelId ${channelId}');
+    _localStorageService.saveToDisk(userChannelId, channelId);
+  }
+
+  String getChannelId() {
+    return _localStorageService.getFromDisk(userChannelId) as String;
+  }
+
+    List<Channel> _channels = [];
+
+  void saveChannelList(List<Channel> channels){
+    _channels = channels;
+  }
+
+  List<Channel> getChannelList() {
+    return _channels;
+  }
+
   currentLoggedInUser.User? getCurrentLoggedInUser() {
     var userJson = _localStorageService.getFromDisk(localAuthResponseKey);
     if (userJson != null) {
       if (userJson is String) {
-        return Auth.fromJson(json.decode(userJson)).user;
+        log.i(userJson);
+        _currentLoggedInUser = Auth.fromJson(json.decode(userJson)).user;
+        return _currentLoggedInUser;
       }
       return null;
     }
   }
+
 
   Channel _currentChannel = Channel();
 
@@ -62,27 +97,33 @@ class ChannelsService with ReactiveServiceMixin {
   /// This is used to get the list of channels on the page
   Future<List<Channel>> getChannels({String? organizationId}) async {
     log.i('getChannels called');
+    final orgId = _organizationService.getOrganizationId();
     final response = await _zuriApiService.fetchChannelsListUsingOrgId(
-        organizationId: organizationId!, token: _auth.user!.token);
+        organizationId: orgId, token: _auth.user!.token);
     log.i(response);
-    return response;
-    //return List.from(response.map((value) => Channel.fromJson(value)));
+    //return response;
+    //return List.of(response.toMap((channel) => Channel.fromJson(channel)));
+    return List.from(response.map((value) => Channel.fromJson(value)));
   }
 
   /// This is used to create a channel on the page
-  Future<void> createChannels({
+  Future<Channel> createChannels({
     String? name,
     String? owner,
     String? description,
-    required bool private,
+    bool? private,
+    String? topic,
+    bool? defaultChannel,
   }) async {
     final response = await _zuriApiService.createChannelsUsingOrgId(
         sessionId: _auth.sessionID,
-        insertedOrganization: insertedOrganisationId,
+        insertedOrganization: _organizationService.getOrganizationId(),
         name: name,
         owner: owner,
         description: description,
-        private: private);
+        private: private,
+        topic: topic,
+        defaultChannel: defaultChannel);
     log.i(response);
     // Getting stored AuthResponse from local storage
     String insertedId = response['_id'];
@@ -91,7 +132,11 @@ class ChannelsService with ReactiveServiceMixin {
       userChannelId,
       jsonEncode(insertedId),
     );
+
+    return response;
   }
+
+
 
   /// This is used to create a channel on the page
   Future<void> addUserToChannel({
@@ -122,6 +167,18 @@ class ChannelsService with ReactiveServiceMixin {
         organizationId: org_id, channelId: channel_id, memberId: member_id);
   }
 
+  // void setExistingChannelInfo(Channel channel) {
+  //   _dmChannelInfo = channel;
+  // }
+
+  // Future<void> setNewChannelInfo(Users user) async {
+  //   User? currentUser=getCurrentLoggedInUser();
+  //   var roomId = await createChannels();
+  //   _dmChannelInfo = Channel();
+  // }
+
+  Channel? get getExistingRoomInfo => _dmChannelInfo;
+
   Future<dynamic> sendMessage(
       {var channel_id, var senderId, var message, var org_id}) async {
     log.i(DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
@@ -134,9 +191,10 @@ class ChannelsService with ReactiveServiceMixin {
         organization_id: org_id);
   }
 
-  Future<List<ChannelMessage>> fetchChannelMessages() async {
+  Future<List<ChannelMessage>> fetchChannelMessages(String? channelId) async {
     final response = await _zuriApiService.fetchChannelMessages(
-        channelId: _currentChannel.id,
+        // channelId: _currentChannel.id,
+        channelId: channelId!,
         organizationId: _organizationService.getOrganizationId());
     log.i(response);
     return List<ChannelMessage>.from(

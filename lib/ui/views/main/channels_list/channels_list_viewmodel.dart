@@ -1,48 +1,30 @@
-import 'dart:convert';
-
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
-import 'package:zc_desktop_flutter/services/local_storage_service.dart';
-import 'package:zc_desktop_flutter/services/organization_service.dart';
+// import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 class ChannelsListViewModel extends BaseViewModel {
   final log = getLogger('ChannelsDisplayViewModel');
-  final _channelService = locator<ChannelsService>();
-  final _organizationService = locator<OrganizationService>();
-  final _localStorageService = locator<LocalStorageService>();
 
-  String _channelText1 = 'Channel browser';
-  String _channelText2 = 'Search Channel';
-  String _channelText3 = '4 recommended results';
-  String _channelText4 = 'Sort';
-  String _channelText5 = 'Filter';
-  String _channelText6 = 'channelName';
-  String _channelText7 = ' Joined ';
-  String _channelText8 = '34';
-  String _channelText9 = ' members  ';
-  String _channelText10 = 'View';
-  String _channelText11 = 'Join';
+  final _channelService = locator<ChannelsService>();
+  // final _organizationService = locator<OrganizationService>();
+
+  List<Channel> _channels = [];
+  int selectedChannelIndex = 0;
+  
+
+  List<Channel> get channels => _channels;
+  final _navigationService = locator<NavigationService>();
+
 
   bool _isChannelHover = false;
   int? _selectedind;
 
   var _searchChannel = '';
-
-  String get channelText1 => _channelText1;
-  String get channelText2 => _channelText2;
-  String get channelText3 => _channelText3;
-  String get channelText4 => _channelText4;
-  String get channelText5 => _channelText5;
-  String get channelText6 => _channelText6;
-  String get channelText7 => _channelText7;
-  String get channelText8 => _channelText8;
-  String get channelText9 => _channelText9;
-  String get channelText10 => _channelText10;
-  String get channelText11 => _channelText11;
 
   bool get isChannelHover => _isChannelHover;
 
@@ -68,33 +50,16 @@ class ChannelsListViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Map<String, String> _sidebarItems = {
-    'announcements': '34',
-    'team-Desktop-Client': '500',
-    'games': '45',
-  };
+  void performGetChannel() {
+    _channels = _channelService.getChannelList();
+    log.d('list of channels ${_channels}');
+  }
 
-  Map<String, String> get sidebarItems => _sidebarItems;
-
-  Future<void> getchannels() async {
-    await runBusyFuture(performGetChannel());
-
+  void goToChannelsView({int index = 0}) {
+    selectedChannelIndex = index;
     notifyListeners();
+    _channelService.setChannel(_channels[index]);
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
 
-  Future<void> performGetChannel() async {
-    // List<ChannelsDataModel> channelsList = await _channelService.getChannelsList();
-    // ignore: unused_local_variable
-    List<Channel>? channelsList = await _channelService.getChannels(
-        organizationId: _organizationService.getOrganizationId());
-  }
-
-  User? user;
-  AuthResponse? userdata;
-  Future<void> fetchAndSetUserData() async {
-    final authResponse = _localStorageService.getFromDisk(localAuthResponseKey);
-    // ignore: unused_local_variable
-    final resUser = AuthResponse.fromJson(jsonDecode(authResponse as String));
-    notifyListeners();
-  }
 }

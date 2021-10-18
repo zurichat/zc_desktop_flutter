@@ -152,16 +152,23 @@ final headline3 = TextStyle(
 );
 
 final subtitle2 = TextStyle(
-  fontSize: 18.sp,
+  fontSize: 16.sp,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
 );
 
 final subtitlec2 = TextStyle(
-  fontSize: 18.sp,
+  fontSize: 16.sp,
   color: kcBackgroundColor2,
   fontWeight: FontWeight.w400,
   fontFamily: 'Lato',
+);
+
+final subtitle2b = TextStyle(
+  fontSize: 16.sp,
+  fontFamily: 'Lato',
+  color: createChannelHeaderColor,
+  fontWeight: FontWeight.bold,
 );
 
 final subtitle3 = TextStyle(
@@ -172,7 +179,7 @@ final subtitle3 = TextStyle(
 );
 
 final subtitle3b = TextStyle(
-  fontSize: 20.sp,
+  fontSize: 16.sp,
   color: createChannelHeaderColor,
   fontWeight: FontWeight.w500,
   fontFamily: 'Lato',
@@ -289,7 +296,7 @@ TextStyle searchChannelHeaderGreenStyle = TextStyle(
     fontWeight: FontWeight.w600,
     fontFamily: 'Lato');
 TextStyle createChannelHeaderStyle = TextStyle(
-    fontSize: 29.sp,
+    fontSize: 28.sp,
     color: createChannelHeaderColor,
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
@@ -299,7 +306,7 @@ TextStyle createChannelSmallHeaderStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'Lato');
 TextStyle createChannelTextStyle = TextStyle(
-    fontSize: 15.sp,
+    fontSize: 13.5.sp,
     color: createChannelTextColor,
     fontWeight: FontWeight.w500,
     fontFamily: 'Lato');
@@ -319,13 +326,13 @@ TextStyle newToZuriChatTextstyle = TextStyle(
     color: createAccountColor,
     fontWeight: FontWeight.w500,
     fontFamily: 'Lato');
-    TextStyle voiceCallTextstyle = TextStyle(
+TextStyle voiceCallTextstyle = TextStyle(
     fontSize: 13.sp,
     color: kcDisplayChannelColor,
     fontWeight: FontWeight.w400,
     fontFamily: 'Lato');
 
-     TextStyle viewProfileTextstyle = TextStyle(
+TextStyle viewProfileTextstyle = TextStyle(
     fontSize: 15.sp,
     color: headerColor,
     fontWeight: FontWeight.w700,
@@ -375,6 +382,26 @@ TextStyle allDmsDayStyle = TextStyle(
     color: Color(0xff242424),
     fontWeight: FontWeight.w400,
     fontFamily: 'Lato');
+
+final changeRegionStyle = TextStyle(
+  color: createAccountColor,
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Lato',
+);
+
+final regionStyle = TextStyle(
+  color: leftNavBarColor,
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Lato',
+);
+ final bottomTextStyle = TextStyle(
+        fontFamily: 'Lato',
+        fontSize: 18.sp,
+        color: Color.fromRGBO(153, 153, 153, 1),
+        fontWeight: FontWeight.w400);
+  
 
 final addPeopleChannelStyle = TextStyle(
   fontSize: 25,

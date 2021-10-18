@@ -32,17 +32,20 @@ class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
-
 @freezed
 class Member with _$Member {
   factory Member({
-    @Default('') @JsonKey(name:'_id') String id,
-    @Default('') String orgId,
-    @JsonKey(name: 'name') @Default('') String fullName,
+    @JsonKey(name:'_id') required String id,
+    @JsonKey(name:'_orgid') required String orgId,
+    @JsonKey(name: 'first_name') required String firstName,
+    @JsonKey(name: 'last_name') required String lastName,
     @JsonKey(name: 'display_name') @Default('') String displayName,
     @Default('') String phone,
     @Default('') String status,
-    @Default('')  String pronouns,
+    @JsonKey(name: 'image_url') @Default('') String pronouns,
+    @Default('') String bio,
+    @Default([]) List socials,
+    @Default('') String img,
     @JsonKey(name: 'time_zone') @Default('') String timeZone,
     @JsonKey(name: 'created_at') @Default('') String createdAt,
     @JsonKey(name: 'updated_at') @Default('') String updatedAt,
@@ -50,7 +53,6 @@ class Member with _$Member {
 
   factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
 }
-
 
 @freezed
 class AuthResponse with _$AuthResponse {
@@ -166,7 +168,7 @@ class RoomInfoResponse with _$RoomInfoResponse {
       _$RoomInfoResponseFromJson(json);
 }
 
- @freezed
+@freezed
 class Themes with _$Themes {
   const factory Themes({
     @Default(false) bool syncWithOS,
@@ -180,7 +182,6 @@ class Themes with _$Themes {
   }) = _Themes;
 
   factory Themes.fromJson(Map<String, dynamic> json) => _$ThemesFromJson(json);
-
 }
 
 @freezed
@@ -228,7 +229,7 @@ class Notifications with _$Notifications {
     @Default('To') String to,
     @Default(true) bool includePreview,
     @Default(false) bool muteAll,
-     @Default(false) isEmail,
+    @Default(false) isEmail,
     @Default('as soon as I\'m inactive') String notificationValue,
     @Default('Pick sound') String messageSound,
     @Default('Pick sound') String loungeSound,
@@ -312,9 +313,10 @@ class DummyUser with _$DummyUser {
 
 @freezed
 class DM with _$DM {
-  factory DM({
-    @Default('1') String userId,
-    required UserProfile userProfile}) = _DM;
+  factory DM(
+      {required DMRoomsResponse roomInfo,
+      required UserProfile currentUserProfile,
+      required UserProfile otherUserProfile}) = _DM;
   factory DM.fromJson(Map<String, dynamic> json) => _$DMFromJson(json);
 }
 
@@ -351,11 +353,13 @@ class ChannelResponse with _$ChannelResponse {
 @freezed
 class Channel with _$Channel {
   factory Channel({
-    @Default('') @JsonKey(name:'_id') String id,
+    @Default('') @JsonKey(name: '_id') String id,
     @Default('') String name,
     @Default('') String owner,
     @Default('') String description,
     @Default(false) bool private,
+    @Default(true) @JsonKey(name:'allow_members_input') bool memberinput,
+    @Default(0) int member,
   }) = _Channel;
   factory Channel.fromJson(Map<String, dynamic> json) =>
       _$ChannelFromJson(json);
@@ -373,13 +377,19 @@ class OrganizationResponse with _$OrganizationResponse {
       _$OrganizationResponseFromJson(json);
 }
 
+
 @freezed
 class Organization with _$Organization {
   factory Organization({
     @Default('') String id,
     @Default('') String logoUrl,
     @Default('') String name,
+    @Default('') String memberId,
+    @Default(false) bool isOwner,
+    @Default(0) int noOfMembers,
+    @Default([]) List imgs,
     @Default('') String workspaceUrl,
+    Member? member,
   }) = _Organization;
 
   factory Organization.fromJson(Map<String, dynamic> json) =>
@@ -415,10 +425,20 @@ class ChannelMessage with _$ChannelMessage {
 class Users with _$Users {
   factory Users({
     @Default('') @JsonKey(name: '_id') String? id,
-    @Default('') @JsonKey(name: 'image_url') String profileImage,
-    @Default('') String display_name,
-    @Default('') String name,
-    @Default('') String bio,
+    @Default(
+        'https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg')
+    @JsonKey(name: 'image_url')
+        String profileImage,
+    @Default('Abodhanga') @JsonKey(name: 'display_name') String displayName,
+    @Default('') @JsonKey(name: 'first_name') String firstName,
+    @Default('') @JsonKey(name: 'user_name') String userName,
+    @Default('') @JsonKey(name: 'last_name') String lastName,
+    @Default('Abodhanga') String name,
+    @Default('Welcome to zuri') String bio,
+    @Default('') String pronouns,
+    @Default('') String status,
+    @Default('') String phone,
+    @Default('') String email,
   }) = _Users;
 
   factory Users.fromJson(Map<String, dynamic> json) => _$UsersFromJson(json);
@@ -434,7 +454,6 @@ class Files with _$Files {
 
   factory Files.fromJson(Map<String, dynamic> json) => _$FilesFromJson(json);
 }
-
 
 @freezed
 class DMRoomsResponse with _$DMRoomsResponse {
@@ -457,18 +476,48 @@ class DMRoomsResponse with _$DMRoomsResponse {
 @freezed
 class UserProfile with _$UserProfile {
   factory UserProfile({
-    @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'last_name') required String lastName,
-    @JsonKey(name: 'display_name') required String displayName,
-    @JsonKey(name: 'image_url') required String imageUrl,
-    @JsonKey(name: 'user_name') required String userName,
-    required String phone,
-    required String pronouns,
-    required String bio,
-    required String status,
+    @JsonKey(name: 'first_name') @Default('') String firstName,
+    @JsonKey(name: 'last_name') @Default('') String lastName,
+    @JsonKey(name: 'display_name') @Default('') String displayName,
+    @JsonKey(name: 'image_url')
+    @Default('https://api.zuri.chat/files/profile_image/614679ee1a5607b13c00bcb7/61467e671a5607b13c00bcc9/20210928144813_0.jpg')
+        String imageUrl,
+    @JsonKey(name: 'user_name') @Default('') String userName,
+    @Default('') @JsonKey(name: '_id') String userId,
+    @Default('') String phone,
+    @Default('') String pronouns,
+    @Default('') String bio,
+    @Default('') String status,
   }) = _UserProfile;
 
-  factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
+  factory UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileFromJson(json);
+}
+
+@freezed
+class ReactToMessage with _$ReactToMessage {
+  factory ReactToMessage({
+    @Default('') String senderId,
+    @Default('') String data,
+    @Default('') String category,
+    @Default([]) List<String> aliases,
+    @Default(0) int count,
+  }) = _ReactToMessage;
+
+  factory ReactToMessage.fromJson(Map<String, dynamic> json) =>
+      _$ReactToMessageFromJson(json);
+}
+
+@freezed
+class AllMembersResponse with _$AllMembersResponse {
+  factory AllMembersResponse({
+    @Default(0) int status,
+    @Default('') String message,
+    @Default([]) List<UserProfile> data,
+  }) = _AllMembersResponse;
+
+  factory AllMembersResponse.fromJson(Map<String, dynamic> json) =>
+      _$AllMembersResponseFromJson(json);
 }
 
 @freezed
@@ -479,25 +528,49 @@ class Todo with _$Todo {
     @Default('') String title,
     @Default('') String status,
     @Default('') String description,
-
   }) = _Todo;
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
 }
 
 @freezed
 class Accessibility with _$Accessibility {
-  factory Accessibility({
-    @Default(false) bool animateValue,
-    @Default(false) bool msgSound,
-    @Default(false) bool sentMsgSound,
-    @Default(false) bool receiveSound,
-    @Default(false) bool readIncoming,
-    @Default(UpButtonsChoice.option1) UpButtonsChoice upButtonsChoice
+  factory Accessibility(
+      {@Default(false) bool animateValue,
+      @Default(false) bool msgSound,
+      @Default(false) bool sentMsgSound,
+      @Default(false) bool receiveSound,
+      @Default(false) bool readIncoming,
+      @Default(UpButtonsChoice.option1) UpButtonsChoice upButtonsChoice
 
 //   factory Accessibility.fromJson(Map<String, dynamic> json) => _$Accessibility(json);
 //   Map<String, dynamic> toJson() => _$Accessibility(this);
 // }
-  }) = _Accessibility;
+      }) = _Accessibility;
 
-  factory Accessibility.fromJson(Map<String, dynamic> json) => _$AccessibilityFromJson(json);
+  factory Accessibility.fromJson(Map<String, dynamic> json) =>
+      _$AccessibilityFromJson(json);
+}
+
+@freezed
+class PinnedMessagesResponse with _$PinnedMessagesResponse {
+  factory PinnedMessagesResponse({
+    @Default('') @JsonKey(name: 'room_id') String roomId,
+    @Default([]) List<String> links,
+  }) = _PinnedMessagesResponse;
+
+  factory PinnedMessagesResponse.fromJson(Map<String, dynamic> json) =>
+      _$PinnedMessagesResponseFromJson(json);
+}
+
+@freezed
+class PinnedMessageContent with _$PinnedMessageContent {
+  factory PinnedMessageContent({
+    @Default('') String displayName,
+    @Default('') String message,
+    @Default('') String displayImage,
+    @Default('') String createdAt,
+  }) = _PinnedMessageContent;
+
+  factory PinnedMessageContent.fromJson(Map<String, dynamic> json) =>
+      _$PinnedMessageContentFromJson(json);
 }

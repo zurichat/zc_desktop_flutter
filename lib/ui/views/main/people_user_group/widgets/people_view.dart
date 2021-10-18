@@ -26,7 +26,7 @@ class PeopleView extends StatelessWidget {
       ) {
         return model.isLoading
             ? SizedBox(
-              height: 300.h,
+                height: 300.h,
                 child: Center(
                   child: CircularProgressIndicator(
                     color: kcPrimaryColor,
@@ -89,38 +89,52 @@ class PeopleView extends StatelessWidget {
                       padding: EdgeInsets.only(
                         right: 61,
                       ),
-                      child: model.suggestionList.isNotEmpty ? GridView.builder(
-                        addAutomaticKeepAlives: true,
-                        controller: _controller,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 5,
-                            crossAxisSpacing: 40,
-                            childAspectRatio: 0.8,
-                            mainAxisSpacing: 50),
-                        itemCount: model.suggestionList.length,
-                        itemBuilder: (context, index) =>
-                            BuildSuggestionContainer(
-                          displayName: model.suggestionList[index].display_name,
-                          displayPicture:
-                              model.suggestionList[index].profileImage,
-                          bio: model.suggestionList[index].bio,
-                        ),
-                      ) : Center(child: RichText(text: TextSpan(
-                        text: 'User ',
-                        style: headline6.copyWith(color: searchBarColor),
-                        children: [
-                          TextSpan(
-                            text: _searchController.text,
-                            style: headline6.copyWith(color: kcPrimaryColor),
-                            children: [
-                              TextSpan(
-                                text: ' is not a member of this organization.',
-                                style: headline6.copyWith(color: searchBarColor),
-                              )
-                            ]
-                          )
-                        ]
-                      ),),),
+                      child: model.suggestionList.isNotEmpty
+                          ? GridView.builder(
+                              addAutomaticKeepAlives: true,
+                              controller: _controller,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 5,
+                                      crossAxisSpacing: 40,
+                                      childAspectRatio: 0.8,
+                                      mainAxisSpacing: 50),
+                              itemCount: model.suggestionList.length,
+                              itemBuilder: (context, index) => GestureDetector(
+                                onTap: () {
+                                  model.goToDmView(index);
+                                },
+                                child: BuildSuggestionContainer(
+                                  displayName:
+                                      model.suggestionList[index].displayName,
+                                  displayPicture:
+                                      model.suggestionList[index].profileImage,
+                                  bio: model.suggestionList[index].bio,
+                                ),
+                              ),
+                            )
+                          : Center(
+                              child: RichText(
+                                text: TextSpan(
+                                    text: 'User ',
+                                    style: headline6.copyWith(
+                                        color: searchBarColor),
+                                    children: [
+                                      TextSpan(
+                                          text: _searchController.text,
+                                          style: headline6.copyWith(
+                                              color: kcPrimaryColor),
+                                          children: [
+                                            TextSpan(
+                                              text:
+                                                  ' is not a member of this organization.',
+                                              style: headline6.copyWith(
+                                                  color: searchBarColor),
+                                            )
+                                          ])
+                                    ]),
+                              ),
+                            ),
                     ),
                   )
                 ],

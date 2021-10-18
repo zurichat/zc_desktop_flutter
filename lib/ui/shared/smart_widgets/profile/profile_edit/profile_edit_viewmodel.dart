@@ -8,44 +8,39 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
-import 'package:zc_desktop_flutter/services/user_service.dart';
 
 class ProfileEditViewModel extends FormViewModel {
-  final _userService = locator<UserService>();
   final log = getLogger('ProfileEditViewModel');
   final _organizationService = locator<OrganizationService>();
-  final GlobalKey<FormFieldState> _fullNameFormKey =
-      GlobalKey<FormFieldState>();
 
-  bool _isFormValid() {
-    return (_fullNameFormKey.currentState!.isValid);
-  }
+  // bool _isFormValid() {
+  //   return (_fullNameFormKey.currentState!.isValid);
+  // }
+  bool _isLoading = false;
 
-  bool _isSaveButtonEnabled = false;
+  bool get isLoading => _isLoading;
 
-  User? user;
-  String? userId;
-  String? token;
-
-  String profileImage = '';
-
-  File? _choosenImage;
-
-  Member _currentMember = Member();
+  Member _currentMember = Member(
+    id: '',
+    orgId: '',
+    firstName: '',
+    lastName: '',
+    displayName: '',
+    bio: '',
+    phone: '',
+    img: '',
+    pronouns: '',
+    timeZone: '',
+    createdAt: '',
+    updatedAt: '',
+  );
 
   Member get currentMember => _currentMember;
 
+  File? _choosenImage = null;
+
   File? get choosenImage => _choosenImage;
 
-  get isFormValid => _isFormValid();
-
-  get isSubmit => _isSaveButtonEnabled;
-
-  void onValidate() {
-    _isSaveButtonEnabled = _isFormValid();
-    _fullNameFormKey.currentState!.validate();
-    notifyListeners();
-  }
 
   Future<void> postDetails(
     String bio,
@@ -54,10 +49,9 @@ class ProfileEditViewModel extends FormViewModel {
     String lastName,
     String phoneNumber,
     String pronoun,
-    String timeZone,
   ) async {
     await runBusyFuture(performProfilePost(
-        firstName, lastName, displayName, bio, pronoun, phoneNumber, timeZone));
+        firstName, lastName, displayName, bio, pronoun, phoneNumber,));
   }
 
   Future<void> performProfilePost(
@@ -67,45 +61,46 @@ class ProfileEditViewModel extends FormViewModel {
     String lastName,
     String phoneNumber,
     String pronoun,
-    String timeZone,
   ) async {
     try {
-      await _userService.updateUser(
-        bio: '',
-        displayName: '',
-        firstName: firstName,
-        lastName: lastName,
-        phoneNumber: '',
-        pronoun: '',
-        timeZone: '',
+      await _organizationService.updateUser(
+        bio: bio,
+        displayName: displayName.trim(),
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        phoneNumber: phoneNumber,
+        pronoun: pronoun.trim(),
       );
     } catch (e) {
-      throw Failure(e.toString());
+      if (e.toString().contains('40')) {
+        throw Failure('');
+      }
+      throw Failure('');
     }
     // Do something after save
   }
 
-  void setup() async {
-    await runBusyFuture(setupOrganization());
-    _organizationService.saveMemberId(_currentMember.id);
-    log.d('current member id ${_currentMember.id}');
+  Future<void> postPicture(
+    File url,
+  ) async {
+    await runBusyFuture(performPicturePost(_choosenImage!));
   }
 
-  Future<void> setupOrganization() async {}
-
-  // getUserDetail() async {
-  //   final orgId = _organizationService.getOrganizationId();
-  //   var response = await _api.updateUserDetails(
-  //     organizationId: orgId,
-  //     memberId: '',
-  //     token: '', parameter: [],
-  //   );
-  //   notifyListeners();
-  // }
-
-  // Future<void> getOrganizations() async {
-  //   _organization = await _organizationService.getOrganizations();
-  // }
+  Future<void> performPicturePost(
+    File url,
+  ) async {
+    try {
+      await _organizationService.updateUserImage(
+        url: url,
+      );
+    } catch (e) {
+      if (e.toString().contains('40')) {
+        throw Failure('');
+      }
+      throw Failure('');
+    }
+    // Do something after save
+  }
 
   removeImage() {
     _choosenImage = null;
@@ -122,6 +117,7 @@ class ProfileEditViewModel extends FormViewModel {
       if (result != null) {
         File file = File(result.files.single.path!);
         _choosenImage = File(file.path);
+        postPicture(_choosenImage!);
         notifyListeners();
       } else {
         // User canceled the picker

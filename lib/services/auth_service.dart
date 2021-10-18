@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 import 'local_storage_service.dart';
 
 const localAuthResponseKey = 'localAuthResponse';
+const selectedOrgKey = 'SelectedOrgKey';
 
 class AuthService {
   final log = getLogger('AuthService');
@@ -25,8 +26,8 @@ class AuthService {
     _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
   }
 
-  Future<void> signup({required String password, required String email}) async {
-    await _zuriApiService.signup(email: email, password: password);
+  Future<void> signup({required String password, required String email, String? fName, String? lName}) async {
+    await _zuriApiService.signup(email: email, password: password, fName: fName ?? '', lName: lName ?? '');
   }
 
   Future<void> confirmEmail(String otpCode) async {
@@ -49,5 +50,6 @@ class AuthService {
   void logOut(String token) async{
     _zuriApiService.signOut(token);
     _localStorageService.removeFromDisk(localAuthResponseKey);
+    _localStorageService.removeFromDisk(selectedOrgKey);
   }
 }

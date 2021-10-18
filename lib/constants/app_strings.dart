@@ -1,6 +1,7 @@
 const String AppNameText = 'Zuri Chat';
 const String CreateAccountText = 'Create Account';
 const String EmailHintText = 'someone@gmail.com';
+const String FullNameHintText = 'John Doe';
 const String PasswordHintText = 'password';
 const String PolicyText =
     'By signing up, you agree that you have accepted our User Notice and Privacy Policy';
@@ -38,7 +39,7 @@ const String HotelsNg = 'Hotels.ng';
 const String MemberText = 'Members';
 const String WorkspaceText = 'Workspace for';
 const String OpenText = 'Open';
-const String SelectText = ' None Selected';
+const String SelectText = 'Selected';
 const String SignIntoNewWorkspace = 'or sign into a new workspace here';
 const String PrivacyText = 'Privacy & Terms';
 const String ContactUs = 'Contact Us';
@@ -58,6 +59,7 @@ const String TimePlaceholder = '13:02';
 const String ImagePlaceholder = 'B';
 
 const String SavedItems = 'Saved Items';
+const String AllDms = 'All DMs';
 const String SearchModalHintText = 'Find in direct messages with rafiu';
 const String LookingForWidget = 'I’m looking for...';
 const String ButtonText = 'Messages';
@@ -96,7 +98,8 @@ const String ArchiveText = 'Archive';
 const String TrashText = 'Trash';
 const String CreateTodo = 'Create a new todo';
 const String TodoTitle = 'Create a prototype';
-const String TodoTitle2 = 'Create a Prototype Mobile for \nGet Notification on Slack';
+const String TodoTitle2 =
+    'Create a Prototype Mobile for \nGet Notification on Slack';
 const String TodoTextOne =
     'Todo helps to keep track of tasks. They are best when created \nspecifically for a task with subsequent sub tasks';
 const String TodoTextTwo = 'Title';
@@ -118,12 +121,14 @@ const String SuccessSubtitle =
 const String ResetTitle = 'Check your email for code';
 const String ConfirmTitle = 'Next, confirm your email address';
 
-const String InvalidErrorMessage = 'Invalid Credential. Please Check you details and try again.';
-const String EmailAlreadyInUseError = 'Email address already in use. Use another email or try login.';
+const String InvalidErrorMessage =
+    'Invalid Credential. Please Check you details and try again.';
+const String EmailAlreadyInUseError =
+    'Email address already in use. Use another email or try login.';
 const String DefaultProfilePictureUrl = 'https://i.stack.imgur.com/l60Hf.png';
-const String UserAdditionErrorMessage = 'User is already part of the workspace or user does not exit.';
+const String UserAdditionErrorMessage =
+    'User is already part of the workspace or user does not exit.';
 const String UserAdittionSuccessMessage = 'User added successfully';
-
 
 const String profileView = 'Profile View';
 const String voiceCall = 'Voice call';
@@ -133,3 +138,54 @@ const String displayName = 'Display Name';
 const String displayemail = 'Email Address';
 const String phoneNumber = 'Phone Number';
 const String editProfile = 'Edit Profile';
+
+const String SelectingRegion =
+    'Selecting a different region will change the language and content of Zuri Chat.';
+const String EuropeText = 'Europe';
+const String AmericaText = 'America';
+const String AsiaText = 'Asia Pacific';
+const String MiddleEastText = 'Middle East';
+const String DeutschText = 'Deutschland (Deutsch)';
+const String EspanaText = 'Espana (Espanol)';
+const String FranceText = 'France (Francais)';
+const String UkText = 'United Kingdon (English)';
+const String LatinoText = 'Latinoamerica (Espanol)';
+const String BrasilText = 'Brasil (Portuguese)';
+const String USText = 'United States (English)';
+const String IndiaText = 'India (English)';
+const String UAEText = 'UAE (Arabic)';
+
+//Display Menu
+const String threads = 'Threads';
+const String allDMs = 'All DMs';
+const String draft = 'Draft';
+const String savedItems = 'Saved Items';
+const String files = 'Files';
+const String people = 'People and User Groups';
+const String todo = 'Todo';
+const String plugins = 'Plugins';
+const String channelText1 = 'Channel browser';
+const String channelText2 = 'Search Channel';
+const String channelText3 = 'recommended results';
+const String channelText4 = 'Sort';
+const String channelText5 = 'Filter';
+const String channelText6 = 'channelName';
+const String channelText7 = ' Joined ';
+const String channelText8 = '34';
+const String channelText9 = ' members  ';
+const String channelText10 = 'View';
+const String channelText11 = 'Join';
+
+const String createChannel = 'Create a channel';
+const String channelTextOne =
+    'Channels are where your team communicates. They’re best ';
+const String channelTextTwo =
+    'when organized around a topic - #marketing, for example.';
+const String channelTextThree = 'Name';
+const String channelTextFour = 'Description ';
+const String channelTextFive = '(optional)';
+const String channelTextSix = 'Make this channel private';
+const String channelTextSeven = 'When a channel is set to private,';
+const String channelTextEight = 'it can be viewed or joined by invitation.';
+const String channelTextNine = 'Create';
+const String channelTextTen = 'Channel created, You will be redirected shortly';

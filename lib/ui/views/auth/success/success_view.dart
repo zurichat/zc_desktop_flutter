@@ -14,6 +14,7 @@ class SuccessView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SuccessViewModel>.nonReactive(
+      onModelReady: (model) => model.init(),
       viewModelBuilder: () => SuccessViewModel(),
       builder: (BuildContext context, model, Widget? child) {
         return Scaffold(

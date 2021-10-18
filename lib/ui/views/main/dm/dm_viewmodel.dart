@@ -1,44 +1,55 @@
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart' as LoggedInUser;
+import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/dm_service.dart';
 
 class DmViewModel extends BaseViewModel {
   final log = getLogger('DmViewModel');
   final _dmService = locator<DMService>();
+  final _centrifugeService = locator<CentrifugeService>();
   Users _user = Users(name: '');
   late LoggedInUser.User _currentLoggedInUser;
   String? _roomId = '';
+  DM? _dmRoomInfo;
   List<Results> _messages = [];
+  List<PinnedMessageContent> _pinnedItems = [];
 
   void setup() {
     runTask();
   }
 
   void runTask() async {
-    _user = await runBusyFuture(_dmService.getUser());
+    setBusy(true);
+    _user = await _dmService.getUser();
     _currentLoggedInUser = _dmService.getCurrentLoggedInUser()!;
-    _roomId = await _dmService.createRoom(_currentLoggedInUser, _user);
-    _dmService.getRoomInfo(_roomId);
+    _dmRoomInfo = _dmService.getExistingRoomInfo;
+    if (_dmRoomInfo == null) {
+      //we dont have a conversation yet so create a new room
+      await _dmService.createRoom(_currentLoggedInUser, _user);
+
+      ///_dmService.getRoomInfo(_roomId);
+    } else {
+      _roomId = _dmRoomInfo!.roomInfo.id;
+    }
     _messages = (await _dmService.fetchRoomMessages(_roomId));
+    fetchPinnedMessages();
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
+    setBusy(false);
     log.i(_user.name);
     notifyListeners();
-  }
 
-  String? getChatUserName() {
-    if (_user.name.isNotEmpty) {
-      return _user.name;
-    }
-
-    return 'No data';
+    websocketConnect();
+    listenToNewMessages();
   }
 
   Users get user => _user;
   String get roomId => _roomId!;
+  DM get dmRoomInfo => _dmRoomInfo!;
   LoggedInUser.User get currentLoggedInUser => _currentLoggedInUser;
   final DateTime currentMessageTime = DateTime.now();
 
@@ -117,22 +128,11 @@ class DmViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  LoggedInUser.User getUser(var senderId) {
-    if (_currentLoggedInUser.id == senderId) {
-      return _currentLoggedInUser;
+  UserProfile getUser(var senderId) {
+    if (_dmRoomInfo!.currentUserProfile.userId == senderId) {
+      return _dmRoomInfo!.currentUserProfile;
     } else {
-      return LoggedInUser.User(
-          id: _user.id.toString(),
-          firstName: 'firstName',
-          lastName: 'lastName',
-          displayName: _user.name,
-          email: 'email',
-          phone: 'phone',
-          status: 1,
-          timeZone: 'timeZone',
-          createdAt: 'createdAt',
-          updatedAt: 'updatedAt',
-          token: 'token'); //check this functionality
+      return _dmRoomInfo!.otherUserProfile;
     }
   }
 
@@ -187,6 +187,18 @@ class DmViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void newReactionToMessage(int messageIndex) {
+    _dmService.reactToMessage(
+        roomId,
+        _messages.elementAt(messageIndex).id,
+        ReactToMessage(
+            senderId: _currentLoggedInUser.id,
+            data: '😃',
+            category: 'SMILEYS',
+            aliases: [],
+            count: 0));
+  }
+
   String formatDate(String createdAt) {
     final dateToCheck = DateTime.parse(createdAt);
     final now = DateTime.now();
@@ -208,7 +220,8 @@ class DmViewModel extends BaseViewModel {
           ' ' +
           DateFormat('MMMM').format(dateToCheck).toString();
     } else {
-      return DateFormat('MM').format(dateToCheck) +
+      return DateFormat('EEE ').format(dateToCheck) +
+          DateFormat('MMMM ').format(dateToCheck) +
           DateFormat('dd').format(dateToCheck);
     }
   }
@@ -260,5 +273,132 @@ class DmViewModel extends BaseViewModel {
 
   void toggleShowingNewMessageIn(bool showing) {
     _showingNewMessageIn = showing;
+  }
+
+  void websocketConnect() async {
+    await _centrifugeService.connect();
+    await _centrifugeService.subscribe(roomId);
+  }
+
+  void listenToNewMessages() {
+    _centrifugeService.messageStreamController.stream.listen((event) async {
+      // _messages = await _channelService.fetchChannelMessages();
+      notifyListeners();
+    });
+  }
+
+  //Pinned and bookmarks
+  final String urlLink = '';
+
+  bool _isDropped = false;
+  bool _isHover = false;
+  bool _isMessagePinned = false;
+  bool _isBookmarkDecoyVisible = false;
+  bool _isOriginalBookmarkVisible = true;
+  bool _isDecoyForPinnedMessageVisible = false;
+
+  final String profileImageUrl = '';
+  final String userName = '';
+
+  //---
+  bool get isDecoyForPinnedMessageVisible => _isDecoyForPinnedMessageVisible;
+  bool get isOriginalBookmarkVisible => _isOriginalBookmarkVisible;
+  bool get isBookmarkDecoyVisible => _isBookmarkDecoyVisible;
+  bool get isMessagePinned => _isMessagePinned;
+  bool get isDropped => _isDropped;
+  bool get isHover => _isHover;
+  List<PinnedMessageContent> get pinnedMessages => _pinnedItems;
+  setIsDropped(bool value) {
+    _isDropped = value;
+    notifyListeners();
+  }
+
+  onEntered(bool isHover) {
+    _isHover = isHover;
+    notifyListeners();
+  }
+
+  onPinnedMessage(bool isMessagePinned) {
+    _isMessagePinned = isMessagePinned;
+
+    // if (_pinnedItems.length <= 1) {
+    //   _isMessagePinned = false;
+    // }
+    notifyListeners();
+  }
+
+  displayDecoyForPinnedMessage(bool isDecoyForPinnedMessageVisible) {
+    _isDecoyForPinnedMessageVisible = isDecoyForPinnedMessageVisible;
+    notifyListeners();
+  }
+
+  displayOriginalBookmark(bool isOriginalBookmarkVisible) {
+    _isOriginalBookmarkVisible = isOriginalBookmarkVisible;
+    notifyListeners();
+  }
+
+  displayDecoyForAddBookmark(bool isBookmarkDecoyVisible) {
+    _isBookmarkDecoyVisible = isBookmarkDecoyVisible;
+    notifyListeners();
+  }
+
+  void launchBookmarkedUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      throw 'Could not launch the $url';
+    }
+  }
+
+  void getUserPinnedMessage() {
+    // _dmService.
+  }
+
+  void pinMessage(String messageId) {
+    _dmService.pinMessage(messageId);
+    for (var message in messages) {
+      if (message.id == messageId) {
+        _pinnedItems.add(PinnedMessageContent(
+          displayName:
+              message.sender_id == _dmRoomInfo!.currentUserProfile.userId
+                  ? _dmRoomInfo!.currentUserProfile.displayName
+                  : _dmRoomInfo!.otherUserProfile.displayName,
+          displayImage:
+              message.sender_id == _dmRoomInfo!.currentUserProfile.userId
+                  ? _dmRoomInfo!.currentUserProfile.imageUrl
+                  : _dmRoomInfo!.otherUserProfile.imageUrl,
+          message: message.message,
+          createdAt: formatTime(message.created_at),
+        ));
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> fetchPinnedMessages() async {
+    var pinned = await _dmService.fetchPinnedMessages(_roomId!);
+    for (var message in messages) {
+      for (var pin in pinned) {
+        if (message.id == pin) {
+          _pinnedItems.add(PinnedMessageContent(
+            displayName:
+                message.sender_id == _dmRoomInfo!.currentUserProfile.userId
+                    ? _dmRoomInfo!.currentUserProfile.displayName
+                    : _dmRoomInfo!.otherUserProfile.displayName,
+            displayImage:
+                message.sender_id == _dmRoomInfo!.currentUserProfile.userId
+                    ? _dmRoomInfo!.currentUserProfile.imageUrl
+                    : _dmRoomInfo!.otherUserProfile.imageUrl,
+            message: message.message,
+            createdAt: formatTime(message.created_at),
+          ));
+        }
+      }
+    }
+    notifyListeners();
   }
 }
