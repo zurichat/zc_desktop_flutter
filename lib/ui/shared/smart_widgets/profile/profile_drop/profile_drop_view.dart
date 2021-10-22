@@ -116,7 +116,7 @@ class DropDown extends StatelessWidget {
                 user: model.user,
                 member: model.currentMember,
                 // member: model.member,
-                // displayName: model.currentMember.displayName,
+                displayName: model.currentMember.displayName,
               ),
               Container(
                 padding:
@@ -238,13 +238,13 @@ class DropDownItem extends StatelessWidget {
 
 class ProfilePicture extends StatelessWidget {
   final bool isActive = false;
-  final String? displayName;
+  final String displayName;
   final String? img;
   final User user;
   final Member member;
   ProfilePicture({
     Key? key,
-    this.displayName,
+    required this.displayName,
     this.img,
     required this.user,
     required this.member,
@@ -278,7 +278,7 @@ class ProfilePicture extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${displayName!.isEmpty ? 'Anonymous' : displayName}',
+                '${displayName.isEmpty  ? 'Anonymous' : displayName}',
                 // '${member.displayName.isEmpty ? 'Anonymous' : member.displayName}',
                 style: subtitle3b,
               ),
