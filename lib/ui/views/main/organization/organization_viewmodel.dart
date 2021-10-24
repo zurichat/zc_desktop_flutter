@@ -115,7 +115,6 @@ class OrganizationViewModel extends BaseViewModel {
           _localStorageService.getFromDisk(_selectedOrgKey).toString()) as List;
       result.forEach((element) {
         _organization.add(Organization.fromJson(element));
-        
       });
       log.i('************* $_organization');
     } catch (e) {
@@ -128,6 +127,7 @@ class OrganizationViewModel extends BaseViewModel {
     _channels = await _channelService.getChannels(
         organizationId: _currentOrganization.id);
     _channelService.setChannel(_channels[0]);
+    _channelService.saveChannelList(_channels);
     log.i('${_channels}');
   }
 
@@ -262,13 +262,14 @@ class OrganizationViewModel extends BaseViewModel {
   }
 
   Future<void> updateOrganizationDetails({String? url, String? name}) async {
-    if(url!.isNotEmpty) {
-      await 
-      _organizationService.updateOrganizationUrl(url: url, token: _userService.auth.user!.token);
+    if (url!.isNotEmpty) {
+      await _organizationService.updateOrganizationUrl(
+          url: url, token: _userService.auth.user!.token);
       //organization[_selectedMenuIndex] = organization[_selectedMenuIndex].copyWith(url: url);
     }
-    if(name!.isNotEmpty){
-      await _organizationService.updateOrganizationName(name: name, token:_userService.auth.user!.token);
+    if (name!.isNotEmpty) {
+      await _organizationService.updateOrganizationName(
+          name: name, token: _userService.auth.user!.token);
       _currentOrganization = _currentOrganization.copyWith(name: name);
       final indexToUpdate = _organization.indexOf(_currentOrganization);
       _organization.insert(indexToUpdate, _currentOrganization);
