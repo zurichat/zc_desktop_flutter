@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 
 // Text Styles we will be using through the app.
@@ -34,10 +35,9 @@ final kHeadlineTextStyle = TextStyle(
   fontFamily: 'Lato',
 );
 
-final kBodyTextStyle = TextStyle(
+final kBodyTextStyle = GoogleFonts.lato(
   fontSize: 16.sp,
   fontWeight: FontWeight.w400,
-  fontFamily: 'Lato',
 );
 
 final kSubHeadingTextStyle = TextStyle(

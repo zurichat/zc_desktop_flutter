@@ -23,8 +23,7 @@ class ResetPasswordView extends StatelessWidget {
         Widget? child,
       ) {
         return Scaffold(
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          body: ListView(
             children: [
               Column(
                 children: [

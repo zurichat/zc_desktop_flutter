@@ -1,12 +1,13 @@
 // TODO: Arrange strings alphabetically and add Path to the ending string
+// find the path to the root data
 
 const String CircularGifPath = 'assets/lottie/hng.gif';
 const String AppSvgPath = 'assets/icons/zuri.svg';
-const String ZuriLogoPath = 'assets/images/zc_logo2.png';
+const String ZuriLogoPath = 'assets/images/zc_logo.svg';
 const String ZuriSvgPath = "assets/images/zc_icon.svg";
-const String GoogleLogo = 'assets/images/google.png';
-const String FacebookLogo = 'assets/images/facebook.png';
-const String TwitterLogo = 'assets/images/twitter.png';
+const String GoogleLogo = 'assets/images/google.svg';
+const String FacebookLogo = 'assets/images/facebook.svg';
+const String TwitterLogo = 'assets/images/twitter.svg';
 const String ChannelsListSvg = "assets/icons/hash_inactive.svg";
 const String DropDownOpenSvg = "assets/icons/drop_down_open.svg";
 const String DropDownClosedSvg = "assets/icons/drop_down_closed.svg";

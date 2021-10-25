@@ -29,7 +29,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   void gotoForgetPassword() {
-    _navigationService.navigateTo(Routes.resetPasswordView);
+    _navigationService.navigateTo(Routes.forgotPasswordView);
   }
 
   Future<void> login({

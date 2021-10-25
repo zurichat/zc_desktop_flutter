@@ -38,8 +38,8 @@ class APIConstants {
   Uri getOrganisationUri(String organisationId) =>
       Uri(scheme: scheme, host: host, path: '/organizations/$organisationId');
 
-  Uri getaddUserToOganization(orgID) => 
-    Uri(scheme: scheme, host: host, path: '/organizations/$orgID/members');
+  Uri getaddUserToOganization(orgID) =>
+      Uri(scheme: scheme, host: host, path: '/organizations/$orgID/members');
 
   // Channels Endpoints
 
@@ -69,13 +69,19 @@ class APIConstants {
   Uri dmMarkMessageAsRead(String messageId) =>
       Uri(scheme: scheme, host: dmHost, path: '/api/v1/${messageId}/read/new/');
 
-      //Channnel endpoints
-      Uri channelSendMessage(String channel_id,String org_id) => Uri(
-      scheme: scheme, host: channelHost, path: '/api/v1/${org_id}/channels/${channel_id}/messages/');
+  //Channnel endpoints
+  Uri channelSendMessage(String channel_id, String org_id) => Uri(
+      scheme: scheme,
+      host: channelHost,
+      path: '/api/v1/${org_id}/channels/${channel_id}/messages/');
 
-      Uri channelFetchMessages(String channel_id,String org_id) => Uri(
-      scheme: scheme, host: channelHost, path: '/api/v1/${org_id}/channels/${channel_id}/messages/');
+  Uri channelFetchMessages(String channel_id, String org_id) => Uri(
+      scheme: scheme,
+      host: channelHost,
+      path: '/api/v1/${org_id}/channels/${channel_id}/messages/');
 
-      Uri getChannelSocketId(String channel_id,String org_id) => Uri(
-      scheme: scheme, host: channelHost, path: '/api/v1/${org_id}/channels/${channel_id}/socket/');
+  Uri getChannelSocketId(String channel_id, String org_id) => Uri(
+      scheme: scheme,
+      host: channelHost,
+      path: '/api/v1/${org_id}/channels/${channel_id}/socket/');
 }

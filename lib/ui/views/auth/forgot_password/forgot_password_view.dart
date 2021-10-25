@@ -10,7 +10,6 @@ import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/forgot_password/forgot_password_viewmodel.dart';
@@ -42,7 +41,7 @@ class ForgotPasswordView extends StatelessWidget {
                 ),
                 verticalSpaceSmall,
                 Container(
-                    height: 58.h,
+                    height: 48.h,
                     width: 440.w,
                     child: AuthButton(
                       label: model.btnText,
@@ -85,7 +84,6 @@ class ForgotPasswordView extends StatelessWidget {
                   ),
                 ),
                 verticalSpaceSmall,
-                GotoLoginButton(),
               ],
             ),
             AuthFooter()

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:zc_desktop_flutter/constants/asset_paths.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 
@@ -10,9 +11,9 @@ class AuthIcons extends StatelessWidget {
 
   const AuthIcons({
     Key? key,
-   required this.googleOnPressed,
-   required this.facebookOnPressed,
-   required this.twitterOnPressed,
+    required this.googleOnPressed,
+    required this.facebookOnPressed,
+    required this.twitterOnPressed,
   }) : super(key: key);
 
   @override
@@ -21,19 +22,19 @@ class AuthIcons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         IconButton(
-          icon: Image.asset(GoogleLogo),
+          icon: SvgPicture.asset(GoogleLogo),
           iconSize: 40.h,
           onPressed: googleOnPressed,
         ),
         horizontalSpaceRegular,
         IconButton(
-          icon: Image.asset(FacebookLogo),
+          icon: SvgPicture.asset(FacebookLogo),
           iconSize: 40.h,
           onPressed: facebookOnPressed,
         ),
         horizontalSpaceRegular,
         IconButton(
-          icon: Image.asset(TwitterLogo),
+          icon: SvgPicture.asset(TwitterLogo),
           iconSize: 40.h,
           onPressed: twitterOnPressed,
         ),

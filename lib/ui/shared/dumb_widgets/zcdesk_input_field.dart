@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -81,7 +82,7 @@ class AuthInputField extends StatelessWidget {
                       )
                     : null,
                 contentPadding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
                 hintText: hintPlaceHolder,
                 hintStyle: TextStyle(
                   color: Colors.grey,
