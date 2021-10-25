@@ -16,6 +16,10 @@ class CheckEmailViewModel extends BaseViewModel {
   get errorMsg => _errorMsg;
   final _windowsTitleBarService = locator<WindowTitleBarService>();
 
+
+  /// This method is called inside on model ready in the view which act just like init state
+  /// The function is used to state the state of the title bar as well a the title of the 
+  /// title bar. 
   void init() async {
     await Future.delayed(Duration(milliseconds: 1));
     _windowsTitleBarService.setHome(false);
