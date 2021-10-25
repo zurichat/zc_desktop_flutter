@@ -155,7 +155,6 @@ class ZuriApiService implements Api {
     }
   }
 
-
   /* AUTH SERVICE */
 
   @override
@@ -424,19 +423,29 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<Map<String, dynamic>> updateOrganizationName({required String name, required String organizationId, required String token}) async {
-    final response = await _patch( updateOrganizationNameUrl(organizationId),body: {
-      'organization_name': name
-    }, headers: {'Authorization': 'Bearer ${token}'},);
+  Future<Map<String, dynamic>> updateOrganizationName(
+      {required String name,
+      required String organizationId,
+      required String token}) async {
+    final response = await _patch(
+      updateOrganizationNameUrl(organizationId),
+      body: {'organization_name': name},
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
     log.i(response);
     return response;
   }
 
   @override
-  Future<Map<String, dynamic>> updateOrganizationUrl({ required String url, required String organizationId, required String token}) async {
-    final response = await _patch( getUpdateOrganizationUrl(organizationId),body: {
-      'ur': url
-    }, headers: {'Authorization': 'Bearer ${token}'},);
+  Future<Map<String, dynamic>> updateOrganizationUrl(
+      {required String url,
+      required String organizationId,
+      required String token}) async {
+    final response = await _patch(
+      getUpdateOrganizationUrl(organizationId),
+      body: {'ur': url},
+      headers: {'Authorization': 'Bearer ${token}'},
+    );
     log.i(response);
     return response;
   }
@@ -519,13 +528,15 @@ class ZuriApiService implements Api {
   }
 
   @override
-  Future<void> fetchMemberDetail(
+  Future<dynamic> fetchMemberDetail(
       {required String organizationId,
       required String memberId,
       required String token}) async {
     final uri = getMemberIdUri(organizationId, memberId);
-    final response =
-        await _get(uri, headers: {'Authorization': 'Bearer $token'});
+    final response = await _get(uri, headers: {
+      // ignore: prefer_single_quotes
+      "Content-Type": "application/json", 'Authorization': 'Bearer ${token}',
+    });
 
     Member member = Member.fromJson(response['data']);
     log.i(member);
@@ -574,7 +585,8 @@ class ZuriApiService implements Api {
   }) async {
     final uri = updateUserProfilePicture(organizationId, memberId);
     // String fileName = url.path.split('/').last;
-    FormData formData = FormData.fromMap({'file': await MultipartFile.fromFile(url.path)});
+    FormData formData =
+        FormData.fromMap({'file': await MultipartFile.fromFile(url.path)});
     final response = await _patch(
       uri,
       body: formData,
@@ -617,5 +629,4 @@ class ZuriApiService implements Api {
 
     return await _get(uri);
   }
-  
 }

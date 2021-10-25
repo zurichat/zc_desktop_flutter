@@ -283,7 +283,7 @@ abstract class Api {
   ///
   Future<Map<String, dynamic>> fetchRoomMessages({var roomId, var orgId});
 
-  Future<void> fetchMemberDetail(
+  Future<dynamic> fetchMemberDetail(
       {required String organizationId,
       required String memberId,
       required String token});

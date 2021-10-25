@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -50,6 +51,7 @@ class ProfileDropdownView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileDropdownViewModel>.reactive(
+      onModelReady: (model) => model.getDetails(),
       builder: (context, model, child) => Material(
         child: InkWell(
           onTap: () {
@@ -105,6 +107,7 @@ class DropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileDropdownViewModel>.reactive(
       viewModelBuilder: () => ProfileDropdownViewModel(),
+      onModelReady: (model) async => await model.getDetails(),
       builder: (context, model, child) => Material(
         elevation: 20,
         child: Expanded(
@@ -115,6 +118,7 @@ class DropDown extends StatelessWidget {
               ProfilePicture(
                 user: model.user,
                 member: model.currentMember,
+                // displayName: displayName,
                 // member: model.member,
                 // displayName: model.currentMember.displayName,
               ),
@@ -278,7 +282,7 @@ class ProfilePicture extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${displayName!.isEmpty ? 'Anonymous' : displayName}',
+                '${member.displayName.isEmpty ? 'Anonymous' : member.displayName}',
                 // '${member.displayName.isEmpty ? 'Anonymous' : member.displayName}',
                 style: subtitle3b,
               ),
@@ -296,7 +300,8 @@ class ProfilePicture extends StatelessWidget {
                   ),
                   horizontalSpaceTiny,
                   Text(
-                    '${user.status == 0 ? 'Away' : 'Online'}',
+                    '',
+                    // '${user.status == 0 ? 'Away' : 'Online'}',
                     style: preferenceStyleNormal,
                   )
                 ],

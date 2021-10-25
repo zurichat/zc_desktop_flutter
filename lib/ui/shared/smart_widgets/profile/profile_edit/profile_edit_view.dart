@@ -309,7 +309,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('Cancel', style: kSubHeadingTextStyle),
+                        child: Text('Cancel', style: subtitle3bb),
                       ),
                     ),
                     horizontalSpaceSmall,

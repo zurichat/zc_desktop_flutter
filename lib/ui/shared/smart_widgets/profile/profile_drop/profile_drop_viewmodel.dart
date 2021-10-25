@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
@@ -38,7 +40,7 @@ class ProfileDropdownViewModel extends BaseViewModel {
     orgId: '',
     firstName: '',
     lastName: '',
-    displayName: 'perpKate',
+    displayName: '',
     bio: '',
     phone: '',
     img: 'assets/images/mark.jpg',
@@ -70,15 +72,20 @@ class ProfileDropdownViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> getdetails() async {
-    await _userService.fetchMemberDetails(
-      member.displayName,
-    );
+  Future<void> getDetails() async {
+    await performGetdetails();
   }
 
-  // void goToViewProfile() {
-  //   _navigationService.navigateTo(OrganizationViewRoutes.profileShowView, id:0);
-  // }
+  Future<void> performGetdetails() async {
+    _currentMember = await runBusyFuture(_userService.fetchMemberDetails());
+    // var displayName = member.displayName;
+    // return response;
+  }
+
+  void goToViewProfile() {
+    _navigationService.navigateTo(OrganizationViewRoutes.profileShowView,
+        id: 1);
+  }
 
   void signOut() {
     _authService.logOut(_userService.auth.user!.token.toString());
