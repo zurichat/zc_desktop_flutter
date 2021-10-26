@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:getwidget/components/avatar/gf_avatar.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
