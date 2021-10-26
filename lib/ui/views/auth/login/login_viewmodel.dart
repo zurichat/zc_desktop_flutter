@@ -34,7 +34,7 @@ class LoginViewModel extends FormViewModel {
   }
 
   void gotoForgetPassword() {
-    _navigationService.navigateTo(Routes.forgotPasswordView);
+    _navigationService.navigateTo(Routes.resetPasswordView);
   }
 
   Future<void> login(String email, String password) async {
