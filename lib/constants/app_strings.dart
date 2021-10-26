@@ -79,6 +79,8 @@ const String SearchModal1 = 'Search in Messages';
 const String SearchModal2 = 'Search in Files';
 const String SearchModal3 = 'Search anyone in workspace';
 const String AddPeopleText = 'Add People';
+const String AddPeopleHint = 'Enter a name, email or user group';
+const String SnackBarMessageAddUser = 'User(s) Added Successfully';
 const String AddPeopleUserGroupHeader =
     'To see Zuri Chat in action, you’ll need a few more people here. Try inviting some of the teammates you talk with most.';
 const String InvitePeopleTextFieldHintText = 'Ex. ellis@gmail.com';

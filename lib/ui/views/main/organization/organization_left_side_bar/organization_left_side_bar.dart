@@ -13,6 +13,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+import 'package:zc_desktop_flutter/ui/views/main/add_user_channel/add_user_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
@@ -95,7 +96,12 @@ class OrganizationLeftSideBar extends ViewModelWidget<OrganizationViewModel> {
                           showChannelListDisplay: () {
                             model.goToAllDmView();
                           },
-                          addTap: () {},
+                          addTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AddUserView(),
+                            );
+                          },
                           listItemCount: model.dms.length,
                           onListItemTapped: (index) {
                             model.goToDmView(index);
