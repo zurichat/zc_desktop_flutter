@@ -194,6 +194,11 @@ class OrganizationViewModel extends BaseViewModel {
     _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
   }
 
+  void goToThreadsView() {
+    notifyListeners();
+    _navigationService.navigateTo(OrganizationViewRoutes.threadsView, id: 1);
+  }
+
   void goToUserPeopleGroup() {
     notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.peopleUserGroupView,
