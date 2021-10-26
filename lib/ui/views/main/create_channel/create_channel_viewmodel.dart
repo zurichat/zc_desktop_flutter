@@ -116,7 +116,7 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   }
 
   String userDisplayName() {
-    return _auth.user!.displayName;
+    return _auth.user!.email;
   }
 
   void goToChannelsView({int index = 0}) {

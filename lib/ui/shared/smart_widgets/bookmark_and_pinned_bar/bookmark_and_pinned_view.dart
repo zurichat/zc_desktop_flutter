@@ -8,6 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
+
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 //import 'package:zc_desktop_flutter/ui/shared/smart_widgets/bookmark_and_pinned_bar/bookmark_and_pinned_viewmodel.dart';
@@ -127,13 +129,14 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                   Visibility(
                     visible: dmViewModel.isMessagePinned,
                     child: RowActionItem(
-                      tip: 'Pinned Items',
-                      label: '${dmViewModel.pinnedMessages.length} Pinned',
+                      tip: bookmarkPinned,
+                      label:
+                          '${dmViewModel.pinnedMessages.length} ${bookmarkPinned2}',
                       icon: SVGAssetPaths.pinnedIcon,
                       onClicked: () {
                         //dmViewModel.onPinnedMessage(false);
                         //dmViewModel.displayDecoyForPinnedMessage(true);
-                        log('Pinned messages clicked');
+                        log(bookmarkPinned7);
                         _toggleDropdownForAddBookmark(
                             close: true, context: context);
                         _toggleDropDownForPinnedMessages(
@@ -145,8 +148,8 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                   Visibility(
                     visible: dmViewModel.isDecoyForPinnedMessageVisible,
                     child: RowActionItem(
-                      tip: 'Pinned Items',
-                      label: 'close',
+                      tip: bookmarkPinned,
+                      label: bookmarkPinned3,
                       icon: SVGAssetPaths.pinnedIcon,
                       onClicked: () {
                         dmViewModel.onPinnedMessage(true);
@@ -159,8 +162,8 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                     ),
                   ),
                   BookMarkedItem(
-                      tip: 'www.zurichat.com',
-                      label: 'zurichat',
+                      tip: bookmarkPinned4,
+                      label: bookmarkPinned5,
                       icon: SVGAssetPaths.linkIcon,
                       onClicked: () {
                         showDialog(
@@ -169,7 +172,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                                   child: ActionsBookmarkDialog(context),
                                 ));
                       }),
-                  Visibility(
+                  /* Visibility(
                     visible: dmViewModel.isOriginalBookmarkVisible,
                     child: RowActionItem(
                       //2
@@ -187,9 +190,9 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                         log('Add to bookmarks clicked');
                       },
                     ),
-                  ),
+                  ), */
                   //Decoy Button=> closes the overlay
-                  Visibility(
+                  /* Visibility(
                     visible: dmViewModel.isBookmarkDecoyVisible,
                     child: RowActionItem(
                       //Decoy
@@ -207,7 +210,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                         log('Add to bookmarks clicked');
                       },
                     ),
-                  ),
+                  ), */
                 ],
               ),
             ),
@@ -300,7 +303,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 child: Container(
                   //color: Colors.red,
                   //margin: EdgeInsets.only(left: 20),
-                  child: Text('No recent links',
+                  child: Text(dropDown,
                       style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w500,
@@ -316,57 +319,58 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
         ),
       );
 
-  AddBookMark(BuildContext context, {final void Function()? onPressed}) =>
-      MouseRegion(
-        onEnter: (_) => dmViewModel.onEntered(true),
-        onExit: (_) => dmViewModel.onEntered(false),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop;
-            _toggleDropdownForAddBookmark(close: true, context: context);
-            showDialog(
-                context: context,
-                builder: (context) =>
-                    Dialog(child: AddBookmarkDialog(context)));
-            dmViewModel.onPinnedMessage(false);
-            // view.toggleDropdownForAddBookmarkForAddBookmarkForAddBookmarkForAddBookmark(context: context, close: true);
-          },
-          child: Container(
-              color: dmViewModel.isHover ? kcPrimaryColor : kcBackgroundColor2,
-              // width: 250.w,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: Row(
-                children: [
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SvgPicture.asset(
-                        SVGAssetPaths.linkIcon,
-                      ),
+  AddBookMark(BuildContext context, {final void Function()? onPressed}) {
+    return MouseRegion(
+      onEnter: (_) => dmViewModel.onEntered(true),
+      onExit: (_) => dmViewModel.onEntered(false),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop;
+
+          _toggleDropdownForAddBookmark(close: true, context: context);
+          showDialog(
+              context: context,
+              builder: (context) => Dialog(child: AddBookmarkDialog(context)));
+          dmViewModel.onPinnedMessage(false);
+          // view.toggleDropdownForAddBookmarkForAddBookmarkForAddBookmarkForAddBookmark(context: context, close: true);
+        },
+        child: Container(
+            color: dmViewModel.isHover ? kcPrimaryColor : kcBackgroundColor2,
+            // width: 250.w,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            child: Row(
+              children: [
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: SvgPicture.asset(
+                      SVGAssetPaths.linkIcon,
                     ),
                   ),
-                  horizontalSpaceSmall,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Add a bookmark', style: headline7),
-                      Text('Easily find your team\'s important links',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Lato',
-                          ))
-                    ],
-                  )
-                ],
-              )),
-        ),
-      );
+                ),
+                horizontalSpaceSmall,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(addBookmark, style: headline7),
+                    Text(addBookmark2,
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Lato',
+                        ))
+                  ],
+                )
+              ],
+            )),
+      ),
+    );
+  }
 
   DropDownItem({
     required final String text,
@@ -398,416 +402,424 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
         ),
       );
 
-  AddBookmarkDialog(BuildContext context) => Container(
-        width: 580,
-        height: 420,
-        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
-        child: Column(children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Add A Bookmark',
-                    style: headline6,
+  AddBookmarkDialog(BuildContext context) {
+    return Container(
+      width: 580,
+      height: 420,
+      padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
+      child: Column(children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  addBookmarkDialog,
+                  style: headline6,
+                ),
+                IconButton(
+                    onPressed: Navigator.of(context).pop,
+                    icon: Icon(
+                      Icons.close,
+                      size: 28.sp,
+                    ))
+              ],
+            ),
+            verticalSpaceMediumTwo,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(addBookmarkDialog2, style: subtitle2),
+                verticalSpaceSmall,
+                TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: kcPrimaryColor)),
+                    hintText: addBookmarkDialog3,
                   ),
-                  IconButton(
-                      onPressed: Navigator.of(context).pop,
-                      icon: Icon(
-                        Icons.close,
-                        size: 28.sp,
-                      ))
-                ],
-              ),
-              verticalSpaceMediumTwo,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Link', style: subtitle2),
-                  verticalSpaceSmall,
-                  TextField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: kcPrimaryColor)),
-                      hintText: 'https://www.zuri.chat',
-                    ),
-                  ),
-                ],
-              ),
-              verticalSpaceMediumTwo,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Name', style: subtitle2),
-                  verticalSpaceSmall,
-                  TextField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: kcPrimaryColor)),
-                      hintText: 'Ex. design reference ',
-                      prefixIcon: IconButton(
-                        onPressed: () {},
-                        icon: Container(
-                          height: 15,
-                          width: 15,
-                          child: SvgPicture.asset(
-                            SVGAssetPaths.linkIcon,
-                          ),
+                ),
+              ],
+            ),
+            verticalSpaceMediumTwo,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(addBookmarkDialog4, style: subtitle2),
+                verticalSpaceSmall,
+                TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: kcPrimaryColor)),
+                    hintText: addBookmarkDialog5,
+                    prefixIcon: IconButton(
+                      onPressed: () {},
+                      icon: Container(
+                        height: 15,
+                        width: 15,
+                        child: SvgPicture.asset(
+                          SVGAssetPaths.linkIcon,
                         ),
                       ),
                     ),
-                  )
-                ],
+                  ),
+                )
+              ],
+            ),
+            verticalSpaceMedium,
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: kcPrimaryColor,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(
+                addBookmarkDialog6,
+                style: TextStyle(color: Colors.white),
               ),
-              verticalSpaceMedium,
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    primary: kcPrimaryColor,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor, width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text(
-                  'Add',
-                  style: TextStyle(color: Colors.white),
-                ),
-                //),
-              ),
-              horizontalSpaceMedium,
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    primary: Colors.white,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor, width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text('Cancel'),
-                //),
-              ),
-            ],
-          )
-        ]),
-      );
+              //),
+            ),
+            horizontalSpaceMedium,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: Colors.white,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(addBookmarkDialog6),
+              //),
+            ),
+          ],
+        )
+      ]),
+    );
+  }
 
 //
 // BOOKMARK SECTION
 //
 //EDIT BOOKMARK DIALOGUE
-  EditBookmarkDialog(BuildContext context) => Container(
-        width: 580,
-        height: 420,
-        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
-        child: Column(children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Edit Bookmark',
-                    style: headline6,
+  EditBookmarkDialog(BuildContext context) {
+    return Container(
+      width: 580,
+      height: 420,
+      padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
+      child: Column(children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  editBookmarkDialog,
+                  style: headline6,
+                ),
+                IconButton(
+                    onPressed: Navigator.of(context).pop,
+                    icon: Icon(
+                      Icons.close,
+                      size: 28.sp,
+                    ))
+              ],
+            ),
+            verticalSpaceMediumTwo,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(editBookmarkDialog2, style: subtitle2),
+                verticalSpaceSmall,
+                TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(),
+                    hintText: editBookmarkDialog3,
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: kcPrimaryColor)),
                   ),
-                  IconButton(
-                      onPressed: Navigator.of(context).pop,
-                      icon: Icon(
-                        Icons.close,
-                        size: 28.sp,
-                      ))
-                ],
-              ),
-              verticalSpaceMediumTwo,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Link', style: subtitle2),
-                  verticalSpaceSmall,
-                  TextField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(),
-                      hintText: 'https://www.zuri.chat',
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: kcPrimaryColor)),
-                    ),
-                  ),
-                ],
-              ),
-              verticalSpaceMediumTwo,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Name', style: subtitle2),
-                  verticalSpaceSmall,
-                  TextField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: kcPrimaryColor)),
-                      //helperText: 'www.zurichat.com',
-                      // hintText: 'Ex. design reference ',
-                      prefixIcon: IconButton(
-                        onPressed: () {},
-                        icon: Container(
-                          height: 15,
-                          width: 15,
-                          child: SvgPicture.asset(
-                            SVGAssetPaths.linkIcon,
-                          ),
+                ),
+              ],
+            ),
+            verticalSpaceMediumTwo,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(editBookmarkDialog4, style: subtitle2),
+                verticalSpaceSmall,
+                TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: kcPrimaryColor)),
+                    //helperText: 'www.zurichat.com',
+                    // hintText: 'Ex. design reference ',
+                    prefixIcon: IconButton(
+                      onPressed: () {},
+                      icon: Container(
+                        height: 15,
+                        width: 15,
+                        child: SvgPicture.asset(
+                          SVGAssetPaths.linkIcon,
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text('Last edited by Dan Odin, Today at 6:09PM'),
-            ],
-          ),
-          verticalSpaceSmall,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    primary: kcPrimaryColor,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor, width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text(
-                  'Edit',
-                  style: TextStyle(color: Colors.white),
-                ),
-                //),
-              ),
-              horizontalSpaceMedium,
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    primary: Colors.white,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor, width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text('Cancel'),
-                //),
-              ),
-            ],
-          )
-        ]),
-      );
-
-  DeleteBookmarkDialog(BuildContext context) => Container(
-        width: 580.w,
-        height: 280.h,
-        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
-        child: Column(children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Delete Bookmark',
-                    style: headline6,
                   ),
-                  IconButton(
-                      onPressed: Navigator.of(context).pop,
-                      icon: Icon(
-                        Icons.close,
-                        size: 28.sp,
-                      ))
-                ],
+                )
+              ],
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(editBookmarkDialog5),
+          ],
+        ),
+        verticalSpaceSmall,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: kcPrimaryColor,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(
+                editBookmarkDialog6,
+                style: TextStyle(color: Colors.white),
               ),
-              verticalSpaceMediumTwo,
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Are you sure you want to delete this? If you do,\nIt will be lost for eternity beyond death and time. Unrecoverable!',
-                softWrap: true,
-                style: TextStyle(fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-          verticalSpaceSmall,
-          verticalSpaceMediumTwo,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    primary: kcAccentColor,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor, width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text(
-                  'Delete',
-                  style: TextStyle(color: Colors.white),
-                ),
-                //),
-              ),
-              horizontalSpaceMedium,
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    primary: Colors.white,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor, width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text('Cancel'),
-                //),
-              ),
-            ],
-          )
-        ]),
-      );
+              //),
+            ),
+            horizontalSpaceMedium,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: Colors.white,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(editBookmarkDialog7),
+              //),
+            ),
+          ],
+        )
+      ]),
+    );
+  }
 
-  ActionsBookmarkDialog(BuildContext context) => Container(
-        width: 270.w,
-        height: 280.h,
-        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
-        child: Column(children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Actions',
-                    style: headline6,
-                  ),
-                  IconButton(
-                      onPressed: Navigator.of(context).pop,
-                      icon: Icon(
-                        Icons.close,
-                        size: 28.sp,
-                      ))
-                ],
+  DeleteBookmarkDialog(BuildContext context) {
+    return Container(
+      width: 580.w,
+      height: 280.h,
+      padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
+      child: Column(children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  deleteBookmarkDialog,
+                  style: headline6,
+                ),
+                IconButton(
+                    onPressed: Navigator.of(context).pop,
+                    icon: Icon(
+                      Icons.close,
+                      size: 28.sp,
+                    ))
+              ],
+            ),
+            verticalSpaceMediumTwo,
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              deleteBookmarkDialog,
+              softWrap: true,
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
+        verticalSpaceSmall,
+        verticalSpaceMediumTwo,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: kcAccentColor,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(
+                deleteBookmarkDialog3,
+                style: TextStyle(color: Colors.white),
               ),
-              verticalSpaceMediumTwo,
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BookmarkActions(
-                text: 'Open Link',
-                onTap: () {
-                  Navigator.pop(context, true);
-                  dmViewModel.launchBookmarkedUrl('https://www.zuri.chat');
-                },
-              ),
-              verticalSpaceSmall,
-              BookmarkActions(
-                text: 'Edit Link',
-                onTap: () {
-                  Navigator.pop(context, true);
-                  showDialog(
-                      context: context,
-                      builder: (context) =>
-                          Dialog(child: EditBookmarkDialog(context)));
-                },
-              ),
-              verticalSpaceSmall,
-              BookmarkActions(text: 'Copy Link'),
-              verticalSpaceSmall,
-              BookmarkActions(
-                text: 'Delete Link',
-                onTap: () {
-                  Navigator.pop(context, true);
-                  showDialog(
-                      context: context,
-                      builder: (context) =>
-                          Dialog(child: DeleteBookmarkDialog(context)));
-                },
-              ),
-            ],
-          ),
-          verticalSpaceSmall,
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.end,
-          //   children: [
-          //     ElevatedButton(
-          //       onPressed: () {
-          //         Navigator.pop(context, true);
-          //       },
-          //       style: ElevatedButton.styleFrom(
-          //           fixedSize: Size(105.w, 42.h),
-          //           textStyle: clearStatusTextStyle,
-          //           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          //           primary: Colors.white,
-          //           onPrimary: bodyColor,
-          //           side: BorderSide(
-          //               color: clearStatusBtnBorderColor, width: 1.0.w),
-          //           shape: RoundedRectangleBorder(
-          //               borderRadius: BorderRadius.circular(5.r))),
-          //       child: Text('Close'),
-          //       //),
-          //     ),
-          //   ],
-          // )
-        ]),
-      );
+              //),
+            ),
+            horizontalSpaceMedium,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: Colors.white,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(deleteBookmarkDialog4),
+              //),
+            ),
+          ],
+        )
+      ]),
+    );
+  }
+
+  ActionsBookmarkDialog(BuildContext context) {
+    return Container(
+      width: 270.w,
+      height: 280.h,
+      padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
+      child: Column(children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  actionsBookmarkDialog,
+                  style: headline6,
+                ),
+                IconButton(
+                    onPressed: Navigator.of(context).pop,
+                    icon: Icon(
+                      Icons.close,
+                      size: 28.sp,
+                    ))
+              ],
+            ),
+            verticalSpaceMediumTwo,
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BookmarkActions(
+              text: actionsBookmarkDialog2,
+              onTap: () {
+                Navigator.pop(context, true);
+                dmViewModel.launchBookmarkedUrl(addBookmarkDialog3);
+              },
+            ),
+            verticalSpaceSmall,
+            BookmarkActions(
+              text: actionsBookmarkDialog3,
+              onTap: () {
+                Navigator.pop(context, true);
+                showDialog(
+                    context: context,
+                    builder: (context) =>
+                        Dialog(child: EditBookmarkDialog(context)));
+              },
+            ),
+            verticalSpaceSmall,
+            BookmarkActions(text: actionsBookmarkDialog4),
+            verticalSpaceSmall,
+            BookmarkActions(
+              text: actionsBookmarkDialog5,
+              onTap: () {
+                Navigator.pop(context, true);
+                showDialog(
+                    context: context,
+                    builder: (context) =>
+                        Dialog(child: DeleteBookmarkDialog(context)));
+              },
+            ),
+          ],
+        ),
+        verticalSpaceSmall,
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   children: [
+        //     ElevatedButton(
+        //       onPressed: () {
+        //         Navigator.pop(context, true);
+        //       },
+        //       style: ElevatedButton.styleFrom(
+        //           fixedSize: Size(105.w, 42.h),
+        //           textStyle: clearStatusTextStyle,
+        //           padding: EdgeInsets.symmetric(horizontal: 16.w),
+        //           primary: Colors.white,
+        //           onPrimary: bodyColor,
+        //           side: BorderSide(
+        //               color: clearStatusBtnBorderColor, width: 1.0.w),
+        //           shape: RoundedRectangleBorder(
+        //               borderRadius: BorderRadius.circular(5.r))),
+        //       child: Text('Close'),
+        //       //),
+        //     ),
+        //   ],
+        // )
+      ]),
+    );
+  }
 
   BookMarkedItem(
           {required String label,
@@ -1030,7 +1042,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Today at ${time}',
+                    '${buildPinned} ${time}',
                     style: TextStyle(
                         fontFamily: 'Lato',
                         color: lightIconColor,
@@ -1051,99 +1063,100 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
     required String time,
     final void Function()? onPressed,
   })
-      //final String message;
-      =>
-      Container(
-        width: 580.w,
-        height: 370.h,
-        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
-        child: Column(children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Remove Pinned Item',
-                    style: headline6,
-                  ),
-                  IconButton(
-                      onPressed: Navigator.of(context).pop,
-                      icon: Icon(
-                        Icons.close,
-                        size: 28.sp,
-                      ))
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Are you sure you want to remove this pinned item?',
-                softWrap: true,
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-          verticalSpaceTiny,
-          Container(
-            width: 550.w,
-            // height: 180.h,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1, color: kcBorderColor)),
-            child: BuildPinnedItem(
-                isCancelIconVisble: false,
-                message: message,
-                userDisplayName: userDisplayName,
-                userDisplayImageUrl: userDisplayImageUrl,
-                time: time),
-          ),
-          verticalSpaceMedium,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                onPressed: onPressed,
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    primary: kcAccentColor,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor, width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text(
-                  'Remove',
-                  style: TextStyle(color: Colors.white),
+  //final String message;
+  {
+    return Container(
+      width: 580.w,
+      height: 370.h,
+      padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
+      child: Column(children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  deletePinned,
+                  style: headline6,
                 ),
-                //),
+                IconButton(
+                    onPressed: Navigator.of(context).pop,
+                    icon: Icon(
+                      Icons.close,
+                      size: 28.sp,
+                    ))
+              ],
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              deletePinned2,
+              softWrap: true,
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+        verticalSpaceTiny,
+        Container(
+          width: 550.w,
+          // height: 180.h,
+          decoration:
+              BoxDecoration(border: Border.all(width: 1, color: kcBorderColor)),
+          child: BuildPinnedItem(
+              isCancelIconVisble: false,
+              message: message,
+              userDisplayName: userDisplayName,
+              userDisplayImageUrl: userDisplayImageUrl,
+              time: time),
+        ),
+        verticalSpaceMedium,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: onPressed,
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: kcAccentColor,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(
+                deletePinned3,
+                style: TextStyle(color: Colors.white),
               ),
-              horizontalSpaceMedium,
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(117.w, 48.h),
-                    textStyle: clearStatusTextStyle,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    primary: Colors.white,
-                    onPrimary: bodyColor,
-                    side: BorderSide(
-                        color: clearStatusBtnBorderColor, width: 1.0.w),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r))),
-                child: Text('Cancel'),
-                //),
-              ),
-            ],
-          )
-        ]),
-      );
+              //),
+            ),
+            horizontalSpaceMedium,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(117.w, 48.h),
+                  textStyle: clearStatusTextStyle,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  primary: Colors.white,
+                  onPrimary: bodyColor,
+                  side: BorderSide(
+                      color: clearStatusBtnBorderColor, width: 1.0.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r))),
+              child: Text(deletePinned4),
+              //),
+            ),
+          ],
+        )
+      ]),
+    );
+  }
 } // END OF CLASS
 

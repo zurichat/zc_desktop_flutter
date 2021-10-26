@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:getwidget/components/avatar/gf_avatar.dart';
+import 'package:getwidget/shape/gf_avatar_shape.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -13,6 +15,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/new_message_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/work_space_setting.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
+import 'package:zc_desktop_flutter/ui/views/main/add_user_channel/add_user_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
@@ -95,7 +98,12 @@ class OrganizationLeftSideBar extends ViewModelWidget<OrganizationViewModel> {
                           showChannelListDisplay: () {
                             model.goToAllDmView();
                           },
-                          addTap: () {},
+                          addTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AddUserView(),
+                            );
+                          },
                           listItemCount: model.dms.length,
                           onListItemTapped: (index) {
                             model.goToDmView(index);
@@ -106,7 +114,7 @@ class OrganizationLeftSideBar extends ViewModelWidget<OrganizationViewModel> {
                                   .elementAt(index)
                                   .otherUserProfile
                                   .displayName,
-                              userIcon: 'assets/icons/users.svg',
+                              userIcon: model.dms.elementAt(index).otherUserProfile.imageUrl,
                               selected: model.selectedDM(index),
                             );
                           },
@@ -224,7 +232,12 @@ class DMItem extends StatelessWidget {
             Container(
               height: 20.0,
               width: 20.0,
-              child: SvgPicture.asset(userIcon!),
+              child:GFAvatar(
+                              backgroundColor: Colors.transparent,
+                              foregroundColor: kcPrimaryLight,
+                              shape: GFAvatarShape.standard,
+                              backgroundImage: NetworkImage(userIcon!),
+                            ),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
               ),
@@ -382,6 +395,7 @@ class DisplayMenu extends StatelessWidget {
             text: 'Threads',
             isSelected: model.selectedMenuIndex == 0,
             onTap: () {
+              model.goToThreadsView();
               model.updateSelectedMenuIndex(0);
             },
           ),

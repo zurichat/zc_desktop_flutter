@@ -14,6 +14,7 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.da
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
+
 import 'change_password_view.form.dart';
 import 'change_password_viewmodel.dart';
 
@@ -56,7 +57,7 @@ class ChangePasswordView extends StatelessWidget with $ChangePasswordView {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'Reset Password',
+                              ChangePasswordTitleText,
                               style: headline3,
                             ),
                           ),
@@ -66,37 +67,34 @@ class ChangePasswordView extends StatelessWidget with $ChangePasswordView {
                             child: Column(
                               children: [
                                 ZuriDeskInputField(
-                                  label: 'Password',
+                                  label: PasswordText,
                                   password: true,
                                   isVisible: model.isPasswordVisible,
-                                  onVisibilityTap:
-                                      model.setIsPasswordVisible,
+                                  onVisibilityTap: model.setIsPasswordVisible,
                                   errorText: model.passwordMsg,
                                   controller: passwordController,
-                                  hintPlaceHolder: 'Password',
+                                  hintPlaceHolder: PasswordText,
                                 ),
                                 verticalSpaceSmall,
                                 ZuriDeskInputField(
-                                  label: 'Confirm Password',
+                                  label: ConfirmPasswordText,
                                   password: true,
                                   isVisible: model.isPasswordVisible,
-                                  onVisibilityTap:
-                                      model.setIsPasswordVisible,
+                                  onVisibilityTap: model.setIsPasswordVisible,
                                   errorText: model.confirmErrorMsg,
                                   controller: confirmPasswordController,
-                                  hintPlaceHolder: 'Confirm Password',
+                                  hintPlaceHolder: ConfirmPasswordText,
                                 ),
                                 verticalSpaceRegular,
                                 AuthButton(
-                                  label: 'Continue',
+                                  label: ContinueText,
                                   isBusy: model.isBusy,
                                   onTap: () async {
                                     await model.changePassword();
                                     if (model.isShowDialog) {
                                       showDialog(
                                           context: context,
-                                          builder: (_) =>
-                                              BuildConfirmation());
+                                          builder: (_) => BuildConfirmation());
                                     }
                                   },
                                 )
@@ -107,7 +105,7 @@ class ChangePasswordView extends StatelessWidget with $ChangePasswordView {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Don\'t wish to change your password?  ',
+                              Text(DontWishToChangePasswordText,
                                   style: headline7),
                               GotoLoginButton(),
                             ],

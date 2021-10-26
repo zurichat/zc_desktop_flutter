@@ -14,32 +14,47 @@ class LoginViewModel extends FormViewModel {
   final _auth = locator<AuthService>();
   final _windowsTitleBarService = locator<WindowTitleBarService>();
 
+  /// The varible when set to true is use to obscure the password field and when set to false
+  /// make the password text visible.
+  bool _passwordVisibility = true;
+
+  bool get passwordVisible => _passwordVisibility;
+
+  /// This method is called in the view on model ready so the function is called
+  /// as soon as the view is coming up. The method called [WindowsTitleBarService]
+  /// to set the [isHome] variable as well as the [title] variable.
+  /// The delay was put into place because the [WindowsTitleBarsevice] make use of set state
+  /// which would through and error without the use of await.
   void init() async {
     await Future.delayed(Duration(milliseconds: 1));
     _windowsTitleBarService.setHome(false);
     _windowsTitleBarService.setTitle('Zuri | SignIn');
   }
 
-  bool _passwordVisibility = true;
-
-  bool get passwordVisible => _passwordVisibility;
-
+  /// This function update the value of [_passwordVisibility] when the action is
+  /// triggered by user using the eyes button on the view
   void setPasswordVisibility() {
     _passwordVisibility = !_passwordVisibility;
     notifyListeners();
   }
 
+  /// Navigate user to signup screen using [NavigationService]
   void goToSignUp() {
     _navigationService.navigateTo(Routes.signUpView);
   }
 
+  /// Navigate user to forget password screen using [NavigationService]
   void gotoForgetPassword() {
     _navigationService.navigateTo(Routes.resetPasswordView);
   }
 
+  /// This funtion perform the login action by calling runBusyFunction to set the
+  /// view to busy set.
   Future<void> login(String email, String password) async {
     await runBusyFuture(performLogin(email, password));
   }
+
+  /// This function authentiate user and redirect them to the choose workspace view
 
   Future<void> performLogin(String email, String password) async {
     try {
@@ -59,6 +74,8 @@ class LoginViewModel extends FormViewModel {
     super.onFutureError(error, key);
   }
 
+  /// This method is meant to  be override while using the FormViewModel but since there's
+  /// absolutely no need for the function inside this view model so it remain an empty funcion 
   @override
   void setFormStatus() {}
 }

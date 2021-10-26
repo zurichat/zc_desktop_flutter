@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -87,8 +86,9 @@ class ProfileDropdownViewModel extends BaseViewModel {
         id: 1);
   }
 
-  void signOut() {
+  void signOut() async {
     _authService.logOut(_userService.auth.user!.token.toString());
+    await Future.delayed(Duration(milliseconds: 500));
     _navigationService.pushNamedAndRemoveUntil(Routes.loginView);
   }
 }
