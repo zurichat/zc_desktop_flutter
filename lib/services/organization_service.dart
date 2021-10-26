@@ -108,10 +108,6 @@ class OrganizationService {
     final response = await _apiService.invitePeopleToOrganization(
         organizationId: organizationId, email: email, token: auth.user!.token);
     log.i(response);
-    organization =
-        OrganizationResponse.fromJson(response).data as Organization?;
-    _localStorageService.saveToDisk(
-        localOrganizationResponseKey, jsonEncode(organization));
   }
 
   ///This is used to get the list of users in an organization

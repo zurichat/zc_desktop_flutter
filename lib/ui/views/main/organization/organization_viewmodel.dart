@@ -64,9 +64,9 @@ class OrganizationViewModel extends BaseViewModel {
 
   /// This is the first function that is fired when the viewmodel is activated
   void setup() async {
-    _windowTitleBarService.setHome(true);
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
+    _windowTitleBarService.setHome(true);
     _organizationService.saveOrganizationId(_currentOrganization.id);
     _organizationService.saveMemberId(_currentOrganization.memberId);
     log.d('current organization id ${_currentOrganization.id}');
