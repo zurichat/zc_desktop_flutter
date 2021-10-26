@@ -257,8 +257,8 @@ class OrganizationViewRouter extends RouterBase {
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
     ChannelsView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => ChannelsView(),
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) => ChannelsView(),
         settings: data,
       );
     },
@@ -266,8 +266,8 @@ class OrganizationViewRouter extends RouterBase {
       var args = data.getArgs<ChannelDmViewArguments>(
         orElse: () => ChannelDmViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => ChannelDmView(
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) => ChannelDmView(
           key: args.key,
           margin: args.margin,
           color: args.color,
@@ -280,32 +280,36 @@ class OrganizationViewRouter extends RouterBase {
       );
     },
     ChannelsListView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const ChannelsListView(),
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const ChannelsListView(),
         settings: data,
       );
     },
     CreateChannelView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => CreateChannelView(),
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            CreateChannelView(),
         settings: data,
       );
     },
     DmView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const DmView(),
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) => const DmView(),
         settings: data,
       );
     },
     AllDmsView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const AllDmsView(),
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const AllDmsView(),
         settings: data,
       );
     },
     SavedItemsView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const SavedItemsView(),
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const SavedItemsView(),
         settings: data,
       );
     },
@@ -313,8 +317,9 @@ class OrganizationViewRouter extends RouterBase {
       var args = data.getArgs<PeopleUserGroupViewArguments>(
         orElse: () => PeopleUserGroupViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => PeopleUserGroupView(key: args.key),
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            PeopleUserGroupView(key: args.key),
         settings: data,
       );
     },
@@ -322,8 +327,9 @@ class OrganizationViewRouter extends RouterBase {
       var args = data.getArgs<TodoViewArguments>(
         orElse: () => TodoViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => TodoView(key: args.key),
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            TodoView(key: args.key),
         settings: data,
       );
     },

@@ -169,7 +169,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                                   child: ActionsBookmarkDialog(context),
                                 ));
                       }),
-                  Visibility(
+                  /* Visibility(
                     visible: dmViewModel.isOriginalBookmarkVisible,
                     child: RowActionItem(
                       //2
@@ -187,9 +187,9 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                         log('Add to bookmarks clicked');
                       },
                     ),
-                  ),
+                  ), */
                   //Decoy Button=> closes the overlay
-                  Visibility(
+                  /* Visibility(
                     visible: dmViewModel.isBookmarkDecoyVisible,
                     child: RowActionItem(
                       //Decoy
@@ -207,7 +207,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                         log('Add to bookmarks clicked');
                       },
                     ),
-                  ),
+                  ), */
                 ],
               ),
             ),

@@ -5,16 +5,17 @@ import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
-import 'package:zc_desktop_flutter/services/organization_service.dart';
+// import 'package:zc_desktop_flutter/services/organization_service.dart';
 
 class ChannelsListViewModel extends BaseViewModel {
   final log = getLogger('ChannelsDisplayViewModel');
 
   final _channelService = locator<ChannelsService>();
-  final _organizationService = locator<OrganizationService>();
+  // final _organizationService = locator<OrganizationService>();
 
   List<Channel> _channels = [];
   int selectedChannelIndex = 0;
+  
 
   List<Channel> get channels => _channels;
   final _navigationService = locator<NavigationService>();
@@ -49,13 +50,9 @@ class ChannelsListViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> performGetChannel() async {
-
-    _channels = await _channelService.getChannels(
-        organizationId: _organizationService.getOrganizationId());
-
-    log.d('List of channels ${_channels}');
-    notifyListeners();
+  void performGetChannel() {
+    _channels = _channelService.getChannelList();
+    log.d('list of channels ${_channels}');
   }
 
   void goToChannelsView({int index = 0}) {
