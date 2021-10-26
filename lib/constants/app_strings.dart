@@ -128,7 +128,7 @@ const String EmailAlreadyInUseError =
 const String DefaultProfilePictureUrl = 'https://i.stack.imgur.com/l60Hf.png';
 const String UserAdditionErrorMessage =
     'User is already part of the workspace or user does not exit.';
-const String UserAdittionSuccessMessage = 'User added successfully';
+const String UserAdittionSuccessMessage = 'Invitation Sent';
 
 const String profileView = 'Profile View';
 const String voiceCall = 'Voice call';

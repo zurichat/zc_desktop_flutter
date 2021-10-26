@@ -17,6 +17,7 @@ class AuthHeader extends StatelessWidget {
                 verticalSpaceMedium,
                 Text(
                   title,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 43.sp,

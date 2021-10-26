@@ -80,8 +80,9 @@ class ProfileDropdownViewModel extends BaseViewModel {
   //   _navigationService.navigateTo(OrganizationViewRoutes.profileShowView, id:0);
   // }
 
-  void signOut() {
+  void signOut() async {
     _authService.logOut(_userService.auth.user!.token.toString());
+    await Future.delayed(Duration(milliseconds: 500));
     _navigationService.pushNamedAndRemoveUntil(Routes.loginView);
   }
 }
