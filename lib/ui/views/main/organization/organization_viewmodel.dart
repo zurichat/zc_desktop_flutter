@@ -100,14 +100,16 @@ class OrganizationViewModel extends BaseViewModel {
     return _organizationService.selectedOrganization;
   }
 
+//This is called in onModelReady and makes sure that this fuctions are called and setUp once
+//Just like init state
   Future<void> setupOrganization() async {
     await getOrganizations();
     await getDMs();
     await getChannels();
   }
-
+//Fetches the selected organization by user from local storage
+//and displays them on the leftside container
   Future<void> getOrganizations() async {
-    // _organization = await _organizationService.getOrganizations();
     _organization = [];
     try {
       final result = await json.decode(
