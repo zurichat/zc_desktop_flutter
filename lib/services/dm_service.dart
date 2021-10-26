@@ -45,37 +45,35 @@ class DMService {
   }
 
   Future<void> setNewRoomInfo(Users user) async {
-    User? currentUser=getCurrentLoggedInUser();
-    var roomId=await createRoom(currentUser, user);
-    _dmRoomInfo= DM(
-          otherUserProfile: UserProfile(
+    User? currentUser = getCurrentLoggedInUser();
+    var roomId = await createRoom(currentUser, user);
+    _dmRoomInfo = DM(
+        otherUserProfile: UserProfile(
             firstName: user.firstName,
-              lastName: user.lastName,
-              displayName:user.displayName,
-              imageUrl: user.profileImage,
-              userName: user.userName,
-              userId: user.id!,
-              phone: user.phone,
-              pronouns: user.pronouns,
-              bio:user.bio,
-              status: user.bio
-          ),
-          roomInfo: DMRoomsResponse(
+            lastName: user.lastName,
+            displayName: user.displayName,
+            imageUrl: user.profileImage,
+            userName: user.userName,
+            userId: user.id!,
+            phone: user.phone,
+            pronouns: user.pronouns,
+            bio: user.bio,
+            status: UserStatus()),
+        roomInfo: DMRoomsResponse(
             id: roomId,
             orgId: _organizationService.getOrganizationId(),
-            roomUserIds: [currentUser!.id,user.id!]
-          ),
-          currentUserProfile: UserProfile(
-              firstName: currentUser.firstName,
-              lastName: currentUser.lastName,
-              displayName: currentUser.displayName,
-              imageUrl: currentUser.displayName,
-              userName: currentUser.displayName,
-              userId: currentUser.id,
-              phone: currentUser.phone,
-              pronouns: currentUser.displayName,
-              bio: currentUser.displayName,
-              status: currentUser.displayName));
+            roomUserIds: [currentUser!.id, user.id!]),
+        currentUserProfile: UserProfile(
+            firstName: currentUser.firstName,
+            lastName: currentUser.lastName,
+            displayName: currentUser.displayName,
+            imageUrl: currentUser.displayName,
+            userName: currentUser.displayName,
+            userId: currentUser.id,
+            phone: currentUser.phone,
+            pronouns: currentUser.displayName,
+            bio: currentUser.displayName,
+            status: UserStatus()));
   }
 
   DM? get getExistingRoomInfo => _dmRoomInfo;
@@ -112,8 +110,7 @@ class DMService {
   Future<List<DMRoomsResponse>> getDMs(var orgId) async {
     final response = await _zuriApiService.fetchDMs(
         orgId: orgId, userId: getCurrentLoggedInUser()!.id);
-    log.i('dm is back with: ');
-    log.i(response);
+    log.i('dm is back with: ${response}');
     return List<DMRoomsResponse>.from(
         response.map((model) => DMRoomsResponse.fromJson(model)));
   }

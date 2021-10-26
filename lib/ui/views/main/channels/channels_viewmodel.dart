@@ -87,7 +87,6 @@ class ChannelsViewModel extends BaseViewModel {
   }
 
   void websocketConnect(String socketId) async {
-    await _centrifugeService.connect();
     await _centrifugeService.subscribe(socketId);
   }
 

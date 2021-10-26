@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
@@ -11,6 +13,7 @@ class DmViewModel extends BaseViewModel {
   final log = getLogger('DmViewModel');
   final _dmService = locator<DMService>();
   final _centrifugeService = locator<CentrifugeService>();
+  final rightSideBarController = ScrollController();
   Users _user = Users(name: '');
   late LoggedInUser.User _currentLoggedInUser;
   String? _roomId = '';
@@ -37,6 +40,7 @@ class DmViewModel extends BaseViewModel {
     _messages = (await _dmService.fetchRoomMessages(_roomId));
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
     setBusy(false);
+    scrollToBottom();
     log.i(_user.name);
     notifyListeners();
 
@@ -99,6 +103,7 @@ class DmViewModel extends BaseViewModel {
       room_id: _roomId!,
     );
     _messages.add(mess);
+    scrollToBottom();
     notifyListeners();
     //u can get index by getting list length and minus 1
     SendMessageResponse res =
@@ -185,7 +190,7 @@ class DmViewModel extends BaseViewModel {
   }
 
   void newReactionToMessage(int messageIndex) {
-     _dmService.reactToMessage(
+    _dmService.reactToMessage(
         roomId,
         _messages.elementAt(messageIndex).id,
         ReactToMessage(
@@ -273,14 +278,30 @@ class DmViewModel extends BaseViewModel {
   }
 
   void websocketConnect() async {
-    await _centrifugeService.connect();
     await _centrifugeService.subscribe(roomId);
   }
 
   void listenToNewMessages() {
-    _centrifugeService.messageStreamController.stream.listen((event) async {
-      // _messages = await _channelService.fetchChannelMessages();
-      notifyListeners();
+    _centrifugeService.listen(
+      socketId: roomId,
+      channelId: roomId,
+      onData: (message) async {
+        log.i('listened to meso $message');
+        _messages = (await _dmService.fetchRoomMessages(_roomId));
+        scrollToBottom();
+        notifyListeners();
+      },
+    );
+  }
+
+  void scrollToBottom() {
+    SchedulerBinding.instance!.addPostFrameCallback((_) {
+      rightSideBarController.animateTo(
+        rightSideBarController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 10),
+        curve: Curves.easeOut,
+      );
     });
+    notifyListeners();
   }
 }

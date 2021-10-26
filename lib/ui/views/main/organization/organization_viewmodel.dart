@@ -135,7 +135,7 @@ class OrganizationViewModel extends BaseViewModel {
               phone: auth.user!.phone,
               pronouns: auth.user!.displayName,
               bio: auth.user!.displayName,
-              status: auth.user!.displayName));
+              status: UserStatus()));
       _dms.add(dm);
     }
     log.i('${_dms}');

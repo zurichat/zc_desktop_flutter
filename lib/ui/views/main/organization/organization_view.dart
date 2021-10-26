@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:getwidget/components/avatar/gf_avatar.dart';
+import 'package:getwidget/shape/gf_avatar_shape.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
@@ -207,8 +209,7 @@ class OrganizationWrapper extends StatelessWidget {
                                                     .elementAt(index)
                                                     .otherUserProfile
                                                     .displayName,
-                                                userIcon:
-                                                    'assets/icons/users.svg',
+                                                userIcon:model!.dms.elementAt(index).otherUserProfile.imageUrl,
                                                 selected: false,
                                               );
                                             },
@@ -602,10 +603,12 @@ class DMItem extends StatelessWidget {
             Container(
               height: 20.0,
               width: 20.0,
-              child: SvgPicture.asset(userIcon!),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-              ),
+              child: GFAvatar(
+                              backgroundColor: Colors.transparent,
+                              foregroundColor: kcPrimaryLight,
+                              shape: GFAvatarShape.standard,
+                              backgroundImage: NetworkImage(userIcon!),
+                            )
             ),
             horizontalSpaceSmall,
             Text(

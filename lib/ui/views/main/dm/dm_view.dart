@@ -24,7 +24,7 @@ class DmView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _rightSideBarController = ScrollController();
+    
 
     return ViewModelBuilder<DmViewModel>.reactive(
         onModelReady: (model) {
@@ -69,7 +69,7 @@ class DmView extends StatelessWidget {
                                 child: Container(
                                   color: kcBackgroundColor2,
                                   child: Scrollbar(
-                                    controller: _rightSideBarController,
+                                    controller: model.rightSideBarController,
                                     isAlwaysShown: true,
                                     scrollbarOrientation:
                                         ScrollbarOrientation.right,
@@ -78,7 +78,7 @@ class DmView extends StatelessWidget {
                                     child: ListView(
                                       physics: AlwaysScrollableScrollPhysics(),
                                       shrinkWrap: true,
-                                      controller: _rightSideBarController,
+                                      controller: model.rightSideBarController,
                                       children: [
                                         NewDmView(
                                           model: model,
