@@ -425,9 +425,12 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> signOut(String token) {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future signOut(String token) async {
+    await Future.delayed(Duration(milliseconds: 500));
+    return {
+      'status':'200',
+      'message': 'token destroyed successfully'
+    };
   }
 
   @override

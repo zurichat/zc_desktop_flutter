@@ -138,7 +138,7 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
       } catch(e) {
         if(e.toString() == '400') {
          throw Failure(UserAdditionErrorMessage);
-      }
+      } 
        throw Failure(AuthErrorMessage);
       }
     } else {

@@ -436,7 +436,7 @@ class Users with _$Users {
     @Default('Abodhanga') String name,
     @Default('Welcome to zuri') String bio,
     @Default('') String pronouns,
-    @Default('') String status,
+    @Default({}) Map<String, dynamic> status,
     @Default('') String phone,
     @Default('') String email,
   }) = _Users;
