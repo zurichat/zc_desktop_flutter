@@ -151,5 +151,381 @@
     "forgotPasswordText" : "Forgot Password?",
     "@forgotPasswordText": {
         "description" : "Forgot Password"
+    },
+    "appBarText" : "# All direct messages",
+    "@appBarText": {
+        "description": "app bar text"
+    },
+    "searchBarText" : "To: @somebody or @somebody@example.com",
+    "@searchBarText": {
+        "description": "search bar text"
+    },
+    "dayPlaceholderText" : "Today",
+    "@dayPlaceholderText": {
+        "description": "Today text"
+    },
+    "savedItems" : "Saved Items",
+    "@savedItems": {
+        "description": "saved items text"
+    },
+     "allDms" : "All DMs",
+    "@allDms": {
+        "description": "all DMs text"
+    },
+     "searchModalHintText" : "Find in direct messages with {userName}",
+    "@searchModalHintText": {
+        "description": "find in direct messages"
+    },
+     "lookingForText" : "I’m looking for...",
+    "@lookingForText": {
+        "description": "looking for widget"
+    },
+     "buttonText" : "Messages",
+    "@buttonText": {
+        "description": "search modal button"
+    },
+     "buttonText2" : "Files",
+    "@buttonText2": {
+        "description": " search modal button"
+    },
+     "buttonText3" : "People",
+    "@buttonText3": {
+        "description": " search modal button"
+    },
+    "buttonText4" : "Channel",
+    "@buttonText4": {
+        "description": " search modal button"
+    },
+    "recentSearch" : "Recent Searches",
+    "@recentSearch": {
+        "description": " search modal"
+    },
+    "recentSearch" : "Recent Searches",
+    "@recentSearch": {
+        "description": " search modal"
+    },
+    "searchModalHintText1" : "Scour your archives and fish out the answers",
+    "@searchModalHintText1": {
+        "description": "search modal"
+    },
+     "buttonText5" : "Not the results that you expected? ",
+    "@buttonText5": {
+        "description": " search modal button"
+    },
+     "buttonText6" : "Give feedback ",
+    "@buttonText6": {
+        "description": " search modal button"
+    },
+     "buttonText7" : "or ",
+    "@buttonText7": {
+        "description": " search modal button"
+    },
+    "buttonText8" : "learn more",
+    "@buttonText8": {
+        "description": " search modal button"
+    },
+     "searchModal" : "Search in Channels",
+    "@searchModal": {
+        "description": " search modal"
+    },
+    "searchModal1" : "Search in Messages",
+    "@searchModal1": {
+        "description": " search modal"
+    },
+    "searchModal2" : "Search in Files",
+    "@searchModal2": {
+        "description": " search modal"
+    },
+    "searchModal3" : "Search anyone in workspace",
+    "@searchModal3": {
+        "description": " search modal"
+    },
+     "addPeopleText" : "Add People",
+    "@addPeopleText": {
+        "description": " Add people"
+    },
+    "addPeopleUserGroupHeader" : "To see {appName} in action, you’ll need a few more people here. Try inviting some of the teammates you talk with most.",
+    "@addPeopleUserGroupHeader": {
+        "description": " add People"
+    },
+     "addButtonText" : "Add",
+    "@addButtonText": {
+        "description": " Add button"
+    },
+     "groupText" : "User Groups",
+    "@groupText": {
+        "description": "User groups"
+    },
+    "searchPeopleTextFieldHintText" : "Search by name, role or team",
+    "@searchPeopleTextFieldHintText": {
+        "description": "search"
+    },
+     "recommendedSearchText" : "50 Recommended Searches",
+    "@recommendedSearchText": {
+        "description": "search"
+    },
+     "mostRecommendedSortText" : "Sort: Most Recommended",
+    "@mostRecommendedSortText": {
+        "description": "search"
+    },
+     "filterText" : "Filter",
+    "@filterText": {
+        "description": "search"
+    },
+    "emailErrorText" : "Invalid email address",
+    "@emailErrorText": {
+        "description": "Invalid email"
+    },
+     "backToLoginText" : "Back To Login",
+    "@backToLoginText": {
+        "description": "Go back to log in text"
+    },
+    "backToWorkspaceText" : "Back To Workspace",
+    "@backToWorkspaceText": {
+        "description": "Go back to workspace  text"
+    },
+    "backToWorkspaceText" : "Back To Workspace",
+    "@backToWorkspaceText": {
+        "description": "Go back to workspace  text"
+    },
+    "todoList" : "Back To Workspace",
+    "@todoList": {
+        "description": "to do"
+    },
+    "pendingText" : "Pending",
+    "@pendingText": {
+        "description": "to do"
+    },
+    "archiveText" : "Archive",
+    "@archiveText": {
+        "description": "to do"
+    },
+    "trashText" : "Trash",
+    "@trashText": {
+        "description": "to do"
+    },
+    "createTodo" : "Create a new todo",
+    "@createTodo": {
+        "description": "to do"
+    },
+    "todoTitle" : "Create a prototype",
+    "@todoTitle": {
+        "description": "to do"
+    },
+    "todoTitle2" : "Create a Prototype Mobile for \nGet Notification on {appName}",
+    "@todoTitle2": {
+        "description": "to do"
+    },
+    "todoTextOne" : "Todo helps to keep track of tasks. They are best when created \nspecifically for a task with subsequent sub tasks",
+    "@todoTextOne": {
+        "description": "to do"
+    },
+    "todoTextTwo" : "Title",
+    "@todoTextTwo": {
+        "description": "to do"
+    },
+    "todoTextThree" : "e.g. Todo 01",
+    "@todoTextThree": {
+        "description": "to do"
+    },
+    "todoTextFour" : "Description",
+    "@todoTextFour": {
+        "description": "to do"
+    },
+    "todoTextFive" : "(Optional)",
+    "@todoTextFive": {
+        "description": "to do"
+    },
+    "todoTextSix" : "Make this todo private",
+    "@todoTextSix": {
+        "description": "to do"
+    },
+    "todoTextSeven" : "Due date",
+    "@todoTextSeven": {
+        "description": "to do"
+    },
+    "todoTextNine" : "Create",
+    "@todoTextNine": {
+        "description": "to do"
+    },
+    "todoTextTen" : "Meeting with zuri partners...",
+    "@todoTextTen": {
+        "description": "to do"
+    },
+     "emptyWorkspaceText" : "Oh no 😭😭😭, Your workspace is empty. You can invite people with their email",
+    "@emptyWorkspaceText": {
+        "description": "Empty workspace"
+    },
+    "errorTitle" : "Password Reset failed",
+    "@errorTitle": {
+        "description": "Authentication"
+    },
+    "errorSubtitle" : "Your password reset failed! Give it another shot!",
+    "@errorSubtitle": {
+        "description": "Authentication"
+    },
+     "successTitle" : "Password Reset successful",
+    "@successTitle": {
+        "description": "Authentication"
+    },
+    "successSubtitle" : "Your password reset was successful! You can now proceed to Login!",
+    "@successSubtitle": {
+        "description": "Authentication"
+    },
+    "resetTitle" : "Check your email for code",
+    "@resetTitle": {
+        "description": "Authentication"
+    },
+     "confirmTitle" : "Next, confirm your email address",
+    "@confirmTitle": {
+        "description": "Authentication"
+    },
+     "invalidErrorMessage" : "Invalid Credential. Please Check you details and try again.",
+    "@invalidErrorMessage": {
+        "description": "Authentication"
+    },
+     "emailAlreadyInUseError" : "Email address already in use. Use another email or try login.",
+    "@emailAlreadyInUseError": {
+        "description": "Authentication"
+    },
+     "userAdditionErrorMessage" : "User is already part of the workspace or user does not exit.",
+    "@userAdditionErrorMessage": {
+        "description": "Authentication"
+    },
+     "userAdittionSuccessMessage" : "Invitation Sent",
+    "@userAdittionSuccessMessage": {
+        "description": "Authentication"
+    },
+    "profileView" : "Profile View",
+    "@profileView": {
+        "description": "profile View"
+    },
+    "voiceCall" : "Voice call",
+    "@voiceCall": {
+        "description": "profile View"
+    },
+    "videoCall" : "Video call",
+    "@videoCall": {
+        "description": "profile View"
+    },
+    "textMore" : "More",
+    "@textMore": {
+        "description": "profile View"
+    },
+    "displayName" : "Display Name",
+    "@displayName": {
+        "description": "profile View"
+    },
+    "displayemail" : "Email Address",
+    "@displayemail": {
+        "description": "profile View"
+    },
+    "phoneNumber" : "Phone Number",
+    "@phoneNumber": {
+        "description": "profile View"
+    },
+    "editProfile" : "Edit Profile",
+    "@editProfile": {
+        "description": "profile View"
+    },
+    "selectingRegion" : "Selecting a different region will change the language and content of {appName}.",
+    "@selectingRegion": {
+        "description": "Change Region"
+    },
+     "threads" : "Threads",
+    "@threads": {
+        "description": "Display Menu"
+    },
+     "draft" : "Draft",
+    "@draft": {
+        "description": "Display Menu"
+    },
+    "people" : "People and User Groups",
+    "@people": {
+        "description": "Display Menu"
+    },
+    "todo" : "Todo",
+    "@todo": {
+        "description": "Display Menu"
+    },
+    "plugins" : "Plugins",
+    "@plugins": {
+        "description": "Display Menu"
+    },
+    "channelText1" : "Channel browser",
+    "@channelText1": {
+        "description": "Channel Text"
+    },
+    "channelText2" : "Search Channel",
+    "@channelText2": {
+        "description": "Channel Text"
+    },
+    "channelText3" : "recommended results",
+    "@channelText3": {
+        "description": "Channel Text"
+    },
+    "channelText4" : "Sort",
+    "@channelText4": {
+        "description": "Channel Text"
+    },
+    "channelText5" : "Filter",
+    "@channelText5": {
+        "description": "Channel Text"
+    },
+    "channelText6" : "channel Name",
+    "@channelText6": {
+        "description": "Channel Text"
+    },
+     "channelText7" : " Joined ",
+    "@channelText7": {
+        "description": "Channel Text"
+    },
+    "channelText9" : " members  ",
+    "@channelText9": {
+        "description": "Channel Text"
+    },
+    "channelText10" : "View",
+    "@channelText10": {
+        "description": "Channel Text"
+    },
+    "channelText11" : "Join",
+    "@channelText11": {
+        "description": "Channel Text"
+    },
+    "createChannel" : "Create a channel",
+    "@createChannel": {
+        "description": "Channel Text"
+    },
+    "channelTextOne" : "Channels are where your team communicates. They’re best ",
+    "@channelTextOne": {
+        "description": "Channel Text"
+    },
+    "channelTextTwo" : "when organized around a topic - #marketing, for example.",
+    "@channelTextTwo": {
+        "description": "Channel Text"
+    },
+    "channelTextThree" : "Name",
+    "@channelTextThree": {
+        "description": "Channel Text"
+    },
+     "channelTextSix" : "Make this channel private",
+    "@channelTextSix": {
+        "description": "Channel Text"
+    },
+    "channelTextSeven" : "When a channel is set to private,",
+    "@channelTextSeven": {
+        "description": "Channel Text"
+    },
+    "channelTextEight" : "it can be viewed or joined by invitation.",
+    "@channelTextEight": {
+        "description": "Channel Text"
+    },
+    "channelTextNine" : "Create",
+    "@channelTextNine": {
+        "description": "Channel Text"
+    },
+    "channelTextTen" : "Channel created, You will be redirected shortly",
+    "@channelTextTen": {
+        "description": "Channel Text"
     }
 }
