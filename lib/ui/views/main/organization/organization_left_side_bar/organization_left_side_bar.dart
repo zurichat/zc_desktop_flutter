@@ -382,6 +382,7 @@ class DisplayMenu extends StatelessWidget {
             text: 'Threads',
             isSelected: model.selectedMenuIndex == 0,
             onTap: () {
+              model.goToThreadsView();
               model.updateSelectedMenuIndex(0);
             },
           ),
