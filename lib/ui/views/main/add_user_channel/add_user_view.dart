@@ -8,7 +8,6 @@ import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/center_tile.dart';
 import 'package:zc_desktop_flutter/ui/views/main/add_user_channel/add_user_viewmodel.dart';
 
 class AddUserView extends StatelessWidget {
