@@ -8,6 +8,7 @@ import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
+import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/center_tile.dart';
 import 'package:zc_desktop_flutter/ui/views/main/add_user_channel/add_user_viewmodel.dart';
 
 class AddUserView extends StatelessWidget {
@@ -58,7 +59,11 @@ class AddUserView extends StatelessWidget {
                           onTap: () {
                             Navigator.pop(context, true);
                           },
-                          child: SvgPicture.asset(Cancel),
+                          child: SvgPicture.asset(
+                            Cancel,
+                            width: 14,
+                            height: 14,
+                          ),
                         )
                       ],
                     ),
@@ -156,7 +161,7 @@ class AddUserView extends StatelessWidget {
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: kcPrimaryColor,
-                              minimumSize: Size(110.w, 55.h),
+                              minimumSize: Size(115.w, 56.h),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
@@ -307,25 +312,46 @@ class BuildSelectedUserContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kcPrimaryLight,
-      height: 35,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: 40,
-            width: 25,
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
+      color: KaddPeopleBackcolor,
+      height: 30,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 40,
+              width: 40,
+              child: Stack(
+                children: [
+                  Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Text(username),
-          IconButton(icon: Icon(Icons.close), onPressed: onTap),
-          horizontalSpaceTiny
-        ],
+            SizedBox(
+              width: 4,
+            ),
+            Text(
+              username,
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
+            ),
+            SizedBox(
+              width: 4,
+            ),
+            IconButton(
+                icon: Icon(
+                  Icons.close,
+                  size: 10,
+                ),
+                onPressed: onTap),
+            horizontalSpaceTiny
+          ],
+        ),
       ),
     );
   }
