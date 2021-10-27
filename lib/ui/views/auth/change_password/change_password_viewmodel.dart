@@ -2,9 +2,12 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
+import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
+
 import 'change_password_view.form.dart';
 
 class ChangePasswordViewModel extends FormViewModel with Validator {
@@ -24,31 +27,41 @@ class ChangePasswordViewModel extends FormViewModel with Validator {
 
   final _windowsTitleBarService = locator<WindowTitleBarService>();
 
+  /// This method sets the [title] of the [ChangePasswordView] on the title  bar
+  /// it is called immediately the view comes up
   void init() async {
     await Future.delayed(Duration(milliseconds: 1));
     _windowsTitleBarService.setTitle('Zuri | Change Password');
   }
 
+  /// sets the error state of the view
   _setIsError() {
     _isError = !_isError;
     notifyListeners();
   }
 
+  /// set the busy state of the view
   _setIsBusy() {
     _isBusy = !_isBusy;
     notifyListeners();
   }
 
+  /// this method sets dialog  to view
   _setIsShowDialog(bool value) async {
     _isShowDialog = value;
     notifyListeners();
   }
 
+  /// this method sets the password field visibility
   setIsPasswordVisible() {
     _isNotPasswordVisible = !_isNotPasswordVisible;
     notifyListeners();
   }
 
+  /// this method enables you to change your password if all criteria are met
+  /// criteria include password must be same with confirm password, password must not be less
+  /// than 8 characters and must include special characters
+  /// then takes you back to login view
   Future<void> changePassword() async {
     _setIsShowDialog(false);
     bool passwordCheck = passwordValidator(passwordValue!);
@@ -56,17 +69,13 @@ class ChangePasswordViewModel extends FormViewModel with Validator {
         confirmPasswordValidator(passwordValue!, confirmPasswordValue!);
     if (!passwordCheck || !confirmPasswordCheck) {
       if (!passwordCheck) {
-        _passwordMsg = '''Invalid Password. Password should consist of atleast:
-                       One Uppercase 
-                       One Lowercase
-                       One Character
-                       And must be at least 8 characters long ''';
+        _passwordMsg = ChangePasswordErrorMessage;
       } else {
         _passwordMsg = null;
       }
 
       if (!confirmPasswordCheck) {
-        _confirmErrorMsg = 'Password does not match';
+        _confirmErrorMsg = ConfirmPasswordErrorMessage;
       } else {
         _confirmErrorMsg = null;
       }
@@ -84,10 +93,13 @@ class ChangePasswordViewModel extends FormViewModel with Validator {
     _setIsShowDialog(true);
   }
 
+  /// this method navigates to the login view
   gotoLogin() {
     _navigationService.navigateTo(Routes.loginView);
   }
 
+  /// This method is meant to  be override while using the FormViewModel but since there's
+  /// absolutely no need for the method inside this view model so it remain an empty method
   @override
   void setFormStatus() {}
 }
