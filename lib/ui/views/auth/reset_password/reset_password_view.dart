@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
@@ -41,7 +42,8 @@ class ResetPasswordView extends StatelessWidget with $ResetPasswordView {
                     Container(
                         width: 542.w,
                         child: AuthHeader(
-                            title: model.title, subTitle: model.subTitle)),
+                            title: ResetPasswordTitleText,
+                            subTitle: ResetPasswordSubtitleText)),
                     verticalSpaceLarge,
                     Text(
                       model.errorMessage,
@@ -67,8 +69,8 @@ class ResetPasswordView extends StatelessWidget with $ResetPasswordView {
                         child: AuthButton(
                           label: 'Get a reset link',
                           isBusy: model.isBusy,
-                          onTap: () async =>
-                              await model.verfiyAndGotoCheckEmail(emailController.text),
+                          onTap: () async => await model
+                              .verifyAndGotoCheckEmail(emailController.text),
                         )),
                     SizedBox(
                       height: 32.h,

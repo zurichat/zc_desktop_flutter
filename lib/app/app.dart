@@ -38,6 +38,7 @@ import 'package:zc_desktop_flutter/ui/views/main/people_user_group/peopel_user_v
 import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/todo/Todo_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/Threads/threads_view.dart';
 
 /// Use this to switch to mock data or live data
 const useFakeApiService = true;
@@ -68,10 +69,16 @@ const useFakeApiService = true;
         MaterialRoute(page: DmView),
         MaterialRoute(page: AllDmsView),
         MaterialRoute(page: SavedItemsView),
-        MaterialRoute(page: PeopleUserGroupView,),
-        MaterialRoute(page: TodoView,),
+        MaterialRoute(
+          page: PeopleUserGroupView,
+        ),
+        MaterialRoute(
+          page: TodoView,
+        ),
         MaterialRoute(page: ProfileShowView),
-    ],) 
+        MaterialRoute(page: ThreadsView),
+      ],
+    )
   ],
   dependencies: [
     Presolve(

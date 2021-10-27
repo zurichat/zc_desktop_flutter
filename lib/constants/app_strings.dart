@@ -3,6 +3,11 @@ const String CreateAccountText = 'Create Account';
 const String EmailHintText = 'someone@gmail.com';
 const String FullNameHintText = 'John Doe';
 const String PasswordHintText = 'password';
+const String PasswordText = 'Password';
+const String ConfirmPasswordText = 'Confirm Password';
+const String ContinueText = 'Continue';
+const String DontWishToChangePasswordText =
+    'Don\'t wish to change your password?  ';
 const String PolicyText =
     'By signing up, you agree that you have accepted our User Notice and Privacy Policy';
 const String SignInText = 'Sign in';
@@ -16,6 +21,21 @@ const String StartUpSubTitleText1 =
     'Unlimited team collaboration platform with emphasis on team building,';
 const String StartUpSubTitleText2 =
     'fun, team management and above all, project management';
+const String ResetPasswordTitleText = 'Reset your password';
+const String ResetPasswordSubtitleText =
+    'To reset your password, enter the email address you use to sign in to your workspace';
+const String ResetPassword4o4ErrorMessage = 'User not found';
+const String ResetPasswordOtherEmailErrorMessages =
+    'Something went wrong please try again';
+const String ResetPasswordEmailErrorText = 'Invalid Email';
+const String ChangePasswordTitleText = 'Change Password';
+const String ChangePasswordErrorMessage =
+    '''Invalid Password. Password should consist of atleast:
+                       One Uppercase 
+                       One Lowercase
+                       One Character
+                       And must be at least 8 characters long ''';
+const String ConfirmPasswordErrorMessage = 'Password does not match';
 const String ZuriText = 'ZURI';
 const String ErrorHeaderText = 'For some reason, Zuri Chat couldn’t load 😓';
 const String ZuriStatusUrlText = 'https://status.zurichat.com';
