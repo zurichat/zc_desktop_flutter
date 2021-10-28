@@ -9,7 +9,6 @@ import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_footer.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_header.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/goto_login_button.dart';
 import 'check_email_viewmodel.dart';
@@ -28,6 +27,7 @@ class CheckEmailView extends StatelessWidget {
     bool? _isResetPassword = _args['isReset'];
 
     return ViewModelBuilder<CheckEmailViewModel>.reactive(
+      onModelReady: (model) => model.init(),
       builder: (context, model, child) => Scaffold(
         body: Stack(
           children: [
@@ -97,7 +97,7 @@ class CheckEmailView extends StatelessWidget {
                     if (_isResetPassword ?? false) GotoLoginButton(),
                   ],
                 ),
-                AuthFooter()
+                //AuthFooter()
               ],
             ),
             if (model.isBusy)

@@ -6,6 +6,7 @@ import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
+import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 
 class CreateWorkspaceViewModel extends BaseViewModel {
   final _organizationService = locator<OrganizationService>();
@@ -60,6 +61,14 @@ class CreateWorkspaceViewModel extends BaseViewModel {
 
   String? _emailErrorText = '';
   String? get emailErrorText => _emailErrorText;
+
+  final _windowsTitleBarService = locator<WindowTitleBarService>();
+  
+  void init() async {
+    await Future.delayed(Duration(milliseconds: 1));
+    _windowsTitleBarService.setHome(false);
+    _windowsTitleBarService.setTitle('Zuri | Create Workspace');
+  }
   void setEmail(String? value) {
     _email = value;
     notifyListeners();

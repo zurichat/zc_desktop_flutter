@@ -14,6 +14,8 @@ class LocalStorageService {
   static const String prefNotificationKey = 'notificationSetting';
   static const String prefSideBarKey = 'sideBarSetting';
   static const String prefThemesKey = 'themesSetting';
+  static const String organizationResponseKey = 'localOrganizationResponse';
+
 
   //AuthResponse getter
   AuthResponse? get authResponse {
@@ -27,6 +29,7 @@ class LocalStorageService {
   //AuthResponse setter
   void setAuthResponse(AuthResponse? authResponseToSave) =>
       saveToDisk(authResponseKey, jsonEncode(authResponseToSave.toString()));
+      
 
   //Remove AuthResponse
 
@@ -175,4 +178,17 @@ class LocalStorageService {
     //print('(TRACE) LocalStorageService:_getFromDisk. key: $key value: $value');
     return value;
   }
+
+  OrganizationResponse? get organizationResponse {
+    var organizationResponseJson = getFromDisk(organizationResponseKey);
+    if (organizationResponseJson == null) {
+      return null;
+    }
+    return OrganizationResponse.fromJson(jsonDecode(organizationResponseJson.toString()));
+  }
+
+  //OrgResponse setter
+  void setOrganizationResponse(OrganizationResponse? organizationResponseToSave) =>
+      saveToDisk(organizationResponseKey, jsonEncode(organizationResponseToSave.toString()));
+    
 }

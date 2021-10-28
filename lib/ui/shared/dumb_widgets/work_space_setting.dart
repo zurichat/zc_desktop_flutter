@@ -16,7 +16,7 @@ class WorkSpaceSetting extends StatelessWidget {
           Text(workspaceTitle!,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 15.sp,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
               )),
           Container(

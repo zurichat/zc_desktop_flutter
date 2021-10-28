@@ -7,10 +7,9 @@ const Color kcAccentColor = Color(0xffB8003C);
 const Color kcErrorColor = Color(0xffF40101);
 const Color kcSuccessColor = Color(0xff008B5E);
 const Color kcPrimaryLight = Color(0xffE1FDF4);
+const Color KaddPeopleBackcolor = Color(0xFFBCF9E6);
 const Color purple = Colors.purple;
 const Color kcStatusIcon = Colors.yellow;
-
-
 
 //Create and display Channel Color
 const Color kcCreateChannelColor = Color.fromRGBO(0, 184, 124, 0.48);
@@ -67,5 +66,4 @@ const List<Color> emojiHoverRandomColor = [
   kcSecondaryColor,
   kcCreateChannelColor,
   purple
-
 ];

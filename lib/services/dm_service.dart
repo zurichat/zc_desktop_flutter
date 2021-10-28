@@ -150,4 +150,20 @@ class DMService {
         organizationId: _organizationService.getOrganizationId(),
         token: getCurrentLoggedInUser()!.token);
   }
+
+  Future<void> pinMessage(String messageId) {
+    var response = _zuriApiService.pinMessage(
+        messageId, _organizationService.getOrganizationId());
+    log.i(response);
+    return response;
+
+    ///
+  }
+
+  Future<List<String>> fetchPinnedMessages(String roomId) async {
+    var response = await _zuriApiService.fetchPinnedMessgaes(
+        roomId, _organizationService.getOrganizationId());
+    log.i(response);
+    return PinnedMessagesResponse.fromJson(response).links;
+  }
 }

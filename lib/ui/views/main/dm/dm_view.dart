@@ -59,7 +59,9 @@ class DmView extends StatelessWidget {
                     ),
                     Align(
                         alignment: Alignment.topCenter,
-                        child: BookmarkAndPinnedMessagesView()),
+                        child: BookmarkAndPinnedMessagesView(
+                          dmViewModel: model,
+                        )),
                     Flexible(
                         fit: FlexFit.tight,
                         child: Align(
@@ -128,8 +130,8 @@ class DmView extends StatelessWidget {
                                                     ),
                                                   ],
                                                 );
-                                              }else if ((!model
-                                                      .isSameDate(index))) {
+                                              } else if ((!model
+                                                  .isSameDate(index))) {
                                                 return Column(
                                                   children: [
                                                     MessageTile(
@@ -142,8 +144,8 @@ class DmView extends StatelessWidget {
                                                         date: model.formatDate(
                                                             model
                                                                 .messages
-                                                                .elementAt(index +
-                                                                            1)
+                                                                .elementAt(
+                                                                    index + 1)
                                                                 .created_at)),
                                                   ],
                                                 );
@@ -239,9 +241,7 @@ class MessageTile extends StatelessWidget {
                               image: DecorationImage(
                                 fit: BoxFit.fill,
                                 image: NetworkImage(
-                                    model
-                                        .getUser(message.sender_id)
-                                        .imageUrl,
+                                    model.getUser(message.sender_id).imageUrl,
                                     scale: 5),
                               )),
                         ),
@@ -277,8 +277,8 @@ class MessageTile extends StatelessWidget {
                                     ),
                                     Text(
                                       model.formatTime(message.created_at),
-                                      style:
-                                          messageTimeStyleNormal.copyWith(color: timeColor),
+                                      style: messageTimeStyleNormal.copyWith(
+                                          color: timeColor),
                                     )
                                   ],
                                 ),
@@ -287,6 +287,8 @@ class MessageTile extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(0, 0, 30, 0),
                                   child: Text(message.message),
                                 ),
+
+                                
                                 Padding(
                                   padding: EdgeInsets.all(4),
                                   child: GridView.builder(
@@ -354,6 +356,7 @@ class MessageTile extends StatelessWidget {
                     right: 10,
                     child: OnHoverWidget(
                       model: model,
+                      message: message,
                     ),
                   )
                 : SizedBox()
@@ -487,8 +490,13 @@ class NewMessageIn extends StatelessWidget {
 
 class OnHoverWidget extends StatelessWidget {
   final DmViewModel model;
+  final Results message;
+  // final int messageIndex;
 
-  OnHoverWidget({required this.model});
+  OnHoverWidget({
+    required this.model,
+    required this.message,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -577,7 +585,11 @@ class OnHoverWidget extends StatelessWidget {
                         useSafeArea: false,
                         builder: (context) {
                           return AlertDialog(
-                            content: MoreActions(),
+                            content: MoreActions(
+                              message: message,
+                              //messageIndex: null,
+                              model: model,
+                            ),
                             contentPadding: EdgeInsets.all(20),
                             scrollable: true,
                             insetPadding: EdgeInsets.all(0),
@@ -659,7 +671,8 @@ class DmScreenLeading extends StatelessWidget {
               borderRadius: BorderRadius.circular(4.r),
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: NetworkImage(model!.dmRoomInfo.otherUserProfile.imageUrl),
+                image:
+                    NetworkImage(model!.dmRoomInfo.otherUserProfile.imageUrl),
               ),
             ),
           ),

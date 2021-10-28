@@ -10,7 +10,6 @@ import 'package:zc_desktop_flutter/core/validator/validation_extension.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
-import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/auth_icons.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/left_side_container.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_auth_btn.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_input_field.dart';
@@ -33,7 +32,10 @@ class LoginView extends HookWidget with $LoginView {
     final _appLocalization = AppLocalizations.of(context)!;
 
     return ViewModelBuilder<LoginViewModel>.reactive(
-      onModelReady: (model) => listenToFormUpdated(model),
+      onModelReady: (model) {
+        listenToFormUpdated(model);
+        model.init();
+      },
       builder: (context, model, child) => Scaffold(
         backgroundColor: Colors.white,
         body: Container(
@@ -114,18 +116,18 @@ class LoginView extends HookWidget with $LoginView {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    _appLocalization.easySignIn,
-                                    // EasySignInWith,
-                                    style: bodyText1.copyWith(fontSize: 16.sp),
-                                  ),
-                                  verticalSpaceSmall,
-                                  AuthIcons(
-                                    googleOnPressed: () {},
-                                    facebookOnPressed: () {},
-                                    twitterOnPressed: () {},
-                                  ),
-                                  verticalSpaceSmall,
+                                  // Text(
+                                  //   _appLocalization.easySignIn,
+                                  //   // EasySignInWith,
+                                  //   style: bodyText1.copyWith(fontSize: 16.sp),
+                                  // ),
+                                  // verticalSpaceSmall,
+                                  // AuthIcons(
+                                  //   googleOnPressed: () {},
+                                  //   facebookOnPressed: () {},
+                                  //   twitterOnPressed: () {},
+                                  // ),
+                                  // verticalSpaceSmall,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [

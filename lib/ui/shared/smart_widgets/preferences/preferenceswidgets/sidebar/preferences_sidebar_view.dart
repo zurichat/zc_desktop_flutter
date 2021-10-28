@@ -204,7 +204,7 @@ class DisplayCheckBox extends StatelessWidget {
         ),
         SvgPicture.asset(assetName),
         SizedBox(width: 5),
-        Text(text, style: preferenceStyleNormal),
+        Text(text, style: authBtnChannelStyle),
       ],
     );
   }

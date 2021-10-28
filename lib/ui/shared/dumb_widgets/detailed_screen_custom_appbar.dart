@@ -23,7 +23,7 @@ class DetailedCustomAppBar extends StatelessWidget {
       width: fullWidth(context),
       color: Theme.of(context).colorScheme.secondary,
       margin: margin,
-      padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 5.0.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.0.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

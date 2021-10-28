@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
@@ -12,7 +13,6 @@ import 'package:zc_desktop_flutter/services/channels_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class CreateChannelViewModel extends BaseViewModel with Validator {
-  //final _navigator = locator<NavigationService>();
 
   //Declare the services that are dependent upon
   final _localStorageService = locator<LocalStorageService>();
@@ -26,20 +26,22 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
   final log = getLogger('CreateChannelViewModel');
   final _navigationService = locator<NavigationService>();
   final _channelsService = locator<ChannelsService>();
+  
+  int selectedChannelIndex = 0;
 
-  String _createChannel = 'Create a channel';
-  String _channelTextOne =
-      'Channels are where your team communicates. They’re best ';
-  String _channelTextTwo =
-      'when organized around a topic - #marketing, for example.';
-  String _channelTextThree = 'Name';
-  String _channelTextFour = 'Description ';
-  String _channelTextFive = '(optional)';
-  String _channelTextSix = 'Make this channel private';
-  String _channelTextSeven = 'When a channel is set to private,';
-  String _channelTextEight = 'it can be viewed or joined by invitation.';
-  String _channelTextNine = 'Create';
-  String _channelTextTen = 'Channel created, You will be redirected shortly';
+  List<Channel> _channels = [];
+
+  // List<Channel> _newChannel = [
+  //   Channel(
+  //         id: '1',
+  //         name: 'team-zuri',
+  //         private: false,
+  //         description: 'All about Zuri Main Channel',
+  //         owner: ''),
+  // ];
+  
+  List<Channel> get channels => _channels;
+
   bool _isSwitched = false;
   String _errorMessage = '';
   bool _showError = false;
@@ -55,18 +57,6 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
 
   var _channelName = '';
   var _channelDescription = '';
-
-  String get createChannel => _createChannel;
-  String get channelTextOne => _channelTextOne;
-  String get channelTextTwo => _channelTextTwo;
-  String get channelTextThree => _channelTextThree;
-  String get channelTextFour => _channelTextFour;
-  String get channelTextFive => _channelTextFive;
-  String get channelTextSix => _channelTextSix;
-  String get channelTextSeven => _channelTextSeven;
-  String get channelTextEight => _channelTextEight;
-  String get channelTextNine => _channelTextNine;
-  String get channelTextTen => _channelTextTen;
 
   bool get isSwitched => _isSwitched;
   String get errorMessage => _errorMessage;
@@ -125,8 +115,29 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     notifyListeners();
   }
 
-  String userEmail() {
+  String userDisplayName() {
     return _auth.user!.email;
+  }
+
+  void goToChannelsView({int index = 0}) {
+    selectedChannelIndex = index;
+    notifyListeners();
+    // _channelsService.setChannel(_channels[index]);
+    // _channelsService.createChannels();
+    _channelsService.setChannel(_channels[index]);
+    
+    _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
+  }
+
+  
+  Future<void> performCreateChannel(
+      String name, String owner, String description, bool private, String topic, bool defaultChannel) async {
+
+    await _channelsService.createChannels(
+        name: name, owner: owner, description: description, private: private, topic: topic, defaultChannel: defaultChannel);
+
+    _showError = true;
+    notifyListeners();
   }
 
   Future<void> createchannels(
@@ -134,6 +145,9 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     String owner,
     String description,
     bool private,
+    String topic,
+    bool defaultChannel,
+    BuildContext context
   ) async {
     bool isChannelNameValid = nameValidator(_channelName);
     bool isChannelDescriptionValid = nameValidator(_channelDescription);
@@ -158,33 +172,25 @@ class CreateChannelViewModel extends BaseViewModel with Validator {
     _setIsBusy();
     // if()
     await runBusyFuture(
-        performCreateChannel(name, owner, description, private));
+        performCreateChannel(name, owner, description, private, topic, defaultChannel));
 
-    if (_showError == false) {
+    if (_showError == true) {
       setErrorMessage('An unexpected error occured!');
       _setIsBusy();
       _setIsCreateChannelNotSuccessful();
     } else {
       _setIsCreateChannelSuccessful();
+      await Future.delayed(
+      Duration(milliseconds: 1500),
+      );
+      Navigator.of(context).pop();
+      // goToChannelsView();
+    // _navigationService.pushNamedAndRemoveUntil(Routes.organizationView);
     }
 
     notifyListeners();
   }
 
-  Future<void> performCreateChannel(
-      String name, String owner, String description, bool private) async {
-    // await _auth.createChannels(
-    //     name, owner, description, private);
-    await _channelsService.createChannels(
-        name: name, owner: owner, description: description, private: private);
-
-    _showError = true;
-    await Future.delayed(
-      Duration(milliseconds: 1500),
-    );
-    notifyListeners();
-    _navigationService.pushNamedAndRemoveUntil(Routes.organizationView);
-  }
 
   /// Error should be handled here. It could be displaying a toast of something else
   @override

@@ -18,10 +18,9 @@ import 'profile_edit_view.form.dart';
   FormTextField(name: 'who'),
   FormTextField(name: 'pronoun'),
   FormTextField(name: 'phoneNumber'),
-  FormTextField(name: 'timeZone')
 ])
 class ProfileEditView extends StatelessWidget with $ProfileEditView {
-  final _fullNameFormKey = GlobalKey<FormFieldState>();
+  final _fullNameFormKey = GlobalKey<FormState>();
 
   ProfileEditView({
     Key? key,
@@ -30,13 +29,6 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
   @override
   Widget build(BuildContext context) {
     final scrollcontroller = ScrollController();
-    final _firstNameController = TextEditingController();
-    final _lastNameController = TextEditingController();
-    final _displayNameController = TextEditingController();
-    final _whoController = TextEditingController();
-    final _pronounController = TextEditingController();
-    final _phoneNumberController = TextEditingController();
-    final _timeZoneController = TextEditingController();
 
     return ViewModelBuilder<ProfileEditViewModel>.reactive(
       onModelReady: (model) => listenToFormUpdated(model),
@@ -96,24 +88,19 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                       children: [
                                         verticalSpaceRegular,
                                         ProfileInputField(
-                                          controller: _firstNameController,
+                                          controller: firstNameController,
                                           label: 'First Name',
                                           hintPlaceHolder: 'First Name',
-                                          errorText:
-                                              'Unfortunately, you can’t leave this blank.',
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           onSaved: (value) {
                                             value!;
                                           },
-                                          onChanged: (value) {
-                                            // model.onValidate();
-                                          },
                                           validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[a-z A-Z] +$')
+                                            if (value == null || value.isEmpty ||
+                                                !RegExp(r'^[a-z A-Z]+$')
                                                     .hasMatch(value)) {
-                                              return 'Enter correct name format';
+                                              return 'Unfortunately, you can’t leave this blank.';
                                             } else {
                                               return null;
                                             }
@@ -121,24 +108,19 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ),
                                         verticalSpaceRegular,
                                         ProfileInputField(
-                                          controller: _lastNameController,
+                                          controller: lastNameController,
                                           label: 'Last Name',
                                           hintPlaceHolder: 'Last Name',
-                                          errorText:
-                                              'Unfortunately, you can’t leave this blank.',
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           onSaved: (value) {
                                             value!;
                                           },
-                                          onChanged: (value) {
-                                            // model.onValidate();
-                                          },
                                           validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[a-z A-Z] +$')
+                                            if (value == null || value.isEmpty ||
+                                                !RegExp(r'^[a-z A-Z]+$')
                                                     .hasMatch(value)) {
-                                              return 'Enter correct name format';
+                                              return 'Unfortunately, you can’t leave this blank.';
                                             } else {
                                               return null;
                                             }
@@ -146,20 +128,19 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ),
                                         verticalSpaceRegular,
                                         ProfileInputField(
-                                          controller: _displayNameController,
+                                          controller: displayNameController,
                                           label: 'Display Name',
                                           helperText:
                                               'This could be your first name, or a nickname, however you’d like people to refer to you in Slack.',
                                           hintPlaceHolder: 'Display Name',
                                           keyboardType:
                                               TextInputType.emailAddress,
-                                          onSaved: (value) {},
-                                          onChanged: (value) {},
+                                          onSaved: (value) {
+                                            value;
+                                          },
                                           validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[a-z A-Z 1-0] +$')
-                                                    .hasMatch(value)) {
-                                              return 'Enter currect displayname';
+                                            if (value!.isEmpty) {
+                                              return 'Enter displayname';
                                             } else {
                                               return null;
                                             }
@@ -172,33 +153,26 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                         ),
                                         verticalSpaceRegular,
                                         Text(
-                                          'Please use as ingle firstname or a permanent nickname. If someone uses your name, please change it',
+                                          'Please use as single firstname or a permanent nickname. If someone uses your name, please change it',
                                           style: subtitle3b,
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(
-                                          controller: _whoController,
+                                          controller: whoController,
                                           label: 'What I do',
                                           hintPlaceHolder: 'What I do',
                                           helperText:
                                               'Let pepole know what you do at Zuri x I4G.',
                                           keyboardType:
                                               TextInputType.emailAddress,
-                                          onSaved: (value) {},
-                                          onChanged: (value) {},
-                                          validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[a-z A-Z] +$')
-                                                    .hasMatch(value)) {
-                                              return 'Enter currect what you do';
-                                            } else {
-                                              return null;
-                                            }
+                                          onSaved: (value) {
+                                            value;
                                           },
+                                          
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(
-                                          controller: _pronounController,
+                                          controller: pronounController,
                                           label: 'Pronouns',
                                           hintPlaceHolder:
                                               'Ex. they/Them/theirs',
@@ -206,52 +180,28 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                               'Let pepole know which pronoun you are',
                                           keyboardType:
                                               TextInputType.emailAddress,
-                                          onSaved: (value) {},
-                                          onChanged: (value) {},
-                                          validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[a-z A-Z] +$')
-                                                    .hasMatch(value)) {
-                                              return 'Enter currect pronoun format';
-                                            } else {
-                                              return null;
-                                            }
+                                          onSaved: (value) {
+                                            value;
                                           },
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(
-                                          controller: _phoneNumberController,
+                                          controller: phoneNumberController,
                                           label: 'Phone Number',
                                           hintPlaceHolder: '(123) 555-55555',
                                           helperText: 'Enter a phone number.',
+                                          inputType: TextInputType.number,
                                           keyboardType: TextInputType.phone,
-                                          inputType: TextInputType.phone,
-                                          onSaved: (value) {},
-                                          onChanged: (value) {},
+                                          onSaved: (value) {
+                                            value!;
+                                          },
                                           validator: (value) {
-                                            if (value!.isEmpty ||
-                                                !RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1[-\s\.\] +$')
-                                                    .hasMatch(value)) {
+                                            if (value!.length < 9) {
                                               return 'Enter currect phone number';
                                             } else {
                                               return null;
                                             }
                                           },
-                                        ),
-                                        verticalSpaceMedium,
-                                        InkWell(
-                                          onTap: () {},
-                                          child: ProfileInputField(
-                                            controller: _timeZoneController,
-                                            label: 'Time Zone',
-                                            hintPlaceHolder:
-                                                'Please Select an option',
-                                            helperText:
-                                                'Your current time zone. Used to send summary and notification emails, for times in your activity feeds, and for reminders.',
-                                            keyboardType:
-                                                TextInputType.emailAddress,
-                                            onChanged: (value) {},
-                                          ),
                                         ),
                                         verticalSpaceRegular,
                                       ],
@@ -278,7 +228,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                       model.choosenImage != null
                                           ? Container(
                                               // color: kcCreateChannelColor,
-                                              height: 230.h,
+                                              height: 200.h,
                                               width: 200.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
@@ -292,7 +242,7 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                                   )),
                                             )
                                           : Container(
-                                              height: 230.h,
+                                              height: 200.h,
                                               width: 200.w,
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.all(
@@ -365,11 +315,11 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                     horizontalSpaceSmall,
                     Container(
                       height: 45.h,
-                      // width: 100.w,
                       child: ProfileButton(
                         isBusy: model.isBusy,
                         onTap: () async {
-                          // model.isSubmit;
+                          if (!_fullNameFormKey.currentState!.validate())
+                            return;
                           await model.postDetails(
                             whoController.text,
                             displayNameController.text,
@@ -377,9 +327,12 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                             lastNameController.text,
                             phoneNumberController.text,
                             pronounController.text,
-                            timeZoneController.text,
                           );
-                          // await model.postPicture(model.choosenImage);
+
+                          if (model.choosenImage != null) {
+                            await model.postPicture(model.choosenImage!);
+                          }
+
                           Navigator.of(context).pop();
                         },
                         label: 'Save Changes',
