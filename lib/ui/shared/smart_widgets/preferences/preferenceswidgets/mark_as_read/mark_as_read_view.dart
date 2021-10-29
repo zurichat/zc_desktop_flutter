@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -78,7 +79,7 @@ class ViewChannelOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       ListTile(
-        title: Text('Start me where I left off, and mark the channel read',
+        title: Text(startWhereILeftOff,
             style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option1,
@@ -90,7 +91,7 @@ class ViewChannelOptions extends StatelessWidget {
         ),
       ),
       ListTile(
-        title: Text('Start me at the newest message, and mark the channel read',
+        title: Text(startAtNewestMessage,
             style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option2,
@@ -103,7 +104,7 @@ class ViewChannelOptions extends StatelessWidget {
       ),
       ListTile(
         title: Text(
-            'Start me at the newest message, but leave unseen messages unread',
+            startAtNewestMessageUnread,
             style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option3,
@@ -134,7 +135,7 @@ class ViewMarkAll extends StatelessWidget {
             }),
         horizontalSpaceTiny,
         Flexible(
-            child: Text('Prompt To confirm', style: preferenceStyleNormal)),
+            child: Text(promptConfirm, style: preferenceStyleNormal)),
       ],
     );
   }
@@ -153,7 +154,7 @@ class KeyBoardSettingsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Keyboard Shortcuts', style: preferenceStyleBold),
+          Text(keyboardShortcuts, style: preferenceStyleBold),
           verticalSpaceRegular,
           Row(
             children: [
@@ -187,7 +188,7 @@ class KeyBoardSettingsSection extends StatelessWidget {
           Row(
             children: [
               verticalSpaceTiny,
-              Text('To view the full list of keyboard shortcuts, just press',
+              Text(viewFullList,
                   style: preferenceStyleNormal),
               horizontalSpaceTiny,
               ShortCuts().ctrl(),

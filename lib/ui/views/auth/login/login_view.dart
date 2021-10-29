@@ -57,7 +57,7 @@ class LoginView extends HookWidget with $LoginView {
                               Image.asset(ZuriLogoPath),
                               verticalSpaceMedium,
                               Text(
-                                AppLocalizations.of(context)!.signInText,
+                                _appLocalization.signInText,
                                 // SignInText,
                                 style: headline3,
                               ),
