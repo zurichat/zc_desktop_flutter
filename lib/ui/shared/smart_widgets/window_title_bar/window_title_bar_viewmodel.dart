@@ -13,7 +13,7 @@ class WindowTitleBarModel extends BaseViewModel {
     });
   }
 
-  bool _isHomeView = false;
+  bool _isHomeView = true;
   String _title = 'Zuri | Sign In';
 
   bool get isHomeView => _isHomeView;

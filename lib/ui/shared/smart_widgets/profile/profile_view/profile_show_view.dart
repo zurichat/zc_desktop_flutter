@@ -30,7 +30,7 @@ class ProfileShowView extends StatelessWidget {
                   children: [
                     Text(
                       profileView,
-                      style: kHeading3TextStyle,
+                      style: kHeading4TextStyle,
                     ),
                     IconButton(
                       color: kcSuccessColor,
@@ -65,20 +65,23 @@ class ProfileShowView extends StatelessWidget {
                                 width: 200.w,
                                 decoration:
                                     BoxDecoration(shape: BoxShape.circle),
-                                child: Image.asset(profileImage),
+                                child: Image.asset(
+                                  profileImage,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                               verticalSpaceRegular,
                               Text(
                                 model.name,
-                                style: kHeading4TextStyle,
+                                style: subtitle3,
                               ),
                               Text(
                                 model.description,
-                                style: kSubHeadingTextStyle,
+                                style: subtitle3,
                               ),
                               Text(
                                 model.title,
-                                style: subtitle2,
+                                style: subtitle3,
                               ),
                               verticalSpaceMedium,
                               Row(
@@ -87,8 +90,8 @@ class ProfileShowView extends StatelessWidget {
                                   Column(
                                     children: [
                                       Container(
-                                        width: 60.w,
-                                        height: 60.h,
+                                        width: 40.w,
+                                        height: 40.h,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(5),
@@ -104,16 +107,21 @@ class ProfileShowView extends StatelessWidget {
                                       Text(voiceCall)
                                     ],
                                   ),
-                                  horizontalSpaceRegular,
+                                  horizontalSpaceSmall,
                                   Column(
                                     children: [
                                       Container(
-                                        width: 80.w,
-                                        height: 80.h,
+                                        width: 40.w,
+                                        height: 40.h,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(5),
-                                          color: kcSuccessColor,
+                                          color: kcPrimaryColor,
+                                        ),
+                                        child: Icon(
+                                          Icons.video_call,
+                                          size: 30,
+                                          color: kcBackgroundColor2,
                                         ),
                                       ),
                                       verticalSpaceSmall,
@@ -126,8 +134,8 @@ class ProfileShowView extends StatelessWidget {
                                   Column(
                                     children: [
                                       Container(
-                                        width: 60.w,
-                                        height: 60.h,
+                                        width: 40.w,
+                                        height: 40.h,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(5),
@@ -159,20 +167,19 @@ class ProfileShowView extends StatelessWidget {
                             children: [
                               Text(displayName),
                               verticalSpaceSmall,
-                              Text(model.name, style: kHeading4TextStyle),
+                              Text(model.name, style: subtitle3b),
                               verticalSpaceMedium,
                               Divider(),
                               verticalSpaceRegular,
                               Text(displayemail),
                               verticalSpaceSmall,
-                              Text(model.email, style: kHeading4TextStyle),
+                              Text(model.email, style: subtitle3b),
                               verticalSpaceMedium,
                               Divider(),
                               verticalSpaceRegular,
                               Text(phoneNumber),
                               verticalSpaceSmall,
-                              Text(model.phoneNumber,
-                                  style: kHeading4TextStyle),
+                              Text(model.phoneNumber, style: subtitle3b),
                               verticalSpaceMedium,
                               Divider(),
                               verticalSpaceRegular,
@@ -186,7 +193,7 @@ class ProfileShowView extends StatelessWidget {
                                   horizontalSpaceSmall,
                                   Text(
                                     editProfile,
-                                    style: kHeading4TextStyle,
+                                    style: subtitle3b,
                                   )
                                 ],
                               )
