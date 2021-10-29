@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:getwidget/components/avatar/gf_avatar.dart';
+import 'package:getwidget/shape/gf_avatar_shape.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -112,7 +114,7 @@ class OrganizationLeftSideBar extends ViewModelWidget<OrganizationViewModel> {
                                   .elementAt(index)
                                   .otherUserProfile
                                   .displayName,
-                              userIcon: 'assets/icons/users.svg',
+                              userIcon: model.dms.elementAt(index).otherUserProfile.imageUrl,
                               selected: model.selectedDM(index),
                             );
                           },
@@ -230,7 +232,12 @@ class DMItem extends StatelessWidget {
             Container(
               height: 20.0,
               width: 20.0,
-              child: SvgPicture.asset(userIcon!),
+              child:GFAvatar(
+                              backgroundColor: Colors.transparent,
+                              foregroundColor: kcPrimaryLight,
+                              shape: GFAvatarShape.standard,
+                              backgroundImage: NetworkImage(userIcon!),
+                            ),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
               ),
