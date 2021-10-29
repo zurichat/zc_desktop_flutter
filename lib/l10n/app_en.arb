@@ -200,10 +200,6 @@
     "@recentSearch": {
         "description": " search modal"
     },
-    "recentSearch" : "Recent Searches",
-    "@recentSearch": {
-        "description": " search modal"
-    },
     "searchModalHintText1" : "Scour your archives and fish out the answers",
     "@searchModalHintText1": {
         "description": "search modal"
@@ -284,11 +280,7 @@
     "@backToWorkspaceText": {
         "description": "Go back to workspace  text"
     },
-    "backToWorkspaceText" : "Back To Workspace",
-    "@backToWorkspaceText": {
-        "description": "Go back to workspace  text"
-    },
-    "todoList" : "Back To Workspace",
+    "todoList" : "To-do-List",
     "@todoList": {
         "description": "to do"
     },
