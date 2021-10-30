@@ -37,149 +37,159 @@ class AddUserView extends StatelessWidget {
       builder: (context, model, child) => Dialog(
         child: Container(
           width: 600.w,
-          height: 300.h,
+          height: 310,
           child: Container(
             height: 300.h,
             child: Padding(
               padding: const EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        AddPeopleText,
-                        style: addPeopleChannelStyle,
-                      ),
-                      SizedBox(width: 360.w),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context, true);
-                        },
-                        child: SvgPicture.asset(Cancel),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 10.h),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(25),
-                          child: Stack(children: [
-                            TextField(
-                              onChanged: (value) {
-                                model.search(
-                                  value,
-                                );
-                                if (!model.isDropped) {
-                                  _toggleDropdown(
-                                      context: context, model: model);
-                                  model.setIsDropped();
-                                }
-                              },
-                              onTap: () {
-                                if (!model.isDropped) {
-                                  _toggleDropdown(
-                                      context: context, model: model);
-                                  model.setIsDropped();
-                                }
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: model.usersToBeAdded.isEmpty
-                                        ? 10
-                                        : ((model.usersToBeAdded.length) *
-                                            120.w)),
-                                hintText: 'Enter a name, email or user group',
-                                hintStyle: TextStyle(color: lightIconColor),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: bodyColor, width: 2.0),
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: bodyColor, width: 2.0),
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                              ),
-                            ),
-                            if (model.usersToBeAdded.isNotEmpty)
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                    width:
-                                        (model.usersToBeAdded.length) * 130.h,
-                                    height: 30.h,
-                                    child: ListView.builder(
-                                      itemCount: model.usersToBeAdded.length,
-                                      scrollDirection: Axis.horizontal,
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) => Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: BuildSelectedUserContainer(
-                                          username: model.usersToBeAdded[index]
-                                              .displayName,
-                                          onTap: () =>
-                                              model.removeUsersToBeAdded(index),
-                                          imageUrl: model.usersToBeAdded[index]
-                                                  .profileImage.isEmpty
-                                              ? DefaultProfilePictureUrl
-                                              : model.usersToBeAdded[index]
-                                                  .profileImage,
-                                        ),
-                                      ),
-                                    )),
-                              )
-                          ]),
+                        Text(
+                          AddPeopleText,
+                          style: addPeopleChannelStyle,
+                        ),
+                        SizedBox(width: 360.w),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context, true);
+                          },
+                          child: SvgPicture.asset(
+                            Cancel,
+                            width: 14,
+                            height: 14,
+                          ),
                         )
                       ],
                     ),
-                  ),
-                  SizedBox(height: 10.h),
-                  SizedBox(height: 10.h),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: kcPrimaryColor,
-                            minimumSize: Size(100.w, 40.h),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
-                          onPressed: () async {
-                            await model.addUsersToChannel().then((_) =>
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content: Text('User(s) Added Successfully'),
-                                  backgroundColor: kcSuccessColor,
-                                )));
-                            Navigator.pop(context, true);
-                          },
-                          child: model.isBusy
-                              ? CircularProgressIndicator()
-                              : Text(
-                                  'Add',
-                                  style: TextStyle(
-                                      color: kcBackgroundColor1,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Lato'),
+                    SizedBox(height: 10.h),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(25),
+                            child: Stack(children: [
+                              TextField(
+                                onChanged: (value) {
+                                  model.search(
+                                    value,
+                                  );
+                                  if (!model.isDropped) {
+                                    _toggleDropdown(
+                                        context: context, model: model);
+                                    model.setIsDropped();
+                                  }
+                                },
+                                onTap: () {
+                                  if (!model.isDropped) {
+                                    _toggleDropdown(
+                                        context: context, model: model);
+                                    model.setIsDropped();
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: model.usersToBeAdded.isEmpty
+                                          ? 10
+                                          : ((model.usersToBeAdded.length) *
+                                              120.w)),
+                                  hintText: AddPeopleHint,
+                                  hintStyle: TextStyle(color: lightIconColor),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: bodyColor, width: 2.0),
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: bodyColor, width: 2.0),
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
                                 ),
-                        ),
-                      ],
+                              ),
+                              if (model.usersToBeAdded.isNotEmpty)
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                      width:
+                                          (model.usersToBeAdded.length) * 130.h,
+                                      height: 30.h,
+                                      child: ListView.builder(
+                                        itemCount: model.usersToBeAdded.length,
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, index) =>
+                                            Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: BuildSelectedUserContainer(
+                                            username: model
+                                                .usersToBeAdded[index]
+                                                .displayName,
+                                            onTap: () => model
+                                                .removeUsersToBeAdded(index),
+                                            imageUrl: model
+                                                    .usersToBeAdded[index]
+                                                    .profileImage
+                                                    .isEmpty
+                                                ? DefaultProfilePictureUrl
+                                                : model.usersToBeAdded[index]
+                                                    .profileImage,
+                                          ),
+                                        ),
+                                      )),
+                                )
+                            ]),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 10.h),
+                    SizedBox(height: 10.h),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: kcPrimaryColor,
+                              minimumSize: Size(115.w, 56.h),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            onPressed: () async {
+                              await model.addUsersToChannel().then((_) =>
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text(SnackBarMessageAddUser),
+                                    backgroundColor: kcSuccessColor,
+                                  )));
+                              Navigator.pop(context, true);
+                            },
+                            child: model.isBusy
+                                ? CircularProgressIndicator()
+                                : Text(
+                                    AddButtonText,
+                                    style: TextStyle(
+                                        color: kcBackgroundColor1,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Lato'),
+                                  ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -301,25 +311,46 @@ class BuildSelectedUserContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kcPrimaryLight,
-      height: 35,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: 40,
-            width: 25,
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
+      color: KaddPeopleBackcolor,
+      height: 30,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 40,
+              width: 40,
+              child: Stack(
+                children: [
+                  Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Text(username),
-          IconButton(icon: Icon(Icons.close), onPressed: onTap),
-          horizontalSpaceTiny
-        ],
+            SizedBox(
+              width: 4,
+            ),
+            Text(
+              username,
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
+            ),
+            SizedBox(
+              width: 4,
+            ),
+            IconButton(
+                icon: Icon(
+                  Icons.close,
+                  size: 10,
+                ),
+                onPressed: onTap),
+            horizontalSpaceTiny
+          ],
+        ),
       ),
     );
   }

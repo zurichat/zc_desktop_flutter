@@ -38,25 +38,25 @@ class OrganizationView extends StatelessWidget {
                     : Expanded(
                         child: Row(
                           children: [
-                            Expanded(
-                              flex: 5,
-                              child: Row(
-                                children: [
-                                  //TODO: organization side bar
-                                  OrganizationListNavBar(),
-                                  //TODO: Left side bar
-                                  OrganizationLeftSideBar(),
-                                  //TODO: Center Area
-                                  OrganizationCenter(),
-                                  //TODO: Reusable view for channel and dms
-                                  // ChannelDmView(channel: true, dm: false),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: ProfileShowView(),
-                            )
+                            // Expanded(
+                            //   flex: 5,
+                            //   child: Row(
+                            //     children: [
+                            //TODO: organization side bar
+                            OrganizationListNavBar(),
+                            //TODO: Left side bar
+                            OrganizationLeftSideBar(),
+                            //TODO: Center Area
+                            OrganizationCenter(),
+                            //TODO: Reusable view for channel and dms
+                            // ChannelDmView(channel: true, dm: false),
+                            //     ],
+                            //   ),
+                            // ),
+                            // Expanded(
+                            //   flex: 2,
+                            //   child: ProfileShowView(),
+                            // )
                           ],
                         ),
                       ),

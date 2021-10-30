@@ -120,7 +120,7 @@ class DropDown extends StatelessWidget {
                 member: model.currentMember,
                 // displayName: displayName,
                 // member: model.member,
-                // displayName: model.currentMember.displayName,
+                displayName: model.currentMember.displayName,
               ),
               Container(
                 padding:
@@ -242,13 +242,13 @@ class DropDownItem extends StatelessWidget {
 
 class ProfilePicture extends StatelessWidget {
   final bool isActive = false;
-  final String? displayName;
+  final String displayName;
   final String? img;
   final User user;
   final Member member;
   ProfilePicture({
     Key? key,
-    this.displayName,
+    required this.displayName,
     this.img,
     required this.user,
     required this.member,
