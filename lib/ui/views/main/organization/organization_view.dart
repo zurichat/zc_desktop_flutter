@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/base_connectivity_check/base_connectvity_check.dart';
-import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_view/profile_show_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_center/organization_center.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_left_side_bar/organization_left_side_bar.dart';
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_list_nav_bar/organization_list_nav_bar.dart';
@@ -38,25 +37,25 @@ class OrganizationView extends StatelessWidget {
                     : Expanded(
                         child: Row(
                           children: [
-                            Expanded(
-                              flex: 5,
-                              child: Row(
-                                children: [
-                                  //TODO: organization side bar
-                                  OrganizationListNavBar(),
-                                  //TODO: Left side bar
-                                  OrganizationLeftSideBar(),
-                                  //TODO: Center Area
-                                  OrganizationCenter(),
-                                  //TODO: Reusable view for channel and dms
-                                  // ChannelDmView(channel: true, dm: false),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: ProfileShowView(),
-                            )
+                            // Expanded(
+                            //   flex: 5,
+                            //   child: Row(
+                            //     children: [
+                            //TODO: organization side bar
+                            OrganizationListNavBar(),
+                            //TODO: Left side bar
+                            OrganizationLeftSideBar(),
+                            //TODO: Center Area
+                            OrganizationCenter(),
+                            //TODO: Reusable view for channel and dms
+                            // ChannelDmView(channel: true, dm: false),
+                            //     ],
+                            //   ),
+                            // ),
+                            // Expanded(
+                            //   flex: 2,
+                            //   child: ProfileShowView(),
+                            // )
                           ],
                         ),
                       ),

@@ -58,7 +58,7 @@ class ProfileShowView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 15),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
                                 height: 200.h,
@@ -73,15 +73,15 @@ class ProfileShowView extends StatelessWidget {
                               verticalSpaceRegular,
                               Text(
                                 model.name,
-                                style: subtitle3,
+                                style: headline7,
                               ),
                               Text(
                                 model.description,
-                                style: subtitle3,
+                                style: headline7,
                               ),
                               Text(
                                 model.title,
-                                style: subtitle3,
+                                style: headline7,
                               ),
                               verticalSpaceMedium,
                               Row(

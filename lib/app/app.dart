@@ -19,7 +19,6 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_view/profile_show_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/check_email/check_email_view.dart';
-import 'package:zc_desktop_flutter/ui/views/auth/forgot_password/forgot_password_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/login/login_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/reset_password/reset_password_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/sign_up/sign_up_view.dart';
@@ -39,9 +38,10 @@ import 'package:zc_desktop_flutter/ui/views/main/people_user_group/peopel_user_v
 import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/todo/Todo_view.dart';
 import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
+import 'package:zc_desktop_flutter/ui/views/main/Threads/threads_view.dart';
 
 /// Use this to switch to mock data or live data
-const useFakeApiService = true;
+const useFakeApiService = false;
 
 @StackedApp(
   routes: [
@@ -49,7 +49,7 @@ const useFakeApiService = true;
     CustomRoute(page: ChooseWorkspaceView),
     CustomRoute(page: LoginView),
     CustomRoute(page: SignUpView),
-    CustomRoute(page: ForgotPasswordView),
+    //CustomRoute(page: ForgotPasswordView),
     CustomRoute(page: CheckEmailView),
     CustomRoute(page: ResetPasswordView),
     CustomRoute(page: ChangePasswordView),
@@ -69,10 +69,16 @@ const useFakeApiService = true;
         MaterialRoute(page: DmView),
         MaterialRoute(page: AllDmsView),
         MaterialRoute(page: SavedItemsView),
-        MaterialRoute(page: PeopleUserGroupView,),
-        MaterialRoute(page: TodoView,),
+        MaterialRoute(
+          page: PeopleUserGroupView,
+        ),
+        MaterialRoute(
+          page: TodoView,
+        ),
         MaterialRoute(page: ProfileShowView),
-    ],) 
+        MaterialRoute(page: ThreadsView),
+      ],
+    )
   ],
   dependencies: [
     Presolve(
@@ -85,7 +91,11 @@ const useFakeApiService = true;
     LazySingleton(classType: DMService),
     LazySingleton(classType: OrganizationService),
     LazySingleton(classType: StartupService),
-    LazySingleton(classType: CentrifugeService),
+    LazySingleton(classType: UserService),
+    Presolve(
+      classType: CentrifugeService,
+      presolveUsing: CentrifugeService.getInstance,
+    ),
     LazySingleton(classType: ConnectivityService),
     LazySingleton(
         classType: useFakeApiService ? FakeZuriApiService : ZuriApiService,
@@ -96,7 +106,7 @@ const useFakeApiService = true;
       resolveUsing: ThemeService.getInstance,
     ),
     LazySingleton(classType: WindowTitleBarService),
-    LazySingleton(classType: UserService),
+    
   ],
   logger: StackedLogger(),
 )

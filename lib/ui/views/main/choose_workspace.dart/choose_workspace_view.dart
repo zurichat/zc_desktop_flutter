@@ -19,10 +19,6 @@ class ChooseWorkspaceView extends StatelessWidget {
     return ViewModelBuilder<ChooseWorkspaceViewmodel>.reactive(
       viewModelBuilder: () => ChooseWorkspaceViewmodel(),
       onModelReady: (model) async => await model.init(),
-      //   onDispose: (model) {
-      //  // debugPrint('Anything ----saving Data');
-      //   //  model.saveSelectedOrg();
-      //   },
       builder: (context, model, _) => Scaffold(
         body: model.isBusy
             ? Center(
@@ -56,7 +52,8 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
-
+  //This is the text that helps to sign in to a new or different workspace
+  // not on our available workspace
   InkWell signIntoNewWorkspace(ChooseWorkspaceViewmodel model) {
     return InkWell(
       onTap: model.goToCreateWorkSpace,
@@ -73,7 +70,7 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
-
+  //This is the text 
   promiseText() {
     return Container(
       margin: EdgeInsets.only(left: 460.w, right: 425.w),
@@ -86,7 +83,8 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
-
+  //Onclick of this button it opens all the selected workspaces by the user
+  //and displays them on the left side of the organizationView
   Container openButtonWidget(ChooseWorkspaceViewmodel model) {
     return Container(
       height: 36.h,
@@ -119,7 +117,7 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
-
+  //Tis the Large Choose Workspace text that appears in the UI
   Container largeWorkspaceText() {
     return Container(
       margin: EdgeInsets.only(left: 465.w, right: 430.w, top: 10.h),
@@ -134,6 +132,8 @@ class ChooseWorkspaceView extends StatelessWidget {
   }
 }
 
+//This appears at the very top of the UI, it contains the Zuri Logo and the Zuri text
+//This UI contains the newToZuriText which helps the user create an account with zuri Onclick of the text
 class ZuriLogoAndText extends StatelessWidget {
   const ZuriLogoAndText(this.model, {Key? key}) : super(key: key);
 
@@ -166,7 +166,7 @@ class ZuriLogoAndText extends StatelessWidget {
       ),
     );
   }
-
+//newToZuriText which helps the user create an account with zuri Onclick of the text
   Container newToZuriText() {
     return Container(
       height: 72.h,
@@ -197,6 +197,8 @@ class ZuriLogoAndText extends StatelessWidget {
   }
 }
 
+//BottomTexts contains all the Privacy text, change region & contact us text.
+
 class BottomTexts extends StatelessWidget {
   const BottomTexts({
     Key? key,
@@ -205,7 +207,7 @@ class BottomTexts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 420.w, right: 408.w, bottom: 10.h),
+      margin: EdgeInsets.only(left: 420.w, right: 408.w, bottom: 8.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -246,7 +248,8 @@ class BottomTexts extends StatelessWidget {
     );
   }
 }
-
+//This is the center of the UI and allows the user select the workspaces he/she is registered with
+//Then onClick of the open button the user is then navigated appropriately to the organizationView
 class WorkspaceBox extends StatelessWidget {
   const WorkspaceBox(
     this.model, {
@@ -302,8 +305,6 @@ class WorkspaceBox extends StatelessWidget {
                     value: boolValue,
                     onChanged: (boolValue) {
                       model.onChange(boolValue!, index);
-
-                      // model.getCounter(index);
                     },
                     activeColor: kcPrimaryColor,
                     controlAffinity: ListTileControlAffinity.leading,
@@ -318,6 +319,7 @@ class WorkspaceBox extends StatelessWidget {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(ZuriI4gLogo),
+                                
                                 //NetworkImage(model.orgList[index].logoUrl),
                                 fit: BoxFit.cover),
                           ),
@@ -378,6 +380,8 @@ class WorkspaceBox extends StatelessWidget {
     );
   }
 
+
+//This is the image which is usually the Logo of the Organizations User is Logged in to
   Container imageContainer() {
     return Container(
       height: 16.h,

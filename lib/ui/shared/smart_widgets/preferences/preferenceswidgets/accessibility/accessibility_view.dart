@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -61,7 +62,7 @@ class MessageAnimationSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // animation setting
-          Text('Animation', style: preferenceStyleBold),
+          Text(animationText, style: preferenceStyleBold),
           Row(
             children: [
               ZcCheckBox(
@@ -71,14 +72,14 @@ class MessageAnimationSection extends StatelessWidget {
                   }),
               horizontalSpaceTiny,
               Flexible(
-                  child: Text('Allow animated images and emoji',
+                  child: Text(allowAnimated,
                       style: preferenceStyleNormal)),
             ],
           ),
           verticalSpaceRegular,
 
           //messaging setting
-          Text('Direct message announcements', style: preferenceStyleBold),
+          Text(directMessagesText, style: preferenceStyleBold),
 
           verticalSpaceSmall,
           Text.rich(TextSpan(style: preferenceStyleNormal, children: [
@@ -154,7 +155,7 @@ class KeyBoardSettingsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // key short cut setting
-          Text('Keyboard', style: headline6.copyWith(fontSize: 15.sp)),
+          Text(keyboard, style: headline6.copyWith(fontSize: 15.sp)),
           verticalSpaceRegular,
 
           // desc
@@ -173,11 +174,11 @@ class KeyBoardSettingsSection extends StatelessWidget {
           // desc2
           Row(
             children: [
-              Text('Press', style: preferenceStyleBold),
+              Text(press, style: preferenceStyleBold),
               horizontalSpaceTiny,
               ShortCuts().up(),
               horizontalSpaceTiny,
-              Text('in the empty message field to:', style: preferenceStyleBold)
+              Text(emptyMessageField, style: preferenceStyleBold)
             ],
           ),
           verticalSpaceSmall,
@@ -200,10 +201,10 @@ class ShortCutDescription extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
-          title: Text('Move focus to the message list',
+          title: Text(moveFocus,
               style: preferenceStyleBold),
           subtitle: Text(
-              'The last visible message in the list will be selected',
+              visibleMessage,
               style: preferenceStyleNormal),
           leading: Radio(
             value: UpButtonsChoice.option1,
@@ -215,9 +216,9 @@ class ShortCutDescription extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Edit your last message', style: preferenceStyleBold),
+          title: Text(editLastMessage, style: preferenceStyleBold),
           subtitle: Text(
-              'The last message you sent will be selected and in editing mode',
+              lastMessage,
               style: preferenceStyleNormal),
           leading: Radio(
             value: UpButtonsChoice.option2,
@@ -234,12 +235,12 @@ class ShortCutDescription extends StatelessWidget {
         //notice
         Wrap(
           children: [
-            Text('Note: press ', style: preferenceStyleNormal),
+            Text(notePress, style: preferenceStyleNormal),
             ShortCuts().ctrl(),
             Text(' + ', style: preferenceStyleNormal),
             ShortCuts().up(),
             Flexible(
-                child: Text(' to edit your last message, with either option',
+                child: Text(editMessageWithOption,
                     style: preferenceStyleNormal)),
           ],
         )

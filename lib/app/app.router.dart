@@ -7,7 +7,6 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -15,11 +14,11 @@ import '../ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import '../ui/shared/smart_widgets/profile/profile_view/profile_show_view.dart';
 import '../ui/views/auth/change_password/change_password_view.dart';
 import '../ui/views/auth/check_email/check_email_view.dart';
-import '../ui/views/auth/forgot_password/forgot_password_view.dart';
 import '../ui/views/auth/login/login_view.dart';
 import '../ui/views/auth/reset_password/reset_password_view.dart';
 import '../ui/views/auth/sign_up/sign_up_view.dart';
 import '../ui/views/auth/success/success_view.dart';
+import '../ui/views/main/Threads/threads_view.dart';
 import '../ui/views/main/channels/channels_view.dart';
 import '../ui/views/main/channels_list/channels_list_view.dart';
 import '../ui/views/main/choose_workspace.dart/choose_workspace_view.dart';
@@ -41,7 +40,6 @@ class Routes {
   static const String chooseWorkspaceView = '/choose-workspace-view';
   static const String loginView = '/login-view';
   static const String signUpView = '/sign-up-view';
-  static const String forgotPasswordView = '/forgot-password-view';
   static const String checkEmailView = '/check-email-view';
   static const String resetPasswordView = '/reset-password-view';
   static const String changePasswordView = '/change-password-view';
@@ -57,7 +55,6 @@ class Routes {
     chooseWorkspaceView,
     loginView,
     signUpView,
-    forgotPasswordView,
     checkEmailView,
     resetPasswordView,
     changePasswordView,
@@ -79,7 +76,6 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.chooseWorkspaceView, page: ChooseWorkspaceView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.signUpView, page: SignUpView),
-    RouteDef(Routes.forgotPasswordView, page: ForgotPasswordView),
     RouteDef(Routes.checkEmailView, page: CheckEmailView),
     RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
     RouteDef(Routes.changePasswordView, page: ChangePasswordView),
@@ -121,13 +117,6 @@ class StackedRouter extends RouterBase {
     SignUpView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) => SignUpView(),
-        settings: data,
-      );
-    },
-    ForgotPasswordView: (data) {
-      return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const ForgotPasswordView(),
         settings: data,
       );
     },
@@ -224,6 +213,7 @@ class OrganizationViewRoutes {
   static const String peopleUserGroupView = '/people-user-group-view';
   static const String todoView = '/todo-view';
   static const String profileShowView = '/profile-show-view';
+  static const String threadsView = '/threads-view';
   static const all = <String>{
     channelsView,
     channelDmView,
@@ -235,6 +225,7 @@ class OrganizationViewRoutes {
     peopleUserGroupView,
     todoView,
     profileShowView,
+    threadsView,
   };
 }
 
@@ -253,6 +244,7 @@ class OrganizationViewRouter extends RouterBase {
         page: PeopleUserGroupView),
     RouteDef(OrganizationViewRoutes.todoView, page: TodoView),
     RouteDef(OrganizationViewRoutes.profileShowView, page: ProfileShowView),
+    RouteDef(OrganizationViewRoutes.threadsView, page: ThreadsView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -334,6 +326,12 @@ class OrganizationViewRouter extends RouterBase {
       );
       return MaterialPageRoute<dynamic>(
         builder: (context) => ProfileShowView(key: args.key),
+        settings: data,
+      );
+    },
+    ThreadsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ThreadsView(),
         settings: data,
       );
     },

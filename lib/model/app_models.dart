@@ -35,14 +35,15 @@ class User with _$User {
 @freezed
 class Member with _$Member {
   factory Member({
-    @JsonKey(name:'_id') required String id,
-    @JsonKey(name:'_orgid') required String orgId,
-    @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'last_name') required String lastName,
+    @Default('') @JsonKey(name: '_id') String id,
+    @JsonKey(name: 'name') @Default('') String fullName,
     @JsonKey(name: 'display_name') @Default('') String displayName,
     @Default('') String phone,
     @Default('') String status,
-    @JsonKey(name: 'image_url') @Default('') String pronouns,
+    @Default('') String pronouns,
+    @JsonKey(name:'_orgid') required String orgId,
+    @JsonKey(name: 'first_name') required String firstName,
+    @JsonKey(name: 'last_name') required String lastName,
     @Default('') String bio,
     @Default([]) List socials,
     @Default('') String img,
@@ -436,7 +437,7 @@ class Users with _$Users {
     @Default('Abodhanga') String name,
     @Default('Welcome to zuri') String bio,
     @Default('') String pronouns,
-    @Default('') String status,
+    UserStatus? status,
     @Default('') String phone,
     @Default('') String email,
   }) = _Users;
@@ -487,11 +488,24 @@ class UserProfile with _$UserProfile {
     @Default('') String phone,
     @Default('') String pronouns,
     @Default('') String bio,
-    @Default('') String status,
+    UserStatus? status,
   }) = _UserProfile;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
+}
+
+@freezed
+class UserStatus with _$UserStatus {
+  factory UserStatus({
+    @JsonKey(name: 'expiry_time') @Default('') String expiryTime,
+    @JsonKey(name: 'status_history') @Default('') String statusHistory,
+    @Default('') String tag,
+    @Default('') String text,
+  }) = _UserStatus;
+
+  factory UserStatus.fromJson(Map<String, dynamic> json) =>
+      _$UserStatusFromJson(json);
 }
 
 @freezed
@@ -551,6 +565,19 @@ class Accessibility with _$Accessibility {
       _$AccessibilityFromJson(json);
 }
 
+@freezed
+class CentrifugalMessageResponse with _$CentrifugalMessageResponse {
+  factory CentrifugalMessageResponse({
+    @Default('') String status,
+    @Default('') String event,
+    @JsonKey(name: 'message_id') @Default('') String messageId,
+    @JsonKey(name: 'room_id') @Default('') String roomId,
+    @JsonKey(name: 'channel_id') @Default('') String channelId,
+    @Default(false) bool thread,
+  }) = _CentrifugalMessageResponse;
+  factory CentrifugalMessageResponse.fromJson(Map<String, dynamic> json) =>
+      _$CentrifugalMessageResponseFromJson(json);
+}
 @freezed
 class PinnedMessagesResponse with _$PinnedMessagesResponse {
   factory PinnedMessagesResponse({

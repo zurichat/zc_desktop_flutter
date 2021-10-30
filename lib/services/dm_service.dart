@@ -58,7 +58,7 @@ class DMService {
             phone: user.phone,
             pronouns: user.pronouns,
             bio: user.bio,
-            status: user.bio),
+            status: UserStatus()),
         roomInfo: DMRoomsResponse(
             id: roomId,
             orgId: _organizationService.getOrganizationId(),
@@ -73,7 +73,7 @@ class DMService {
             phone: currentUser.phone,
             pronouns: currentUser.displayName,
             bio: currentUser.displayName,
-            status: currentUser.displayName));
+            status: UserStatus()));
   }
 
   DM? get getExistingRoomInfo => _dmRoomInfo;
@@ -110,8 +110,7 @@ class DMService {
   Future<List<DMRoomsResponse>> getDMs(var orgId) async {
     final response = await _zuriApiService.fetchDMs(
         orgId: orgId, userId: getCurrentLoggedInUser()!.id);
-    log.i('dm is back with: ');
-    log.i(response);
+    log.i('dm is back with: ${response}');
     return List<DMRoomsResponse>.from(
         response.map((model) => DMRoomsResponse.fromJson(model)));
   }
