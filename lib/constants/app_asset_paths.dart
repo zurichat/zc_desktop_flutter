@@ -49,3 +49,6 @@ const String Video = 'assets/icons/video.svg';
 const String EditProfile = 'assets/icons/edit_profile.svg';
 const String profileImage = 'assets/images/wks_image.png';
 const String profileAvatar = 'assets/images/profile_avatar.png';
+const String profilePlaceholder = 'assets/images/profile_placeholder.png';
+const String profileCurrentImg = 'assets/images/mark.jpg';
+
