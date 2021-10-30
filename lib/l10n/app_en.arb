@@ -200,10 +200,6 @@
     "@recentSearch": {
         "description": " search modal"
     },
-    "recentSearch" : "Recent Searches",
-    "@recentSearch": {
-        "description": " search modal"
-    },
     "searchModalHintText1" : "Scour your archives and fish out the answers",
     "@searchModalHintText1": {
         "description": "search modal"
@@ -284,11 +280,7 @@
     "@backToWorkspaceText": {
         "description": "Go back to workspace  text"
     },
-    "backToWorkspaceText" : "Back To Workspace",
-    "@backToWorkspaceText": {
-        "description": "Go back to workspace  text"
-    },
-    "todoList" : "Back To Workspace",
+    "todoList" : "To-do-List",
     "@todoList": {
         "description": "to do"
     },
@@ -527,5 +519,501 @@
     "channelTextTen" : "Channel created, You will be redirected shortly",
     "@channelTextTen": {
         "description": "Channel Text"
+    },
+    "animationText" : "Animation",
+    "@animationText": {
+        "description": "accessibility view"
+    },
+    "allowAnimated" : "Allow animated images and emoji",
+    "@allowAnimated": {
+        "description": "accessibility view"
+    },
+    "directMessagesText" : "Direct message announcements",
+    "@directMessagesText": {
+        "description": "accessibility view"
+    },
+    "keyboard" : "Keyboard",
+    "@keyboard": {
+        "description": "accessibility view"
+    },
+    "press" : "Press",
+    "@press": {
+        "description": "accessibility view"
+    },
+    "emptyMessageField" : "in the empty message field to:",
+    "@emptyMessageField": {
+        "description": "accessibility view"
+    },
+    "moveFocus" : "Move focus to the message list",
+    "@moveFocus": {
+        "description": "accessibility view"
+    },
+    "visibleMessage" : "The last visible message in the list will be selected",
+    "@visibleMessage": {
+        "description": "accessibility view"
+    },
+    "editLastMessage" : "Edit your last message",
+    "@editLastMessage": {
+        "description": "accessibility view"
+    },
+    "lastMessage" : "The last message you sent will be selected and in editing mode",
+    "@lastMessage": {
+        "description": "accessibility view"
+    },
+    "notePress" : "Note: press ",
+    "@notePress": {
+        "description": "accessibility view"
+    },
+    "editMessageWithOption" : " to edit your last message, with either option",
+    "@editMessageWithOption": {
+        "description": "accessibility view"
+    },
+    "inputOptions" : "Input options",
+    "@inputOptions": {
+        "description": "advanced view"
+    },
+    "whenTyping" : "When typing code with ````, ",
+    "@whenTyping": {
+        "description": "advanced view"
+    },
+    "sendMessage" : " should send the message",
+    "@sendMessage": {
+        "description": "advanced view"
+    },
+    "thisTicked" : "With this ticked, use ",
+    "@thisTicked": {
+        "description": "advanced view"
+    },
+    "toSend" : " to send",
+    "@toSend": {
+        "description": "advanced view"
+    },
+    "formatMessages" : "Format messages with markup",
+    "@formatMessages": {
+        "description": "advanced view"
+    },
+    "textFormatting" : "The text formatting toolbar won’t show in the composer",
+    "@textFormatting": {
+        "description": "advanced view"
+    },
+    "writingMessage" : "When writing a message, press",
+    "@writingMessage": {
+        "description": "advanced view"
+    },
+    "toText" : "to:",
+    "@toText": {
+        "description": "advanced view"
+    },
+    "sendTheMessage" : "Send the message",
+    "@sendTheMessage": {
+        "description": "advanced view"
+    },
+    "startNewLine" : "Start a new line ( use",
+    "@startNewLine": {
+        "description": "advanced view"
+    },
+    "toSendParenthesis" : "to send )",
+    "@toSendParenthesis": {
+        "description": "advanced view"
+    },
+    "searchOptions" : "Search options",
+    "@searchOptions": {
+        "description": "advanced view"
+    },
+    "overrideNormal" : "Overrides normal behavaiour in search behaviour",
+    "@overrideNormal": {
+        "description": "advanced view"
+    },
+    "startQuickSwitcher" : "Starts the quick switcher",
+    "@startQuickSwitcher": {
+        "description": "advanced view"
+    },
+    "overrideNormalBehaviour" : "Overrides normal behaviour in some browsers",
+    "@overrideNormalBehaviour": {
+        "description": "advanced view"
+    },
+    "excludeChannels" : "Exclude these channels from search results:",
+    "@excludeChannels": {
+        "description": "advanced view"
+    },
+    "typeAChannel" : "Type a channel name...",
+    "@typeAChannel": {
+        "description": "advanced view"
+    },
+    "otherOptions" : "Other Options",
+    "@otherOptions": {
+        "description": "advanced view"
+    },
+    "andText" : "and",
+    "@andText": {
+        "description": "advanced view"
+    },
+    "askToToggleAway" : "Ask if I want to toggle my away status when I log in after having set myself away ",
+    "@askToToggleAway": {
+        "description": "advanced view"
+    },
+    "sendOccassionalSurvey" : "Send me occassional survey via {appName} bot",
+    "@sendOccassionalSurvey": {
+        "description": "advanced view"
+    },
+    "startZuriChatSearch" : "Starts a {appName} search",
+    "@startZuriChatSearch": {
+        "description": "advanced view"
+    },
+    "makingZuriChatBetterText" : "We’re working to make Zuri Chat better. We’d always love to hear your thoughts",
+    "@makingZuriChatBetterText": {
+        "description": "advanced view"
+    },
+    "warnAboutMaliciousLinks" : "Warn me about potential malicious links",
+    "@warnAboutMaliciousLinks": {
+        "description": "advanced view"
+    },
+    "camera" : "Camera",
+    "@camera": {
+        "description": "Audio Video View"
+    },
+    "microPhone" : "Microphone",
+    "@microPhone": {
+        "description": "Audio Video View"
+    },
+    "inputLevel" : "Input Level : ",
+    "@inputLevel": {
+        "description": "Audio Video View"
+    },
+    "enableSpeaker" : "Enable Speaker",
+    "@enableSpeaker": {
+        "description": "Audio Video View"
+    },
+    "testSpeaker" : "Test Speaker",
+    "@testSpeaker": {
+        "description": "Audio Video View"
+    },
+    "joinZuriChatCall" : "When joining Zuri Chat call...",
+    "@joinZuriChatCall": {
+        "description": "Audio Video View"
+    },
+    "setStatusOnCall" : "Set my status to “On a call…”",
+    "@setStatusOnCall": {
+        "description": "Audio Video View"
+    },
+    "ifStatusSet" : "If you already have a status set, Zuri Chat won’t change it.",
+    "@ifStatusSet": {
+        "description": "Audio Video View"
+    },
+    "muteMicrophone" : "Mute my Microphone",
+    "@muteMicrophone": {
+        "description": "Audio Video View"
+    },
+    "joiningHuddle" : "When joining {HuddleText}...",
+    "@joiningHuddle": {
+        "description": "Audio Video View"
+    },
+    "setStatusInHuddle" : "Set my status to “In a {HuddleText}…”",
+    "@setStatusInHuddle": {
+        "description": "Audio Video View"
+    },
+    "automaticTurnOnCaption" : "Automatically turn on captions when you’re in a {HuddleText}",
+    "@automaticTurnOnCaption": {
+        "description": "Audio Video View"
+    },
+    "sendWarning" : "Send a warning if you’re starting a {HuddleText} in a channel with more than 150 members",
+    "@sendWarning": {
+        "description": "Audio Video View"
+    },
+    "playMusic" : "Play music to let you know when you’re the last one in the {HuddleText}",
+    "@playMusic": {
+        "description": "Audio Video View"
+    },
+    "startWhereILeftOff" : "Start me where I left off, and mark the channel read",
+    "@startWhereILeftOff": {
+        "description": "Mark as Read View"
+    },
+    "startAtNewestMessage" : "Start me at the newest message, and mark the channel read",
+    "@startAtNewestMessage": {
+        "description": "Mark as Read View"
+    },
+    "startAtNewestMessageUnread" : "Start me at the newest message, but leave unseen messages unread",
+    "@startAtNewestMessageUnread": {
+        "description": "Mark as Read View"
+    },
+    "promptConfirm" : "Prompt To confirm",
+    "@promptConfirm": {
+        "description": "Mark as Read View"
+    },
+    "viewFullList" : "To view the full list of keyboard shortcuts, just press",
+    "@viewFullList": {
+        "description": "Mark as Read View"
+    },
+    "keyboardShortcuts" : "Keyboard Shortcuts",
+    "@keyboardShortcuts": {
+        "description": "Mark as Read View"
+    },
+    "getForwardedMessage" : "Get a forwarded message",
+    "@getForwardedMessage": {
+        "description": "Media Preference View"
+    },
+    "displayJumboVersion" : "Display the jumbo versions of emoji (up to 23 at a time!) in messages without text.",
+    "@displayJumboVersion": {
+        "description": "Media Preference View"
+    },
+    "hereIsAnExample" : "Here is an Example",
+    "@hereIsAnExample": {
+        "description": "Media Preference View"
+    },
+    "justReviewed" : "I just reviewed it, I'm ready to provide feedback",
+    "@justReviewed": {
+        "description": "Media Preference View"
+    },
+    "feelingGreat" : "Feeling great",
+    "@feelingGreat": {
+        "description": "Media Preference View"
+    },
+    "hiText" : "Hi, i am ",
+    "@hiText": {
+        "description": "Media Preference View"
+    },
+    "changeDisplayName" : "To change your full or display name, head to",
+    "@changeDisplayName": {
+        "description": "Media Preference View"
+    },
+    "yourProfile" : " your profile.",
+    "@yourProfile": {
+        "description": "Media Preference View"
+    },
+    "clean" : "Clean",
+    "@clean": {
+        "description": "Media Preference View"
+    },
+    "compact" : "Compact",
+    "@clean": {
+        "description": "Media Preference View"
+    },
+    "fullAndDisplay" : "Full & display names",
+    "@fullAndDisplay": {
+        "description": "Media Preference View"
+    },
+    "justDisplayNames" : "Just display names",
+    "@justDisplayNames": {
+        "description": "Media Preference View"
+    },
+    "notifyAbout" : "Nofity me about",
+    "@notifyAbout": {
+        "description": "Preferences Notification View"
+    },
+    "aboutNotifications" : "About notifications",
+    "@aboutNotifications": {
+        "description": "Preferences Notification View"
+    },
+    "allMessages" : "All messages",
+    "@allMessages": {
+        "description": "Preferences Notification View"
+    },
+    "directMessages" : "Direct messages",
+    "@directMessages": {
+        "description": "Preferences Notification View"
+    },
+    "none" : "None",
+    "@none": {
+        "description": "Preferences Notification View"
+    },
+    "useDiffSettings" : "Use different settings for mobile",
+    "@useDiffSettings": {
+        "description": "Preferences Notification View"
+    },
+    "notifyMe" : "Notify me when a meeting is set",
+    "@notifyMe": {
+        "description": "Preferences Notification View"
+    },
+    "notifyMeOfReplies" : "Notify me of replies to thread",
+    "@notifyMeOfReplies": {
+        "description": "Preferences Notification View"
+    },
+    "keywords" : "Keywords",
+    "@keywords": {
+        "description": "Preferences Notification View"
+    },
+    "keywordNotification" : "You will be notified anything, someone uses these keyword in thread",
+    "@keywordNotification": {
+        "description": "Preferences Notification View"
+    },
+    "scheduleNotification" : "Schedule Notification",
+    "@scheduleNotification": {
+        "description": "Preferences Notification View"
+    },
+    "activeHoursNotification" : "You'll only receive notifications in the hours that you choose. Outside of those times, notifications will be paused ",
+    "@activeHoursNotification": {
+        "description": "Preferences Notification View"
+    },
+    "learnMore" : "Learn more",
+    "@learnMore": {
+        "description": "Preferences Notification View"
+    },
+    "soundChecks" : "Sound Checks",
+    "@soundChecks": {
+        "description": "Preferences Notification View"
+    },
+    "chooseNotificationSound" : "Choose your notification sound.",
+    "@chooseNotificationSound": {
+        "description": "Preferences Notification View"
+    },
+    "exampleSound" : "Example Sound",
+    "@exampleSound": {
+        "description": "Preferences Notification View"
+    },
+    "exampleSound" : "Example Sound",
+    "@exampleSound": {
+        "description": "Preferences Notification View"
+    },
+    "includePreviewMessage" : "Include preview message in notification",
+    "@includePreviewMessage": {
+        "description": "Preferences Notification View"
+    },
+    "muteAll" : "Mute all",
+    "@muteAll": {
+        "description": "Preferences Notification View"
+    },
+    "setNotification" : "Set your notifications right (Messages)",
+    "@setNotification": {
+        "description": "Preferences Notification View"
+    },
+    "setNotificationLounge" : "Set your notifications right (Lounge)",
+    "@setNotificationLounge": {
+        "description": "Preferences Notification View"
+    },
+    "flashWindow" : "Flash windows when notification comes",
+    "@flashWindow": {
+        "description": "Preferences Notification View"
+    },
+    "never" : "Never",
+    "@never": {
+        "description": "Preferences Notification View"
+    },
+    "whenIdle" : "whenIdle",
+    "@whenIdle": {
+        "description": "Preferences Notification View"
+    },
+    "whenIdle" : "When idle",
+    "@whenIdle": {
+        "description": "Preferences Notification View"
+    },
+    "always" : "Always",
+    "@always": {
+        "description": "Preferences Notification View"
+    },
+    "deliverNotifications" : "Deliver notification via",
+    "@deliverNotifications": {
+        "description": "Preferences Notification View"
+    },
+    "notActiveOnDesktop" : "When I am not active on desktop",
+    "@notActiveOnDesktop": {
+        "description": "Preferences Notification View"
+    },
+    "notificationsToMobile" : "Send notifications to my mobile",
+    "@notificationsToMobile": {
+        "description": "Preferences Notification View"
+    },
+    "sendEmailNotifications" : "Send me email notifications for mentions",
+    "@sendEmailNotifications": {
+        "description": "Preferences Notification View"
+    },
+    "alwaysShowInSidebar" : "Always show in the side bar",
+    "@alwaysShowInSidebar": {
+        "description": "Preferences side bar View"
+    },
+    "insights" : "Insights",
+    "@insights": {
+        "description": "Preferences side bar View"
+    },
+    "integrate" : "Integrate",
+    "@integrate": {
+        "description": "Preferences side bar View"
+    },
+    "todoText" : "To-do",
+    "@todoText": {
+        "description": "Preferences side bar View"
+    },
+    "fileBrowser" : "File browser",
+    "@fileBrowser": {
+        "description": "Preferences side bar View"
+    },
+    "channelBrowser" : "Channel browser",
+    "@channelBrowser": {
+        "description": "Preferences side bar View"
+    },
+    "showText" : "Show...",
+    "@showText": {
+        "description": "Preferences side bar View"
+    },
+    "allConvo" : "All your conversation",
+    "@allConvo": {
+        "description": "Preferences side bar View"
+    },
+    "unreadConvo" : "Unread conversation only",
+    "@unreadConvo": {
+        "description": "Preferences side bar View"
+    },
+    "customDepend" : "Custom depending on section",
+    "@customDepend": {
+        "description": "Preferences side bar View"
+    },
+    "chooseSettings" : "Choose your settings for each section from the sidebar ",
+    "@chooseSettings": {
+        "description": "Preferences side bar View"
+    },
+    "sortText" : "Sort...",
+    "@sortText": {
+        "description": "Preferences side bar View"
+    },
+    "alphabetically" : "Alphabetically",
+    "@alphabetically": {
+        "description": "Preferences side bar View"
+    },
+    "byMosRectent" : "By most recent",
+    "@byMosRectent": {
+        "description": "Preferences side bar View"
+    },
+    "byPriority" : "By priority",
+    "@byPriority": {
+        "description": "Preferences side bar View"
+    },
+    "chooseIndividualSection" : "You can also choose how individual section are sorted directly from the sidebar",
+    "@chooseIndividualSection": {
+        "description": "Preferences side bar View"
+    },
+    "dmAnnouncement" : "Direct message announcements",
+    "@dmAnnouncement": {
+        "description": "Preferences side bar View"
+    },
+    "showProfilePhotos" : "Show profile photos next to DM",
+    "@showProfilePhotos": {
+        "description": "Preferences side bar View"
+    },
+    "listPrivateChats" : "List private chats separately",
+    "@listPrivateChats": {
+        "description": "Preferences side bar View"
+    },
+    "organizeExternalConvo" : "Organize external conversations into the connections section",
+    "@organizeExternalConvo": {
+        "description": "Preferences side bar View"
+    },
+    "customTheme" : "create a custom theme",
+    "@customTheme": {
+        "description": "Preferences side bar View"
+    },
+    "classicThemes" : "Show all classic themes",
+    "@classicThemes": {
+        "description": "Preferences side bar View"
+    },
+    "lookNiceToday" : "Look nice today",
+    "@lookNiceToday": {
+        "description": "Preferences side bar View"
+    },
+    "light" : "Light",
+    "@light": {
+        "description": "Preferences side bar View"
+    },
+    "customizeWorkspace" : "Customise the look of your workspace. Feeling adventurous?\n",
+    "@customizeWorkspace": {
+        "description": "ThemeView"
     }
 }

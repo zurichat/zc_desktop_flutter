@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_text.dart';
@@ -29,7 +30,7 @@ Widget build(BuildContext context) {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SectionTitle(title: 'Camera'),
+              SectionTitle(title: camera),
               SizedBox(height: 16),
               Container(
                 width: 487.w,
@@ -50,7 +51,7 @@ Widget build(BuildContext context) {
                 onChanged: (String? value) => model.setSelectedCamera(value!),
               ),
               SizedBox(height: 46),
-              SectionTitle(title: 'Microphone'),
+              SectionTitle(title: microPhone),
               SizedBox(height: 8),
               DropDownField<String>(
                 options: model.availableSpeakers,
@@ -61,7 +62,7 @@ Widget build(BuildContext context) {
               SizedBox(height: 20),
               Row(
                 children: [
-                  ZcdeskText.bodyText('Input Level : '),
+                  ZcdeskText.bodyText(inputLevel),
                   _buildDummyInputLevel(),
                 ],
               ),
@@ -70,10 +71,10 @@ Widget build(BuildContext context) {
                 value: model.settings['speakerEnabled']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'speakerEnabled'),
-                title: 'Enable Speaker',
+                title: enableSpeaker,
               ),
               SizedBox(height: 19),
-              SectionTitle(title: 'Microphone'),
+              SectionTitle(title: microPhone),
               SizedBox(height: 8),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +102,7 @@ Widget build(BuildContext context) {
                       ),
                       onPressed: () {},
                       child: Text(
-                        'Test Speaker',
+                        testSpeaker,
                         style: kBodyTextStyle.copyWith(
                           fontWeight: FontWeight.w700,
                           fontSize: 15.w,
@@ -113,23 +114,23 @@ Widget build(BuildContext context) {
                 ],
               ),
               SizedBox(height: 46),
-              SectionTitle(title: 'When joining Zurichat call...'),
+              SectionTitle(title: joinZuriChatCall),
               SizedBox(height: 17),
               AudioVideoSetting(
                 value: model.settings['onCallStatus']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'onCallStatus'),
-                title: 'Set my status to “On a call…”',
+                title: setStatusOnCall,
                 useSubtitle: true,
                 subtitle:
-                    'If you already have a status set, Zurichat won’t change it.',
+                    ifStatusSet,
               ),
               SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['callMicrophoneMuted']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'callMicrophoneMuted'),
-                title: 'Mute my Microphone',
+                title: muteMicrophone,
               ),
               SizedBox(height: 26),
               SizedBox(
@@ -137,30 +138,30 @@ Widget build(BuildContext context) {
                 child: Divider(),
               ),
               SizedBox(height: 16),
-              SectionTitle(title: 'When joining huddle...'),
+              SectionTitle(title: joiningHuddle),
               SizedBox(height: 17),
               AudioVideoSetting(
                 value: model.settings['onHuddleStatus']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'onHuddleStatus'),
-                title: 'Set my status to “In a huddle…”',
+                title: setStatusInHuddle,
                 useSubtitle: true,
                 subtitle:
-                    'If you already have a status set, Zurichat won’t change it.',
+                    ifStatusSet,
               ),
               SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['huddleMicrophoneMuted']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'huddleMicrophoneMuted'),
-                title: 'Mute my Microphone',
+                title: muteMicrophone,
               ),
               SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['captionOnInHuddle']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'captionOnInHuddle'),
-                title: 'Automatically turn on captions when you’re in a huddle',
+                title: automaticTurnOnCaption,
               ),
               SizedBox(height: 10),
               AudioVideoSetting(
@@ -168,14 +169,14 @@ Widget build(BuildContext context) {
                 onChanged: (value) =>
                     model.toggleSetting(value, 'warningSentForLargeNumber'),
                 title:
-                    'Send a warning if you’re starting a huddle in a channel with more than 150 members',
+                    sendWarning,
               ),
               SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['playMusic']!,
                 onChanged: (value) => model.toggleSetting(value, 'playMusic'),
                 title:
-                    'Play music to let you know when you’re the last one in the huddle',
+                    playMusic,
               ),
             ],
           ),
