@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -58,7 +59,7 @@ Widget bringEmailIntoZuriSection(MessageMediaPreferenceViewModel model) {
         ),
         verticalSpaceMedium,
         PreferenceButton(
-          label: 'Get a forward message',
+          label: getForwardedMessage,
         ),
       ],
     ),
@@ -241,15 +242,15 @@ Widget emojiSection(MessageMediaPreferenceViewModel model) {
         SizedBox(
           width: 400.w,
           child: Text(
-              'Display the jumbo versions of emoji (up to 23 at a time!) in messages without text.',
+              displayJumboVersion,
               style: preferenceStyleNormal),
         ),
         verticalSpaceMedium,
-        Text('Here is an Example', style: preferenceStyleNormal),
+        Text(hereIsAnExample, style: preferenceStyleNormal),
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/People of Brooklyn Avatar 2.png',
-          subtitle: "I just reviewed it, I'm ready to provide feedback",
+          subtitle: justReviewed,
           time: '9:25am',
           title: 'Mark',
           emoji: '',
@@ -273,11 +274,11 @@ Widget themeSection(MessageMediaPreferenceViewModel model) {
         Text(model.messagepreferencetitles[0], style: preferenceStyleBold),
         buildThemeRadioColumn(model),
         verticalSpaceSmall,
-        Text('Here is an Example', style: preferenceStyleNormal),
+        Text(hereIsAnExample, style: preferenceStyleNormal),
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/GroupLogo.png',
-          subtitle: 'Feeling great',
+          subtitle: feelingGreat,
           time: '9:25am',
           title: 'Zuri Bot',
           emoji: '',
@@ -303,7 +304,7 @@ Widget nameSection(MessageMediaPreferenceViewModel model) {
         verticalSpaceSmall,
         ReusableContainer(
           image: 'assets/images/People of Brooklyn Avatar.png',
-          subtitle: 'Hi, i am ',
+          subtitle: hiText,
           time: '9:25am',
           title: 'Zuri',
           emoji: 'assets/images/Vector.svg',
@@ -316,14 +317,14 @@ Widget nameSection(MessageMediaPreferenceViewModel model) {
           child: RichText(
               softWrap: true,
               text: TextSpan(
-                  text: 'To change your full or display name, head to',
+                  text: changeDisplayName,
                   style: subtitle2.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: timeColor),
                   children: [
                     TextSpan(
-                      text: ' your profile.',
+                      text: yourProfile,
                       style: subtitle2.copyWith(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -464,14 +465,14 @@ buildThemeRadioColumn(MessageMediaPreferenceViewModel model) {
       buildRadio(
           groupValue: model.themepref,
           value: PrefTheme.Clean,
-          txt: 'Clean',
+          txt: clean,
           onChanged: (value) {
             model.setThemePref((value));
           }),
       buildRadio(
           groupValue: model.themepref,
           value: PrefTheme.Compact,
-          txt: 'Comapct',
+          txt: compact,
           onChanged: (value) {
             model.setThemePref((value));
           }),
@@ -485,14 +486,14 @@ buildNameRadioColumn(MessageMediaPreferenceViewModel model) {
       buildRadio(
           groupValue: model.namepref,
           value: PrefTheme.FullandDisplaynames,
-          txt: 'Full & display names',
+          txt: fullAndDisplay,
           onChanged: (value) {
             model.setNamePref((value));
           }),
       buildRadio(
           groupValue: model.namepref,
           value: PrefTheme.JustDisplayNames,
-          txt: 'Just display names',
+          txt: justDisplayNames,
           onChanged: (value) {
             model.setNamePref((value));
           }),

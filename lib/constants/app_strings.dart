@@ -99,6 +99,8 @@ const String SearchModal1 = 'Search in Messages';
 const String SearchModal2 = 'Search in Files';
 const String SearchModal3 = 'Search anyone in workspace';
 const String AddPeopleText = 'Add People';
+const String AddPeopleHint = 'Enter a name, email or user group';
+const String SnackBarMessageAddUser = 'User(s) Added Successfully';
 const String AddPeopleUserGroupHeader =
     'To see Zuri Chat in action, you’ll need a few more people here. Try inviting some of the teammates you talk with most.';
 const String InvitePeopleTextFieldHintText = 'Ex. ellis@gmail.com';
@@ -217,3 +219,143 @@ const String profileViewProfile = 'View Profile';
 const String profilePreferences = 'Preferences';
 const String profileSignOut = 'Sign out of Zuri';
 const String profileCurrentName = 'perpKate';
+
+//accessibility View
+const String animationText = 'Animation';
+const String allowAnimated = 'Allow animated images and emoji';
+const String directMessagesText = 'Direct message announcements';
+const String keyboard = 'Keyboard';
+const String press = 'Press';
+const String emptyMessageField = 'in the empty message field to:';
+const String moveFocus = 'Move focus to the message list';
+const String visibleMessage = 'The last visible message in the list will be selected';
+const String editLastMessage = 'Edit your last message';
+const String lastMessage = 'The last message you sent will be selected and in editing mode';
+const String notePress = 'Note: press ';
+const String editMessageWithOption = ' to edit your last message, with either option';
+
+//Advanced View
+const String inputOptions = 'Input options';
+const String whenTyping = 'When typing code with ````, ';
+const String sendMessage = ' should send the message';
+const String thisTicked = 'With this ticked, use ';
+const String toSend = ' to send';
+const String formatMessages = 'Format messages with markup';
+const String textFormatting = 'The text formatting toolbar won’t show in the composer';
+const String writingMessage = 'When writing a message, press';
+const String toText = 'to:';
+const String sendTheMessage = 'Send the message';
+const String startNewLine = 'Start a new line ( use';
+const String toSendParenthesis = 'to send )';
+const String searchOptions = 'Search options';
+const String overrideNormal = 'Overrides normal behavaiour in search behaviour';
+const String startQuickSwitcher = 'Starts the quick switcher';
+const String overrideNormalBehaviour = 'Overrides normal behaviour in some browsers';
+const String excludeChannels = 'Exclude these channels from search results:';
+const String typeAChannel = 'Type a channel name...';
+const String otherOptions = 'Other Options';
+const String andText = 'and';
+const String askToToggleAway = 'Ask if I want to toggle my away status when I log in after having set myself away ';
+const String sendOccassionalSurvey = 'Send me occassional survey via Zuri Chat bot';
+const String startZuriChatSearch = 'Starts a Zuri Chat search';
+const String makingZuriChatBetterText = 'We’re working to make Zuri Chat better. We’d always love to hear your thoughts';
+const String warnAboutMaliciousLinks = 'Warn me about potential malicious links';
+
+//AudioVideo View
+const String camera = 'Camera';
+const String microPhone = 'Microphone';
+const String inputLevel = 'Input Level : ';
+const String enableSpeaker = 'Enable Speaker';
+const String testSpeaker = 'Test Speaker';
+const String joinZuriChatCall = 'When joining Zuri Chat call...';
+const String setStatusOnCall = 'Set my status to “On a call…”';
+const String ifStatusSet = 'If you already have a status set, Zuri Chat won’t change it.';
+const String muteMicrophone = 'Mute my Microphone';
+const String joiningHuddle = 'When joining huddle...';
+const String setStatusInHuddle = 'Set my status to “In a huddle…”';
+const String automaticTurnOnCaption = 'Automatically turn on captions when you’re in a huddle';
+const String sendWarning = 'Send a warning if you’re starting a huddle in a channel with more than 150 members';
+const String playMusic = 'Play music to let you know when you’re the last one in the huddle';
+
+//Mark As Read View
+const String startWhereILeftOff = 'Start me where I left off, and mark the channel read';
+const String startAtNewestMessage = 'Start me at the newest message, and mark the channel read';
+const String startAtNewestMessageUnread = 'Start me at the newest message, but leave unseen messages unread';
+const String promptConfirm = 'Prompt To confirm';
+const String viewFullList = 'To view the full list of keyboard shortcuts, just press';
+const String keyboardShortcuts = 'Keyboard Shortcuts';
+
+//Message media preference view
+const String getForwardedMessage = 'Get a forwarded message';
+const String displayJumboVersion = 'Display the jumbo versions of emoji (up to 23 at a time!) in messages without text.';
+const String hereIsAnExample = 'Here is an Example';
+const String justReviewed = "I just reviewed it, I'm ready to provide feedback";
+const String feelingGreat = 'Feeling great';
+const String hiText = 'Hi, i am ';
+const String changeDisplayName = 'To change your full or display name, head to';
+const String yourProfile = ' your profile.';
+const String clean = 'Clean';
+const String compact = 'Compact';
+const String fullAndDisplay = 'Full & display names';
+const String justDisplayNames = 'Just display names';
+
+//Preference Notification View
+const String notifyAbout = 'Nofity me about';
+const String aboutNotifications = 'About notifications';
+const String allMessages = 'All messages';
+const String directMessages = 'Direct messages';
+const String none = 'None';
+const String useDiffSettings = 'Use different settings for mobile';
+const String notifyMe = 'Notify me when a meeting is set';
+const String notifyMeOfReplies = 'Notify me of replies to thread';
+const String keywords = 'Keywords';
+const String keywordNotification = 'You will be notified anything, someone uses these keyword in thread';
+const String scheduleNotification = 'Schedule Notification';
+const String activeHoursNotification = 'You\'ll only receive notifications in the hours that you choose. Outside of those times, notifications will be paused ';
+const String learnMore = 'Learn more';
+const String soundChecks= 'Sound Checks';
+const String chooseNotificationSound = 'Choose your notification sound.';
+const String exampleSound = 'Example Sound';
+const String includePreviewMessage = 'Include preview message in notification';
+const String muteAll = 'Mute all';
+const String setNotification = 'Set your notifications right (Messages)';
+const String setNotificationLounge = 'Set your notifications right (Lounge)';
+const String flashWindow = 'Flash windows when notification comes';
+const String never = 'Never';
+const String whenIdle = 'When idle';
+const String always = 'Always';
+const String deliverNotifications = 'Deliver notification via';
+const String notActiveOnDesktop = 'When I am not active on desktop';
+const String notificationsToMobile = 'Send notifications to my mobile';
+const String sendEmailNotifications = 'Send me email notifications for mentions';
+
+//Preference Side Bar View
+const String alwaysShowInSidebar = 'Always show in the side bar';
+const String insights = 'Insights';
+const String draftText = 'Draft';
+const String integrate = 'Integrate';
+const String todoText = 'To-do';
+const String fileBrowser = 'File browser';
+const String channelBrowser = 'Channel browser';
+const String showText = 'Show...';
+const String allConvo = 'All your conversation';
+const String unreadConvo = 'Unread conversation only';
+const String customDepend = 'Custom depending on section';
+const String chooseSettings = 'Choose your settings for each section from the sidebar ';
+const String sortText = 'Sort...';
+const String alphabetically = 'Alphabetically';
+const String byMostRecent = 'By most recent';
+const String byPriority = 'By priority';
+const String chooseIndividualSection = 'You can also choose how individual section are sorted directly from the sidebar';
+const String dmAnnouncement = 'Direct message announcements';
+const String showProfilePhotos = 'Show profile photos next to DM';
+const String listPrivateChats = 'List private chats separately';
+const String OrganizeExternalConvo = 'Organize external conversations into the connections section';
+const String customTheme = 'create a custom theme';
+const String classicThemes = 'Show all classic themes';
+const String lookNiceToday = 'Look nice today';
+const String light = 'Light';
+
+//ThemeView
+const String customizeWorkspace = 'Customise the look of your workspace. Feeling adventurous?\n';
+

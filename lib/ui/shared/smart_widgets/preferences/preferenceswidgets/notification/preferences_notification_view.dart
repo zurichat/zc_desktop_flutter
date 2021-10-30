@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/enums/flash_windows.dart';
 import 'package:zc_desktop_flutter/core/enums/pref_message.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -32,7 +33,7 @@ class NotificationView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Nofity me about',
+                            notifyAbout,
                             style: prefHeaderTextStyle,
                           ),
                           TextButton(
@@ -40,7 +41,7 @@ class NotificationView extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Text(
-                                    'About notifications',
+                                    aboutNotifications,
                                     style: prefHeaderTextStyle.copyWith(
                                         color: kcPrimaryColor),
                                   ),
@@ -57,21 +58,21 @@ class NotificationView extends StatelessWidget {
                           BuildRadio(
                               groupValue: model.messageNotification,
                               value: PrefMessageNotification.AllMessages,
-                              txt: 'All messages',
+                              txt: allMessages,
                               onChanged: (value) {
                                 model.setMessageNotification((value));
                               }),
                           BuildRadio(
                               groupValue: model.messageNotification,
                               value: PrefMessageNotification.DirectMessages,
-                              txt: 'Direct messages',
+                              txt: directMessages,
                               onChanged: (value) {
                                 model.setMessageNotification((value));
                               }),
                           BuildRadio(
                               groupValue: model.messageNotification,
                               value: PrefMessageNotification.None,
-                              txt: 'None',
+                              txt: none,
                               onChanged: (value) {
                                 model.setMessageNotification((value));
                               }),
@@ -82,24 +83,24 @@ class NotificationView extends StatelessWidget {
                         thickness: 0.5,
                       ),
                       Column(children: [
-                        BuildCheckBox('Use different seetings for mobile',
+                        BuildCheckBox(useDiffSettings,
                             model.isSameForMobile, (_) {
                           model.setIsSameForMobile();
                         }),
-                        BuildCheckBox('Notify me when a meeting is set',
+                        BuildCheckBox(notifyMe,
                             model.isMeetingSet, (_) {
                           model.setIsmeetingSet();
                         }),
-                        BuildCheckBox('Notify me of replies to thread',
+                        BuildCheckBox(notifyMeOfReplies,
                             model.isRepliedInThred, (_) {
                           model.setISRepliedInThread();
                         }),
                       ]),
                       verticalSpaceMediumTwo,
-                      Text('Keywords', style: prefHeaderTextStyle),
+                      Text(keywords, style: prefHeaderTextStyle),
                       verticalSpaceSmall,
                       Text(
-                        'You will be notified anything, someone uses these keyword in thread',
+                        keywordNotification,
                         style: prefSubTitleTextStyle,
                       ),
                       verticalSpaceRegularOne,
@@ -113,7 +114,7 @@ class NotificationView extends StatelessWidget {
                       ),
                       verticalSpaceMediumTwo,
                       Text(
-                        'Schedule Notification',
+                        scheduleNotification,
                         style: prefHeaderTextStyle,
                       ),
                       verticalSpaceSmall,
@@ -123,11 +124,11 @@ class NotificationView extends StatelessWidget {
                             softWrap: true,
                             text: TextSpan(
                                 text:
-                                    'You\'ll only receive notifications in the hours that you choose. Outside of those times, notifications will be paused ',
+                                    activeHoursNotification,
                                 style: prefSubTitleTextStyle,
                                 children: [
                                   TextSpan(
-                                    text: 'Learn more',
+                                    text: learnMore,
                                     style: prefSubTitleTextStyle.copyWith(
                                         color: kcPrimaryColor),
                                   )
@@ -163,12 +164,12 @@ class NotificationView extends StatelessWidget {
                       ),
                       verticalSpaceSmall,
                       Text(
-                        'Sound Checks',
+                        soundChecks,
                         style: prefHeaderTextStyle,
                       ),
                       verticalSpaceSmall,
                       Text(
-                        'Choose your notification sound.',
+                        chooseNotificationSound,
                         style: prefSubTitleTextStyle,
                       ),
                       verticalSpaceRegular,
@@ -182,18 +183,18 @@ class NotificationView extends StatelessWidget {
                               border: Border.all(color: kcDisplayChannelColor)),
                           child: Center(
                               child: Text(
-                            'Example Sound',
+                            exampleSound,
                             style: prefSubTitleTextStyle,
                           )),
                         ),
                       ),
                      verticalSpaceMedium,
-                      BuildCheckBox('Include preview message in notification',
+                      BuildCheckBox(includePreviewMessage,
                           model.isPreviewMessage, (_) {
                         model.setIsPreviewMessage();
                       }),
                      verticalSpaceRegularOne,
-                      BuildCheckBox('Mute all', model.isMute, (_) {
+                      BuildCheckBox(muteAll, model.isMute, (_) {
                         model.setIsMute();
                       }),
                       verticalSpaceMedium,
@@ -202,12 +203,12 @@ class NotificationView extends StatelessWidget {
                         children: [
                           Expanded(
                               child: Text(
-                            'Set your notifications right (Messages)',
+                            setNotification,
                             style: prefBodyTextStyle,
                           )),
                           Expanded(
                               child: Text(
-                            'Set your notifications right (Lounge)',
+                            setNotificationLounge,
                             style: prefBodyTextStyle,
                           ))
                         ],
@@ -233,7 +234,7 @@ class NotificationView extends StatelessWidget {
                         ],
                       ),
                      verticalSpaceMediumTwo,
-                      Text('Flash windows when notification comes',
+                      Text(flashWindow,
                           style: prefHeaderTextStyle),
                       verticalSpaceRegularOne,
                       Column(
@@ -241,21 +242,21 @@ class NotificationView extends StatelessWidget {
                           BuildRadio(
                               value: FlashWindows.Never,
                               groupValue: model.flashWindows,
-                              txt: 'Never',
+                              txt: never,
                               onChanged: (value) {
                                 model.setFlashWindows(value);
                               }),
                           BuildRadio(
                               value: FlashWindows.WhenIdle,
                               groupValue: model.flashWindows,
-                              txt: 'When idle',
+                              txt: whenIdle,
                               onChanged: (value) {
                                 model.setFlashWindows(value);
                               }),
                           BuildRadio(
                               value: FlashWindows.Always,
                               groupValue: model.flashWindows,
-                              txt: 'Always',
+                              txt: always,
                               onChanged: (value) {
                                 model.setFlashWindows(value);
                               })
@@ -263,7 +264,7 @@ class NotificationView extends StatelessWidget {
                       ),
                     verticalSpaceMedium,
                       Text(
-                        'Deliver notification via',
+                        deliverNotifications,
                         style: prefHeaderTextStyle,
                       ),
                      verticalSpaceTinyTwo,
@@ -276,11 +277,11 @@ class NotificationView extends StatelessWidget {
                             model.setNotificationSoundValue(value);
                           })),
                      verticalSpaceMediumTwo,
-                      Text('When I am not active on desktop',
+                      Text(notActiveOnDesktop,
                           style: prefHeaderTextStyle),
                      verticalSpaceRegular,
                       Text(
-                        'Send notifications to my mobile',
+                        notificationsToMobile,
                         style: prefSubTitleTextStyle,
                       ),
                      verticalSpaceTinyTwo,
@@ -293,7 +294,7 @@ class NotificationView extends StatelessWidget {
                         }),
                       ),
                      verticalSpaceRegularOne,
-                      BuildCheckBox('Send me email notifications for mentions',
+                      BuildCheckBox(sendEmailNotifications,
                           model.isEmail, (_) {
                         model.setIsEmail();
                       })

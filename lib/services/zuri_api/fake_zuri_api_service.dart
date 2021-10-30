@@ -1,6 +1,6 @@
-import 'dart:io';
-
 import 'package:intl/intl.dart';
+
+import 'dart:io';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
@@ -337,6 +337,7 @@ class FakeZuriApiService implements Api {
     };
     return orgList;
   }
+
 
   // @override
   // Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
