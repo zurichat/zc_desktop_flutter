@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -105,13 +106,13 @@ class ChannelDmView extends StatelessWidget {
                             ),
                       trailing: (channel == true)
                           ? InkWell(
-                            onTap: () => showDialog(
+                              onTap: () => showDialog(
                                   context: context,
                                   builder: (context) => ChannelsDetailsView()),
-                            child: WorkSpaceMembers(
+                              child: WorkSpaceMembers(
                                 color: whiteColor,
                               ),
-                          )
+                            )
                           : SvgPicture.asset('assets/icons/Shape.svg'),
                     ),
                     Container(
@@ -145,7 +146,7 @@ class ChannelDmView extends StatelessWidget {
                                     children: <Widget>[
                                       SvgPicture.asset(
                                           'assets/icons/bi_pin-angle-fill.svg'),
-                                      Text(' 3 Pinned'),
+                                      Text(channelDm),
                                     ],
                                   ),
                                 ),
@@ -169,7 +170,7 @@ class ChannelDmView extends StatelessWidget {
                                     children: <Widget>[
                                       SvgPicture.asset(
                                           'assets/icons/carbon_add.svg'),
-                                      Text(' Add a bookmark'),
+                                      Text(channelDm2),
                                     ],
                                   ),
                                 ),
@@ -194,7 +195,7 @@ class ChannelDmView extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        'This is the very beginning of the ',
+                                        channelDm3,
                                         style: messageTimeStyleNormal,
                                       ),
                                       Text(
@@ -202,7 +203,7 @@ class ChannelDmView extends StatelessWidget {
                                         style: messageTimeStyleNormal,
                                       ),
                                       Text(
-                                        ' channel',
+                                        channelDm4,
                                         style: messageTimeStyleNormal,
                                       ),
                                     ],
@@ -215,7 +216,7 @@ class ChannelDmView extends StatelessWidget {
                                         style: messageTimeStyleNormal,
                                       ),
                                       Text(
-                                        ' created this channel on Aug 30th.',
+                                        channelDm5,
                                         style: messageTimeStyleNormal,
                                       ),
                                     ],
@@ -229,7 +230,7 @@ class ChannelDmView extends StatelessWidget {
                                             'assets/icons/add_member.svg'),
                                       ),
                                       Text(
-                                        ' Add members',
+                                        channelDm6,
                                         style: messageTimeStyleNormal,
                                       ),
                                     ],
@@ -291,7 +292,7 @@ class ChannelDmView extends StatelessWidget {
                                                         MainAxisAlignment.start,
                                                     children: [
                                                       Text(
-                                                        'This conversation is just between you and ',
+                                                        channelDm7,
                                                         style:
                                                             messageTimeStyleNormal,
                                                       ),
@@ -301,7 +302,7 @@ class ChannelDmView extends StatelessWidget {
                                                             messageTimeStyleNormal,
                                                       ),
                                                       Text(
-                                                        ' no one else can see it',
+                                                        channelDm8,
                                                         style:
                                                             messageTimeStyleNormal,
                                                       ),
@@ -313,7 +314,7 @@ class ChannelDmView extends StatelessWidget {
                                                         MainAxisAlignment.start,
                                                     children: [
                                                       Text(
-                                                        'Here you can send messages and share files with .',
+                                                        channelDm9,
                                                         style:
                                                             messageTimeStyleNormal,
                                                       ),
@@ -391,8 +392,7 @@ class ChannelDmView extends StatelessWidget {
 
 Widget messageReplies(ChannelDmViewModel model) {
   return InkWell(
-    onTap: () {
-    },
+    onTap: () {},
     child: Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -407,10 +407,10 @@ Widget messageReplies(ChannelDmViewModel model) {
               userDefaultImageUrl: model.userDefaultImageUrl),
           horizontalSpaceTiny,
           //TODO: Get message time of last reply in a thread
-          Text('${ChannelDmViewModel().numberOfReplies} replies',
+          Text('${ChannelDmViewModel().numberOfReplies} ${messageReply}',
               style: TextStyle(color: kcSecondaryColor)),
           horizontalSpaceTiny,
-          Text('Last reply yesterday at 9:12PM')
+          Text(messageReply2)
         ],
       ),
     ),
@@ -422,8 +422,7 @@ Widget constructRepliesHighLightAvatars({
   int? numberOfReplies,
 }) {
   return InkWell(
-    onTap: () {
-    },
+    onTap: () {},
     child: Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -515,7 +514,7 @@ class MessageTile extends StatelessWidget {
                                         .getUser(message.user_id)
                                         .displayName
                                         .isEmpty
-                                    ? 'Zuri Me'
+                                    ? messageTile
                                     : model
                                         .getUser(message.user_id)
                                         .displayName,
