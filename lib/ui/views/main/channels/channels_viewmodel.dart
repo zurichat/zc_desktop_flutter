@@ -153,7 +153,6 @@ class ChannelsViewModel extends BaseViewModel {
     void websocketConnect() async {
       String channelSockId = await _channelService.fetchChannelSocketId();
       
-      await _centrifugeService.connect();
       await _centrifugeService.subscribe(channelSockId);
   }
 

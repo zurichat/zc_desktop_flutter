@@ -192,8 +192,7 @@ class OrganizationService {
   /// This is used to get a single user profile
   Future<UserProfile> getUserProfile(
       String organizationId, String memberId) async {
-    final response = await _apiService.getUserProfile(
-        orgId: organizationId, memberId: memberId);
+     final response = await _apiService.getUserProfile(orgId: organizationId,memberId: memberId);
     log.i(response);
     return UserProfile.fromJson(response);
 
