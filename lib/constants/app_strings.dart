@@ -195,7 +195,6 @@ const String channelText8 = '34';
 const String channelText9 = ' members  ';
 const String channelText10 = 'View';
 const String channelText11 = 'Join';
-
 const String createChannel = 'Create a channel';
 const String channelTextOne =
     'Channels are where your team communicates. They’re best ';
@@ -209,3 +208,12 @@ const String channelTextSeven = 'When a channel is set to private,';
 const String channelTextEight = 'it can be viewed or joined by invitation.';
 const String channelTextNine = 'Create';
 const String channelTextTen = 'Channel created, You will be redirected shortly';
+
+const String profileClearStatus = 'Clear Status';
+const String profileSetStatus = 'Set yourself as Away';
+const String profilePauseNotification = 'Pause Notificatons';
+const String profileEditProfile = 'Edit Profile';
+const String profileViewProfile = 'View Profile';
+const String profilePreferences = 'Preferences';
+const String profileSignOut = 'Sign out of Zuri';
+const String profileCurrentName = 'perpKate';

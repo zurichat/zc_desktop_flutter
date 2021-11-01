@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -68,7 +70,7 @@ class ProfileDropdownView extends StatelessWidget {
               ),
             ),
             child: Image.asset(
-              'assets/images/profile_placeholder.png',
+              profilePlaceholder,
               fit: BoxFit.fill,
             ),
           ),
@@ -120,7 +122,7 @@ class DropDown extends StatelessWidget {
               ),
               Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: OutlinedButton(
                   onPressed: () {
                     onPress!();
@@ -141,13 +143,13 @@ class DropDown extends StatelessWidget {
                 ),
               ),
               DropDownItem(
-                text: 'Clear Status',
+                text: profileClearStatus,
               ),
               DropDownItem(
-                text: 'Set yourself as Away',
+                text: profileSetStatus,
               ),
               DropDownItem(
-                text: 'Pause Notificatons',
+                text: profilePauseNotification,
               ),
               Divider(),
               DropDownItem(
@@ -157,14 +159,14 @@ class DropDown extends StatelessWidget {
                       context: context,
                       builder: (context) => ProfileEditView());
                 },
-                text: 'Edit Profile',
+                text: profileEditProfile,
               ),
               DropDownItem(
                 onTap: () {
                   onPress!();
                   // model.goToViewProfile();
                 },
-                text: 'View Profile',
+                text: profileViewProfile,
               ),
               DropDownItem(
                 onTap: () {
@@ -172,15 +174,18 @@ class DropDown extends StatelessWidget {
                   showDialog(
                       context: context, builder: (context) => PreferenceView());
                 },
-                text: 'Preferences',
+                text: profilePreferences,
               ),
               Divider(),
-              DropDownItem(
-                text: 'Sign out of Zuri',
-                onTap: () {
-                  onPress!();
-                  model.signOut();
-                },
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: DropDownItem(
+                  text: profileSignOut,
+                  onTap: () {
+                    onPress!();
+                    model.signOut();
+                  },
+                ),
               )
             ]),
           ),
@@ -213,7 +218,7 @@ class DropDownItem extends StatelessWidget {
                 onTap: onTap,
                 child: Container(
                   color: model.isHover ? kcPrimaryColor : kcBackgroundColor2,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Expanded(
                     child: Row(
                       children: <Widget>[
@@ -256,7 +261,7 @@ class ProfilePicture extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(children: [
         Container(
-          height: 50.h,
+          // height: 80.h,
           width: 50.w,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -266,7 +271,7 @@ class ProfilePicture extends StatelessWidget {
             ),
           ),
           child: Image.asset(
-            'assets/images/profile_placeholder.png',
+            profilePlaceholder,
             // '${img!.isEmpty ? 'assets/images/profile_placeholder.png' : img}',
             fit: BoxFit.fill,
           ),
@@ -278,7 +283,7 @@ class ProfilePicture extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${displayName.isEmpty  ? 'Anonymous' : displayName}',
+                '${displayName.isEmpty ? 'Anonymous' : displayName}',
                 // '${member.displayName.isEmpty ? 'Anonymous' : member.displayName}',
                 style: subtitle3b,
               ),
