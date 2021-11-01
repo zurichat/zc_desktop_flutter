@@ -1015,5 +1015,205 @@
     "customizeWorkspace" : "Customise the look of your workspace. Feeling adventurous?\n",
     "@customizeWorkspace": {
         "description": "ThemeView"
+    },
+    "bookmarkPinned" : "Pinned Items",
+    "@bookmarkPinned": {
+        "description": "bookmark and pinned"
+    },
+    "bookmarkPinned2" : "Pinned",
+    "@bookmarkPinned2": {
+        "description": "bookmark and pinned"
+    },
+    "bookmarkPinned3" : "Close",
+    "@bookmarkPinned3": {
+        "description": "bookmark and pinned"
+    },
+    "bookmarkPinned4" : "www.zurichat.com",
+    "@bookmarkPinned4": {
+        "description": "bookmark and pinned"
+    },
+    "bookmarkPinned5" : "zurichat",
+    "@bookmarkPinned5": {
+        "description": "bookmark and pinned"
+    },
+    "bookmarkPinned6" : "No recent links",
+    "@bookmarkPinned6": {
+        "description": "bookmark and pinned"
+    },
+    "bookmarkPinned7" : "Pinned Messages clicked",
+    "@bookmarkPinned7": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmark" : "No recent links",
+    "@addBookmark": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmark2" : "Easily find your team's important links",
+    "@addBookmark2": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmarkDialog" : "Add A Bookmark",
+    "@addBookmarkDialog": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmarkDialog2" : "Link",
+    "@addBookmarkDialog2": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmarkDialog3" : "https://www.zuri.chat",
+    "@addBookmarkDialog3": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmarkDialog4" : "Name",
+    "@addBookmarkDialog4": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmarkDialog5" : "Ex. design reference ",
+    "@addBookmarkDialog5": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmarkDialog6" : "Add",
+    "@addBookmarkDialog6": {
+        "description": "bookmark and pinned"
+    },
+    "addBookmarkDialog7" : "Cancel",
+    "@addBookmarkDialog7": {
+        "description": "bookmark and pinned"
+    },
+    "dropDown" : "No recent links",
+    "@dropDown": {
+        "description": "bookmark and pinned"
+    },
+    "editBookmarkDialog" : "Edit Bookmark",
+    "@editBookmarkDialog": {
+        "description": "bookmark and pinned"
+    },
+    "editBookmarkDialog2" : "Link",
+    "@editBookmarkDialog2": {
+        "description": "bookmark and pinned"
+    },
+    "editBookmarkDialog3" : "https://www.zuri.chat",
+    "@editBookmarkDialog3": {
+        "description": "bookmark and pinned"
+    },
+    "editBookmarkDialog4" : "Name",
+    "@editBookmarkDialog4": {
+        "description": "bookmark and pinned"
+    },
+    "editBookmarkDialog5" : "Last edited by Dan Odin, Today at 6:09PM",
+    "@editBookmarkDialog5": {
+        "description": "bookmark and pinned"
+    },
+    "editBookmarkDialog6" : "Edit",
+    "@editBookmarkDialog6": {
+        "description": "bookmark and pinned"
+    },
+    "editBookmarkDialog7" : "Cancel",
+    "@editBookmarkDialog7": {
+        "description": "bookmark and pinned"
+    },
+    "deleteBookmarkDialog" : "Delete Bookmark",
+    "@deleteBookmarkDialog": {
+        "description": "bookmark and pinned"
+    },
+    "deleteBookmarkDialog2" : "Are you sure you want to delete this? If you do,\nIt will be lost for eternity beyond death and time. Unrecoverable!",
+    "@deleteBookmarkDialog2": {
+        "description": "bookmark and pinned"
+    },
+    "deleteBookmarkDialog3" : "Delete",
+    "@deleteBookmarkDialog3": {
+        "description": "bookmark and pinned"
+    },
+    "deleteBookmarkDialog4" : "Cancel",
+    "@deleteBookmarkDialog4": {
+        "description": "bookmark and pinned"
+    },
+    "actionsBookmarkDialog" : "Action",
+    "@actionsBookmarkDialog": {
+        "description": "bookmark and pinned"
+    },
+    "actionsBookmarkDialog2" : "Open Link",
+    "@actionsBookmarkDialog2": {
+        "description": "bookmark and pinned"
+    },
+    "actionsBookmarkDialog3" : "Edit Link",
+    "@actionsBookmarkDialog3": {
+        "description": "bookmark and pinned"
+    },
+    "actionsBookmarkDialog4" : "Copy Link",
+    "@actionsBookmarkDialog4": {
+        "description": "bookmark and pinned"
+    },
+    "actionsBookmarkDialog5" : "Delete Link",
+    "@actionsBookmarkDialog5": {
+        "description": "bookmark and pinned"
+    },
+    "deletePinned" : "Remove Pinned Item",
+    "@deletePinned": {
+        "description": "bookmark and pinned"
+    },
+    "deletePinned2" : "Are you sure you want to remove this pinned item?",
+    "@deletePinned2": {
+        "description": "bookmark and pinned"
+    },
+    "deletePinned3" : "Remove",
+    "@deletePinned3": {
+        "description": "bookmark and pinned"
+    },
+    "deletePinned4" : "Cancel",
+    "@deletePinned4": {
+        "description": "bookmark and pinned"
+    },
+    "buildPinned" : "Today at",
+    "@buildPinned": {
+        "description": "bookmark and pinned"
+    },
+    "channelDm" : "3 Pinned",
+    "@channelDm": {
+        "description": "Channel Dm"
+    },
+    "channelDm2" : " Add a bookmark",
+    "@channelDm2": {
+        "description": "Channel Dm"
+    },
+    "channelDm3" : "This is the very beginning of the ",
+    "@channelDm3": {
+        "description": "Channel Dm"
+    },
+    "channelDm4" : "Channel",
+    "@channelDm4": {
+        "description": "Channel Dm"
+    },
+    "channelDm5" : " created this channel on Aug 30th.",
+    "@channelDm5": {
+        "description": "Channel Dm"
+    },
+    "channelDm6" : "Add members",
+    "@channelDm6": {
+        "description": "Channel Dm"
+    },
+    "channelDm7" : "This conversation is just between you and ",
+    "@channelDm7": {
+        "description": "Channel Dm"
+    },
+    "channelDm8" : " no one else can see it",
+    "@channelDm8": {
+        "description": "Channel Dm"
+    },
+    "channelDm9" : "Here you can send messages and share files with .",
+    "@channelDm9": {
+        "description": "Channel Dm"
+    },
+    "messageReply" : " replies",
+    "@messageReply": {
+        "description": "Channel Dm"
+    },
+    "messageReply2" : "Last reply yesterday at 9:12PM",
+    "@messageReply2": {
+        "description": "Channel Dm"
+    },
+    "messageTile" : "Zuri me",
+    "@messageTile": {
+        "description": "Channel Dm"
     }
 }
