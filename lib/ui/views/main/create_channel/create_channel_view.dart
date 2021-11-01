@@ -27,8 +27,8 @@ class CreateChannelView extends HookWidget {
                   model.isCreateChannelSuccessful == true ||
                   model.channelNameError != null ||
                   model.channelDescriptionError != null)
-              ? 565.h
-              : 520.h,
+              ? 660.h
+              : 560.h,
           width: 410.w,
           child: Padding(
             padding: EdgeInsets.only(
@@ -184,18 +184,16 @@ class CreateChannelView extends HookWidget {
                                   : kcPrimaryColor,
                             )),
                         onPressed: () async {
-
                           if (!_formKey.currentState!.validate()) return;
 
                           await model.createchannels(
-                            nameController.text,
-                            model.userDisplayName(),
-                            descriptionController.text,
-                            model.isPrivate,
-                            nameController.text,
-                            model.isPrivate,
-                            context
-                          );
+                              nameController.text,
+                              model.userDisplayName(),
+                              descriptionController.text,
+                              model.isPrivate,
+                              nameController.text,
+                              model.isPrivate,
+                              context);
                         },
                         child: !model.isBusy
                             ? Padding(
@@ -206,7 +204,7 @@ class CreateChannelView extends HookWidget {
                                 ),
                               )
                             : CircularProgressIndicator(
-                              strokeWidth: 4.0,
+                                strokeWidth: 4.0,
                                 color: whiteColor,
                               ),
                       ),
