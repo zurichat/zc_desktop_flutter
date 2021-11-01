@@ -71,7 +71,7 @@ class AllDmsView extends StatelessWidget {
                               model.goToDmView(index);
                             },
                             leading: GFAvatar(
-                              backgroundColor: kcPrimaryColor,
+                              backgroundColor: Colors.transparent,
                               foregroundColor: kcPrimaryLight,
                               shape: GFAvatarShape.standard,
                               backgroundImage: NetworkImage(model.dms

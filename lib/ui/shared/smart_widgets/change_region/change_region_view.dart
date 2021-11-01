@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
@@ -9,9 +10,10 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/change_region/change_
 
 class ChangeRegionView extends StatelessWidget {
   const ChangeRegionView({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
+    final _appLocalization = AppLocalizations.of(context)!;
     return ViewModelBuilder<ChangeRegionViewmodel>.nonReactive(
         viewModelBuilder: () => ChangeRegionViewmodel(),
         builder: (context, model, _) {
@@ -28,14 +30,14 @@ class ChangeRegionView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ChangeRegion,
+                       _appLocalization.changeRegion,
                         style: changeRegionStyle,
                       ),
                       SizedBox(
                         height: 10.h,
                       ),
                       Text(
-                        SelectingRegion,
+                       _appLocalization.selectingRegion,
                         style: subtitlec2.copyWith(
                           color: createAccountColor,
                         ),
