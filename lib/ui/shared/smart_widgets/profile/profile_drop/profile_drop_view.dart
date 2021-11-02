@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
@@ -120,7 +119,7 @@ class DropDown extends StatelessWidget {
                 member: model.currentMember,
                 // displayName: displayName,
                 // member: model.member,
-                // displayName: model.currentMember.displayName,
+                displayName: model.currentMember.displayName,
               ),
               Container(
                 padding:
@@ -242,13 +241,13 @@ class DropDownItem extends StatelessWidget {
 
 class ProfilePicture extends StatelessWidget {
   final bool isActive = false;
-  final String? displayName;
+  final String displayName;
   final String? img;
   final User user;
   final Member member;
   ProfilePicture({
     Key? key,
-    this.displayName,
+    required this.displayName,
     this.img,
     required this.user,
     required this.member,

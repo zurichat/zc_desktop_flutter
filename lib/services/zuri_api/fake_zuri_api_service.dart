@@ -1,6 +1,6 @@
-import 'dart:io';
-
 import 'package:intl/intl.dart';
+
+import 'dart:io';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
@@ -338,6 +338,7 @@ class FakeZuriApiService implements Api {
     return orgList;
   }
 
+
   // @override
   // Future<Map<String, dynamic>> fetchUserDetails({String? userId}) {
   //   // TODO: implement fetchUserDetails
@@ -425,9 +426,12 @@ class FakeZuriApiService implements Api {
   }
 
   @override
-  Future<void> signOut(String token) {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future signOut(String token) async {
+    await Future.delayed(Duration(milliseconds: 500));
+    return {
+      'status':'200',
+      'message': 'token destroyed successfully'
+    };
   }
 
   @override

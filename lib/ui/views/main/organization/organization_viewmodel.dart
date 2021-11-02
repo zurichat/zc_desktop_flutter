@@ -64,9 +64,9 @@ class OrganizationViewModel extends BaseViewModel {
 
   /// This is the first function that is fired when the viewmodel is activated
   void setup() async {
-    _windowTitleBarService.setHome(true);
     setSelectedOrganization(getSelectedOrganizationIndex() ?? 0);
     await runBusyFuture(setupOrganization());
+    _windowTitleBarService.setHome(true);
     _organizationService.saveOrganizationId(_currentOrganization.id);
     _organizationService.saveMemberId(_currentOrganization.memberId);
     log.d('current organization id ${_currentOrganization.id}');
@@ -105,6 +105,7 @@ class OrganizationViewModel extends BaseViewModel {
     await getOrganizations();
     await getDMs();
     await getChannels();
+    
   }
 
   Future<void> getOrganizations() async {
@@ -153,7 +154,7 @@ class OrganizationViewModel extends BaseViewModel {
               phone: auth.user!.phone,
               pronouns: auth.user!.displayName,
               bio: auth.user!.displayName,
-              status: auth.user!.displayName));
+              status: UserStatus()));
       _dms.add(dm);
     }
     log.i('${_dms}');
@@ -192,6 +193,11 @@ class OrganizationViewModel extends BaseViewModel {
   void goToSavedItems() {
     notifyListeners();
     _navigationService.navigateTo(OrganizationViewRoutes.savedItemsView, id: 1);
+  }
+
+  void goToThreadsView() {
+    notifyListeners();
+    _navigationService.navigateTo(OrganizationViewRoutes.threadsView, id: 1);
   }
 
   void goToUserPeopleGroup() {
@@ -253,6 +259,7 @@ class OrganizationViewModel extends BaseViewModel {
     }
     return false;
   }
+
 
   @override
   void dispose() {

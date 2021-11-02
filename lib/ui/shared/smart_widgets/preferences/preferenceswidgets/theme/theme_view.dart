@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/theme/theme_viewmodel.dart';
@@ -121,13 +122,13 @@ class ThemeView extends StatelessWidget {
                                     text: TextSpan(children: [
                                   TextSpan(
                                       text:
-                                          'Customise the look of your workspace. Feeling adventurous?\n',
+                                          customizeWorkspace,
                                       style: kSubHeadingTextStyle.copyWith(
                                           color: Theme.of(context)
                                               .colorScheme
                                               .primary)),
                                   TextSpan(
-                                      text: 'create a custom theme',
+                                      text: customTheme,
                                       style: kSubHeadingTextStyle.copyWith(
                                           color:
                                               Color.fromRGBO(0, 184, 124, 1))),
@@ -206,7 +207,7 @@ class ThemeView extends StatelessWidget {
                                                 color: Color.fromRGBO(
                                                     0, 184, 124, 1),
                                                 size: 20),
-                                            Text('Show all classic themes',
+                                            Text(classicThemes,
                                                 style: kBodyTextStyle.copyWith(
                                                     fontSize: 14.sp,
                                                     color: Color.fromRGBO(
@@ -528,13 +529,13 @@ class ClassicThemeWidgetLight extends StatelessWidget {
             ]),
             subtitle: Container(
                 margin: EdgeInsets.only(top: 10),
-                child: Text('Look nice today', style: preferenceStyleNormal)),
+                child: Text(lookNiceToday, style: preferenceStyleNormal)),
           ),
           Spacer(),
           BuildRadio(
             value: toggleBtwTheme.LightTheme,
             groupValue: model.switchLightDark,
-            txt: 'Light',
+            txt: light,
             onChanged: (value) {
               model.switchBtwLightDark(value);
             },

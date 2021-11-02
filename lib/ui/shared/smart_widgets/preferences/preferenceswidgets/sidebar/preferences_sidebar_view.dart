@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_bar.dart';
 import 'package:zc_desktop_flutter/core/enums/pre_sidebar.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
@@ -28,143 +29,143 @@ class SideBarView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Always show in the side bar', style: preferenceStyleBold),
+                Text(alwaysShowInSidebar, style: preferenceStyleBold),
                 SizedBox(height: 14),
                 DisplayCheckBox(
                   value: model.insight,
                   assetName: 'assets/icons/insight.svg',
-                  text: 'Insights',
+                  text: insights,
                   // style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleInsight,
                 ),
                 DisplayCheckBox(
                   value: model.thread,
                   assetName: 'assets/icons/threads.svg',
-                  text: 'Threads',
+                  text: threads,
                   //style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleThread,
                 ),
                 DisplayCheckBox(
                   value: model.alldm,
                   assetName: 'assets/icons/alldms.svg',
-                  text: 'All DMs',
+                  text: AllDms,
                   //style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleAlldm,
                 ),
                 DisplayCheckBox(
                   value: model.draft,
                   assetName: 'assets/icons/draft.svg',
-                  text: 'Draft',
+                  text: draft,
                   //style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleDraft,
                 ),
                 DisplayCheckBox(
                   value: model.file,
                   assetName: 'assets/icons/file.svg',
-                  text: 'Files',
+                  text: files,
                   //style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleFile,
                 ),
                 DisplayCheckBox(
                   value: model.integrate,
                   assetName: 'assets/icons/integrate.svg',
-                  text: 'Integrate',
+                  text: integrate,
                   //style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleIntegrate,
                 ),
                 DisplayCheckBox(
                   value: model.todo,
                   assetName: 'assets/icons/todo.svg',
-                  text: 'To-do',
+                  text: todoText,
                   //style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleTodo,
                 ),
                 DisplayCheckBox(
                   value: model.browser,
                   assetName: 'assets/icons/filebrowser.svg',
-                  text: 'File browser',
+                  text: fileBrowser,
                   // style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleBrowser,
                 ),
                 DisplayCheckBox(
                   value: model.channel,
                   assetName: 'assets/icons/channel.svg',
-                  text: 'Channel browser',
+                  text: channelBrowser,
                   // style: headline6.copyWith(fontSize: 13.sp),
                   onChanged: model.togggleChannel,
                 ),
                 SizedBox(height: 5),
                 Divider(),
                 SizedBox(height: 10),
-                Text('Show...', style: preferenceStyleBold),
+                Text(showText, style: preferenceStyleBold),
                 DisplayRadio(
                     groupValue: model.sidebar,
-                    text: 'All your conversation',
+                    text: allConvo,
                     onChanged: (value) {
                       model.toggleSidebar((value));
                     },
                     value: PrefSidebar.AllConversation),
                 DisplayRadio(
                     groupValue: model.sidebar,
-                    text: 'Unread conversation only',
+                    text: unreadConvo,
                     onChanged: (value) {
                       model.toggleSidebar((value));
                     },
                     value: PrefSidebar.Unread),
                 DisplayRadio(
                     groupValue: model.sidebar,
-                    text: 'Custom depending on section',
+                    text: customDepend,
                     onChanged: (value) {
                       model.toggleSidebar((value));
                     },
                     value: PrefSidebar.Custom),
                 SizedBox(height: 5),
-                Text('Choose your settings for each section from the sidebar ',
+                Text(chooseSettings,
                     style: preferenceStyleNormal),
                 Divider(),
                 SizedBox(height: 10),
-                Text('Sort...', style: preferenceStyleBold),
+                Text(sortText, style: preferenceStyleBold),
                 DisRadio(
                     groupValue: model.bar,
-                    text: 'Alphabetically',
+                    text: alphabetically,
                     onChanged: (value) {
                       model.toggleBar((value));
                     },
                     value: PreBar.Alpha),
                 DisRadio(
                     groupValue: model.bar,
-                    text: 'By most recent',
+                    text: byMostRecent,
                     onChanged: (value) {
                       model.toggleBar((value));
                     },
                     value: PreBar.Recent),
                 DisRadio(
                     groupValue: model.bar,
-                    text: 'By priority',
+                    text: byPriority,
                     onChanged: (value) {
                       model.toggleBar((value));
                     },
                     value: PreBar.Priority),
                 SizedBox(height: 5),
                 Text(
-                    'You can also choose how individual section are sorted directly from the sidebar',
+                    chooseIndividualSection,
                     style: preferenceStyleNormal),
                 Divider(),
                 SizedBox(height: 10),
-                Text('Direct message announcements',
+                Text(dmAnnouncement,
                     style: preferenceStyleBold),
                 SizedBox(height: 5),
                 DisCheckBox(
-                    text: 'Show profile photos next to DM',
+                    text: showProfilePhotos,
                     onChanged: model.togggleshow,
                     value: model.show),
                 DisCheckBox(
-                    text: 'List private chats separately',
+                    text: listPrivateChats,
                     onChanged: model.togggleList,
                     value: model.list),
                 DisCheckBox(
                     text:
-                        'Organize external conversations into the connections section',
+                        OrganizeExternalConvo,
                     onChanged: model.togggleOrganize,
                     value: model.organize),
               ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -25,9 +26,11 @@ import 'sign_up_viewmodel.dart';
 ])
 class SignUpView extends HookWidget with $SignUpView {
   final _formKey = GlobalKey<FormState>();
+ 
 
   @override
   Widget build(BuildContext context) {
+    final _appLocalization = AppLocalizations.of(context)!;
     return ViewModelBuilder<SignUpViewModel>.reactive(
       onModelReady: (model) {
         listenToFormUpdated(model);
@@ -57,7 +60,7 @@ class SignUpView extends HookWidget with $SignUpView {
                                 Image.asset(ZuriLogoPath),
                                 verticalSpaceMedium,
                                 Text(
-                                  CreateAccountText,
+                                  _appLocalization.createAccounText,
                                   style: headline3,
                                 ),
                                 if (model.hasError) ...[

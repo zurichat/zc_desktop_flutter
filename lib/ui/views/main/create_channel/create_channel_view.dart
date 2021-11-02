@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_text_styles.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_ui_helpers.dart';
@@ -18,8 +18,10 @@ class CreateChannelView extends HookWidget {
   Widget build(BuildContext context) {
     final nameController = useTextEditingController();
     final descriptionController = useTextEditingController();
+    final _appLocalization = AppLocalizations.of(context)!;
 
     return ViewModelBuilder<CreateChannelViewModel>.reactive(
+      
       builder: (context, model, child) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
         child: Container(
@@ -46,7 +48,7 @@ class CreateChannelView extends HookWidget {
                   children: [
                     // ZcdeskText.headingCreateChannel(model.createChannel),
                     Text(
-                      CreateAccountText,
+                      _appLocalization.createAccounText,
                       style: createChannelHeaderStyle,
                     ),
                     Builder(
@@ -65,19 +67,19 @@ class CreateChannelView extends HookWidget {
                   ],
                 ),
                 Text(
-                  channelTextOne,
+                  _appLocalization.channelTextOne,
                   style: createChannelTextStyle,
                 ),
                 verticalSpaceTinyThree,
                 Text(
-                  channelTextTwo,
+                  _appLocalization.channelTextTwo,
                   style: createChannelTextStyle,
                 ),
                 // ZcdeskText.textCreateChannel(channelTextTwo),
                 verticalSpaceSmall,
                 verticalSpaceSmall,
                 if (model.isCreateChannelSuccessful)
-                  Text(channelTextTen,
+                  Text(_appLocalization.channelTextTen,
                       style: headline7.copyWith(color: kcSuccessColor)),
                 if (model.isCreateChannelNotSuccessful)
                   Text(model.errorMessage,
@@ -89,7 +91,7 @@ class CreateChannelView extends HookWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        channelTextThree,
+                       _appLocalization.channelTextThree,
                         style: createChannelSmallHeaderStyle,
                       ),
                       CreateChannelInputField(
@@ -111,11 +113,12 @@ class CreateChannelView extends HookWidget {
                       Row(
                         children: [
                           Text(
-                            channelTextFour,
+                            //todoTextFour still holds the value 'Description'
+                           _appLocalization.todoTextFour,
                             style: createChannelSmallHeaderStyle,
                           ),
                           Text(
-                            channelTextFive,
+                           _appLocalization.todoTextFive,
                             style: createChannelTextStyle,
                           ),
                         ],
@@ -143,7 +146,7 @@ class CreateChannelView extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      channelTextSix,
+                     _appLocalization.channelTextSix,
                       style: createChannelSmallHeaderStyle,
                     ),
                     Switch(
@@ -159,12 +162,12 @@ class CreateChannelView extends HookWidget {
                 ),
                 verticalSpaceSmall,
                 Text(
-                  channelTextSeven,
+                 _appLocalization.channelTextSeven,
                   style: createChannelTextStyle,
                 ),
                 verticalSpaceTinyTwo,
                 Text(
-                  channelTextEight,
+                 _appLocalization.channelTextEight,
                   style: createChannelTextStyle,
                 ),
                 verticalSpaceLarge,
@@ -201,7 +204,7 @@ class CreateChannelView extends HookWidget {
                             ? Padding(
                                 padding: EdgeInsets.only(bottom: 3.0.h),
                                 child: Text(
-                                  channelTextNine,
+                                 _appLocalization.channelTextNine,
                                   style: authBtnChannelStyle,
                                 ),
                               )
