@@ -41,7 +41,7 @@ import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart';
 import 'package:zc_desktop_flutter/ui/views/main/Threads/threads_view.dart';
 
 /// Use this to switch to mock data or live data
-const useFakeApiService = false;
+const useFakeApiService = true;
 
 @StackedApp(
   routes: [
@@ -91,11 +91,7 @@ const useFakeApiService = false;
     LazySingleton(classType: DMService),
     LazySingleton(classType: OrganizationService),
     LazySingleton(classType: StartupService),
-    LazySingleton(classType: UserService),
-    Presolve(
-      classType: CentrifugeService,
-      presolveUsing: CentrifugeService.getInstance,
-    ),
+    LazySingleton(classType: CentrifugeService),
     LazySingleton(classType: ConnectivityService),
     LazySingleton(
         classType: useFakeApiService ? FakeZuriApiService : ZuriApiService,
@@ -106,7 +102,7 @@ const useFakeApiService = false;
       resolveUsing: ThemeService.getInstance,
     ),
     LazySingleton(classType: WindowTitleBarService),
-    
+    LazySingleton(classType: UserService),
   ],
   logger: StackedLogger(),
 )
