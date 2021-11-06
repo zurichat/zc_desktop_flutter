@@ -1020,20 +1020,20 @@
     "@bookmarkPinned": {
         "description": "bookmark and pinned"
     },
-    "bookmarkPinned2" : "Pinned",
-    "@bookmarkPinned2": {
+    "pinned" : "Pinned",
+    "@pinned": {
         "description": "bookmark and pinned"
     },
-    "bookmarkPinned3" : "Close",
-    "@bookmarkPinned3": {
+    "close" : "Close",
+    "@close": {
         "description": "bookmark and pinned"
     },
     "bookmarkPinned4" : "www.zurichat.com",
     "@bookmarkPinned4": {
         "description": "bookmark and pinned"
     },
-    "bookmarkPinned5" : "zurichat",
-    "@bookmarkPinned5": {
+    "zurichat" : "zurichat",
+    "@zurichat": {
         "description": "bookmark and pinned"
     },
     "bookmarkPinned6" : "No recent links",
@@ -1056,28 +1056,28 @@
     "@addBookmarkDialog": {
         "description": "bookmark and pinned"
     },
-    "addBookmarkDialog2" : "Link",
-    "@addBookmarkDialog2": {
+    "link" : "Link",
+    "@link": {
         "description": "bookmark and pinned"
     },
-    "addBookmarkDialog3" : "https://www.zuri.chat",
-    "@addBookmarkDialog3": {
+    "zuriLink" : "https://www.zuri.chat",
+    "@zuriLink": {
         "description": "bookmark and pinned"
     },
-    "addBookmarkDialog4" : "Name",
-    "@addBookmarkDialog4": {
+    "name" : "Name",
+    "@name": {
         "description": "bookmark and pinned"
     },
     "addBookmarkDialog5" : "Ex. design reference ",
     "@addBookmarkDialog5": {
         "description": "bookmark and pinned"
     },
-    "addBookmarkDialog6" : "Add",
-    "@addBookmarkDialog6": {
+    "add" : "Add",
+    "@add": {
         "description": "bookmark and pinned"
     },
-    "addBookmarkDialog7" : "Cancel",
-    "@addBookmarkDialog7": {
+    "cancel" : "Cancel",
+    "@cancel": {
         "description": "bookmark and pinned"
     },
     "dropDown" : "No recent links",
@@ -1092,24 +1092,12 @@
     "@editBookmarkDialog2": {
         "description": "bookmark and pinned"
     },
-    "editBookmarkDialog3" : "https://www.zuri.chat",
-    "@editBookmarkDialog3": {
-        "description": "bookmark and pinned"
-    },
-    "editBookmarkDialog4" : "Name",
-    "@editBookmarkDialog4": {
-        "description": "bookmark and pinned"
-    },
     "editBookmarkDialog5" : "Last edited by Dan Odin, Today at 6:09PM",
     "@editBookmarkDialog5": {
         "description": "bookmark and pinned"
     },
-    "editBookmarkDialog6" : "Edit",
-    "@editBookmarkDialog6": {
-        "description": "bookmark and pinned"
-    },
-    "editBookmarkDialog7" : "Cancel",
-    "@editBookmarkDialog7": {
+    "edit" : "Edit",
+    "@edit": {
         "description": "bookmark and pinned"
     },
     "deleteBookmarkDialog" : "Delete Bookmark",
@@ -1120,12 +1108,8 @@
     "@deleteBookmarkDialog2": {
         "description": "bookmark and pinned"
     },
-    "deleteBookmarkDialog3" : "Delete",
-    "@deleteBookmarkDialog3": {
-        "description": "bookmark and pinned"
-    },
-    "deleteBookmarkDialog4" : "Cancel",
-    "@deleteBookmarkDialog4": {
+    "delete" : "Delete",
+    "@delete": {
         "description": "bookmark and pinned"
     },
     "actionsBookmarkDialog" : "Action",
@@ -1158,10 +1142,6 @@
     },
     "deletePinned3" : "Remove",
     "@deletePinned3": {
-        "description": "bookmark and pinned"
-    },
-    "deletePinned4" : "Cancel",
-    "@deletePinned4": {
         "description": "bookmark and pinned"
     },
     "buildPinned" : "Today at",

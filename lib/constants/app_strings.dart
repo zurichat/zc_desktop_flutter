@@ -388,34 +388,29 @@ const String customizeWorkspace =
 
 //Bookmark and Pinned View
 const String bookmarkPinned = 'Pinned Items';
-const String bookmarkPinned2 = 'Pinned';
-const String bookmarkPinned3 = 'Close';
+const String pinned = 'Pinned';
+const String close = 'Close';
 const String bookmarkPinned4 = 'www.zurichat.com';
-const String bookmarkPinned5 = 'zurichat';
+const String zurichat = 'zurichat';
 const String bookmarkPinned6 = 'No recent links';
 const String bookmarkPinned7 = 'Pinned messages clicked';
-const String addBookmark = 'No recent links';
+const String noRecentLink = 'No recent links';
 const String addBookmark2 = 'Easily find your team\'s important links';
 const String addBookmarkDialog = 'Add A Bookmark';
-const String addBookmarkDialog2 = 'Link';
-const String addBookmarkDialog3 = 'https://www.zuri.chat';
-const String addBookmarkDialog4 = 'Name';
+const String link = 'Link';
+const String zuriLink = 'https://www.zuri.chat';
+const String name = 'Name';
 const String addBookmarkDialog5 = 'Ex. design reference ';
-const String addBookmarkDialog6 = 'Add';
-const String addBookmarkDialog7 = 'Cancel';
+const String add = 'Add';
+const String cancel = 'Cancel';
 const String dropDown = 'No recent links';
 const String editBookmarkDialog = 'Edit Bookmark';
-const String editBookmarkDialog2 = 'Link';
-const String editBookmarkDialog3 = 'https://www.zuri.chat';
-const String editBookmarkDialog4 = 'Name';
 const String editBookmarkDialog5 = 'Last edited by Dan Odin, Today at 6:09PM';
-const String editBookmarkDialog6 = 'Edit';
-const String editBookmarkDialog7 = 'Cancel';
+const String edit = 'Edit';
 const String deleteBookmarkDialog = 'Delete Bookmark';
 const String deleteBookmarkDialog2 =
     'Are you sure you want to delete this? If you do,\nIt will be lost for eternity beyond death and time. Unrecoverable!';
-const String deleteBookmarkDialog3 = 'Delete';
-const String deleteBookmarkDialog4 = 'Cancel';
+const String delete = 'Delete';
 const String actionsBookmarkDialog = 'Action';
 const String actionsBookmarkDialog2 = 'Open Link';
 const String actionsBookmarkDialog3 = 'Edit Link';
@@ -425,7 +420,6 @@ const String deletePinned = 'Remove Pinned Item';
 const String deletePinned2 =
     'Are you sure you want to remove this pinned item?';
 const String deletePinned3 = 'Remove';
-const String deletePinned4 = 'Cancel';
 const String buildPinned = 'Today at';
 
 //Channel View
