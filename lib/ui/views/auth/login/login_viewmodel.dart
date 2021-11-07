@@ -25,7 +25,7 @@ class LoginViewModel extends FormViewModel {
   /// to set the [isHome] variable as well as the [title] variable.
   /// The delay was put into place because the [WindowsTitleBarsevice] make use of set state
   /// which would through and error without the use of await.
-  void init() async {
+  Future<void> init() async {
     await Future.delayed(Duration(milliseconds: 1));
     _windowsTitleBarService.setHome(false);
     _windowsTitleBarService.setTitle('Zuri | SignIn');
@@ -65,7 +65,11 @@ class LoginViewModel extends FormViewModel {
       }
       throw Failure(AuthErrorMessage);
     }
-    _navigationService.navigateTo(Routes.chooseWorkspaceView);
+   gotoChooseWorkSpace();
+  }
+
+  void gotoChooseWorkSpace(){
+     _navigationService.navigateTo(Routes.chooseWorkspaceView);
   }
 
   @override
