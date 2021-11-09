@@ -14,18 +14,18 @@ class DMService {
   final log = getLogger('DMService');
   final _zuriApiService = locator<Api>();
   final _organizationService = locator<OrganizationService>();
-  Users _user = Users(name: '');
-  DM? _dmRoomInfo;
+  Users user = Users(name: '');
+  DM? dmRoomInfo;
   currentLoggedInUser.User? _currentLoggedInUser;
   final _localStorageService = locator<LocalStorageService>();
 
   void setUser(Users user) {
-    this._user = user;
+    this.user = user;
   }
 
   Future<Users> getUser() async {
     await Future.delayed(Duration(seconds: 2));
-    return this._user;
+    return this.user;
   }
 
   currentLoggedInUser.User? getCurrentLoggedInUser() {
@@ -41,13 +41,13 @@ class DMService {
   }
 
   void setExistingRoomInfo(DM dm) {
-    _dmRoomInfo = dm;
+    dmRoomInfo = dm;
   }
 
   Future<void> setNewRoomInfo(Users user) async {
     User? currentUser = getCurrentLoggedInUser();
     var roomId = await createRoom(currentUser, user);
-    _dmRoomInfo = DM(
+    dmRoomInfo = DM(
         otherUserProfile: UserProfile(
             firstName: user.firstName,
             lastName: user.lastName,
@@ -76,7 +76,7 @@ class DMService {
             status: UserStatus()));
   }
 
-  DM? get getExistingRoomInfo => _dmRoomInfo;
+  DM? get getExistingRoomInfo => dmRoomInfo;
 
   Future<SendMessageResponse> sendMessage(
       var roomId, var senderId, var message) async {
