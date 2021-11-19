@@ -251,7 +251,7 @@ class BottomTexts extends StatelessWidget {
 //This is the center of the UI and allows the user select the workspaces he/she is registered with
 //Then onClick of the open button the user is then navigated appropriately to the organizationView
 class WorkspaceBox extends StatelessWidget {
-  const WorkspaceBox(
+   WorkspaceBox(
     this.model, {
     this.listTileItemCount,
     this.workspaceOwner,
@@ -261,7 +261,7 @@ class WorkspaceBox extends StatelessWidget {
   final ChooseWorkspaceViewmodel model;
   final int? listTileItemCount;
   final String? workspaceOwner;
-
+final rightSideBarController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -298,82 +298,92 @@ class WorkspaceBox extends StatelessWidget {
           Container(
             height: 230.h,
             width: 676.w,
-            child: ListView.separated(
-                itemBuilder: (context, index) {
-                  final boolValue = model.isChecked![index];
-                  return CheckboxListTile(
-                    value: boolValue,
-                    onChanged: (boolValue) {
-                      model.onChange(boolValue!, index);
-                    },
-                    activeColor: kcPrimaryColor,
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: Container(
-                      height: 60.h,
-                      width: 676.w,
-                      padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                      child: Row(children: [
-                        Container(
-                          height: 40.h,
-                          width: 40.w,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(ZuriI4gLogo),
-                                
-                                //NetworkImage(model.orgList[index].logoUrl),
-                                fit: BoxFit.cover),
+            child: Scrollbar(
+              controller: rightSideBarController,
+                                    isAlwaysShown: true,
+                                    scrollbarOrientation:
+                                        ScrollbarOrientation.right,
+                                    thickness: 10,
+                                    showTrackOnHover: true,
+              child: ListView.separated(
+                physics: AlwaysScrollableScrollPhysics(),
+                controller: rightSideBarController,
+                  itemBuilder: (context, index) {
+                    final boolValue = model.isChecked![index];
+                    return CheckboxListTile(
+                      value: boolValue,
+                      onChanged: (boolValue) {
+                        model.onChange(boolValue!, index);
+                      },
+                      activeColor: kcPrimaryColor,
+                      controlAffinity: ListTileControlAffinity.leading,
+                      title: Container(
+                        height: 60.h,
+                        width: 676.w,
+                        padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                        child: Row(children: [
+                          Container(
+                            height: 40.h,
+                            width: 40.w,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(ZuriI4gLogo),
+                                  
+                                  //NetworkImage(model.orgList[index].logoUrl),
+                                  fit: BoxFit.cover),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10.h,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              model.orgList[index].name,
-                              style: createChannelTextStyle.copyWith(
-                                color: headerColor,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                imageContainer(),
-                                imageContainer(),
-                                imageContainer(),
-                                imageContainer(),
-                                imageContainer(),
-                                imageContainer(),
-                                SizedBox(
-                                  width: 8.w,
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                model.orgList[index].name,
+                                style: createChannelTextStyle.copyWith(
+                                  color: headerColor,
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                Text(
-                                  '3, 496 $MemberText',
-                                  style: kExtraSmallTextStyle.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      color: leftNavBarColor),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ]),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(left: 24.w, right: 24.w),
-                    child: Divider(height: 0.5.w),
-                  );
-                },
-                itemCount: model.orgLength),
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  imageContainer(),
+                                  imageContainer(),
+                                  imageContainer(),
+                                  imageContainer(),
+                                  imageContainer(),
+                                  imageContainer(),
+                                  SizedBox(
+                                    width: 8.w,
+                                  ),
+                                  Text(
+                                    '3, 496 $MemberText',
+                                    style: kExtraSmallTextStyle.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: leftNavBarColor),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ]),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(left: 24.w, right: 24.w),
+                      child: Divider(height: 0.5.w),
+                    );
+                  },
+                  itemCount: model.orgLength),
+            ),
           )
         ],
       ),

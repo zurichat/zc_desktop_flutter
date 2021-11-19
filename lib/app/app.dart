@@ -91,7 +91,10 @@ const useFakeApiService = true;
     LazySingleton(classType: DMService),
     LazySingleton(classType: OrganizationService),
     LazySingleton(classType: StartupService),
-    LazySingleton(classType: CentrifugeService),
+    Presolve(
+      classType: CentrifugeService,
+      presolveUsing: CentrifugeService.getInstance,
+    ),
     LazySingleton(classType: ConnectivityService),
     LazySingleton(
         classType: useFakeApiService ? FakeZuriApiService : ZuriApiService,
