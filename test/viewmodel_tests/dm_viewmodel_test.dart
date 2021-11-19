@@ -1,9 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zc_desktop_flutter/model/app_models.dart';
-import 'package:zc_desktop_flutter/ui/views/main/dm/dm_viewmodel.dart';
 
 import '../helpers/test_helpers.dart';
-import '../widget_test.dart';
 
 void main() {
   setUp(() => registerServices());
