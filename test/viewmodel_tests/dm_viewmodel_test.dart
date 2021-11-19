@@ -7,7 +7,7 @@ import '../widget_test.dart';
 
 void main() {
   setUp(() => registerServices());
-    tearDown(() => unregisterServices());
+    tearDown(() => unregisterServices());/* 
   group('DmViewmodelTest -', () {
     
 
@@ -38,4 +38,5 @@ void main() {
       });
     });
   });
+ */
 }

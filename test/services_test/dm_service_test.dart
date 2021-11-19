@@ -8,7 +8,7 @@ import '../helpers/test_helpers.dart';
 void main() {
   setUp(() => registerServices());
   tearDown(() => unregisterServices());
-  group('runLogic -', () {
+/*   group('runLogic -', () {
     test('set New Room Info test', () {
       final service = getAndRegisterDMService();
       service.setNewRoomInfo(Users(firstName: 'Zuri User'));
@@ -51,5 +51,6 @@ void main() {
       final service = getAndRegisterDMService();
       service.sendMessage('12345', '98765', 'Hello, are u still working');
     });
-  });
+  }); */
+
 }
