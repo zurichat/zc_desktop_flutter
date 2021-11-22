@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/centrifuge_service.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
@@ -74,6 +77,18 @@ OrganizationService getAndRegisterOrganizationService() {
 LocalStorageService getAndRegisterLocalStorageService() {
   _removeRegistrationIfExists<LocalStorageService>();
   final service = MockLocalStorageService();
+  when(service.getFromDisk(localAuthResponseKey)).thenReturn(jsonEncode(User(
+      id: '1',
+      firstName: 'Dedan',
+      lastName: 'Ndungu',
+      displayName: 'dedankibere',
+      email: 'dnkibere@gmail.com',
+      phone: '254700314700',
+      status: 0,
+      timeZone: 'timeZone',
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
+      token: 'token')));
   locator.registerSingleton<LocalStorageService>(service);
   return service;
 }
@@ -81,6 +96,28 @@ LocalStorageService getAndRegisterLocalStorageService() {
 DMService getAndRegisterDMService() {
   _removeRegistrationIfExists<DMService>();
   final service = MockDMService();
+  when(service.getUser()).thenAnswer((u) async {
+    Future.delayed(Duration(seconds: 3));
+    return Users();
+  });
+
+  when(service.getCurrentLoggedInUser()).thenReturn(User(
+      id: '1',
+      firstName: 'Dedan',
+      lastName: 'Ndungu',
+      displayName: 'dedankibere',
+      email: 'dnkibere@gmail.com',
+      phone: '254700314700',
+      status: 0,
+      timeZone: 'timeZone',
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
+      token: 'token'));
+  when(service.getExistingRoomInfo)
+      .thenReturn(DM(
+              roomInfo: DMRoomsResponse(),
+              currentUserProfile: UserProfile(),
+              otherUserProfile: UserProfile()));
   locator.registerSingleton<DMService>(service);
   return service;
 }
@@ -133,7 +170,6 @@ void registerServices() {
   getAndRegisterUserService();
   getAndRegisterWindowTitleBarService();
   getAndRegisterZuriApiService();
-  
 }
 
 void unregisterServices() {

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:zc_desktop_flutter/services/auth_service.dart';
 
 import '../helpers/test_helpers.dart';
 
@@ -8,7 +9,11 @@ void main() {
     tearDown(() => unregisterServices());
 
     group('runLogic -', () {
-      test('', () {});
+      test('get logged in user', () {
+        final service = getAndRegisterLocalStorageService();
+        service.getFromDisk(localAuthResponseKey);
+
+      });
     });
   });
 }

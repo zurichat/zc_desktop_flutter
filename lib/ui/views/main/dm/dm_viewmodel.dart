@@ -89,6 +89,7 @@ class DmViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+//This function handles sending message to another user
   Future<void> sendMessage(String message) async {
     var mess = Results(
       reactions: [],

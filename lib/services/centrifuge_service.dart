@@ -11,7 +11,7 @@ import 'package:zc_desktop_flutter/services/local_storage_service.dart';
 
 class CentrifugeService with ReactiveServiceMixin {
   static final _localStorageService = locator<LocalStorageService>();
-  static String? get token => auth.user!.token;
+  static String? get token => auth?.user!.token;
 
   static late Client _client;
 
@@ -22,9 +22,12 @@ class CentrifugeService with ReactiveServiceMixin {
 
   Map<String, Subscription> subList = {};
 
-  static Auth get auth {
+  static Auth? get auth {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
-    return Auth.fromJson(jsonDecode(auth as String));
+    if (auth != null) {
+      return Auth.fromJson(jsonDecode(auth as String));
+    } else
+      return null;
   }
 
   ///This contains the `socketId` mapped to the stream or contoller
