@@ -1,16 +1,20 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:zc_desktop_flutter/model/app_models.dart';
+import 'package:zc_desktop_flutter/services/dm_service.dart';
 
 import '../helpers/test_helpers.dart';
 
 void main() {
   setUp(() => registerServices());
-  tearDown(() => unregisterServices());
-/*   group('runLogic -', () {
+  tearDown(() => unregisterServices());/* 
+     group('runLogic -', () {
     test('set New Room Info test', () {
       final service = getAndRegisterDMService();
-      service.setNewRoomInfo(Users(firstName: 'Zuri User'));
+      final serv=DMService();
+      
+      serv.setNewRoomInfo(Users(firstName: 'Zuri User'));
       expect(
-          service.getExistingRoomInfo!.otherUserProfile.firstName, 'Zuri User');
+          serv.getExistingRoomInfo!.otherUserProfile.firstName, 'Zuri User');
     });
     test('get user', () {
       final service = getAndRegisterDMService();
@@ -48,6 +52,6 @@ void main() {
       final service = getAndRegisterDMService();
       service.sendMessage('12345', '98765', 'Hello, are u still working');
     });
-  }); */
-
+  }); 
+ */
 }

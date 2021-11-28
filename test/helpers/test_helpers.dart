@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -100,7 +102,6 @@ DMService getAndRegisterDMService() {
     Future.delayed(Duration(seconds: 3));
     return Users();
   });
-
   when(service.getCurrentLoggedInUser()).thenReturn(User(
       id: '1',
       firstName: 'Dedan',
@@ -113,11 +114,24 @@ DMService getAndRegisterDMService() {
       createdAt: 'createdAt',
       updatedAt: 'updatedAt',
       token: 'token'));
-  when(service.getExistingRoomInfo)
-      .thenReturn(DM(
-              roomInfo: DMRoomsResponse(),
-              currentUserProfile: UserProfile(),
-              otherUserProfile: UserProfile()));
+  when(service.getExistingRoomInfo).thenReturn(DM(
+      roomInfo: DMRoomsResponse(),
+      currentUserProfile: UserProfile(),
+      otherUserProfile: UserProfile()));
+  when(service.fetchRoomMessages(any)).thenAnswer((u) async {
+    await Future.delayed(Duration(microseconds: 100));
+    List<Results> res = [];
+    res.add(Results());
+    return res;
+  });
+  when(service.fetchPinnedMessages(any)).thenAnswer((realInvocation) async {
+    await Future.delayed(Duration(microseconds: 100));
+    return [];
+  });
+  when(service.sendMessage(any, any, any)).thenAnswer((realInvocation) async {
+    await Future.delayed(Duration(microseconds: 100));
+    return SendMessageResponse(data: SendMessageResponseData());
+  });
   locator.registerSingleton<DMService>(service);
   return service;
 }
@@ -146,6 +160,17 @@ AuthService getAndRegisterAuthService() {
 CentrifugeService getAndRegisterCentrifugeService() {
   _removeRegistrationIfExists<CentrifugeService>();
   final service = MockCentrifugeService();
+  when(service.subscribe(any)).thenAnswer((_) async {
+    await Future.delayed(Duration(microseconds: 100));
+    return null;
+  });
+  when(service.listen(
+          socketId: anyNamed('socketId'),
+          channelId: anyNamed('channelId'),
+          onData: anyNamed('onData')))
+      .thenAnswer((realInvocation) {
+    return StreamController.broadcast().stream.listen((event) {});
+  });
   locator.registerSingleton<CentrifugeService>(service);
   return service;
 }
