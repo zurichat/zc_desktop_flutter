@@ -33,13 +33,13 @@ class DmViewModel extends BaseViewModel {
     _dmRoomInfo = _dmService.getExistingRoomInfo;
     if (_dmRoomInfo == null) {
       //we dont have a conversation yet so create a new room
-      await _dmService.createRoom(_currentLoggedInUser, _user);
+       _roomId=await _dmService.createRoom(_currentLoggedInUser, _user);
 
       ///_dmService.getRoomInfo(_roomId);
     } else {
       _roomId = _dmRoomInfo!.roomInfo.id;
     }
-    _messages = (await _dmService.fetchRoomMessages(_roomId));
+    _messages = await _dmService.fetchRoomMessages(_roomId);
     fetchPinnedMessages();
     //_dmService.markMessageAsRead('614b1e8f44a9bd81cedc0a29');
     setBusy(false);
@@ -299,7 +299,7 @@ class DmViewModel extends BaseViewModel {
   }
 
   void scrollToBottom() {
-    SchedulerBinding.instance!.addPostFrameCallback((_) {
+    SchedulerBinding.instance?.addPostFrameCallback((_) {
       rightSideBarController.animateTo(
         rightSideBarController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 10),

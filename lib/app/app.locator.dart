@@ -43,7 +43,9 @@ Future setupLocator(
   locator.registerLazySingleton(() => DMService());
   locator.registerLazySingleton(() => OrganizationService());
   locator.registerLazySingleton(() => StartupService());
-  locator.registerLazySingleton(() => CentrifugeService());
+  final centrifugeService = await CentrifugeService.getInstance();
+  locator.registerSingleton(centrifugeService);
+
   locator.registerLazySingleton(() => ConnectivityService());
   locator.registerLazySingleton<Api>(() => FakeZuriApiService());
   locator.registerLazySingleton(() => FilesService());
