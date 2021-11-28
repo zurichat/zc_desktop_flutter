@@ -130,8 +130,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                     visible: dmViewModel.isMessagePinned,
                     child: RowActionItem(
                       tip: bookmarkPinned,
-                      label:
-                          '${dmViewModel.pinnedMessages.length} ${bookmarkPinned2}',
+                      label: '${dmViewModel.pinnedMessages.length} ${pinned}',
                       icon: SVGAssetPaths.pinnedIcon,
                       onClicked: () {
                         //dmViewModel.onPinnedMessage(false);
@@ -149,7 +148,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                     visible: dmViewModel.isDecoyForPinnedMessageVisible,
                     child: RowActionItem(
                       tip: bookmarkPinned,
-                      label: bookmarkPinned3,
+                      label: close,
                       icon: SVGAssetPaths.pinnedIcon,
                       onClicked: () {
                         dmViewModel.onPinnedMessage(true);
@@ -163,7 +162,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                   ),
                   BookMarkedItem(
                       tip: bookmarkPinned4,
-                      label: bookmarkPinned5,
+                      label: zurichat,
                       icon: SVGAssetPaths.linkIcon,
                       onClicked: () {
                         showDialog(
@@ -357,7 +356,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(addBookmark, style: headline7),
+                    Text(noRecentLink, style: headline7),
                     Text(addBookmark2,
                         style: TextStyle(
                           fontSize: 18.sp,
@@ -430,14 +429,14 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(addBookmarkDialog2, style: subtitle2),
+                Text(link, style: subtitle2),
                 verticalSpaceSmall,
                 TextField(
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(),
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: kcPrimaryColor)),
-                    hintText: addBookmarkDialog3,
+                    hintText: zuriLink,
                   ),
                 ),
               ],
@@ -446,7 +445,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(addBookmarkDialog4, style: subtitle2),
+                Text(name, style: subtitle2),
                 verticalSpaceSmall,
                 TextField(
                   decoration: InputDecoration(
@@ -489,7 +488,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.r))),
               child: Text(
-                addBookmarkDialog6,
+                add,
                 style: TextStyle(color: Colors.white),
               ),
               //),
@@ -509,7 +508,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.r))),
-              child: Text(addBookmarkDialog6),
+              child: Text(cancel),
               //),
             ),
           ],
@@ -550,12 +549,12 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(editBookmarkDialog2, style: subtitle2),
+                Text(link, style: subtitle2),
                 verticalSpaceSmall,
                 TextField(
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(),
-                    hintText: editBookmarkDialog3,
+                    hintText: zuriLink,
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: kcPrimaryColor)),
                   ),
@@ -566,7 +565,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(editBookmarkDialog4, style: subtitle2),
+                Text(name, style: subtitle2),
                 verticalSpaceSmall,
                 TextField(
                   decoration: InputDecoration(
@@ -616,7 +615,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.r))),
               child: Text(
-                editBookmarkDialog6,
+                edit,
                 style: TextStyle(color: Colors.white),
               ),
               //),
@@ -636,7 +635,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.r))),
-              child: Text(editBookmarkDialog7),
+              child: Text(cancel),
               //),
             ),
           ],
@@ -676,7 +675,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              deleteBookmarkDialog,
+              deleteBookmarkDialog2,
               softWrap: true,
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
@@ -702,7 +701,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.r))),
               child: Text(
-                deleteBookmarkDialog3,
+                delete,
                 style: TextStyle(color: Colors.white),
               ),
               //),
@@ -722,7 +721,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.r))),
-              child: Text(deleteBookmarkDialog4),
+              child: Text(cancel),
               //),
             ),
           ],
@@ -765,7 +764,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
               text: actionsBookmarkDialog2,
               onTap: () {
                 Navigator.pop(context, true);
-                dmViewModel.launchBookmarkedUrl(addBookmarkDialog3);
+                dmViewModel.launchBookmarkedUrl(actionsBookmarkDialog2);
               },
             ),
             verticalSpaceSmall,
@@ -1150,7 +1149,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.r))),
-              child: Text(deletePinned4),
+              child: Text(cancel),
               //),
             ),
           ],
