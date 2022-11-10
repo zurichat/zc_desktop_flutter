@@ -2,7 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/app/app_router.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';

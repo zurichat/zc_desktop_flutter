@@ -73,16 +73,16 @@ class ChannelDmViewModel extends BaseViewModel {
   void runTask() async {
     _currentChannel = _channelService.getChannel();
     _currentLoggedInUser = _channelService.getCurrentLoggedInUser()!;
-    /*_channelService.addUserToChannel(
+    _channelService.addUserToChannel(
         id: _currentLoggedInUser.id,
         role_id: '1',
         is_admin: true,
         prop1: 'prop1',
         prop2: 'prop2',
         prop3: 'prop3');
-    _messages = await _channelService.fetchChannelMessages();
+    _messages = await _channelService.fetchChannelMessages(channelId);
     getChannelSocketId();
-    listenToNewMessages();*/
+    listenToNewMessages();
   }
 
   void getChannelSocketId() async {

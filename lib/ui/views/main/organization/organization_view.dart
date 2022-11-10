@@ -8,7 +8,7 @@ import 'package:zc_desktop_flutter/ui/views/main/organization/organization_list_
 import 'package:zc_desktop_flutter/ui/views/main/organization/organization_viewmodel.dart';
 
 class OrganizationView extends StatelessWidget {
- const OrganizationView({Key? key}) : super(key: key);
+  OrganizationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

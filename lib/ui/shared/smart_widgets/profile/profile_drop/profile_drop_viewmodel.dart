@@ -1,6 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:zc_desktop_flutter/app/app_router.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_asset_paths.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';

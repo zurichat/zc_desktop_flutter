@@ -15,7 +15,6 @@ import 'package:zc_desktop_flutter/services/window_title_bar_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/api.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/fake_zuri_api_service.dart';
 import 'package:zc_desktop_flutter/services/zuri_api/zuri_api_service.dart';
-import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_view/profile_show_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart';
 import 'package:zc_desktop_flutter/ui/views/auth/check_email/check_email_view.dart';
@@ -63,7 +62,7 @@ const useFakeApiService = true;
       page: OrganizationView,
       children: [
         MaterialRoute(page: ChannelsView, initial: true),
-        MaterialRoute(page: ChannelDmView),
+        // MaterialRoute(page: ChannelDmView),
         MaterialRoute(page: ChannelsListView),
         MaterialRoute(page: CreateChannelView),
         MaterialRoute(page: DmView),

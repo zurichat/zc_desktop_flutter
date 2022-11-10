@@ -4,7 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/app/app_router.dart';
+import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/enums/button_type_enum.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';

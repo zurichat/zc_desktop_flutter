@@ -4,12 +4,11 @@
 // StackedLocatorGenerator
 // **************************************************************************
 
-// ignore_for_file: public_member_api_docs
+// ignore_for_file: public_member_api_docs, implementation_imports, depend_on_referenced_packages
 
-import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
-import 'package:stacked_services/stacked_services.dart';
-import 'package:stacked_themes/stacked_themes.dart';
+import 'package:stacked_core/stacked_core.dart';
+import 'package:stacked_services/src/navigation/navigation_service.dart';
+import 'package:stacked_themes/src/theme_service.dart';
 
 import '../services/auth_service.dart';
 import '../services/centrifuge_service.dart';
@@ -27,7 +26,7 @@ import '../services/zuri_api/fake_zuri_api_service.dart';
 
 final locator = StackedLocator.instance;
 
-Future setupLocator(
+Future<void> setupLocator(
     {String? environment, EnvironmentFilter? environmentFilter}) async {
 // Register environments
   locator.registerEnvironment(
@@ -43,7 +42,9 @@ Future setupLocator(
   locator.registerLazySingleton(() => DMService());
   locator.registerLazySingleton(() => OrganizationService());
   locator.registerLazySingleton(() => StartupService());
-  locator.registerLazySingleton(() => CentrifugeService());
+  final centrifugeService = await CentrifugeService.getInstance();
+  locator.registerSingleton(centrifugeService);
+
   locator.registerLazySingleton(() => ConnectivityService());
   locator.registerLazySingleton<Api>(() => FakeZuriApiService());
   locator.registerLazySingleton(() => FilesService());
