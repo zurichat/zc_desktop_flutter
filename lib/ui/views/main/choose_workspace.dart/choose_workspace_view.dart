@@ -52,6 +52,7 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
+
   //This is the text that helps to sign in to a new or different workspace
   // not on our available workspace
   InkWell signIntoNewWorkspace(ChooseWorkspaceViewmodel model) {
@@ -70,7 +71,8 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
-  //This is the text 
+
+  //This is the text
   promiseText() {
     return Container(
       margin: EdgeInsets.only(left: 460.w, right: 425.w),
@@ -83,6 +85,7 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
+
   //Onclick of this button it opens all the selected workspaces by the user
   //and displays them on the left side of the organizationView
   Container openButtonWidget(ChooseWorkspaceViewmodel model) {
@@ -117,6 +120,7 @@ class ChooseWorkspaceView extends StatelessWidget {
       ),
     );
   }
+
   //Tis the Large Choose Workspace text that appears in the UI
   Container largeWorkspaceText() {
     return Container(
@@ -166,6 +170,7 @@ class ZuriLogoAndText extends StatelessWidget {
       ),
     );
   }
+
 //newToZuriText which helps the user create an account with zuri Onclick of the text
   Container newToZuriText() {
     return Container(
@@ -248,10 +253,11 @@ class BottomTexts extends StatelessWidget {
     );
   }
 }
+
 //This is the center of the UI and allows the user select the workspaces he/she is registered with
 //Then onClick of the open button the user is then navigated appropriately to the organizationView
 class WorkspaceBox extends StatelessWidget {
-   WorkspaceBox(
+  WorkspaceBox(
     this.model, {
     this.listTileItemCount,
     this.workspaceOwner,
@@ -261,7 +267,7 @@ class WorkspaceBox extends StatelessWidget {
   final ChooseWorkspaceViewmodel model;
   final int? listTileItemCount;
   final String? workspaceOwner;
-final rightSideBarController = ScrollController();
+  final rightSideBarController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -300,14 +306,13 @@ final rightSideBarController = ScrollController();
             width: 676.w,
             child: Scrollbar(
               controller: rightSideBarController,
-                                    isAlwaysShown: true,
-                                    scrollbarOrientation:
-                                        ScrollbarOrientation.right,
-                                    thickness: 10,
-                                    showTrackOnHover: true,
+              thumbVisibility: true,
+              scrollbarOrientation: ScrollbarOrientation.right,
+              thickness: 10,
+              trackVisibility: true,
               child: ListView.separated(
-                physics: AlwaysScrollableScrollPhysics(),
-                controller: rightSideBarController,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  controller: rightSideBarController,
                   itemBuilder: (context, index) {
                     final boolValue = model.isChecked![index];
                     return CheckboxListTile(
@@ -328,7 +333,7 @@ final rightSideBarController = ScrollController();
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(ZuriI4gLogo),
-                                  
+
                                   //NetworkImage(model.orgList[index].logoUrl),
                                   fit: BoxFit.cover),
                             ),
@@ -350,7 +355,8 @@ final rightSideBarController = ScrollController();
                                 height: 2.h,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   imageContainer(),
@@ -389,7 +395,6 @@ final rightSideBarController = ScrollController();
       ),
     );
   }
-
 
 //This is the image which is usually the Logo of the Organizations User is Logged in to
   Container imageContainer() {

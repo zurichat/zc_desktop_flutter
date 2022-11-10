@@ -89,7 +89,7 @@ class ProfileDropdownView extends StatelessWidget {
       model.setIsDropped();
     } else {
       this._floatingDropdown = this._createFloatingDropdown(model);
-      Overlay.of(context)!.insert(this._floatingDropdown);
+      Overlay.of(context).insert(this._floatingDropdown);
       model.setIsDropped();
     }
   }

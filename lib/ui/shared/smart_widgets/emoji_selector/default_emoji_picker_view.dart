@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/emoji_selector/category_emoji.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/emoji_selector/config.dart';

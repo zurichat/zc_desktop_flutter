@@ -76,7 +76,7 @@ class ConnectivityService with ReactiveServiceMixin {
       // check for internet connection
       _internetSubscription =
           InternetConnectionChecker().onStatusChange.listen(_internetCallback);
-      InternetConnectionChecker().checkInterval = DEFAULT_INTERVAL;
+      // InternetConnectionChecker().checkInterval = DEFAULT_INTERVAL;
       InternetConnectionChecker().addresses = _DEFAULT_ADDRESSES;
     }
   }
@@ -134,17 +134,17 @@ class ConnectivityService with ReactiveServiceMixin {
 
   final List<AddressCheckOptions> _DEFAULT_ADDRESSES = List.unmodifiable([
     AddressCheckOptions(
-      InternetAddress('1.1.1.1'),
+      address: InternetAddress('1.1.1.1'),
       port: DEFAULT_PORT,
       timeout: DEFAULT_TIMEOUT,
     ),
     AddressCheckOptions(
-      InternetAddress('8.8.4.4'),
+      address: InternetAddress('8.8.4.4'),
       port: DEFAULT_PORT,
       timeout: DEFAULT_TIMEOUT,
     ),
     AddressCheckOptions(
-      InternetAddress('208.67.222.222'),
+      address: InternetAddress('208.67.222.222'),
       port: DEFAULT_PORT,
       timeout: DEFAULT_TIMEOUT,
     ),

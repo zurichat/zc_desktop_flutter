@@ -27,7 +27,7 @@ class AddUserView extends StatelessWidget {
     if (_floatingDropdown == null) {
       this._floatingDropdown = this._createFloatingDropdown(model);
     }
-    Overlay.of(context)!.insert(this._floatingDropdown!);
+    Overlay.of(context).insert(this._floatingDropdown!);
   }
 
   @override
@@ -159,7 +159,7 @@ class AddUserView extends StatelessWidget {
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: kcPrimaryColor,
+                              backgroundColor: kcPrimaryColor,
                               minimumSize: Size(115.w, 56.h),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),

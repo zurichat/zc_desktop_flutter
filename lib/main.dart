@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app_router.dart';
 import 'package:zc_desktop_flutter/l10n/l10n.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/preferences/preferenceswidgets/theme/themes.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/window_title_bar/window_title_bar_view.dart';
 import 'package:zc_desktop_flutter/window_setup.dart';
-
-import 'app/app.router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +34,7 @@ class ZcDesktop extends StatelessWidget {
       themes: getThemes(),
       builder: (context, regularTheme, darkTheme, themeMode) => ScreenUtilInit(
         designSize: Size(1440, 1024),
-        builder: () {
+        builder: (BuildContext context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Zuri Chat',

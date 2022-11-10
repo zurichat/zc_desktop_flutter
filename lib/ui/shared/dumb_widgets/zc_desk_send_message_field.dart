@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:zc_desktop_flutter/ui/shared/const_app_colors.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/emoji_builder.dart';
 import 'package:zc_desktop_flutter/ui/shared/smart_widgets/emoji_selector/emoji.dart';
@@ -143,7 +142,7 @@ class _SendMessageFunctions extends StatelessWidget {
       this.attachPressed,
       this.schedulePressed,
       this.formatPressed,
-      this.emojiPressed})
+      })
       : super(key: key);
   final bool isActive;
   final bool isTyping;
@@ -153,7 +152,6 @@ class _SendMessageFunctions extends StatelessWidget {
   final Function()? attachPressed;
   final Function()? schedulePressed;
   final Function()? formatPressed;
-  final Function()? emojiPressed;
   final TextEditingController? messageController;
 
   @override

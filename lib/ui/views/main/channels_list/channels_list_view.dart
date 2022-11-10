@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,42 +23,42 @@ class ChannelsListView extends StatelessWidget {
       builder: (context, model, child) => Container(
         color: whiteColor,
         child: model.isBusy
-          ? Expanded(
-              child: Center(
-                child: Container(
-                  width: 24.0,
-                  height: 24.0,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.0.r,
-                    valueColor: AlwaysStoppedAnimation(Colors.grey),
+            ? Expanded(
+                child: Center(
+                  child: Container(
+                    width: 24.0,
+                    height: 24.0,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.0.r,
+                      valueColor: AlwaysStoppedAnimation(Colors.grey),
+                    ),
                   ),
                 ),
-              ),
-            )
-          : Padding(
-          padding: EdgeInsets.only(
-            left: 15.0.w,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              DetailedCustomAppBar(
-                // margin: EdgeInsets.only(left: 1.0.w),
-                leading: WorkSpaceTitle(
-                  channelTitle: 'Channel Browser',
+              )
+            : Padding(
+                padding: EdgeInsets.only(
+                  left: 15.0.w,
                 ),
-              ),
-              verticalSpaceRegular,
-              Expanded(
-                flex: 14,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * .7,
-                  height: double.infinity,
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    DetailedCustomAppBar(
+                      // margin: EdgeInsets.only(left: 1.0.w),
+                      leading: WorkSpaceTitle(
+                        channelTitle: 'Channel Browser',
+                      ),
+                    ),
+                    verticalSpaceRegular,
+                    Expanded(
+                      flex: 14,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * .7,
+                        height: double.infinity,
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
                           // Text('${model.channels.length == 0 ? '0' : model.channels.length} ${channelText3}', style: searchChannelHeaderStyle,),
                           Text('${model.channels.length} ${channelText3}', style: searchChannelHeaderStyle,),
                           Spacer(),
@@ -119,38 +117,38 @@ class ChannelsListView extends StatelessWidget {
                                   paddingBottom2: 6.0.h,
                                   paddingall: 7.0,
                                   paddingBottom3: 2.5.h,
-
-                                  channelText6: model.channels[index].name,
-                                  channelText7: channelText7,
-
-                                  channelText8: model.channels[index].member,
-                                  channelText9: channelText9,
-                                  channelText10: channelText10,
-                                  channelText11: channelText11,
-                                  paddingBottom4: 3.0.h,
-                                  isChannelHover:
-                                      (model.isChannelHover == false ||
-                                              model.selectedind != index)
-                                          ? whiteColor
-                                          : kcBackgroundColor1,
-                                  visibleButton:
-                                      (model.isChannelHover == false ||
-                                              model.selectedind != index)
-                                          ? false
-                                          : true,
-                                  hoverFunction: (val) {
-                                    model.setIsChannelHover();
-                                    model.setIsselectedind(index);
-                                  });
-                            }),
+                                        channelText6:
+                                            model.channels[index].name,
+                                        channelText7: channelText7,
+                                        channelText8:
+                                            model.channels[index].member,
+                                        channelText9: channelText9,
+                                        channelText10: channelText10,
+                                        channelText11: channelText11,
+                                        paddingBottom4: 3.0.h,
+                                        isChannelHover:
+                                            (model.isChannelHover == false ||
+                                                    model.selectedind != index)
+                                                ? whiteColor
+                                                : kcBackgroundColor1,
+                                        visibleButton:
+                                            (model.isChannelHover == false ||
+                                                    model.selectedind != index)
+                                                ? false
+                                                : true,
+                                        hoverFunction: (val) {
+                                          model.setIsChannelHover();
+                                          model.setIsselectedind(index);
+                                        });
+                                  }),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
       ),
       //   ],
       // ),
@@ -239,7 +237,10 @@ class ChannelsDisplayList extends StatelessWidget {
                           padding: EdgeInsets.only(bottom: paddingBottom3),
                           // child: ZcdeskText.displayChannelSmallHeaderBlackStyle(
                           //   channelText6,
-                          child: Text(channelText6, style: displayChannelSmallHeaderBlackStyle,),
+                          child: Text(
+                            channelText6,
+                            style: displayChannelSmallHeaderBlackStyle,
+                          ),
                         ),
                       ],
                     ),
@@ -261,15 +262,24 @@ class ChannelsDisplayList extends StatelessWidget {
                                   ),
                                   // ZcdeskText.searchChannelHeaderGreenStyle(
                                   //     channelText7),
-                                  Text(channelText7, style: searchChannelHeaderGreenStyle,),
+                                  Text(
+                                    channelText7,
+                                    style: searchChannelHeaderGreenStyle,
+                                  ),
                                   horizontalSpaceSmall,
                                 ],
                               ),
                             ),
                             // ZcdeskText.searchChannelHeaderStyle(channelText8),
-                            Text('${channelText8}', style: searchChannelHeaderStyle,),
+                            Text(
+                              '${channelText8}',
+                              style: searchChannelHeaderStyle,
+                            ),
                             // ZcdeskText.searchChannelHeaderStyle(channelText9),
-                            Text(channelText9, style: searchChannelHeaderStyle,),
+                            Text(
+                              channelText9,
+                              style: searchChannelHeaderStyle,
+                            ),
                           ],
                         ),
                       ],

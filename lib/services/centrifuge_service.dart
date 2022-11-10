@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:centrifuge/centrifuge.dart' as centrifuge;
 import 'package:centrifuge/centrifuge.dart';
 import 'package:stacked/stacked.dart';
-import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
+import 'package:zc_desktop_flutter/app/app.logger.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/services/local_storage_service.dart';
@@ -30,31 +30,24 @@ class CentrifugeService with ReactiveServiceMixin {
       return null;
   }
 
-  ///This contains the `socketId` mapped to the stream or contoller
-  ///so user dont subscribe to the same event twice
+  ///This contains the `socketId` mapped to the stream or controller
+  ///so user don't subscribe to the same event twice
   static Future<CentrifugeService> getInstance() async {
     _showLog('Starting Centrifuge Service');
     _instance ??= CentrifugeService();
-
-    _client = centrifuge.createClient(
-        'wss://realtime.zuri.chat/connection/websocket?format=protobuf',
-        config: ClientConfig(
-          debug: true,
-          retry: (int rty) {
-            log.w('Retry Count - $rty');
-          },
-        ));
-
     final connectData = utf8.encode(json.encode({'bearer': token}));
+    _client = centrifuge.createClient(
+      '$connectData?format=protobuf',
+      centrifuge.ClientConfig(token: token, data: connectData),
+    );
+    onEvent(dynamic event) {
+      log.i('client event> $event');
+    }
 
-    _client.setConnectData(connectData);
-
-// _client.setConnectData([2]);
-    _client.connectStream.listen(_showLog);
-    _client.disconnectStream.listen(_showLog);
-
-    _client.connect();
-
+    _client.connecting.listen(onEvent);
+    _client.connected.listen(onEvent);
+    _client.disconnected.listen(onEvent);
+    await _client.connect();
     return _instance!;
   }
 
@@ -62,12 +55,12 @@ class CentrifugeService with ReactiveServiceMixin {
     _client.disconnect();
   }
 
-  void _showError(_error) {
-    log.e(_error);
+  void _showError(error) {
+    log.e(error);
   }
 
-  static void _showLog(_message) {
-    log.wtf(_message);
+  static void _showLog(message) {
+    log.wtf(message);
   }
 
   ///Use this to listen to centrifuge event either from dm, channels
@@ -83,26 +76,43 @@ class CentrifugeService with ReactiveServiceMixin {
   StreamSubscription listen({
     required String socketId,
     required channelId,
-    required Function(CentrifugalMessageResponse userMessage) onData,
+    required Function(Map userMessage) onData,
   }) {
     if (!hasSubscribed(socketId)) {
       _showLog('subscribed $socketId');
       subscribe(socketId);
     }
-
     var streamSub = messageStreamController.stream.listen((message) {
-      var res = CentrifugalMessageResponse.fromJson(message);
-      log.i('before errr ${res}');
-      String? eventType = res.event;
-      if (eventType != 'message_create') {
-        log.e('not a new message');
+      String? eventType = message['event']['action'];
+      if (eventType != 'create:message') {
         return;
       }
-      if (res.roomId != channelId) {
-        log.e('not the same channel');
+      if (message['channel_id'] != channelId) {
         return;
       }
-      onData(res);
+      onData(message);
+    });
+    return streamSub;
+  }
+
+  StreamSubscription listenDM({
+    required String socketId,
+    required roomID,
+    required Function(Map userMessage) onData,
+  }) {
+    if (!hasSubscribed(socketId)) {
+      _showLog('subscribed $socketId');
+      subscribe(socketId);
+    }
+    var streamSub = messageStreamController.stream.listen((message) {
+      String? eventType = message['event']['action'];
+      if (eventType != 'create:message') {
+        return;
+      }
+      if (message['room_id'] != roomID) {
+        return;
+      }
+      onData(message);
     });
     return streamSub;
   }
@@ -119,7 +129,6 @@ class CentrifugeService with ReactiveServiceMixin {
       if (message['channel_id'] == channelId) {
         return;
       }
-
       onData(message);
     });
     return streamSub;
@@ -135,32 +144,28 @@ class CentrifugeService with ReactiveServiceMixin {
           'Channel Socket ID is required to subscribe to a channel');
     }
     Subscription? subscription = _client.getSubscription(channelSocketId);
-
-    subscription.subscribeErrorStream.listen(_showError);
-    subscription.subscribeSuccessStream.listen(_showLog);
-    subscription.unsubscribeStream.listen(_showLog);
-
-    subscription.joinStream.listen((event) {
-      log.i('Subcribe join stream $event');
+    subscription!.subscribing.listen(_showLog);
+    subscription.error.listen(_showError);
+    subscription.subscribed.listen(_showLog);
+    subscription.unsubscribed.listen(_showLog);
+    subscription.join.listen((event) {
+      log.i('Subscribe join stream $event');
     });
-
-    subscription.leaveStream.listen((event) {
-      log.i('Subcribe leave stream $event');
+    subscription.leave.listen((event) {
+      log.i('Subscribe leave stream $event');
     });
-
-    subscription.publishStream.listen((event) {
+    subscription.publication.listen((event) {
       Map userMessage = json.decode(utf8.decode(event.data));
       _showLog('CENTRIFUGE RTC EVENT OUTPUT $userMessage');
-
       messageStreamController.sink.add(userMessage);
     });
-
     subscription.subscribe();
     if (hasSubscribed(channelSocketId)) {
       subscription.unsubscribe();
       return null;
     }
     subList[channelSocketId] = subscription;
+    return null;
   }
 
   void dispose() {

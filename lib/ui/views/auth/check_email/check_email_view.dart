@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -50,7 +48,7 @@ class CheckEmailView extends StatelessWidget {
                     Text(
                       model.errorMsg,
                       style: boldCaptionStyle.copyWith(
-                        color: Theme.of(context).errorColor,
+                        color: Theme.of(context).colorScheme.error,
                       ),
                     ),
                     verticalSpaceSmall,
@@ -64,7 +62,8 @@ class CheckEmailView extends StatelessWidget {
                           style: subtitle2,
                           textFieldAlignment: MainAxisAlignment.spaceAround,
                           fieldStyle: FieldStyle.box,
-                          onCompleted: (pin) => model.performVarification(pin, _isResetPassword!),
+                          onCompleted: (pin) =>
+                              model.performVarification(pin, _isResetPassword!),
                         )),
                     verticalSpaceLarge,
                     GestureDetector(

@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/app/app_router.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,17 +16,16 @@ class CheckEmailViewModel extends BaseViewModel {
   get errorMsg => _errorMsg;
   final _windowsTitleBarService = locator<WindowTitleBarService>();
 
-
   /// This method is called inside on model ready in the view which act just like init state
-  /// The function is used to state the state of the title bar as well a the title of the 
-  /// title bar. 
+  /// The function is used to state the state of the title bar as well a the title of the
+  /// title bar.
   void init() async {
     await Future.delayed(Duration(milliseconds: 1));
     _windowsTitleBarService.setHome(false);
     _windowsTitleBarService.setTitle('Zuri | Check Email');
   }
 
- /// This function set the busy state of the view. 
+  /// This function set the busy state of the view.
   void _setIsBusy() {
     _isBusy = !_isBusy;
     notifyListeners();
@@ -45,6 +44,7 @@ class CheckEmailViewModel extends BaseViewModel {
         } else {
           await _auth.verifyPasswordResetCode(otp);
         }
+
         /// Performing navigation based on the [isReset] value
         _navigator.navigateTo(
             isReset ? Routes.changePasswordView : Routes.successView);
@@ -57,9 +57,11 @@ class CheckEmailViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// This function open gmail in the user browser. 
+  /// This function open gmail in the user browser.
   void openGmail() async {
+    // ignore: deprecated_member_use
     if (await canLaunch(GmailUrlText)) {
+      // ignore: deprecated_member_use
       await launch(
         GmailUrlText,
         forceSafariVC: false,

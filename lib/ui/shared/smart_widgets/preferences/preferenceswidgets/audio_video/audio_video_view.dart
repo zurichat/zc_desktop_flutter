@@ -13,16 +13,17 @@ class AudioVideoView extends StatelessWidget {
   const AudioVideoView({Key? key}) : super(key: key);
 
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final _scrollController = ScrollController();
 
     return ViewModelBuilder<AudioVideoViewModel>.reactive(
       onModelReady: (model) => model.fetchSettings(),
       builder: (context, model, child) => Scrollbar(
         controller: _scrollController,
-        isAlwaysShown: true,
+        thumbVisibility: true,
         interactive: true,
         scrollbarOrientation: ScrollbarOrientation.right,
+        // ignore: deprecated_member_use
         hoverThickness: 8,
         thickness: 5,
         child: SingleChildScrollView(
@@ -95,7 +96,7 @@ Widget build(BuildContext context) {
                     height: 40,
                     child: TextButton(
                       style: ElevatedButton.styleFrom(
-                        primary: kcBackgroundColor2,
+                        backgroundColor: kcBackgroundColor2,
                         side: BorderSide(
                           color: Color(0xff9b9b9b),
                         ),
@@ -122,8 +123,7 @@ Widget build(BuildContext context) {
                     model.toggleSetting(value, 'onCallStatus'),
                 title: setStatusOnCall,
                 useSubtitle: true,
-                subtitle:
-                    ifStatusSet,
+                subtitle: ifStatusSet,
               ),
               SizedBox(height: 10),
               AudioVideoSetting(
@@ -146,8 +146,7 @@ Widget build(BuildContext context) {
                     model.toggleSetting(value, 'onHuddleStatus'),
                 title: setStatusInHuddle,
                 useSubtitle: true,
-                subtitle:
-                    ifStatusSet,
+                subtitle: ifStatusSet,
               ),
               SizedBox(height: 10),
               AudioVideoSetting(
@@ -168,15 +167,13 @@ Widget build(BuildContext context) {
                 value: model.settings['warningSentForLargeNumber']!,
                 onChanged: (value) =>
                     model.toggleSetting(value, 'warningSentForLargeNumber'),
-                title:
-                    sendWarning,
+                title: sendWarning,
               ),
               SizedBox(height: 10),
               AudioVideoSetting(
                 value: model.settings['playMusic']!,
                 onChanged: (value) => model.toggleSetting(value, 'playMusic'),
-                title:
-                    playMusic,
+                title: playMusic,
               ),
             ],
           ),
@@ -204,13 +201,3 @@ Widget build(BuildContext context) {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-  

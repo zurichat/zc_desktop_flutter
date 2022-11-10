@@ -47,9 +47,9 @@ class ChannelsService with ReactiveServiceMixin {
     return _localStorageService.getFromDisk(userChannelId) as String;
   }
 
-    List<Channel> _channels = [];
+  List<Channel> _channels = [];
 
-  void saveChannelList(List<Channel> channels){
+  void saveChannelList(List<Channel> channels) {
     _channels = channels;
   }
 
@@ -67,8 +67,8 @@ class ChannelsService with ReactiveServiceMixin {
       }
       return null;
     }
+    return null;
   }
-
 
   Channel _currentChannel = Channel();
 
@@ -135,8 +135,6 @@ class ChannelsService with ReactiveServiceMixin {
 
     return response;
   }
-
-
 
   /// This is used to create a channel on the page
   Future<void> addUserToChannel({

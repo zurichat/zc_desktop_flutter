@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,7 +17,7 @@ import 'package:zc_desktop_flutter/ui/shared/smart_widgets/channel_dm/channel_dm
 import 'package:zc_desktop_flutter/ui/views/main/channels_details/channels_details_view.dart';
 
 class ChannelDmView extends StatelessWidget {
-  const ChannelDmView({
+  ChannelDmView({
     Key? key,
     this.margin,
     this.color,
@@ -250,10 +248,10 @@ class ChannelDmView extends StatelessWidget {
                             color: kcBackgroundColor2,
                             child: Scrollbar(
                               controller: _rightSideBarController,
-                              isAlwaysShown: true,
+                              thumbVisibility: true,
                               scrollbarOrientation: ScrollbarOrientation.right,
                               thickness: 10,
-                              showTrackOnHover: true,
+                              trackVisibility: true,
                               child: ListView(
                                 physics: AlwaysScrollableScrollPhysics(),
                                 shrinkWrap: true,

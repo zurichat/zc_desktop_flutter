@@ -2,7 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/app/app_router.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
 import 'package:zc_desktop_flutter/services/channels_service.dart';
 // import 'package:zc_desktop_flutter/services/organization_service.dart';
@@ -15,11 +15,9 @@ class ChannelsListViewModel extends BaseViewModel {
 
   List<Channel> _channels = [];
   int selectedChannelIndex = 0;
-  
 
   List<Channel> get channels => _channels;
   final _navigationService = locator<NavigationService>();
-
 
   bool _isChannelHover = false;
   int? _selectedind;
@@ -61,5 +59,4 @@ class ChannelsListViewModel extends BaseViewModel {
     _channelService.setChannel(_channels[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
-
 }

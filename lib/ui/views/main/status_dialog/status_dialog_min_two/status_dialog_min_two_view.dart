@@ -64,41 +64,39 @@ class StatusDialogMinTwoView extends StatelessWidget {
         Align(
           alignment: Alignment.bottomRight,
           //child: Padding(
-            //padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(117.w, 48.h),
-                        textStyle: clearStatusTextStyle,
-                        padding: EdgeInsets.symmetric( horizontal: 16.w),
-                        primary: Colors.white,
-                        onPrimary: bodyColor,
-                        side: BorderSide(
-                            color: clearStatusBtnBorderColor,
-                            width: 1.0.w),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.r))),
-                    child: Text(model.cancelBtnText)),
-                horizontalSpaceMedium,
-                ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(117.w, 48.h),
-                        textStyle: clearStatusTextStyle,
-                        padding: EdgeInsets.symmetric( horizontal: 16.w),
-                        primary: kcPrimaryColor,
-                        onPrimary: Colors.white,
-                        side: BorderSide(
-                            color: clearStatusBtnBorderColor,
-                            width: 1.0.w),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.r))),
-                    child: Text(model.saveBtnText)),
-              ],
-            ),
+          //padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: bodyColor,
+                      backgroundColor: Colors.white,
+                      fixedSize: Size(117.w, 48.h),
+                      textStyle: clearStatusTextStyle,
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      side: BorderSide(
+                          color: clearStatusBtnBorderColor, width: 1.0.w),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.r))),
+                  child: Text(model.cancelBtnText)),
+              horizontalSpaceMedium,
+              ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: kcPrimaryColor,
+                      fixedSize: Size(117.w, 48.h),
+                      textStyle: clearStatusTextStyle,
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      side: BorderSide(
+                          color: clearStatusBtnBorderColor, width: 1.0.w),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.r))),
+                  child: Text(model.saveBtnText)),
+            ],
+          ),
           //),
         ),
       ]),

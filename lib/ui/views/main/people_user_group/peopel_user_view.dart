@@ -29,7 +29,7 @@ class PeopleUserGroupView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left:2.0),
+                  padding: const EdgeInsets.only(left: 2.0),
                   child: Container(
                     height: 40.h,
                     width: double.infinity,
@@ -95,7 +95,7 @@ class PeopleUserGroupView extends StatelessWidget {
                                         : UserAdittionSuccessMessage,
                                   ),
                                   backgroundColor: model.hasError
-                                      ? Theme.of(context).errorColor
+                                      ? Theme.of(context).colorScheme.error
                                       : kcPrimaryColor,
                                 ));
                               }

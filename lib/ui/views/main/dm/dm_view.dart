@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,8 +23,6 @@ class DmView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return ViewModelBuilder<DmViewModel>.reactive(
         onModelReady: (model) {
           model.setup();
@@ -72,11 +69,11 @@ class DmView extends StatelessWidget {
                                   color: kcBackgroundColor2,
                                   child: Scrollbar(
                                     controller: model.rightSideBarController,
-                                    isAlwaysShown: true,
+                                    thumbVisibility: true,
                                     scrollbarOrientation:
                                         ScrollbarOrientation.right,
                                     thickness: 10,
-                                    showTrackOnHover: true,
+                                    trackVisibility: true,
                                     child: ListView(
                                       physics: AlwaysScrollableScrollPhysics(),
                                       shrinkWrap: true,
@@ -118,9 +115,9 @@ class DmView extends StatelessWidget {
                                                   children: [
                                                     DateWidget(
                                                         date: model.formatDate(
-                                                            model
-                                                                .messages
-                                                                .elementAt(index)
+                                                            model.messages
+                                                                .elementAt(
+                                                                    index)
                                                                 .created_at)),
                                                     MessageTile(
                                                       model: model,
@@ -287,8 +284,6 @@ class MessageTile extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(0, 0, 30, 0),
                                   child: Text(message.message),
                                 ),
-
-                                
                                 Padding(
                                   padding: EdgeInsets.all(4),
                                   child: GridView.builder(

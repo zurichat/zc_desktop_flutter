@@ -2,7 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
-import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/app/app_router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/auth_service.dart';
@@ -65,11 +65,11 @@ class LoginViewModel extends FormViewModel {
       }
       throw Failure(AuthErrorMessage);
     }
-   gotoChooseWorkSpace();
+    gotoChooseWorkSpace();
   }
 
-  void gotoChooseWorkSpace(){
-     _navigationService.navigateTo(Routes.chooseWorkspaceView);
+  void gotoChooseWorkSpace() {
+    _navigationService.navigateTo(Routes.chooseWorkspaceView);
   }
 
   @override
@@ -79,7 +79,7 @@ class LoginViewModel extends FormViewModel {
   }
 
   /// This method is meant to  be override while using the FormViewModel but since there's
-  /// absolutely no need for the function inside this view model so it remain an empty funcion 
+  /// absolutely no need for the function inside this view model so it remain an empty funcion
   @override
   void setFormStatus() {}
 }

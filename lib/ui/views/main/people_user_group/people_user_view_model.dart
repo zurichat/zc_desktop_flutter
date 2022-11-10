@@ -2,8 +2,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
 import 'package:zc_desktop_flutter/app/app.logger.dart';
+import 'package:zc_desktop_flutter/app/app_router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
-import 'package:zc_desktop_flutter/app/app.router.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/core/validator/validator.dart';
 import 'package:zc_desktop_flutter/model/app_models.dart';
@@ -14,7 +14,7 @@ import 'package:zc_desktop_flutter/services/user_service.dart';
 class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   final _organizationService = locator<OrganizationService>();
   final _userService = locator<UserService>();
-    final _dmService = locator<DMService>();
+  final _dmService = locator<DMService>();
   final _navigationService = locator<NavigationService>();
   final _log = getLogger('PeopleUserGroupViewModel');
   // _pageIndex is used to keep track of the current view.
@@ -124,22 +124,22 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
           _errorText = EmailErrorText;
           notifyListeners();
           return;
-        }else {
+        } else {
           _errorText = null;
           notifyListeners();
         }
       }
       try {
         await _organizationService.invitePeopleToOrganization(
-        _organizationService.getOrganizationId(),
-        emails,
-      );
-      //fetchAndSetOrgMembers();
-      } catch(e) {
-        if(e.toString() == '400') {
-         throw Failure(UserAdditionErrorMessage);
-      } 
-       throw Failure(AuthErrorMessage);
+          _organizationService.getOrganizationId(),
+          emails,
+        );
+        //fetchAndSetOrgMembers();
+      } catch (e) {
+        if (e.toString() == '400') {
+          throw Failure(UserAdditionErrorMessage);
+        }
+        throw Failure(AuthErrorMessage);
       }
     } else {
       _errorText = EmailErrorText;
@@ -173,7 +173,8 @@ class PeopleUserGroupViewModel extends BaseViewModel with Validator {
   }
 
   void goToDmView(int index) {
-    _dmService.setNewRoomInfo(!_isSearchStarted ? _dataList[index] : _suggestionsList[index]);
+    _dmService.setNewRoomInfo(
+        !_isSearchStarted ? _dataList[index] : _suggestionsList[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.dmView, id: 1);
   }
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
@@ -19,16 +18,16 @@ class AccessibilityView extends StatelessWidget {
     final _rightSideBarController = ScrollController();
 
     return ViewModelBuilder<AccessibilityViewModel>.reactive(
-       onModelReady: (model)=>model.fetchAndSetSetting(),
-        onDispose: (model)=>model.saveSettings(),
+        onModelReady: (model) => model.fetchAndSetSetting(),
+        onDispose: (model) => model.saveSettings(),
         viewModelBuilder: () => AccessibilityViewModel(),
         builder: (context, model, _) {
           return Scrollbar(
             controller: _rightSideBarController,
-            isAlwaysShown: true,
+            thumbVisibility: true,
             scrollbarOrientation: ScrollbarOrientation.right,
             thickness: 8,
-            showTrackOnHover: true,
+            trackVisibility: true,
             child: SingleChildScrollView(
               controller: _rightSideBarController,
               child: Container(
@@ -72,8 +71,7 @@ class MessageAnimationSection extends StatelessWidget {
                   }),
               horizontalSpaceTiny,
               Flexible(
-                  child: Text(allowAnimated,
-                      style: preferenceStyleNormal)),
+                  child: Text(allowAnimated, style: preferenceStyleNormal)),
             ],
           ),
           verticalSpaceRegular,
@@ -161,8 +159,7 @@ class KeyBoardSettingsSection extends StatelessWidget {
           // desc
           GestureDetector(
             onTap: () {},
-            child: Text.rich(TextSpan(
-                style: preferenceStyleBold, children: [
+            child: Text.rich(TextSpan(style: preferenceStyleBold, children: [
               TextSpan(text: model.shortCutMsg),
               TextSpan(
                   text: ' ' + model.boldShortCutMsg,
@@ -201,11 +198,8 @@ class ShortCutDescription extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
-          title: Text(moveFocus,
-              style: preferenceStyleBold),
-          subtitle: Text(
-              visibleMessage,
-              style: preferenceStyleNormal),
+          title: Text(moveFocus, style: preferenceStyleBold),
+          subtitle: Text(visibleMessage, style: preferenceStyleNormal),
           leading: Radio(
             value: UpButtonsChoice.option1,
             groupValue: model.upButtonsChoice,
@@ -217,9 +211,7 @@ class ShortCutDescription extends StatelessWidget {
         ),
         ListTile(
           title: Text(editLastMessage, style: preferenceStyleBold),
-          subtitle: Text(
-              lastMessage,
-              style: preferenceStyleNormal),
+          subtitle: Text(lastMessage, style: preferenceStyleNormal),
           leading: Radio(
             value: UpButtonsChoice.option2,
             groupValue: model.upButtonsChoice,
@@ -240,8 +232,8 @@ class ShortCutDescription extends StatelessWidget {
             Text(' + ', style: preferenceStyleNormal),
             ShortCuts().up(),
             Flexible(
-                child: Text(editMessageWithOption,
-                    style: preferenceStyleNormal)),
+                child:
+                    Text(editMessageWithOption, style: preferenceStyleNormal)),
           ],
         )
       ],

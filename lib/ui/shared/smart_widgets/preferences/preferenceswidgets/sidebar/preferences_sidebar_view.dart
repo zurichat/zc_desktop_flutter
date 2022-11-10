@@ -17,9 +17,10 @@ class SideBarView extends StatelessWidget {
     return ViewModelBuilder<SideBarViewModel>.reactive(
       builder: (context, model, child) => Scrollbar(
         controller: _controller,
-        isAlwaysShown: true,
+        thumbVisibility: true,
         interactive: true,
         scrollbarOrientation: ScrollbarOrientation.right,
+        // ignore: deprecated_member_use
         hoverThickness: 8,
         thickness: 5,
         child: SingleChildScrollView(
@@ -120,8 +121,7 @@ class SideBarView extends StatelessWidget {
                     },
                     value: PrefSidebar.Custom),
                 SizedBox(height: 5),
-                Text(chooseSettings,
-                    style: preferenceStyleNormal),
+                Text(chooseSettings, style: preferenceStyleNormal),
                 Divider(),
                 SizedBox(height: 10),
                 Text(sortText, style: preferenceStyleBold),
@@ -147,13 +147,10 @@ class SideBarView extends StatelessWidget {
                     },
                     value: PreBar.Priority),
                 SizedBox(height: 5),
-                Text(
-                    chooseIndividualSection,
-                    style: preferenceStyleNormal),
+                Text(chooseIndividualSection, style: preferenceStyleNormal),
                 Divider(),
                 SizedBox(height: 10),
-                Text(dmAnnouncement,
-                    style: preferenceStyleBold),
+                Text(dmAnnouncement, style: preferenceStyleBold),
                 SizedBox(height: 5),
                 DisCheckBox(
                     text: showProfilePhotos,
@@ -164,8 +161,7 @@ class SideBarView extends StatelessWidget {
                     onChanged: model.togggleList,
                     value: model.list),
                 DisCheckBox(
-                    text:
-                        OrganizeExternalConvo,
+                    text: OrganizeExternalConvo,
                     onChanged: model.togggleOrganize,
                     value: model.organize),
               ],
@@ -211,8 +207,6 @@ class DisplayCheckBox extends StatelessWidget {
   }
 }
 
-
-
 class DisplayRadio extends StatelessWidget {
   final String text;
   final void Function(Object? value) onChanged;
@@ -242,8 +236,6 @@ class DisplayRadio extends StatelessWidget {
     );
   }
 }
-
-
 
 class DisRadio extends StatelessWidget {
   final String text;

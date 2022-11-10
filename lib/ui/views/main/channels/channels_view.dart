@@ -123,11 +123,11 @@ class ChannelsView extends StatelessWidget {
                                 color: kcBackgroundColor2,
                                 child: Scrollbar(
                                   controller: _rightSideBarController,
-                                  isAlwaysShown: true,
+                                  thumbVisibility: true,
                                   scrollbarOrientation:
                                       ScrollbarOrientation.right,
                                   thickness: 10,
-                                  showTrackOnHover: true,
+                                  trackVisibility: true,
                                   child: ListView(
                                     physics: AlwaysScrollableScrollPhysics(),
                                     shrinkWrap: true,

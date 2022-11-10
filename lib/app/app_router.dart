@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
 
 import '../ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
 import '../ui/shared/smart_widgets/profile/profile_view/profile_show_view.dart';
@@ -195,7 +194,7 @@ class StackedRouter extends RouterBase {
     OrganizationView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const OrganizationView(),
+           const OrganizationView(),
         settings: data,
       );
     },
@@ -341,7 +340,6 @@ class OrganizationViewRouter extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
-
 /// ResetPasswordView arguments holder class
 class ResetPasswordViewArguments {
   final Key? key;

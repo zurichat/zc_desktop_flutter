@@ -14,10 +14,10 @@ void main() {
   testWidgets('Dm tile displays user and message', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     String date = '23 June 9.10 pm';
-      await tester.pumpWidget(testableWidget(
-          child: DateWidget(
-        date: date,
-      )));
+    await tester.pumpWidget(testableWidget(
+        child: DateWidget(
+      date: date,
+    )));
 
     expect(find.text(date), findsOneWidget);
   });
@@ -28,7 +28,8 @@ class _Wrapper extends StatelessWidget {
   _Wrapper(this.child);
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(BoxConstraints(maxWidth: 1400), designSize: Size(1440, 940));
+    ScreenUtil.init(BoxConstraints(maxWidth: 1400) as BuildContext,
+        designSize: Size(1440, 940));
     return child;
   }
 }

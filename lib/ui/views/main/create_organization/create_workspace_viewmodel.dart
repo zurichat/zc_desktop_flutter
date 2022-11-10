@@ -2,7 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:zc_desktop_flutter/app/app.locator.dart';
-import 'package:zc_desktop_flutter/app/app.router.dart';
+import 'package:zc_desktop_flutter/app/app_router.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
 import 'package:zc_desktop_flutter/core/network/failure.dart';
 import 'package:zc_desktop_flutter/services/organization_service.dart';
@@ -63,12 +63,13 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String? get emailErrorText => _emailErrorText;
 
   final _windowsTitleBarService = locator<WindowTitleBarService>();
-  
+
   void init() async {
     await Future.delayed(Duration(milliseconds: 1));
     _windowsTitleBarService.setHome(false);
     _windowsTitleBarService.setTitle('Zuri | Create Workspace');
   }
+
   void setEmail(String? value) {
     _email = value;
     notifyListeners();
@@ -156,10 +157,10 @@ class CreateWorkspaceViewModel extends BaseViewModel {
     try {
       await _organizationService.createOrganization(email);
       //if(!hasError) {
-        goToStage1();
-     // }
+      goToStage1();
+      // }
     } catch (e) {
-      if(e.toString().contains('40')) {
+      if (e.toString().contains('40')) {
         throw Failure('user with this email does not exist');
       }
       throw Failure(AuthErrorMessage);

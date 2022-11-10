@@ -83,7 +83,7 @@ class PeopleView extends StatelessWidget {
                   verticalSpaceSmallOne,
                   Scrollbar(
                     controller: _controller,
-                    isAlwaysShown: true,
+                    thumbVisibility: true,
                     child: Container(
                       height: height < 1000 ? (height * 0.45) : height * 0.55,
                       padding: EdgeInsets.only(

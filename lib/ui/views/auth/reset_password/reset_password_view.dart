@@ -48,7 +48,7 @@ class ResetPasswordView extends StatelessWidget with $ResetPasswordView {
                     Text(
                       model.errorMessage,
                       style: headline6.copyWith(
-                        color: Theme.of(context).errorColor,
+                        color: Theme.of(context).colorScheme.error,
                       ),
                     ),
                     verticalSpaceSmall,

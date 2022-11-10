@@ -86,15 +86,17 @@ class StatusDialogMinView extends StatelessWidget {
           child: ElevatedButton(
               onPressed: () {
                 model.setStatusTag;
-                Navigator.pop(context,);
+                Navigator.pop(
+                  context,
+                );
                 // Navigator.pop(context, model.statusTag);
               },
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
+                  backgroundColor: Colors.white,
                   fixedSize: Size(117.w, 48.h),
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: Colors.white,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
