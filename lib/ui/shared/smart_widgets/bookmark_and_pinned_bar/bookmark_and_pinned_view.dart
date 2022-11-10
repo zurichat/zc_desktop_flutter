@@ -93,7 +93,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
       dmViewModel.setIsDropped(false);
     } else {
       this._floatingDropdown = this._buildFloatingDropdown();
-      Overlay.of(context).insert(this._floatingDropdown);
+      Overlay.of(context).insert!(this._floatingDropdown);
       dmViewModel.setIsDropped(true);
     }
   }
@@ -109,7 +109,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
     } else {
       this._floatingPinnedMessagesDropDown =
           this._buildDropDownForPinnedMessages(model);
-      Overlay.of(context).insert(this._floatingPinnedMessagesDropDown);
+      Overlay.of(context).insert!(this._floatingPinnedMessagesDropDown);
       model.setIsDropped(true);
     }
   }
