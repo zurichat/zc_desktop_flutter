@@ -18,124 +18,136 @@ List<ThemeData> getThemes() {
 }
 
 final ThemeData lightTheme = ThemeData(
-    backgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(0, 184, 124, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(0, 184, 124, 1),
-      brightness: Brightness.light,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(0, 184, 124, 1),
+          brightness: Brightness.light,
+        )
+        .copyWith(background: Colors.white));
 
 final ThemeData darkTheme = ThemeData(
-    backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.black87,
         iconTheme: IconThemeData(color: Colors.white)),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Colors.black12,
-      brightness: Brightness.dark,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Colors.black12,
+          brightness: Brightness.dark,
+        )
+        .copyWith(background: Colors.black87));
 
 final ThemeData versatiles = ThemeData(
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(0, 184, 124, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    backgroundColor: Colors.white,
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(0, 184, 124, 1),
-      brightness: Brightness.light,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(0, 184, 124, 1),
+          brightness: Brightness.light,
+        )
+        .copyWith(background: Colors.white));
 
 final ThemeData aubergineTheme = ThemeData(
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white)),
-    backgroundColor: Colors.white,
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(0, 184, 124, 1),
-      brightness: Brightness.light,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(0, 184, 124, 1),
+          brightness: Brightness.light,
+        )
+        .copyWith(background: Colors.white));
 
 final ThemeData aubergineTheme2 = ThemeData(
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(254, 161, 98, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    backgroundColor: Colors.white,
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(0, 184, 124, 1),
-      brightness: Brightness.light,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(0, 184, 124, 1),
+          brightness: Brightness.light,
+        )
+        .copyWith(background: Colors.white));
 
 final ThemeData aubergineTheme3 = ThemeData(
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(220, 26, 163, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    backgroundColor: Colors.white,
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(0, 184, 124, 1),
-      brightness: Brightness.light,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(0, 184, 124, 1),
+          brightness: Brightness.light,
+        )
+        .copyWith(background: Colors.white));
 
 final ThemeData coast = ThemeData(
-    backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(37, 120, 93, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(21, 74, 57, 1),
-      brightness: Brightness.dark,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(21, 74, 57, 1),
+          brightness: Brightness.dark,
+        )
+        .copyWith(background: Colors.black87));
 
 final ThemeData triadic = ThemeData(
-    backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(153, 28, 116, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(124, 19, 93, 1),
-      brightness: Brightness.dark,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(124, 19, 93, 1),
+          brightness: Brightness.dark,
+        )
+        .copyWith(background: Colors.black87));
 
 final ThemeData complimentary = ThemeData(
-    backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(9, 12, 81, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(6, 8, 58, 1),
-      brightness: Brightness.dark,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(6, 8, 58, 1),
+          brightness: Brightness.dark,
+        )
+        .copyWith(background: Colors.black87));
 
 final ThemeData automatic = ThemeData(
-    backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(2, 156, 106, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(0, 184, 124, 1),
-      brightness: Brightness.dark,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(0, 184, 124, 1),
+          brightness: Brightness.dark,
+        )
+        .copyWith(background: Colors.black87));
 
 final ThemeData nocture = ThemeData(
-    backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(201, 196, 157, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(6, 8, 58, 1),
-      brightness: Brightness.dark,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(6, 8, 58, 1),
+          brightness: Brightness.dark,
+        )
+        .copyWith(background: Colors.black87));
 
 final ThemeData expensive = ThemeData(
-    backgroundColor: Colors.black87,
     appBarTheme: AppBarTheme(
         backgroundColor: Color.fromRGBO(0, 42, 54, 1),
         iconTheme: IconThemeData(color: Colors.white)),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Color.fromRGBO(7, 53, 66, 1),
-      brightness: Brightness.dark,
-    ));
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(
+          secondary: Color.fromRGBO(7, 53, 66, 1),
+          brightness: Brightness.dark,
+        )
+        .copyWith(background: Colors.black87));
 //rgba(21, 74, 57, 1) background: rgba(37, 120, 93, 1);
 //background: rgba(124, 19, 93, 1); background: rgba(153, 28, 116, 1);
 //background: rgba(6, 8, 58, 1); background: rgba(9, 12, 81, 1);

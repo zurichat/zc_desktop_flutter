@@ -127,7 +127,7 @@ class _ZcDesktopEmojiPickerState extends State<ZcDesktopEmojiPicker> {
     if (!loaded) {
       // Load emojis
       _updateEmojis().then(
-        (value) => WidgetsBinding.instance!.addPostFrameCallback((_) {
+        (value) => WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) return;
           setState(() {
             loaded = true;

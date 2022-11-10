@@ -113,7 +113,7 @@ class TodoView extends StatelessWidget {
                           ),
                           child: Text(CreateTodo),
                           style: ElevatedButton.styleFrom(
-                            primary: KStartupContainerColor,
+                            backgroundColor: KStartupContainerColor,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 15, vertical: 20),
                             textStyle: TextStyle(

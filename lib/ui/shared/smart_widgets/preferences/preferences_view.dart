@@ -102,7 +102,10 @@ class PreferenceView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Preferences', style: headline6,),
+                    Text(
+                      'Preferences',
+                      style: headline6,
+                    ),
                     IconButton(
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -143,10 +146,10 @@ class PreferenceView extends StatelessWidget {
                   ),
                   Scrollbar(
                     controller: _rightSideBarController,
-                    isAlwaysShown: true,
+                    thumbVisibility: true,
                     scrollbarOrientation: ScrollbarOrientation.right,
                     thickness: 10,
-                    showTrackOnHover: true,
+                    trackVisibility: true,
                     child: SingleChildScrollView(
                         controller: _rightSideBarController,
                         child: Container(
@@ -169,23 +172,29 @@ class BuildListItem extends StatelessWidget {
   final String text, assetName;
   final bool isSelected;
   final VoidCallback? onClicked;
-  const BuildListItem({ Key? key, required this.text,
-  required this.assetName,
-  required this.isSelected,
-  this.onClicked, }) : super(key: key);
+  const BuildListItem({
+    Key? key,
+    required this.text,
+    required this.assetName,
+    required this.isSelected,
+    this.onClicked,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final hoverColor = Colors.grey[200];
     final color = isSelected ? Colors.white : null;
-  return ListTile(
-    tileColor: isSelected ? KStartupContainerColor : null,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-    minLeadingWidth: 5,
-     leading: SvgPicture.asset(assetName, color: color,),
-    title: Text(text, style: leftSideBarPrefTextStyle.copyWith(color: color)),
-    hoverColor: isSelected ? KStartupContainerColor : hoverColor,
-    onTap: onClicked,
-  );
+    return ListTile(
+      tileColor: isSelected ? KStartupContainerColor : null,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      minLeadingWidth: 5,
+      leading: SvgPicture.asset(
+        assetName,
+        color: color,
+      ),
+      title: Text(text, style: leftSideBarPrefTextStyle.copyWith(color: color)),
+      hoverColor: isSelected ? KStartupContainerColor : hoverColor,
+      onTap: onClicked,
+    );
   }
 }

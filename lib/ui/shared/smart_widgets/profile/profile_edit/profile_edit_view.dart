@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -63,9 +62,10 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
               Expanded(
                 child: Scrollbar(
                   controller: scrollcontroller,
+                  // ignore: deprecated_member_use
                   isAlwaysShown: true,
                   thickness: 10,
-                  showTrackOnHover: true,
+                  trackVisibility: true,
                   child: SingleChildScrollView(
                     controller: scrollcontroller,
                     child: Column(
@@ -97,7 +97,8 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                             value!;
                                           },
                                           validator: (value) {
-                                            if (value == null || value.isEmpty ||
+                                            if (value == null ||
+                                                value.isEmpty ||
                                                 !RegExp(r'^[a-z A-Z]+$')
                                                     .hasMatch(value)) {
                                               return 'Unfortunately, you can’t leave this blank.';
@@ -117,7 +118,8 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                             value!;
                                           },
                                           validator: (value) {
-                                            if (value == null || value.isEmpty ||
+                                            if (value == null ||
+                                                value.isEmpty ||
                                                 !RegExp(r'^[a-z A-Z]+$')
                                                     .hasMatch(value)) {
                                               return 'Unfortunately, you can’t leave this blank.';
@@ -168,7 +170,6 @@ class ProfileEditView extends StatelessWidget with $ProfileEditView {
                                           onSaved: (value) {
                                             value;
                                           },
-                                          
                                         ),
                                         verticalSpaceMedium,
                                         ProfileInputField(

@@ -8,8 +8,7 @@ class ZcDeskButton extends StatelessWidget {
       this.onPressed,
       this.filled = false,
       this.fillColor,
-      this.child
-      })
+      this.child})
       : super(key: key);
 
   final String? text;
@@ -23,19 +22,22 @@ class ZcDeskButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        primary: filled ? fillColor : Theme.of(context).backgroundColor,
+        backgroundColor:
+            filled ? fillColor : Theme.of(context).colorScheme.background,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(4.0),
             side: BorderSide(color: Colors.grey, width: 1.0)),
         minimumSize: Size.fromHeight(58.0),
       ),
       onPressed: onPressed,
-      child: text == null ? child : Text(
-        text!,
-        style: subtitle2.copyWith(
-          color: Color(0xFFFFFFFF),
-        ),
-      ),
+      child: text == null
+          ? child
+          : Text(
+              text!,
+              style: subtitle2.copyWith(
+                color: Color(0xFFFFFFFF),
+              ),
+            ),
     );
   }
 }

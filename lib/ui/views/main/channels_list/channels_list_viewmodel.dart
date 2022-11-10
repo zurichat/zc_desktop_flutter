@@ -15,11 +15,9 @@ class ChannelsListViewModel extends BaseViewModel {
 
   List<Channel> _channels = [];
   int selectedChannelIndex = 0;
-  
 
   List<Channel> get channels => _channels;
   final _navigationService = locator<NavigationService>();
-
 
   bool _isChannelHover = false;
   int? _selectedind;
@@ -61,5 +59,4 @@ class ChannelsListViewModel extends BaseViewModel {
     _channelService.setChannel(_channels[index]);
     _navigationService.navigateTo(OrganizationViewRoutes.channelsView, id: 1);
   }
-
 }

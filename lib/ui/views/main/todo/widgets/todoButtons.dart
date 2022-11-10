@@ -15,13 +15,13 @@ class CreateDateButton extends StatelessWidget {
         CreateTodoDialogModel model,
         Widget? child,
       ) {
-        return  ElevatedButton.icon(
-          onPressed: ()=> showDatePicker(
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.utc(DateTime.now().year),
-                              lastDate: DateTime.utc(2050),
-                              context: context)
-                          .then((value) => model.setSelectedDate(value!)),
+        return ElevatedButton.icon(
+          onPressed: () => showDatePicker(
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.utc(DateTime.now().year),
+                  lastDate: DateTime.utc(2050),
+                  context: context)
+              .then((value) => model.setSelectedDate(value!)),
           icon: Icon(
             Icons.date_range,
             color: Colors.white,
@@ -29,18 +29,17 @@ class CreateDateButton extends StatelessWidget {
           ),
           label: Text(model.selectedDate),
           style: ElevatedButton.styleFrom(
-            primary: KStartupContainerColor,
+            backgroundColor: KStartupContainerColor,
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
           ),
         );
-        },
+      },
     );
   }
 }
 
 class ViewTodo extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -51,7 +50,8 @@ class ViewTodo extends StatelessWidget {
       },
       child: Text(
         'View Task',
-        style: headline6.copyWith(fontSize: 15,
+        style: headline6.copyWith(
+          fontSize: 15,
           color: Color.fromRGBO(0, 184, 124, 1),
         ),
       ),

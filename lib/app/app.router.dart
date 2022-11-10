@@ -4,52 +4,83 @@
 // StackedRouterGenerator
 // **************************************************************************
 
-// ignore_for_file: public_member_api_docs
-
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter/material.dart' as _i16;
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
-
-import '../ui/shared/smart_widgets/channel_dm/channel_dm_view.dart';
-import '../ui/shared/smart_widgets/profile/profile_view/profile_show_view.dart';
-import '../ui/views/auth/change_password/change_password_view.dart';
-import '../ui/views/auth/check_email/check_email_view.dart';
-import '../ui/views/auth/login/login_view.dart';
-import '../ui/views/auth/reset_password/reset_password_view.dart';
-import '../ui/views/auth/sign_up/sign_up_view.dart';
-import '../ui/views/auth/success/success_view.dart';
-import '../ui/views/main/Threads/threads_view.dart';
-import '../ui/views/main/channels/channels_view.dart';
-import '../ui/views/main/channels_list/channels_list_view.dart';
-import '../ui/views/main/choose_workspace.dart/choose_workspace_view.dart';
-import '../ui/views/main/create_channel/create_channel_view.dart';
-import '../ui/views/main/create_organization/create_organization_name.dart';
-import '../ui/views/main/create_organization/create_workspace.dart';
-import '../ui/views/main/create_organization/create_workspace_stage2.dart';
-import '../ui/views/main/create_organization/create_workspace_stage3.dart';
-import '../ui/views/main/dm/all_dms/all_dms_view.dart';
-import '../ui/views/main/dm/dm_view.dart';
-import '../ui/views/main/organization/organization_view.dart';
-import '../ui/views/main/people_user_group/peopel_user_view.dart';
-import '../ui/views/main/saved_items/saved_items_view.dart';
-import '../ui/views/main/todo/Todo_view.dart';
-import '../ui/views/startup/startup_view.dart';
+import 'package:stacked/stacked.dart' as _i1;
+import 'package:stacked_services/stacked_services.dart' as _i26;
+import 'package:zc_desktop_flutter/ui/shared/smart_widgets/profile/profile_view/profile_show_view.dart'
+    as _i24;
+import 'package:zc_desktop_flutter/ui/views/auth/change_password/change_password_view.dart'
+    as _i8;
+import 'package:zc_desktop_flutter/ui/views/auth/check_email/check_email_view.dart'
+    as _i6;
+import 'package:zc_desktop_flutter/ui/views/auth/login/login_view.dart' as _i4;
+import 'package:zc_desktop_flutter/ui/views/auth/reset_password/reset_password_view.dart'
+    as _i7;
+import 'package:zc_desktop_flutter/ui/views/auth/sign_up/sign_up_view.dart'
+    as _i5;
+import 'package:zc_desktop_flutter/ui/views/auth/success/success_view.dart'
+    as _i9;
+import 'package:zc_desktop_flutter/ui/views/main/channels/channels_view.dart'
+    as _i17;
+import 'package:zc_desktop_flutter/ui/views/main/channels_list/channels_list_view.dart'
+    as _i18;
+import 'package:zc_desktop_flutter/ui/views/main/choose_workspace.dart/choose_workspace_view.dart'
+    as _i3;
+import 'package:zc_desktop_flutter/ui/views/main/create_channel/create_channel_view.dart'
+    as _i19;
+import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_organization_name.dart'
+    as _i11;
+import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_workspace.dart'
+    as _i10;
+import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_workspace_stage2.dart'
+    as _i12;
+import 'package:zc_desktop_flutter/ui/views/main/create_organization/create_workspace_stage3.dart'
+    as _i13;
+import 'package:zc_desktop_flutter/ui/views/main/dm/all_dms/all_dms_view.dart'
+    as _i21;
+import 'package:zc_desktop_flutter/ui/views/main/dm/dm_view.dart' as _i20;
+import 'package:zc_desktop_flutter/ui/views/main/organization/organization_view.dart'
+    as _i15;
+import 'package:zc_desktop_flutter/ui/views/main/people_user_group/peopel_user_view.dart'
+    as _i22;
+import 'package:zc_desktop_flutter/ui/views/main/saved_items/saved_items_view.dart'
+    as _i14;
+import 'package:zc_desktop_flutter/ui/views/main/Threads/threads_view.dart'
+    as _i25;
+import 'package:zc_desktop_flutter/ui/views/main/todo/Todo_view.dart' as _i23;
+import 'package:zc_desktop_flutter/ui/views/startup/startup_view.dart' as _i2;
 
 class Routes {
-  static const String startUpView = '/';
-  static const String chooseWorkspaceView = '/choose-workspace-view';
-  static const String loginView = '/login-view';
-  static const String signUpView = '/sign-up-view';
-  static const String checkEmailView = '/check-email-view';
-  static const String resetPasswordView = '/reset-password-view';
-  static const String changePasswordView = '/change-password-view';
-  static const String successView = '/success-view';
-  static const String createWorkspaceView = '/create-workspace-view';
-  static const String createWorkspaceStage1 = '/create-workspace-stage1';
-  static const String createWorkspaceStage2 = '/create-workspace-stage2';
-  static const String createWorkspaceStage3 = '/create-workspace-stage3';
-  static const String savedItemsView = '/saved-items-view';
-  static const String organizationView = '/organization-view';
+  static const startUpView = '/';
+
+  static const chooseWorkspaceView = '/choose-workspace-view';
+
+  static const loginView = '/login-view';
+
+  static const signUpView = '/sign-up-view';
+
+  static const checkEmailView = '/check-email-view';
+
+  static const resetPasswordView = '/reset-password-view';
+
+  static const changePasswordView = '/change-password-view';
+
+  static const successView = '/success-view';
+
+  static const createWorkspaceView = '/create-workspace-view';
+
+  static const createWorkspaceStage1 = '/create-workspace-stage1';
+
+  static const createWorkspaceStage2 = '/create-workspace-stage2';
+
+  static const createWorkspaceStage3 = '/create-workspace-stage3';
+
+  static const savedItemsView = '/saved-items-view';
+
+  static const organizationView = '/organization-view';
+
   static const all = <String>{
     startUpView,
     chooseWorkspaceView,
@@ -68,155 +99,288 @@ class Routes {
   };
 }
 
-class StackedRouter extends RouterBase {
-  @override
-  List<RouteDef> get routes => _routes;
-  final _routes = <RouteDef>[
-    RouteDef(Routes.startUpView, page: StartUpView),
-    RouteDef(Routes.chooseWorkspaceView, page: ChooseWorkspaceView),
-    RouteDef(Routes.loginView, page: LoginView),
-    RouteDef(Routes.signUpView, page: SignUpView),
-    RouteDef(Routes.checkEmailView, page: CheckEmailView),
-    RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
-    RouteDef(Routes.changePasswordView, page: ChangePasswordView),
-    RouteDef(Routes.successView, page: SuccessView),
-    RouteDef(Routes.createWorkspaceView, page: CreateWorkspaceView),
-    RouteDef(Routes.createWorkspaceStage1, page: CreateWorkspaceStage1),
-    RouteDef(Routes.createWorkspaceStage2, page: CreateWorkspaceStage2),
-    RouteDef(Routes.createWorkspaceStage3, page: CreateWorkspaceStage3),
-    RouteDef(Routes.savedItemsView, page: SavedItemsView),
-    RouteDef(
+class StackedRouter extends _i1.RouterBase {
+  final _routes = <_i1.RouteDef>[
+    _i1.RouteDef(
+      Routes.startUpView,
+      page: _i2.StartUpView,
+    ),
+    _i1.RouteDef(
+      Routes.chooseWorkspaceView,
+      page: _i3.ChooseWorkspaceView,
+    ),
+    _i1.RouteDef(
+      Routes.loginView,
+      page: _i4.LoginView,
+    ),
+    _i1.RouteDef(
+      Routes.signUpView,
+      page: _i5.SignUpView,
+    ),
+    _i1.RouteDef(
+      Routes.checkEmailView,
+      page: _i6.CheckEmailView,
+    ),
+    _i1.RouteDef(
+      Routes.resetPasswordView,
+      page: _i7.ResetPasswordView,
+    ),
+    _i1.RouteDef(
+      Routes.changePasswordView,
+      page: _i8.ChangePasswordView,
+    ),
+    _i1.RouteDef(
+      Routes.successView,
+      page: _i9.SuccessView,
+    ),
+    _i1.RouteDef(
+      Routes.createWorkspaceView,
+      page: _i10.CreateWorkspaceView,
+    ),
+    _i1.RouteDef(
+      Routes.createWorkspaceStage1,
+      page: _i11.CreateWorkspaceStage1,
+    ),
+    _i1.RouteDef(
+      Routes.createWorkspaceStage2,
+      page: _i12.CreateWorkspaceStage2,
+    ),
+    _i1.RouteDef(
+      Routes.createWorkspaceStage3,
+      page: _i13.CreateWorkspaceStage3,
+    ),
+    _i1.RouteDef(
+      Routes.savedItemsView,
+      page: _i14.SavedItemsView,
+    ),
+    _i1.RouteDef(
       Routes.organizationView,
-      page: OrganizationView,
-      generator: OrganizationViewRouter(),
+      page: _i15.OrganizationView,
     ),
   ];
-  @override
-  Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
-  final _pagesMap = <Type, StackedRouteFactory>{
-    StartUpView: (data) {
+
+  final _pagesMap = <Type, _i1.StackedRouteFactory>{
+    _i2.StartUpView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const StartUpView(),
+            const _i2.StartUpView(),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    ChooseWorkspaceView: (data) {
+    _i3.ChooseWorkspaceView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const ChooseWorkspaceView(),
+            const _i3.ChooseWorkspaceView(),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    LoginView: (data) {
-      return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) => LoginView(),
-        settings: data,
-      );
-    },
-    SignUpView: (data) {
-      return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) => SignUpView(),
-        settings: data,
-      );
-    },
-    CheckEmailView: (data) {
+    _i4.LoginView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const CheckEmailView(),
+            _i4.LoginView(),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    ResetPasswordView: (data) {
-      var args = data.getArgs<ResetPasswordViewArguments>(
-        orElse: () => ResetPasswordViewArguments(),
-      );
+    _i5.SignUpView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            ResetPasswordView(key: args.key),
+            _i5.SignUpView(),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    ChangePasswordView: (data) {
-      var args = data.getArgs<ChangePasswordViewArguments>(
-        orElse: () => ChangePasswordViewArguments(),
-      );
+    _i6.CheckEmailView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            ChangePasswordView(key: args.key),
+            const _i6.CheckEmailView(),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    SuccessView: (data) {
-      return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const SuccessView(),
-        settings: data,
-      );
-    },
-    CreateWorkspaceView: (data) {
-      var args = data.getArgs<CreateWorkspaceViewArguments>(
-        orElse: () => CreateWorkspaceViewArguments(),
+    _i7.ResetPasswordView: (data) {
+      final args = data.getArgs<ResetPasswordViewArguments>(
+        orElse: () => const ResetPasswordViewArguments(),
       );
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            CreateWorkspaceView(key: args.key),
+            _i7.ResetPasswordView(key: args.key),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    CreateWorkspaceStage1: (data) {
+    _i8.ChangePasswordView: (data) {
+      final args = data.getArgs<ChangePasswordViewArguments>(
+        orElse: () => const ChangePasswordViewArguments(),
+      );
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const CreateWorkspaceStage1(),
+            _i8.ChangePasswordView(key: args.key),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    CreateWorkspaceStage2: (data) {
+    _i9.SuccessView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const CreateWorkspaceStage2(),
+            const _i9.SuccessView(),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    CreateWorkspaceStage3: (data) {
+    _i10.CreateWorkspaceView: (data) {
+      final args = data.getArgs<CreateWorkspaceViewArguments>(
+        orElse: () => const CreateWorkspaceViewArguments(),
+      );
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const CreateWorkspaceStage3(),
+            _i10.CreateWorkspaceView(key: args.key),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    SavedItemsView: (data) {
+    _i11.CreateWorkspaceStage1: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const SavedItemsView(),
+            const _i11.CreateWorkspaceStage1(),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
-    OrganizationView: (data) {
+    _i12.CreateWorkspaceStage2: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const OrganizationView(),
+            const _i12.CreateWorkspaceStage2(),
         settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
+      );
+    },
+    _i13.CreateWorkspaceStage3: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const _i13.CreateWorkspaceStage3(),
+        settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
+      );
+    },
+    _i14.SavedItemsView: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const _i14.SavedItemsView(),
+        settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
+      );
+    },
+    _i15.OrganizationView: (data) {
+      final args = data.getArgs<OrganizationViewArguments>(
+        orElse: () => const OrganizationViewArguments(),
+      );
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            _i15.OrganizationView(key: args.key),
+        settings: data,
+        transitionsBuilder: data.transition ??
+            (context, animation, secondaryAnimation, child) {
+              return child;
+            },
       );
     },
   };
+
+  @override
+  List<_i1.RouteDef> get routes => _routes;
+  @override
+  Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
+}
+
+class ResetPasswordViewArguments {
+  const ResetPasswordViewArguments({this.key});
+
+  final _i16.Key? key;
+}
+
+class ChangePasswordViewArguments {
+  const ChangePasswordViewArguments({this.key});
+
+  final _i16.Key? key;
+}
+
+class CreateWorkspaceViewArguments {
+  const CreateWorkspaceViewArguments({this.key});
+
+  final _i16.Key? key;
+}
+
+class OrganizationViewArguments {
+  const OrganizationViewArguments({this.key});
+
+  final _i16.Key? key;
 }
 
 class OrganizationViewRoutes {
-  static const String channelsView = '/';
-  static const String channelDmView = '/channel-dm-view';
-  static const String channelsListView = '/channels-list-view';
-  static const String createChannelView = '/create-channel-view';
-  static const String dmView = '/dm-view';
-  static const String allDmsView = '/all-dms-view';
-  static const String savedItemsView = '/saved-items-view';
-  static const String peopleUserGroupView = '/people-user-group-view';
-  static const String todoView = '/todo-view';
-  static const String profileShowView = '/profile-show-view';
-  static const String threadsView = '/threads-view';
+  static const channelsView = '/';
+
+  static const channelsListView = '/channels-list-view';
+
+  static const createChannelView = '/create-channel-view';
+
+  static const dmView = '/dm-view';
+
+  static const allDmsView = '/all-dms-view';
+
+  static const savedItemsView = '/saved-items-view';
+
+  static const peopleUserGroupView = '/people-user-group-view';
+
+  static const todoView = '/todo-view';
+
+  static const profileShowView = '/profile-show-view';
+
+  static const threadsView = '/threads-view';
+
   static const all = <String>{
     channelsView,
-    channelDmView,
     channelsListView,
     createChannelView,
     dmView,
@@ -229,170 +393,494 @@ class OrganizationViewRoutes {
   };
 }
 
-class OrganizationViewRouter extends RouterBase {
-  @override
-  List<RouteDef> get routes => _routes;
-  final _routes = <RouteDef>[
-    RouteDef(OrganizationViewRoutes.channelsView, page: ChannelsView),
-    RouteDef(OrganizationViewRoutes.channelDmView, page: ChannelDmView),
-    RouteDef(OrganizationViewRoutes.channelsListView, page: ChannelsListView),
-    RouteDef(OrganizationViewRoutes.createChannelView, page: CreateChannelView),
-    RouteDef(OrganizationViewRoutes.dmView, page: DmView),
-    RouteDef(OrganizationViewRoutes.allDmsView, page: AllDmsView),
-    RouteDef(OrganizationViewRoutes.savedItemsView, page: SavedItemsView),
-    RouteDef(OrganizationViewRoutes.peopleUserGroupView,
-        page: PeopleUserGroupView),
-    RouteDef(OrganizationViewRoutes.todoView, page: TodoView),
-    RouteDef(OrganizationViewRoutes.profileShowView, page: ProfileShowView),
-    RouteDef(OrganizationViewRoutes.threadsView, page: ThreadsView),
+class OrganizationViewRouter extends _i1.RouterBase {
+  final _routes = <_i1.RouteDef>[
+    _i1.RouteDef(
+      OrganizationViewRoutes.channelsView,
+      page: _i17.ChannelsView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.channelsListView,
+      page: _i18.ChannelsListView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.createChannelView,
+      page: _i19.CreateChannelView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.dmView,
+      page: _i20.DmView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.allDmsView,
+      page: _i21.AllDmsView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.savedItemsView,
+      page: _i14.SavedItemsView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.peopleUserGroupView,
+      page: _i22.PeopleUserGroupView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.todoView,
+      page: _i23.TodoView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.profileShowView,
+      page: _i24.ProfileShowView,
+    ),
+    _i1.RouteDef(
+      OrganizationViewRoutes.threadsView,
+      page: _i25.ThreadsView,
+    ),
   ];
-  @override
-  Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
-  final _pagesMap = <Type, StackedRouteFactory>{
-    ChannelsView: (data) {
+
+  final _pagesMap = <Type, _i1.StackedRouteFactory>{
+    _i17.ChannelsView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => ChannelsView(),
+        builder: (context) => _i17.ChannelsView(),
         settings: data,
       );
     },
-    ChannelDmView: (data) {
-      var args = data.getArgs<ChannelDmViewArguments>(
-        orElse: () => ChannelDmViewArguments(),
-      );
+    _i18.ChannelsListView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => ChannelDmView(
-          key: args.key,
-          margin: args.margin,
-          color: args.color,
-          leading: args.leading,
-          trailing: args.trailing,
-          channel: args.channel,
-          dm: args.dm,
-        ),
+        builder: (context) => const _i18.ChannelsListView(),
         settings: data,
       );
     },
-    ChannelsListView: (data) {
+    _i19.CreateChannelView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const ChannelsListView(),
+        builder: (context) => _i19.CreateChannelView(),
         settings: data,
       );
     },
-    CreateChannelView: (data) {
+    _i20.DmView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => CreateChannelView(),
+        builder: (context) => const _i20.DmView(),
         settings: data,
       );
     },
-    DmView: (data) {
+    _i21.AllDmsView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const DmView(),
+        builder: (context) => const _i21.AllDmsView(),
         settings: data,
       );
     },
-    AllDmsView: (data) {
+    _i14.SavedItemsView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const AllDmsView(),
+        builder: (context) => const _i14.SavedItemsView(),
         settings: data,
       );
     },
-    SavedItemsView: (data) {
+    _i22.PeopleUserGroupView: (data) {
+      final args = data.getArgs<NestedPeopleUserGroupViewArguments>(
+        orElse: () => const NestedPeopleUserGroupViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const SavedItemsView(),
+        builder: (context) => _i22.PeopleUserGroupView(key: args.key),
         settings: data,
       );
     },
-    PeopleUserGroupView: (data) {
-      var args = data.getArgs<PeopleUserGroupViewArguments>(
-        orElse: () => PeopleUserGroupViewArguments(),
+    _i23.TodoView: (data) {
+      final args = data.getArgs<NestedTodoViewArguments>(
+        orElse: () => const NestedTodoViewArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => PeopleUserGroupView(key: args.key),
+        builder: (context) => _i23.TodoView(key: args.key),
         settings: data,
       );
     },
-    TodoView: (data) {
-      var args = data.getArgs<TodoViewArguments>(
-        orElse: () => TodoViewArguments(),
+    _i24.ProfileShowView: (data) {
+      final args = data.getArgs<NestedProfileShowViewArguments>(
+        orElse: () => const NestedProfileShowViewArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => TodoView(key: args.key),
+        builder: (context) => _i24.ProfileShowView(key: args.key),
         settings: data,
       );
     },
-    ProfileShowView: (data) {
-      var args = data.getArgs<ProfileShowViewArguments>(
-        orElse: () => ProfileShowViewArguments(),
-      );
+    _i25.ThreadsView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => ProfileShowView(key: args.key),
-        settings: data,
-      );
-    },
-    ThreadsView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const ThreadsView(),
+        builder: (context) => const _i25.ThreadsView(),
         settings: data,
       );
     },
   };
+
+  @override
+  List<_i1.RouteDef> get routes => _routes;
+  @override
+  Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-/// ************************************************************************
-/// Arguments holder classes
-/// *************************************************************************
+class NestedPeopleUserGroupViewArguments {
+  const NestedPeopleUserGroupViewArguments({this.key});
 
-/// ResetPasswordView arguments holder class
-class ResetPasswordViewArguments {
-  final Key? key;
-  ResetPasswordViewArguments({this.key});
+  final _i16.Key? key;
 }
 
-/// ChangePasswordView arguments holder class
-class ChangePasswordViewArguments {
-  final Key? key;
-  ChangePasswordViewArguments({this.key});
+class NestedTodoViewArguments {
+  const NestedTodoViewArguments({this.key});
+
+  final _i16.Key? key;
 }
 
-/// CreateWorkspaceView arguments holder class
-class CreateWorkspaceViewArguments {
-  final Key? key;
-  CreateWorkspaceViewArguments({this.key});
+class NestedProfileShowViewArguments {
+  const NestedProfileShowViewArguments({this.key});
+
+  final _i16.Key? key;
 }
 
-/// ChannelDmView arguments holder class
-class ChannelDmViewArguments {
-  final Key? key;
-  final EdgeInsetsGeometry? margin;
-  final Color? color;
-  final Widget leading;
-  final Widget trailing;
-  final bool? channel;
-  final bool? dm;
-  ChannelDmViewArguments(
-      {this.key,
-      this.margin,
-      this.color,
-      this.leading = const SizedBox(),
-      this.trailing = const SizedBox(),
-      this.channel,
-      this.dm});
-}
+extension NavigatorStateExtension on _i26.NavigationService {
+  Future<dynamic> navigateToStartUpView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.startUpView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
 
-/// PeopleUserGroupView arguments holder class
-class PeopleUserGroupViewArguments {
-  final Key? key;
-  PeopleUserGroupViewArguments({this.key});
-}
+  Future<dynamic> navigateToChooseWorkspaceView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.chooseWorkspaceView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
 
-/// TodoView arguments holder class
-class TodoViewArguments {
-  final Key? key;
-  TodoViewArguments({this.key});
-}
+  Future<dynamic> navigateToLoginView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.loginView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
 
-/// ProfileShowView arguments holder class
-class ProfileShowViewArguments {
-  final Key? key;
-  ProfileShowViewArguments({this.key});
+  Future<dynamic> navigateToSignUpView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.signUpView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCheckEmailView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.checkEmailView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToResetPasswordView({
+    _i16.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.resetPasswordView,
+        arguments: ResetPasswordViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToChangePasswordView({
+    _i16.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.changePasswordView,
+        arguments: ChangePasswordViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToSuccessView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.successView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCreateWorkspaceView({
+    _i16.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.createWorkspaceView,
+        arguments: CreateWorkspaceViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCreateWorkspaceStage1([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.createWorkspaceStage1,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCreateWorkspaceStage2([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.createWorkspaceStage2,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCreateWorkspaceStage3([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.createWorkspaceStage3,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToSavedItemsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.savedItemsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToOrganizationView({
+    _i16.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.organizationView,
+        arguments: OrganizationViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedChannelsViewInOrganizationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.channelsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedChannelsListViewInOrganizationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.channelsListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedCreateChannelViewInOrganizationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.createChannelView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedDmViewInOrganizationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.dmView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedAllDmsViewInOrganizationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.allDmsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedSavedItemsViewInOrganizationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.savedItemsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedPeopleUserGroupViewInOrganizationView({
+    _i16.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.peopleUserGroupView,
+        arguments: NestedPeopleUserGroupViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedTodoViewInOrganizationView({
+    _i16.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.todoView,
+        arguments: NestedTodoViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedProfileShowViewInOrganizationView({
+    _i16.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.profileShowView,
+        arguments: NestedProfileShowViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedThreadsViewInOrganizationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(OrganizationViewRoutes.threadsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
 }

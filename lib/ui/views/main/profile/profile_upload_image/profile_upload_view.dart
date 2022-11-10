@@ -71,9 +71,9 @@ class ProfileUploadView extends StatelessWidget {
             Expanded(
               child: Scrollbar(
                 controller: scrollcontroller,
-                isAlwaysShown: true,
+                thumbVisibility: true,
                 thickness: 10,
-                showTrackOnHover: true,
+                trackVisibility: true,
                 child: SingleChildScrollView(
                   controller: scrollcontroller,
                   child: Column(

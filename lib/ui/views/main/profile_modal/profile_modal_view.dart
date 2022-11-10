@@ -13,7 +13,7 @@ class ProfileModalView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       builder: (context, model, child) => Dialog(
-        child: buildContainer(model as ProfileModalViewModel),
+        child: buildContainer(model),
       ),
       viewModelBuilder: () => ProfileModalViewModel(),
     );

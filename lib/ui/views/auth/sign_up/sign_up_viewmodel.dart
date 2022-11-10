@@ -17,12 +17,12 @@ class SignUpViewModel extends FormViewModel with Validator {
   final _authService = locator<AuthService>();
   final _windowsTitleBarService = locator<WindowTitleBarService>();
 
-  /// This variable keeps track of the password field visibility state. When set to true the 
+  /// This variable keeps track of the password field visibility state. When set to true the
   /// password text is obscured when set to false it isn't
   bool _passwordVisibility = true;
   bool get passwordVisibility => _passwordVisibility;
 
-  /// This variable keeps track of the confirm password field visibility state. When set to true the 
+  /// This variable keeps track of the confirm password field visibility state. When set to true the
   /// confirm password text is obscured when set to false it isn't
   bool _confirmPasswordVisibility = true;
   bool get confirmPasswordVisibility => _confirmPasswordVisibility;
@@ -32,10 +32,9 @@ class SignUpViewModel extends FormViewModel with Validator {
   bool _isPolicyChecked = false;
   bool get isPolicyChecked => _isPolicyChecked;
 
-
   /// This method is called inside on model ready in the view which act just like init state
-  /// The function is used to state the state of the title bar as well a the title of the 
-  /// title bar. 
+  /// The function is used to state the state of the title bar as well a the title of the
+  /// title bar.
   void init() async {
     await Future.delayed(Duration(milliseconds: 1));
     _windowsTitleBarService.setTitle('Zuri | SignUp');
@@ -48,7 +47,7 @@ class SignUpViewModel extends FormViewModel with Validator {
     notifyListeners();
   }
 
-   /// This function update the state of [_confrimPasswordVissibility] when the relative action is
+  /// This function update the state of [_confrimPasswordVissibility] when the relative action is
   /// triggered. Act more like the setter for the variable
   void setConfirmPasswordVisibility() {
     _confirmPasswordVisibility = !_confirmPasswordVisibility;
@@ -71,13 +70,15 @@ class SignUpViewModel extends FormViewModel with Validator {
   /// This function is called to perform the user signup and set the view state to busy
   /// while performing the task. This is accomplished by using the [runBusyFuture]
   Future<void> signUp() async {
-    await runBusyFuture(performSignUp(emailValue!, passwordValue!, fullNameValue!));
+    await runBusyFuture(
+        performSignUp(emailValue!, passwordValue!, fullNameValue!));
   }
 
   /// This function validate all the field in  the signup screen and create the acount if
   /// all fields have been validated. Redirect the user to the login screen when user
   /// acout has been reated.
-  Future<void> performSignUp(String email, String password, String fullName) async {
+  Future<void> performSignUp(
+      String email, String password, String fullName) async {
     if (!isPolicyChecked) {
       throw Failure('Please accept our policy before you continue');
     } else {
@@ -87,16 +88,15 @@ class SignUpViewModel extends FormViewModel with Validator {
     try {
       String fName = '';
       String lName = '';
-      if(fullName.contains(' ')) {
+      if (fullName.contains(' ')) {
         final names = fullName.split(' ');
         fName = names[0];
         lName = names[1];
-      } else {
-
-      }
-      await _authService.signup(email: email.trim(), password: password, fName: fName, lName: lName);
+      } else {}
+      await _authService.signup(
+          email: email.trim(), password: password, fName: fName, lName: lName);
     } catch (e) {
-      if(e.toString().contains('40')){
+      if (e.toString().contains('40')) {
         throw Failure(EmailAlreadyInUseError);
       }
       throw Failure(AuthErrorMessage);

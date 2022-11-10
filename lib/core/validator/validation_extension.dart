@@ -18,6 +18,7 @@ extension ValidationExtension on BuildContext {
 
   String? validatePassword(String? password) {
     if (password == null || password.isEmpty) return 'Field cannot be empty';
+    return null;
 
     /*bool isPasswordValid = (password.length >= 8 &&
         RegExp(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$")

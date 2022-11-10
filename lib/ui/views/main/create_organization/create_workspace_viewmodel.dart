@@ -63,12 +63,13 @@ class CreateWorkspaceViewModel extends BaseViewModel {
   String? get emailErrorText => _emailErrorText;
 
   final _windowsTitleBarService = locator<WindowTitleBarService>();
-  
+
   void init() async {
     await Future.delayed(Duration(milliseconds: 1));
     _windowsTitleBarService.setHome(false);
     _windowsTitleBarService.setTitle('Zuri | Create Workspace');
   }
+
   void setEmail(String? value) {
     _email = value;
     notifyListeners();
@@ -156,10 +157,10 @@ class CreateWorkspaceViewModel extends BaseViewModel {
     try {
       await _organizationService.createOrganization(email);
       //if(!hasError) {
-        goToStage1();
-     // }
+      goToStage1();
+      // }
     } catch (e) {
-      if(e.toString().contains('40')) {
+      if (e.toString().contains('40')) {
         throw Failure('user with this email does not exist');
       }
       throw Failure(AuthErrorMessage);

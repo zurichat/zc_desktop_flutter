@@ -23,7 +23,6 @@ class SearchViewModel extends BaseViewModel {
   final _channelsService = locator<ChannelsService>();
   final _localStorageService = locator<LocalStorageService>();
 
-
   String? _text;
   String? _hintText;
   String? _textFieldText;
@@ -134,7 +133,7 @@ class SearchViewModel extends BaseViewModel {
           name: item.otherUserProfile.displayName,
           object: 'dm'));
     }
-      var userList = List.of(_searchList).where((e) {
+    var userList = List.of(_searchList).where((e) {
       final userLower = e.name.toLowerCase();
       final queryLower = query.toLowerCase();
       return userLower.startsWith(queryLower);
@@ -174,8 +173,8 @@ class SearchViewModel extends BaseViewModel {
     channel = await _channelsService.getChannels(
         organizationId: _organizationService.getOrganizationId());
     for (int x = 0; x < channel.length; x++) {
-      _searchList
-          .add(SearchObject(id: x.toString(), name: channel[x].name, object: 'channel'));
+      _searchList.add(SearchObject(
+          id: x.toString(), name: channel[x].name, object: 'channel'));
     }
     var filteredList = List.of(_searchList).where((e) {
       final channelNameToLower = e.name.toLowerCase();
@@ -215,7 +214,6 @@ class SearchViewModel extends BaseViewModel {
     switch (buttonType) {
       case ButtonType.CHANNELS:
         {
-
           searchChannels(channel[int.parse(data.id)]);
         }
         break;

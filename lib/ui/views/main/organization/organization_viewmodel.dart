@@ -105,7 +105,6 @@ class OrganizationViewModel extends BaseViewModel {
     await getOrganizations();
     await getDMs();
     await getChannels();
-    
   }
 
   Future<void> getOrganizations() async {
@@ -259,7 +258,6 @@ class OrganizationViewModel extends BaseViewModel {
     }
     return false;
   }
-
 
   @override
   void dispose() {

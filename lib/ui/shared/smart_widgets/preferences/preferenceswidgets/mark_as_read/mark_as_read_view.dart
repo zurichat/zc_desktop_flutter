@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:zc_desktop_flutter/constants/app_strings.dart';
@@ -20,10 +19,10 @@ class MarkAsRead extends StatelessWidget {
         builder: (context, model, _) {
           return Scrollbar(
             controller: _rightSideBarController,
-            isAlwaysShown: true,
+            thumbVisibility: true,
             scrollbarOrientation: ScrollbarOrientation.right,
             thickness: 8,
-            showTrackOnHover: true,
+            trackVisibility: true,
             child: SingleChildScrollView(
               controller: _rightSideBarController,
               child: Container(
@@ -79,8 +78,7 @@ class ViewChannelOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       ListTile(
-        title: Text(startWhereILeftOff,
-            style: preferenceStyleNormal),
+        title: Text(startWhereILeftOff, style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option1,
           groupValue: model.upButtonsChoice,
@@ -91,8 +89,7 @@ class ViewChannelOptions extends StatelessWidget {
         ),
       ),
       ListTile(
-        title: Text(startAtNewestMessage,
-            style: preferenceStyleNormal),
+        title: Text(startAtNewestMessage, style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option2,
           groupValue: model.upButtonsChoice,
@@ -103,9 +100,7 @@ class ViewChannelOptions extends StatelessWidget {
         ),
       ),
       ListTile(
-        title: Text(
-            startAtNewestMessageUnread,
-            style: preferenceStyleNormal),
+        title: Text(startAtNewestMessageUnread, style: preferenceStyleNormal),
         leading: Radio(
           value: UpButtonsChoice.option3,
           groupValue: model.upButtonsChoice,
@@ -134,8 +129,7 @@ class ViewMarkAll extends StatelessWidget {
               model.setAnimateValue = v;
             }),
         horizontalSpaceTiny,
-        Flexible(
-            child: Text(promptConfirm, style: preferenceStyleNormal)),
+        Flexible(child: Text(promptConfirm, style: preferenceStyleNormal)),
       ],
     );
   }
@@ -188,8 +182,7 @@ class KeyBoardSettingsSection extends StatelessWidget {
           Row(
             children: [
               verticalSpaceTiny,
-              Text(viewFullList,
-                  style: preferenceStyleNormal),
+              Text(viewFullList, style: preferenceStyleNormal),
               horizontalSpaceTiny,
               ShortCuts().ctrl(),
               horizontalSpaceTiny,
@@ -203,16 +196,3 @@ class KeyBoardSettingsSection extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

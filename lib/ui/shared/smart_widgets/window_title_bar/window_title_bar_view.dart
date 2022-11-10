@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +31,7 @@ class WindowTitleBar extends StatelessWidget {
         return ScreenUtilInit(
           key: Key(MediaQuery.of(context).size.toString()),
           designSize: Size(1280, 720),
-          builder: () => Container(
+          builder: (_, __) => Container(
             child: Column(
               children: [
                 Padding(

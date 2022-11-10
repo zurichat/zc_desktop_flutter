@@ -17,44 +17,44 @@ class AdvancedView extends StatelessWidget {
   Widget build(BuildContext context) {
     final _rightSideBarController = ScrollController();
     return ViewModelBuilder<AdvancedViewModel>.reactive(
-        viewModelBuilder: () => AdvancedViewModel(),
-        builder: (context, model, _) {
-          return Scrollbar(
+      viewModelBuilder: () => AdvancedViewModel(),
+      builder: (context, model, _) {
+        return Scrollbar(
+          controller: _rightSideBarController,
+          thumbVisibility: true,
+          scrollbarOrientation: ScrollbarOrientation.right,
+          thickness: 8,
+          trackVisibility: true,
+          child: SingleChildScrollView(
             controller: _rightSideBarController,
-            isAlwaysShown: true,
-            scrollbarOrientation: ScrollbarOrientation.right,
-            thickness: 8,
-            showTrackOnHover: true,
-            child: SingleChildScrollView(
-              controller: _rightSideBarController,
-              child: Container(
-                width: fullWidth(context),
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AdvancedViewInputOptions(model: model),
-                    verticalSpaceMedium,
-                    Divider(
-                      color: Colors.black54,
-                    ),
-                    verticalSpaceMedium,
-                    AdvancedViewSearchOptions(model: model),
-                    verticalSpaceMedium,
-                    Divider(
-                      color: Colors.black54,
-                    ),
-                    verticalSpaceRegular,
-                    AdvancedViewMoreOptions(model: model)
-                  ],
-                ),
+            child: Container(
+              width: fullWidth(context),
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AdvancedViewInputOptions(model: model),
+                  verticalSpaceMedium,
+                  Divider(
+                    color: Colors.black54,
+                  ),
+                  verticalSpaceMedium,
+                  AdvancedViewSearchOptions(model: model),
+                  verticalSpaceMedium,
+                  Divider(
+                    color: Colors.black54,
+                  ),
+                  verticalSpaceRegular,
+                  AdvancedViewMoreOptions(model: model)
+                ],
               ),
             ),
-          );
-        },
-        onModelReady: (model) => model.fetchAndSetFromDisk(),
-        onDispose:  (model) => model.saveToStorage(),
+          ),
         );
+      },
+      onModelReady: (model) => model.fetchAndSetFromDisk(),
+      onDispose: (model) => model.saveToStorage(),
+    );
   }
 }
 
@@ -83,8 +83,7 @@ class AdvancedViewInputOptions extends StatelessWidget {
               spacing: 10.0,
               runAlignment: WrapAlignment.spaceEvenly,
               children: [
-                Text(whenTyping,
-                    style: preferenceStyleBold),
+                Text(whenTyping, style: preferenceStyleBold),
                 ShortCuts().enter(),
                 Text(sendMessage, style: preferenceStyleBold),
               ],
@@ -107,11 +106,8 @@ class AdvancedViewInputOptions extends StatelessWidget {
                 onChanged: (v) {
                   model.setAllowMsgFormat = v;
                 }),
-            title:
-                Text(formatMessages, style: preferenceStyleBold),
-            subtitle: Text(
-                textFormatting,
-                style: preferenceStyleNormal),
+            title: Text(formatMessages, style: preferenceStyleBold),
+            subtitle: Text(textFormatting, style: preferenceStyleNormal),
           ),
 
           verticalSpaceMedium,
@@ -147,8 +143,7 @@ class AdvancedViewInputOptions extends StatelessWidget {
                     spacing: 10.0,
                     runAlignment: WrapAlignment.spaceEvenly,
                     children: [
-                      Text(startNewLine,
-                          style: preferenceStyleBold),
+                      Text(startNewLine, style: preferenceStyleBold),
                       ShortCuts().ctrl(),
                       ShortCuts().enter(),
                       Text(toSendParenthesis, style: preferenceStyleBold),
@@ -201,8 +196,7 @@ class AdvancedViewSearchOptions extends StatelessWidget {
                 Text(startZuriChatSearch, style: preferenceStyleBold),
               ],
             ),
-            subtitle: Text(overrideNormal,
-                style: preferenceStyleNormal),
+            subtitle: Text(overrideNormal, style: preferenceStyleNormal),
           ),
           ListTile(
             leading: ZcCheckBox(
@@ -220,15 +214,12 @@ class AdvancedViewSearchOptions extends StatelessWidget {
                 Text(startQuickSwitcher, style: preferenceStyleBold),
               ],
             ),
-            subtitle: Text(overrideNormalBehaviour,
-                style: preferenceStyleNormal),
+            subtitle:
+                Text(overrideNormalBehaviour, style: preferenceStyleNormal),
           ),
 
-          Text(excludeChannels,
-              style: preferenceStyleBold),
-          ZuriDeskInputField(
-            hintPlaceHolder: typeAChannel
-          )
+          Text(excludeChannels, style: preferenceStyleBold),
+          ZuriDeskInputField(hintPlaceHolder: typeAChannel)
         ],
       ),
     );
@@ -278,9 +269,7 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                   onChanged: (v) {
                     model.setOption2 = v;
                   }),
-              title: Text(
-                  askToToggleAway,
-                  style: preferenceStyleNormal)),
+              title: Text(askToToggleAway, style: preferenceStyleNormal)),
 
           // zuri bot setting
           ListTile(
@@ -289,11 +278,9 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                 onChanged: (v) {
                   model.setOption3 = v;
                 }),
-            title: Text(sendOccassionalSurvey,
-                style: preferenceStyleBold),
-            subtitle: Text(
-                makingZuriChatBetterText,
-                style: preferenceStyleNormal),
+            title: Text(sendOccassionalSurvey, style: preferenceStyleBold),
+            subtitle:
+                Text(makingZuriChatBetterText, style: preferenceStyleNormal),
           ),
 
           ListTile(
@@ -302,8 +289,8 @@ class AdvancedViewMoreOptions extends StatelessWidget {
                   onChanged: (v) {
                     model.setOption4 = v;
                   }),
-              title: Text(warnAboutMaliciousLinks,
-                  style: preferenceStyleNormal)),
+              title:
+                  Text(warnAboutMaliciousLinks, style: preferenceStyleNormal)),
         ],
       ),
     );

@@ -299,7 +299,7 @@ class DmViewModel extends BaseViewModel {
   }
 
   void scrollToBottom() {
-    SchedulerBinding.instance!.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       rightSideBarController.animateTo(
         rightSideBarController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 10),
@@ -364,7 +364,9 @@ class DmViewModel extends BaseViewModel {
   }
 
   void launchBookmarkedUrl(String url) async {
+    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(
         url,
         forceSafariVC: false,

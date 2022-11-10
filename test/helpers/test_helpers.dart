@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 
 import 'package:mockito/annotations.dart';
@@ -113,11 +115,10 @@ DMService getAndRegisterDMService() {
       createdAt: 'createdAt',
       updatedAt: 'updatedAt',
       token: 'token'));
-  when(service.getExistingRoomInfo)
-      .thenReturn(DM(
-              roomInfo: DMRoomsResponse(),
-              currentUserProfile: UserProfile(),
-              otherUserProfile: UserProfile()));
+  when(service.getExistingRoomInfo).thenReturn(DM(
+      roomInfo: DMRoomsResponse(),
+      currentUserProfile: UserProfile(),
+      otherUserProfile: UserProfile()));
   locator.registerSingleton<DMService>(service);
   return service;
 }

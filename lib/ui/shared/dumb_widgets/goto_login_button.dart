@@ -14,14 +14,17 @@ class GotoLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-          onTap: (){
-            final _navigate = locator<NavigationService>();
-            _navigate.navigateTo(!isHome ? Routes.loginView : Routes.organizationView);
-          },
-          child: Text(
-            isHome ? BackToWorkspaceText : BackToLoginText,
-            style: subtitle2.copyWith(color: kcPrimaryColor,),
-          ),
+      onTap: () {
+        final _navigate = locator<NavigationService>();
+        _navigate
+            .navigateTo(!isHome ? Routes.loginView : Routes.organizationView);
+      },
+      child: Text(
+        isHome ? BackToWorkspaceText : BackToLoginText,
+        style: subtitle2.copyWith(
+          color: kcPrimaryColor,
+        ),
+      ),
     );
   }
 }

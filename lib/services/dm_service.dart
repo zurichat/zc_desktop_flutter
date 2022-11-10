@@ -38,6 +38,7 @@ class DMService {
       }
       return null;
     }
+    return null;
   }
 
   void setExistingRoomInfo(DM dm) {
@@ -105,6 +106,7 @@ class DMService {
     log.i(response);
     var res = RoomInfoResponse.fromJson(response).numberOfUsers;
     log.i(res);
+    return null;
   }
 
   Future<List<DMRoomsResponse>> getDMs(var orgId) async {

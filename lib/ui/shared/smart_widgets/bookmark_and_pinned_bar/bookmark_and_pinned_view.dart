@@ -93,7 +93,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
       dmViewModel.setIsDropped(false);
     } else {
       this._floatingDropdown = this._buildFloatingDropdown();
-      Overlay.of(context)!.insert(this._floatingDropdown);
+      // Overlay.of(context).insert(this._floatingDropdown);
       dmViewModel.setIsDropped(true);
     }
   }
@@ -109,7 +109,7 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
     } else {
       this._floatingPinnedMessagesDropDown =
           this._buildDropDownForPinnedMessages(model);
-      Overlay.of(context)!.insert(this._floatingPinnedMessagesDropDown);
+      // Overlay.of(context).insert(this._floatingPinnedMessagesDropDown);
       model.setIsDropped(true);
     }
   }
@@ -478,11 +478,11 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 Navigator.pop(context, true);
               },
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
+                  backgroundColor: kcPrimaryColor,
                   fixedSize: Size(117.w, 48.h),
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: kcPrimaryColor,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
@@ -499,11 +499,11 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 Navigator.pop(context, true);
               },
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
+                  backgroundColor: Colors.white,
                   fixedSize: Size(117.w, 48.h),
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: Colors.white,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
@@ -605,11 +605,11 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 Navigator.pop(context, true);
               },
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
+                  backgroundColor: kcPrimaryColor,
                   fixedSize: Size(117.w, 48.h),
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: kcPrimaryColor,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
@@ -626,11 +626,11 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 Navigator.pop(context, true);
               },
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
                   fixedSize: Size(117.w, 48.h),
+                  backgroundColor: Colors.white,
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: Colors.white,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
@@ -691,11 +691,11 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 Navigator.pop(context, true);
               },
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
+                  backgroundColor: kcAccentColor,
                   fixedSize: Size(117.w, 48.h),
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: kcAccentColor,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
@@ -712,11 +712,11 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 Navigator.pop(context, true);
               },
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
                   fixedSize: Size(117.w, 48.h),
+                  backgroundColor: Colors.white,
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: Colors.white,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
@@ -1119,11 +1119,11 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
             ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
+                  backgroundColor: kcAccentColor,
                   fixedSize: Size(117.w, 48.h),
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: kcAccentColor,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(
@@ -1140,11 +1140,11 @@ class BookmarkAndPinnedMessagesView extends StatelessWidget {
                 Navigator.pop(context, true);
               },
               style: ElevatedButton.styleFrom(
+                  foregroundColor: bodyColor,
+                  backgroundColor: Colors.white,
                   fixedSize: Size(117.w, 48.h),
                   textStyle: clearStatusTextStyle,
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  primary: Colors.white,
-                  onPrimary: bodyColor,
                   side: BorderSide(
                       color: clearStatusBtnBorderColor, width: 1.0.w),
                   shape: RoundedRectangleBorder(

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
@@ -11,15 +10,17 @@ import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/radio_button.dart';
 import 'package:zc_desktop_flutter/ui/shared/dumb_widgets/zcdesk_checkbox.dart';
 import '../../../../const_app_colors.dart';
 import 'preferences_notification_viewmodel.dart';
+
 class NotificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     final ScrollController _controller = ScrollController();
     return ViewModelBuilder<NotificationViewModel>.reactive(
-       builder: (context, model, child) => Scrollbar(
+        builder: (context, model, child) => Scrollbar(
               controller: _controller,
-              isAlwaysShown: true,
+              thumbVisibility: true,
               interactive: true,
               scrollbarOrientation: ScrollbarOrientation.right,
+              // ignore: deprecated_member_use
               hoverThickness: 8,
               thickness: 5,
               child: SingleChildScrollView(
@@ -83,16 +84,15 @@ class NotificationView extends StatelessWidget {
                         thickness: 0.5,
                       ),
                       Column(children: [
-                        BuildCheckBox(useDiffSettings,
-                            model.isSameForMobile, (_) {
+                        BuildCheckBox(useDiffSettings, model.isSameForMobile,
+                            (_) {
                           model.setIsSameForMobile();
                         }),
-                        BuildCheckBox(notifyMe,
-                            model.isMeetingSet, (_) {
+                        BuildCheckBox(notifyMe, model.isMeetingSet, (_) {
                           model.setIsmeetingSet();
                         }),
-                        BuildCheckBox(notifyMeOfReplies,
-                            model.isRepliedInThred, (_) {
+                        BuildCheckBox(notifyMeOfReplies, model.isRepliedInThred,
+                            (_) {
                           model.setISRepliedInThread();
                         }),
                       ]),
@@ -123,8 +123,7 @@ class NotificationView extends StatelessWidget {
                         child: RichText(
                             softWrap: true,
                             text: TextSpan(
-                                text:
-                                    activeHoursNotification,
+                                text: activeHoursNotification,
                                 style: prefSubTitleTextStyle,
                                 children: [
                                   TextSpan(
@@ -139,7 +138,7 @@ class NotificationView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                             BuildDropDown(
+                            BuildDropDown(
                                 model.scheduleList, model.scheduleValue,
                                 (value) {
                               model.setScheduleValue(value);
@@ -155,9 +154,9 @@ class NotificationView extends StatelessWidget {
                               model.setSchedule2Value(value);
                             }),
                           ],
-                           ),
+                        ),
                       ),
-                     verticalSpaceRegular,
+                      verticalSpaceRegular,
                       Divider(
                         color: kcViewColor,
                         thickness: 0.5,
@@ -188,12 +187,12 @@ class NotificationView extends StatelessWidget {
                           )),
                         ),
                       ),
-                     verticalSpaceMedium,
-                      BuildCheckBox(includePreviewMessage,
-                          model.isPreviewMessage, (_) {
+                      verticalSpaceMedium,
+                      BuildCheckBox(
+                          includePreviewMessage, model.isPreviewMessage, (_) {
                         model.setIsPreviewMessage();
                       }),
-                     verticalSpaceRegularOne,
+                      verticalSpaceRegularOne,
                       BuildCheckBox(muteAll, model.isMute, (_) {
                         model.setIsMute();
                       }),
@@ -213,7 +212,7 @@ class NotificationView extends StatelessWidget {
                           ))
                         ],
                       ),
-                     verticalSpaceTiny,
+                      verticalSpaceTiny,
                       Row(
                         children: [
                           Container(
@@ -223,7 +222,7 @@ class NotificationView extends StatelessWidget {
                               model.setMessageSoundValue(value);
                             }),
                           ),
-                         horizontalSpaceLarge,
+                          horizontalSpaceLarge,
                           Container(
                             width: 192.w,
                             child: BuildDropDown(
@@ -233,9 +232,8 @@ class NotificationView extends StatelessWidget {
                           ),
                         ],
                       ),
-                     verticalSpaceMediumTwo,
-                      Text(flashWindow,
-                          style: prefHeaderTextStyle),
+                      verticalSpaceMediumTwo,
+                      Text(flashWindow, style: prefHeaderTextStyle),
                       verticalSpaceRegularOne,
                       Column(
                         children: [
@@ -262,12 +260,12 @@ class NotificationView extends StatelessWidget {
                               })
                         ],
                       ),
-                    verticalSpaceMedium,
+                      verticalSpaceMedium,
                       Text(
                         deliverNotifications,
                         style: prefHeaderTextStyle,
                       ),
-                     verticalSpaceTinyTwo,
+                      verticalSpaceTinyTwo,
                       Container(
                           width: 273.w,
                           height: 39,
@@ -276,15 +274,14 @@ class NotificationView extends StatelessWidget {
                               (value) {
                             model.setNotificationSoundValue(value);
                           })),
-                     verticalSpaceMediumTwo,
-                      Text(notActiveOnDesktop,
-                          style: prefHeaderTextStyle),
-                     verticalSpaceRegular,
+                      verticalSpaceMediumTwo,
+                      Text(notActiveOnDesktop, style: prefHeaderTextStyle),
+                      verticalSpaceRegular,
                       Text(
                         notificationsToMobile,
                         style: prefSubTitleTextStyle,
                       ),
-                     verticalSpaceTinyTwo,
+                      verticalSpaceTinyTwo,
                       Container(
                         height: 39,
                         width: 273.w,
@@ -293,21 +290,20 @@ class NotificationView extends StatelessWidget {
                           model.setNotificationValue(value);
                         }),
                       ),
-                     verticalSpaceRegularOne,
-                      BuildCheckBox(sendEmailNotifications,
-                          model.isEmail, (_) {
+                      verticalSpaceRegularOne,
+                      BuildCheckBox(sendEmailNotifications, model.isEmail, (_) {
                         model.setIsEmail();
                       })
                     ],
                   ),
-                ), ),
+                ),
+              ),
             ),
-            viewModelBuilder: () => NotificationViewModel(),
+        viewModelBuilder: () => NotificationViewModel(),
         onModelReady: (model) => model.fetchAndSetSetting(),
         onDispose: (model) => model.saveSettings());
   }
 }
-
 
 class BuildDropDown extends StatelessWidget {
   final List<String> items;
@@ -320,34 +316,36 @@ class BuildDropDown extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Container(
-      height: 39.h,
-      width: 129.w,
-      padding: EdgeInsets.symmetric(horizontal: 17.w),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: kcDisplayChannelColor)),
-      child: Center(
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-              value: value,
-               isExpanded: true,
-              isDense: true,
-              onChanged: onChange,
-              alignment: Alignment.center,
-              borderRadius: BorderRadius.circular(10),
-              items: items
-                  .map<DropdownMenuItem<String>>(
-                      (String value) => DropdownMenuItem( child: Text(value, style: prefBodyTextStyle),
-                            value: value,
-                          ))
-                  .toList()),
-
-      ),));
+        height: 39.h,
+        width: 129.w,
+        padding: EdgeInsets.symmetric(horizontal: 17.w),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: kcDisplayChannelColor)),
+        child: Center(
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton(
+                value: value,
+                isExpanded: true,
+                isDense: true,
+                onChanged: onChange,
+                alignment: Alignment.center,
+                borderRadius: BorderRadius.circular(10),
+                items: items
+                    .map<DropdownMenuItem<String>>(
+                        (String value) => DropdownMenuItem(
+                              child: Text(value, style: prefBodyTextStyle),
+                              value: value,
+                            ))
+                    .toList()),
+          ),
+        ));
   }
 }
+
 class BuildCheckBox extends StatelessWidget {
   final String txt;
   final bool value;
@@ -358,19 +356,19 @@ class BuildCheckBox extends StatelessWidget {
     this.onChange, {
     Key? key,
   }) : super(key: key);
-   @override
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-          ZcCheckBox(
+        ZcCheckBox(
           value: value,
           onChanged: onChange,
-             ),
+        ),
         Text(
           txt,
-           style: prefBodyTextStyle,
+          style: prefBodyTextStyle,
         ),
       ],
     );
   }
-  }
+}
